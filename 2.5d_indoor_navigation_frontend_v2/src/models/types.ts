@@ -35,6 +35,21 @@ export interface RoomListItem {
   featureId: string;
 }
 
+/** Per-level categorized GeoJSON data */
+export interface LevelData {
+  rooms: GeoJSON.FeatureCollection;
+  colliders: GeoJSON.FeatureCollection;
+  walls: GeoJSON.FeatureCollection;
+}
+
+/** Building manifest from manifest.json */
+export interface BuildingManifest {
+  building: string;
+  name: string;
+  loc_ref: string;
+  levels: number[];
+}
+
 export const ROOM_COLORS: Record<string, string> = {
   classroom: '#8FB8D0',
   lab: '#81C784',

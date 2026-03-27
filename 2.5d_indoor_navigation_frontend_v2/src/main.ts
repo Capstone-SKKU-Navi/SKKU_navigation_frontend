@@ -6,6 +6,7 @@ import * as GeoMap from './components/geoMap';
 import * as RouteOverlay from './components/routeOverlay';
 import { fetchRoute } from './services/apiClient';
 import { ROOM_TYPE_LABELS, RoomListItem } from './models/types';
+import { setupGraphEditor } from './editor/graphEditor';
 
 // ===== App State =====
 let startRoom: string | null = null;
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       setupRouteUI();
       setupRoomClickPopup();
       setupFpsCounter();
+      setupGraphEditor();
       hideLoading();
     });
   } catch (err: any) {

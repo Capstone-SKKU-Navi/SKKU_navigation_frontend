@@ -30,3 +30,8 @@ Use the `/browse` skill from gstack for all web browsing. Never use `mcp__claude
 ### Available gstack skills
 
 - `/browse` — Headless browser for QA and testing
+
+
+### Save the Token: Dont use AGENT
+PLEASE DON'T USE AGNET. They are very very expensive.
+Agent need only the situation which very complicated and multiprocessing needed.

@@ -1,328 +1,232 @@
 """
-QGIS에서 내보낸 GeoJSON → 앱 호환 GeoJSON 변환 스크립트
+QGIS GeoJSON → 앱용 개별 파일 변환 (범용)
 
-원본: Geojson/ 폴더 (수정 안 함)
-출력: geojson_convert/eng1.geojson
+사용법: python convert.py <building_code> <level> [level ...]
+  예시: python convert.py eng1 1
+        python convert.py eng2 1 2 3 4 5
+
+입력 (Geojson/ 폴더):
+  {code}_outline.geojson
+  {code}_room_L{n}.geojson
+  {code}_wall_l{n}.geojson
+  {code}_collider_L{n}.geojson
+
+출력 (public/geojson/{code}/ 폴더):
+  manifest.json
+  {code}_outline.geojson
+  {code}_room_L{n}.geojson      ← 슬리버 제거 + 속성 부여
+  {code}_collider_L{n}.geojson
+  {code}_wall_L{n}.geojson
 """
 import json
 import os
+import sys
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(SCRIPT_DIR)
 INPUT_DIR = os.path.join(PROJECT_DIR, "Geojson")
-OUTPUT_FILE = os.path.join(SCRIPT_DIR, "eng1.geojson")
+V2_DIR = os.path.join(PROJECT_DIR, "2.5d_indoor_navigation_frontend_v2")
+PUBLIC_GEOJSON = os.path.join(V2_DIR, "public", "geojson")
+
+# 슬리버 판정 기준 (Shoelace 좌표 면적, ≈5m² at lat37)
+MIN_AREA = 5e-10
+
+# 건물 한국어 이름 (manifest.name 용)
+BUILDING_NAMES = {
+    "eng1": "제1공학관", "eng2": "제2공학관",
+    "sci1": "제1과학관", "sci2": "제2과학관",
+    "res1": "제1종합연구동", "res2": "제2종합연구동",
+    "slib": "삼성학술정보관", "iac": "산학협력센터",
+    "bio": "생명공학관", "chem": "화학관",
+    "semi": "반도체관", "bas": "기초학문관",
+    "med": "의학관", "phar": "약학관",
+}
 
 
-def multi_to_single(geometry):
-    """MultiPolygon → Polygon 변환 (단일 링만 있을 때)"""
-    if geometry["type"] == "MultiPolygon":
-        coords = geometry["coordinates"]
-        if len(coords) == 1:
-            return {"type": "Polygon", "coordinates": coords[0]}
-    return geometry
+# ──────────────────────────────────────────
+# 유틸
+# ──────────────────────────────────────────
 
-
-def calc_center(coords):
-    """폴리곤 중심 좌표 계산"""
-    ring = coords[0] if coords else []
-    if not ring:
-        return None
+def polygon_area(ring):
+    area = 0
     n = len(ring)
-    cx = sum(p[0] for p in ring) / n
-    cy = sum(p[1] for p in ring) / n
-    return (cx, cy)
+    for i in range(n - 1):
+        area += ring[i][0] * ring[i + 1][1] - ring[i + 1][0] * ring[i][1]
+    return abs(area / 2)
 
 
-def classify_building(cx, cy):
-    """좌표로 21/22/23동 분류"""
-    # 21동 왼쪽 끝 계단 (lon < 126.9761, lat < 37.2938)
-    if cx < 126.97605 and cy < 37.29380:
-        return "21_stairs"
-    # 21-22동 연결부 계단 (lon ~126.977, lat < 37.2935)
-    if cx > 126.97690 and cy < 37.29355:
-        return "21_22_stairs"
-    # 22동: 오른쪽 세로 건물 (lon > 126.9769, lat 37.2935~37.2941)
-    if cx > 126.97693 and cy < 37.29412:
-        return "22"
-    # 23동: 위쪽 가로 건물 (lat > 37.2941)
-    if cy > 37.29418:
-        return "23"
-    # 21동: 아래쪽 가로 건물
-    if cy < 37.29418:
-        return "21"
-    return "unknown"
+def feature_area(geom):
+    if geom["type"] == "Polygon":
+        return polygon_area(geom["coordinates"][0])
+    if geom["type"] == "MultiPolygon":
+        return sum(polygon_area(p[0]) for p in geom["coordinates"])
+    return 0
 
 
-def classify_row(building, cx, cy):
-    """같은 동 내에서 위/아래 또는 좌/우 줄 분류"""
-    if building == "21":
-        # 윗줄 (북쪽, 복도 쪽): lat > 37.29362
-        return "north" if cy > 37.29362 else "south"
-    elif building == "22":
-        # 오른쪽 줄 (동쪽, 외벽): lon > 126.97710
-        return "east" if cx > 126.97710 else "west"
-    elif building == "23":
-        # 윗줄 (북쪽, 외벽): lat > 37.29430
-        return "north" if cy > 37.29430 else "south"
-    return building  # stairs 등은 그대로
+def is_sliver(geom):
+    return feature_area(geom) <= MIN_AREA
 
 
-def assign_room_numbers(rooms_by_group):
-    """
-    각 그룹 내에서 위치 순으로 정렬하고 방 번호 할당.
-    구조도 기반 방 번호 매핑.
-    """
-    result = []
-
-    # 21동 북쪽 줄 (복도 쪽): 21102~21108 (왼→오, lon 순)
-    group = rooms_by_group.get(("21", "north"), [])
-    group.sort(key=lambda r: r["center"][0])
-    room_nums_21n = [21102, 21103, 21104, 21105, 21106, 21107, 21108]
-    for i, r in enumerate(group):
-        ref = room_nums_21n[i] if i < len(room_nums_21n) else 21102 + i
-        r["ref"] = str(ref)
-        r["room_type"] = "classroom"
-        result.append(r)
-
-    # 21동 남쪽 줄 (외벽 쪽): 21101, 21109~21118 (왼→오, lon 순)
-    group = rooms_by_group.get(("21", "south"), [])
-    group.sort(key=lambda r: r["center"][0])
-    room_nums_21s = [21101, 21109, 21110, 21111, 21112, 21113, 21114, 21115]
-    for i, r in enumerate(group):
-        ref = room_nums_21s[i] if i < len(room_nums_21s) else 21109 + i
-        r["ref"] = str(ref)
-        r["room_type"] = "classroom"
-        result.append(r)
-
-    # 22동 동쪽 줄 (외벽): 22101~22106 (위→아래, lat 내림차순)
-    group = rooms_by_group.get(("22", "east"), [])
-    group.sort(key=lambda r: -r["center"][1])
-    room_nums_22e = [22101, 22102, 22103, 22104, 22105, 22106]
-    for i, r in enumerate(group):
-        ref = room_nums_22e[i] if i < len(room_nums_22e) else 22101 + i
-        r["ref"] = str(ref)
-        r["room_type"] = "classroom"
-        result.append(r)
-
-    # 22동 서쪽 줄 (복도 쪽): 22107~22113 (위→아래, lat 내림차순)
-    group = rooms_by_group.get(("22", "west"), [])
-    group.sort(key=lambda r: -r["center"][1])
-    room_nums_22w = [22107, 22108, 22109, 22110, 22111, 22112, 22113]
-    for i, r in enumerate(group):
-        ref = room_nums_22w[i] if i < len(room_nums_22w) else 22107 + i
-        r["ref"] = str(ref)
-        r["room_type"] = "classroom"
-        result.append(r)
-
-    # 23동 남쪽 줄 (복도 쪽): 23102~23108 (왼→오)
-    group = rooms_by_group.get(("23", "south"), [])
-    group.sort(key=lambda r: r["center"][0])
-    room_nums_23s = [23102, 23103, 23104, 23105, 23106, 23107, 23108]
-    for i, r in enumerate(group):
-        ref = room_nums_23s[i] if i < len(room_nums_23s) else 23102 + i
-        r["ref"] = str(ref)
-        r["room_type"] = "classroom"
-        result.append(r)
-
-    # 23동 북쪽 줄 (외벽 쪽): 23109~23114+ (왼→오)
-    group = rooms_by_group.get(("23", "north"), [])
-    group.sort(key=lambda r: r["center"][0])
-    room_nums_23n = [23109, 23110, 23111, 23112, 23113, 23114, 23115,
-                     23116, 23117, 23118, 23119, 23120, 23121, 23122]
-    for i, r in enumerate(group):
-        ref = room_nums_23n[i] if i < len(room_nums_23n) else 23109 + i
-        r["ref"] = str(ref)
-        r["room_type"] = "classroom"
-        result.append(r)
-
-    # 21동 왼쪽 (0=화장실, 1=계단) — lat 내림차순 정렬
-    group = rooms_by_group.get(("21_stairs", "21_stairs"), [])
-    group.sort(key=lambda r: -r["center"][1])  # 위쪽(높은 lat)이 0
-    types_21 = [("21_toilet", "toilets"), ("21_stairs", "stairs")]
-    for i, r in enumerate(group):
-        ref, rtype = types_21[i] if i < len(types_21) else (f"21_stairs_{i}", "stairs")
-        r["ref"] = ref
-        r["room_type"] = rtype
-        result.append(r)
-
-    # 21-22동 연결부 (0=화장실, 1=계단) — lat 내림차순 정렬
-    group = rooms_by_group.get(("21_22_stairs", "21_22_stairs"), [])
-    group.sort(key=lambda r: -r["center"][1])  # 위쪽이 0
-    types_2122 = [("21_22_toilet", "toilets"), ("21_22_stairs", "stairs")]
-    for i, r in enumerate(group):
-        ref, rtype = types_2122[i] if i < len(types_2122) else (f"21_22_stairs_{i}", "stairs")
-        r["ref"] = ref
-        r["room_type"] = rtype
-        result.append(r)
-
-    # 분류 안 된 방
-    for key, group in rooms_by_group.items():
-        if key[0] == "unknown":
-            for r in group:
-                r["ref"] = "unknown"
-                r["room_type"] = "room"
-                result.append(r)
-
-    return result
+def multi_to_single(geom):
+    if geom["type"] == "MultiPolygon" and len(geom["coordinates"]) == 1:
+        return {"type": "Polygon", "coordinates": geom["coordinates"][0]}
+    return geom
 
 
-def convert():
-    features = []
+def calc_centroid(geom):
+    if geom["type"] == "Polygon":
+        ring = geom["coordinates"][0]
+    elif geom["type"] == "MultiPolygon":
+        ring = geom["coordinates"][0][0]
+    else:
+        return None
+    n = len(ring) - 1
+    if n <= 0:
+        return None
+    cx = sum(p[0] for p in ring[:n]) / n
+    cy = sum(p[1] for p in ring[:n]) / n
+    return [round(cx, 7), round(cy, 7)]
 
-    # === 1. 건물 외곽선 ===
-    with open(os.path.join(INPUT_DIR, "eng1_outline.geojson"), encoding="utf-8") as f:
-        outline_data = json.load(f)
 
-    for feat in outline_data["features"]:
+def coord_area_m2(geom):
+    a = feature_area(geom)
+    return a * 111000 * 88000
+
+
+def try_open(path):
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def write_geojson(path, features):
+    data = {"type": "FeatureCollection", "features": features}
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+
+# ──────────────────────────────────────────
+# 메인 변환
+# ──────────────────────────────────────────
+
+def convert(code, levels):
+    out_dir = os.path.join(PUBLIC_GEOJSON, code)
+    os.makedirs(out_dir, exist_ok=True)
+
+    # === 1. 외곽선 ===
+    outline_src = try_open(os.path.join(INPUT_DIR, f"{code}_outline.geojson"))
+    if outline_src and outline_src["features"]:
+        feat = outline_src["features"][0]
         geom = multi_to_single(feat["geometry"])
-        if geom["type"] == "Polygon" and geom["coordinates"] and geom["coordinates"][0]:
-            features.append({
-                "type": "Feature",
-                "id": "way/eng1_outline",
-                "properties": {
-                    "building": "university",
-                    "building:levels": "5",
-                    "min_level": "1",
-                    "max_level": "5",
-                    "name": "제1공학관",
-                    "name:en": "Engineering Building 1",
-                    "loc_ref": "ENG1",
-                    "id": "way/eng1_outline"
-                },
-                "geometry": geom
-            })
-            break  # 외곽선은 하나만
-
-    # === 2. 복도 (collider → corridor) ===
-    collider_path = os.path.join(INPUT_DIR, "eng1_collider_L1.geojson")
-    if os.path.exists(collider_path):
-        with open(collider_path, encoding="utf-8") as f:
-            collider_data = json.load(f)
-        for i, feat in enumerate(collider_data["features"]):
-            geom = multi_to_single(feat["geometry"])
-            if geom["type"] == "Polygon" and geom["coordinates"] and geom["coordinates"][0]:
-                features.append({
-                    "type": "Feature",
-                    "id": f"way/skku_corridor_L1_{i}",
-                    "properties": {
-                        "indoor": "corridor",
-                        "level": "1",
-                        "id": f"way/skku_corridor_L1_{i}"
-                    },
-                    "geometry": geom
-                })
-
-    # === 3. 방 ===
-    with open(os.path.join(INPUT_DIR, "eng1_rooms_L1.geojson"), encoding="utf-8") as f:
-        rooms_data = json.load(f)
-
-    # 방을 그룹별로 분류
-    rooms_by_group = {}
-    for feat in rooms_data["features"]:
-        geom = multi_to_single(feat["geometry"])
-        if geom["type"] != "Polygon" or not geom["coordinates"] or not geom["coordinates"][0]:
-            continue
-        center = calc_center(geom["coordinates"])
-        if not center:
-            continue
-        building = classify_building(center[0], center[1])
-        row = classify_row(building, center[0], center[1])
-        key = (building, row)
-        if key not in rooms_by_group:
-            rooms_by_group[key] = []
-        rooms_by_group[key].append({
-            "geometry": geom,
-            "center": center
-        })
-
-    # 그룹별 현황 출력
-    print("\n=== 방 그룹별 현황 ===")
-    for key, group in sorted(rooms_by_group.items()):
-        print(f"  {key[0]}동 {key[1]}: {len(group)}개")
-
-    # 방 번호 할당
-    assigned_rooms = assign_room_numbers(rooms_by_group)
-
-    for r in assigned_rooms:
-        ref = r["ref"]
-        building = ref[:2] if ref != "unknown" else "xx"
-        feat_id = f"way/skku_room_{ref}"
-        features.append({
+        outline_feature = {
             "type": "Feature",
-            "id": feat_id,
             "properties": {
-                "indoor": "room",
-                "level": "1",
-                "ref": ref,
-                "name": f"Room {ref}",
-                "room_type": r["room_type"],
-                "id": feat_id
+                "building": "university",
+                "name": BUILDING_NAMES.get(code, ""),
+                "loc_ref": code.upper(),
             },
-            "geometry": r["geometry"]
-        })
+            "geometry": geom,
+        }
+        write_geojson(os.path.join(out_dir, f"{code}_outline.geojson"), [outline_feature])
+        print(f"  외곽선: 1개")
+    else:
+        print(f"  [경고] {code}_outline.geojson 없음")
 
-    # === 4. 벽 ===
-    walls_path = os.path.join(INPUT_DIR, "eng1_walls_l1.geojson")
-    if os.path.exists(walls_path):
-        with open(walls_path, encoding="utf-8") as f:
-            walls_data = json.load(f)
-        for i, feat in enumerate(walls_data["features"]):
-            geom = feat["geometry"]
-            if geom.get("coordinates"):
-                features.append({
+    # === 2. 층별 처리 ===
+    for level in levels:
+        print(f"\n--- Level {level} ---")
+
+        # 복도 (collider)
+        collider = try_open(os.path.join(INPUT_DIR, f"{code}_collider_L{level}.geojson"))
+        if collider:
+            collider_feats = []
+            for i, feat in enumerate(collider["features"]):
+                geom = multi_to_single(feat["geometry"])
+                collider_feats.append({
                     "type": "Feature",
-                    "id": f"wall/skku_L1_partition_{i}",
+                    "properties": {"indoor": "corridor", "level": str(level)},
+                    "geometry": geom,
+                })
+            write_geojson(os.path.join(out_dir, f"{code}_collider_L{level}.geojson"), collider_feats)
+            print(f"  복도: {len(collider_feats)}개")
+
+        # 방 (슬리버 제거 + 정렬 + 속성)
+        rooms = try_open(os.path.join(INPUT_DIR, f"{code}_room_L{level}.geojson"))
+        if rooms:
+            total = len(rooms["features"])
+            sliver_n = 0
+            room_entries = []
+
+            for feat in rooms["features"]:
+                geom = multi_to_single(feat["geometry"])
+                if is_sliver(geom):
+                    sliver_n += 1
+                    continue
+                centroid = calc_centroid(geom)
+                area = round(coord_area_m2(geom), 1)
+                room_entries.append((centroid, area, geom))
+
+            # 위치 순 정렬 (위→아래, 왼→오)
+            room_entries.sort(key=lambda e: (-e[0][1], e[0][0]) if e[0] else (0, 0))
+
+            room_feats = []
+            for idx, (centroid, area, geom) in enumerate(room_entries):
+                room_feats.append({
+                    "type": "Feature",
                     "properties": {
-                        "indoor": "wall",
-                        "level": "1",
-                        "wall_type": "partition",
-                        "id": f"wall/skku_L1_partition_{i}"
+                        "indoor": "room",
+                        "level": str(level),
+                        "ref": "",
+                        "name": "",
+                        "room_type": "",
+                        "_idx": idx + 1,
+                        "_centroid": centroid,
+                        "_area_m2": area,
                     },
-                    "geometry": geom
+                    "geometry": geom,
                 })
 
-    # === 5. Bearing 계산 노드 (지도 회전용) ===
-    # 21동 남쪽 벽의 양 끝 점 사용 (수평선 기준)
-    features.append({
-        "type": "Feature",
-        "id": "node/skku_bearing_1",
-        "properties": {"id": "node/skku_bearing_1", "level": "1"},
-        "geometry": {
-            "type": "Point",
-            "coordinates": [126.976816, 37.293503]  # 21동 남동쪽
-        }
-    })
-    features.append({
-        "type": "Feature",
-        "id": "node/skku_bearing_2",
-        "properties": {"id": "node/skku_bearing_2", "level": "1"},
-        "geometry": {
-            "type": "Point",
-            "coordinates": [126.976072, 37.293594]  # 21동 남서쪽
-        }
-    })
+            write_geojson(os.path.join(out_dir, f"{code}_room_L{level}.geojson"), room_feats)
+            print(f"  방: {total}개 → 슬리버 {sliver_n}개 제거 → {len(room_feats)}개")
 
-    # === 출력 ===
-    output = {
-        "type": "FeatureCollection",
-        "features": features
+        # 벽
+        walls = try_open(os.path.join(INPUT_DIR, f"{code}_wall_l{level}.geojson"))
+        wall_feats = []
+        if walls:
+            for feat in walls["features"]:
+                if feat["geometry"].get("coordinates"):
+                    geom = multi_to_single(feat["geometry"])
+                    wall_feats.append({
+                        "type": "Feature",
+                        "properties": {"indoor": "wall", "level": str(level)},
+                        "geometry": geom,
+                    })
+        write_geojson(os.path.join(out_dir, f"{code}_wall_L{level}.geojson"), wall_feats)
+        print(f"  벽: {len(wall_feats)}개")
+
+    # === 3. manifest.json ===
+    manifest = {
+        "building": code,
+        "name": BUILDING_NAMES.get(code, ""),
+        "loc_ref": code.upper(),
+        "levels": sorted(levels),
     }
-
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(output, f, indent=2, ensure_ascii=False)
+    with open(os.path.join(out_dir, "manifest.json"), "w", encoding="utf-8") as f:
+        json.dump(manifest, f, indent=2, ensure_ascii=False)
 
     print(f"\n=== 변환 완료 ===")
-    print(f"  총 피처: {len(features)}")
-    print(f"  출력: {OUTPUT_FILE}")
-
-    # 요약
-    counts = {}
-    for feat in features:
-        indoor = feat["properties"].get("indoor", feat["properties"].get("building", "outline"))
-        counts[indoor] = counts.get(indoor, 0) + 1
-    for k, v in counts.items():
-        print(f"  - {k}: {v}개")
+    print(f"  출력: {out_dir}")
+    print(f"  manifest.json + 외곽선 + {len(levels)}개 층 파일")
 
 
 if __name__ == "__main__":
-    convert()
+    if len(sys.argv) < 3:
+        print("사용법: python convert.py <building_code> <level> [level ...]")
+        print("  예시: python convert.py eng1 1")
+        print("        python convert.py eng2 1 2 3 4 5")
+        sys.exit(1)
+
+    code = sys.argv[1]
+    levels = [int(x) for x in sys.argv[2:]]
+    convert(code, levels)

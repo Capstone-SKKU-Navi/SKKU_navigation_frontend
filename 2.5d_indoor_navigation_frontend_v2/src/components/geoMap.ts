@@ -3,6 +3,7 @@ import * as BackendService from '../services/backendService';
 import * as IndoorLayer from './indoorLayer';
 import * as RouteOverlay from './routeOverlay';
 import * as FloatingLabels from './floatingLabels';
+import { MapConfig } from '../config/mapConfig';
 
 /**
  * GeoMap — MapLibre GL JS based map component
@@ -65,6 +66,9 @@ export function initMap(): void {
 
   map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
 
+  // Middle-click (wheel button) drag to pan
+  setupMiddleClickPan(map);
+
   map.on('load', () => {
     try {
       IndoorLayer.addIndoorLayers(map!);
@@ -74,6 +78,8 @@ export function initMap(): void {
     } catch (e) {
       console.error('Map init error:', e);
     }
+    // 2D 모드: pitch만 잠그고 Z축(bearing) 회전은 허용
+    map!.setMaxPitch(0);
     // Always emit loaded event so UI doesn't get stuck
     document.dispatchEvent(new CustomEvent('mapLoaded'));
   });
@@ -86,13 +92,13 @@ export function toggle3D(): void {
   flatMode = !flatMode;
 
   if (flatMode) {
-    // Switch to 2D: pitch 0, no bearing rotation
+    // Switch to 2D: pitch 0, Z축 회전만 허용
     map.easeTo({
       pitch: 0,
-      bearing: constants.standardBearing,
       zoom: constants.standardZoom,
-      duration: 600,
+      duration: MapConfig.toggleDuration,
     });
+    map.setMaxPitch(0);
     IndoorLayer.setExtrusionHeight(map, false);
   } else {
     // Switch to 3D: tilted view with extrusions
@@ -100,8 +106,9 @@ export function toggle3D(): void {
       pitch: constants.standardPitch3DMode,
       bearing: constants.standardBearing3DMode,
       zoom: constants.standardZoom3DMode,
-      duration: 600,
+      duration: MapConfig.toggleDuration,
     });
+    map.setMaxPitch(MapConfig.maxPitch3D);
     IndoorLayer.setExtrusionHeight(map, true);
   }
 }
@@ -113,9 +120,9 @@ export function centerMapToBuilding(): void {
   const center = BackendService.getMapCenter();
 
   if (flatMode) {
-    map.easeTo({ center, zoom: constants.standardZoom, bearing: constants.standardBearing, pitch: 0, duration: 800 });
+    map.easeTo({ center, zoom: constants.standardZoom, pitch: 0, duration: MapConfig.centerDuration });
   } else {
-    map.easeTo({ center, zoom: constants.standardZoom3DMode, bearing: constants.standardBearing3DMode, pitch: constants.standardPitch3DMode, duration: 800 });
+    map.easeTo({ center, zoom: constants.standardZoom3DMode, bearing: constants.standardBearing3DMode, pitch: constants.standardPitch3DMode, duration: MapConfig.centerDuration });
   }
 }
 
@@ -156,8 +163,8 @@ export function flyToRoom(ref: string): void {
 
     map.easeTo({
       center: center as [number, number],
-      zoom: 20.5,
-      duration: 600,
+      zoom: MapConfig.flyToRoomZoom,
+      duration: MapConfig.flyToRoomDuration,
     });
 
     IndoorLayer.highlightRoom(map, ref);
@@ -254,11 +261,46 @@ function getRoomTypeLabel(type: string): string {
 
 function polygonCenter(coords: number[][]): number[] {
   let sumLng = 0, sumLat = 0;
-  // Exclude closing coordinate (last = first)
   const len = coords.length - 1;
   for (let i = 0; i < len; i++) {
     sumLng += coords[i][0];
     sumLat += coords[i][1];
   }
   return [sumLng / len, sumLat / len];
+}
+
+function setupMiddleClickPan(m: maplibregl.Map): void {
+  const canvas = m.getCanvas();
+  let panning = false;
+  let lastX = 0;
+  let lastY = 0;
+
+  canvas.addEventListener('mousedown', (e) => {
+    if (e.button !== 1) return; // middle button only
+    e.preventDefault();
+    panning = true;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    canvas.style.cursor = 'grabbing';
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!panning) return;
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    m.panBy([-dx, -dy], { animate: false });
+  });
+
+  window.addEventListener('mouseup', (e) => {
+    if (e.button !== 1) return;
+    panning = false;
+    canvas.style.cursor = '';
+  });
+
+  // Prevent default middle-click scroll behavior
+  canvas.addEventListener('auxclick', (e) => {
+    if (e.button === 1) e.preventDefault();
+  });
 }

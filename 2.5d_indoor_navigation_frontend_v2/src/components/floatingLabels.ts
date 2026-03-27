@@ -51,11 +51,10 @@ export function updateLabels(level: number, is3D: boolean, altitude: number): vo
   active = true;
 
   // Get room features for this level
-  const levelGeoJson = BackendService.getLevelGeoJson(level);
+  const roomFeatures = BackendService.getRoomFeaturesForLevel(level);
 
-  for (const f of levelGeoJson.features) {
+  for (const f of roomFeatures) {
     if (f.geometry.type !== 'Polygon' && f.geometry.type !== 'MultiPolygon') continue;
-    if (f.properties.indoor !== 'room') continue;
     if (!f.properties.ref) continue;
 
     const coords = f.geometry.type === 'Polygon'

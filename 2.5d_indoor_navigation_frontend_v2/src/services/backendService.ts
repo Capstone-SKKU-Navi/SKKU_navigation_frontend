@@ -1,14 +1,9 @@
-import { BuildingInterface, BuildingConstants, RoomListItem } from '../models/types';
+import { BuildingInterface, BuildingConstants, BuildingManifest, LevelData, RoomListItem } from '../models/types';
 import { extractLevels } from '../utils/extractLevels';
-import { lat2y } from '../utils/coordinateHelpers';
 
-// Building constants from v1 config
-const BUILDING_CONFIG = {
+// Building view config (zoom, pitch, etc.)
+const BUILDING_VIEW = {
   eng1: {
-    SEARCH_STRING: '제1공학관',
-    BEARING_OFFSET: 90,
-    BEARING_CALC_NODE1: 'skku_bearing_1',
-    BEARING_CALC_NODE2: 'skku_bearing_2',
     STANDARD_ZOOM: 19.5,
     MAX_ZOOM: 21,
     MIN_ZOOM: 15,
@@ -16,165 +11,196 @@ const BUILDING_CONFIG = {
     STANDARD_PITCH_3D_MODE: 72,
     STANDARD_ZOOM_3D_MODE: 20.0,
   },
-};
+} as Record<string, {
+  STANDARD_ZOOM: number; MAX_ZOOM: number; MIN_ZOOM: number;
+  STANDARD_BEARING_3D_MODE: number; STANDARD_PITCH_3D_MODE: number; STANDARD_ZOOM_3D_MODE: number;
+}>;
 
-const MAP_START_LAT = 37.2939;
-const MAP_START_LNG = 126.9766;
+const DEFAULT_VIEW = {
+  STANDARD_ZOOM: 19.5, MAX_ZOOM: 21, MIN_ZOOM: 15,
+  STANDARD_BEARING_3D_MODE: -45, STANDARD_PITCH_3D_MODE: 72, STANDARD_ZOOM_3D_MODE: 20.0,
+};
 
 const currentBuilding = 'eng1';
 
-let geoJson: GeoJSON.FeatureCollection;
+let manifest: BuildingManifest;
 let buildingInterface: BuildingInterface;
 let buildingConstants: BuildingConstants;
 let buildingDescription = '';
-const allLevels = new Set<number>();
 let roomList: RoomListItem[] = [];
 
-// Per-level filtered GeoJSON caches
-const levelGeoJsonCache = new Map<number, GeoJSON.FeatureCollection>();
+// Per-level categorized data
+const levelDataCache = new Map<number, LevelData>();
+
+// ===== Fetching =====
+
+async function fetchJson<T>(url: string): Promise<T | null> {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    return await res.json() as T;
+  } catch { return null; }
+}
+
+const emptyFC = (): GeoJSON.FeatureCollection => ({ type: 'FeatureCollection', features: [] });
 
 export async function fetchBackendData(): Promise<void> {
-  const res = await fetch(`/geojson/eng1.geojson`);
-  if (!res.ok) throw new Error('GeoJSON 로딩 실패');
-  const fullGeojson: GeoJSON.FeatureCollection = await res.json();
+  const code = currentBuilding;
+  const base = `/geojson/${code}`;
 
-  // Find building outline
-  const outlineFeature = fullGeojson.features.find(
-    f => f.properties?.building !== undefined &&
-      (f.properties!.name === BUILDING_CONFIG[currentBuilding].SEARCH_STRING ||
-       f.properties!.loc_ref === 'ENG1')
-  );
+  // 1. Manifest
+  const m = await fetchJson<BuildingManifest>(`${base}/manifest.json`);
+  if (!m) throw new Error('manifest.json 로딩 실패');
+  manifest = m;
 
-  if (!outlineFeature || !outlineFeature.properties) throw new Error('건물 외곽선을 찾을 수 없습니다.');
+  // 2. Outline
+  const outlineGeoJson = await fetchJson<GeoJSON.FeatureCollection>(`${base}/${code}_outline.geojson`);
+  const outlineFeature = outlineGeoJson?.features?.[0];
+  if (!outlineFeature) throw new Error('건물 외곽선을 찾을 수 없습니다.');
 
-  // Compute bounding box
-  const coords = (outlineFeature.geometry as GeoJSON.Polygon).coordinates[0];
+  // Bounding box
+  const allCoords = extractAllCoords(outlineFeature.geometry);
   let minLng = Infinity, minLat = Infinity, maxLng = -Infinity, maxLat = -Infinity;
-  for (const [lng, lat] of coords) {
+  for (const [lng, lat] of allCoords) {
     if (lng < minLng) minLng = lng;
     if (lat < minLat) minLat = lat;
     if (lng > maxLng) maxLng = lng;
     if (lat > maxLat) maxLat = lat;
   }
 
-  buildingInterface = {
-    boundingBox: [minLng, minLat, maxLng, maxLat],
-    feature: outlineFeature,
-  };
+  buildingInterface = { boundingBox: [minLng, minLat, maxLng, maxLat], feature: outlineFeature };
 
-  // Filter to indoor features only
-  const indoorFeatures = fullGeojson.features.filter(f =>
-    ('indoor' in f.properties && f.properties.indoor !== 'no') || 'level' in f.properties
-  );
+  // Description
+  const props = outlineFeature.properties ?? {};
+  buildingDescription = props.name ?? manifest.name ?? '';
+  if (manifest.loc_ref) buildingDescription += ` (${manifest.loc_ref})`;
 
-  // Parse levels
-  for (const feature of indoorFeatures) {
-    if (!['Polygon', 'LineString', 'MultiPolygon'].includes(feature.geometry.type)) continue;
-    if (feature.properties.level === undefined) continue;
+  // 3. Per-level files (parallel)
+  const levels = manifest.levels;
+  await Promise.all(levels.map(async (level) => {
+    const [rooms, colliders, walls] = await Promise.all([
+      fetchJson<GeoJSON.FeatureCollection>(`${base}/${code}_room_L${level}.geojson`),
+      fetchJson<GeoJSON.FeatureCollection>(`${base}/${code}_collider_L${level}.geojson`),
+      fetchJson<GeoJSON.FeatureCollection>(`${base}/${code}_wall_L${level}.geojson`),
+    ]);
 
-    const levels = extractLevels(String(feature.properties.level));
-    feature.properties.level = levels;
-    levels.forEach(l => allLevels.add(l));
-  }
+    // Parse level strings to arrays on room features
+    const roomFC = rooms ?? emptyFC();
+    for (const f of roomFC.features) {
+      if (f.properties.level !== undefined) {
+        f.properties.level = extractLevels(String(f.properties.level));
+      }
+    }
 
-  geoJson = { type: 'FeatureCollection', features: indoorFeatures };
+    const colliderFC = colliders ?? emptyFC();
+    for (const f of colliderFC.features) {
+      if (f.properties.level !== undefined) {
+        f.properties.level = extractLevels(String(f.properties.level));
+      }
+    }
 
-  // Build room list for search
-  roomList = [];
-  for (const f of geoJson.features) {
-    if (f.geometry.type !== 'Polygon' && f.geometry.type !== 'MultiPolygon') continue;
-    if (!f.properties.indoor || f.properties.indoor === 'corridor') continue;
-    if (!f.properties.ref) continue;
-
-    const levels = Array.isArray(f.properties.level) ? f.properties.level : extractLevels(String(f.properties.level ?? ''));
-    roomList.push({
-      ref: f.properties.ref,
-      name: f.properties.name ?? '',
-      level: levels,
-      roomType: f.properties.room_type ?? f.properties.indoor ?? '',
-      featureId: String(f.id ?? ''),
+    levelDataCache.set(level, {
+      rooms: roomFC,
+      colliders: colliderFC,
+      walls: walls ?? emptyFC(),
     });
-  }
+  }));
 
-  // Build description
-  if (outlineFeature.properties.name) {
-    buildingDescription = outlineFeature.properties.name;
-    if (outlineFeature.properties.loc_ref) {
-      buildingDescription += ` (${outlineFeature.properties.loc_ref})`;
+  // 4. Build room list (for search)
+  roomList = [];
+  for (const level of levels) {
+    const data = levelDataCache.get(level);
+    if (!data) continue;
+    for (const f of data.rooms.features) {
+      if (f.geometry.type !== 'Polygon' && f.geometry.type !== 'MultiPolygon') continue;
+      if (!f.properties.ref) continue;
+      const fLevels = Array.isArray(f.properties.level) ? f.properties.level : [level];
+      roomList.push({
+        ref: f.properties.ref,
+        name: f.properties.name ?? '',
+        level: fLevels,
+        roomType: f.properties.room_type ?? '',
+        featureId: String(f.properties._idx ?? ''),
+      });
     }
   }
 
-  // Calculate bearing from reference nodes
-  const cfg = BUILDING_CONFIG[currentBuilding];
-  const node1 = fullGeojson.features.find(f => f.id === `node/${cfg.BEARING_CALC_NODE1}`);
-  const node2 = fullGeojson.features.find(f => f.id === `node/${cfg.BEARING_CALC_NODE2}`);
-
-  let standardBearing = cfg.STANDARD_BEARING_3D_MODE;
-  if (node1 && node2) {
-    const p1 = (node1.geometry as GeoJSON.Point).coordinates;
-    const p2 = (node2.geometry as GeoJSON.Point).coordinates;
-    standardBearing = ((
-      Math.atan2(p2[0] - p1[0], lat2y(p2[1]) - lat2y(p1[1])) * (180 / Math.PI)
-      + cfg.BEARING_OFFSET
-    + 180) % 360) - 180;
-  }
-
+  // 5. Building constants
+  const view = BUILDING_VIEW[code] ?? DEFAULT_VIEW;
   buildingConstants = {
-    standardZoom: cfg.STANDARD_ZOOM,
-    maxZoom: cfg.MAX_ZOOM,
-    minZoom: cfg.MIN_ZOOM,
-    standardBearing,
-    standardBearing3DMode: cfg.STANDARD_BEARING_3D_MODE,
-    standardPitch3DMode: cfg.STANDARD_PITCH_3D_MODE,
-    standardZoom3DMode: cfg.STANDARD_ZOOM_3D_MODE,
+    standardZoom: view.STANDARD_ZOOM,
+    maxZoom: view.MAX_ZOOM,
+    minZoom: view.MIN_ZOOM,
+    standardBearing: view.STANDARD_BEARING_3D_MODE,
+    standardBearing3DMode: view.STANDARD_BEARING_3D_MODE,
+    standardPitch3DMode: view.STANDARD_PITCH_3D_MODE,
+    standardZoom3DMode: view.STANDARD_ZOOM_3D_MODE,
   };
+
+  // Map center = bounding box center
+  const centerLng = (minLng + maxLng) / 2;
+  const centerLat = (minLat + maxLat) / 2;
+  mapCenter = [centerLng, centerLat];
 }
 
-export function getGeoJson(): GeoJSON.FeatureCollection {
-  return geoJson;
+function extractAllCoords(geom: GeoJSON.Geometry): number[][] {
+  const coords: number[][] = [];
+  function walk(arr: any): void {
+    if (typeof arr[0] === 'number') { coords.push(arr); }
+    else { for (const c of arr) walk(c); }
+  }
+  if ('coordinates' in geom) walk(geom.coordinates);
+  return coords;
 }
 
-export function getBuildingConstants(): BuildingConstants {
-  return buildingConstants;
-}
+// ===== Public API =====
 
-export function getBuildingDescription(): string {
-  return buildingDescription;
-}
+let mapCenter: [number, number] = [126.9766, 37.2939];
+
+export function getBuildingConstants(): BuildingConstants { return buildingConstants; }
+export function getBuildingDescription(): string { return buildingDescription; }
+export function getMapCenter(): [number, number] { return mapCenter; }
+export function getBoundingBox(): [number, number, number, number] { return buildingInterface.boundingBox; }
+export function getRoomList(): RoomListItem[] { return roomList; }
 
 export function getOutline(): number[][] {
-  return (buildingInterface.feature.geometry as GeoJSON.Polygon).coordinates[0];
+  const geom = buildingInterface.feature.geometry;
+  if (geom.type === 'MultiPolygon') return (geom as GeoJSON.MultiPolygon).coordinates[0][0];
+  return (geom as GeoJSON.Polygon).coordinates[0];
 }
 
 export function getAllLevels(): number[] {
-  return Array.from(allLevels).sort((a, b) => b - a); // descending: [5, 4, 3, 2, 1]
+  return [...manifest.levels].sort((a, b) => b - a);
 }
 
-export function getMapCenter(): [number, number] {
-  return [MAP_START_LNG, MAP_START_LAT];
+/** Pre-categorized level data (rooms, colliders, walls) */
+export function getLevelData(level: number): LevelData {
+  return levelDataCache.get(level) ?? { rooms: emptyFC(), colliders: emptyFC(), walls: emptyFC() };
 }
 
-export function getRoomList(): RoomListItem[] {
-  return roomList;
+/** Room features for a specific level */
+export function getRoomFeaturesForLevel(level: number): GeoJSON.Feature[] {
+  return getLevelData(level).rooms.features;
 }
 
-export function getBoundingBox(): [number, number, number, number] {
-  return buildingInterface.boundingBox;
-}
-
-/** Get GeoJSON filtered to a specific level */
+/** Backward-compat: all features for a level merged */
 export function getLevelGeoJson(level: number): GeoJSON.FeatureCollection {
-  if (levelGeoJsonCache.has(level)) return levelGeoJsonCache.get(level)!;
+  const data = getLevelData(level);
+  return {
+    type: 'FeatureCollection',
+    features: [...data.rooms.features, ...data.colliders.features, ...data.walls.features],
+  };
+}
 
-  const features = geoJson.features.filter(f => {
-    const levels = f.properties.level;
-    if (Array.isArray(levels)) return levels.includes(level);
-    return false;
-  });
-
-  const fc: GeoJSON.FeatureCollection = { type: 'FeatureCollection', features };
-  levelGeoJsonCache.set(level, fc);
-  return fc;
+/** Backward-compat: all indoor features across all levels */
+export function getGeoJson(): GeoJSON.FeatureCollection {
+  const features: GeoJSON.Feature[] = [];
+  for (const level of manifest.levels) {
+    const data = levelDataCache.get(level);
+    if (!data) continue;
+    features.push(...data.rooms.features, ...data.colliders.features);
+  }
+  return { type: 'FeatureCollection', features };
 }
 
 /** Search rooms by ref/name */

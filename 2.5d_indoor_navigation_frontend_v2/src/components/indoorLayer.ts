@@ -32,7 +32,7 @@ const INACTIVE_CORRIDOR_OPACITY = 0.15;
 
 // Colors
 const DEFAULT_ROOM_COLOR = '#B0BEC5';
-const CORRIDOR_COLOR = '#E8E8E0';
+const CORRIDOR_COLOR = '#D5D0C8';
 const WALL_COLOR = '#9E9E9E';
 const OUTLINE_COLOR = '#546E7A';
 
@@ -145,6 +145,7 @@ function applyVisibility(map: maplibregl.Map): void {
       setLayerVis(map, `${prefix}-rooms-outline`, isActive ? 'visible' : 'none');
       setLayerVis(map, `${prefix}-rooms-labels`, 'none'); // hidden in 3D — FloatingLabels handles this
       setLayerVis(map, `${prefix}-corridors-3d`, vis);
+      setLayerVis(map, `${prefix}-corridors-outline`, isActive ? 'visible' : 'none');
       setLayerVis(map, `${prefix}-stairs-3d`, vis);
       setLayerVis(map, `${prefix}-walls-3d`, vis);
 
@@ -170,6 +171,10 @@ function applyVisibility(map: maplibregl.Map): void {
         setPaint(map, `${prefix}-corridors-3d`, 'fill-extrusion-opacity',
           isActive ? ACTIVE_CORRIDOR_OPACITY : INACTIVE_CORRIDOR_OPACITY);
 
+        setPaint(map, `${prefix}-corridors-outline`, 'fill-extrusion-base', base);
+        setPaint(map, `${prefix}-corridors-outline`, 'fill-extrusion-height', base + CORRIDOR_THICKNESS + 0.3);
+        setPaint(map, `${prefix}-corridors-outline`, 'fill-extrusion-opacity', 0.6);
+
         setPaint(map, `${prefix}-stairs-3d`, 'fill-extrusion-base', base);
         setPaint(map, `${prefix}-stairs-3d`, 'fill-extrusion-height', base + STAIRS_THICKNESS);
         setPaint(map, `${prefix}-stairs-3d`, 'fill-extrusion-opacity',
@@ -188,6 +193,7 @@ function applyVisibility(map: maplibregl.Map): void {
       setLayerVis(map, `${prefix}-rooms-outline`, vis);
       setLayerVis(map, `${prefix}-rooms-labels`, vis);
       setLayerVis(map, `${prefix}-corridors-3d`, vis);
+      setLayerVis(map, `${prefix}-corridors-outline`, vis);
       setLayerVis(map, `${prefix}-stairs-3d`, vis);
       setLayerVis(map, `${prefix}-walls-3d`, 'none'); // no walls in 2D
 
@@ -205,9 +211,15 @@ function applyVisibility(map: maplibregl.Map): void {
 
         setPaint(map, `${prefix}-corridors-3d`, 'fill-extrusion-base', 0);
         setPaint(map, `${prefix}-corridors-3d`, 'fill-extrusion-height', 0);
+        setPaint(map, `${prefix}-corridors-3d`, 'fill-extrusion-opacity', ACTIVE_CORRIDOR_OPACITY);
+
+        setPaint(map, `${prefix}-corridors-outline`, 'fill-extrusion-base', 0);
+        setPaint(map, `${prefix}-corridors-outline`, 'fill-extrusion-height', 0.2);
+        setPaint(map, `${prefix}-corridors-outline`, 'fill-extrusion-opacity', 0.6);
 
         setPaint(map, `${prefix}-stairs-3d`, 'fill-extrusion-base', 0);
         setPaint(map, `${prefix}-stairs-3d`, 'fill-extrusion-height', 0);
+        setPaint(map, `${prefix}-stairs-3d`, 'fill-extrusion-opacity', 0.7);
       }
     }
     } catch (e) {
@@ -248,28 +260,25 @@ function addLevelLayers(map: maplibregl.Map, level: number): void {
   if (addedLevels.has(level)) return;
   addedLevels.add(level);
 
-  const levelGeoJson = BackendService.getLevelGeoJson(level);
+  const levelData = BackendService.getLevelData(level);
   const sourceId = `floor-${level}`;
 
+  // Classify room features: stairs/elevator vs regular rooms
   const rooms: GeoJSON.Feature[] = [];
-  const corridors: GeoJSON.Feature[] = [];
   const stairs: GeoJSON.Feature[] = [];
-  const other: GeoJSON.Feature[] = [];
-
-  for (const f of levelGeoJson.features) {
+  for (const f of levelData.rooms.features) {
     if (f.geometry.type !== 'Polygon' && f.geometry.type !== 'MultiPolygon') continue;
-    const indoor = f.properties.indoor;
-
-    if (indoor === 'corridor' || indoor === 'area') {
-      corridors.push(f);
-    } else if (f.properties.stairs === 'yes' || f.properties.highway === 'elevator') {
+    const rt = f.properties.room_type;
+    if (rt === 'stairs' || rt === 'elevator') {
       stairs.push(f);
-    } else if (indoor === 'room') {
+    } else {
       rooms.push(f);
-    } else if (indoor && indoor !== 'pathway') {
-      other.push(f);
     }
   }
+
+  const corridors = levelData.colliders.features.filter(
+    f => f.geometry.type === 'Polygon' || f.geometry.type === 'MultiPolygon'
+  );
 
   // Rooms
   if (rooms.length > 0) {
@@ -314,10 +323,17 @@ function addLevelLayers(map: maplibregl.Map, level: number): void {
       });
     }
 
+    // Room labels — separate point source for manual positioning
+    const labelPoints = buildLabelPoints(rooms);
+    map.addSource(`${sourceId}-rooms-labelpts`, {
+      type: 'geojson',
+      data: { type: 'FeatureCollection', features: labelPoints },
+    });
+
     map.addLayer({
       id: `${sourceId}-rooms-labels`,
       type: 'symbol',
-      source: `${sourceId}-rooms`,
+      source: `${sourceId}-rooms-labelpts`,
       layout: {
         visibility: 'none',
         'text-field': ['get', 'ref'],
@@ -326,8 +342,8 @@ function addLevelLayers(map: maplibregl.Map, level: number): void {
           19.5, 9, 20, 12, 20.5, 14, 21, 16,
         ],
         'text-font': ['Noto Sans Regular'],
-        'text-allow-overlap': false,
-        'text-ignore-placement': false,
+        'text-allow-overlap': true,
+        'text-ignore-placement': true,
       },
       paint: {
         'text-color': '#263238',
@@ -356,6 +372,28 @@ function addLevelLayers(map: maplibregl.Map, level: number): void {
         'fill-extrusion-opacity': ACTIVE_CORRIDOR_OPACITY,
       },
     });
+
+    // Corridor outline edges
+    const corridorEdges = buildEdgePolygons(corridors);
+    if (corridorEdges.length > 0) {
+      map.addSource(`${sourceId}-corridors-edges`, {
+        type: 'geojson',
+        data: { type: 'FeatureCollection', features: corridorEdges },
+      });
+
+      map.addLayer({
+        id: `${sourceId}-corridors-outline`,
+        type: 'fill-extrusion',
+        source: `${sourceId}-corridors-edges`,
+        layout: { visibility: 'none' },
+        paint: {
+          'fill-extrusion-color': OUTLINE_COLOR,
+          'fill-extrusion-height': 0,
+          'fill-extrusion-base': 0,
+          'fill-extrusion-opacity': 0.6,
+        },
+      });
+    }
   }
 
   // Stairs
@@ -380,7 +418,7 @@ function addLevelLayers(map: maplibregl.Map, level: number): void {
   }
 
   // Walls
-  const allPolygons = [...rooms, ...corridors, ...stairs, ...other];
+  const allPolygons = [...rooms, ...corridors, ...stairs];
   if (allPolygons.length > 0) {
     map.addSource(`${sourceId}-walls`, {
       type: 'geojson',
@@ -413,6 +451,55 @@ function buildRoomColorExpression(): maplibregl.ExpressionSpecification {
     ...entries,
     DEFAULT_ROOM_COLOR,
   ] as unknown as maplibregl.ExpressionSpecification;
+}
+
+// ===== Label point builder =====
+// Each room gets a Point feature at _label_pos (custom) or _centroid (default).
+
+function buildLabelPoints(rooms: GeoJSON.Feature[]): GeoJSON.Feature[] {
+  return rooms.map(room => {
+    const props = room.properties;
+    const pos: [number, number] = props._label_pos
+      ? [props._label_pos[0], props._label_pos[1]]
+      : props._centroid
+        ? [props._centroid[0], props._centroid[1]]
+        : polygonCentroid(room.geometry as GeoJSON.Polygon | GeoJSON.MultiPolygon);
+
+    return {
+      type: 'Feature' as const,
+      properties: { ...props },
+      geometry: { type: 'Point' as const, coordinates: pos },
+    };
+  });
+}
+
+function polygonCentroid(geom: GeoJSON.Polygon | GeoJSON.MultiPolygon): [number, number] {
+  const ring = geom.type === 'Polygon' ? geom.coordinates[0] : geom.coordinates[0][0];
+  const n = ring.length - 1;
+  let sx = 0, sy = 0;
+  for (let i = 0; i < n; i++) { sx += ring[i][0]; sy += ring[i][1]; }
+  return [sx / n, sy / n];
+}
+
+/** Rebuild room sources for a level (called by editor when labels/properties change) */
+export function refreshRoomLabels(map: maplibregl.Map, level: number): void {
+  const allRooms = BackendService.getRoomFeaturesForLevel(level);
+
+  // Update label points source
+  const labelSource = map.getSource(`floor-${level}-rooms-labelpts`) as maplibregl.GeoJSONSource | undefined;
+  if (labelSource) {
+    labelSource.setData({ type: 'FeatureCollection', features: buildLabelPoints(allRooms) });
+  }
+
+  // Update room polygon source (so click queries + colors reflect edits)
+  const roomSource = map.getSource(`floor-${level}-rooms`) as maplibregl.GeoJSONSource | undefined;
+  if (roomSource) {
+    const rooms = allRooms.filter(f => {
+      const rt = f.properties.room_type;
+      return rt !== 'stairs' && rt !== 'elevator';
+    });
+    roomSource.setData({ type: 'FeatureCollection', features: rooms });
+  }
 }
 
 // ===== Edge geometry builder =====
