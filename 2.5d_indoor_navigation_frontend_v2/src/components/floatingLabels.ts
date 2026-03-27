@@ -108,18 +108,15 @@ function updatePositions(): void {
   if (!map || !active || labels.length === 0) return;
 
   const transform = (map as any).transform;
-  const m = transform.pixelMatrix3D;
-  if (!m) return;
-
-  const viewW = transform.width;
-  const viewH = transform.height;
-
-  // Get current zoom for font size interpolation
   const zoom = map.getZoom();
   const fontSize = interpolateFontSize(zoom);
+  const canvas = map.getCanvas();
+  const viewW = canvas.clientWidth;
+  const viewH = canvas.clientHeight;
 
   for (const label of labels) {
-    const pos = projectToScreen(m, label.lngLat, label.altitude);
+    // Use MapLibre's internal coordinatePoint with altitude-aware MercatorCoordinate
+    const pos = project3D(transform, label.lngLat, label.altitude);
 
     if (pos && pos.x >= -100 && pos.x <= viewW + 100 && pos.y >= -100 && pos.y <= viewH + 100) {
       label.el.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0) translate(-50%, -50%)`;
@@ -131,25 +128,17 @@ function updatePositions(): void {
   }
 }
 
-function projectToScreen(
-  m: Float64Array | Float32Array,
-  lngLat: [number, number],
-  altitudeMeters: number,
-): { x: number; y: number } | null {
-  const merc = maplibregl.MercatorCoordinate.fromLngLat(lngLat, altitudeMeters);
-
-  // pixelMatrix3D is column-major: m[col*4 + row]
-  const mx = merc.x;
-  const my = merc.y;
-  const mz = merc.z;
-
-  const w = m[3] * mx + m[7] * my + m[11] * mz + m[15];
-  if (w <= 0) return null; // behind camera
-
-  const x = (m[0] * mx + m[4] * my + m[8] * mz + m[12]) / w;
-  const y = (m[1] * mx + m[5] * my + m[9] * mz + m[13]) / w;
-
-  return { x, y };
+/** Project a lngLat + altitude to screen coordinates.
+ * Uses MapLibre's coordinatePoint with pixelMatrix3D — the same path
+ * as locationPoint + terrain, so elevation stays in sync with fill-extrusion. */
+function project3D(transform: any, lngLat: [number, number], altitudeMeters: number): { x: number, y: number } | null {
+  try {
+    const mc = maplibregl.MercatorCoordinate.fromLngLat(lngLat, 0);
+    const p = transform.coordinatePoint(mc, altitudeMeters, transform.pixelMatrix3D);
+    return { x: p.x, y: p.y };
+  } catch {
+    return null;
+  }
 }
 
 function interpolateFontSize(zoom: number): number {
