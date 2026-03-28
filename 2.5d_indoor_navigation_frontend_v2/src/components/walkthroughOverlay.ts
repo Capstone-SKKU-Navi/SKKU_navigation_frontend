@@ -265,8 +265,14 @@ function updateProgressUI(globalTime: number): void {
 
 // ===== Map Sync =====
 
+let lastSyncTs = 0;
+
 function syncMapPosition(globalTime: number): void {
   if (!activePlaylist) return;
+
+  const now = performance.now();
+  if (now - lastSyncTs < 33) return; // 30fps — visually identical for a map dot
+  lastSyncTs = now;
 
   const result = getPositionAtTime(activePlaylist, globalTime);
   if (!result) return;
