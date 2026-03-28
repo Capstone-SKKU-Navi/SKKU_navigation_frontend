@@ -32,6 +32,26 @@ npm run dev    # webpack dev server (localhost:8082, 자동 오픈)
 npm run build  # dist/ 폴더에 번들 생성
 ```
 
+### Get Started: 360° 영상 세팅
+
+그래프 에디터에서 엣지에 영상을 할당하거나, Walkthrough 재생을 하려면 360° 영상 파일이 필요하다.
+
+1. 공유 드라이브에서 `eng1_mp4/` 폴더를 받는다 (48개 mp4, 약 1.2GB)
+2. `2.5d_indoor_navigation_frontend_v2/videos/` 에 넣는다
+
+```
+2.5d_indoor_navigation_frontend_v2/
+└── videos/
+    ├── eng1_corridor_21_1F_cw.mp4
+    ├── eng1_corridor_21_1F_ccw.mp4
+    ├── eng1_stair_1_up.mp4
+    ├── eng1_elev_1_1F.mp4
+    └── ... (48개)
+```
+
+`videos/` 폴더는 `.gitignore`에 등록되어 있어 커밋되지 않는다.
+영상 네이밍 규칙과 엣지 매핑 방법은 `docs/360-video-guide.md` 참조.
+
 ## 아키텍처
 
 | 레이어 | 기술 | 설명 |
@@ -85,7 +105,6 @@ npm run build  # dist/ 폴더에 번들 생성
 - [ ] **3~5층 GeoJSON 데이터 제작** (QGIS → `geojson_convert/convert.py`)
 - [ ] **그래프 데이터 완성** — 전 층 노드/간선 생성 (그래프 에디터 활용)
 - [ ] **엣지-비디오 매핑 완성** — 전체 엣지에 비디오/시간 할당 (그래프 에디터 활용)
-- [ ] **비디오 상하 분할 뷰** — 상단 50% 비디오 + 하단 50% 지도, 전체화면 전환
 
 ## 핵심 파일 가이드
 
@@ -158,7 +177,6 @@ npm run build  # dist/ 폴더에 번들 생성
 
 - **벽만 merge, 방은 그룹화**: 벽은 BufferGeometry merge로 ~1개 draw call, 방 바닥은 room_type별 ~10개 그룹
 - **MeshStandardMaterial**: metalness 0.1, roughness 0.85 (AmbientLight 0.6 + DirectionalLight 0.8)
-- **비디오 패턴**: Apple Look Around — 상단 50% 비디오 + 하단 50% 지도, 전체화면 전환 지원
 - **VideoTexture**: 클립 전환 시 반드시 `.dispose()` 호출 (메모리 누수 방지)
 - **색상**: `docs/DESIGN.md`의 ROOM_COLORS 룩업 테이블 기준
 - **MapLibre → deck.gl**: v1 Maptalks에서 MapLibre GL + deck.gl로 렌더링 스택 변경 (v2)

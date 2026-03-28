@@ -4,6 +4,7 @@ node_modules/
 # Large binary files
 *.zip
 sample_video/
+2.5d_indoor_navigation_frontend_v2/videos/
 
 # IDE & tool configs
 .idea/
