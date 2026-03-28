@@ -74,13 +74,17 @@ npm run build  # dist/ 폴더에 번들 생성
 - [x] **다중 엣지 선택** — Shift+클릭으로 여러 엣지 선택, 체인 자동 감지 + 방향 표시
 - [x] **다중 엣지 분할 할당** — Assign & Split: 한 영상을 N개 엣지에 분할점으로 나눠 할당
 - [x] **360° 프리뷰 오버레이** — 드래그 회전, 휠 줌, 재생/일시정지(스페이스바), 시크바, 마커 드래그
+- [x] **360° Walkthrough 플레이어** — 경로 기반 360° 영상 재생, 세그먼트 전환 (더블 버퍼링), Three.js VideoTexture
+- [x] **Walkthrough 위치 표시** — 재생 위치를 지도 위 주황색 원으로 실시간 표시, 카메라 추적 + 자동 층 전환
+- [x] **고배속 재생** — 0.5x/1x/2x/5x/10x 배속 지원, >2x는 seek 기반 스테핑 (H.264 디코더 병목 우회)
+- [x] **그래프 에디터 실시간 동기화** — 에디터 저장 시 경로 탐색 그래프 자동 리로드 (새로고침 불필요)
+- [x] **다중 엣지 체인 정렬 개선** — 좌표 기반 정렬 → 알파벳순 노드 ID 정렬로 단순화, REV 방향 분할 할당 수정
 
 ## 남은 작업
 
 - [ ] **3~5층 GeoJSON 데이터 제작** (QGIS → `geojson_convert/convert.py`)
 - [ ] **그래프 데이터 완성** — 전 층 노드/간선 생성 (그래프 에디터 활용)
 - [ ] **엣지-비디오 매핑 완성** — 전체 엣지에 비디오/시간 할당 (그래프 에디터 활용)
-- [ ] **360° 비디오 플레이어** — 통합 시크바, 클립 전환, 마우스 회전
 - [ ] **비디오 상하 분할 뷰** — 상단 50% 비디오 + 하단 50% 지도, 전체화면 전환
 
 ## 핵심 파일 가이드
@@ -103,6 +107,10 @@ npm run build  # dist/ 폴더에 번들 생성
 | `editor/videoSettings.ts` | 비디오별 초기 yaw 각도 관리 (`video_settings.json`) |
 | `editor/videoSettingsPanel.ts` | Video Settings 패널 (영상별 방향 일괄 설정) |
 | `editor/videoPreview.ts` | 360° 프리뷰 오버레이 (Three.js, yaw/time-range/split 모드) |
+| `components/walkthroughOverlay.ts` | Walkthrough UI 오케스트레이터 (오버레이, 프로그레스 바, 배속, 카메라 추적) |
+| `components/walkthroughPlayer.ts` | 360° 세그먼트 재생 엔진 (더블 버퍼링, seek 기반 고배속) |
+| `components/walkthroughTypes.ts` | Walkthrough 타입 정의 (Clip, Segment, Playlist) |
+| `services/walkthroughPlanner.ts` | 경로 → 비디오 클립 플레이리스트 변환 (위치 보간, 부분 엣지 처리) |
 | `services/backendService.ts` | GeoJSON 로딩 + 방 정보 조회 (centroid, polygon, level) |
 | `services/graphService.ts` | 경로 탐색 엔진 (Dijkstra, 문 위치 근사, corridor edge 투영) |
 | `services/apiClient.ts` | 경로 API 클라이언트 (로컬 Dijkstra ↔ 백엔드 A* 전환) |

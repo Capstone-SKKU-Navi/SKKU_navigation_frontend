@@ -4,6 +4,7 @@ import { NavNode, NavEdge, NavGraph, EditorState, EditorMode, Command, NavGraphE
 import { getDistanceBetweenCoordinatesInM } from '../utils/coordinateHelpers';
 import { DEFAULT_FLOOR_HEIGHT } from '../components/indoorLayer';
 import * as BackendService from '../services/backendService';
+import * as GraphService from '../services/graphService';
 
 const GRAPH_JSON_URL = '/geojson/graph.json';
 const SAVE_API_URL = '/api/save-graph';
@@ -162,6 +163,7 @@ function saveToFile(graph: NavGraph): void {
     body: JSON.stringify(data),
   }).then(res => {
     if (!res.ok) console.warn('[GraphEditor] graph save failed:', res.status);
+    else GraphService.loadGraph(); // Refresh pathfinding graph so walkthrough uses latest data
   }).catch(err => console.warn('[GraphEditor] graph save error:', err));
 }
 

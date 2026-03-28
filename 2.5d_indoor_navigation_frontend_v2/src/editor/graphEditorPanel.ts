@@ -487,6 +487,7 @@ interface ChainEntry { edge: NavEdge; aligned: boolean; }
 function getOrderedChain(edges: NavEdge[]): ChainEntry[] | null {
   if (edges.length <= 1) return edges.map(e => ({ edge: e, aligned: true }));
 
+  // Build adjacency: node → edges touching it
   const nodeToEdges = new Map<string, NavEdge[]>();
   for (const e of edges) {
     for (const nid of [e.from, e.to]) {
@@ -495,9 +496,16 @@ function getOrderedChain(edges: NavEdge[]): ChainEntry[] | null {
     }
   }
 
-  const endpoints = [...nodeToEdges.entries()].filter(([, list]) => list.length === 1).map(([n]) => n);
+  // Endpoint nodes = touched by only 1 selected edge (chain ends)
+  const endpoints = [...nodeToEdges.entries()]
+    .filter(([, list]) => list.length === 1)
+    .map(([n]) => n);
   if (endpoints.length !== 2) return null;
 
+  // Deterministic start: alphabetically first node ID
+  endpoints.sort();
+
+  // Walk chain from start, assigning E1, E2, E3...
   const result: ChainEntry[] = [];
   const used = new Set<string>();
   let current = endpoints[0];
@@ -512,44 +520,6 @@ function getOrderedChain(edges: NavEdge[]): ChainEntry[] | null {
   }
 
   return result;
-}
-
-function getChainEndpoints(edges: NavEdge[]): { start: string; end: string } | null {
-  if (edges.length === 0) return null;
-  if (edges.length === 1) return { start: edges[0].from, end: edges[0].to };
-
-  // Count how many times each node appears as from/to
-  const nodeCount = new Map<string, number>();
-  for (const e of edges) {
-    for (const nid of [e.from, e.to]) {
-      nodeCount.set(nid, (nodeCount.get(nid) || 0) + 1);
-    }
-  }
-
-  // Endpoint nodes appear exactly once (they're at the ends of the chain)
-  const endpoints = [...nodeCount.entries()].filter(([, c]) => c === 1).map(([n]) => n);
-  if (endpoints.length !== 2) return null;
-
-  // Walk chain to determine order
-  const edgeSet = new Set(edges.map(e => e.id));
-  const nodeToEdge = new Map<string, NavEdge[]>();
-  for (const e of edges) {
-    for (const nid of [e.from, e.to]) {
-      if (!nodeToEdge.has(nid)) nodeToEdge.set(nid, []);
-      nodeToEdge.get(nid)!.push(e);
-    }
-  }
-
-  let current = endpoints[0];
-  const used = new Set<string>();
-  for (let i = 0; i < edges.length; i++) {
-    const next = (nodeToEdge.get(current) || []).find(e => !used.has(e.id));
-    if (!next) return null;
-    used.add(next.id);
-    current = next.from === current ? next.to : next.from;
-  }
-
-  return { start: endpoints[0], end: current };
 }
 
 export function hideEdgeProperties(): void {
@@ -568,20 +538,25 @@ export function showMultiEdgeProperties(edges: NavEdge[], nodes: Record<string, 
   if (!multiEl) return;
   multiEl.style.display = 'block';
 
-  // Detect chain endpoints
-  const endpoints = getChainEndpoints(edges);
-  const startLabel = endpoints ? (nodes[endpoints.start]?.label || endpoints.start.slice(5, 13)) : '?';
-  const endLabel = endpoints ? (nodes[endpoints.end]?.label || endpoints.end.slice(5, 13)) : '?';
-
   setText('geMultiEdgeCount', `${edges.length} edges selected`);
-  setText('geMultiEdgeFwdLabel', `FWD  ${startLabel} → ${endLabel}`);
-  setText('geMultiEdgeRevLabel', `REV  ${endLabel} → ${startLabel}`);
 
   // Store edge IDs
   multiEl.dataset.edgeIds = edges.map(e => e.id).join(',');
 
-  // Chain alignment
+  // Build ordered chain (E1, E2, E3...)
   const chain = getOrderedChain(edges);
+
+  // Derive start/end labels from the chain
+  if (chain && chain.length > 0) {
+    const first = chain[0];
+    const last = chain[chain.length - 1];
+    const startId = first.aligned ? first.edge.from : first.edge.to;
+    const endId = last.aligned ? last.edge.to : last.edge.from;
+    const startLabel = nodes[startId]?.label || startId.slice(5, 13);
+    const endLabel = nodes[endId]?.label || endId.slice(5, 13);
+    setText('geMultiEdgeFwdLabel', `FWD  ${startLabel} → ${endLabel}`);
+    setText('geMultiEdgeRevLabel', `REV  ${endLabel} → ${startLabel}`);
+  }
   const orderedEdges = chain ? chain.map(c => c.edge) : edges;
 
   function resolveKeys(chainIdx: number, dir: 'fwd' | 'rev') {
@@ -636,9 +611,11 @@ export function showMultiEdgeProperties(edges: NavEdge[], nodes: Record<string, 
       if (hasAnyTimes && uniqueVideos.length === 1) {
         const lines: string[] = [];
         for (let i = 0; i < orderedEdges.length; i++) {
-          const keys = resolveKeys(i, dirKey);
-          const s = orderedEdges[i][keys.startKey];
-          const e2 = orderedEdges[i][keys.endKey];
+          // For REV, reverse the display: E1 = chain end (REV start)
+          const chainIdx = dirKey === 'rev' ? orderedEdges.length - 1 - i : i;
+          const keys = resolveKeys(chainIdx, dirKey);
+          const s = orderedEdges[chainIdx][keys.startKey];
+          const e2 = orderedEdges[chainIdx][keys.endKey];
           const timeStr = (s !== undefined && e2 !== undefined) ? `${fmtSec(s)}~${fmtSec(e2)}` : '?';
           lines.push(`E${i + 1}: ${timeStr}`);
         }

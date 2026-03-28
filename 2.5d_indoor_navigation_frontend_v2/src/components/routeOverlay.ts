@@ -1,7 +1,7 @@
 import { MapboxOverlay } from '@deck.gl/mapbox';
 import { PathLayer, ScatterplotLayer } from '@deck.gl/layers';
 import type maplibregl from 'maplibre-gl';
-import { getLevelBase, ROOM_THICKNESS } from './indoorLayer';
+import { getLevelBase, ROOM_THICKNESS, getCurrentLevel } from './indoorLayer';
 import { MapConfig } from '../config/mapConfig';
 
 /**
@@ -18,6 +18,12 @@ let storedCoordinates: GeoJSON.Position[] | null = null;
 let storedLevels: number[] | null = null;
 let storedIs3D = false;
 
+// Walkthrough position indicator
+let positionIndicatorData: PoiData | null = null;
+
+// Endpoint preview (before route search)
+let previewEndpoints: PoiData[] = [];
+
 const R = MapConfig.route;
 
 interface RouteData {
@@ -28,6 +34,7 @@ interface PoiData {
   position: number[];
   color: [number, number, number];
   radius: number;
+  level?: number;
 }
 
 export function initOverlay(map: maplibregl.Map): void {
@@ -60,6 +67,12 @@ export function setIs3D(is3D: boolean): void {
   if (!storedCoordinates) return;
   storedIs3D = is3D;
   renderRoute();
+}
+
+/** 층 변경 시 경로/endpoint opacity 업데이트 */
+export function onLevelChange(): void {
+  if (!storedCoordinates && previewEndpoints.length === 0) return;
+  rebuildLayers();
 }
 
 /** 현재 경로가 표시 중인지 */
@@ -133,58 +146,7 @@ function splitByLevel(
 
 function renderRoute(): void {
   if (!overlay || !storedCoordinates) return;
-
-  const path3d = buildPath3D(storedCoordinates, storedLevels, storedIs3D);
-  const segments = splitByLevel(path3d, storedLevels);
-
-  const minLevel = storedLevels
-    ? Math.min(...storedLevels)
-    : 1;
-
-  // 세그먼트별 PathLayer
-  const pathLayers = segments.map((seg, i) =>
-    new PathLayer<Segment>({
-      id: `route-path-${i}`,
-      data: [seg],
-      getPath: (d) => d.path,
-      getColor: colorForLevel(seg.level, minLevel),
-      getWidth: R.lineWidth,
-      widthMinPixels: R.lineWidthMinPx,
-      widthMaxPixels: R.lineWidthMaxPx,
-      capRounded: true,
-      jointRounded: true,
-    }),
-  );
-
-  // Start and end POIs
-  const pois: PoiData[] = [];
-  if (path3d.length >= 2) {
-    pois.push({
-      position: path3d[0],
-      color: [...R.startColor] as [number, number, number],
-      radius: R.endpointRadius,
-    });
-    pois.push({
-      position: path3d[path3d.length - 1],
-      color: [...R.endColor] as [number, number, number],
-      radius: R.endpointRadius,
-    });
-  }
-
-  overlay.setProps({
-    layers: [
-      ...pathLayers,
-      new ScatterplotLayer<PoiData>({
-        id: 'route-endpoints',
-        data: pois,
-        getPosition: (d) => d.position as [number, number, number],
-        getFillColor: (d) => d.color,
-        getRadius: (d) => d.radius,
-        radiusMinPixels: R.endpointMinPx,
-        radiusMaxPixels: R.endpointMaxPx,
-      }),
-    ],
-  });
+  rebuildLayers();
 }
 
 /** Highlight POIs on the map (e.g., search results) */
@@ -216,12 +178,172 @@ export function showPois(positions: GeoJSON.Position[]): void {
   });
 }
 
+// ===== Endpoint Preview (before route search) =====
+
+/** Show start/end markers before route is searched */
+export function showEndpointPreview(
+  startPos: GeoJSON.Position | null,
+  endPos: GeoJSON.Position | null,
+  startLevel?: number | null,
+  endLevel?: number | null,
+): void {
+  previewEndpoints = [];
+  if (startPos) {
+    previewEndpoints.push({
+      position: [startPos[0], startPos[1]],
+      color: [...R.startColor] as [number, number, number],
+      radius: R.endpointRadius,
+      level: startLevel ?? undefined,
+    });
+  }
+  if (endPos) {
+    previewEndpoints.push({
+      position: [endPos[0], endPos[1]],
+      color: [...R.endColor] as [number, number, number],
+      radius: R.endpointRadius,
+      level: endLevel ?? undefined,
+    });
+  }
+  rebuildLayers();
+}
+
+export function clearEndpointPreview(): void {
+  previewEndpoints = [];
+  rebuildLayers();
+}
+
+// ===== Walkthrough Position Indicator =====
+
+/** Show an orange circle at the given position to indicate walkthrough progress */
+export function showPositionIndicator(
+  position: GeoJSON.Position,
+  level: number,
+  is3D: boolean,
+): void {
+  const pos3d = is3D
+    ? [position[0], position[1], getLevelBase(level) + ROOM_THICKNESS + 0.5]
+    : [position[0], position[1]];
+
+  positionIndicatorData = {
+    position: pos3d,
+    color: [255, 152, 0],   // orange
+    radius: 6,
+  };
+  rebuildLayers();
+}
+
+/** Remove the walkthrough position indicator */
+export function clearPositionIndicator(): void {
+  positionIndicatorData = null;
+  rebuildLayers();
+}
+
+/** Rebuild all overlay layers (route + position indicator) */
+function rebuildLayers(): void {
+  if (!overlay) return;
+
+  const layers: any[] = [];
+
+  // Route layers
+  if (storedCoordinates) {
+    const path3d = buildPath3D(storedCoordinates, storedLevels, storedIs3D);
+    const segments = splitByLevel(path3d, storedLevels);
+    const minLevel = storedLevels ? Math.min(...storedLevels) : 1;
+    const curLevel = getCurrentLevel();
+
+    segments.forEach((seg, i) => {
+      const baseColor = colorForLevel(seg.level, minLevel);
+      const opacity = seg.level === curLevel ? R.activeOpacity : R.inactiveOpacity;
+      layers.push(
+        new PathLayer<Segment>({
+          id: `route-path-${i}`,
+          data: [seg],
+          getPath: (d) => d.path,
+          getColor: [...baseColor, opacity] as [number, number, number, number],
+          getWidth: R.lineWidth,
+          widthMinPixels: R.lineWidthMinPx,
+          widthMaxPixels: R.lineWidthMaxPx,
+          capRounded: true,
+          jointRounded: true,
+        }),
+      );
+    });
+
+    // Start/end POIs
+    if (path3d.length >= 2) {
+      const startLevel = storedLevels?.[0] ?? curLevel;
+      const endLevel = storedLevels?.[storedLevels.length - 1] ?? curLevel;
+      layers.push(
+        new ScatterplotLayer<PoiData>({
+          id: 'route-endpoints',
+          data: [
+            { position: path3d[0], color: [...R.startColor] as [number, number, number], radius: R.endpointRadius },
+            { position: path3d[path3d.length - 1], color: [...R.endColor] as [number, number, number], radius: R.endpointRadius },
+          ],
+          getPosition: (d) => d.position as [number, number, number],
+          getFillColor: (d, { index }) => {
+            const lvl = index === 0 ? startLevel : endLevel;
+            const c = d.color;
+            return lvl === curLevel
+              ? [c[0], c[1], c[2], R.activeOpacity]
+              : [c[0], c[1], c[2], R.inactiveOpacity];
+          },
+          getRadius: (d) => d.radius,
+          radiusMinPixels: R.endpointMinPx,
+          radiusMaxPixels: R.endpointMaxPx,
+        }),
+      );
+    }
+  }
+
+  // Endpoint preview (before route search)
+  if (previewEndpoints.length > 0 && !storedCoordinates) {
+    const curLevel = getCurrentLevel();
+    // Pre-compute colors with alpha so deck.gl picks up changes on re-render
+    const previewData = previewEndpoints.map(d => {
+      const alpha = (d.level != null && d.level !== curLevel)
+        ? R.inactiveOpacity : R.activeOpacity;
+      return { ...d, fillColor: [d.color[0], d.color[1], d.color[2], alpha] as [number, number, number, number] };
+    });
+    layers.push(
+      new ScatterplotLayer({
+        id: 'endpoint-preview',
+        data: previewData,
+        getPosition: (d: any) => d.position,
+        getFillColor: (d: any) => d.fillColor,
+        getRadius: (d: any) => d.radius,
+        radiusMinPixels: R.endpointMinPx,
+        radiusMaxPixels: R.endpointMaxPx,
+      }),
+    );
+  }
+
+  // Position indicator
+  if (positionIndicatorData) {
+    layers.push(
+      new ScatterplotLayer<PoiData>({
+        id: 'walkthrough-position',
+        data: [positionIndicatorData],
+        getPosition: (d) => d.position as [number, number, number],
+        getFillColor: [255, 152, 0],
+        getRadius: 6,
+        radiusMinPixels: 8,
+        radiusMaxPixels: 16,
+      }),
+    );
+  }
+
+  overlay.setProps({ layers });
+}
+
 /** Clear all deck.gl layers */
 export function clearRoute(): void {
   if (!overlay) return;
   storedCoordinates = null;
   storedLevels = null;
   storedIs3D = false;
+  positionIndicatorData = null;
+  previewEndpoints = [];
   overlay.setProps({ layers: [] });
 }
 

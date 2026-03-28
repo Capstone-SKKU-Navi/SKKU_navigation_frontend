@@ -43,6 +43,10 @@ function importGraph(data: NavGraphExport): NavGraph {
     from: e.from,
     to: e.to,
     weight: e.weight,
+    videoFwd: e.videoFwd, videoFwdStart: e.videoFwdStart, videoFwdEnd: e.videoFwdEnd,
+    videoFwdExit: e.videoFwdExit, videoFwdExitStart: e.videoFwdExitStart, videoFwdExitEnd: e.videoFwdExitEnd,
+    videoRev: e.videoRev, videoRevStart: e.videoRevStart, videoRevEnd: e.videoRevEnd,
+    videoRevExit: e.videoRevExit, videoRevExitStart: e.videoRevExitStart, videoRevExitEnd: e.videoRevExitEnd,
   }));
   return { nodes, edges };
 }
@@ -63,6 +67,10 @@ function buildAdjacency(): void {
 
 export function isLoaded(): boolean {
   return graph !== null;
+}
+
+export function getGraph(): NavGraph | null {
+  return graph;
 }
 
 // ===== Node Queries =====
@@ -249,7 +257,7 @@ function dijkstra(startId: string, endId: string): DijkstraResult | null {
 
 // ===== Corridor Edge Projection =====
 
-interface EdgeProjection {
+export interface EdgeProjection {
   point: [number, number];   // 수선의 발 (corridor edge 위의 투영점)
   nodeA: string;             // edge endpoint A
   nodeB: string;             // edge endpoint B
@@ -314,6 +322,16 @@ export interface FullRouteResult {
   estimatedTime: string;
   startLevel: number;
   endLevel: number;
+  /** Projection data for perpendicular foot at route start */
+  fromProjection: EdgeProjection | null;
+  /** Projection data for perpendicular foot at route end */
+  toProjection: EdgeProjection | null;
+  /** Ordered edges traversed, with direction flag */
+  edgePath: { edge: NavEdge; forward: boolean }[];
+  /** Whether start and end project onto the same edge */
+  sameEdge: boolean;
+  /** Trimmed node IDs after backtracking removal */
+  trimmedPathNodeIds: string[];
 }
 
 /**
@@ -377,6 +395,7 @@ export function buildFullRoute(fromRef: string, toRef: string): FullRouteResult 
 
   // 5. 좌표 + 층 정보 조립
   let pathNodeIds: string[] = [];
+  let trimmedPath: string[] = [];
   const raw: GeoJSON.Position[] = [];
   const rawLevels: number[] = [];
 
@@ -442,6 +461,7 @@ export function buildFullRoute(fromRef: string, toRef: string): FullRouteResult 
     }
 
     pathNodeIds = bestResult.path;
+    trimmedPath = path.slice(pathStart, pathEnd);
     for (let i = pathStart; i < pathEnd; i++) {
       const node = graph!.nodes[path[i]];
       if (node) pushCoord(node.coordinates, node.level);
@@ -476,6 +496,45 @@ export function buildFullRoute(fromRef: string, toRef: string): FullRouteResult 
   const minutes = Math.max(1, Math.round(totalDistance / 72));
   const estimatedTime = `${minutes}분`;
 
+  // Build edgePath: all edges traversed in order
+  // Structure: [fromProj edge] → [inter-node edges...] → [toProj edge]
+  const edgePath: { edge: NavEdge; forward: boolean }[] = [];
+
+  function findEdge(nA: string, nB: string): NavEdge | undefined {
+    return graph!.edges.find(
+      e => (e.from === nA && e.to === nB) || (e.from === nB && e.to === nA),
+    );
+  }
+
+  if (sameEdge) {
+    // Same edge: single edge from projection endpoints
+    const e = findEdge(fromProj.nodeA, fromProj.nodeB);
+    if (e) edgePath.push({ edge: e, forward: true }); // direction resolved in planner
+  } else if (trimmedPath.length > 0) {
+    // Start edge: from perpFoot → first trimmed node
+    const firstNode = trimmedPath[0];
+    const startEdge = findEdge(fromProj.nodeA, fromProj.nodeB);
+    if (startEdge) {
+      // forward = the first trimmed node is edge.to
+      edgePath.push({ edge: startEdge, forward: startEdge.to === firstNode });
+    }
+
+    // Inter-node edges
+    for (let i = 0; i < trimmedPath.length - 1; i++) {
+      const nA = trimmedPath[i];
+      const nB = trimmedPath[i + 1];
+      const e = findEdge(nA, nB);
+      if (e) edgePath.push({ edge: e, forward: e.from === nA });
+    }
+
+    // End edge: last trimmed node → perpFoot (only if different from start edge)
+    const lastNode = trimmedPath[trimmedPath.length - 1];
+    const endEdge = findEdge(toProj.nodeA, toProj.nodeB);
+    if (endEdge && endEdge !== startEdge) {
+      edgePath.push({ edge: endEdge, forward: endEdge.from === lastNode });
+    }
+  }
+
   return {
     coordinates,
     levels,
@@ -484,22 +543,11 @@ export function buildFullRoute(fromRef: string, toRef: string): FullRouteResult 
     estimatedTime,
     startLevel: fromLevel,
     endLevel: toLevel,
+    fromProjection: fromProj,
+    toProjection: toProj,
+    edgePath,
+    sameEdge,
+    trimmedPathNodeIds: trimmedPath,
   };
 }
 
-/** 연속으로 ~1m 이내인 중복 좌표 제거 (PathLayer 렌더링 깨짐 방지) */
-function deduplicateCoords(coords: GeoJSON.Position[]): GeoJSON.Position[] {
-  if (coords.length <= 1) return coords;
-  const MIN_GAP = 0.000009; // ~1m in degrees at SKKU latitude
-  const result: GeoJSON.Position[] = [coords[0]];
-  for (let i = 1; i < coords.length; i++) {
-    const prev = result[result.length - 1];
-    const cur = coords[i];
-    const dx = cur[0] - prev[0];
-    const dy = cur[1] - prev[1];
-    if (dx * dx + dy * dy > MIN_GAP * MIN_GAP) {
-      result.push(cur);
-    }
-  }
-  return result;
-}

@@ -8,6 +8,9 @@ import * as GraphService from './services/graphService';
 import { fetchRoute } from './services/apiClient';
 import { ROOM_TYPE_LABELS, RoomListItem } from './models/types';
 import { setupGraphEditor } from './editor/graphEditor';
+import * as VideoSettings from './editor/videoSettings';
+import { buildWalkthroughPlaylist } from './services/walkthroughPlanner';
+import * as WalkthroughOverlay from './components/walkthroughOverlay';
 
 // ===== Route 3D sync =====
 function syncRoute3D(): void {
@@ -21,6 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await Promise.all([
       BackendService.fetchBackendData(),
       GraphService.loadGraph(),
+      VideoSettings.loadVideoSettings(),
     ]);
     GeoMap.initMap();
 
@@ -34,6 +38,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       setupRoomClickPopup();
       setupFpsCounter();
       setupGraphEditor();
+
+      // Sync floor wheel when walkthrough changes level
+      document.addEventListener('walkthroughLevelChange', ((e: CustomEvent) => {
+        updateFloorWheelActive(e.detail.level);
+      }) as EventListener);
+
+      // Update route opacity when level changes
+      document.addEventListener('levelChanged', () => {
+        RouteOverlay.onLevelChange();
+      });
+
       hideLoading();
     });
   } catch (err: any) {
@@ -243,12 +258,40 @@ function setupRouteUI(): void {
       const visible = routeInputs.style.display !== 'none';
       routeInputs.style.display = visible ? 'none' : 'flex';
       toggleBtn.classList.toggle('active', !visible);
+      if (toggleBtn) toggleBtn.style.display = visible ? '' : 'none';
     }
   });
 
+  // Update endpoint preview markers when inputs change
+  function updateEndpointPreview(): void {
+    // Clear existing route and walkthrough when endpoints change
+    if (RouteOverlay.hasRoute()) {
+      RouteOverlay.clearRoute();
+      WalkthroughOverlay.hideWalkthroughOverlay();
+      const routeInfo = document.getElementById('routeInfo');
+      const buildingInfo = document.getElementById('buildingInfo');
+      if (routeInfo) routeInfo.style.display = 'none';
+      if (buildingInfo) buildingInfo.style.display = 'flex';
+    }
+    const startRef = startInput?.value.trim();
+    const endRef = endInput?.value.trim();
+    const startPos = startRef ? BackendService.getRoomCentroid(startRef) : null;
+    const endPos = endRef ? BackendService.getRoomCentroid(endRef) : null;
+    const startLevel = startRef ? BackendService.getRoomLevel(startRef) : null;
+    const endLevel = endRef ? BackendService.getRoomLevel(endRef) : null;
+    RouteOverlay.showEndpointPreview(startPos, endPos, startLevel, endLevel);
+  }
+
+  // Listen for popup-triggered endpoint changes
+  document.addEventListener('routeEndpointChanged', updateEndpointPreview);
+
   // Autocomplete for start/end inputs
-  if (startInput) setupRouteAutocomplete(startInput, 'startAutocomplete');
-  if (endInput) setupRouteAutocomplete(endInput, 'endAutocomplete');
+  if (startInput) setupRouteAutocomplete(startInput, 'startAutocomplete', updateEndpointPreview);
+  if (endInput) setupRouteAutocomplete(endInput, 'endAutocomplete', updateEndpointPreview);
+
+  // Update preview as user types a valid ref
+  startInput?.addEventListener('input', updateEndpointPreview);
+  endInput?.addEventListener('input', updateEndpointPreview);
 
   findBtn?.addEventListener('click', async () => {
     const from = startInput?.value.trim();
@@ -258,6 +301,7 @@ function setupRouteUI(): void {
     try {
       const route = await fetchRoute(from, to);
 
+      RouteOverlay.clearEndpointPreview();
       if (route.coordinates && route.coordinates.length >= 2) {
         RouteOverlay.showRoute(
           route.coordinates,
@@ -267,6 +311,19 @@ function setupRouteUI(): void {
       }
 
       showRouteInfo(route.estimatedTime, route.totalDistance);
+
+      // Build walkthrough video overlay
+      const fullResult = GraphService.buildFullRoute(from, to);
+      if (fullResult) {
+        console.log('[Walkthrough] edgePath:', fullResult.edgePath.length, 'edges, trimmedPath:', fullResult.trimmedPathNodeIds.length, 'nodes');
+        const playlist = buildWalkthroughPlaylist(fullResult);
+        console.log('[Walkthrough] playlist:', playlist ? `${playlist.clips.length} clips, ${playlist.totalDuration.toFixed(1)}s` : 'null');
+        if (playlist && playlist.clips.length > 0) {
+          WalkthroughOverlay.showWalkthroughOverlay(playlist);
+        }
+      } else {
+        console.warn('[Walkthrough] buildFullRoute returned null');
+      }
     } catch (err: any) {
       console.error('경로 검색 실패:', err);
     }
@@ -274,14 +331,18 @@ function setupRouteUI(): void {
 
   clearBtn?.addEventListener('click', () => {
     RouteOverlay.clearRoute();
+    WalkthroughOverlay.hideWalkthroughOverlay();
     const routeInfo = document.getElementById('routeInfo');
     const buildingInfo = document.getElementById('buildingInfo');
     if (routeInfo) routeInfo.style.display = 'none';
     if (buildingInfo) buildingInfo.style.display = 'flex';
+    // Restore route toggle button and hide inputs
+    if (routeInputs) routeInputs.style.display = 'none';
+    if (toggleBtn) { toggleBtn.style.display = ''; toggleBtn.classList.remove('active'); }
   });
 }
 
-function setupRouteAutocomplete(input: HTMLInputElement, dropdownId: string): void {
+function setupRouteAutocomplete(input: HTMLInputElement, dropdownId: string, onSelect?: () => void): void {
   const dropdown = document.getElementById(dropdownId);
   if (!dropdown) return;
 
@@ -314,6 +375,7 @@ function setupRouteAutocomplete(input: HTMLInputElement, dropdownId: string): vo
         const idx = parseInt((item as HTMLElement).dataset.index ?? '0');
         input.value = currentResults[idx].ref;
         dropdown.classList.remove('visible');
+        onSelect?.();
       });
     });
   });
@@ -334,6 +396,7 @@ function setupRouteAutocomplete(input: HTMLInputElement, dropdownId: string): vo
       e.preventDefault();
       input.value = currentResults[highlightIdx].ref;
       dropdown.classList.remove('visible');
+      onSelect?.();
     } else if (e.key === 'Escape') {
       dropdown.classList.remove('visible');
     }
@@ -364,6 +427,7 @@ function setupRoomClickPopup(): void {
   if (!popup) return;
 
   let selectedRef: string | null = null;
+  let justOpened = false;
 
   document.addEventListener('roomClicked', ((e: CustomEvent) => {
     const { ref, screenX, screenY } = e.detail;
@@ -372,6 +436,8 @@ function setupRoomClickPopup(): void {
     popup.style.display = 'block';
     popup.style.left = `${screenX}px`;
     popup.style.top = `${screenY}px`;
+    justOpened = true;
+    requestAnimationFrame(() => { justOpened = false; });
   }) as EventListener);
 
   document.getElementById('popupSetStart')?.addEventListener('click', () => {
@@ -380,6 +446,9 @@ function setupRoomClickPopup(): void {
       if (input) input.value = selectedRef;
       const routeInputs = document.getElementById('routeInputs');
       if (routeInputs) routeInputs.style.display = 'flex';
+      const toggleBtn = document.getElementById('routeToggleBtn');
+      if (toggleBtn) toggleBtn.style.display = 'none';
+      document.dispatchEvent(new Event('routeEndpointChanged'));
     }
     popup.style.display = 'none';
   });
@@ -390,14 +459,61 @@ function setupRoomClickPopup(): void {
       if (input) input.value = selectedRef;
       const routeInputs = document.getElementById('routeInputs');
       if (routeInputs) routeInputs.style.display = 'flex';
+      const toggleBtn = document.getElementById('routeToggleBtn');
+      if (toggleBtn) toggleBtn.style.display = 'none';
+      document.dispatchEvent(new Event('routeEndpointChanged'));
     }
     popup.style.display = 'none';
   });
 
+  // Close popup: click outside or right-click anywhere or Esc
   document.addEventListener('click', (e) => {
+    if (justOpened) return;
     const target = e.target as HTMLElement;
-    if (!target.closest('#roomPopup') && !target.closest('.maplibregl-canvas')) {
+    if (!target.closest('#roomPopup')) {
       popup.style.display = 'none';
+    }
+  });
+
+  function clearRouteEndpoints(): void {
+    const startInput = document.getElementById('startRoomInput') as HTMLInputElement;
+    const endInput = document.getElementById('endRoomInput') as HTMLInputElement;
+    if (startInput) startInput.value = '';
+    if (endInput) endInput.value = '';
+    RouteOverlay.clearEndpointPreview();
+    RouteOverlay.clearRoute();
+    WalkthroughOverlay.hideWalkthroughOverlay();
+    const routeInfo = document.getElementById('routeInfo');
+    const buildingInfo = document.getElementById('buildingInfo');
+    if (routeInfo) routeInfo.style.display = 'none';
+    if (buildingInfo) buildingInfo.style.display = 'flex';
+    const routeInputs = document.getElementById('routeInputs');
+    if (routeInputs) routeInputs.style.display = 'none';
+    const toggleBtn = document.getElementById('routeToggleBtn');
+    if (toggleBtn) { toggleBtn.style.display = ''; toggleBtn.classList.remove('active'); }
+  }
+
+  document.addEventListener('contextmenu', () => {
+    popup.style.display = 'none';
+  });
+
+  // Right-click on a room that is set as start/end → clear that endpoint
+  document.addEventListener('roomRightClicked', ((e: CustomEvent) => {
+    const ref = e.detail.ref;
+    const startInput = document.getElementById('startRoomInput') as HTMLInputElement;
+    const endInput = document.getElementById('endRoomInput') as HTMLInputElement;
+    if (startInput && startInput.value.trim() === ref) startInput.value = '';
+    if (endInput && endInput.value.trim() === ref) endInput.value = '';
+    document.dispatchEvent(new Event('routeEndpointChanged'));
+  }) as EventListener);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (popup.style.display !== 'none') {
+        popup.style.display = 'none';
+        return;
+      }
+      clearRouteEndpoints();
     }
   });
 }

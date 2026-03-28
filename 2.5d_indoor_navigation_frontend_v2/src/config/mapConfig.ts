@@ -45,5 +45,15 @@ export const MapConfig = {
     startColor: [76, 175, 80] as readonly [number, number, number],   // green
     /** 도착 마커 색 */
     endColor: [244, 67, 54] as readonly [number, number, number],     // red
+    /** 현재 층 경로/마커 불투명도 (0-255) */
+    activeOpacity: 255,
+    /** 다른 층 경로/마커 불투명도 (0-255) */
+    inactiveOpacity: 128,
+  },
+
+  // ── Walkthrough ───────────────────────────────────
+  walkthrough: {
+    /** 배속 선택지 */
+    playbackRates: [0.5, 1, 2, 5, 10] as readonly number[],
   },
 } as const;

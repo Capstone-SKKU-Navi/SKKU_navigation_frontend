@@ -61,6 +61,7 @@ module.exports = (env, argv) => {
         { directory: path.join(__dirname, 'public'), watch: false },
         { directory: path.resolve('E:/360video/260328/eng1_mp4'), publicPath: '/videos', watch: false },
       ],
+      headers: { 'Access-Control-Allow-Origin': '*' },
       port: 8082,
       hot: true,
       liveReload: true,

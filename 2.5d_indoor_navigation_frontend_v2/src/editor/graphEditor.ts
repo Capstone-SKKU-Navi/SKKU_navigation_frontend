@@ -506,8 +506,7 @@ function handleSplitAssign(edgeIds: string[], direction: 'fwd' | 'rev', videoFil
   const entry = VideoSettings.getEntry(videoFile);
   const yaw = entry?.yaw ?? 0;
 
-  // Collect existing splits — use per-edge resolved keys
-  const existingSplits: number[] = [];
+  // Collect existing splits — gather all boundary times, sort for display
   const allHaveTimes = chain.every(({ edge, aligned }) => {
     const keys = resolveEdgeVideoKeys(direction, aligned);
     return edge[keys.videoKey] === videoFile
@@ -515,12 +514,18 @@ function handleSplitAssign(edgeIds: string[], direction: 'fwd' | 'rev', videoFil
       && edge[keys.endKey] !== undefined;
   });
 
+  const existingSplits: number[] = [];
   if (allHaveTimes) {
-    const firstKeys = resolveEdgeVideoKeys(direction, chain[0].aligned);
-    existingSplits.push(chain[0].edge[firstKeys.startKey]!);
+    const allTimes: number[] = [];
     for (const { edge, aligned } of chain) {
       const keys = resolveEdgeVideoKeys(direction, aligned);
-      existingSplits.push(edge[keys.endKey]!);
+      allTimes.push(edge[keys.startKey]!, edge[keys.endKey]!);
+    }
+    // Deduplicate and sort for correct UI display
+    const sorted = [...new Set(allTimes.map(t => Math.round(t * 1000) / 1000))]
+      .sort((a, b) => a - b);
+    if (sorted.length === chain.length + 1) {
+      existingSplits.push(...sorted);
     }
   }
 
@@ -532,9 +537,11 @@ function handleSplitAssign(edgeIds: string[], direction: 'fwd' | 'rev', videoFil
     initialSplits: existingSplits.length === chain.length + 1 ? existingSplits : undefined,
     onConfirm: () => {},
     onConfirmSplits: (splits) => {
+      // For REV, reverse the mapping: first video segment → chain end (REV start)
       for (let i = 0; i < chain.length; i++) {
-        const keys = resolveEdgeVideoKeys(direction, chain[i].aligned);
-        State.updateEdge(state, chain[i].edge.id, {
+        const chainIdx = direction === 'rev' ? chain.length - 1 - i : i;
+        const keys = resolveEdgeVideoKeys(direction, chain[chainIdx].aligned);
+        State.updateEdge(state, chain[chainIdx].edge.id, {
           [keys.videoKey]: videoFile,
           [keys.startKey]: splits[i],
           [keys.endKey]: splits[i + 1],
@@ -581,16 +588,19 @@ function orderEdgeChain(edgeIds: string[], graph: { nodes: Record<string, any>; 
 
   if (endpointNodes.length !== 2) return null; // not a simple chain
 
-  // Walk the chain from first endpoint, tracking direction per edge
+  // Deterministic start: alphabetically first node ID
+  endpointNodes.sort();
+  const startNode = endpointNodes[0];
+
+  // Walk the chain from startNode, tracking direction per edge
   const result: ChainEdge[] = [];
   const used = new Set<string>();
-  let currentNode = endpointNodes[0];
+  let currentNode = startNode;
 
   while (result.length < edges.length) {
     const nextEdge = (nodeToEdges.get(currentNode) || []).find(e => !used.has(e.id));
     if (!nextEdge) return null;
     used.add(nextEdge.id);
-    // aligned = chain walks from→to; reversed = chain walks to→from
     const aligned = nextEdge.from === currentNode;
     result.push({ edge: nextEdge, aligned });
     currentNode = aligned ? nextEdge.to : nextEdge.from;

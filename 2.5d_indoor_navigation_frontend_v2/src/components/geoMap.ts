@@ -130,6 +130,7 @@ export function centerMapToBuilding(): void {
 export function handleLevelChange(level: number): void {
   if (!map) return;
   IndoorLayer.setVisibleLevel(map, level);
+  document.dispatchEvent(new Event('levelChanged'));
 }
 
 /** Get current level */
@@ -207,6 +208,14 @@ function setupRoomClick(): void {
           screenY: e.point.y + 56, // offset by header height
         },
       }));
+    });
+
+    map.on('contextmenu', layerId, (e) => {
+      if (!e.features || e.features.length === 0) return;
+      const ref = e.features[0].properties?.ref;
+      if (!ref) return;
+      e.preventDefault();
+      document.dispatchEvent(new CustomEvent('roomRightClicked', { detail: { ref } }));
     });
 
     // Change cursor on hover

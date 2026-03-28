@@ -170,8 +170,12 @@ export function openVideoPreview(options: VideoPreviewOptions): void {
     addSplitBtn.className = 'ge-preview-btn';
     addSplitBtn.innerHTML = '<span class="material-icons" style="font-size:14px">content_cut</span> Add Split';
     addSplitBtn.addEventListener('click', () => {
+      // Only allow adding internal splits (start/end are fixed)
+      const internalCount = Math.max(0, splitTimes.length - 2);
+      if (internalCount >= neededSplits) return;
       const t = video.currentTime;
-      // Insert in sorted order
+      // Don't add duplicates near existing splits
+      if (splitTimes.some(s => Math.abs(s - t) < 0.1)) return;
       splitTimes.push(t);
       splitTimes.sort((a, b) => a - b);
       rebuildSplitMarkers();
@@ -181,7 +185,10 @@ export function openVideoPreview(options: VideoPreviewOptions): void {
     clearSplitsBtn.className = 'ge-preview-btn';
     clearSplitsBtn.innerHTML = '<span class="material-icons" style="font-size:14px">clear_all</span> Clear';
     clearSplitsBtn.addEventListener('click', () => {
-      splitTimes = [];
+      // Keep start and end boundaries, only remove internal splits
+      const start = splitTimes.length > 0 ? splitTimes[0] : 0;
+      const end = splitTimes.length > 1 ? splitTimes[splitTimes.length - 1] : (video.duration || 0);
+      splitTimes = [start, end];
       rebuildSplitMarkers();
     });
 

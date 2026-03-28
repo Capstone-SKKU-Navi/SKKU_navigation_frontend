@@ -1379,43 +1379,43 @@
       "to": "node-mn8zts1n-iubw",
       "weight": 23,
       "videoFwd": "eng1_corridor_22_1F_cw.mp4",
-      "videoFwdStart": 1.708524459776806,
-      "videoFwdEnd": 18.800437,
+      "videoFwdStart": 1.556,
+      "videoFwdEnd": 19.375,
       "videoRev": "eng1_corridor_22_1F_ccw.mp4",
-      "videoRevStart": 1.2927164400759157,
-      "videoRevEnd": 19.077358
+      "videoRevStart": 42.269132,
+      "videoRevEnd": 58.800242
     },
     {
       "from": "node-mn8zts1n-iubw",
       "to": "node-mn8ztqtj-d5yx",
       "weight": 28,
       "videoFwd": "eng1_corridor_22_1F_cw.mp4",
-      "videoFwdStart": 18.800437,
-      "videoFwdEnd": 36.764645,
+      "videoFwdStart": 19.375,
+      "videoFwdEnd": 38.243,
       "videoRev": "eng1_corridor_22_1F_ccw.mp4",
-      "videoRevStart": 19.077358,
-      "videoRevEnd": 39.83917
+      "videoRevStart": 21.5061,
+      "videoRevEnd": 42.269132
     },
     {
       "from": "node-mn8ztqtj-d5yx",
       "to": "node-mn8ztn1z-ojg3",
       "weight": 28,
       "videoFwd": "eng1_corridor_22_1F_cw.mp4",
-      "videoFwdStart": 36.764645,
-      "videoFwdEnd": 57.5242,
+      "videoFwdStart": 38.243,
+      "videoFwdEnd": 57.724,
       "videoRev": "eng1_corridor_22_1F_ccw.mp4",
-      "videoRevStart": 39.83917,
-      "videoRevEnd": 58.87735786163943
+      "videoRevStart": 1.247843,
+      "videoRevEnd": 21.5061
     },
     {
       "from": "node-mn8ztn1z-ojg3",
       "to": "node-mn8ztns2-93ws",
       "weight": 26,
       "videoFwd": "eng1_corridor_21_1F_cw.mp4",
-      "videoFwdStart": 42.328335,
-      "videoFwdEnd": 63.663667,
+      "videoFwdStart": 0.336,
+      "videoFwdEnd": 22.728,
       "videoRev": "eng1_corridor_21_1F_ccw.mp4",
-      "videoRevStart": 39.862888,
+      "videoRevStart": 39.863,
       "videoRevEnd": 64.331
     },
     {
@@ -1423,22 +1423,22 @@
       "to": "node-mn8ztota-bazw",
       "weight": 30,
       "videoFwd": "eng1_corridor_21_1F_cw.mp4",
-      "videoFwdStart": 21.159686,
-      "videoFwdEnd": 42.328335,
+      "videoFwdStart": 22.728,
+      "videoFwdEnd": 42.72,
       "videoRev": "eng1_corridor_21_1F_ccw.mp4",
-      "videoRevStart": 23.125856444654048,
-      "videoRevEnd": 39.862888
+      "videoRevStart": 23.126,
+      "videoRevEnd": 39.863
     },
     {
       "from": "node-mn8ztota-bazw",
       "to": "node-mn8ztph0-liq2",
       "weight": 32,
       "videoFwd": "eng1_corridor_21_1F_cw.mp4",
-      "videoFwdStart": 0.2939286536847082,
-      "videoFwdEnd": 21.159686,
+      "videoFwdStart": 42.72,
+      "videoFwdEnd": 63.153,
       "videoRev": "eng1_corridor_21_1F_ccw.mp4",
-      "videoRevStart": 1.2304819185687361,
-      "videoRevEnd": 23.125856444654048
+      "videoRevStart": 1.23,
+      "videoRevEnd": 23.126
     },
     {
       "from": "node-mn8zxfoi-jzcg",
@@ -1492,22 +1492,22 @@
       "to": "node-mn8ztgqm-gv1j",
       "weight": 30,
       "videoFwd": "eng1_corridor_23_2F_ccw.mp4",
-      "videoFwdStart": 22.151925,
-      "videoFwdEnd": 51.296626,
+      "videoFwdStart": 1.979,
+      "videoFwdEnd": 22.152,
       "videoRev": "eng1_corridor_23_2F_cw.mp4",
-      "videoRevStart": 54.364544,
-      "videoRevEnd": 77.7143750492486
+      "videoRevStart": 54.365,
+      "videoRevEnd": 77.714
     },
     {
       "from": "node-mn8ztgqm-gv1j",
       "to": "node-mn8ztjd3-qvqz",
       "weight": 41,
       "videoFwd": "eng1_corridor_23_2F_ccw.mp4",
-      "videoFwdStart": 1.978609,
-      "videoFwdEnd": 22.151925,
+      "videoFwdStart": 22.152,
+      "videoFwdEnd": 51.297,
       "videoRev": "eng1_corridor_23_2F_cw.mp4",
-      "videoRevStart": 23.195536041789516,
-      "videoRevEnd": 54.364544
+      "videoRevStart": 23.196,
+      "videoRevEnd": 54.365
     },
     {
       "from": "node-mn8ztjd3-qvqz",
@@ -1537,32 +1537,32 @@
       "weight": 24,
       "videoFwd": "eng1_corridor_22_2F_cw.mp4",
       "videoFwdStart": 0,
-      "videoFwdEnd": 18.55549,
+      "videoFwdEnd": 18.555,
       "videoRev": "eng1_corridor_22_2F_ccw.mp4",
-      "videoRevStart": 0,
-      "videoRevEnd": 19.896257
+      "videoRevStart": 38.463,
+      "videoRevEnd": 55.455
     },
     {
       "from": "node-mn8ztezg-pghh",
       "to": "node-mn8ztdys-i6rd",
       "weight": 25,
       "videoFwd": "eng1_corridor_22_2F_cw.mp4",
-      "videoFwdStart": 18.55549,
-      "videoFwdEnd": 37.20795,
+      "videoFwdStart": 18.555,
+      "videoFwdEnd": 37.208,
       "videoRev": "eng1_corridor_22_2F_ccw.mp4",
-      "videoRevStart": 19.896257,
-      "videoRevEnd": 38.462603
+      "videoRevStart": 19.896,
+      "videoRevEnd": 38.463
     },
     {
       "from": "node-mn8ztdys-i6rd",
       "to": "node-mn8ztcbv-lloh",
       "weight": 29,
       "videoFwd": "eng1_corridor_22_2F_cw.mp4",
-      "videoFwdStart": 37.20795,
-      "videoFwdEnd": 55.905200045228185,
+      "videoFwdStart": 37.208,
+      "videoFwdEnd": 55.905,
       "videoRev": "eng1_corridor_22_2F_ccw.mp4",
-      "videoRevStart": 38.462603,
-      "videoRevEnd": 55.455467
+      "videoRevStart": 0,
+      "videoRevEnd": 19.896
     },
     {
       "from": "node-mn8ztcbv-lloh",
@@ -1591,33 +1591,33 @@
       "to": "node-mn8ztba4-8tdk",
       "weight": 22,
       "videoFwd": "eng1_corridor_21_2F_cw.mp4",
-      "videoFwdStart": 38.413572,
-      "videoFwdEnd": 60.4271,
+      "videoFwdStart": 1.793,
+      "videoFwdEnd": 16.109,
       "videoRev": "eng1_corridor_21_2F_ccw.mp4",
-      "videoRevStart": 44.203493,
-      "videoRevEnd": 60.360367
+      "videoRevStart": 44.203,
+      "videoRevEnd": 60.36
     },
     {
       "from": "node-mn8ztba4-8tdk",
       "to": "node-mn8ztagm-v7nh",
       "weight": 34,
       "videoFwd": "eng1_corridor_21_2F_cw.mp4",
-      "videoFwdStart": 16.108806,
-      "videoFwdEnd": 38.413572,
+      "videoFwdStart": 16.109,
+      "videoFwdEnd": 38.414,
       "videoRev": "eng1_corridor_21_2F_ccw.mp4",
-      "videoRevStart": 23.078061,
-      "videoRevEnd": 44.203493
+      "videoRevStart": 23.078,
+      "videoRevEnd": 44.203
     },
     {
       "from": "node-mn8ztagm-v7nh",
       "to": "node-mn8zt8vi-1iiu",
       "weight": 30,
       "videoFwd": "eng1_corridor_21_2F_cw.mp4",
-      "videoFwdStart": 1.7934954860580647,
-      "videoFwdEnd": 16.108806,
+      "videoFwdStart": 38.414,
+      "videoFwdEnd": 60.427,
       "videoRev": "eng1_corridor_21_2F_ccw.mp4",
       "videoRevStart": 0,
-      "videoRevEnd": 23.078061
+      "videoRevEnd": 23.078
     },
     {
       "from": "node-mn8zuh9m-kgsf",
