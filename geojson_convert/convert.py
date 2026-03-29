@@ -137,8 +137,10 @@ def convert(code, levels):
     for level in levels:
         print(f"\n--- Level {level} ---")
 
-        # 복도 (collider)
+        # 복도 (collider / corridors)
         collider = try_open(os.path.join(INPUT_DIR, f"{code}_collider_L{level}.geojson"))
+        if collider is None:
+            collider = try_open(os.path.join(INPUT_DIR, f"{code}_corridors_L{level}.geojson"))
         if collider:
             collider_feats = []
             for i, feat in enumerate(collider["features"]):
@@ -153,6 +155,8 @@ def convert(code, levels):
 
         # 방 (슬리버 제거 + 정렬 + 속성)
         rooms = try_open(os.path.join(INPUT_DIR, f"{code}_room_L{level}.geojson"))
+        if rooms is None:
+            rooms = try_open(os.path.join(INPUT_DIR, f"{code}_rooms_L{level}.geojson"))
         if rooms:
             total = len(rooms["features"])
             sliver_n = 0
@@ -192,6 +196,8 @@ def convert(code, levels):
 
         # 벽
         walls = try_open(os.path.join(INPUT_DIR, f"{code}_wall_l{level}.geojson"))
+        if walls is None:
+            walls = try_open(os.path.join(INPUT_DIR, f"{code}_wall_L{level}.geojson"))
         wall_feats = []
         if walls:
             for feat in walls["features"]:

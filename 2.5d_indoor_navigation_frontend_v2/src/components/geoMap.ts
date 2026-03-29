@@ -185,47 +185,48 @@ export function clearHighlight(): void {
 function setupRoomClick(): void {
   if (!map) return;
 
-  // Make room layers clickable
-  const levels = BackendService.getAllLevels();
+  // Make room layers clickable (iterate buildings × levels)
+  for (const building of BackendService.getBuildingCodes()) {
+    const levels = BackendService.getBuildingLevels(building);
 
-  for (const level of levels) {
-    const layerId = `floor-${level}-rooms-3d`;
-    if (!map.getLayer(layerId)) continue; // layer might not exist yet
+    for (const level of levels) {
+      const layerId = `${building}-floor-${level}-rooms-3d`;
+      if (!map.getLayer(layerId)) continue;
 
-    map.on('click', layerId, (e) => {
-      if (!e.features || e.features.length === 0) return;
-      const feature = e.features[0];
-      const ref = feature.properties?.ref;
-      if (!ref) return;
+      map.on('click', layerId, (e) => {
+        if (!e.features || e.features.length === 0) return;
+        const feature = e.features[0];
+        const ref = feature.properties?.ref;
+        if (!ref) return;
 
-      document.dispatchEvent(new CustomEvent('roomClicked', {
-        detail: {
-          ref,
-          name: feature.properties?.name ?? '',
-          roomType: feature.properties?.room_type ?? '',
-          level: IndoorLayer.getCurrentLevel(),
-          screenX: e.point.x,
-          screenY: e.point.y + 56, // offset by header height
-        },
-      }));
-    });
+        document.dispatchEvent(new CustomEvent('roomClicked', {
+          detail: {
+            ref,
+            name: feature.properties?.name ?? '',
+            roomType: feature.properties?.room_type ?? '',
+            level: IndoorLayer.getCurrentLevel(),
+            screenX: e.point.x,
+            screenY: e.point.y + 56, // offset by header height
+          },
+        }));
+      });
 
-    map.on('contextmenu', layerId, (e) => {
-      if (!e.features || e.features.length === 0) return;
-      const ref = e.features[0].properties?.ref;
-      if (!ref) return;
-      e.preventDefault();
-      document.dispatchEvent(new CustomEvent('roomRightClicked', { detail: { ref } }));
-    });
+      map.on('contextmenu', layerId, (e) => {
+        if (!e.features || e.features.length === 0) return;
+        const ref = e.features[0].properties?.ref;
+        if (!ref) return;
+        e.preventDefault();
+        document.dispatchEvent(new CustomEvent('roomRightClicked', { detail: { ref } }));
+      });
 
-    // Change cursor on hover
-    map.on('mouseenter', layerId, () => {
-      if (map) map.getCanvas().style.cursor = 'pointer';
-    });
+      map.on('mouseenter', layerId, () => {
+        if (map) map.getCanvas().style.cursor = 'pointer';
+      });
 
-    map.on('mouseleave', layerId, () => {
-      if (map) map.getCanvas().style.cursor = '';
-    });
+      map.on('mouseleave', layerId, () => {
+        if (map) map.getCanvas().style.cursor = '';
+      });
+    }
   }
 }
 

@@ -3,6 +3,7 @@ node_modules/
 
 # Large binary files
 *.zip
+*.xcf
 sample_video/
 2.5d_indoor_navigation_frontend_v2/videos/
 

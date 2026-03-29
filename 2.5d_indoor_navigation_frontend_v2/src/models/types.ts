@@ -34,6 +34,7 @@ export interface RouteResponse {
 }
 
 export interface RoomListItem {
+  building: string;
   ref: string;
   name: string;
   level: number[];

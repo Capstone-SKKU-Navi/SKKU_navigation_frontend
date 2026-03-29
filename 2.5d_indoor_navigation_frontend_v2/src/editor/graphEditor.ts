@@ -180,10 +180,13 @@ function setupRoomClickListener(): void {
     if (state.mode !== 'label-room' || !map) return;
 
     const level = state.currentLevel;
-    const layerId = `floor-${level}-rooms-3d`;
-    if (!map.getLayer(layerId)) return;
+    // Query room layers across all buildings for this level
+    const roomLayerIds = BackendService.getBuildingCodes()
+      .map(b => `${b}-floor-${level}-rooms-3d`)
+      .filter(id => map!.getLayer(id));
+    if (roomLayerIds.length === 0) return;
 
-    const features = map.queryRenderedFeatures(e.point, { layers: [layerId] });
+    const features = map.queryRenderedFeatures(e.point, { layers: roomLayerIds });
 
     if (features.length > 0 && features[0].properties) {
       const props = features[0].properties;

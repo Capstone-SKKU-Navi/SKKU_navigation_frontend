@@ -43,7 +43,7 @@ https://drive.google.com/file/d/10toUrH2QPkQCoq1o22d0djIxiuP59Muh/view?usp=shari
 
 ```
 ├── 2.5d_indoor_navigation_frontend_v2/   # 메인 프론트엔드 앱 (TypeScript + MapLibre GL + deck.gl)
-├── Geojson/                              # QGIS 원본 데이터 (방, 벽, 외곽선, 충돌체)
+├── Geojson/                              # QGIS 원본 데이터 (rooms, corridors, outline)
 ├── geojson_convert/                      # QGIS → 앱용 GeoJSON 변환 파이프라인
 ├── cad/                                  # CAD 참조 도구 (DXF/SVG 변환, QGIS 가이드)
 ├── buildings/                            # 건물 구조 데이터 (eng1.json)
@@ -83,7 +83,7 @@ https://drive.google.com/file/d/10toUrH2QPkQCoq1o22d0djIxiuP59Muh/view?usp=shari
 - [x] 노드 타입 사전 선택 — add-node 모드에서 배치 전 타입 지정
 - [x] 층별 전환 UI (휠 + 키보드)
 - [x] 2D/3D 토글
-- [x] QGIS 데이터 파이프라인 (1~2층 완료)
+- [x] QGIS 데이터 파이프라인 (1~5층 완료)
 - [x] 플로팅 룸 라벨
 - [x] **프론트엔드 경로 탐색** — Dijkstra 기반 최단경로 (graph.json 활용, 백엔드 API 교체 대비)
 - [x] **방↔복도 이동 궤적** — room 노드(문 위치 마커) + corridor edge 수직 투영으로 자연스러운 경로
@@ -104,12 +104,18 @@ https://drive.google.com/file/d/10toUrH2QPkQCoq1o22d0djIxiuP59Muh/view?usp=shari
 - [x] **고배속 재생** — 0.5x/1x/2x/5x/10x 배속 지원, >2x는 seek 기반 스테핑 (H.264 디코더 병목 우회)
 - [x] **그래프 에디터 실시간 동기화** — 에디터 저장 시 경로 탐색 그래프 자동 리로드 (새로고침 불필요)
 - [x] **다중 엣지 체인 정렬 개선** — 좌표 기반 정렬 → 알파벳순 노드 ID 정렬로 단순화, REV 방향 분할 할당 수정
+- [x] **5층 GeoJSON 데이터 적용** — QGIS CAD 원본에서 1~5층 전체 변환 (65+77+85+165+115 = 507개 방)
+- [x] **다중 건물 지원** — `buildings.json` 기반 건물 자동 탐색, 모든 건물 동시 렌더링, 층 전환 동기화
+- [x] **변환 파이프라인 확장** — `convert.py`가 QGIS 새 네이밍(`rooms`, `corridors`)과 기존 네이밍 모두 자동 감지
+- [x] **비디오 네이밍 컨벤션 정의** — `VIDEO_NAMING.md`: 건물 독립적 세그먼트 기반 규칙 (`{building}_cor_{floor}F_{seg}_{fwd|rev}.mp4`)
 
 ## 남은 작업
 
-- [ ] **3~5층 GeoJSON 데이터 제작** (QGIS → `geojson_convert/convert.py`)
-- [ ] **그래프 데이터 완성** — 전 층 노드/간선 생성 (그래프 에디터 활용)
+- [ ] **4층 복도 GeoJSON 수정** — `eng1_corridors_L4.geojson`이 rooms 파일과 동일한 데이터 (QGIS에서 재작업 필요)
+- [ ] **방 속성 입력** — 3~5층 `room_type`, `ref`, `name` (그래프 에디터 라벨 모드 활용)
+- [ ] **그래프 데이터 완성** — 3~5층 노드/간선 생성 (그래프 에디터 활용)
 - [ ] **엣지-비디오 매핑 완성** — 전체 엣지에 비디오/시간 할당 (그래프 에디터 활용)
+- [ ] **비디오 파일 신규 네이밍 적용** — 기존 48개 영상을 `VIDEO_NAMING.md` 규칙에 맞춰 이름 변경
 
 ## 핵심 파일 가이드
 
@@ -135,7 +141,7 @@ https://drive.google.com/file/d/10toUrH2QPkQCoq1o22d0djIxiuP59Muh/view?usp=shari
 | `components/walkthroughPlayer.ts` | 360° 세그먼트 재생 엔진 (더블 버퍼링, seek 기반 고배속) |
 | `components/walkthroughTypes.ts` | Walkthrough 타입 정의 (Clip, Segment, Playlist) |
 | `services/walkthroughPlanner.ts` | 경로 → 비디오 클립 플레이리스트 변환 (위치 보간, 부분 엣지 처리) |
-| `services/backendService.ts` | GeoJSON 로딩 + 방 정보 조회 (centroid, polygon, level) |
+| `services/backendService.ts` | 다중 건물 GeoJSON 로딩 (`buildings.json` → 건물별 manifest/room/collider/wall) |
 | `services/graphService.ts` | 경로 탐색 엔진 (Dijkstra, 문 위치 근사, corridor edge 투영) |
 | `services/apiClient.ts` | 경로 API 클라이언트 (로컬 Dijkstra ↔ 백엔드 A* 전환) |
 | `config/mapConfig.ts` | 지도 인터랙션 + 경로 표시 상수 (한 곳에서 조정) |
@@ -145,11 +151,12 @@ https://drive.google.com/file/d/10toUrH2QPkQCoq1o22d0djIxiuP59Muh/view?usp=shari
 
 | 파일 | 역할 |
 |------|------|
-| `Geojson/eng1_room_L*.geojson` | QGIS 디지타이징한 방 폴리곤 (층별) |
-| `Geojson/eng1_wall_L*.geojson` | 벽 폴리곤 (층별) |
-| `Geojson/eng1_collider_L*.geojson` | 충돌체 geometry (층별) |
+| `Geojson/eng1_rooms_L*.geojson` | QGIS CAD 원본 방 폴리곤 (층별, MultiPolygon) |
+| `Geojson/eng1_corridors_L*.geojson` | QGIS CAD 원본 복도 폴리곤 (층별) |
 | `Geojson/eng1_outline.geojson` | 건물 외곽선 |
-| `geojson_convert/convert.py` | QGIS 출력 → 앱 호환 GeoJSON 변환 |
+| `geojson_convert/convert.py` | QGIS 출력 → 앱 호환 GeoJSON 변환 (양쪽 네이밍 자동 감지) |
+| `public/geojson/buildings.json` | 건물 코드 목록 (다중 건물 자동 탐색용) |
+| `VIDEO_NAMING.md` | 360° 비디오 네이밍 컨벤션 (건물 독립적) |
 | `cad/QGIS_GUIDE.md` | QGIS 작업 가이드 (새 층 추가 시 참조) |
 
 ### 디자인
@@ -177,6 +184,31 @@ https://drive.google.com/file/d/10toUrH2QPkQCoq1o22d0djIxiuP59Muh/view?usp=shari
 
 - **자동 저장**: 노드/간선 → `public/geojson/graph.json`, 방 라벨 → `public/geojson/eng1/eng1_room_L{n}.geojson` (dev server PUT API)
 - **3D 모드**: 모든 노드·간선을 층 높이에 맞춰 표시, 비활성 층은 반투명 처리
+
+## 다중 건물 지원
+
+프론트엔드는 여러 건물을 동시에 렌더링할 수 있다. `public/geojson/buildings.json`에 건물 코드를 추가하면 자동으로 로딩된다.
+
+### 건물 추가 방법
+
+```bash
+# 1. QGIS에서 방/복도/외곽선 GeoJSON 내보내기
+# 2. Geojson/ 폴더에 파일 배치 (eng2_rooms_L1.geojson, eng2_corridors_L1.geojson, ...)
+# 3. 변환 실행
+python geojson_convert/convert.py eng2 1 2 3 4 5
+
+# 4. buildings.json에 추가
+# ["eng1", "eng2"]
+```
+
+변환 파이프라인은 두 가지 입력 네이밍을 자동 감지한다:
+- 기존: `{code}_room_L{n}`, `{code}_collider_L{n}`, `{code}_wall_l{n}`
+- 신규 (QGIS CAD): `{code}_rooms_L{n}`, `{code}_corridors_L{n}`
+
+### 레이어 ID 규칙
+
+MapLibre GL 소스/레이어는 `{building}-floor-{level}-{type}` 형식:
+- `eng1-floor-1-rooms-3d`, `eng1-floor-1-corridors-3d`, `eng1-floor-1-walls-3d`, ...
 
 ## 주요 설계 결정
 
