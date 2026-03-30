@@ -6,61 +6,53 @@ Universal naming scheme for 360 walkthrough videos across all buildings.
 
 | Type | Pattern | Example |
 |------|---------|---------|
-| Corridor | `{building}_cor_{floor}F_{segment}_{fwd\|rev}.mp4` | `eng1_cor_1F_01_fwd.mp4` |
-| Stairs | `{building}_str_{stairId}_{up\|down}.mp4` | `eng1_str_1_up.mp4` |
-| Elevator | `{building}_elv_{elevId}_{floor}F.mp4` | `eng1_elv_1_1F.mp4` |
+| Corridor | `{building}_c_F{floor}_{id}_{cw\|ccw}.mp4` | `eng1_c_F1_1_cw.mp4` |
+| Stairs | `{building}_s_{stairId}_{floor}{e\|o}{u\|d}.mp4` | `eng1_s_1_1eu.mp4` |
+| Elevator | `{building}_e_{elevId}_{floor}{e\|o}.mp4` | `eng1_e_1_1e.mp4` |
 
 ## Fields
 
-- **building**: Building code (`eng1`, `eng2`, `sci1`, `bio`, etc.)
-- **floor**: Floor number (`1F`, `2F`, ..., `5F`)
-- **segment**: 2-digit corridor segment index per floor (`01`, `02`, `03`). Numbered sequentially along the graph edge traversal order.
-- **fwd / rev**: Forward follows graph edge direction (from -> to). Reverse is the opposite.
-- **stairId / elevId**: Integer ID, consistent across all floors (stair 1 on 1F is the same physical staircase as stair 1 on 5F).
+- **building**: Building code (`eng1`, `eng2`, etc.)
+- **floor**: Floor number (`1`, `2`, ..., `5`)
+- **id**: Corridor segment index per floor, numbered sequentially
+- **cw / ccw**: Clockwise / counter-clockwise direction
+- **stairId / elevId**: Physical staircase/elevator number (consistent across all floors)
+- **e / o**: Enter (들어가기) / Out (나가기)
+- **u / d**: Up (올라가기) / Down (내려가기) — stairs only
 
-## Directory Structure
+## Stair Video Logic
 
-```
-videos/
-  eng1/
-    eng1_cor_1F_01_fwd.mp4
-    eng1_cor_1F_01_rev.mp4
-    eng1_cor_1F_02_fwd.mp4
-    ...
-    eng1_str_1_up.mp4
-    eng1_str_1_down.mp4
-    eng1_elv_1_1F.mp4
-    eng1_elv_1_2F.mp4
-  eng2/
-    eng2_cor_1F_01_fwd.mp4
-    ...
-```
+Going from floor X to floor Y via stair N:
 
-## Migration from Current Naming
+| Direction | Entry clip | Exit clip |
+|-----------|-----------|----------|
+| X → Y (up) | `{building}_s_{N}_{X}eu.mp4` | `{building}_s_{N}_{Y}ou.mp4` |
+| X → Y (down) | `{building}_s_{N}_{X}ed.mp4` | `{building}_s_{N}_{Y}od.mp4` |
 
-Current eng1 videos use wing-based naming (`eng1_corridor_21_1F_cw.mp4`).
+Examples:
+- 1F→2F via stair 1: entry=`eng1_s_1_1eu.mp4`, exit=`eng1_s_1_2ou.mp4`
+- 3F→1F via stair 1: entry=`eng1_s_1_3ed.mp4`, exit=`eng1_s_1_1od.mp4`
 
-Mapping to new convention:
+Available clips per floor:
+- Floor 1 (bottom): `1eu`, `1od`
+- Floor 2-4 (middle): `{f}eu`, `{f}ed`, `{f}ou`, `{f}od`
+- Floor 5 (top): `5ed`, `5ou`
 
-| Old | New | Notes |
-|-----|-----|-------|
-| `eng1_corridor_21_1F_cw.mp4` | `eng1_cor_1F_01_fwd.mp4` | Wing 21 -> segment 01 (depends on graph order) |
-| `eng1_corridor_21_1F_ccw.mp4` | `eng1_cor_1F_01_rev.mp4` | cw -> fwd, ccw -> rev |
-| `eng1_corridor_22_1F_cw.mp4` | `eng1_cor_1F_02_fwd.mp4` | Wing 22 -> segment 02 |
-| `eng1_stair_1_up.mp4` | `eng1_str_1_up.mp4` | Abbreviated |
-| `eng1_elev_1_1F.mp4` | `eng1_elv_1_1F.mp4` | Abbreviated |
+## Elevator Video Logic
 
-The exact segment numbering for each building is determined when the navigation graph is built. Document the mapping in a `video_manifest.json` per building:
+Going from floor X to floor Y via elevator N:
 
-```json
-{
-  "building": "eng1",
-  "segmentsPerFloor": {
-    "1": ["01", "02", "03"],
-    "2": ["01", "02", "03"],
-    "3": ["01", "02", "03"]
-  },
-  "stairs": [1, 2, 3, 4],
-  "elevators": [1, 2]
-}
-```
+| Entry clip | Exit clip |
+|-----------|----------|
+| `{building}_e_{N}_{X}e.mp4` | `{building}_e_{N}_{Y}o.mp4` |
+
+Examples:
+- 1F→5F via elevator 1: entry=`eng1_e_1_1e.mp4`, exit=`eng1_e_1_5o.mp4`
+- 5F→1F via elevator 1: entry=`eng1_e_1_5e.mp4`, exit=`eng1_e_1_1o.mp4`
+
+## eng1 Building
+
+- 4 staircases (stairId: 1-4)
+- 2 elevators (elevId: 1-2)
+- 5 floors (1-5)
+- 3 corridor segments per floor

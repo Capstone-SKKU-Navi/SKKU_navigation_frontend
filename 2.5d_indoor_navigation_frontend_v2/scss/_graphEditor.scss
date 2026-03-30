@@ -812,6 +812,98 @@
 }
 
 
+// ===== Collapsible Video Tree Picker =====
+
+.ge-video-tree {
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  margin: 2px 0 4px;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 3px;
+  }
+}
+
+.ge-tree-folder-header {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px 6px;
+  cursor: pointer;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+  user-select: none;
+  white-space: nowrap;
+
+  .material-icons {
+    font-size: 14px;
+    transition: transform 0.15s ease;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  &.open > .material-icons {
+    transform: rotate(90deg);
+  }
+}
+
+.ge-tree-folder-children {
+  padding-left: 10px;
+}
+
+.ge-tree-item {
+  padding: 2px 6px 2px 20px;
+  font-size: 10px;
+  font-family: 'Courier New', monospace;
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    background: rgba(66, 165, 245, 0.15);
+    color: #fff;
+  }
+
+  &.selected {
+    background: rgba(66, 165, 245, 0.2);
+    color: #42A5F5;
+  }
+}
+
+// Auto-computed vertical video display
+.ge-auto-video {
+  padding: 4px 8px;
+  margin: 2px 0 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: 'Courier New', monospace;
+  color: rgba(66, 165, 245, 0.8);
+  line-height: 1.5;
+}
+
+.ge-auto-video-label {
+  font-size: 9px;
+  font-family: 'Pretendard', sans-serif;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-bottom: 1px;
+}
+
 // ===== Editor-active body class: suppress room popup =====
 
 body.editor-active {

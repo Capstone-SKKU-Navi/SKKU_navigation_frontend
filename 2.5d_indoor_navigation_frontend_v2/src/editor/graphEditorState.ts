@@ -3,6 +3,7 @@
 import { NavNode, NavEdge, NavGraph, EditorState, EditorMode, Command, NavGraphExport } from './graphEditorTypes';
 import { getDistanceBetweenCoordinatesInM } from '../utils/coordinateHelpers';
 import { DEFAULT_FLOOR_HEIGHT } from '../components/indoorLayer';
+import { detectBuilding, pointInPolygon } from '../utils/buildingDetection';
 import * as BackendService from '../services/backendService';
 import * as GraphService from '../services/graphService';
 
@@ -172,12 +173,14 @@ function saveToFile(graph: NavGraph): void {
 export function exportGraph(graph: NavGraph): NavGraphExport {
   const nodes: NavGraphExport['nodes'] = {};
   for (const [id, node] of Object.entries(graph.nodes)) {
-    nodes[id] = {
+    const entry: NavGraphExport['nodes'][string] = {
       coordinates: node.coordinates,
       level: node.level,
       type: node.type,
       label: node.label,
     };
+    if (node.verticalId !== undefined) entry.verticalId = node.verticalId;
+    nodes[id] = entry;
   }
   return {
     nodes,
@@ -211,6 +214,7 @@ export function importGraph(data: NavGraphExport): NavGraph {
       building: detectBuilding(raw.coordinates, level),
       type: raw.type as NavNode['type'],
       label: raw.label ?? '',
+      ...(raw.verticalId !== undefined ? { verticalId: raw.verticalId } : {}),
     };
   }
   const edges: NavEdge[] = data.edges.map(e => ({
@@ -234,46 +238,8 @@ export function importGraph(data: NavGraphExport): NavGraph {
   return { nodes, edges };
 }
 
-// ===== Building Detection =====
-
-export function detectBuilding(coords: [number, number], level: number): string {
-  const [lng, lat] = coords;
-
-  // Try room polygon containment
-  try {
-    const levelGeoJson = BackendService.getLevelGeoJson(level);
-    for (const f of levelGeoJson.features) {
-      if (f.properties.indoor !== 'room' || !f.properties.ref) continue;
-      if (f.geometry.type !== 'Polygon') continue;
-
-      const ring = (f.geometry as GeoJSON.Polygon).coordinates[0];
-      if (pointInPolygon(lng, lat, ring)) {
-        const ref = f.properties.ref as string;
-        if (ref.startsWith('21')) return '21';
-        if (ref.startsWith('22')) return '22';
-        if (ref.startsWith('23')) return '23';
-      }
-    }
-  } catch { /* data not loaded yet */ }
-
-  // Fallback: geographic heuristic
-  if (lat < 37.29418 && lng < 126.97693) return '21';
-  if (lng >= 126.97693) return '22';
-  if (lat >= 37.29418) return '23';
-  return 'ENG1';
-}
-
-function pointInPolygon(x: number, y: number, ring: number[][]): boolean {
-  let inside = false;
-  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-    const xi = ring[i][0], yi = ring[i][1];
-    const xj = ring[j][0], yj = ring[j][1];
-    if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) {
-      inside = !inside;
-    }
-  }
-  return inside;
-}
+// Re-export detectBuilding from shared utility (used by graphEditor.ts and others)
+export { detectBuilding, pointInPolygon } from '../utils/buildingDetection';
 
 // ===== Edge Weight Calculation =====
 

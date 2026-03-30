@@ -1,6 +1,8 @@
 // ===== Video Settings Panel — bulk yaw assignment per video =====
+// Organized as a collapsible tree: Building > Type > Floor
 
 import { getAllVideos, VideoEntry } from './videoCatalog';
+import { getAllVerticalVideos, ENG1_VERTICAL_CONFIG, VerticalVideoEntry } from '../utils/verticalVideoFilename';
 import * as VideoSettings from './videoSettings';
 import { VideoYawEntry } from './videoSettings';
 import { openVideoPreview } from './videoPreview';
@@ -26,37 +28,11 @@ export function openVideoSettingsPanel(): void {
   closeBtn.addEventListener('click', close);
   header.appendChild(closeBtn);
 
-  // Body
+  // Body — collapsible tree
   const body = document.createElement('div');
   body.className = 'ge-video-settings-body';
 
-  const videos = getAllVideos();
-  const groups: Record<string, VideoEntry[]> = { corridor: [], stair: [], elevator: [] };
-  for (const v of videos) groups[v.type].push(v);
-
-  const typeLabels: Record<string, string> = { corridor: '복도', stair: '계단', elevator: '엘리베이터' };
-
-  for (const type of ['corridor', 'stair', 'elevator'] as const) {
-    if (groups[type].length === 0) continue;
-
-    const groupHeader = document.createElement('div');
-    groupHeader.className = 'ge-vs-group-header';
-    if (type === 'corridor') {
-      groupHeader.textContent = typeLabels[type];
-    } else {
-      // Show column headers for entry/exit
-      groupHeader.innerHTML = `<span>${typeLabels[type]}</span><span class="ge-vs-col-headers"><span>entry</span><span>exit</span></span>`;
-    }
-    body.appendChild(groupHeader);
-
-    for (const v of groups[type]) {
-      if (type === 'corridor') {
-        body.appendChild(buildCorridorRow(v));
-      } else {
-        body.appendChild(buildStairElevRow(v));
-      }
-    }
-  }
+  buildSettingsTree(body);
 
   panel.appendChild(header);
   panel.appendChild(body);
@@ -69,7 +45,105 @@ export function openVideoSettingsPanel(): void {
   (panel as any)._backdrop = backdrop;
 }
 
-// ===== Corridor: single yaw =====
+// ===== Build collapsible tree: Building > Type > Floor =====
+
+function buildSettingsTree(body: HTMLElement): void {
+  const corridorVideos = getAllVideos(); // corridor only
+  const verticalVideos = getAllVerticalVideos(ENG1_VERTICAL_CONFIG);
+
+  // Group corridors by floor
+  const corridorByFloor: Record<number, VideoEntry[]> = {};
+  for (const v of corridorVideos) {
+    const f = v.floor ?? 0;
+    if (!corridorByFloor[f]) corridorByFloor[f] = [];
+    corridorByFloor[f].push(v);
+  }
+
+  // Group vertical by type > id > floor
+  const stairEntries: Record<number, Record<number, VerticalVideoEntry[]>> = {};
+  const elevEntries: Record<number, Record<number, VerticalVideoEntry[]>> = {};
+  for (const v of verticalVideos) {
+    const target = v.type === 'stair' ? stairEntries : elevEntries;
+    if (!target[v.id]) target[v.id] = {};
+    if (!target[v.id][v.floor]) target[v.id][v.floor] = [];
+    target[v.id][v.floor].push(v);
+  }
+
+  // Building folder (eng1)
+  const buildingFolder = createTreeFolder('eng1', true);
+  body.appendChild(buildingFolder.el);
+
+  // --- Corridor folder ---
+  const corridorFolder = createTreeFolder('Corridor', false);
+  buildingFolder.children.appendChild(corridorFolder.el);
+
+  for (const floor of Object.keys(corridorByFloor).map(Number).sort()) {
+    const floorFolder = createTreeFolder(`F${floor}`, false);
+    corridorFolder.children.appendChild(floorFolder.el);
+
+    for (const v of corridorByFloor[floor]) {
+      floorFolder.children.appendChild(buildCorridorRow(v));
+    }
+  }
+
+  // --- Stairs folder ---
+  const stairsFolder = createTreeFolder('Stairs', false);
+  buildingFolder.children.appendChild(stairsFolder.el);
+
+  for (const stairId of Object.keys(stairEntries).map(Number).sort()) {
+    const stairFolder = createTreeFolder(`계단 ${stairId}`, false);
+    stairsFolder.children.appendChild(stairFolder.el);
+
+    for (const floor of Object.keys(stairEntries[stairId]).map(Number).sort()) {
+      const floorFolder = createTreeFolder(`F${floor}`, false);
+      stairFolder.children.appendChild(floorFolder.el);
+
+      for (const v of stairEntries[stairId][floor]) {
+        floorFolder.children.appendChild(buildVerticalRow(v));
+      }
+    }
+  }
+
+  // --- Elevator folder ---
+  const elevFolder = createTreeFolder('Elevator', false);
+  buildingFolder.children.appendChild(elevFolder.el);
+
+  for (const elevId of Object.keys(elevEntries).map(Number).sort()) {
+    const eFolder = createTreeFolder(`엘리베이터 ${elevId}`, false);
+    elevFolder.children.appendChild(eFolder.el);
+
+    for (const floor of Object.keys(elevEntries[elevId]).map(Number).sort()) {
+      const floorFolder = createTreeFolder(`F${floor}`, false);
+      eFolder.children.appendChild(floorFolder.el);
+
+      for (const v of elevEntries[elevId][floor]) {
+        floorFolder.children.appendChild(buildVerticalRow(v));
+      }
+    }
+  }
+}
+
+// ===== Tree folder helper =====
+
+function createTreeFolder(label: string, startOpen: boolean): { el: HTMLElement; children: HTMLElement } {
+  const el = document.createElement('div');
+  const header = document.createElement('div');
+  header.className = 'ge-tree-folder-header' + (startOpen ? ' open' : '');
+  header.innerHTML = `<span class="material-icons">chevron_right</span>${label}`;
+  const children = document.createElement('div');
+  children.className = 'ge-tree-folder-children';
+  children.style.display = startOpen ? 'block' : 'none';
+  header.addEventListener('click', () => {
+    const isOpen = children.style.display !== 'none';
+    children.style.display = isOpen ? 'none' : 'block';
+    header.classList.toggle('open', !isOpen);
+  });
+  el.appendChild(header);
+  el.appendChild(children);
+  return { el, children };
+}
+
+// ===== Row builders =====
 
 function buildCorridorRow(v: VideoEntry): HTMLElement {
   const row = document.createElement('div');
@@ -78,6 +152,7 @@ function buildCorridorRow(v: VideoEntry): HTMLElement {
   const label = document.createElement('span');
   label.className = 'ge-vs-label';
   label.textContent = v.label;
+  label.title = v.filename;
 
   const entry = VideoSettings.getEntry(v.filename);
   const yawSpan = document.createElement('span');
@@ -92,37 +167,26 @@ function buildCorridorRow(v: VideoEntry): HTMLElement {
   return row;
 }
 
-// ===== Stair/Elevator: entry + exit yaw in one row =====
-
-function buildStairElevRow(v: VideoEntry): HTMLElement {
+function buildVerticalRow(v: VerticalVideoEntry): HTMLElement {
   const row = document.createElement('div');
   row.className = 'ge-vs-row';
 
   const label = document.createElement('span');
   label.className = 'ge-vs-label';
   label.textContent = v.label;
+  label.title = v.filename;
 
+  const field = v.action === 'enter' ? 'entryYaw' as const : 'exitYaw' as const;
   const entry = VideoSettings.getEntry(v.filename);
+  const yawSpan = document.createElement('span');
+  yawSpan.className = 'ge-vs-yaw';
+  yawSpan.textContent = fmtYaw(entry?.[field]);
 
-  // Entry yaw
-  const entryYawSpan = document.createElement('span');
-  entryYawSpan.className = 'ge-vs-yaw';
-  entryYawSpan.textContent = fmtYaw(entry?.entryYaw);
-  const entryBtn = createPreviewBtn(v.filename, 'entryYaw', entryYawSpan);
-  entryBtn.title = '들어갈 때';
-
-  // Exit yaw
-  const exitYawSpan = document.createElement('span');
-  exitYawSpan.className = 'ge-vs-yaw';
-  exitYawSpan.textContent = fmtYaw(entry?.exitYaw);
-  const exitBtn = createPreviewBtn(v.filename, 'exitYaw', exitYawSpan);
-  exitBtn.title = '나올 때';
+  const btn = createPreviewBtn(v.filename, field, yawSpan);
 
   row.appendChild(label);
-  row.appendChild(entryYawSpan);
-  row.appendChild(entryBtn);
-  row.appendChild(exitYawSpan);
-  row.appendChild(exitBtn);
+  row.appendChild(yawSpan);
+  row.appendChild(btn);
   return row;
 }
 

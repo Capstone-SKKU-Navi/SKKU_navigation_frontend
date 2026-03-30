@@ -1,62 +1,359 @@
 {
   "nodes": {
-    "node-mnbx0ip4-kerx": {
+    "node-mnd1qc8f-nt7s": {
       "coordinates": [
-        126.97613464549556,
-        37.29362863987464
-      ],
-      "level": 1,
-      "type": "room",
-      "label": "21112"
-    },
-    "node-mnbx0jc9-8som": {
-      "coordinates": [
-        126.97620253962106,
-        37.29362216252427
-      ],
-      "level": 1,
-      "type": "room",
-      "label": "21111"
-    },
-    "node-mnbx0kbo-h7xn": {
-      "coordinates": [
-        126.97671374919014,
-        37.29356506621242
-      ],
-      "level": 1,
-      "type": "room",
-      "label": "22211"
-    },
-    "node-mnbx0pce-pzbu": {
-      "coordinates": [
-        126.97611711383723,
-        37.29361500039445
+        126.97608234284479,
+        37.29361664601508
       ],
       "level": 1,
       "type": "corridor",
       "label": ""
     },
-    "node-mnbx0q7m-eamg": {
+    "node-mnd1qe8k-fm0c": {
       "coordinates": [
-        126.97672013594638,
-        37.293548127659534
+        126.97705788987463,
+        37.29348222032064
       ],
       "level": 1,
       "type": "corridor",
       "label": ""
+    },
+    "node-mnd1qfyz-mkd6": {
+      "coordinates": [
+        126.97718402119426,
+        37.294185812770195
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": ""
+    },
+    "node-mnd1qidl-n7jm": {
+      "coordinates": [
+        126.97633198257404,
+        37.29428273888276
+      ],
+      "level": 1,
+      "type": "stairs",
+      "label": ""
+    },
+    "node-mnd1qr92-ysq3": {
+      "coordinates": [
+        126.97725143230434,
+        37.29414551087014
+      ],
+      "level": 1,
+      "type": "stairs",
+      "label": "",
+      "verticalId": 3
+    },
+    "node-mnd1qt71-2oir": {
+      "coordinates": [
+        126.97724987714395,
+        37.29414316780432
+      ],
+      "level": 2,
+      "type": "stairs",
+      "label": "",
+      "verticalId": 3
+    },
+    "node-mnd1qx39-dzcl": {
+      "coordinates": [
+        126.97718957467458,
+        37.294176588445325
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": ""
+    },
+    "node-mnd1qy4l-omce": {
+      "coordinates": [
+        126.97638774280045,
+        37.29427879244153
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": ""
+    },
+    "node-mnd1s3a4-ozyz": {
+      "coordinates": [
+        126.97724439724408,
+        37.29413753902496
+      ],
+      "level": 3,
+      "type": "stairs",
+      "label": "",
+      "verticalId": 3
+    },
+    "node-mnd1s5ga-8nqu": {
+      "coordinates": [
+        126.97718201467012,
+        37.29418675676196
+      ],
+      "level": 3,
+      "type": "corridor",
+      "label": ""
+    },
+    "node-mnd1s6ag-w1gx": {
+      "coordinates": [
+        126.97636761519834,
+        37.29427537584144
+      ],
+      "level": 3,
+      "type": "corridor",
+      "label": ""
+    },
+    "node-mnd1s9jw-0rnz": {
+      "coordinates": [
+        126.97724972799426,
+        37.29412938206144
+      ],
+      "level": 4,
+      "type": "stairs",
+      "label": "",
+      "verticalId": 3
+    },
+    "node-mnd1sbmf-yt5i": {
+      "coordinates": [
+        126.97718069345194,
+        37.29418040773025
+      ],
+      "level": 4,
+      "type": "corridor",
+      "label": ""
+    },
+    "node-mnd1scbv-fzry": {
+      "coordinates": [
+        126.97635944562,
+        37.294275519912176
+      ],
+      "level": 4,
+      "type": "corridor",
+      "label": ""
+    },
+    "node-mnd1zvm6-yekl": {
+      "coordinates": [
+        126.97659477190035,
+        37.29426477973627
+      ],
+      "level": 4,
+      "type": "room",
+      "label": "23333"
+    },
+    "node-mnd1zxqi-9lqk": {
+      "coordinates": [
+        126.97654082506199,
+        37.29426620653115
+      ],
+      "level": 3,
+      "type": "room",
+      "label": "23261"
+    },
+    "node-mnd1zygz-gpey": {
+      "coordinates": [
+        126.97697317366737,
+        37.29419677467874
+      ],
+      "level": 3,
+      "type": "room",
+      "label": "23222"
+    },
+    "node-mnd201c9-y4dc": {
+      "coordinates": [
+        126.97701833346719,
+        37.29418742033576
+      ],
+      "level": 1,
+      "type": "room",
+      "label": "23156"
+    },
+    "node-mnd2023j-g5m0": {
+      "coordinates": [
+        126.97658759494465,
+        37.29426458934165
+      ],
+      "level": 1,
+      "type": "room",
+      "label": "23111"
+    },
+    "node-mnd21c4w-447p": {
+      "coordinates": [
+        126.97661681289208,
+        37.29426042723928
+      ],
+      "level": 2,
+      "type": "room",
+      "label": "23212"
+    },
+    "node-mnd2k9is-7adx": {
+      "coordinates": [
+        126.97635586602826,
+        37.29432044294393
+      ],
+      "level": 1,
+      "type": "elevator",
+      "label": "",
+      "verticalId": 1
+    },
+    "node-mnd2kbff-stpr": {
+      "coordinates": [
+        126.97636429194603,
+        37.29432044294393
+      ],
+      "level": 2,
+      "type": "elevator",
+      "label": "",
+      "verticalId": 1
+    },
+    "node-mnd2kcyu-2x02": {
+      "coordinates": [
+        126.97636429194603,
+        37.29431457773049
+      ],
+      "level": 3,
+      "type": "elevator",
+      "label": "",
+      "verticalId": 1
+    },
+    "node-mnd2kead-qefz": {
+      "coordinates": [
+        126.97636534518631,
+        37.29431373984333
+      ],
+      "level": 4,
+      "type": "elevator",
+      "label": "",
+      "verticalId": 1
+    },
+    "node-mnd2kg3b-50lo": {
+      "coordinates": [
+        126.97636745166466,
+        37.29431373984333
+      ],
+      "level": 5,
+      "type": "elevator",
+      "label": "",
+      "verticalId": 1
     }
   },
   "edges": [
     {
-      "from": "node-mnbx0pce-pzbu",
-      "to": "node-mnbx0q7m-eamg",
-      "weight": 54,
-      "videoFwd": "eng1_corridor_23_1F_cw.mp4",
+      "from": "node-mnd1scbv-fzry",
+      "to": "node-mnd1sbmf-yt5i",
+      "weight": 73,
+      "videoFwd": "eng1_c_F4_12_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 49.215867,
+      "videoRev": "eng1_c_F4_12_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 49.916567
+    },
+    {
+      "from": "node-mnd1sbmf-yt5i",
+      "to": "node-mnd1s9jw-0rnz",
+      "weight": 8
+    },
+    {
+      "from": "node-mnd1s9jw-0rnz",
+      "to": "node-mnd1s3a4-ozyz",
+      "weight": 9
+    },
+    {
+      "from": "node-mnd1s3a4-ozyz",
+      "to": "node-mnd1s5ga-8nqu",
+      "weight": 8
+    },
+    {
+      "from": "node-mnd1s5ga-8nqu",
+      "to": "node-mnd1s6ag-w1gx",
+      "weight": 73,
+      "videoFwd": "eng1_c_F3_9_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 50.784133,
+      "videoRev": "eng1_c_F3_9_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 47.914567
+    },
+    {
+      "from": "node-mnd1s3a4-ozyz",
+      "to": "node-mnd1qt71-2oir",
+      "weight": 9
+    },
+    {
+      "from": "node-mnd1qt71-2oir",
+      "to": "node-mnd1qx39-dzcl",
+      "weight": 7
+    },
+    {
+      "from": "node-mnd1qx39-dzcl",
+      "to": "node-mnd1qy4l-omce",
+      "weight": 72,
+      "videoFwd": "eng1_c_F2_6_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 74.1408,
+      "videoRev": "eng1_c_F2_6_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 77.977967
+    },
+    {
+      "from": "node-mnd1qt71-2oir",
+      "to": "node-mnd1qr92-ysq3",
+      "weight": 8
+    },
+    {
+      "from": "node-mnd1qr92-ysq3",
+      "to": "node-mnd1qfyz-mkd6",
+      "weight": 7
+    },
+    {
+      "from": "node-mnd1qfyz-mkd6",
+      "to": "node-mnd1qidl-n7jm",
+      "weight": 76,
+      "videoFwd": "eng1_c_F1_3_cw.mp4",
       "videoFwdStart": 0,
       "videoFwdEnd": 54.254267,
-      "videoRev": "eng1_corridor_23_1F_ccw.mp4",
+      "videoRev": "eng1_c_F1_3_ccw.mp4",
       "videoRevStart": 0,
       "videoRevEnd": 50.850867
+    },
+    {
+      "from": "node-mnd2kg3b-50lo",
+      "to": "node-mnd2kead-qefz",
+      "weight": 8
+    },
+    {
+      "from": "node-mnd2kead-qefz",
+      "to": "node-mnd2kcyu-2x02",
+      "weight": 8
+    },
+    {
+      "from": "node-mnd2kcyu-2x02",
+      "to": "node-mnd2kbff-stpr",
+      "weight": 9
+    },
+    {
+      "from": "node-mnd2kbff-stpr",
+      "to": "node-mnd2k9is-7adx",
+      "weight": 9
+    },
+    {
+      "from": "node-mnd2k9is-7adx",
+      "to": "node-mnd1qidl-n7jm",
+      "weight": 5
+    },
+    {
+      "from": "node-mnd1qy4l-omce",
+      "to": "node-mnd2kbff-stpr",
+      "weight": 5
+    },
+    {
+      "from": "node-mnd1s6ag-w1gx",
+      "to": "node-mnd2kcyu-2x02",
+      "weight": 4
+    },
+    {
+      "from": "node-mnd1scbv-fzry",
+      "to": "node-mnd2kead-qefz",
+      "weight": 4
     }
   ]
 }

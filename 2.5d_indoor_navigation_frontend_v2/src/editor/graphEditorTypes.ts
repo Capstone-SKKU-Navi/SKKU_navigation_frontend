@@ -9,6 +9,7 @@ export interface NavNode {
   building: string;              // "21" | "22" | "23" | "ENG1"
   type: NavNodeType;
   label: string;
+  verticalId?: number;           // stair 1-4, elevator 1-2 — which physical unit
 }
 
 export interface NavEdge {
@@ -81,6 +82,7 @@ export interface NavGraphExport {
     level: number | number[];
     type: string;
     label: string;
+    verticalId?: number;
   }>;
   edges: Array<{
     from: string;

@@ -1,8 +1,9 @@
 // ===== Navigation Graph Editor — Floating Panel UI =====
 
 import { NavNode, NavEdge, EditorMode, PanelCallbacks, ALL_NODE_TYPES, NODE_TYPE_LABELS, NavNodeType, ROOM_TYPES, RoomAutoApplyPreset, RoomType } from './graphEditorTypes';
-import { suggestVideosForEdge, getAllVideos, getOppositeVideo } from './videoCatalog';
+import { suggestVideosForEdge, getAllVideos, getOppositeVideo, type VideoEntry } from './videoCatalog';
 import { openVideoSettingsPanel } from './videoSettingsPanel';
+import { computeStairVideos, computeElevatorVideos } from '../utils/verticalVideoFilename';
 
 let panelEl: HTMLElement | null = null;
 let callbacks: PanelCallbacks | null = null;
@@ -94,6 +95,10 @@ export function createPanel(cb: PanelCallbacks): HTMLElement {
           <label>Label</label>
           <input type="text" id="geNodeLabel" class="ge-input" placeholder="(optional)" />
         </div>
+        <div class="ge-prop-row" id="geNodeVerticalIdRow" style="display:none">
+          <label>Vertical ID</label>
+          <input type="number" id="geNodeVerticalId" class="ge-input" min="1" max="10" style="width:60px" placeholder="계단/엘리베이터 번호" />
+        </div>
       </div>
 
       <div class="ge-section ge-edge-props" id="geEdgeProps" style="display:none">
@@ -111,61 +116,43 @@ export function createPanel(cb: PanelCallbacks): HTMLElement {
         <div class="ge-props-title" style="margin-top:6px">
           <span id="geEdgeFwdLabel">→ From → To</span>
         </div>
-        <div class="ge-vertical-clip-label" id="geEdgeFwdEntryLabel" style="display:none">들어갈 때</div>
-        <div class="ge-prop-row">
-          <select id="geEdgeVideoFwd" class="ge-select">
-            <option value="">(없음)</option>
-          </select>
-        </div>
-        <div class="ge-prop-row ge-edge-time-row" id="geEdgeFwdTimeRow" style="display:none">
-          <span id="geEdgeFwdTime" class="ge-edge-time">-</span>
-          <button class="ge-small-btn" id="geSetTimeFwd" title="Set Time Range">
-            <span class="material-icons" style="font-size:16px">timer</span>
-          </button>
-        </div>
-        <div id="geEdgeFwdExitSection" style="display:none">
-          <div class="ge-vertical-clip-label">나올 때</div>
-          <div class="ge-prop-row">
-            <select id="geEdgeVideoFwdExit" class="ge-select">
-              <option value="">(없음)</option>
-            </select>
-          </div>
-          <div class="ge-prop-row ge-edge-time-row" id="geEdgeFwdExitTimeRow" style="display:none">
-            <span id="geEdgeFwdExitTime" class="ge-edge-time">-</span>
-            <button class="ge-small-btn" id="geSetTimeFwdExit" title="Set Time Range">
+        <!-- FWD: corridor tree picker (hidden for vertical edges) -->
+        <div id="geEdgeFwdCorridorSection">
+          <div id="geEdgeFwdTreeContainer" class="ge-video-tree"></div>
+          <div class="ge-prop-row ge-edge-time-row" id="geEdgeFwdTimeRow" style="display:none">
+            <span id="geEdgeFwdTime" class="ge-edge-time">-</span>
+            <button class="ge-small-btn" id="geSetTimeFwd" title="Set Time Range">
               <span class="material-icons" style="font-size:16px">timer</span>
             </button>
           </div>
+        </div>
+        <!-- FWD: auto-computed vertical videos (hidden for corridor edges) -->
+        <div id="geEdgeFwdAutoSection" style="display:none">
+          <div class="ge-auto-video-label">진입</div>
+          <div class="ge-auto-video" id="geEdgeFwdAutoEntry">-</div>
+          <div class="ge-auto-video-label">나옴</div>
+          <div class="ge-auto-video" id="geEdgeFwdAutoExit">-</div>
         </div>
 
         <div class="ge-props-title" style="margin-top:6px">
           <span id="geEdgeRevLabel">← To → From</span>
         </div>
-        <div class="ge-vertical-clip-label" id="geEdgeRevEntryLabel" style="display:none">들어갈 때</div>
-        <div class="ge-prop-row">
-          <select id="geEdgeVideoRev" class="ge-select">
-            <option value="">(없음)</option>
-          </select>
-        </div>
-        <div class="ge-prop-row ge-edge-time-row" id="geEdgeRevTimeRow" style="display:none">
-          <span id="geEdgeRevTime" class="ge-edge-time">-</span>
-          <button class="ge-small-btn" id="geSetTimeRev" title="Set Time Range">
-            <span class="material-icons" style="font-size:16px">timer</span>
-          </button>
-        </div>
-        <div id="geEdgeRevExitSection" style="display:none">
-          <div class="ge-vertical-clip-label">나올 때</div>
-          <div class="ge-prop-row">
-            <select id="geEdgeVideoRevExit" class="ge-select">
-              <option value="">(없음)</option>
-            </select>
-          </div>
-          <div class="ge-prop-row ge-edge-time-row" id="geEdgeRevExitTimeRow" style="display:none">
-            <span id="geEdgeRevExitTime" class="ge-edge-time">-</span>
-            <button class="ge-small-btn" id="geSetTimeRevExit" title="Set Time Range">
+        <!-- REV: corridor tree picker -->
+        <div id="geEdgeRevCorridorSection">
+          <div id="geEdgeRevTreeContainer" class="ge-video-tree"></div>
+          <div class="ge-prop-row ge-edge-time-row" id="geEdgeRevTimeRow" style="display:none">
+            <span id="geEdgeRevTime" class="ge-edge-time">-</span>
+            <button class="ge-small-btn" id="geSetTimeRev" title="Set Time Range">
               <span class="material-icons" style="font-size:16px">timer</span>
             </button>
           </div>
+        </div>
+        <!-- REV: auto-computed vertical videos -->
+        <div id="geEdgeRevAutoSection" style="display:none">
+          <div class="ge-auto-video-label">진입</div>
+          <div class="ge-auto-video" id="geEdgeRevAutoEntry">-</div>
+          <div class="ge-auto-video-label">나옴</div>
+          <div class="ge-auto-video" id="geEdgeRevAutoExit">-</div>
         </div>
       </div>
 
@@ -333,6 +320,13 @@ export function showNodeProperties(node: NavNode | null): void {
 
   const labelInput = document.getElementById('geNodeLabel') as HTMLInputElement;
   if (labelInput) labelInput.value = node.label;
+
+  // Show verticalId field only for stairs/elevator nodes
+  const verticalIdRow = document.getElementById('geNodeVerticalIdRow');
+  const verticalIdInput = document.getElementById('geNodeVerticalId') as HTMLInputElement;
+  const isVerticalNode = node.type === 'stairs' || node.type === 'elevator';
+  if (verticalIdRow) verticalIdRow.style.display = isVerticalNode ? 'flex' : 'none';
+  if (verticalIdInput) verticalIdInput.value = node.verticalId !== undefined ? String(node.verticalId) : '';
 }
 
 export function hideNodeProperties(): void {
@@ -397,45 +391,104 @@ export function showEdgeProperties(edge: NavEdge, fromNode: NavNode, toNode: Nav
   const toLabel = toNode.label || toNode.id.slice(5, 13);
   setText('geEdgeWeight', edge.weight + 'm');
 
-  // Detect vertical edge (stairs/elevator)
-  const isVertical = fromNode.type === 'stairs' || fromNode.type === 'elevator'
-    || toNode.type === 'stairs' || toNode.type === 'elevator'
-    || fromNode.level !== toNode.level;
+  // Vertical = both nodes are stairs or both are elevator
+  const isVerticalStairs = fromNode.type === 'stairs' && toNode.type === 'stairs';
+  const isVerticalElev = fromNode.type === 'elevator' && toNode.type === 'elevator';
+  const isVertical = isVerticalStairs || isVerticalElev;
 
   // Direction labels
   setText('geEdgeFwdLabel', `FWD  ${fromLabel} → ${toLabel}`);
   setText('geEdgeRevLabel', `REV  ${toLabel} → ${fromLabel}`);
 
-  // Populate video dropdowns
-  const suggested = suggestVideosForEdge(fromNode, toNode);
-
-  function populateVideoSelect(selectEl: HTMLSelectElement): void {
-    selectEl.innerHTML = '<option value="">(없음)</option>';
-    const groups: Record<string, typeof suggested> = { corridor: [], stair: [], elevator: [] };
-    for (const v of suggested) groups[v.type].push(v);
-    const tLabels: Record<string, string> = { corridor: '복도', stair: '계단', elevator: '엘리베이터' };
-    for (const type of ['corridor', 'stair', 'elevator'] as const) {
-      if (groups[type].length === 0) continue;
-      const optgroup = document.createElement('optgroup');
-      optgroup.label = tLabels[type];
-      for (const v of groups[type]) {
-        const opt = document.createElement('option');
-        opt.value = v.filename;
-        opt.textContent = v.label;
-        optgroup.appendChild(opt);
-      }
-      selectEl.appendChild(optgroup);
-    }
-  }
-
   for (const dir of ['Fwd', 'Rev'] as const) {
-    // Entry/main video
-    const selectEl = document.getElementById(`geEdgeVideo${dir}`) as HTMLSelectElement;
-    if (selectEl) {
-      populateVideoSelect(selectEl);
-      const videoKey = dir === 'Fwd' ? 'videoFwd' : 'videoRev';
-      selectEl.value = edge[videoKey] || '';
+    const corridorSection = document.getElementById(`geEdge${dir}CorridorSection`);
+    const autoSection = document.getElementById(`geEdge${dir}AutoSection`);
 
+    if (isVertical) {
+      // === Vertical edge: show auto-computed videos ===
+      if (corridorSection) corridorSection.style.display = 'none';
+      if (autoSection) autoSection.style.display = 'block';
+
+      // Determine from/to for this direction
+      const fNode = dir === 'Fwd' ? fromNode : toNode;
+      const tNode = dir === 'Fwd' ? toNode : fromNode;
+      const vId = fNode.verticalId ?? tNode.verticalId;
+
+      if (vId !== undefined) {
+        const result = isVerticalStairs
+          ? computeStairVideos(fNode.building, vId, fNode.level, tNode.level)
+          : computeElevatorVideos(fNode.building, vId, fNode.level, tNode.level);
+        setText(`geEdge${dir}AutoEntry`, result.entryVideo);
+        setText(`geEdge${dir}AutoExit`, result.exitVideo);
+      } else {
+        setText(`geEdge${dir}AutoEntry`, '(verticalId 미설정)');
+        setText(`geEdge${dir}AutoExit`, '(verticalId 미설정)');
+      }
+    } else {
+      // === Corridor edge: show tree picker ===
+      if (corridorSection) corridorSection.style.display = 'block';
+      if (autoSection) autoSection.style.display = 'none';
+
+      const treeContainer = document.getElementById(`geEdge${dir}TreeContainer`);
+      if (treeContainer) {
+        const videos = suggestVideosForEdge(fromNode, toNode);
+        const videoKey = dir === 'Fwd' ? 'videoFwd' : 'videoRev';
+        const currentValue = edge[videoKey] || '';
+        buildVideoTree(treeContainer, videos, currentValue, (filename) => {
+          const edgeId = propsEl.dataset.edgeId;
+          if (!edgeId) return;
+          const startKey = dir === 'Fwd' ? 'videoFwdStart' : 'videoRevStart';
+          const endKey = dir === 'Fwd' ? 'videoFwdEnd' : 'videoRevEnd';
+          const props: Record<string, any> = { [videoKey]: filename || undefined };
+
+          if (!filename) {
+            // Cleared: remove time range
+            props[startKey] = undefined;
+            props[endKey] = undefined;
+            callbacks?.onEdgeUpdate(edgeId, props);
+            const timeRow = document.getElementById(`geEdge${dir}TimeRow`);
+            if (timeRow) timeRow.style.display = 'none';
+            return;
+          }
+
+          // Auto-assign opposite direction
+          const opposite = getOppositeVideo(filename);
+          if (opposite) {
+            const otherKey = dir === 'Fwd' ? 'videoRev' : 'videoFwd';
+            props[otherKey] = opposite;
+            const otherDir = dir === 'Fwd' ? 'Rev' : 'Fwd';
+            const otherTree = document.getElementById(`geEdge${otherDir}TreeContainer`);
+            if (otherTree) selectTreeItem(otherTree, opposite);
+          }
+
+          // Auto-set start=0, end=duration by loading video metadata
+          props[startKey] = 0;
+          getVideoDuration(filename).then(duration => {
+            props[endKey] = duration;
+            callbacks?.onEdgeUpdate(edgeId, props);
+            // Update time display
+            const timeRow = document.getElementById(`geEdge${dir}TimeRow`);
+            if (timeRow) timeRow.style.display = 'flex';
+            setText(`geEdge${dir}Time`, `${fmtSec(0)} ~ ${fmtSec(duration)}`);
+
+            // Also auto-set opposite direction time range
+            if (opposite) {
+              const otherStartKey = dir === 'Fwd' ? 'videoRevStart' : 'videoFwdStart';
+              const otherEndKey = dir === 'Fwd' ? 'videoRevEnd' : 'videoFwdEnd';
+              const otherDir = dir === 'Fwd' ? 'Rev' : 'Fwd';
+              getVideoDuration(opposite).then(otherDur => {
+                callbacks?.onEdgeUpdate(edgeId, { [otherStartKey]: 0, [otherEndKey]: otherDur });
+                const otherTimeRow = document.getElementById(`geEdge${otherDir}TimeRow`);
+                if (otherTimeRow) otherTimeRow.style.display = 'flex';
+                setText(`geEdge${otherDir}Time`, `${fmtSec(0)} ~ ${fmtSec(otherDur)}`);
+              });
+            }
+          });
+        });
+      }
+
+      // Time row
+      const videoKey = dir === 'Fwd' ? 'videoFwd' : 'videoRev';
       const hasVideo = !!edge[videoKey];
       const timeRow = document.getElementById(`geEdge${dir}TimeRow`);
       if (timeRow) timeRow.style.display = hasVideo ? 'flex' : 'none';
@@ -446,40 +499,109 @@ export function showEdgeProperties(edge: NavEdge, fromNode: NavNode, toNode: Nav
       const e2 = edge[endKey];
       setText(`geEdge${dir}Time`, (s !== undefined && e2 !== undefined) ? `${fmtSec(s)} ~ ${fmtSec(e2)}` : '-');
     }
+  }
+}
 
-    // Show/hide "들어갈 때" label and exit section
-    const entryLabel = document.getElementById(`geEdge${dir}EntryLabel`);
-    if (entryLabel) entryLabel.style.display = isVertical ? 'block' : 'none';
+// ===== Collapsible Video Tree =====
 
-    const exitSection = document.getElementById(`geEdge${dir}ExitSection`);
-    if (exitSection) exitSection.style.display = isVertical ? 'block' : 'none';
+function buildVideoTree(
+  container: HTMLElement,
+  videos: VideoEntry[],
+  currentValue: string,
+  onSelect: (filename: string) => void,
+): void {
+  container.innerHTML = '';
 
-    // Exit video (vertical edges only)
-    if (isVertical) {
-      const exitSelect = document.getElementById(`geEdgeVideo${dir}Exit`) as HTMLSelectElement;
-      if (exitSelect) {
-        populateVideoSelect(exitSelect);
-        const exitVideoKey = dir === 'Fwd' ? 'videoFwdExit' : 'videoRevExit';
-        exitSelect.value = edge[exitVideoKey] || '';
+  // Group: building > floor
+  const tree: Record<string, Record<string, VideoEntry[]>> = {};
+  for (const v of videos) {
+    const building = v.filename.split('_')[0] || 'unknown';
+    const floor = v.floor !== undefined ? `F${v.floor}` : 'N/A';
+    if (!tree[building]) tree[building] = {};
+    if (!tree[building][floor]) tree[building][floor] = [];
+    tree[building][floor].push(v);
+  }
 
-        const hasExitVideo = !!edge[exitVideoKey];
-        const exitTimeRow = document.getElementById(`geEdge${dir}ExitTimeRow`);
-        if (exitTimeRow) exitTimeRow.style.display = hasExitVideo ? 'flex' : 'none';
+  for (const [building, floors] of Object.entries(tree)) {
+    const buildingFolder = createFolder(building, true);
+    container.appendChild(buildingFolder.el);
 
-        const exitStartKey = dir === 'Fwd' ? 'videoFwdExitStart' : 'videoRevExitStart';
-        const exitEndKey = dir === 'Fwd' ? 'videoFwdExitEnd' : 'videoRevExitEnd';
-        const es = edge[exitStartKey];
-        const ee = edge[exitEndKey];
-        setText(`geEdge${dir}ExitTime`, (es !== undefined && ee !== undefined) ? `${fmtSec(es)} ~ ${fmtSec(ee)}` : '-');
+    const sortedFloors = Object.keys(floors).sort();
+    for (const floor of sortedFloors) {
+      const floorFolder = createFolder(floor, false);
+      buildingFolder.children.appendChild(floorFolder.el);
+
+      for (const v of floors[floor]) {
+        const item = document.createElement('div');
+        item.className = 'ge-tree-item' + (v.filename === currentValue ? ' selected' : '');
+        item.dataset.value = v.filename;
+        item.textContent = v.label || v.filename.replace('.mp4', '');
+        item.title = v.filename;
+        item.addEventListener('click', () => {
+          container.querySelectorAll('.ge-tree-item.selected').forEach(el => el.classList.remove('selected'));
+          item.classList.add('selected');
+          onSelect(v.filename);
+        });
+        floorFolder.children.appendChild(item);
       }
     }
   }
+
+  // "None" option at top
+  const noneItem = document.createElement('div');
+  noneItem.className = 'ge-tree-item' + (!currentValue ? ' selected' : '');
+  noneItem.textContent = '(없음)';
+  noneItem.addEventListener('click', () => {
+    container.querySelectorAll('.ge-tree-item.selected').forEach(el => el.classList.remove('selected'));
+    noneItem.classList.add('selected');
+    onSelect('');
+  });
+  container.insertBefore(noneItem, container.firstChild);
+}
+
+function createFolder(label: string, startOpen: boolean): { el: HTMLElement; children: HTMLElement } {
+  const el = document.createElement('div');
+  const header = document.createElement('div');
+  header.className = 'ge-tree-folder-header' + (startOpen ? ' open' : '');
+  header.innerHTML = `<span class="material-icons">chevron_right</span>${label}`;
+  const children = document.createElement('div');
+  children.className = 'ge-tree-folder-children';
+  children.style.display = startOpen ? 'block' : 'none';
+  header.addEventListener('click', () => {
+    const isOpen = children.style.display !== 'none';
+    children.style.display = isOpen ? 'none' : 'block';
+    header.classList.toggle('open', !isOpen);
+  });
+  el.appendChild(header);
+  el.appendChild(children);
+  return { el, children };
+}
+
+function selectTreeItem(container: HTMLElement, filename: string): void {
+  container.querySelectorAll('.ge-tree-item.selected').forEach(el => el.classList.remove('selected'));
+  const item = container.querySelector(`.ge-tree-item[data-value="${filename}"]`);
+  if (item) item.classList.add('selected');
 }
 
 function fmtSec(s: number): string {
   const m = Math.floor(s / 60);
   const sec = (s % 60).toFixed(1);
   return m > 0 ? `${m}:${sec.padStart(4, '0')}` : `${sec}s`;
+}
+
+/** Load video metadata to get duration (seconds). */
+function getVideoDuration(filename: string): Promise<number> {
+  return new Promise(resolve => {
+    const vid = document.createElement('video');
+    vid.preload = 'metadata';
+    vid.src = `/videos/${filename}`;
+    vid.addEventListener('loadedmetadata', () => {
+      const dur = vid.duration;
+      vid.src = ''; // release
+      resolve(isFinite(dur) ? dur : 0);
+    });
+    vid.addEventListener('error', () => resolve(0));
+  });
 }
 
 interface ChainEntry { edge: NavEdge; aligned: boolean; }
@@ -569,30 +691,21 @@ export function showMultiEdgeProperties(edges: NavEdge[], nodes: Record<string, 
     };
   }
 
-  // Populate both direction rows
+  // Populate both direction rows (corridor videos only — vertical edges are auto-computed)
   const allVideos = getAllVideos();
-  const groups: Record<string, typeof allVideos> = { corridor: [], stair: [], elevator: [] };
-  for (const v of allVideos) groups[v.type].push(v);
-  const typeLabels: Record<string, string> = { corridor: '복도', stair: '계단', elevator: '엘리베이터' };
 
   for (const dir of ['Fwd', 'Rev'] as const) {
     const dirKey = dir.toLowerCase() as 'fwd' | 'rev';
     const selectEl = document.getElementById(`geMultiEdgeVideo${dir}`) as HTMLSelectElement;
     if (!selectEl) continue;
 
-    // Populate dropdown
+    // Populate dropdown with corridor videos
     selectEl.innerHTML = '<option value="">(없음)</option>';
-    for (const type of ['corridor', 'stair', 'elevator'] as const) {
-      if (groups[type].length === 0) continue;
-      const optgroup = document.createElement('optgroup');
-      optgroup.label = typeLabels[type];
-      for (const v of groups[type]) {
-        const opt = document.createElement('option');
-        opt.value = v.filename;
-        opt.textContent = v.label;
-        optgroup.appendChild(opt);
-      }
-      selectEl.appendChild(optgroup);
+    for (const v of allVideos) {
+      const opt = document.createElement('option');
+      opt.value = v.filename;
+      opt.textContent = v.label;
+      selectEl.appendChild(opt);
     }
 
     // Auto-select video if all edges share the same one
@@ -672,10 +785,22 @@ function wireEvents(): void {
   document.getElementById('geNodeType')?.addEventListener('change', (e) => {
     const nodeIdText = document.getElementById('geNodeId')?.textContent;
     if (!nodeIdText) return;
-    // We need the full node id — stored in data attribute
     const fullId = (document.getElementById('geNodeProps') as HTMLElement)?.dataset.nodeId;
     if (fullId) {
-      callbacks?.onNodeUpdate(fullId, { type: (e.target as HTMLSelectElement).value as NavNodeType });
+      const newType = (e.target as HTMLSelectElement).value as NavNodeType;
+      callbacks?.onNodeUpdate(fullId, { type: newType });
+      // Show/hide verticalId row based on type
+      const verticalIdRow = document.getElementById('geNodeVerticalIdRow');
+      if (verticalIdRow) verticalIdRow.style.display = (newType === 'stairs' || newType === 'elevator') ? 'flex' : 'none';
+    }
+  });
+
+  // Node verticalId change
+  document.getElementById('geNodeVerticalId')?.addEventListener('change', (e) => {
+    const fullId = (document.getElementById('geNodeProps') as HTMLElement)?.dataset.nodeId;
+    if (fullId) {
+      const val = parseInt((e.target as HTMLInputElement).value);
+      callbacks?.onNodeUpdate(fullId, { verticalId: isNaN(val) ? undefined : val });
     }
   });
 
@@ -736,55 +861,9 @@ function wireEvents(): void {
     callbacks?.onRoomExport();
   });
 
-  // Edge video change — forward (auto-assigns reverse)
-  document.getElementById('geEdgeVideoFwd')?.addEventListener('change', (e) => {
-    const edgeId = document.getElementById('geEdgeProps')?.dataset.edgeId;
-    if (edgeId) {
-      const videoFwd = (e.target as HTMLSelectElement).value || undefined;
-      const props: Record<string, any> = { videoFwd };
-      const timeRow = document.getElementById('geEdgeFwdTimeRow');
-      if (timeRow) timeRow.style.display = videoFwd ? 'flex' : 'none';
+  // Video selection is now handled by the tree picker in showEdgeProperties()
 
-      // Auto-assign reverse
-      if (videoFwd) {
-        const opposite = getOppositeVideo(videoFwd);
-        if (opposite) {
-          props.videoRev = opposite;
-          const revSelect = document.getElementById('geEdgeVideoRev') as HTMLSelectElement;
-          if (revSelect) revSelect.value = opposite;
-          const revTimeRow = document.getElementById('geEdgeRevTimeRow');
-          if (revTimeRow) revTimeRow.style.display = 'flex';
-        }
-      }
-      callbacks?.onEdgeUpdate(edgeId, props);
-    }
-  });
-
-  // Edge video change — reverse (auto-assigns forward)
-  document.getElementById('geEdgeVideoRev')?.addEventListener('change', (e) => {
-    const edgeId = document.getElementById('geEdgeProps')?.dataset.edgeId;
-    if (edgeId) {
-      const videoRev = (e.target as HTMLSelectElement).value || undefined;
-      const props: Record<string, any> = { videoRev };
-      const timeRow = document.getElementById('geEdgeRevTimeRow');
-      if (timeRow) timeRow.style.display = videoRev ? 'flex' : 'none';
-
-      // Auto-assign forward
-      if (videoRev) {
-        const opposite = getOppositeVideo(videoRev);
-        if (opposite) {
-          props.videoFwd = opposite;
-          const fwdSelect = document.getElementById('geEdgeVideoFwd') as HTMLSelectElement;
-          if (fwdSelect) fwdSelect.value = opposite;
-          const fwdTimeRow = document.getElementById('geEdgeFwdTimeRow');
-          if (fwdTimeRow) fwdTimeRow.style.display = 'flex';
-        }
-      }
-      callbacks?.onEdgeUpdate(edgeId, props);
-    }
-  });
-
-  // Set time — forward / reverse (entry)
+  // Set time — forward / reverse (corridor edges only)
   document.getElementById('geSetTimeFwd')?.addEventListener('click', () => {
     const edgeId = document.getElementById('geEdgeProps')?.dataset.edgeId;
     if (edgeId) callbacks?.onSetTime(edgeId, 'fwd');
@@ -794,59 +873,7 @@ function wireEvents(): void {
     if (edgeId) callbacks?.onSetTime(edgeId, 'rev');
   });
 
-  // Exit video change — forward (auto-assigns reverse exit for stairs)
-  document.getElementById('geEdgeVideoFwdExit')?.addEventListener('change', (e) => {
-    const edgeId = document.getElementById('geEdgeProps')?.dataset.edgeId;
-    if (edgeId) {
-      const v = (e.target as HTMLSelectElement).value || undefined;
-      const props: Record<string, any> = { videoFwdExit: v };
-      const row = document.getElementById('geEdgeFwdExitTimeRow');
-      if (row) row.style.display = v ? 'flex' : 'none';
-
-      if (v) {
-        const opposite = getOppositeVideo(v);
-        if (opposite) {
-          props.videoRevExit = opposite;
-          const revSelect = document.getElementById('geEdgeVideoRevExit') as HTMLSelectElement;
-          if (revSelect) revSelect.value = opposite;
-          const revRow = document.getElementById('geEdgeRevExitTimeRow');
-          if (revRow) revRow.style.display = 'flex';
-        }
-      }
-      callbacks?.onEdgeUpdate(edgeId, props);
-    }
-  });
-  document.getElementById('geEdgeVideoRevExit')?.addEventListener('change', (e) => {
-    const edgeId = document.getElementById('geEdgeProps')?.dataset.edgeId;
-    if (edgeId) {
-      const v = (e.target as HTMLSelectElement).value || undefined;
-      const props: Record<string, any> = { videoRevExit: v };
-      const row = document.getElementById('geEdgeRevExitTimeRow');
-      if (row) row.style.display = v ? 'flex' : 'none';
-
-      if (v) {
-        const opposite = getOppositeVideo(v);
-        if (opposite) {
-          props.videoFwdExit = opposite;
-          const fwdSelect = document.getElementById('geEdgeVideoFwdExit') as HTMLSelectElement;
-          if (fwdSelect) fwdSelect.value = opposite;
-          const fwdRow = document.getElementById('geEdgeFwdExitTimeRow');
-          if (fwdRow) fwdRow.style.display = 'flex';
-        }
-      }
-      callbacks?.onEdgeUpdate(edgeId, props);
-    }
-  });
-
-  // Set time — exit clips
-  document.getElementById('geSetTimeFwdExit')?.addEventListener('click', () => {
-    const edgeId = document.getElementById('geEdgeProps')?.dataset.edgeId;
-    if (edgeId) callbacks?.onSetTime(edgeId, 'fwdExit');
-  });
-  document.getElementById('geSetTimeRevExit')?.addEventListener('click', () => {
-    const edgeId = document.getElementById('geEdgeProps')?.dataset.edgeId;
-    if (edgeId) callbacks?.onSetTime(edgeId, 'revExit');
-  });
+  // Exit time handlers removed — vertical clips are auto-computed and play in full
 
   // Edge delete
   document.getElementById('geEdgeDelete')?.addEventListener('click', () => {

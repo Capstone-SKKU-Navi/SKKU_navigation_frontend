@@ -2,6 +2,7 @@
 
 import { NavGraph, NavNode, NavEdge, NavGraphExport } from '../editor/graphEditorTypes';
 import { getDistanceBetweenCoordinatesInM } from '../utils/coordinateHelpers';
+import { detectBuilding } from '../utils/buildingDetection';
 import * as BackendService from './backendService';
 
 const GRAPH_JSON_URL = '/geojson/graph.json';
@@ -33,9 +34,10 @@ function importGraph(data: NavGraphExport): NavGraph {
       id,
       coordinates: raw.coordinates,
       level,
-      building: '',
+      building: detectBuilding(raw.coordinates, level),
       type: raw.type as NavNode['type'],
       label: raw.label ?? '',
+      ...(raw.verticalId !== undefined ? { verticalId: raw.verticalId } : {}),
     };
   }
   const edges: NavEdge[] = data.edges.map(e => ({
@@ -326,8 +328,8 @@ export interface FullRouteResult {
   fromProjection: EdgeProjection | null;
   /** Projection data for perpendicular foot at route end */
   toProjection: EdgeProjection | null;
-  /** Ordered edges traversed, with direction flag */
-  edgePath: { edge: NavEdge; forward: boolean }[];
+  /** Ordered edges traversed, with direction flag and node refs */
+  edgePath: { edge: NavEdge; forward: boolean; fromNode: NavNode; toNode: NavNode }[];
   /** Whether start and end project onto the same edge */
   sameEdge: boolean;
   /** Trimmed node IDs after backtracking removal */
@@ -498,7 +500,7 @@ export function buildFullRoute(fromRef: string, toRef: string): FullRouteResult 
 
   // Build edgePath: all edges traversed in order
   // Structure: [fromProj edge] → [inter-node edges...] → [toProj edge]
-  const edgePath: { edge: NavEdge; forward: boolean }[] = [];
+  const edgePath: FullRouteResult['edgePath'] = [];
 
   function findEdge(nA: string, nB: string): NavEdge | undefined {
     return graph!.edges.find(
@@ -509,14 +511,14 @@ export function buildFullRoute(fromRef: string, toRef: string): FullRouteResult 
   if (sameEdge) {
     // Same edge: single edge from projection endpoints
     const e = findEdge(fromProj.nodeA, fromProj.nodeB);
-    if (e) edgePath.push({ edge: e, forward: true }); // direction resolved in planner
+    if (e) edgePath.push({ edge: e, forward: true, fromNode: graph!.nodes[e.from], toNode: graph!.nodes[e.to] }); // direction resolved in planner
   } else if (trimmedPath.length > 0) {
     // Start edge: from perpFoot → first trimmed node
     const firstNode = trimmedPath[0];
     const startEdge = findEdge(fromProj.nodeA, fromProj.nodeB);
     if (startEdge) {
       // forward = the first trimmed node is edge.to
-      edgePath.push({ edge: startEdge, forward: startEdge.to === firstNode });
+      edgePath.push({ edge: startEdge, forward: startEdge.to === firstNode, fromNode: graph!.nodes[startEdge.from], toNode: graph!.nodes[startEdge.to] });
     }
 
     // Inter-node edges
@@ -524,14 +526,14 @@ export function buildFullRoute(fromRef: string, toRef: string): FullRouteResult 
       const nA = trimmedPath[i];
       const nB = trimmedPath[i + 1];
       const e = findEdge(nA, nB);
-      if (e) edgePath.push({ edge: e, forward: e.from === nA });
+      if (e) edgePath.push({ edge: e, forward: e.from === nA, fromNode: graph!.nodes[e.from], toNode: graph!.nodes[e.to] });
     }
 
     // End edge: last trimmed node → perpFoot (only if different from start edge)
     const lastNode = trimmedPath[trimmedPath.length - 1];
     const endEdge = findEdge(toProj.nodeA, toProj.nodeB);
     if (endEdge && endEdge !== startEdge) {
-      edgePath.push({ edge: endEdge, forward: endEdge.from === lastNode });
+      edgePath.push({ edge: endEdge, forward: endEdge.from === lastNode, fromNode: graph!.nodes[endEdge.from], toNode: graph!.nodes[endEdge.to] });
     }
   }
 
