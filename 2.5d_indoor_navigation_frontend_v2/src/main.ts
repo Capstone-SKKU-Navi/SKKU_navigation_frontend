@@ -3,6 +3,7 @@ import '../scss/main.scss';
 
 import * as BackendService from './services/backendService';
 import * as GeoMap from './components/geoMap';
+import * as IndoorLayer from './components/indoorLayer';
 import * as RouteOverlay from './components/routeOverlay';
 import * as GraphService from './services/graphService';
 import { fetchRoute } from './services/apiClient';
@@ -37,6 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       setupRouteUI();
       setupRoomClickPopup();
       setupFpsCounter();
+      setupLayerToggle();
       setupGraphEditor();
 
       // Sync floor wheel when walkthrough changes level
@@ -516,6 +518,45 @@ function setupRoomClickPopup(): void {
       clearRouteEndpoints();
     }
   });
+}
+
+// ===== Layer Toggle =====
+function setupLayerToggle(): void {
+  const btn = document.getElementById('layerToggleBtn');
+  const panel = document.getElementById('layerPanel');
+  if (!btn || !panel) return;
+
+  btn.addEventListener('click', () => {
+    const visible = panel.style.display !== 'none';
+    panel.style.display = visible ? 'none' : 'block';
+    btn.classList.toggle('active', !visible);
+  });
+
+  // Close panel on outside click
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('#layerPanel') && !target.closest('#layerToggleBtn')) {
+      panel.style.display = 'none';
+      btn.classList.remove('active');
+    }
+  });
+
+  const groups = [
+    { id: 'layerRooms', group: 'rooms' as const },
+    { id: 'layerCorridors', group: 'corridors' as const },
+    { id: 'layerWalls', group: 'walls' as const },
+    { id: 'layerLabels', group: 'labels' as const },
+  ];
+
+  for (const { id, group } of groups) {
+    const checkbox = document.getElementById(id) as HTMLInputElement;
+    if (!checkbox) continue;
+    checkbox.addEventListener('change', () => {
+      const map = GeoMap.getMap();
+      if (map) IndoorLayer.setLayerGroupVisibility(map, group, checkbox.checked);
+    });
+  }
+
 }
 
 // ===== FPS Counter =====

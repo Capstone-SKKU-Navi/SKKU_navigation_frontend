@@ -25,8 +25,7 @@ import sys
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(SCRIPT_DIR)
 INPUT_DIR = os.path.join(PROJECT_DIR, "Geojson")
-V2_DIR = os.path.join(PROJECT_DIR, "2.5d_indoor_navigation_frontend_v2")
-PUBLIC_GEOJSON = os.path.join(V2_DIR, "public", "geojson")
+PUBLIC_GEOJSON = os.path.join(SCRIPT_DIR, "output")
 
 # 슬리버 판정 기준 (Shoelace 좌표 면적, ≈5m² at lat37)
 MIN_AREA = 5e-10

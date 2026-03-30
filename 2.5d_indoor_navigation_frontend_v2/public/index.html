@@ -59,8 +59,20 @@
             <button id="switch3DBtn" class="header-icon-btn" title="2D/3D 전환">
                 <span class="material-icons" id="switch3DIcon">3d_rotation</span>
             </button>
+            <button id="layerToggleBtn" class="header-icon-btn" title="레이어 토글">
+                <span class="material-icons">layers</span>
+            </button>
         </div>
     </header>
+
+    <!-- Layer toggle panel -->
+    <div id="layerPanel" class="layer-panel" style="display:none;">
+        <div class="layer-panel-title">레이어 표시</div>
+        <label class="layer-toggle"><input type="checkbox" id="layerRooms" checked /><span>방 (Rooms)</span></label>
+        <label class="layer-toggle"><input type="checkbox" id="layerCorridors" checked /><span>복도 (Corridors)</span></label>
+        <label class="layer-toggle"><input type="checkbox" id="layerWalls" checked /><span>3D 바닥 (3D Floor)</span></label>
+        <label class="layer-toggle"><input type="checkbox" id="layerLabels" checked /><span>라벨 (Labels)</span></label>
+    </div>
 
     <!-- MAIN CONTENT -->
     <div id="mainContent">

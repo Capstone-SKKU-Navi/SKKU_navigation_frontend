@@ -121,6 +121,23 @@ export function highlightRoom(map: maplibregl.Map, ref: string | null): void {
   }
 }
 
+type LayerGroup = 'rooms' | 'corridors' | 'walls' | 'labels';
+const disabledGroups = new Set<LayerGroup>();
+
+/** Toggle visibility for a layer group, then re-apply normal visibility rules */
+export function setLayerGroupVisibility(
+  map: maplibregl.Map,
+  group: LayerGroup,
+  visible: boolean,
+): void {
+  if (visible) {
+    disabledGroups.delete(group);
+  } else {
+    disabledGroups.add(group);
+  }
+  applyVisibility(map);
+}
+
 /** Get which level a room ref belongs to */
 export function getRoomLevel(ref: string): number | null {
   const rooms = BackendService.getRoomList();
@@ -151,6 +168,11 @@ function applyVisibility(map: maplibregl.Map): void {
   }
 }
 
+/** Resolve visibility: 'none' if group is disabled, otherwise use the mode-based value */
+function groupVis(group: LayerGroup, modeVis: string): string {
+  return disabledGroups.has(group) ? 'none' : modeVis;
+}
+
 function applyBuildingLevelVisibility(map: maplibregl.Map, building: string, level: number): void {
   const prefix = `${building}-floor-${level}`;
   const base = is3DMode ? getLevelBase(level) : 0;
@@ -162,13 +184,13 @@ function applyBuildingLevelVisibility(map: maplibregl.Map, building: string, lev
     const show = isActive || isBelow;
     const vis = show ? 'visible' : 'none';
 
-    setLayerVis(map, `${prefix}-rooms-3d`, vis);
-    setLayerVis(map, `${prefix}-rooms-outline`, isActive ? 'visible' : 'none');
+    setLayerVis(map, `${prefix}-rooms-3d`, groupVis('rooms', vis));
+    setLayerVis(map, `${prefix}-rooms-outline`, groupVis('rooms', isActive ? 'visible' : 'none'));
     setLayerVis(map, `${prefix}-rooms-labels`, 'none'); // hidden in 3D — FloatingLabels handles this
-    setLayerVis(map, `${prefix}-corridors-3d`, vis);
-    setLayerVis(map, `${prefix}-corridors-outline`, isActive ? 'visible' : 'none');
-    setLayerVis(map, `${prefix}-stairs-3d`, vis);
-    setLayerVis(map, `${prefix}-walls-3d`, vis);
+    setLayerVis(map, `${prefix}-corridors-3d`, groupVis('corridors', vis));
+    setLayerVis(map, `${prefix}-corridors-outline`, groupVis('corridors', isActive ? 'visible' : 'none'));
+    setLayerVis(map, `${prefix}-stairs-3d`, groupVis('rooms', vis));
+    setLayerVis(map, `${prefix}-walls-3d`, groupVis('walls', vis));
 
     if (show) {
       const roomTop = base + ROOM_THICKNESS;
@@ -206,12 +228,12 @@ function applyBuildingLevelVisibility(map: maplibregl.Map, building: string, lev
     // 2D flat mode: show only active level, height = 0
     const vis = isActive ? 'visible' : 'none';
 
-    setLayerVis(map, `${prefix}-rooms-3d`, vis);
-    setLayerVis(map, `${prefix}-rooms-outline`, vis);
-    setLayerVis(map, `${prefix}-rooms-labels`, vis);
-    setLayerVis(map, `${prefix}-corridors-3d`, vis);
-    setLayerVis(map, `${prefix}-corridors-outline`, vis);
-    setLayerVis(map, `${prefix}-stairs-3d`, vis);
+    setLayerVis(map, `${prefix}-rooms-3d`, groupVis('rooms', vis));
+    setLayerVis(map, `${prefix}-rooms-outline`, groupVis('rooms', vis));
+    setLayerVis(map, `${prefix}-rooms-labels`, groupVis('labels', vis));
+    setLayerVis(map, `${prefix}-corridors-3d`, groupVis('corridors', vis));
+    setLayerVis(map, `${prefix}-corridors-outline`, 'none'); // hide corridor outlines in 2D — they overlap rooms
+    setLayerVis(map, `${prefix}-stairs-3d`, groupVis('rooms', vis));
     setLayerVis(map, `${prefix}-walls-3d`, 'none'); // no walls in 2D
 
     if (isActive) {
@@ -283,7 +305,50 @@ function addBuildingLevelLayers(map: maplibregl.Map, building: string, level: nu
     f => f.geometry.type === 'Polygon' || f.geometry.type === 'MultiPolygon'
   );
 
-  // Rooms
+  // Corridors (added first so rooms render on top in 2D)
+  if (corridors.length > 0) {
+    map.addSource(`${sourceId}-corridors`, {
+      type: 'geojson',
+      data: { type: 'FeatureCollection', features: corridors },
+    });
+
+    map.addLayer({
+      id: `${sourceId}-corridors-3d`,
+      type: 'fill-extrusion',
+      source: `${sourceId}-corridors`,
+      layout: { visibility: 'none' },
+      paint: {
+        'fill-extrusion-color': CORRIDOR_COLOR,
+        'fill-extrusion-height': 0,
+        'fill-extrusion-base': 0,
+        'fill-extrusion-opacity': ACTIVE_CORRIDOR_OPACITY,
+      },
+    });
+
+    // Corridor outline edges
+    const corridorEdges = buildEdgePolygons(corridors);
+    if (corridorEdges.length > 0) {
+      map.addSource(`${sourceId}-corridors-edges`, {
+        type: 'geojson',
+        data: { type: 'FeatureCollection', features: corridorEdges },
+      });
+
+      map.addLayer({
+        id: `${sourceId}-corridors-outline`,
+        type: 'fill-extrusion',
+        source: `${sourceId}-corridors-edges`,
+        layout: { visibility: 'none' },
+        paint: {
+          'fill-extrusion-color': OUTLINE_COLOR,
+          'fill-extrusion-height': 0,
+          'fill-extrusion-base': 0,
+          'fill-extrusion-opacity': 0.6,
+        },
+      });
+    }
+  }
+
+  // Rooms (added after corridors so they render on top)
   if (rooms.length > 0) {
     map.addSource(`${sourceId}-rooms`, {
       type: 'geojson',
@@ -355,49 +420,6 @@ function addBuildingLevelLayers(map: maplibregl.Map, building: string, level: nu
         'text-halo-width': 1.5,
       },
     });
-  }
-
-  // Corridors
-  if (corridors.length > 0) {
-    map.addSource(`${sourceId}-corridors`, {
-      type: 'geojson',
-      data: { type: 'FeatureCollection', features: corridors },
-    });
-
-    map.addLayer({
-      id: `${sourceId}-corridors-3d`,
-      type: 'fill-extrusion',
-      source: `${sourceId}-corridors`,
-      layout: { visibility: 'none' },
-      paint: {
-        'fill-extrusion-color': CORRIDOR_COLOR,
-        'fill-extrusion-height': 0,
-        'fill-extrusion-base': 0,
-        'fill-extrusion-opacity': ACTIVE_CORRIDOR_OPACITY,
-      },
-    });
-
-    // Corridor outline edges
-    const corridorEdges = buildEdgePolygons(corridors);
-    if (corridorEdges.length > 0) {
-      map.addSource(`${sourceId}-corridors-edges`, {
-        type: 'geojson',
-        data: { type: 'FeatureCollection', features: corridorEdges },
-      });
-
-      map.addLayer({
-        id: `${sourceId}-corridors-outline`,
-        type: 'fill-extrusion',
-        source: `${sourceId}-corridors-edges`,
-        layout: { visibility: 'none' },
-        paint: {
-          'fill-extrusion-color': OUTLINE_COLOR,
-          'fill-extrusion-height': 0,
-          'fill-extrusion-base': 0,
-          'fill-extrusion-opacity': 0.6,
-        },
-      });
-    }
   }
 
   // Stairs

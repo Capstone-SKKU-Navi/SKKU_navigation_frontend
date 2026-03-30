@@ -387,6 +387,70 @@ html, body {
   pointer-events: none;
 }
 
+// ===== Layer Toggle Panel =====
+.layer-panel {
+  position: fixed;
+  top: $header-height + 8px;
+  right: $ui-padding;
+  z-index: 900;
+  background: rgba(26, 26, 46, 0.92);
+  backdrop-filter: blur(12px);
+  border-radius: $radius;
+  padding: 12px 16px;
+  box-shadow: $shadow;
+  min-width: 180px;
+
+  .layer-panel-title {
+    font-size: 12px;
+    color: $text-muted;
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .layer-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    cursor: pointer;
+    font-size: 13px;
+    color: $text-light;
+
+    input[type="checkbox"] {
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+
+      &:checked {
+        background: $accent;
+        border-color: $accent;
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 3px;
+          top: 0px;
+          width: 5px;
+          height: 9px;
+          border: solid #fff;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+        }
+      }
+    }
+
+    &:hover { color: #fff; }
+  }
+}
+
 // ===== Graph Editor (Dev Tool) =====
 @import 'graphEditor';
 @import 'walkthroughOverlay';

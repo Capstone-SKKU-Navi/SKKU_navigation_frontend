@@ -1,0 +1,12 @@
+{
+  "building": "eng1",
+  "name": "제1공학관",
+  "loc_ref": "ENG1",
+  "levels": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ]
+}
