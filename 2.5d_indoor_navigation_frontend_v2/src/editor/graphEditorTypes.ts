@@ -38,7 +38,10 @@ export interface NavGraph {
 
 export type EditorMode = 'select' | 'add-node' | 'add-edge' | 'label-room';
 
-export type RoomType = 'classroom' | 'lab' | 'restroom' | 'office' | 'stairs' | 'elevator' | '';
+export type RoomType =
+  | 'classroom' | 'lab' | 'restroom' | 'office' | 'stairs' | 'elevator'
+  | 'dormitory' | 'dining' | 'lounge' | 'facility' | 'storage' | 'store' | 'club' | 'reserved'
+  | '';
 
 export interface RoomAutoApplyPreset {
   enabled: boolean;
@@ -53,6 +56,14 @@ export const ROOM_TYPES: { value: RoomType; label: string }[] = [
   { value: 'office', label: '사무실' },
   { value: 'stairs', label: '계단' },
   { value: 'elevator', label: '엘리베이터' },
+  { value: 'dormitory', label: '기숙사' },
+  { value: 'dining', label: '식당' },
+  { value: 'lounge', label: '휴게/편의' },
+  { value: 'facility', label: '기계/설비' },
+  { value: 'storage', label: '창고' },
+  { value: 'store', label: '매장/서비스' },
+  { value: 'club', label: '동아리' },
+  { value: 'reserved', label: '예비' },
 ];
 
 export interface EditorState {

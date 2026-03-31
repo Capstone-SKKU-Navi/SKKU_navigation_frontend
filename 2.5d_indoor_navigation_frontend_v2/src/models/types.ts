@@ -65,6 +65,14 @@ export const ROOM_COLORS: Record<string, string> = {
   stairs: '#A1887F',
   elevator: '#B0BEC5',
   corridor: '#F5F5F0',
+  dormitory: '#F9E79F',
+  dining: '#F5B7B1',
+  lounge: '#A3D9C8',
+  facility: '#D5D8DC',
+  storage: '#E2C999',
+  store: '#AED6F1',
+  club: '#D2B4DE',
+  reserved: '#E0E0E0',
 };
 
 export const ROOM_TYPE_LABELS: Record<string, string> = {
@@ -74,4 +82,12 @@ export const ROOM_TYPE_LABELS: Record<string, string> = {
   office: '사무실',
   stairs: '계단',
   elevator: '엘리베이터',
+  dormitory: '기숙사',
+  dining: '식당',
+  lounge: '휴게/편의',
+  facility: '기계/설비',
+  storage: '창고',
+  store: '매장/서비스',
+  club: '동아리',
+  reserved: '예비',
 };
