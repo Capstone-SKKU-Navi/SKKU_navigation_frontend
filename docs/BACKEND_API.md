@@ -291,3 +291,21 @@ Body: 영상 바이트 데이터
 
 프론트엔드는 `route.coordinates`와 `route.levels`로 경로를 그리고,
 `walkthrough.clips`로 영상 재생 순서를 구성한다. 그래프 데이터 불필요.
+
+---
+
+## 백엔드 필요 데이터
+
+백엔드가 경로 계산 + 영상 클립 생성을 위해 DB에 가져가야 하는 프론트엔드 데이터:
+
+| 파일 | 용도 | DB 테이블 |
+|------|------|-----------|
+| `graph.json` → nodes | 경로 그래프 노드 (좌표, 층, 타입, verticalId) | Node |
+| `graph.json` → edges | 경로 그래프 엣지 (weight, 영상 파일/시간) | Edge |
+| `video_settings.json` | 영상별 yaw 값 (360° 시점 방향) | VideoSettings 또는 Edge 컬럼 |
+| `room_codes.json` | 방 이름/유형 | Room |
+| `*_room_L*.geojson` | 방 폴리곤 + centroid | Room (centroid, geometry) |
+| `buildings.json` + `manifest.json` | 건물 메타데이터 | Building |
+
+> 파일 구조 상세: [DATA_FORMAT.md](DATA_FORMAT.md)
+> 경로 계산 알고리즘: [ROUTE_ALGORITHM.md](ROUTE_ALGORITHM.md)
