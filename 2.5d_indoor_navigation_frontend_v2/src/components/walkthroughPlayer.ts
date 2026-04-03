@@ -4,6 +4,7 @@
 
 import * as THREE from 'three';
 import type { WalkthroughPlaylist } from './walkthroughTypes';
+import { getVideoUrl } from '../services/backendService';
 
 export interface WalkthroughPlayerCallbacks {
   onProgress(globalTime: number): void;
@@ -170,7 +171,7 @@ export function createWalkthroughPlayer(
     standbySegIdx = segIdx;
     const seg = segments[segIdx];
     const vid = standbyVideo; // capture reference — survives swaps
-    vid.src = `/videos/${seg.videoFile}`;
+    vid.src = getVideoUrl(seg.videoFile);
     vid.load();
     vid.addEventListener('loadeddata', function onLoad() {
       vid.removeEventListener('loadeddata', onLoad);
@@ -263,11 +264,11 @@ export function createWalkthroughPlayer(
 
     const seg = segments[segIdx];
     const currentSrc = activeVideo.src;
-    const targetSrc = new URL(`/videos/${seg.videoFile}`, location.href).href;
+    const targetSrc = new URL(getVideoUrl(seg.videoFile), location.href).href;
     const needsSrcChange = currentSrc !== targetSrc;
 
     if (needsSrcChange) {
-      activeVideo.src = `/videos/${seg.videoFile}`;
+      activeVideo.src = getVideoUrl(seg.videoFile);
       activeVideo.load();
       await waitForEvent(activeVideo, 'loadeddata');
       if (destroyed) return;

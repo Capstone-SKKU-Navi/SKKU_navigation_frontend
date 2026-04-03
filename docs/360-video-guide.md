@@ -228,11 +228,12 @@ Interactive Three.js preview with three modes:
 ### Data Flow
 
 ```
-User selects route → graphService.findRoute()
+User selects route → apiClient.fetchRoute(fromCoord, toCoord)
+  ↓ (API mode: POST /api/route, local mode: graph.json Dijkstra + clip builder)
+  ↓ Returns ApiRouteResult { coordinates, levels, clips[] }
   ↓
-walkthroughPlanner.buildWalkthroughPlaylist(route)
-  ├─ Iterate edgePath → build clips from edge.videoFwd/videoRev + times
-  ├─ Compute partial clips at start/end via perpendicular foot projection
+walkthroughPlanner.buildWalkthroughPlaylist(routeResult)
+  ├─ Add globalStart/globalEnd timing to pre-computed clips
   ├─ Group contiguous clips → VideoSegment[]
   └─ Return WalkthroughPlaylist { clips, segments, coordinates, totalDuration }
   ↓

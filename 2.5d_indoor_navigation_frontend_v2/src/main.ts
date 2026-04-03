@@ -6,6 +6,7 @@ import * as GeoMap from './components/geoMap';
 import * as IndoorLayer from './components/indoorLayer';
 import * as RouteOverlay from './components/routeOverlay';
 import { fetchRoute, initRouting, searchRooms as apiSearchRooms } from './services/apiClient';
+import type { RouteCoordinate } from './services/apiClient';
 import { ROOM_TYPE_LABELS, RoomListItem } from './models/types';
 import { setupGraphEditor } from './editor/graphEditor';
 import * as VideoSettings from './editor/videoSettings';
@@ -253,6 +254,10 @@ function selectRoom(room: RoomListItem): void {
 }
 
 // ===== Route UI =====
+
+/** Cache centroids from search results so API mode doesn't depend on local GeoJSON */
+const roomCentroidCache = new Map<string, { centroid: [number, number]; level: number }>();
+
 function setupRouteUI(): void {
   const toggleBtn = document.getElementById('routeToggleBtn');
   const routeInputs = document.getElementById('routeInputs');
@@ -302,31 +307,46 @@ function setupRouteUI(): void {
   endInput?.addEventListener('input', updateEndpointPreview);
 
   findBtn?.addEventListener('click', async () => {
-    const from = startInput?.value.trim();
-    const to = endInput?.value.trim();
-    if (!from || !to) return;
+    const fromRef = startInput?.value.trim();
+    const toRef = endInput?.value.trim();
+    if (!fromRef || !toRef) return;
+
+    // Convert room refs to coordinates — use search result cache first, fallback to GeoJSON
+    const fromCached = roomCentroidCache.get(fromRef);
+    const toCached = roomCentroidCache.get(toRef);
+    const fromCentroid = fromCached?.centroid ?? BackendService.getRoomCentroid(fromRef);
+    const toCentroid = toCached?.centroid ?? BackendService.getRoomCentroid(toRef);
+    const fromLevel = fromCached?.level ?? BackendService.getRoomLevel(fromRef);
+    const toLevel = toCached?.level ?? BackendService.getRoomLevel(toRef);
+
+    if (!fromCentroid || !toCentroid || fromLevel === null || toLevel === null) {
+      console.warn('[Route] Room not found:', fromRef, toRef);
+      return;
+    }
+
+    const from: RouteCoordinate = { lng: fromCentroid[0], lat: fromCentroid[1], level: fromLevel };
+    const to: RouteCoordinate = { lng: toCentroid[0], lat: toCentroid[1], level: toLevel };
 
     try {
-      const fullResult = await fetchRoute(from, to);
-      if (!fullResult) {
-        console.warn('[Route] No route found:', from, '→', to);
+      const routeResult = await fetchRoute(from, to);
+      if (!routeResult) {
+        console.warn('[Route] No route found:', fromRef, '→', toRef);
         return;
       }
 
       RouteOverlay.clearEndpointPreview();
-      if (fullResult.coordinates.length >= 2) {
+      if (routeResult.coordinates.length >= 2) {
         RouteOverlay.showRoute(
-          fullResult.coordinates,
-          fullResult.levels,
+          routeResult.coordinates,
+          routeResult.levels,
           !GeoMap.isFlatMode(),
         );
       }
 
-      showRouteInfo(fullResult.estimatedTime, fullResult.totalDistance);
+      showRouteInfo(routeResult.estimatedTime, routeResult.totalDistance);
 
       // Build walkthrough video overlay
-      console.log('[Walkthrough] edgePath:', fullResult.edgePath.length, 'edges, trimmedPath:', fullResult.trimmedPathNodeIds.length, 'nodes');
-      const playlist = buildWalkthroughPlaylist(fullResult);
+      const playlist = buildWalkthroughPlaylist(routeResult);
       console.log('[Walkthrough] playlist:', playlist ? `${playlist.clips.length} clips, ${playlist.totalDuration.toFixed(1)}s` : 'null');
       if (playlist && playlist.clips.length > 0) {
         WalkthroughOverlay.showWalkthroughOverlay(playlist);
@@ -382,7 +402,9 @@ function setupRouteAutocomplete(input: HTMLInputElement, dropdownId: string, onS
     dropdown.querySelectorAll('.autocomplete-item').forEach(item => {
       item.addEventListener('click', () => {
         const idx = parseInt((item as HTMLElement).dataset.index ?? '0');
-        input.value = currentResults[idx].ref;
+        const room = currentResults[idx];
+        input.value = room.ref;
+        if (room.centroid) roomCentroidCache.set(room.ref, { centroid: room.centroid, level: room.level[0] });
         dropdown.classList.remove('visible');
         onSelect?.();
       });
@@ -403,7 +425,9 @@ function setupRouteAutocomplete(input: HTMLInputElement, dropdownId: string, onS
       updateHighlight(items, highlightIdx);
     } else if (e.key === 'Enter' && highlightIdx >= 0) {
       e.preventDefault();
-      input.value = currentResults[highlightIdx].ref;
+      const room = currentResults[highlightIdx];
+      input.value = room.ref;
+      if (room.centroid) roomCentroidCache.set(room.ref, { centroid: room.centroid, level: room.level[0] });
       dropdown.classList.remove('visible');
       onSelect?.();
     } else if (e.key === 'Escape') {

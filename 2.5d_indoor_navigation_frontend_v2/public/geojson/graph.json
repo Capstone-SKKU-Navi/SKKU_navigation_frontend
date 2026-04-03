@@ -233,6 +233,24 @@
       "type": "elevator",
       "label": "",
       "verticalId": 1
+    },
+    "node-mnic9x4j-ffrs": {
+      "coordinates": [
+        126.97688871312187,
+        37.29352419149899
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": ""
+    },
+    "node-mnidytxs-91n8": {
+      "coordinates": [
+        126.97697081364015,
+        37.29414377205903
+      ],
+      "level": 3,
+      "type": "room",
+      "label": "23222"
     }
   },
   "edges": [
@@ -354,6 +372,17 @@
       "from": "node-mnd1scbv-fzry",
       "to": "node-mnd2kead-qefz",
       "weight": 4
+    },
+    {
+      "from": "node-mnd1qc8f-nt7s",
+      "to": "node-mnic9x4j-ffrs",
+      "weight": 72,
+      "videoFwd": "eng1_c_F1_1_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 63.663667,
+      "videoRev": "eng1_c_F1_1_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 64.331
     }
   ]
 }

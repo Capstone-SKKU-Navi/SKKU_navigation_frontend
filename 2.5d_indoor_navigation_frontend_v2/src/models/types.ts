@@ -40,6 +40,7 @@ export interface RoomListItem {
   level: number[];
   roomType: string;
   featureId: string;
+  centroid?: [number, number];
 }
 
 /** Per-level categorized GeoJSON data */

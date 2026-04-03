@@ -1,0 +1,453 @@
+openapi: 3.0.3
+info:
+  title: SKKU 2.5D Indoor Navigation API
+  description: |
+    성균관대 자연과학캠퍼스 2.5D 실내 내비게이션 백엔드 API.
+
+    ## 설계 원칙
+    - 프론트엔드에 그래프(노드/엣지) 데이터를 전달하지 않는다
+    - 좌표 기반 API — 방 번호가 아닌 좌표(lng, lat, level)로 경로를 요청한다
+    - 경로 응답에 영상 클립 정보를 포함하여, 프론트엔드는 클립을 이어붙이기만 한다
+    - GeoJSON은 3D 모델 렌더링 전용
+  version: "2.0.0"
+  contact:
+    name: SKKU Capstone Team
+
+servers:
+  - url: http://localhost:8080
+    description: Local dev server
+
+tags:
+  - name: Route
+    description: 좌표 기반 경로 탐색
+  - name: Rooms
+    description: 방 검색 (자동완성)
+  - name: GeoJSON
+    description: 건물/층별 GeoJSON 데이터 (3D 모델링용)
+  - name: Videos
+    description: 360° 영상 스트리밍
+
+paths:
+  /api/route:
+    post:
+      tags: [Route]
+      summary: 좌표→좌표 최단경로 탐색
+      description: |
+        두 좌표 사이의 최단경로를 탐색하고, 경로 좌표 + 영상 클립 정보를 반환한다.
+
+        **백엔드 내부 처리:**
+        1. 입력 좌표에서 가장 가까운 복도 엣지를 찾고 수선의 발을 내림
+        2. 다익스트라 최단경로 탐색
+        3. 좌표 체인 생성 및 근접 좌표 중복 제거 (~1m)
+        4. 각 엣지에 대해 영상 파일 선택 (정방향/역방향), 부분 시간 계산
+        5. 계단/엘리베이터: 연속 수직 엣지 그룹핑, 진입/출구 영상 계산
+        6. video_settings.json에서 yaw 값 조회
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteRequest'
+            example:
+              from:
+                lng: 126.97652
+                lat: 37.29412
+                level: 3
+              to:
+                lng: 126.97710
+                lat: 37.29380
+                level: 1
+      responses:
+        '200':
+          description: 경로 탐색 결과
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteResponse'
+              examples:
+                found:
+                  summary: 경로 있음
+                  value:
+                    found: true
+                    route:
+                      coordinates:
+                        - [126.97652, 37.29412]
+                        - [126.97650, 37.29415]
+                        - [126.97648, 37.29418]
+                      levels: [3, 3, 3, 2, 1, 1, 1, 1]
+                      totalDistance: 142.5
+                      estimatedTime: "약 2분"
+                      startLevel: 3
+                      endLevel: 1
+                    walkthrough:
+                      clips:
+                        - index: 0
+                          videoFile: "eng1_c_F3_9_cw.mp4"
+                          videoStart: 12.45
+                          videoEnd: 47.91
+                          duration: 35.46
+                          yaw: 195.47
+                          level: 3
+                          isExitClip: false
+                          coordStartIdx: 2
+                          coordEndIdx: 5
+                          routeDistStart: 3.2
+                          routeDistEnd: 78.5
+                      videoStartCoordIdx: 2
+                      videoEndCoordIdx: 9
+                notFound:
+                  summary: 경로 없음
+                  value:
+                    found: false
+                    error: "경로를 찾을 수 없습니다"
+        '400':
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Invalid coordinates: level must be an integer"
+
+  /api/rooms/search:
+    get:
+      tags: [Rooms]
+      summary: 방 번호/이름 검색 (자동완성)
+      description: |
+        방 번호, 이름, 유형으로 부분 매칭 검색.
+        결과에 centroid 좌표가 포함되어 바로 경로 API에 사용할 수 있다.
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: 검색어 (부분 매칭)
+          schema:
+            type: string
+          example: "213"
+      responses:
+        '200':
+          description: 검색 결과
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoomSearchResult'
+              example:
+                - building: "eng1"
+                  ref: "21301"
+                  name: "일반물리학실험실"
+                  level: 3
+                  roomType: "lab"
+                  centroid: [126.97652, 37.29412]
+                - building: "eng1"
+                  ref: "21302"
+                  name: ""
+                  level: 3
+                  roomType: "classroom"
+                  centroid: [126.97656, 37.29415]
+
+  /api/geojson/{path}:
+    get:
+      tags: [GeoJSON]
+      summary: GeoJSON 파일 서빙
+      description: |
+        건물/층별 GeoJSON 파일을 서빙한다. 프론트엔드가 Three.js 3D 모델 렌더링에 사용.
+
+        **파일 종류:**
+        - `buildings.json` — 건물 목록
+        - `{building}/manifest.json` — 건물 메타데이터 (이름, 층 목록)
+        - `{building}/{building}_outline.geojson` — 건물 외곽선
+        - `{building}/{building}_room_L{level}.geojson` — 방 폴리곤
+        - `{building}/{building}_wall_L{level}.geojson` — 벽 폴리곤
+        - `{building}/{building}_collider_L{level}.geojson` — 충돌 폴리곤
+      parameters:
+        - name: path
+          in: path
+          required: true
+          description: GeoJSON 파일 경로
+          schema:
+            type: string
+          examples:
+            buildings:
+              value: "buildings.json"
+              summary: 건물 목록
+            manifest:
+              value: "eng1/manifest.json"
+              summary: 건물 메타데이터
+            rooms:
+              value: "eng1/eng1_room_L2.geojson"
+              summary: 2층 방 데이터
+            walls:
+              value: "eng1/eng1_wall_L2.geojson"
+              summary: 2층 벽 데이터
+            outline:
+              value: "eng1/eng1_outline.geojson"
+              summary: 건물 외곽선
+      responses:
+        '200':
+          description: GeoJSON 데이터
+          content:
+            application/json:
+              schema:
+                type: object
+                description: GeoJSON FeatureCollection 또는 JSON 파일
+        '404':
+          description: 파일 없음
+
+  /api/videos/{filename}:
+    get:
+      tags: [Videos]
+      summary: 360° 영상 스트리밍
+      description: |
+        영상 파일을 스트리밍한다. HTTP Range 요청을 지원하여 영상 시킹이 가능해야 한다.
+        프론트엔드의 `<video>` 태그 src로 지정하면 브라우저가 자동으로 Range 요청을 보낸다.
+      parameters:
+        - name: filename
+          in: path
+          required: true
+          description: 영상 파일명
+          schema:
+            type: string
+          example: "eng1_c_F3_9_cw.mp4"
+        - name: Range
+          in: header
+          required: false
+          description: "HTTP Range 헤더 (예: `bytes=0-1048575`)"
+          schema:
+            type: string
+          example: "bytes=0-1048575"
+      responses:
+        '200':
+          description: 전체 영상
+          headers:
+            Accept-Ranges:
+              schema:
+                type: string
+                example: "bytes"
+            Content-Length:
+              schema:
+                type: integer
+          content:
+            video/mp4:
+              schema:
+                type: string
+                format: binary
+        '206':
+          description: 부분 영상 (Range 요청)
+          headers:
+            Accept-Ranges:
+              schema:
+                type: string
+                example: "bytes"
+            Content-Range:
+              schema:
+                type: string
+                example: "bytes 0-1048575/52428800"
+            Content-Length:
+              schema:
+                type: integer
+          content:
+            video/mp4:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: 영상 파일 없음
+
+components:
+  schemas:
+    RouteCoordinate:
+      type: object
+      required: [lng, lat, level]
+      properties:
+        lng:
+          type: number
+          format: double
+          description: 경도 (WGS84)
+          example: 126.97652
+        lat:
+          type: number
+          format: double
+          description: 위도 (WGS84)
+          example: 37.29412
+        level:
+          type: integer
+          description: 층 번호
+          example: 3
+
+    RouteRequest:
+      type: object
+      required: [from, to]
+      properties:
+        from:
+          $ref: '#/components/schemas/RouteCoordinate'
+        to:
+          $ref: '#/components/schemas/RouteCoordinate'
+
+    RouteResponse:
+      type: object
+      required: [found]
+      properties:
+        found:
+          type: boolean
+          description: 경로 존재 여부
+        route:
+          $ref: '#/components/schemas/RouteData'
+        walkthrough:
+          $ref: '#/components/schemas/WalkthroughData'
+        error:
+          type: string
+          description: 경로 없음 시 에러 메시지
+
+    RouteData:
+      type: object
+      required: [coordinates, levels, totalDistance, estimatedTime, startLevel, endLevel]
+      description: 경로 정보 — 지도에 경로선을 그리는 데 사용
+      properties:
+        coordinates:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+          description: "경로 폴리라인 [경도, 위도] 배열"
+        levels:
+          type: array
+          items:
+            type: integer
+          description: coordinates와 1:1 대응 — 각 좌표의 층 번호
+        totalDistance:
+          type: number
+          description: 총 경로 거리 (미터)
+          example: 142.5
+        estimatedTime:
+          type: string
+          description: "예상 도보 시간 (예: '약 2분')"
+          example: "약 2분"
+        startLevel:
+          type: integer
+          description: 출발 층
+          example: 3
+        endLevel:
+          type: integer
+          description: 도착 층
+          example: 1
+
+    WalkthroughData:
+      type: object
+      required: [clips, videoStartCoordIdx, videoEndCoordIdx]
+      description: 360° Walkthrough 영상 재생 정보
+      properties:
+        clips:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalkthroughClip'
+        videoStartCoordIdx:
+          type: integer
+          description: 영상이 시작되는 coordinates 인덱스 (수선의 발 위치)
+        videoEndCoordIdx:
+          type: integer
+          description: 영상이 끝나는 coordinates 인덱스
+
+    WalkthroughClip:
+      type: object
+      required:
+        - index
+        - videoFile
+        - videoStart
+        - videoEnd
+        - duration
+        - yaw
+        - level
+        - isExitClip
+        - coordStartIdx
+        - coordEndIdx
+        - routeDistStart
+        - routeDistEnd
+      properties:
+        index:
+          type: integer
+          description: 클립 순번 (0부터)
+        videoFile:
+          type: string
+          description: 영상 파일명
+          example: "eng1_c_F3_9_cw.mp4"
+        videoStart:
+          type: number
+          description: 영상 내 시작 시간 (초)
+          example: 12.45
+        videoEnd:
+          type: number
+          description: 영상 내 종료 시간 (초)
+          example: 47.91
+        duration:
+          type: number
+          description: videoEnd - videoStart (초)
+          example: 35.46
+        yaw:
+          type: number
+          description: 360° 영상 초기 시점 방향 (도)
+          example: 195.47
+        level:
+          type: integer
+          description: 이 클립 재생 중 층 번호
+          example: 3
+        isExitClip:
+          type: boolean
+          description: 계단/엘리베이터 출구 영상 여부
+        coordStartIdx:
+          type: integer
+          description: route.coordinates 배열에서 이 클립 시작 인덱스
+        coordEndIdx:
+          type: integer
+          description: route.coordinates 배열에서 이 클립 끝 인덱스
+        routeDistStart:
+          type: number
+          description: 경로 시작점으로부터의 누적 거리 (미터) — 클립 시작
+        routeDistEnd:
+          type: number
+          description: 경로 시작점으로부터의 누적 거리 (미터) — 클립 끝
+
+    RoomSearchResult:
+      type: object
+      required: [building, ref, name, level, roomType, centroid]
+      properties:
+        building:
+          type: string
+          description: 건물 코드
+          example: "eng1"
+        ref:
+          type: string
+          description: 방 번호
+          example: "21301"
+        name:
+          type: string
+          description: "방 이름 (없으면 빈 문자열)"
+          example: "일반물리학실험실"
+        level:
+          type: integer
+          description: 층 번호
+          example: 3
+        roomType:
+          type: string
+          description: "방 유형"
+          enum: [classroom, lab, office, restroom, stairs, elevator, facility, storage, store, club, lounge, dining, dormitory, reserved]
+          example: "lab"
+        centroid:
+          type: array
+          items:
+            type: number
+          minItems: 2
+          maxItems: 2
+          description: "방 중심 좌표 [경도, 위도] — POST /api/route에 바로 사용 가능"
+          example: [126.97652, 37.29412]
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: 에러 메시지

@@ -1,207 +1,54 @@
-// ===== Walkthrough Planner — Route → Video Clip Playlist =====
+// ===== Walkthrough Planner — API Route Result → Video Clip Playlist =====
+//
+// Simplified version: backend provides pre-computed clips (video file, time range,
+// yaw, coordinate indices). This module only adds global timing, contiguous
+// detection, segment grouping, and position interpolation.
 
-import type { NavEdge, NavNode } from '../editor/graphEditorTypes';
-import type { FullRouteResult, EdgeProjection } from './graphService';
-import { getNodeCoordinates } from './graphService';
+import type { ApiRouteResult, ApiRouteClip } from './api/apiRoute';
 import { getDistanceBetweenCoordinatesInM } from '../utils/coordinateHelpers';
-import * as VideoSettings from '../editor/videoSettings';
-import { computeStairVideos, computeElevatorVideos, STAIR_CLIP_DURATION, ELEVATOR_CLIP_DURATION } from '../utils/verticalVideoFilename';
 import type { WalkthroughClip, WalkthroughPlaylist, VideoSegment } from '../components/walkthroughTypes';
 
 const TIME_EPSILON = 0.05; // seconds — clips within this gap are "contiguous"
 
 /**
- * Build a walkthrough playlist from a full route result.
- * Returns null if no video clips can be assembled.
+ * Build a walkthrough playlist from an API route result.
+ * Returns null if no video clips are available.
  */
 export function buildWalkthroughPlaylist(
-  route: FullRouteResult,
+  route: ApiRouteResult,
 ): WalkthroughPlaylist | null {
-  const { coordinates, levels, edgePath, fromProjection, toProjection, sameEdge } = route;
+  const { coordinates, levels, clips: apiClips, videoStartCoordIdx, videoEndCoordIdx } = route;
+
+  if (!apiClips || apiClips.length === 0) return null;
 
   // 1. Cumulative distance array
   const cumulativeDist = buildCumulativeDist(coordinates);
 
-  // 2. Identify video zone coordinate indices
-  //    Route structure: [centroid, door, perpFoot, ...graphNodes..., perpFoot, door, centroid]
-  //    After dedup, perpFoot is around index 2. We find it by matching fromProjection.point.
-  const videoStartCoordIdx = findCoordIndex(coordinates, fromProjection?.point);
-  const videoEndCoordIdx = findCoordIndex(coordinates, toProjection?.point, true);
-
-  // 3. Build raw clips from edge path
-  const rawClips: Omit<WalkthroughClip, 'index' | 'globalStart' | 'globalEnd' | 'contiguous'>[] = [];
-
-  if (sameEdge && fromProjection && toProjection) {
-    // Same-edge case: single partial clip
-    const clip = buildSameEdgeClip(route, videoStartCoordIdx, videoEndCoordIdx, cumulativeDist);
-    if (clip) rawClips.push(clip);
-  } else {
-    // Build coordinate lookup robust against dedup
-    const nodeToCoord = buildNodeToCoordMap(edgePath, coordinates, videoStartCoordIdx, videoEndCoordIdx);
-
-    // Multi-edge case
-    for (let i = 0; i < edgePath.length; i++) {
-      const { edge, forward, fromNode, toNode } = edgePath[i];
-      const isFirst = i === 0;
-      const isLast = i === edgePath.length - 1;
-
-      // Determine coordinate indices for this edge (robust against coordinate dedup)
-      const edgeCoordStart = getEdgeCoordStart(i, edgePath, nodeToCoord, videoStartCoordIdx);
-      const edgeCoordEnd = getEdgeCoordEnd(i, edgePath, nodeToCoord, videoEndCoordIdx);
-
-      // Detect vertical edge (both stairs or both elevator)
-      const isVerticalStairs = fromNode.type === 'stairs' && toNode.type === 'stairs';
-      const isVerticalElev = fromNode.type === 'elevator' && toNode.type === 'elevator';
-
-      if (isVerticalStairs || isVerticalElev) {
-        // === Auto-computed vertical edge ===
-        // Group consecutive vertical edges of the same type & verticalId
-        // and only emit the first entry clip + last exit clip.
-        const vertType = isVerticalStairs ? 'stairs' : 'elevator';
-        const fNode0 = forward ? fromNode : toNode;
-        const tNode0 = forward ? toNode : fromNode;
-        const vId = fNode0.verticalId ?? tNode0.verticalId;
-        if (vId === undefined) continue;
-        const building = fNode0.building || tNode0.building;
-
-        // Look ahead for consecutive vertical edges of the same type/id
-        let groupEnd = i;
-        for (let j = i + 1; j < edgePath.length; j++) {
-          const ej = edgePath[j];
-          const fj = ej.fromNode;
-          const tj = ej.toNode;
-          const sameStairs = fj.type === 'stairs' && tj.type === 'stairs' && vertType === 'stairs';
-          const sameElev = fj.type === 'elevator' && tj.type === 'elevator' && vertType === 'elevator';
-          if (!sameStairs && !sameElev) break;
-          const ejVid = fj.verticalId ?? tj.verticalId;
-          if (ejVid !== vId) break;
-          groupEnd = j;
-        }
-
-        // First edge in group → entry clip
-        const firstResult = isVerticalStairs
-          ? computeStairVideos(building, vId, fNode0.level, tNode0.level)
-          : computeElevatorVideos(building, vId, fNode0.level, tNode0.level);
-
-        const clipDur = isVerticalStairs ? STAIR_CLIP_DURATION : ELEVATOR_CLIP_DURATION;
-        const level = route.levels[edgeCoordStart] ?? route.startLevel;
-
-        const entrySettings = VideoSettings.getEntry(firstResult.entryVideo);
-        const entryYaw = entrySettings?.yaw ?? entrySettings?.entryYaw ?? 0;
-        rawClips.push({
-          videoFile: firstResult.entryVideo,
-          videoStart: 0,
-          videoEnd: clipDur,
-          duration: clipDur,
-          yaw: entryYaw,
-          level,
-          isExitClip: false,
-          edgeId: edge.id,
-          coordStartIdx: edgeCoordStart,
-          coordEndIdx: edgeCoordEnd,
-          routeDistStart: cumulativeDist[edgeCoordStart],
-          routeDistEnd: cumulativeDist[edgeCoordEnd],
-        });
-
-        // Last edge in group → exit clip
-        const lastEntry = edgePath[groupEnd];
-        const lastFwd = lastEntry.forward;
-        const lastFNode = lastFwd ? lastEntry.fromNode : lastEntry.toNode;
-        const lastTNode = lastFwd ? lastEntry.toNode : lastEntry.fromNode;
-        const lastCoordEnd = getEdgeCoordEnd(groupEnd, edgePath, nodeToCoord, videoEndCoordIdx);
-
-        const lastResult = isVerticalStairs
-          ? computeStairVideos(building, vId, lastFNode.level, lastTNode.level)
-          : computeElevatorVideos(building, vId, lastFNode.level, lastTNode.level);
-
-        const exitSettings = VideoSettings.getEntry(lastResult.exitVideo);
-        const exitYaw = exitSettings?.yaw ?? exitSettings?.exitYaw ?? 0;
-        const exitLevel = route.levels[lastCoordEnd] ?? level;
-        rawClips.push({
-          videoFile: lastResult.exitVideo,
-          videoStart: 0,
-          videoEnd: clipDur,
-          duration: clipDur,
-          yaw: exitYaw,
-          level: exitLevel,
-          isExitClip: true,
-          edgeId: lastEntry.edge.id,
-          coordStartIdx: lastCoordEnd,
-          coordEndIdx: lastCoordEnd,
-          routeDistStart: cumulativeDist[lastCoordEnd],
-          routeDistEnd: cumulativeDist[lastCoordEnd],
-        });
-
-        // Skip the grouped edges
-        i = groupEnd;
-      } else {
-        // === Corridor edge — use stored edge video data with time slicing ===
-        const videoFile = forward ? edge.videoFwd : edge.videoRev;
-        const videoStart = forward ? edge.videoFwdStart : edge.videoRevStart;
-        const videoEnd = forward ? edge.videoFwdEnd : edge.videoRevEnd;
-
-        if (!videoFile || videoStart == null || videoEnd == null) continue;
-
-        let clipStart = videoStart;
-        let clipEnd = videoEnd;
-
-        // Handle partial first edge (from perpendicular foot)
-        if (isFirst && fromProjection) {
-          clipStart = computePartialTime(fromProjection, edge, forward, videoStart, videoEnd);
-        }
-
-        // Handle partial last edge (to perpendicular foot)
-        if (isLast && toProjection) {
-          clipEnd = computePartialTime(toProjection, edge, forward, videoStart, videoEnd);
-        }
-
-        // Ensure clipStart <= clipEnd (partial edges can invert)
-        if (clipStart > clipEnd) [clipStart, clipEnd] = [clipEnd, clipStart];
-
-        // Determine level from the start coordinate of this edge
-        const level = route.levels[edgeCoordStart] ?? route.startLevel;
-
-        // Get yaw from video settings
-        const settings = VideoSettings.getEntry(videoFile);
-        const yaw = settings?.yaw ?? settings?.entryYaw ?? 0;
-
-        const clipDuration = Math.max(0, clipEnd - clipStart);
-        if (clipDuration <= 0) continue;
-
-        rawClips.push({
-          videoFile,
-          videoStart: clipStart,
-          videoEnd: clipEnd,
-          duration: clipDuration,
-          yaw,
-          level,
-          isExitClip: false,
-          edgeId: edge.id,
-          coordStartIdx: edgeCoordStart,
-          coordEndIdx: edgeCoordEnd,
-          routeDistStart: cumulativeDist[edgeCoordStart],
-          routeDistEnd: cumulativeDist[edgeCoordEnd],
-        });
-      }
-    }
-  }
-
-  if (rawClips.length === 0) return null;
-
-  // 4. Assign global times and detect contiguous clips
+  // 2. Assign global times and detect contiguous clips
   const clips: WalkthroughClip[] = [];
   let globalTime = 0;
 
-  for (let i = 0; i < rawClips.length; i++) {
-    const raw = rawClips[i];
-    const prev = i > 0 ? rawClips[i - 1] : null;
+  for (let i = 0; i < apiClips.length; i++) {
+    const raw = apiClips[i];
+    const prev = i > 0 ? apiClips[i - 1] : null;
     const contiguous = prev != null
       && prev.videoFile === raw.videoFile
       && Math.abs(prev.videoEnd - raw.videoStart) < TIME_EPSILON;
 
     clips.push({
-      ...raw,
-      index: i,
+      index: raw.index,
+      videoFile: raw.videoFile,
+      videoStart: raw.videoStart,
+      videoEnd: raw.videoEnd,
+      duration: raw.duration,
+      yaw: raw.yaw,
+      level: raw.level,
+      isExitClip: raw.isExitClip,
+      edgeId: '',  // not exposed by backend — unused by player
+      coordStartIdx: raw.coordStartIdx,
+      coordEndIdx: raw.coordEndIdx,
+      routeDistStart: raw.routeDistStart,
+      routeDistEnd: raw.routeDistEnd,
       globalStart: globalTime,
       globalEnd: globalTime + raw.duration,
       contiguous,
@@ -211,10 +58,10 @@ export function buildWalkthroughPlaylist(
 
   const totalDuration = globalTime;
 
-  // 5. Build video segments (group contiguous clips on the same file)
+  // 3. Build video segments (group contiguous clips on the same file)
   const segments = buildSegments(clips);
 
-  // 6. Segment boundaries for progress bar
+  // 4. Segment boundaries for progress bar
   const segmentBoundaries: number[] = [];
   for (const clip of clips) {
     if (clip.index > 0) {
@@ -283,134 +130,6 @@ function buildCumulativeDist(coordinates: GeoJSON.Position[]): number[] {
   return dist;
 }
 
-function findCoordIndex(
-  coordinates: GeoJSON.Position[],
-  point: [number, number] | undefined | null,
-  fromEnd = false,
-): number {
-  if (!point) return fromEnd ? coordinates.length - 1 : 0;
-
-  let bestIdx = fromEnd ? coordinates.length - 1 : 0;
-  let bestDist = Infinity;
-  const start = fromEnd ? coordinates.length - 1 : 0;
-  const end = fromEnd ? -1 : coordinates.length;
-  const step = fromEnd ? -1 : 1;
-
-  for (let i = start; i !== end; i += step) {
-    const dx = coordinates[i][0] - point[0];
-    const dy = coordinates[i][1] - point[1];
-    const d = dx * dx + dy * dy;
-    if (d < bestDist) {
-      bestDist = d;
-      bestIdx = i;
-    }
-  }
-  return bestIdx;
-}
-
-/**
- * Build a mapping from graph node IDs to their nearest coordinate index
- * within the video zone. This is robust against coordinate deduplication
- * which can remove nodes that are too close together.
- */
-function buildNodeToCoordMap(
-  edgePath: { edge: NavEdge; forward: boolean; fromNode: NavNode; toNode: NavNode }[],
-  coordinates: GeoJSON.Position[],
-  videoStartCoordIdx: number,
-  videoEndCoordIdx: number,
-): Map<string, number> {
-  const map = new Map<string, number>();
-
-  // Collect all unique node IDs referenced by edges
-  const nodeIds = new Set<string>();
-  for (const { edge } of edgePath) {
-    nodeIds.add(edge.from);
-    nodeIds.add(edge.to);
-  }
-
-  const loIdx = Math.min(videoStartCoordIdx, videoEndCoordIdx);
-  const hiIdx = Math.max(videoStartCoordIdx, videoEndCoordIdx);
-
-  for (const nodeId of nodeIds) {
-    const nodeCoords = getNodeCoordinates(nodeId);
-    if (!nodeCoords) continue;
-
-    let bestIdx = -1;
-    let bestDist = Infinity;
-    for (let i = loIdx; i <= hiIdx; i++) {
-      const dx = coordinates[i][0] - nodeCoords[0];
-      const dy = coordinates[i][1] - nodeCoords[1];
-      const d = dx * dx + dy * dy;
-      if (d < bestDist) {
-        bestDist = d;
-        bestIdx = i;
-      }
-    }
-    if (bestIdx >= 0) {
-      map.set(nodeId, bestIdx);
-    }
-  }
-
-  return map;
-}
-
-function getEdgeCoordStart(
-  edgeIdx: number,
-  edgePath: { edge: NavEdge; forward: boolean; fromNode: NavNode; toNode: NavNode }[],
-  nodeToCoord: Map<string, number>,
-  videoStartCoordIdx: number,
-): number {
-  if (edgeIdx === 0) return videoStartCoordIdx;
-  // Start of edge i = destination node of edge i-1
-  const prevEntry = edgePath[edgeIdx - 1];
-  const prevDest = prevEntry.forward ? prevEntry.edge.to : prevEntry.edge.from;
-  const idx = nodeToCoord.get(prevDest);
-  if (idx === undefined) console.warn('[WalkthroughPlanner] coord miss for node', prevDest);
-  return idx ?? videoStartCoordIdx;
-}
-
-function getEdgeCoordEnd(
-  edgeIdx: number,
-  edgePath: { edge: NavEdge; forward: boolean; fromNode: NavNode; toNode: NavNode }[],
-  nodeToCoord: Map<string, number>,
-  videoEndCoordIdx: number,
-): number {
-  if (edgeIdx === edgePath.length - 1) return videoEndCoordIdx;
-  // End of edge i = destination node of edge i
-  const curEntry = edgePath[edgeIdx];
-  const dest = curEntry.forward ? curEntry.edge.to : curEntry.edge.from;
-  const idx = nodeToCoord.get(dest);
-  if (idx === undefined) console.warn('[WalkthroughPlanner] coord miss for node', dest);
-  return idx ?? videoEndCoordIdx;
-}
-
-/**
- * Compute the video time at a perpendicular foot projection point.
- * The foot divides the edge at ratio t = distToA / (distToA + distToB).
- */
-function computePartialTime(
-  projection: EdgeProjection,
-  edge: NavEdge,
-  forward: boolean,
-  fullStart: number,
-  fullEnd: number,
-): number {
-  const totalDist = projection.distToA + projection.distToB;
-  if (totalDist === 0) return fullStart;
-
-  if (forward) {
-    // Walking from→to. Projection is distToA from node 'from' (nodeA).
-    // Video time progresses from fullStart (at from) to fullEnd (at to).
-    const t = projection.distToA / totalDist;
-    return fullStart + t * (fullEnd - fullStart);
-  } else {
-    // Walking to→from (reverse). Video plays from→to perspective reversed.
-    // distToB = distance from projection to edge.to
-    const t = projection.distToB / totalDist;
-    return fullStart + t * (fullEnd - fullStart);
-  }
-}
-
 function interpolateAlongRoute(
   coordinates: GeoJSON.Position[],
   levels: number[],
@@ -433,65 +152,6 @@ function interpolateAlongRoute(
   return {
     position: coordinates[coordinates.length - 1],
     level: levels[levels.length - 1],
-  };
-}
-
-function buildSameEdgeClip(
-  route: FullRouteResult,
-  videoStartCoordIdx: number,
-  videoEndCoordIdx: number,
-  cumulativeDist: number[],
-): Omit<WalkthroughClip, 'index' | 'globalStart' | 'globalEnd' | 'contiguous'> | null {
-  const { fromProjection, toProjection, edgePath } = route;
-  if (!fromProjection || !toProjection || edgePath.length === 0) return null;
-
-  // Find the edge from the graph (sameEdge means both projections are on it)
-  // Use the first matching edge between the projection's nodes
-  const edge = edgePath.length > 0 ? edgePath[0].edge : null;
-  if (!edge) return null;
-
-  // Determine direction: walk from startFoot toward endFoot
-  // Both are on the same edge, so we check which direction covers startFoot→endFoot
-  const totalDist = fromProjection.distToA + fromProjection.distToB;
-  if (totalDist === 0) return null;
-
-  const startT = fromProjection.distToA / totalDist;
-  const endT = toProjection.distToA / totalDist;
-
-  // If startT < endT, we walk from→to (forward), else reverse
-  const forward = startT < endT;
-  const videoFile = forward ? edge.videoFwd : edge.videoRev;
-  const fullStart = (forward ? edge.videoFwdStart : edge.videoRevStart) ?? 0;
-  const fullEnd = (forward ? edge.videoFwdEnd : edge.videoRevEnd) ?? 0;
-
-  if (!videoFile) return null;
-
-  const clipStart = forward
-    ? fullStart + startT * (fullEnd - fullStart)
-    : fullStart + (1 - startT) * (fullEnd - fullStart);
-  const clipEnd = forward
-    ? fullStart + endT * (fullEnd - fullStart)
-    : fullStart + (1 - endT) * (fullEnd - fullStart);
-
-  const actualStart = Math.min(clipStart, clipEnd);
-  const actualEnd = Math.max(clipStart, clipEnd);
-
-  const settings = VideoSettings.getEntry(videoFile);
-  const yaw = settings?.yaw ?? settings?.entryYaw ?? 0;
-
-  return {
-    videoFile,
-    videoStart: actualStart,
-    videoEnd: actualEnd,
-    duration: actualEnd - actualStart,
-    yaw,
-    level: route.startLevel,
-    isExitClip: false,
-    edgeId: edge.id,
-    coordStartIdx: videoStartCoordIdx,
-    coordEndIdx: videoEndCoordIdx,
-    routeDistStart: cumulativeDist[videoStartCoordIdx],
-    routeDistEnd: cumulativeDist[videoEndCoordIdx],
   };
 }
 

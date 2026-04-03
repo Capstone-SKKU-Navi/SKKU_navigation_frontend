@@ -15,6 +15,7 @@
 | 생명공학관 | `bio` | Bioengineering Building | 3층 (벤젠고리관)
 | 화학관 | `chem` | Chemistry Building | (반도체관)
 | 환경플랜트 | `envp` | Environmental Plant | x
+| 벤젠고리관 | `benz` | 생명공학관 + 기초학문관 + 제1과학관 + 제2과학관 |
 
 ## 과학·기초학문 계열
 

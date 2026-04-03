@@ -33,12 +33,21 @@ let buildingDescription = '';
 let roomList: RoomListItem[] = [];
 let mapCenter: [number, number] = [126.9766, 37.2939];
 
-// ===== GeoJSON Base URL (configurable for future /api/geojson support) =====
+// ===== Base URLs (configurable for backend API) =====
 
 let geojsonBase = '/geojson';
+let videoBase = '/videos';
 
 export function setGeojsonBase(base: string): void {
   geojsonBase = base;
+}
+
+export function setVideoBase(base: string): void {
+  videoBase = base;
+}
+
+export function getVideoUrl(filename: string): string {
+  return `${videoBase}/${filename}`;
 }
 
 // ===== Fetching =====
