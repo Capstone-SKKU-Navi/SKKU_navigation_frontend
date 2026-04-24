@@ -11,6 +11,7 @@ import * as VideoSettings from './editor/videoSettings';
 import * as WalkthroughOverlay from './components/walkthroughOverlay';
 import { isMobileDevice } from './utils/deviceDetection';
 import * as RouteActions from './services/routeActions';
+import { setupApiModeBadge } from './components/apiModeBadge';
 
 // ===== Helpers =====
 function escapeHtml(s: string): string {
@@ -19,7 +20,8 @@ function escapeHtml(s: string): string {
 
 // ===== Route 3D sync =====
 function syncRoute3D(): void {
-  if (!RouteOverlay.hasRoute()) return;
+  // Always forward the 3D state — endpoint-preview markers (shown before a
+  // route is searched) also need it so they sit at the correct altitude.
   RouteOverlay.setIs3D(!GeoMap.isFlatMode());
 }
 
@@ -42,6 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       setupCenterButton();
       setup3DToggle();
       setupFpsCounter();
+      setupApiModeBadge();
 
       if (mobile) {
         // Mobile chrome — dynamic import keeps mobile code out of the PC bundle

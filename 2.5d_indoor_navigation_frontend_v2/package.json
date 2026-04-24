@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "webpack serve --mode development --open",
     "build": "webpack --mode production",
-    "start": "webpack serve --mode development"
+    "start": "webpack serve --mode development",
+    "seed": "python scripts/seed.py",
+    "dev:full": "powershell -ExecutionPolicy Bypass -File scripts/bootstrap.ps1",
+    "dev:full:bash": "bash scripts/bootstrap.sh"
   },
   "dependencies": {
     "@deck.gl/core": "^9.1.0",

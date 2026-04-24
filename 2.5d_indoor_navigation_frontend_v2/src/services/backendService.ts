@@ -124,6 +124,190 @@ export async function fetchBackendData(): Promise<void> {
   if (locRef) buildingDescription += ` (${locRef})`;
 }
 
+// ===== API mode: re-fetch GeoJSON from backend /api/geojson/all =====
+
+interface BackendStateSnapshot {
+  manifests: Map<string, BuildingManifest>;
+  interfaces: Map<string, BuildingInterface>;
+  caches: Map<string, Map<number, LevelData>>;
+  codes: string[];
+  constants: BuildingConstants;
+  description: string;
+  rooms: RoomListItem[];
+  center: [number, number];
+}
+
+let localSnapshot: BackendStateSnapshot | null = null;
+
+function snapshotCurrentState(): BackendStateSnapshot {
+  return {
+    manifests: new Map(buildingManifests),
+    interfaces: new Map(buildingInterfaces),
+    caches: new Map(levelDataCaches),
+    codes: [...buildingCodes],
+    constants: { ...buildingConstants },
+    description: buildingDescription,
+    rooms: [...roomList],
+    center: [...mapCenter] as [number, number],
+  };
+}
+
+function applySnapshot(s: BackendStateSnapshot): void {
+  buildingManifests.clear(); s.manifests.forEach((v, k) => buildingManifests.set(k, v));
+  buildingInterfaces.clear(); s.interfaces.forEach((v, k) => buildingInterfaces.set(k, v));
+  levelDataCaches.clear(); s.caches.forEach((v, k) => levelDataCaches.set(k, v));
+  buildingCodes = [...s.codes];
+  buildingConstants = { ...s.constants };
+  buildingDescription = s.description;
+  roomList = [...s.rooms];
+  mapCenter = [...s.center] as [number, number];
+}
+
+/**
+ * Re-fetch all GeoJSON from the backend's /api/geojson/all endpoint and
+ * rebuild the per-building / per-level caches in place. Snapshots the current
+ * (locally-loaded) state on first call so `restoreLocalData()` can roll back.
+ */
+export async function fetchBackendDataFromApi(apiBase: string): Promise<void> {
+  if (!localSnapshot) localSnapshot = snapshotCurrentState();
+
+  const url = `${apiBase}/geojson/all`;
+  const fc = await fetchJson<GeoJSON.FeatureCollection>(url);
+  if (!fc || !Array.isArray(fc.features)) {
+    throw new Error(`API geojson/all returned no features (${url})`);
+  }
+
+  // Partition features by _building / _level / _featureType
+  type Bucket = { rooms: GeoJSON.Feature[]; colliders: GeoJSON.Feature[]; walls: GeoJSON.Feature[]; outline?: GeoJSON.Feature };
+  const byBuilding = new Map<string, { outline?: GeoJSON.Feature; perLevel: Map<number, Bucket> }>();
+
+  for (const f of fc.features) {
+    const props = (f.properties ?? {}) as Record<string, unknown>;
+    const building = String(props._building ?? '');
+    const featureType = String(props._featureType ?? '');
+    const level = props._level === null || props._level === undefined ? null : Number(props._level);
+    if (!building || !featureType) continue;
+
+    let entry = byBuilding.get(building);
+    if (!entry) { entry = { perLevel: new Map() }; byBuilding.set(building, entry); }
+
+    if (featureType === 'outline') {
+      entry.outline = f;
+      continue;
+    }
+    if (level === null || Number.isNaN(level)) continue;
+
+    let bucket = entry.perLevel.get(level);
+    if (!bucket) {
+      bucket = { rooms: [], colliders: [], walls: [] };
+      entry.perLevel.set(level, bucket);
+    }
+    if (featureType === 'room') {
+      // Frontend convention: room.properties.level may be a parsed array
+      if (f.properties && (f.properties as any).level !== undefined) {
+        (f.properties as any).level = extractLevels(String((f.properties as any).level));
+      }
+      bucket.rooms.push(f);
+    } else if (featureType === 'collider') {
+      if (f.properties && (f.properties as any).level !== undefined) {
+        (f.properties as any).level = extractLevels(String((f.properties as any).level));
+      }
+      bucket.colliders.push(f);
+    } else if (featureType === 'wall') {
+      bucket.walls.push(f);
+    }
+  }
+
+  // Replace state from the partitioned data
+  buildingManifests.clear();
+  buildingInterfaces.clear();
+  levelDataCaches.clear();
+
+  const newCodes: string[] = [];
+  for (const [code, entry] of byBuilding.entries()) {
+    newCodes.push(code);
+
+    // Per-level data
+    const cache = new Map<number, LevelData>();
+    for (const [level, b] of entry.perLevel.entries()) {
+      cache.set(level, {
+        rooms: { type: 'FeatureCollection', features: b.rooms },
+        colliders: { type: 'FeatureCollection', features: b.colliders },
+        walls: { type: 'FeatureCollection', features: b.walls },
+      });
+    }
+    levelDataCaches.set(code, cache);
+
+    // Manifest: derived from level set + name from the local snapshot if available
+    const sortedLevels = [...entry.perLevel.keys()].sort((a, b) => a - b);
+    const localManifest = localSnapshot?.manifests.get(code);
+    buildingManifests.set(code, {
+      building: code,
+      name: localManifest?.name ?? code,
+      loc_ref: localManifest?.loc_ref ?? '',
+      levels: sortedLevels,
+    });
+
+    // Interface: bbox from outline (if present), else from union of all coords
+    const outline = entry.outline ?? localSnapshot?.interfaces.get(code)?.feature;
+    if (outline) {
+      const allCoords = extractAllCoords(outline.geometry);
+      let minLng = Infinity, minLat = Infinity, maxLng = -Infinity, maxLat = -Infinity;
+      for (const [lng, lat] of allCoords) {
+        if (lng < minLng) minLng = lng;
+        if (lat < minLat) minLat = lat;
+        if (lng > maxLng) maxLng = lng;
+        if (lat > maxLat) maxLat = lat;
+      }
+      buildingInterfaces.set(code, { boundingBox: [minLng, minLat, maxLng, maxLat], feature: outline });
+    }
+  }
+  buildingCodes = newCodes.length > 0 ? newCodes : (localSnapshot?.codes ?? []);
+
+  // Rebuild aggregate room list (same logic as fetchBackendData step 3)
+  roomList = [];
+  for (const code of buildingCodes) {
+    const manifest = buildingManifests.get(code);
+    const cache = levelDataCaches.get(code);
+    if (!manifest || !cache) continue;
+    for (const level of manifest.levels) {
+      const data = cache.get(level);
+      if (!data) continue;
+      for (const f of data.rooms.features) {
+        if (f.geometry.type !== 'Polygon' && f.geometry.type !== 'MultiPolygon') continue;
+        if (!f.properties || !(f.properties as any).ref) continue;
+        const fLevels = Array.isArray((f.properties as any).level) ? (f.properties as any).level : [level];
+        roomList.push({
+          building: code,
+          ref: (f.properties as any).ref,
+          name: (f.properties as any).name ?? '',
+          level: fLevels,
+          roomType: (f.properties as any).room_type ?? '',
+          featureId: String((f.properties as any)._idx ?? ''),
+        });
+      }
+    }
+  }
+
+  // Recompute map center from union bbox
+  let minLng = Infinity, minLat = Infinity, maxLng = -Infinity, maxLat = -Infinity;
+  for (const bi of buildingInterfaces.values()) {
+    const [w, s, e, n] = bi.boundingBox;
+    if (w < minLng) minLng = w;
+    if (s < minLat) minLat = s;
+    if (e > maxLng) maxLng = e;
+    if (n > maxLat) maxLat = n;
+  }
+  if (Number.isFinite(minLng)) mapCenter = [(minLng + maxLng) / 2, (minLat + maxLat) / 2];
+}
+
+/** Restore the local-static GeoJSON state captured on the first API fetch. */
+export function restoreLocalData(): boolean {
+  if (!localSnapshot) return false;
+  applySnapshot(localSnapshot);
+  return true;
+}
+
 async function loadBuilding(code: string): Promise<void> {
   const base = `${geojsonBase}/${code}`;
 

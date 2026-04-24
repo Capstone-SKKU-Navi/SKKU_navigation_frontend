@@ -19,6 +19,7 @@ dist/
 js/dist/
 coverage/
 tmp/
+map_images/
 
 # OS files
 .DS_Store

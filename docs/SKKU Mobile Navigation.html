@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SKKU 2.5D Navigation — Mobile</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  html,body { margin:0; padding:0; font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background:#f0eee9; overscroll-behavior:none; -webkit-font-smoothing: antialiased; }
+  *, *::before, *::after { box-sizing: border-box; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="android-frame.jsx"></script>
+<script type="text/babel" src="skku-map.jsx"></script>
+<script type="text/babel" src="skku-overlays.jsx"></script>
+<script type="text/babel" src="skku-app.jsx"></script>
+<script type="text/babel">
+// Tweaks persisted defaults
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accent": "#42A5F5",
+  "walkthroughStyle": "sheet"
+}/*EDITMODE-END*/;
+
+const WT_STYLES = ['sheet', 'fullscreen', 'split'];
+const ACCENTS = { vividBlue: '#42A5F5', indigo: '#5C6BC0', teal: '#26A69A', skkuGreen: '#00796B' };
+
+function Root() {
+  const [tweaks, setTweaks] = React.useState(TWEAK_DEFAULTS);
+  const [tweaksOpen, setTweaksOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    const onMsg = (e) => {
+      if (e.data?.type === '__activate_edit_mode') setTweaksOpen(true);
+      if (e.data?.type === '__deactivate_edit_mode') setTweaksOpen(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent?.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  const update = (patch) => {
+    const next = { ...tweaks, ...patch };
+    setTweaks(next);
+    window.parent?.postMessage({ type: '__edit_mode_set_keys', edits: patch }, '*');
+  };
+
+  // Phone frames side-by-side in a design canvas
+  const iosW = 390, iosH = 760;
+  const andW = 400, andH = 780;
+
+  return (
+    <>
+      <DesignCanvas>
+        <DCSection id="mobile" title="SKKU 2.5D Navigation — Mobile"
+          subtitle="PC의 마우스 인터랙션을 모바일 제스처로 포팅. 탭·롱프레스·핀치·스와이프·회전 전부 동작.">
+          <DCArtboard id="ios-main" label="iOS · 메인 (지도 + 경로)" width={iosW} height={iosH}>
+            <IOSDevice width={iosW} height={iosH} dark={false}>
+              <Slot h={iosH - 96}><SKKUApp mode="ios" accent={tweaks.accent} /></Slot>
+            </IOSDevice>
+          </DCArtboard>
+
+          <DCArtboard id="android-main" label="Android · 메인 (지도 + 경로)" width={andW} height={andH}>
+            <AndroidDevice width={andW} height={andH} dark={false}>
+              <Slot h={andH - 64}><SKKUApp mode="android" accent={tweaks.accent} /></Slot>
+            </AndroidDevice>
+          </DCArtboard>
+
+          <DCArtboard id="ios-search" label="iOS · 풀스크린 검색" width={iosW} height={iosH}>
+            <IOSDevice width={iosW} height={iosH}>
+              <Slot h={iosH - 96}><SearchDemo mode="ios" accent={tweaks.accent} /></Slot>
+            </IOSDevice>
+          </DCArtboard>
+
+          <DCArtboard id="ios-longpress" label="iOS · 롱프레스 빠른메뉴" width={iosW} height={iosH}>
+            <IOSDevice width={iosW} height={iosH}>
+              <Slot h={iosH - 96}><LongPressDemo accent={tweaks.accent} /></Slot>
+            </IOSDevice>
+          </DCArtboard>
+
+          <DCArtboard id="ios-walk" label="iOS · 워크스루 (풀)" width={iosW} height={iosH}>
+            <IOSDevice width={iosW} height={iosH}>
+              <Slot h={iosH - 96}><WalkDemo accent={tweaks.accent} mode="ios" /></Slot>
+            </IOSDevice>
+          </DCArtboard>
+
+          <DCArtboard id="ios-coach" label="iOS · 제스처 가이드" width={iosW} height={iosH}>
+            <IOSDevice width={iosW} height={iosH}>
+              <Slot h={iosH - 96}><CoachDemo accent={tweaks.accent} /></Slot>
+            </IOSDevice>
+          </DCArtboard>
+
+          <DCArtboard id="android-route" label="Android · 경로 표시" width={andW} height={andH}>
+            <AndroidDevice width={andW} height={andH}>
+              <Slot h={andH - 64}><RouteDemo mode="android" accent={tweaks.accent} /></Slot>
+            </AndroidDevice>
+          </DCArtboard>
+        </DCSection>
+
+        <DCPostIt top={10} right={24} rotate={2}>
+          PC → 모바일 제스처 매핑<br />
+          좌클릭 → <b>탭</b><br />
+          우클릭 → <b>롱프레스</b> (빠른메뉴)<br />
+          휠클릭/드래그 → <b>1손가락 팬</b><br />
+          휠스크롤 → <b>핀치 줌</b> / 좌측 휠<br />
+          드래그 회전 → <b>2손가락 회전</b><br />
+          Esc → <b>스와이프 다운</b>
+        </DCPostIt>
+      </DesignCanvas>
+
+      {tweaksOpen && (
+        <div style={{
+          position: 'fixed', bottom: 16, right: 16, zIndex: 200,
+          background: '#fff', borderRadius: 14, padding: 14, width: 260,
+          boxShadow: '0 8px 40px rgba(0,0,0,0.25)', fontFamily: 'Pretendard, system-ui',
+        }}>
+          <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 10 }}>Tweaks</div>
+          <div style={{ fontSize: 12, color: '#757575', marginBottom: 6 }}>Accent 컬러</div>
+          <div style={{ display: 'flex', gap: 6, marginBottom: 12 }}>
+            {Object.entries(ACCENTS).map(([k, v]) => (
+              <button key={k} onClick={() => update({ accent: v })} style={{
+                flex: 1, height: 32, borderRadius: 8, border: tweaks.accent === v ? '2px solid #212121' : '1px solid #E0E0E0',
+                background: v, cursor: 'pointer',
+              }} />
+            ))}
+          </div>
+          <div style={{ fontSize: 12, color: '#757575', marginBottom: 6 }}>워크스루 프레젠테이션</div>
+          <div style={{ display: 'flex', gap: 6 }}>
+            {WT_STYLES.map(s => (
+              <button key={s} onClick={() => update({ walkthroughStyle: s })} style={{
+                flex: 1, padding: '8px 4px', borderRadius: 8,
+                border: tweaks.walkthroughStyle === s ? '2px solid #212121' : '1px solid #E0E0E0',
+                background: '#fff', cursor: 'pointer', fontSize: 11, fontWeight: 600,
+              }}>{s === 'sheet' ? '바텀시트' : s === 'fullscreen' ? '풀스크린' : '상하분할'}</button>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+// Slot: explicit-height relative box so absolute-positioned app chrome resolves
+// against it inside flex-based device frames.
+function Slot({ h, children }) {
+  return (
+    <div style={{ position: 'relative', width: '100%', height: h, overflow: 'hidden' }}>
+      {children}
+    </div>
+  );
+}
+
+// ---- static demo helpers ----
+function SearchDemo({ accent }) {
+  const [v, setV] = React.useState('21');
+  return (
+    <div style={{ position: 'absolute', inset: 0 }}>
+      <div style={{ position:'absolute', inset:0, background:'linear-gradient(180deg,#dbe7ef,#eef0f1)' }} />
+      <SearchOverlay value={v} onChange={setV} onClose={() => {}} onSelect={() => {}} mode="ios" />
+    </div>
+  );
+}
+
+function LongPressDemo({ accent }) {
+  const [reset, setReset] = React.useState(0);
+  const room = { ref: '22215', name: '교수 연구실', type: 'office', x: 200, y: 400 };
+  return (
+    <div style={{ position: 'absolute', inset: 0 }}>
+      <SKKUMap floor={2} accent={accent} />
+      <RadialMenu item={room} onStart={() => setReset(r=>r+1)} onEnd={() => setReset(r=>r+1)} onInfo={() => {}} onClose={() => {}} key={reset} />
+    </div>
+  );
+}
+
+function WalkDemo({ accent, mode }) {
+  const [playing, setPlaying] = React.useState(true);
+  const from = { ref: '22201', name: '연구실 I', level: 2 };
+  const to = { ref: '22221', name: '화장실', level: 2 };
+  return (
+    <div style={{ position: 'absolute', inset: 0 }}>
+      <SKKUMap floor={2} accent={accent} showRoute />
+      <Walkthrough state="full" onChange={() => {}} from={from} to={to} playing={playing} setPlaying={setPlaying} mode={mode} accent={accent} />
+    </div>
+  );
+}
+
+function CoachDemo({ accent }) {
+  return (
+    <div style={{ position: 'absolute', inset: 0 }}>
+      <SKKUMap floor={2} accent={accent} />
+      <CoachOverlay onDone={() => {}} mode="ios" />
+    </div>
+  );
+}
+
+function RouteDemo({ accent, mode }) {
+  return <SKKUApp mode={mode} accent={accent} />;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Root />);
+</script>
+</body>
+</html>

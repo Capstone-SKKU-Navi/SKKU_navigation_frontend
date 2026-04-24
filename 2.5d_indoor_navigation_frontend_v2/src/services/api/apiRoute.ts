@@ -85,26 +85,48 @@ export async function init(): Promise<void> {
 
 export async function findRoute(from: RouteCoordinate, to: RouteCoordinate): Promise<ApiRouteResult | null> {
   console.log('[ApiRoute] POST /api/route', from, '→', to);
-  const res = await fetch(`${API_BASE}/route`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from, to }),
-  });
-  if (!res.ok) throw new Error(`API route failed: ${res.status}`);
-  const data: ApiRouteResponse = await res.json();
-  if (!data.found || !data.route || !data.walkthrough) return null;
+  const url = `${API_BASE}/route`;
+  const t0 = performance.now();
+  let status: number | null = null;
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from, to }),
+    });
+    status = res.status;
+    if (!res.ok) throw new Error(`API route failed: ${res.status}`);
+    const data: ApiRouteResponse = await res.json();
 
-  return {
-    coordinates: data.route.coordinates,
-    levels: data.route.levels,
-    totalDistance: data.route.totalDistance,
-    estimatedTime: data.route.estimatedTime,
-    startLevel: data.route.startLevel,
-    endLevel: data.route.endLevel,
-    clips: data.walkthrough.clips,
-    videoStartCoordIdx: data.walkthrough.videoStartCoordIdx,
-    videoEndCoordIdx: data.walkthrough.videoEndCoordIdx,
-  };
+    document.dispatchEvent(new CustomEvent('apiRouteCall', { detail: {
+      url, method: 'POST', status,
+      durationMs: Math.round(performance.now() - t0),
+      pathLength: data?.route?.coordinates?.length ?? 0,
+      edgeCount: data?.walkthrough?.clips?.length ?? 0,
+      error: data?.found ? undefined : (data?.error ?? 'not found'),
+    }}));
+
+    if (!data.found || !data.route || !data.walkthrough) return null;
+
+    return {
+      coordinates: data.route.coordinates,
+      levels: data.route.levels,
+      totalDistance: data.route.totalDistance,
+      estimatedTime: data.route.estimatedTime,
+      startLevel: data.route.startLevel,
+      endLevel: data.route.endLevel,
+      clips: data.walkthrough.clips,
+      videoStartCoordIdx: data.walkthrough.videoStartCoordIdx,
+      videoEndCoordIdx: data.walkthrough.videoEndCoordIdx,
+    };
+  } catch (err: any) {
+    document.dispatchEvent(new CustomEvent('apiRouteCall', { detail: {
+      url, method: 'POST', status,
+      durationMs: Math.round(performance.now() - t0),
+      pathLength: 0, edgeCount: 0, error: err?.message ?? String(err),
+    }}));
+    throw err;
+  }
 }
 
 // ===== Room Search =====

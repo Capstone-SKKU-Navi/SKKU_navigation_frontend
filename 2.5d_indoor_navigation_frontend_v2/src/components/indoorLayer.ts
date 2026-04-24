@@ -557,6 +557,46 @@ function polygonCentroid(geom: GeoJSON.Polygon | GeoJSON.MultiPolygon): [number,
   return [sx / n, sy / n];
 }
 
+/**
+ * Rebuild every layer source for every loaded building/level from the current
+ * BackendService state. Used when the GeoJSON dataset has been replaced (e.g.
+ * after toggling to API mode and re-fetching from /api/geojson/all).
+ */
+export function refreshAll(map: maplibregl.Map): void {
+  for (const building of BackendService.getBuildingCodes()) {
+    for (const level of BackendService.getBuildingLevels(building)) {
+      const data = BackendService.getLevelDataForBuilding(building, level);
+      const sourceId = `${building}-floor-${level}`;
+
+      // Classify rooms (mirrors addBuildingLevelLayers)
+      const rooms: GeoJSON.Feature[] = [];
+      const stairs: GeoJSON.Feature[] = [];
+      for (const f of data.rooms.features) {
+        if (f.geometry.type !== 'Polygon' && f.geometry.type !== 'MultiPolygon') continue;
+        const rt = f.properties?.room_type;
+        if (rt === 'stairs' || rt === 'elevator') stairs.push(f);
+        else rooms.push(f);
+      }
+      const corridors = data.colliders.features.filter(
+        f => f.geometry.type === 'Polygon' || f.geometry.type === 'MultiPolygon'
+      );
+
+      const set = (id: string, fc: GeoJSON.FeatureCollection) => {
+        const src = map.getSource(id) as maplibregl.GeoJSONSource | undefined;
+        if (src) src.setData(fc);
+      };
+
+      set(`${sourceId}-corridors`,       { type: 'FeatureCollection', features: corridors });
+      set(`${sourceId}-corridors-edges`, { type: 'FeatureCollection', features: buildEdgePolygons(corridors) });
+      set(`${sourceId}-rooms`,           { type: 'FeatureCollection', features: rooms });
+      set(`${sourceId}-rooms-edges`,     { type: 'FeatureCollection', features: buildEdgePolygons(rooms) });
+      set(`${sourceId}-rooms-labelpts`,  { type: 'FeatureCollection', features: buildLabelPoints(data.rooms.features) });
+      set(`${sourceId}-stairs`,          { type: 'FeatureCollection', features: stairs });
+      set(`${sourceId}-walls`,           data.walls);
+    }
+  }
+}
+
 /** Rebuild room sources for a level (called by editor when labels/properties change) */
 export function refreshRoomLabels(map: maplibregl.Map, level: number): void {
   for (const building of BackendService.getBuildingCodes()) {

@@ -64,9 +64,10 @@ export function showRoute(
 
 /** 2D↔3D 전환 시 호출 */
 export function setIs3D(is3D: boolean): void {
-  if (!storedCoordinates) return;
   storedIs3D = is3D;
-  renderRoute();
+  // Rebuild even with no route — endpoint preview markers also depend on
+  // the 3D flag for altitude lifting.
+  if (storedCoordinates || previewEndpoints.length > 0) rebuildLayers();
 }
 
 /** 층 변경 시 경로/endpoint opacity 업데이트 */
@@ -299,11 +300,16 @@ function rebuildLayers(): void {
   // Endpoint preview (before route search)
   if (previewEndpoints.length > 0 && !storedCoordinates) {
     const curLevel = getCurrentLevel();
-    // Pre-compute colors with alpha so deck.gl picks up changes on re-render
+    // Pre-compute colors with alpha so deck.gl picks up changes on re-render.
+    // In 3D mode lift the marker to its floor's altitude — without this it
+    // sits on the ground regardless of which floor the room is on.
     const previewData = previewEndpoints.map(d => {
       const alpha = (d.level != null && d.level !== curLevel)
         ? R.inactiveOpacity : R.activeOpacity;
-      return { ...d, fillColor: [d.color[0], d.color[1], d.color[2], alpha] as [number, number, number, number] };
+      const position = (storedIs3D && d.level != null)
+        ? [d.position[0], d.position[1], getLevelBase(d.level) + ROOM_THICKNESS + 0.5]
+        : d.position;
+      return { ...d, position, fillColor: [d.color[0], d.color[1], d.color[2], alpha] as [number, number, number, number] };
     });
     layers.push(
       new ScatterplotLayer({
@@ -341,7 +347,9 @@ export function clearRoute(): void {
   if (!overlay) return;
   storedCoordinates = null;
   storedLevels = null;
-  storedIs3D = false;
+  // NOTE: storedIs3D is the camera-mode state, not route state. Don't reset
+  // it here — the user may clear the route while still in 3D, and the next
+  // endpoint-preview markers must keep their floor altitude.
   positionIndicatorData = null;
   previewEndpoints = [];
   overlay.setProps({ layers: [] });

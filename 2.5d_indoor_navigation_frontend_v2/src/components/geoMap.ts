@@ -208,6 +208,11 @@ function setupRoomClick(): void {
 
       map.on('click', layerId, (e) => {
         if (performance.now() < suppressClickUntil) return; // mobile long-press ate this click
+        // 3D mode stacks every floor's extrusion on the same XY footprint, so a
+        // single click hits each floor's layer. Only let the active floor's
+        // handler win, otherwise the last-registered (lowest) floor overwrites
+        // the dispatch and we always end up selecting a 1F room.
+        if (level !== IndoorLayer.getCurrentLevel()) return;
         if (!e.features || e.features.length === 0) return;
         const feature = e.features[0];
         const ref = feature.properties?.ref;
@@ -226,6 +231,7 @@ function setupRoomClick(): void {
       });
 
       map.on('contextmenu', layerId, (e) => {
+        if (level !== IndoorLayer.getCurrentLevel()) return;
         if (!e.features || e.features.length === 0) return;
         const ref = e.features[0].properties?.ref;
         if (!ref) return;
