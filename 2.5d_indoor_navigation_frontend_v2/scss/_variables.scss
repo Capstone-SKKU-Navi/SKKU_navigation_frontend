@@ -1,0 +1,12 @@
+// ===== Shared SCSS variables =====
+// Loaded via `@use 'variables' as *` by partials that need them.
+
+$header-height: 56px;
+$ui-padding: 12px;
+$primary: #025558;
+$accent: #42A5F5;
+$bg-dark: #1a1a2e;
+$text-light: #f5f5f5;
+$text-muted: rgba(255, 255, 255, 0.6);
+$radius: 8px;
+$shadow: 0 2px 12px rgba(0, 0, 0, 0.3);

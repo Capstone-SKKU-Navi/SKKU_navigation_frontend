@@ -876,11 +876,35 @@ function handleKeyDown(e: KeyboardEvent): void {
 
 // ===== Refresh Map Display =====
 
+/**
+ * Directional endpoints for visualizing edge direction (from=red, to=blue).
+ * - Single selected edge: the edge's from/to nodes.
+ * - Multi-edge chain: the chain's start (red) and end (blue).
+ */
+function getEdgeDirectionalEndpoints(): { fromId: string | null; toId: string | null } {
+  if (state.selectedEdgeIds.length === 0) return { fromId: null, toId: null };
+
+  if (state.selectedEdgeIds.length === 1) {
+    const edge = state.graph.edges.find(e => e.id === state.selectedEdgeIds[0]);
+    if (!edge) return { fromId: null, toId: null };
+    return { fromId: edge.from, toId: edge.to };
+  }
+
+  const chain = orderEdgeChain(state.selectedEdgeIds, state.graph);
+  if (!chain || chain.length === 0) return { fromId: null, toId: null };
+  const first = chain[0];
+  const last = chain[chain.length - 1];
+  const fromId = first.aligned ? first.edge.from : first.edge.to;
+  const toId = last.aligned ? last.edge.to : last.edge.from;
+  return { fromId, toId };
+}
+
 function refreshMap(): void {
   if (!map) return;
 
   const level = state.currentLevel;
   const is3D = !GeoMap.isFlatMode();
+  const { fromId: edgeFromId, toId: edgeToId } = getEdgeDirectionalEndpoints();
 
   if (is3D) {
     // 3D mode: show ALL nodes as floating divs at correct floor heights
@@ -893,6 +917,8 @@ function refreshMap(): void {
       IndoorLayer.getLevelBase,
       IndoorLayer.ROOM_THICKNESS,
       level,
+      edgeFromId,
+      edgeToId,
     );
     EditorMap.updateNodeLayer(map, [], null, null);
 
@@ -913,7 +939,7 @@ function refreshMap(): void {
     EditorMap.set2DNodeLayersVisible(map, true);
     EditorMap.set2DEdgeLayersVisible(map, true);
     const visibleNodes = State.getNodesOnLevel(state, level);
-    EditorMap.updateNodeLayer(map, visibleNodes, state.selectedNodeId, state.edgeStartNodeId);
+    EditorMap.updateNodeLayer(map, visibleNodes, state.selectedNodeId, state.edgeStartNodeId, edgeFromId, edgeToId);
     const visibleEdges = State.getEdgesOnLevel(state, level);
     EditorMap.updateEdgeLayer(map, visibleEdges, level, state.selectedEdgeIds);
   }

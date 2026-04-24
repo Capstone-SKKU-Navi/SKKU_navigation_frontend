@@ -14,9 +14,13 @@ const LYR_EDGES_LINE = `${PREFIX}-edges-line`;
 const LYR_EDGES_CROSS = `${PREFIX}-edges-cross`;
 const LYR_NODES_CIRCLE = `${PREFIX}-nodes-circle`;
 const LYR_NODES_SELECTED = `${PREFIX}-nodes-selected`;
+const LYR_NODES_EDGE_ENDPOINT = `${PREFIX}-nodes-edge-endpoint`;
 const LYR_NODES_LABELS = `${PREFIX}-nodes-labels`;
 const LYR_EDGES_HIT = `${PREFIX}-edges-hit`; // invisible wide layer for click detection
 const LYR_EDGE_START = `${PREFIX}-edge-start`;
+
+const EDGE_FROM_COLOR = '#EF5350'; // red — "from" end of selected edge
+const EDGE_TO_COLOR = '#2979FF';   // blue — "to" end of selected edge
 
 // ===== Init / Destroy =====
 
@@ -108,6 +112,30 @@ export function initEditorLayers(map: maplibregl.Map): void {
     },
   });
 
+  // Directional highlight for endpoints of the currently-selected edge:
+  // from = red, to = blue. Drawn above the normal node circle.
+  map.addLayer({
+    id: LYR_NODES_EDGE_ENDPOINT,
+    type: 'circle',
+    source: SRC_NODES,
+    filter: ['any',
+      ['==', ['get', 'edgeRole'], 'from'],
+      ['==', ['get', 'edgeRole'], 'to'],
+    ],
+    paint: {
+      'circle-radius': 14,
+      'circle-color': 'transparent',
+      'circle-stroke-width': 4,
+      'circle-stroke-color': [
+        'match', ['get', 'edgeRole'],
+        'from', EDGE_FROM_COLOR,
+        'to', EDGE_TO_COLOR,
+        '#FFFFFF',
+      ] as any,
+      'circle-opacity': 1,
+    },
+  });
+
   // Edge-start pulsing indicator (larger faint ring)
   map.addLayer({
     id: LYR_EDGE_START,
@@ -144,7 +172,7 @@ export function initEditorLayers(map: maplibregl.Map): void {
 }
 
 export function destroyEditorLayers(map: maplibregl.Map): void {
-  const layers = [LYR_NODES_LABELS, LYR_EDGE_START, LYR_NODES_SELECTED, LYR_NODES_CIRCLE, LYR_EDGES_HIT, LYR_EDGES_CROSS, LYR_EDGES_LINE];
+  const layers = [LYR_NODES_LABELS, LYR_EDGE_START, LYR_NODES_EDGE_ENDPOINT, LYR_NODES_SELECTED, LYR_NODES_CIRCLE, LYR_EDGES_HIT, LYR_EDGES_CROSS, LYR_EDGES_LINE];
   for (const id of layers) {
     if (map.getLayer(id)) map.removeLayer(id);
   }
@@ -159,6 +187,8 @@ export function updateNodeLayer(
   nodes: NavNode[],
   selectedId: string | null,
   edgeStartId: string | null,
+  edgeFromId: string | null = null,
+  edgeToId: string | null = null,
 ): void {
   const source = map.getSource(SRC_NODES) as maplibregl.GeoJSONSource;
   if (!source) return;
@@ -174,6 +204,7 @@ export function updateNodeLayer(
       displayLabel: node.label || node.id.slice(5, 13),
       selected: node.id === selectedId,
       edgeStart: node.id === edgeStartId,
+      edgeRole: node.id === edgeFromId ? 'from' : node.id === edgeToId ? 'to' : '',
     },
     geometry: {
       type: 'Point',
@@ -440,6 +471,8 @@ export function updateFloatingNodeLayer(
   levelBaseGetter: (level: number) => number,
   roomThickness: number,
   currentLevel: number,
+  edgeFromId: string | null = null,
+  edgeToId: string | null = null,
 ): void {
   clearFloatingNodes();
   if (!floatingContainer || !storedMap) return;
@@ -452,6 +485,8 @@ export function updateFloatingNodeLayer(
     const isSelected = node.id === selectedId;
     const isEdgeStart = node.id === edgeStartId;
     const isInactive = node.level !== currentLevel;
+    const isEdgeFrom = node.id === edgeFromId;
+    const isEdgeTo = node.id === edgeToId;
 
     const el = document.createElement('div');
     el.className = 'ge-floating-node';
@@ -459,6 +494,8 @@ export function updateFloatingNodeLayer(
 
     if (isSelected) el.classList.add('selected');
     if (isEdgeStart) el.classList.add('edge-start');
+    if (isEdgeFrom) el.classList.add('edge-from');
+    if (isEdgeTo) el.classList.add('edge-to');
     if (isInactive) el.classList.add('inactive');
     if (node.type === 'room') el.classList.add('room-node');
 

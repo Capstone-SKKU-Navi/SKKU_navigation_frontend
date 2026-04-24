@@ -43,6 +43,12 @@
 - **방 클릭 팝업** — 출발/도착 즉시 설정
 - **레이어 토글** — 방, 복도, 3D, 라벨 개별 on/off
 
+### 모바일 UI
+- **자동 감지** — `width ≤ 768px && pointer: coarse`일 때 모바일 크롬 로드 (`?device=mobile|pc`로 강제 가능)
+- **터치 제스처** — 탭(방 선택) · 롱프레스(라디얼 메뉴) · 스와이프 다운(경로 해제) · 세로 스와이프(층 전환) · 시트 드래그(피크/하프/풀)
+- **번들 분리** — 모바일 코드는 `src/mobile/`에 격리, PC 번들에 미포함 (반대도 성립)
+- 자세한 내용: [docs/MOBILE.md](docs/MOBILE.md)
+
 ### 그래프 에디터 (개발 도구)
 - 노드/간선 실시간 편집 + Undo/Redo (Command 패턴)
 - 비디오 할당 (yaw, 시간범위, 방향) + 360° 프리뷰
@@ -181,6 +187,7 @@ src/services/
 | 문서 | 설명 |
 |------|------|
 | [docs/DESIGN.md](docs/DESIGN.md) | 색상 팔레트, 레이아웃, 인터랙션 명세 |
+| [docs/MOBILE.md](docs/MOBILE.md) | 모바일 UI 아키텍처 · 제스처 · 테스트 방법 |
 | [docs/FILE_GUIDE.md](docs/FILE_GUIDE.md) | 핵심 파일 역할 가이드 |
 | [docs/GRAPH_EDITOR.md](docs/GRAPH_EDITOR.md) | 그래프 에디터 사용법 (단축키, 영상 할당) |
 | [docs/MULTI_BUILDING.md](docs/MULTI_BUILDING.md) | 다중 건물 추가 방법 |
@@ -200,6 +207,7 @@ src/services/
 
 | 날짜 | 내용 |
 |------|------|
+| 04-24 | **모바일 UI 추가** — 터치 제스처, 풀스크린 검색, 바텀시트 워크스루, 라디얼 롱프레스 메뉴 ([docs/MOBILE.md](docs/MOBILE.md)) |
 | 04-03 | **API v2**: 좌표 기반 경로 API (`POST /api/route`), 프론트에서 그래프 제거, 로컬/API 동일 출력 |
 | 04-03 | 그래프 에디터 방 코드 자동 조회 |
 | 03-31 | room_type 지원, 백엔드 API 서비스 분리 (local/api) |
@@ -214,7 +222,7 @@ src/services/
 - [ ] **API 주소 환경변수** — `localhost:8080` 하드코딩 → 빌드/런타임 설정으로 전환
 - [ ] **다중 건물 지원** — 2번째 건물 데이터 추가 + 건물 전환 UI
 - [ ] **그래프 데이터 완성** — 3~5층 노드/간선, 엣지-비디오 매핑
-- [ ] **모바일 반응형 최적화** — 터치 제스처, 레이아웃 조정
+- [x] ~~**모바일 반응형 최적화** — 터치 제스처, 레이아웃 조정~~ ([docs/MOBILE.md](docs/MOBILE.md))
 - [ ] **사용자 테스트** + 피드백 반영
 
 자세한 내용은 [docs/TODOS.md](docs/TODOS.md) 참조.

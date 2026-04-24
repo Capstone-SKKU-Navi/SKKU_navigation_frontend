@@ -145,6 +145,56 @@ export function getRoomLevel(ref: string): number | null {
   return room && room.level.length > 0 ? room.level[0] : null;
 }
 
+/**
+ * Query the topmost room feature under the given screen point, with a
+ * finger-fat tolerance box so touch hit testing doesn't require surgical
+ * precision. Returns null if no room is under the point.
+ */
+export function queryRoomAt(
+  map: maplibregl.Map,
+  point: { x: number; y: number },
+  radiusPx: number = 12,
+): { ref: string; name: string; roomType: string; level: number; lngLat: [number, number] } | null {
+  // Build the list of room-3d layer ids for the current level across buildings.
+  const level = currentLevel;
+  const layerIds: string[] = [];
+  for (const building of BackendService.getBuildingCodes()) {
+    const bLevels = BackendService.getBuildingLevels(building);
+    if (!bLevels.includes(level)) continue;
+    const id = `${building}-floor-${level}-rooms-3d`;
+    if (map.getLayer(id)) layerIds.push(id);
+  }
+  if (layerIds.length === 0) return null;
+
+  const bbox: [maplibregl.PointLike, maplibregl.PointLike] = [
+    [point.x - radiusPx, point.y - radiusPx],
+    [point.x + radiusPx, point.y + radiusPx],
+  ];
+
+  const features = map.queryRenderedFeatures(bbox, { layers: layerIds });
+  if (!features || features.length === 0) return null;
+
+  const f = features[0];
+  const ref = f.properties?.ref;
+  if (!ref) return null;
+
+  // Compute a representative lngLat from the feature geometry centroid.
+  const geom = f.geometry as GeoJSON.Polygon | GeoJSON.MultiPolygon;
+  const ring = geom.type === 'Polygon' ? geom.coordinates[0] : geom.coordinates[0][0];
+  let sx = 0, sy = 0;
+  const n = ring.length - 1;
+  for (let i = 0; i < n; i++) { sx += ring[i][0]; sy += ring[i][1]; }
+  const lngLat: [number, number] = [sx / n, sy / n];
+
+  return {
+    ref,
+    name: f.properties?.name ?? '',
+    roomType: f.properties?.room_type ?? '',
+    level,
+    lngLat,
+  };
+}
+
 // ===== Core: apply visibility + heights based on mode =====
 
 function applyVisibility(map: maplibregl.Map): void {

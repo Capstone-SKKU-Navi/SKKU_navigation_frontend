@@ -51,6 +51,7 @@ function importGraph(data: NavGraphExport): NavGraph {
     from: e.from,
     to: e.to,
     weight: e.weight,
+    building: nodes[e.from]?.building ?? nodes[e.to]?.building ?? 'ENG1',
     videoFwd: e.videoFwd, videoFwdStart: e.videoFwdStart, videoFwdEnd: e.videoFwdEnd,
     videoFwdExit: e.videoFwdExit, videoFwdExitStart: e.videoFwdExitStart, videoFwdExitEnd: e.videoFwdExitEnd,
     videoRev: e.videoRev, videoRevStart: e.videoRevStart, videoRevEnd: e.videoRevEnd,

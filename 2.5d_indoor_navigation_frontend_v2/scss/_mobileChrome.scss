@@ -1,0 +1,466 @@
+// ============================================================
+// Mobile chrome — active only when body[data-device="mobile"]
+// ============================================================
+
+body[data-device="mobile"] {
+  background: var(--m-bg);
+  color: var(--m-text);
+
+  // Hide PC chrome entirely
+  #appHeader,
+  #floorWheel,
+  #roomPopup,
+  #roomInfoPopup,
+  #layerPanel {
+    display: none !important;
+  }
+
+  // MapLibre's bottom-right NavigationControl collides with the bottom
+  // chip row and sheet — hide it. Users can zoom with pinch on mobile.
+  .maplibregl-ctrl-bottom-right { display: none !important; }
+
+  // Dev FPS counter — keep visible but move away from the search pill
+  .fps-counter {
+    top: auto !important;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 4px);
+    left: 4px !important;
+    right: auto !important;
+    font-size: 10px !important;
+  }
+
+  // Map container — reclaim the 56px that PC reserved for the header.
+  // The PC rule already sets top/left/right/bottom to fix it full-bleed
+  // below the header; overriding `top: 0` lets it fill the entire viewport.
+  #mainContent {
+    top: 0 !important;
+  }
+
+  // Interactive chrome should not trigger the 300ms tap delay
+  [data-mobile-root] button,
+  [data-mobile-root] .m-search-pill,
+  [data-mobile-root] .m-chip,
+  [data-mobile-root] .m-floor-item,
+  [data-mobile-root] .m-popup,
+  [data-mobile-root] .m-radial-item {
+    touch-action: manipulation;
+  }
+}
+
+// CSS custom-property theme tokens, reused by mobile partials.
+// Mirrors DESIGN.md color table — wrapped in :root so they're accessible
+// regardless of device mode.
+:root {
+  --m-accent: #42A5F5;
+  --m-bg: #f0eee9;
+  --m-surface: #ffffff;
+  --m-surface-muted: #f7f6f4;
+  --m-text: #212121;
+  --m-text-secondary: #757575;
+  --m-border: #E0E0E0;
+  --m-route: #42A5F5;
+  --m-start: #66BB6A;
+  --m-end: #EF5350;
+  --m-shadow-1: 0 2px 8px rgba(0,0,0,0.08);
+  --m-shadow-2: 0 6px 24px rgba(0,0,0,0.18);
+}
+
+// ============================================================
+// Search pill (top)
+// ============================================================
+
+body[data-device="mobile"] #mSearchPill {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 12px);
+  left: 12px;
+  right: 72px; // leave room for floor wheel column on the right side
+  height: 48px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: 24px;
+  box-shadow: var(--m-shadow-1);
+  color: var(--m-text-secondary);
+  font: 500 15px/1 'Pretendard', system-ui, sans-serif;
+  z-index: 500;
+  cursor: pointer;
+
+  .material-icons { font-size: 20px; }
+  .m-search-pill-text { flex: 1; text-align: left; }
+}
+
+// ============================================================
+// Search modal (fullscreen)
+// ============================================================
+
+body[data-device="mobile"] #mSearchModal {
+  position: fixed;
+  inset: 0;
+  background: var(--m-bg);
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 220ms cubic-bezier(.2,.8,.2,1), opacity 160ms linear;
+  pointer-events: none;
+
+  &[data-open="true"] {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .m-search-modal-header {
+    flex: 0 0 auto;
+    padding: calc(env(safe-area-inset-top, 0px) + 8px) 8px 8px 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--m-surface);
+    border-bottom: 1px solid var(--m-border);
+
+    .m-search-back,
+    .m-search-clear {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: transparent;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--m-text);
+      cursor: pointer;
+      .material-icons { font-size: 22px; }
+      &:active { background: rgba(0,0,0,0.06); }
+    }
+
+    .m-search-input {
+      flex: 1;
+      height: 40px;
+      border: none;
+      outline: none;
+      background: transparent;
+      font: 500 16px 'Pretendard', system-ui, sans-serif;
+      color: var(--m-text);
+    }
+  }
+
+  .m-search-results {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--m-border);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+
+      &:active { background: rgba(0,0,0,0.05); }
+
+      .m-search-ref {
+        font: 600 16px 'Pretendard', system-ui, sans-serif;
+        color: var(--m-text);
+      }
+      .m-search-meta {
+        font: 400 13px 'Pretendard', system-ui, sans-serif;
+        color: var(--m-text-secondary);
+      }
+    }
+
+    .m-search-empty {
+      padding: 32px 16px;
+      text-align: center;
+      color: var(--m-text-secondary);
+      font: 400 14px 'Pretendard', system-ui, sans-serif;
+    }
+  }
+}
+
+// ============================================================
+// Right-side floating action cluster (recenter, 3D, clear route)
+// ============================================================
+
+body[data-device="mobile"] #mActions {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 72px); // below the search pill
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 420;
+
+  .m-act {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--m-border);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--m-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--m-shadow-1);
+    cursor: pointer;
+    transition: transform 120ms, background 120ms;
+
+    .material-icons { font-size: 22px; }
+
+    &.active {
+      background: var(--m-accent);
+      border-color: var(--m-accent);
+      color: #fff;
+    }
+
+    &.m-act-danger {
+      color: var(--m-end);
+      border-color: rgba(239, 83, 80, 0.3);
+    }
+
+    &[data-visible="false"] {
+      display: none;
+    }
+
+    &:active { transform: scale(0.94); }
+  }
+}
+
+// ============================================================
+// Floor wheel (left vertical)
+// ============================================================
+
+body[data-device="mobile"] #mFloorWheel {
+  position: fixed;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  max-height: 70vh;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--m-border);
+  border-radius: 24px;
+  box-shadow: var(--m-shadow-1);
+  z-index: 400;
+  overflow: hidden;
+  touch-action: none;
+
+  .m-floor-wheel-inner {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 0;
+  }
+
+  .m-floor-item {
+    width: 100%;
+    height: 44px;
+    border: none;
+    background: transparent;
+    font: 700 14px 'Pretendard', system-ui, sans-serif;
+    color: var(--m-text-secondary);
+    cursor: pointer;
+    transition: color 120ms, transform 120ms;
+
+    &.active {
+      color: var(--m-accent);
+      transform: scale(1.1);
+    }
+    &.adjacent { color: var(--m-text); }
+    &.far { color: var(--m-text-secondary); opacity: 0.5; }
+  }
+}
+
+// ============================================================
+// Action chip row (bottom)
+// ============================================================
+
+body[data-device="mobile"] #mChipRow {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 450;
+  transform: translateY(140%);
+  opacity: 0;
+  transition: transform 220ms cubic-bezier(.2,.8,.2,1), opacity 160ms linear;
+  pointer-events: none;
+
+  &[data-visible="true"] {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .m-chip {
+    flex: 1;
+    max-width: 180px;
+    height: 44px;
+    padding: 0 16px;
+    border: 1px solid var(--m-border);
+    border-radius: 22px;
+    background: var(--m-surface);
+    color: var(--m-text);
+    font: 600 14px 'Pretendard', system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: var(--m-shadow-1);
+    cursor: pointer;
+
+    &.start { color: var(--m-start); }
+    &.end { color: var(--m-end); }
+    &.find {
+      background: var(--m-accent);
+      color: #fff;
+      border-color: var(--m-accent);
+      flex: 0 1 220px;
+      max-width: 260px;
+    }
+
+    &:active { transform: scale(0.98); }
+  }
+}
+
+// ============================================================
+// Room popup (bottom-anchored card)
+// ============================================================
+
+body[data-device="mobile"] #mPopup {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  padding: 14px 16px 16px;
+  background: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: 16px;
+  box-shadow: var(--m-shadow-2);
+  z-index: 460;
+  transform: translateY(140%);
+  opacity: 0;
+  transition: transform 220ms cubic-bezier(.2,.8,.2,1), opacity 160ms linear;
+  pointer-events: none;
+  touch-action: none;
+
+  &[data-visible="true"] {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .m-popup-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .m-popup-ref {
+    font: 700 18px 'Pretendard', system-ui, sans-serif;
+    color: var(--m-text);
+  }
+  .m-popup-type {
+    font: 500 13px 'Pretendard', system-ui, sans-serif;
+    color: var(--m-text-secondary);
+    flex-shrink: 0;
+  }
+  .m-popup-name {
+    font: 500 14px 'Pretendard', system-ui, sans-serif;
+    color: var(--m-text-secondary);
+    margin-bottom: 14px;
+  }
+  .m-popup-actions {
+    display: flex;
+    gap: 8px;
+
+    button {
+      flex: 1;
+      height: 40px;
+      border: 1px solid var(--m-border);
+      background: var(--m-surface-muted);
+      border-radius: 10px;
+      font: 600 14px 'Pretendard', system-ui, sans-serif;
+      color: var(--m-text);
+      cursor: pointer;
+
+      &.start { color: var(--m-start); border-color: rgba(102,187,106,0.3); }
+      &.end { color: var(--m-end); border-color: rgba(239,83,80,0.3); }
+      &:active { transform: scale(0.98); }
+    }
+  }
+}
+
+// ============================================================
+// Radial menu (long-press)
+// ============================================================
+
+body[data-device="mobile"] #mRadial {
+  position: fixed;
+  z-index: 700;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+
+  &[data-visible="true"] { pointer-events: auto; }
+
+  .m-radial-center {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--m-accent);
+    box-shadow: var(--m-shadow-2);
+  }
+
+  .m-radial-item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    border: none;
+    border-radius: 50%;
+    background: var(--m-surface);
+    color: var(--m-text);
+    font: 600 12px 'Pretendard', system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    box-shadow: var(--m-shadow-2);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 160ms, transform 160ms cubic-bezier(.2,.8,.2,1);
+
+    .material-icons { font-size: 22px; }
+    &.start { color: var(--m-start); }
+    &.end { color: var(--m-end); }
+    &:active { transform: translate(-50%, -50%) scale(0.96); }
+  }
+
+  &[data-visible="true"] .m-radial-item {
+    opacity: 1;
+  }
+}

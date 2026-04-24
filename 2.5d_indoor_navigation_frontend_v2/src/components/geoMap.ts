@@ -15,6 +15,7 @@ import { MapConfig } from '../config/mapConfig';
 
 let map: maplibregl.Map | null = null;
 let flatMode = true; // start in 2D
+let suppressClickUntil = 0; // timestamp — room clicks before this are dropped
 
 export function getMap(): maplibregl.Map | null {
   return map;
@@ -22,6 +23,15 @@ export function getMap(): maplibregl.Map | null {
 
 export function isFlatMode(): boolean {
   return flatMode;
+}
+
+/**
+ * Drop the next synthetic room click (used by mobile long-press to avoid
+ * a phantom `roomClicked` dispatching when the finger is released after
+ * the radial menu has already opened).
+ */
+export function suppressNextClick(): void {
+  suppressClickUntil = performance.now() + 500;
 }
 
 export function initMap(): void {
@@ -62,6 +72,7 @@ export function initMap(): void {
     antialias: true,
     dragRotate: true,
     touchPitch: true,
+    doubleClickZoom: false, // prevent iOS Safari 300ms double-tap zoom stealing a second room tap
   });
 
   map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
@@ -196,6 +207,7 @@ function setupRoomClick(): void {
       if (!map.getLayer(layerId)) continue;
 
       map.on('click', layerId, (e) => {
+        if (performance.now() < suppressClickUntil) return; // mobile long-press ate this click
         if (!e.features || e.features.length === 0) return;
         const feature = e.features[0];
         const ref = feature.properties?.ref;

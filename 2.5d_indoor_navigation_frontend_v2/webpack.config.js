@@ -1,8 +1,21 @@
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+function getLanAddresses() {
+  const nets = os.networkInterfaces();
+  const addrs = [];
+  for (const ifaces of Object.values(nets)) {
+    if (!ifaces) continue;
+    for (const net of ifaces) {
+      if (net.family === 'IPv4' && !net.internal) addrs.push(net.address);
+    }
+  }
+  return addrs;
+}
 
 module.exports = (env, argv) => {
   const isDev = argv.mode === 'development';
@@ -62,14 +75,30 @@ module.exports = (env, argv) => {
         { directory: path.join(__dirname, 'videos'), publicPath: '/videos', watch: false },
       ],
       headers: { 'Access-Control-Allow-Origin': '*' },
+      host: '0.0.0.0',           // bind all interfaces so phones on LAN can connect
+      allowedHosts: 'all',       // accept Host: <lan-ip> without "Invalid Host header"
       port: 8082,
       hot: true,
       liveReload: true,
       open: true,
       watchFiles: ['src/**/*', 'scss/**/*', 'public/index.html'],
-      client: { overlay: false }, // disable error overlay blocking clicks
+      client: {
+        overlay: false,                           // disable error overlay blocking clicks
+        webSocketURL: 'auto://0.0.0.0:0/ws',     // HMR reconnects from LAN
+      },
       setupMiddlewares(middlewares, devServer) {
         const jsonParser = require('express').json({ limit: '10mb' });
+
+        // Log reachable URLs for phone-on-LAN testing
+        const lanAddrs = getLanAddresses();
+        if (lanAddrs.length > 0) {
+          console.log('\n  📱 Mobile testing — open on phone over Wi-Fi:');
+          for (const addr of lanAddrs) {
+            console.log(`     http://${addr}:8082            (auto device detect)`);
+            console.log(`     http://${addr}:8082?device=mobile (force mobile UI)`);
+          }
+          console.log('');
+        }
 
         // PUT /api/save-graph → write to public/geojson/graph.json
         devServer.app.put('/api/save-graph', jsonParser, (req, res) => {

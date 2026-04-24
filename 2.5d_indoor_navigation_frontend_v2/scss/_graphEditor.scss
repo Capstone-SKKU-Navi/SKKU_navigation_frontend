@@ -380,6 +380,14 @@
     animation: ge-pulse 1.2s ease-in-out infinite;
   }
 
+  &.edge-from {
+    box-shadow: 0 0 0 4px #EF5350;
+  }
+
+  &.edge-to {
+    box-shadow: 0 0 0 4px #2979FF;
+  }
+
   &.inactive {
     opacity: 0.35;
     border-color: rgba(255, 255, 255, 0.5);
@@ -811,6 +819,47 @@
   flex-shrink: 0;
 }
 
+
+// ===== Direction endpoint labels (edge props title) =====
+
+.ge-dir-endpoint {
+  display: inline-block;
+  padding: 0 5px;
+  border-radius: 3px;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.2px;
+}
+
+.ge-dir-from {
+  background: rgba(239, 83, 80, 0.18);
+  color: #FF8A85;
+  border: 1px solid rgba(239, 83, 80, 0.5);
+}
+
+.ge-dir-to {
+  background: rgba(41, 121, 255, 0.18);
+  color: #7AA8FF;
+  border: 1px solid rgba(41, 121, 255, 0.5);
+}
+
+// ===== Video filename search input =====
+
+.ge-video-search {
+  display: block;
+  width: 100%;
+  margin-bottom: 4px;
+  font-size: 11px;
+  padding: 4px 8px;
+}
+
+.ge-tree-empty {
+  padding: 8px 12px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  font-style: italic;
+  text-align: center;
+}
 
 // ===== Collapsible Video Tree Picker =====
 

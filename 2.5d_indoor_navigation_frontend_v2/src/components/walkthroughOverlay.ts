@@ -32,6 +32,7 @@ let docResizeMove: ((e: PointerEvent) => void) | null = null;
 let docResizeUp: (() => void) | null = null;
 let docKeydown: ((e: KeyboardEvent) => void) | null = null;
 let followCheckbox: HTMLInputElement | null = null;
+let canvasResizeObserver: ResizeObserver | null = null;
 
 // ===== Public API =====
 
@@ -45,9 +46,20 @@ export function showWalkthroughOverlay(playlist: WalkthroughPlaylist): void {
 
   buildDOM(playlist);
   setupMapInteractionListener();
+
+  // Notify chrome (e.g. mobile sheet) that the overlay is mounted.
+  // `overlayEl` is guaranteed set here by buildDOM.
+  document.dispatchEvent(new CustomEvent('walkthroughShown', {
+    detail: { overlayEl, playlist },
+  }));
 }
 
 export function hideWalkthroughOverlay(): void {
+  const wasActive = overlayEl !== null;
+  if (canvasResizeObserver) {
+    canvasResizeObserver.disconnect();
+    canvasResizeObserver = null;
+  }
   if (player) {
     player.destroy();
     player = null;
@@ -68,6 +80,10 @@ export function hideWalkthroughOverlay(): void {
   isFullscreen = false;
   // Let map resize back to full
   requestAnimationFrame(() => GeoMap.getMap()?.resize());
+
+  if (wasActive) {
+    document.dispatchEvent(new Event('walkthroughHidden'));
+  }
 }
 
 export function isWalkthroughActive(): boolean {
@@ -248,6 +264,19 @@ function buildDOM(playlist: WalkthroughPlaylist): void {
       if (icon) icon.textContent = 'play_arrow';
     },
   });
+
+  // Keep the Three.js renderer in sync with the canvas container size.
+  // Needed when the overlay is reparented into a different DOM slot
+  // (e.g. the mobile bottom sheet) or when the sheet state changes.
+  if (typeof ResizeObserver !== 'undefined') {
+    canvasResizeObserver = new ResizeObserver(() => {
+      if (!player) return;
+      const w = canvasContainer.clientWidth;
+      const h = canvasContainer.clientHeight;
+      if (w > 0 && h > 0) player.resize(w, h);
+    });
+    canvasResizeObserver.observe(canvasContainer);
+  }
 }
 
 // ===== Progress UI =====
@@ -438,28 +467,70 @@ function removeDocumentListeners(): void {
 // ===== Map interaction detection =====
 
 let mapMoveHandler: ((e: any) => void) | null = null;
+let canvasPointerDown: ((e: PointerEvent) => void) | null = null;
+let canvasPointerMove: ((e: PointerEvent) => void) | null = null;
+let canvasPointerUp: ((e: PointerEvent) => void) | null = null;
+
+function disableFollow(): void {
+  if (cameraFollow) {
+    cameraFollow = false;
+    if (followCheckbox) followCheckbox.checked = false;
+  }
+}
 
 function setupMapInteractionListener(): void {
   const map = GeoMap.getMap();
   if (!map) return;
 
-  // Only cancel follow on pan/rotate, not zoom
-  mapMoveHandler = () => {
-    if (cameraFollow) {
-      cameraFollow = false;
-      if (followCheckbox) followCheckbox.checked = false;
-    }
-  };
+  // MapLibre's dragstart/rotatestart are the happy path.
+  mapMoveHandler = () => disableFollow();
   map.on('dragstart', mapMoveHandler);
   map.on('rotatestart', mapMoveHandler);
+
+  // Backup: watch the canvas directly for any real pointer drag past a
+  // small threshold. This catches edge cases where MapLibre's internal
+  // drag detection is busy handling a programmatic `easeTo` (which fires
+  // continuously during camera-follow) and user intent gets swallowed.
+  const canvas = map.getCanvas();
+  let startX = 0, startY = 0, tracking = false;
+  canvasPointerDown = (e: PointerEvent) => {
+    tracking = true;
+    startX = e.clientX;
+    startY = e.clientY;
+  };
+  canvasPointerMove = (e: PointerEvent) => {
+    if (!tracking) return;
+    if (Math.hypot(e.clientX - startX, e.clientY - startY) > 8) {
+      disableFollow();
+      tracking = false;
+    }
+  };
+  canvasPointerUp = () => { tracking = false; };
+  canvas.addEventListener('pointerdown', canvasPointerDown);
+  canvas.addEventListener('pointermove', canvasPointerMove);
+  canvas.addEventListener('pointerup', canvasPointerUp);
+  canvas.addEventListener('pointercancel', canvasPointerUp);
 }
 
 function removeMapInteractionListener(): void {
-  if (!mapMoveHandler) return;
   const map = GeoMap.getMap();
-  map?.off('dragstart', mapMoveHandler);
-  map?.off('rotatestart', mapMoveHandler);
-  mapMoveHandler = null;
+  if (mapMoveHandler) {
+    map?.off('dragstart', mapMoveHandler);
+    map?.off('rotatestart', mapMoveHandler);
+    mapMoveHandler = null;
+  }
+  const canvas = map?.getCanvas();
+  if (canvas && canvasPointerDown) {
+    canvas.removeEventListener('pointerdown', canvasPointerDown);
+    if (canvasPointerMove) canvas.removeEventListener('pointermove', canvasPointerMove);
+    if (canvasPointerUp) {
+      canvas.removeEventListener('pointerup', canvasPointerUp);
+      canvas.removeEventListener('pointercancel', canvasPointerUp);
+    }
+  }
+  canvasPointerDown = null;
+  canvasPointerMove = null;
+  canvasPointerUp = null;
 }
 
 // ===== Helpers =====

@@ -5,13 +5,12 @@ import * as BackendService from './services/backendService';
 import * as GeoMap from './components/geoMap';
 import * as IndoorLayer from './components/indoorLayer';
 import * as RouteOverlay from './components/routeOverlay';
-import { fetchRoute, initRouting, searchRooms as apiSearchRooms } from './services/apiClient';
-import type { RouteCoordinate } from './services/apiClient';
+import { initRouting, searchRooms as apiSearchRooms } from './services/apiClient';
 import { ROOM_TYPE_LABELS, RoomListItem } from './models/types';
-import { setupGraphEditor } from './editor/graphEditor';
 import * as VideoSettings from './editor/videoSettings';
-import { buildWalkthroughPlaylist } from './services/walkthroughPlanner';
 import * as WalkthroughOverlay from './components/walkthroughOverlay';
+import { isMobileDevice } from './utils/deviceDetection';
+import * as RouteActions from './services/routeActions';
 
 // ===== Helpers =====
 function escapeHtml(s: string): string {
@@ -34,24 +33,44 @@ document.addEventListener('DOMContentLoaded', async () => {
     ]);
     GeoMap.initMap();
 
-    document.addEventListener('mapLoaded', () => {
+    document.addEventListener('mapLoaded', async () => {
+      const mobile = isMobileDevice();
+      document.body.dataset.device = mobile ? 'mobile' : 'pc';
+
+      // Shared setups (both PC and mobile)
       setupBuildingInfo();
       setupCenterButton();
       setup3DToggle();
-      setupFloorWheel();
-      setupRoomSearch();
-      setupRouteUI();
-      setupRoomClickPopup();
       setupFpsCounter();
-      setupLayerToggle();
-      setupGraphEditor();
 
-      // Sync floor wheel when walkthrough changes level
-      document.addEventListener('walkthroughLevelChange', ((e: CustomEvent) => {
-        updateFloorWheelActive(e.detail.level);
-      }) as EventListener);
+      if (mobile) {
+        // Mobile chrome — dynamic import keeps mobile code out of the PC bundle
+        const mobileModule = await import(/* webpackChunkName: "mobile" */ './mobile');
+        mobileModule.setupMobileChrome();
+        // PC chrome is hidden by CSS only *after* data-device is set, which
+        // resizes the map container. Without an explicit resize the map's
+        // internal projection stays stale, so pan/zoom doesn't match where
+        // overlays (route, markers, indoor layers) are drawn.
+        requestAnimationFrame(() => GeoMap.getMap()?.resize());
+      } else {
+        // PC chrome
+        setupFloorWheel();
+        setupRoomSearch();
+        setupRouteUI();
+        setupRoomClickPopup();
+        setupLayerToggle();
 
-      // Update route opacity when level changes
+        // Editor is PC-only — dynamic import keeps editor code out of the mobile bundle
+        const editorModule = await import(/* webpackChunkName: "editor" */ './editor/graphEditor');
+        editorModule.setupGraphEditor();
+
+        // Sync floor wheel when walkthrough changes level (PC floor wheel uses updateFloorWheelActive)
+        document.addEventListener('walkthroughLevelChange', ((e: CustomEvent) => {
+          updateFloorWheelActive(e.detail.level);
+        }) as EventListener);
+      }
+
+      // Update route opacity when level changes (shared)
       document.addEventListener('levelChanged', () => {
         RouteOverlay.onLevelChange();
       });
@@ -255,9 +274,6 @@ function selectRoom(room: RoomListItem): void {
 
 // ===== Route UI =====
 
-/** Cache centroids from search results so API mode doesn't depend on local GeoJSON */
-const roomCentroidCache = new Map<string, { centroid: [number, number]; level: number }>();
-
 function setupRouteUI(): void {
   const toggleBtn = document.getElementById('routeToggleBtn');
   const routeInputs = document.getElementById('routeInputs');
@@ -306,66 +322,12 @@ function setupRouteUI(): void {
   startInput?.addEventListener('input', updateEndpointPreview);
   endInput?.addEventListener('input', updateEndpointPreview);
 
-  findBtn?.addEventListener('click', async () => {
-    const fromRef = startInput?.value.trim();
-    const toRef = endInput?.value.trim();
-    if (!fromRef || !toRef) return;
-
-    // Convert room refs to coordinates — use search result cache first, fallback to GeoJSON
-    const fromCached = roomCentroidCache.get(fromRef);
-    const toCached = roomCentroidCache.get(toRef);
-    const fromCentroid = fromCached?.centroid ?? BackendService.getRoomCentroid(fromRef);
-    const toCentroid = toCached?.centroid ?? BackendService.getRoomCentroid(toRef);
-    const fromLevel = fromCached?.level ?? BackendService.getRoomLevel(fromRef);
-    const toLevel = toCached?.level ?? BackendService.getRoomLevel(toRef);
-
-    if (!fromCentroid || !toCentroid || fromLevel === null || toLevel === null) {
-      console.warn('[Route] Room not found:', fromRef, toRef);
-      return;
-    }
-
-    const from: RouteCoordinate = { lng: fromCentroid[0], lat: fromCentroid[1], level: fromLevel };
-    const to: RouteCoordinate = { lng: toCentroid[0], lat: toCentroid[1], level: toLevel };
-
-    try {
-      const routeResult = await fetchRoute(from, to);
-      if (!routeResult) {
-        console.warn('[Route] No route found:', fromRef, '→', toRef);
-        return;
-      }
-
-      RouteOverlay.clearEndpointPreview();
-      if (routeResult.coordinates.length >= 2) {
-        RouteOverlay.showRoute(
-          routeResult.coordinates,
-          routeResult.levels,
-          !GeoMap.isFlatMode(),
-        );
-      }
-
-      showRouteInfo(routeResult.estimatedTime, routeResult.totalDistance);
-
-      // Build walkthrough video overlay
-      const playlist = buildWalkthroughPlaylist(routeResult);
-      console.log('[Walkthrough] playlist:', playlist ? `${playlist.clips.length} clips, ${playlist.totalDuration.toFixed(1)}s` : 'null');
-      if (playlist && playlist.clips.length > 0) {
-        WalkthroughOverlay.showWalkthroughOverlay(playlist);
-      }
-    } catch (err: any) {
-      console.error('경로 검색 실패:', err);
-    }
+  findBtn?.addEventListener('click', () => {
+    RouteActions.triggerFindRoute();
   });
 
   clearBtn?.addEventListener('click', () => {
-    RouteOverlay.clearRoute();
-    WalkthroughOverlay.hideWalkthroughOverlay();
-    const routeInfo = document.getElementById('routeInfo');
-    const buildingInfo = document.getElementById('buildingInfo');
-    if (routeInfo) routeInfo.style.display = 'none';
-    if (buildingInfo) buildingInfo.style.display = 'flex';
-    // Restore route toggle button and hide inputs
-    if (routeInputs) routeInputs.style.display = 'none';
-    if (toggleBtn) { toggleBtn.style.display = ''; toggleBtn.classList.remove('active'); }
+    RouteActions.clearRoute();
   });
 }
 
@@ -404,7 +366,7 @@ function setupRouteAutocomplete(input: HTMLInputElement, dropdownId: string, onS
         const idx = parseInt((item as HTMLElement).dataset.index ?? '0');
         const room = currentResults[idx];
         input.value = room.ref;
-        if (room.centroid) roomCentroidCache.set(room.ref, { centroid: room.centroid, level: room.level[0] });
+        RouteActions.cacheRoomCentroid(room);
         dropdown.classList.remove('visible');
         onSelect?.();
       });
@@ -427,7 +389,7 @@ function setupRouteAutocomplete(input: HTMLInputElement, dropdownId: string, onS
       e.preventDefault();
       const room = currentResults[highlightIdx];
       input.value = room.ref;
-      if (room.centroid) roomCentroidCache.set(room.ref, { centroid: room.centroid, level: room.level[0] });
+      RouteActions.cacheRoomCentroid(room);
       dropdown.classList.remove('visible');
       onSelect?.();
     } else if (e.key === 'Escape') {
@@ -440,18 +402,6 @@ function setupRouteAutocomplete(input: HTMLInputElement, dropdownId: string, onS
       dropdown.classList.remove('visible');
     }
   });
-}
-
-function showRouteInfo(time: string, distance: number): void {
-  const routeInfo = document.getElementById('routeInfo');
-  const routeText = document.getElementById('routeInfoText');
-  const buildingInfo = document.getElementById('buildingInfo');
-
-  if (routeInfo && routeText) {
-    routeText.textContent = `예상 ${time} · ${distance}m`;
-    routeInfo.style.display = 'flex';
-  }
-  if (buildingInfo) buildingInfo.style.display = 'none';
 }
 
 // ===== Room Click Popup =====
@@ -474,28 +424,12 @@ function setupRoomClickPopup(): void {
   }) as EventListener);
 
   document.getElementById('popupSetStart')?.addEventListener('click', () => {
-    if (selectedRef) {
-      const input = document.getElementById('startRoomInput') as HTMLInputElement;
-      if (input) input.value = selectedRef;
-      const routeInputs = document.getElementById('routeInputs');
-      if (routeInputs) routeInputs.style.display = 'flex';
-      const toggleBtn = document.getElementById('routeToggleBtn');
-      if (toggleBtn) toggleBtn.style.display = 'none';
-      document.dispatchEvent(new Event('routeEndpointChanged'));
-    }
+    if (selectedRef) RouteActions.setStart(selectedRef);
     popup.style.display = 'none';
   });
 
   document.getElementById('popupSetEnd')?.addEventListener('click', () => {
-    if (selectedRef) {
-      const input = document.getElementById('endRoomInput') as HTMLInputElement;
-      if (input) input.value = selectedRef;
-      const routeInputs = document.getElementById('routeInputs');
-      if (routeInputs) routeInputs.style.display = 'flex';
-      const toggleBtn = document.getElementById('routeToggleBtn');
-      if (toggleBtn) toggleBtn.style.display = 'none';
-      document.dispatchEvent(new Event('routeEndpointChanged'));
-    }
+    if (selectedRef) RouteActions.setEnd(selectedRef);
     popup.style.display = 'none';
   });
 
@@ -507,24 +441,6 @@ function setupRoomClickPopup(): void {
       popup.style.display = 'none';
     }
   });
-
-  function clearRouteEndpoints(): void {
-    const startInput = document.getElementById('startRoomInput') as HTMLInputElement;
-    const endInput = document.getElementById('endRoomInput') as HTMLInputElement;
-    if (startInput) startInput.value = '';
-    if (endInput) endInput.value = '';
-    RouteOverlay.clearEndpointPreview();
-    RouteOverlay.clearRoute();
-    WalkthroughOverlay.hideWalkthroughOverlay();
-    const routeInfo = document.getElementById('routeInfo');
-    const buildingInfo = document.getElementById('buildingInfo');
-    if (routeInfo) routeInfo.style.display = 'none';
-    if (buildingInfo) buildingInfo.style.display = 'flex';
-    const routeInputs = document.getElementById('routeInputs');
-    if (routeInputs) routeInputs.style.display = 'none';
-    const toggleBtn = document.getElementById('routeToggleBtn');
-    if (toggleBtn) { toggleBtn.style.display = ''; toggleBtn.classList.remove('active'); }
-  }
 
   document.addEventListener('contextmenu', () => {
     popup.style.display = 'none';
@@ -546,7 +462,7 @@ function setupRoomClickPopup(): void {
         popup.style.display = 'none';
         return;
       }
-      clearRouteEndpoints();
+      RouteActions.clearRoute();
     }
   });
 }

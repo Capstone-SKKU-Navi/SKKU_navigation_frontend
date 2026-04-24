@@ -1,0 +1,151 @@
+// ============================================================
+// Bottom sheet primitive — used by walkthroughSheet
+// ============================================================
+
+body[data-device="mobile"] #mSheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100dvh;
+  @supports not (height: 100dvh) { height: 100vh; }
+
+  background: var(--m-surface);
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  box-shadow: 0 -8px 32px rgba(0,0,0,0.22);
+  z-index: 800;
+  touch-action: none;
+
+  // `--sheet-y` is the translate offset; set by JS as pixels.
+  // Default: off-screen.
+  --sheet-y: 100dvh;
+  @supports not (height: 100dvh) { --sheet-y: 100vh; }
+
+  transform: translate3d(0, var(--sheet-y), 0);
+  transition: transform 220ms cubic-bezier(.2, .8, .2, 1);
+  will-change: transform;
+
+  &.dragging {
+    transition: none;
+  }
+
+  &[data-state="hidden"] { display: none; }
+  &[data-state="peek"],
+  &[data-state="half"],
+  &[data-state="full"] { display: flex; flex-direction: column; }
+
+  .m-sheet-handle {
+    flex: 0 0 auto;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+
+    .m-sheet-grip {
+      width: 40px;
+      height: 4px;
+      background: var(--m-border);
+      border-radius: 2px;
+    }
+  }
+
+  .m-sheet-content {
+    flex: 1 1 auto;
+    overflow: hidden; // content manages its own overflow per state
+    position: relative;
+  }
+
+  // Content overflow/visibility per state (applied to inner container)
+  &[data-state="peek"] .m-sheet-content { overflow: hidden; }
+  &[data-state="half"] .m-sheet-content { overflow: hidden; }
+  &[data-state="full"] .m-sheet-content {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  // ============================================================
+  // Walkthrough overlay, when reparented into the sheet
+  // ============================================================
+
+  .walkthrough-overlay.in-mobile-sheet {
+    // Kill PC chrome: drag header + resize handle — the sheet provides both.
+    .walkthrough-header,
+    .walkthrough-resize-handle {
+      display: none !important;
+    }
+
+    // Reset PC-origin positioning so the overlay fills the sheet content.
+    background: #000;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    // Cap the overlay to the visible sheet area. The sheet itself is always
+    // 100dvh tall (anchored top:0) and translated down by var(--sheet-y);
+    // without this cap the canvas renders to the full sheet height
+    // (e.g. 685px in half state) when only ~305px is visible, wasting pixels
+    // and showing only the top portion of the rendered video.
+    max-height: calc(100dvh - var(--sheet-y, 0px) - 32px);
+    @supports not (height: 100dvh) {
+      max-height: calc(100vh - var(--sheet-y, 0px) - 32px);
+    }
+
+    // Controls at the BOTTOM of the visible sheet area (conventional
+    // video-player placement). The overlay's max-height caps it to the
+    // visible area, so "bottom of overlay" = "bottom of the phone screen
+    // minus safe-area" for all three states.
+    .walkthrough-controls {
+      flex: 0 0 auto;
+      margin-top: auto; // pushes controls to the bottom when canvas is hidden (peek)
+      padding: 10px 12px;
+      background: rgba(0, 0, 0, 0.82);
+      color: #fff;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: none;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    // Hide speed selector on mobile (rare need, clutters compact bar)
+    .walkthrough-speed-select {
+      display: none;
+    }
+
+    // Restyle follow toggle as a compact button in the controls bar.
+    .walkthrough-follow-label {
+      flex-shrink: 0;
+      gap: 6px;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.75);
+      user-select: none;
+
+      input[type="checkbox"] {
+        margin: 0;
+      }
+    }
+
+    .walkthrough-canvas {
+      flex: 1 1 auto;
+      min-height: 0; // override PC's min-height: 120px
+      position: relative;
+      background: #000;
+    }
+  }
+}
+
+// In peek state, only the controls bar shows (canvas collapsed).
+body[data-device="mobile"] #mSheet[data-state="peek"] .walkthrough-overlay.in-mobile-sheet {
+  .walkthrough-canvas { display: none; }
+}

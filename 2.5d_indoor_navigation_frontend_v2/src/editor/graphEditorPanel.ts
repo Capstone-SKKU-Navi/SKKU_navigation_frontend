@@ -113,12 +113,17 @@ export function createPanel(cb: PanelCallbacks): HTMLElement {
           <label>Weight</label>
           <span id="geEdgeWeight" class="ge-prop-value"></span>
         </div>
+        <div class="ge-prop-row">
+          <label>Building</label>
+          <span id="geEdgeBuilding" class="ge-prop-value"></span>
+        </div>
 
         <div class="ge-props-title" style="margin-top:6px">
           <span id="geEdgeFwdLabel">→ From → To</span>
         </div>
         <!-- FWD: corridor tree picker (hidden for vertical edges) -->
         <div id="geEdgeFwdCorridorSection">
+          <input type="text" class="ge-input ge-video-search" id="geEdgeFwdVideoSearch" placeholder="파일명 검색 (예: F3_5_cw)" />
           <div id="geEdgeFwdTreeContainer" class="ge-video-tree"></div>
           <div class="ge-prop-row ge-edge-time-row" id="geEdgeFwdTimeRow" style="display:none">
             <span id="geEdgeFwdTime" class="ge-edge-time">-</span>
@@ -140,6 +145,7 @@ export function createPanel(cb: PanelCallbacks): HTMLElement {
         </div>
         <!-- REV: corridor tree picker -->
         <div id="geEdgeRevCorridorSection">
+          <input type="text" class="ge-input ge-video-search" id="geEdgeRevVideoSearch" placeholder="파일명 검색 (예: F3_5_cw)" />
           <div id="geEdgeRevTreeContainer" class="ge-video-tree"></div>
           <div class="ge-prop-row ge-edge-time-row" id="geEdgeRevTimeRow" style="display:none">
             <span id="geEdgeRevTime" class="ge-edge-time">-</span>
@@ -415,15 +421,16 @@ export function showEdgeProperties(edge: NavEdge, fromNode: NavNode, toNode: Nav
   const fromLabel = fromNode.label || fromNode.id.slice(5, 13);
   const toLabel = toNode.label || toNode.id.slice(5, 13);
   setText('geEdgeWeight', edge.weight + 'm');
+  setText('geEdgeBuilding', edge.building);
 
   // Vertical = both nodes are stairs or both are elevator
   const isVerticalStairs = fromNode.type === 'stairs' && toNode.type === 'stairs';
   const isVerticalElev = fromNode.type === 'elevator' && toNode.type === 'elevator';
   const isVertical = isVerticalStairs || isVerticalElev;
 
-  // Direction labels
-  setText('geEdgeFwdLabel', `FWD  ${fromLabel} → ${toLabel}`);
-  setText('geEdgeRevLabel', `REV  ${toLabel} → ${fromLabel}`);
+  // Direction labels — from end = red, to end = blue, matching map endpoint rings
+  setHtml('geEdgeFwdLabel', `FWD&nbsp;&nbsp;${renderEndpoint(fromLabel, 'from')} → ${renderEndpoint(toLabel, 'to')}`);
+  setHtml('geEdgeRevLabel', `REV&nbsp;&nbsp;${renderEndpoint(toLabel, 'to')} → ${renderEndpoint(fromLabel, 'from')}`);
 
   for (const dir of ['Fwd', 'Rev'] as const) {
     const corridorSection = document.getElementById(`geEdge${dir}CorridorSection`);
@@ -459,7 +466,7 @@ export function showEdgeProperties(edge: NavEdge, fromNode: NavNode, toNode: Nav
         const videos = suggestVideosForEdge(fromNode, toNode);
         const videoKey = dir === 'Fwd' ? 'videoFwd' : 'videoRev';
         const currentValue = edge[videoKey] || '';
-        buildVideoTree(treeContainer, videos, currentValue, (filename) => {
+        const onSelect = (filename: string) => {
           const edgeId = propsEl.dataset.edgeId;
           if (!edgeId) return;
           const startKey = dir === 'Fwd' ? 'videoFwdStart' : 'videoRevStart';
@@ -509,7 +516,16 @@ export function showEdgeProperties(edge: NavEdge, fromNode: NavNode, toNode: Nav
               });
             }
           });
-        });
+        };
+
+        const searchInput = document.getElementById(`geEdge${dir}VideoSearch`) as HTMLInputElement | null;
+        const initialFilter = searchInput?.value.trim() ?? '';
+        buildVideoTree(treeContainer, videos, currentValue, onSelect, initialFilter);
+        if (searchInput) {
+          searchInput.oninput = () => {
+            buildVideoTree(treeContainer, videos, currentValue, onSelect, searchInput.value.trim());
+          };
+        }
       }
 
       // Time row
@@ -534,10 +550,60 @@ function buildVideoTree(
   videos: VideoEntry[],
   currentValue: string,
   onSelect: (filename: string) => void,
+  filterText: string = '',
 ): void {
   container.innerHTML = '';
 
-  // Group: building > floor
+  const makeItem = (v: VideoEntry, primary: string): HTMLDivElement => {
+    const item = document.createElement('div');
+    item.className = 'ge-tree-item' + (v.filename === currentValue ? ' selected' : '');
+    item.dataset.value = v.filename;
+    item.textContent = primary;
+    item.title = `${v.filename}${v.label ? ` — ${v.label}` : ''}`;
+    item.addEventListener('click', () => {
+      container.querySelectorAll('.ge-tree-item.selected').forEach(el => el.classList.remove('selected'));
+      item.classList.add('selected');
+      onSelect(v.filename);
+    });
+    return item;
+  };
+
+  const addNoneItem = () => {
+    const noneItem = document.createElement('div');
+    noneItem.className = 'ge-tree-item' + (!currentValue ? ' selected' : '');
+    noneItem.textContent = '(없음)';
+    noneItem.addEventListener('click', () => {
+      container.querySelectorAll('.ge-tree-item.selected').forEach(el => el.classList.remove('selected'));
+      noneItem.classList.add('selected');
+      onSelect('');
+    });
+    container.insertBefore(noneItem, container.firstChild);
+  };
+
+  // Flat filtered view — search by filename substring (case-insensitive)
+  const filter = filterText.trim().toLowerCase();
+  if (filter) {
+    const matches = videos
+      .filter(v => v.filename.toLowerCase().includes(filter))
+      .sort((a, b) => a.filename.localeCompare(b.filename));
+
+    if (matches.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'ge-tree-empty';
+      empty.textContent = '일치하는 영상 없음';
+      container.appendChild(empty);
+    } else {
+      for (const v of matches) {
+        // Show the filename itself (minus extension) so the search target is visible
+        container.appendChild(makeItem(v, v.filename.replace(/\.mp4$/, '')));
+      }
+    }
+
+    addNoneItem();
+    return;
+  }
+
+  // Tree view (default): building > floor
   const tree: Record<string, Record<string, VideoEntry[]>> = {};
   for (const v of videos) {
     const building = v.filename.split('_')[0] || 'unknown';
@@ -557,31 +623,12 @@ function buildVideoTree(
       buildingFolder.children.appendChild(floorFolder.el);
 
       for (const v of floors[floor]) {
-        const item = document.createElement('div');
-        item.className = 'ge-tree-item' + (v.filename === currentValue ? ' selected' : '');
-        item.dataset.value = v.filename;
-        item.textContent = v.label || v.filename.replace('.mp4', '');
-        item.title = v.filename;
-        item.addEventListener('click', () => {
-          container.querySelectorAll('.ge-tree-item.selected').forEach(el => el.classList.remove('selected'));
-          item.classList.add('selected');
-          onSelect(v.filename);
-        });
-        floorFolder.children.appendChild(item);
+        floorFolder.children.appendChild(makeItem(v, v.label || v.filename.replace(/\.mp4$/, '')));
       }
     }
   }
 
-  // "None" option at top
-  const noneItem = document.createElement('div');
-  noneItem.className = 'ge-tree-item' + (!currentValue ? ' selected' : '');
-  noneItem.textContent = '(없음)';
-  noneItem.addEventListener('click', () => {
-    container.querySelectorAll('.ge-tree-item.selected').forEach(el => el.classList.remove('selected'));
-    noneItem.classList.add('selected');
-    onSelect('');
-  });
-  container.insertBefore(noneItem, container.firstChild);
+  addNoneItem();
 }
 
 function createFolder(label: string, startOpen: boolean): { el: HTMLElement; children: HTMLElement } {
@@ -693,7 +740,7 @@ export function showMultiEdgeProperties(edges: NavEdge[], nodes: Record<string, 
   // Build ordered chain (E1, E2, E3...)
   const chain = getOrderedChain(edges);
 
-  // Derive start/end labels from the chain
+  // Derive start/end labels from the chain. Chain start = from (red), end = to (blue).
   if (chain && chain.length > 0) {
     const first = chain[0];
     const last = chain[chain.length - 1];
@@ -701,8 +748,8 @@ export function showMultiEdgeProperties(edges: NavEdge[], nodes: Record<string, 
     const endId = last.aligned ? last.edge.to : last.edge.from;
     const startLabel = nodes[startId]?.label || startId.slice(5, 13);
     const endLabel = nodes[endId]?.label || endId.slice(5, 13);
-    setText('geMultiEdgeFwdLabel', `FWD  ${startLabel} → ${endLabel}`);
-    setText('geMultiEdgeRevLabel', `REV  ${endLabel} → ${startLabel}`);
+    setHtml('geMultiEdgeFwdLabel', `FWD&nbsp;&nbsp;${renderEndpoint(startLabel, 'from')} → ${renderEndpoint(endLabel, 'to')}`);
+    setHtml('geMultiEdgeRevLabel', `REV&nbsp;&nbsp;${renderEndpoint(endLabel, 'to')} → ${renderEndpoint(startLabel, 'from')}`);
   }
   const orderedEdges = chain ? chain.map(c => c.edge) : edges;
 
@@ -1000,4 +1047,26 @@ export function setNodeIdData(nodeId: string): void {
 function setText(id: string, text: string): void {
   const el = document.getElementById(id);
   if (el) el.textContent = text;
+}
+
+function setHtml(id: string, html: string): void {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
+}
+
+function escapeHtml(s: string): string {
+  return s.replace(/[&<>"']/g, c => {
+    switch (c) {
+      case '&': return '&amp;';
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '"': return '&quot;';
+      case "'": return '&#39;';
+      default: return c;
+    }
+  });
+}
+
+function renderEndpoint(label: string, role: 'from' | 'to'): string {
+  return `<span class="ge-dir-endpoint ge-dir-${role}">${escapeHtml(label)}</span>`;
 }

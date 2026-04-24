@@ -88,7 +88,7 @@ export function addEdge(state: EditorState, from: string, to: string, weightOver
   if (exists) return null;
 
   const weight = weightOverride ?? calcEdgeWeight(nodeA, nodeB);
-  const edge: NavEdge = { id: genEdgeId(from, to), from, to, weight };
+  const edge: NavEdge = { id: genEdgeId(from, to), from, to, weight, building: nodeA.building };
   const cmd = new AddEdgeCmd(edge);
   executeCmd(state, cmd);
   return edge;
@@ -222,6 +222,7 @@ export function importGraph(data: NavGraphExport): NavGraph {
     from: e.from,
     to: e.to,
     weight: e.weight,
+    building: nodes[e.from]?.building ?? nodes[e.to]?.building ?? 'ENG1',
     ...(e.videoFwd ? { videoFwd: e.videoFwd } : {}),
     ...(e.videoFwdStart !== undefined ? { videoFwdStart: e.videoFwdStart } : {}),
     ...(e.videoFwdEnd !== undefined ? { videoFwdEnd: e.videoFwdEnd } : {}),
