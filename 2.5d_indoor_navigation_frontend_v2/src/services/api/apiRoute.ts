@@ -6,8 +6,7 @@
 
 import type { RoomListItem } from '../../models/types';
 import * as BackendService from '../backendService';
-
-const API_BASE = 'http://localhost:8080/api';
+import { getApiBase } from '../../config/apiConfig';
 
 // ===== Types: coordinates sent to backend =====
 
@@ -83,9 +82,13 @@ export async function init(): Promise<void> {
 
 // ===== Route Finding (coordinate-based) =====
 
-export async function findRoute(from: RouteCoordinate, to: RouteCoordinate): Promise<ApiRouteResult | null> {
+export async function findRoute(
+  from: RouteCoordinate,
+  to: RouteCoordinate,
+  signal?: AbortSignal,
+): Promise<ApiRouteResult | null> {
   console.log('[ApiRoute] POST /api/route', from, '→', to);
-  const url = `${API_BASE}/route`;
+  const url = `${getApiBase()}/route`;
   const t0 = performance.now();
   let status: number | null = null;
   try {
@@ -93,6 +96,7 @@ export async function findRoute(from: RouteCoordinate, to: RouteCoordinate): Pro
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ from, to }),
+      signal,
     });
     status = res.status;
     if (!res.ok) throw new Error(`API route failed: ${res.status}`);
@@ -120,11 +124,14 @@ export async function findRoute(from: RouteCoordinate, to: RouteCoordinate): Pro
       videoEndCoordIdx: data.walkthrough.videoEndCoordIdx,
     };
   } catch (err: any) {
-    document.dispatchEvent(new CustomEvent('apiRouteCall', { detail: {
-      url, method: 'POST', status,
-      durationMs: Math.round(performance.now() - t0),
-      pathLength: 0, edgeCount: 0, error: err?.message ?? String(err),
-    }}));
+    // Don't telemetry-spam on intentional aborts.
+    if (err?.name !== 'AbortError') {
+      document.dispatchEvent(new CustomEvent('apiRouteCall', { detail: {
+        url, method: 'POST', status,
+        durationMs: Math.round(performance.now() - t0),
+        pathLength: 0, edgeCount: 0, error: err?.message ?? String(err),
+      }}));
+    }
     throw err;
   }
 }
@@ -134,7 +141,7 @@ export async function findRoute(from: RouteCoordinate, to: RouteCoordinate): Pro
 export async function searchRooms(query: string): Promise<RoomListItem[]> {
   if (!query.trim()) return [];
   console.log('[ApiRoute] Searching rooms:', query);
-  const res = await fetch(`${API_BASE}/rooms/search?q=${encodeURIComponent(query)}`);
+  const res = await fetch(`${getApiBase()}/rooms/search?q=${encodeURIComponent(query)}`);
   if (!res.ok) return [];
   const rooms: ApiRoomSearchResult[] = await res.json();
   return rooms.map((r): RoomListItem => ({

@@ -1,4 +1,8 @@
 // ===== Video Settings — per-video yaw stored globally =====
+//
+// Note: SAVE_URL is intentionally same-origin (the webpack dev server's
+// setupMiddlewares writes to public/geojson/video_settings.json). It is NOT
+// a backend Spring Boot endpoint and must not flow through getApiBase().
 
 const SETTINGS_URL = '/geojson/video_settings.json';
 const SAVE_URL = '/api/save-video-settings';

@@ -13,6 +13,7 @@
  */
 
 import { MOBILE_IDS } from './mobileChrome';
+import { escapeHtml } from '../utils/escapeHtml';
 import * as RouteActions from '../services/routeActions';
 
 let currentRef: string | null = null;
@@ -79,6 +80,3 @@ function hide(row: HTMLElement): void {
   row.setAttribute('aria-hidden', 'true');
 }
 
-function escapeHtml(s: string): string {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}

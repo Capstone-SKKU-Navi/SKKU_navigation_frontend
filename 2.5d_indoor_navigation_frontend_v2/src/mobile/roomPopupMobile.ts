@@ -9,6 +9,7 @@ import { MOBILE_IDS } from './mobileChrome';
 import { onSwipe } from './gestures';
 import * as RouteActions from '../services/routeActions';
 import { ROOM_TYPE_LABELS } from '../models/types';
+import { escapeHtml } from '../utils/escapeHtml';
 
 interface RoomClickDetail {
   ref: string;
@@ -92,6 +93,3 @@ function hide(popup: HTMLElement): void {
   currentRef = null;
 }
 
-function escapeHtml(s: string): string {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}

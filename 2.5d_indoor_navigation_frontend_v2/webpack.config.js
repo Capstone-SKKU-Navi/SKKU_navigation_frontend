@@ -86,6 +86,26 @@ module.exports = (env, argv) => {
         overlay: false,                           // disable error overlay blocking clicks
         webSocketURL: 'auto://0.0.0.0:0/ws',     // HMR reconnects from LAN
       },
+      // Proxy the backend Spring Boot endpoints so the browser sees them as
+      // same-origin. Required for mobile testing over LAN IPs (otherwise the
+      // backend's CORS allowlist rejects the cross-origin request).
+      // The three /api/save-* paths are NOT listed here — they're served by
+      // the local PUT handlers in setupMiddlewares (file writes to public/).
+      proxy: [
+        {
+          context: [
+            '/api/route',
+            '/api/graph',
+            '/api/geojson',
+            '/api/rooms',
+            '/api/nodes',
+            '/api/edges',
+            '/api/buildings',
+          ],
+          target: 'http://localhost:8080',
+          changeOrigin: true,
+        },
+      ],
       setupMiddlewares(middlewares, devServer) {
         const jsonParser = require('express').json({ limit: '10mb' });
 

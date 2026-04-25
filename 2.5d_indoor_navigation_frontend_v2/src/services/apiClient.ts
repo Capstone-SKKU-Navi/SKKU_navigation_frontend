@@ -33,11 +33,15 @@ export async function initRouting(): Promise<void> {
 }
 
 /** Find route between two coordinates */
-export async function fetchRoute(from: RouteCoordinate, to: RouteCoordinate): Promise<ApiRouteResult | null> {
+export async function fetchRoute(
+  from: RouteCoordinate,
+  to: RouteCoordinate,
+  signal?: AbortSignal,
+): Promise<ApiRouteResult | null> {
   if (useApi) {
-    return ApiRoute.findRoute(from, to);
+    return ApiRoute.findRoute(from, to, signal);
   }
-  // Local fallback: same logic as backend, runs locally with graph.json
+  // Local fallback: synchronous Dijkstra on graph.json — signal is irrelevant.
   return LocalRoute.findRoute(from, to);
 }
 

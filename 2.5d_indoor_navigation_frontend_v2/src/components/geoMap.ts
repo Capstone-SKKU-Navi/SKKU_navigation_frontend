@@ -4,6 +4,8 @@ import * as IndoorLayer from './indoorLayer';
 import * as RouteOverlay from './routeOverlay';
 import * as FloatingLabels from './floatingLabels';
 import { MapConfig } from '../config/mapConfig';
+import { ROOM_TYPE_LABELS } from '../models/types';
+import { polygonCenter } from '../utils/polygonCenter';
 
 /**
  * GeoMap — MapLibre GL JS based map component
@@ -257,7 +259,7 @@ function showRoomInfoPopup(ref: string, feature: GeoJSON.Feature, center: number
 
   const roomType = feature.properties?.room_type ?? '';
   const name = feature.properties?.name ?? '';
-  const typeLabel = roomType ? getRoomTypeLabel(roomType) : '';
+  const typeLabel = roomType ? (ROOM_TYPE_LABELS[roomType] ?? roomType) : '';
 
   content.innerHTML = `
     <div class="room-info-title">${ref}${name ? ` (${name})` : ''}</div>
@@ -312,28 +314,6 @@ function initRoomInfoPopup(): void {
     dragging = false;
     popup.classList.remove('dragging');
   });
-}
-
-function getRoomTypeLabel(type: string): string {
-  const labels: Record<string, string> = {
-    classroom: '교실',
-    lab: '실험실',
-    restroom: '화장실',
-    office: '사무실',
-    stairs: '계단',
-    elevator: '엘리베이터',
-  };
-  return labels[type] ?? type;
-}
-
-function polygonCenter(coords: number[][]): number[] {
-  let sumLng = 0, sumLat = 0;
-  const len = coords.length - 1;
-  for (let i = 0; i < len; i++) {
-    sumLng += coords[i][0];
-    sumLat += coords[i][1];
-  }
-  return [sumLng / len, sumLat / len];
 }
 
 function setupMiddleClickPan(m: maplibregl.Map): void {

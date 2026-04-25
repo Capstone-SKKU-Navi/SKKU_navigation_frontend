@@ -3,6 +3,7 @@ import { ROOM_COLORS } from '../models/types';
 import * as BackendService from '../services/backendService';
 import * as FloatingLabels from './floatingLabels';
 import { MapConfig } from '../config/mapConfig';
+import { polygonGeomCenter } from '../utils/polygonCenter';
 
 /**
  * IndoorLayer — stacked multi-floor 3D indoor rendering (multi-building)
@@ -67,6 +68,21 @@ export function getLevelBase(level: number): number {
 export function addIndoorLayers(map: maplibregl.Map): void {
   const levels = BackendService.getAllLevels();
   currentLevel = levels[levels.length - 1] || 1; // start at lowest
+
+  // Drop stale "already added" entries for layer ids that no longer exist on
+  // the map (e.g. after a style reload wiped sources/layers but our Set is
+  // still populated from a previous init). Without this, addBuildingLevelLayers
+  // skips re-adding and the map renders blank.
+  // Rebuild the layer id from components rather than splitting `key` — the key
+  // format is `${building}-${level}` and building codes may contain hyphens.
+  for (const building of BackendService.getBuildingCodes()) {
+    for (const level of BackendService.getBuildingLevels(building)) {
+      const key = `${building}-${level}`;
+      if (!addedBuildingLevels.has(key)) continue;
+      const layerId = `${building}-floor-${level}-rooms-3d`;
+      if (!map.getLayer(layerId)) addedBuildingLevels.delete(key);
+    }
+  }
 
   for (const building of BackendService.getBuildingCodes()) {
     const bLevels = BackendService.getBuildingLevels(building);
@@ -179,12 +195,7 @@ export function queryRoomAt(
   if (!ref) return null;
 
   // Compute a representative lngLat from the feature geometry centroid.
-  const geom = f.geometry as GeoJSON.Polygon | GeoJSON.MultiPolygon;
-  const ring = geom.type === 'Polygon' ? geom.coordinates[0] : geom.coordinates[0][0];
-  let sx = 0, sy = 0;
-  const n = ring.length - 1;
-  for (let i = 0; i < n; i++) { sx += ring[i][0]; sy += ring[i][1]; }
-  const lngLat: [number, number] = [sx / n, sy / n];
+  const lngLat = polygonGeomCenter(f.geometry as GeoJSON.Polygon | GeoJSON.MultiPolygon);
 
   return {
     ref,
@@ -539,7 +550,7 @@ function buildLabelPoints(rooms: GeoJSON.Feature[]): GeoJSON.Feature[] {
       ? [props._label_pos[0], props._label_pos[1]]
       : props._centroid
         ? [props._centroid[0], props._centroid[1]]
-        : polygonCentroid(room.geometry as GeoJSON.Polygon | GeoJSON.MultiPolygon);
+        : polygonGeomCenter(room.geometry as GeoJSON.Polygon | GeoJSON.MultiPolygon);
 
     return {
       type: 'Feature' as const,
@@ -549,13 +560,6 @@ function buildLabelPoints(rooms: GeoJSON.Feature[]): GeoJSON.Feature[] {
   });
 }
 
-function polygonCentroid(geom: GeoJSON.Polygon | GeoJSON.MultiPolygon): [number, number] {
-  const ring = geom.type === 'Polygon' ? geom.coordinates[0] : geom.coordinates[0][0];
-  const n = ring.length - 1;
-  let sx = 0, sy = 0;
-  for (let i = 0; i < n; i++) { sx += ring[i][0]; sy += ring[i][1]; }
-  return [sx / n, sy / n];
-}
 
 /**
  * Rebuild every layer source for every loaded building/level from the current

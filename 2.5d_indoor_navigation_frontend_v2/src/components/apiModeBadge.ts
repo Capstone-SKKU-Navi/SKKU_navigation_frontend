@@ -13,11 +13,12 @@ import * as ApiClient from '../services/apiClient';
 import * as BackendService from '../services/backendService';
 import * as GeoMap from './geoMap';
 import * as IndoorLayer from './indoorLayer';
+import { getApiBase } from '../config/apiConfig';
+import { escapeHtml } from '../utils/escapeHtml';
 
 const STYLE_ID = 'api-mode-badge-style';
 const ROOT_ID = 'apiModeBadge';
 const POS_KEY = 'apiModeBadge.pos';
-const API_BASE = 'http://localhost:8080/api';
 
 type ApiCallDetail = {
   url: string;
@@ -286,7 +287,7 @@ async function onToggleClick(): Promise<void> {
       // 1. /api/graph → "N nodes loaded"
       try {
         const t0 = performance.now();
-        const res = await fetch(`${API_BASE}/graph`);
+        const res = await fetch(`${getApiBase()}/graph`);
         if (!res.ok) throw new Error(`status ${res.status}`);
         const graph = await res.json() as { nodes?: unknown[]; edges?: unknown[] };
         nodeCacheCount = Array.isArray(graph.nodes) ? graph.nodes.length : 0;
@@ -298,7 +299,7 @@ async function onToggleClick(): Promise<void> {
       // 2. /api/geojson/all → replace BackendService state, refresh map sources
       try {
         const t0 = performance.now();
-        await BackendService.fetchBackendDataFromApi(API_BASE);
+        await BackendService.fetchBackendDataFromApi(getApiBase());
         const map = GeoMap.getMap();
         if (map) IndoorLayer.refreshAll(map);
         const ms = Math.round(performance.now() - t0);
@@ -390,10 +391,6 @@ function shortPath(url: string): string {
   } catch {
     return url;
   }
-}
-
-function escapeHtml(s: string): string {
-  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 // ===== Event listener =====

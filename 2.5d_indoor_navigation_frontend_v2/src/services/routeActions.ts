@@ -107,6 +107,11 @@ function showRouteInfo(time: string, distance: number): void {
   if (buildingInfo) buildingInfo.style.display = 'none';
 }
 
+// Tracks the in-flight findRoute request so a newer call can cancel an older
+// one — without this, two rapid clicks can resolve out of order and a stale
+// path overwrites the latest one.
+let routeAbortController: AbortController | null = null;
+
 /**
  * Run the full find-route flow: resolve coords from refs, fetch, render,
  * start walkthrough. Dispatches `routeFound` on success.
@@ -130,8 +135,15 @@ export async function triggerFindRoute(): Promise<void> {
   const from: RouteCoordinate = { lng: fromCentroid[0], lat: fromCentroid[1], level: fromLevel };
   const to: RouteCoordinate = { lng: toCentroid[0], lat: toCentroid[1], level: toLevel };
 
+  // Cancel any prior in-flight request before starting a new one.
+  routeAbortController?.abort();
+  const controller = new AbortController();
+  routeAbortController = controller;
+
   try {
-    const routeResult = await fetchRoute(from, to);
+    const routeResult = await fetchRoute(from, to, controller.signal);
+    // If a newer request started while this one was awaiting, drop this result.
+    if (controller.signal.aborted || routeAbortController !== controller) return;
     if (!routeResult) {
       console.warn('[Route] No route found:', startRef, '→', endRef);
       return;
@@ -156,6 +168,9 @@ export async function triggerFindRoute(): Promise<void> {
 
     document.dispatchEvent(new Event('routeFound'));
   } catch (err: any) {
+    if (err?.name === 'AbortError') return; // superseded by newer request
     console.error('경로 검색 실패:', err);
+  } finally {
+    if (routeAbortController === controller) routeAbortController = null;
   }
 }

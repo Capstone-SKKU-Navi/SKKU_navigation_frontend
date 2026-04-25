@@ -1,6 +1,7 @@
 import maplibregl from 'maplibre-gl';
 import * as BackendService from '../services/backendService';
 import { MapConfig } from '../config/mapConfig';
+import { polygonCenter } from '../utils/polygonCenter';
 
 /**
  * FloatingLabels — HTML div overlay for 3D-positioned room labels
@@ -62,7 +63,7 @@ export function updateLabels(level: number, is3D: boolean, altitude: number): vo
       ? (f.geometry as GeoJSON.Polygon).coordinates[0]
       : (f.geometry as GeoJSON.MultiPolygon).coordinates[0][0];
 
-    const center = polygonCentroid(coords);
+    const center = polygonCenter(coords);
 
     const el = document.createElement('div');
     el.className = 'floating-label';
@@ -157,12 +158,3 @@ function interpolateFontSize(zoom: number): number {
   return 14 + (zoom - 20.5) / 0.5 * 2;                      // 14→16
 }
 
-function polygonCentroid(coords: number[][]): [number, number] {
-  let sumLng = 0, sumLat = 0;
-  const len = coords.length - 1; // exclude closing coordinate
-  for (let i = 0; i < len; i++) {
-    sumLng += coords[i][0];
-    sumLat += coords[i][1];
-  }
-  return [sumLng / len, sumLat / len];
-}

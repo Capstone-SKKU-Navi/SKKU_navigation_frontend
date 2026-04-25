@@ -3,9 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#121417" media="(prefers-color-scheme: dark)">
     <title>SKKU 제1공학관 실내 내비게이션</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
+    <!-- ===== TEMPORARY: in-page mobile console (eruda) =====
+         Activate: append ?debug=1 to the URL on the device.
+         Remove: delete this entire block (until END eruda) when no longer needed. -->
+    <script>
+      (function () {
+        if (!/[?&]debug=1\b/.test(location.search)) return;
+        var s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/eruda@3.4.1';
+        s.onload = function () { try { window.eruda.init(); } catch (_) {} };
+        document.head.appendChild(s);
+      })();
+    </script>
+    <!-- ===== END eruda ===== -->
 </head>
 
 <body>

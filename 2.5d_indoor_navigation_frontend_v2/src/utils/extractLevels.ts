@@ -6,7 +6,7 @@ export function extractLevels(level: string): number[] {
   level = level.trim();
   if (level === '') return [];
 
-  const regExRange = /(-?\d)-(-?\d)/;
+  const regExRange = /(-?\d+)-(-?\d+)/;
 
   if (level.includes(';')) {
     return level.split(';').flatMap(val => extractLevels(val));

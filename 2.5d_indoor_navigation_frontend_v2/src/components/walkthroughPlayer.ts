@@ -165,8 +165,15 @@ export function createWalkthroughPlayer(
 
   // ===== Preload next segment onto standby =====
 
+  // Monotonic token guards against an older preload's loadeddata/seeked
+  // callbacks firing after a newer preload has started — without it, a stale
+  // closure could flip `standbyReady = true` while `standbySegIdx` already
+  // refers to a different segment.
+  let preloadToken = 0;
+
   function preloadNextSegment(segIdx: number): void {
     if (segIdx >= segments.length) return;
+    const myToken = ++preloadToken;
     standbyReady = false;
     standbySegIdx = segIdx;
     const seg = segments[segIdx];
@@ -175,9 +182,11 @@ export function createWalkthroughPlayer(
     vid.load();
     vid.addEventListener('loadeddata', function onLoad() {
       vid.removeEventListener('loadeddata', onLoad);
+      if (preloadToken !== myToken || destroyed) return;
       vid.currentTime = seg.videoStart;
       vid.addEventListener('seeked', function onSeek() {
         vid.removeEventListener('seeked', onSeek);
+        if (preloadToken !== myToken || destroyed) return;
         standbyReady = true;
         console.log(`[Walkthrough] standby ready: segment ${segIdx} (${seg.videoFile} @${seg.videoStart.toFixed(2)})`);
       });
@@ -226,6 +235,7 @@ export function createWalkthroughPlayer(
   // ===== Advance to next segment =====
 
   function advanceToNextSegment(): void {
+    if (loadingSegment) return; // already advancing — guard against double-call
     const nextSegIdx = currentSegmentIdx + 1;
     if (nextSegIdx >= segments.length) {
       playing = false;
@@ -234,26 +244,33 @@ export function createWalkthroughPlayer(
       return;
     }
 
+    // Mark loading immediately so the same animate() frame's stall-detection
+    // and any synchronous re-entry won't fire a second advance.
+    loadingSegment = true;
+
     if (standbyReady && standbySegIdx === nextSegIdx) {
+      loadingSegment = false; // swapToStandby is synchronous; clear before swap
       swapToStandby(nextSegIdx);
     } else {
       console.log(`[Walkthrough] fallback load for segment ${nextSegIdx}`);
       currentClipIdx = segments[nextSegIdx].clipStartIdx;
       lon = clips[currentClipIdx].yaw;
+      // loadSegment sets loadingSegment=true again internally; keep it set here
+      // so the gap before its first await is also covered.
       loadSegment(nextSegIdx, segments[nextSegIdx].videoStart);
     }
   }
 
   // ===== Sequential load (fallback + initial + seek) =====
 
-  function waitForEvent(el: HTMLMediaElement, event: string, timeout = 2000): Promise<void> {
+  function waitForEvent(el: HTMLMediaElement, event: string, timeout = 2000): Promise<boolean> {
     return new Promise(resolve => {
-      if (destroyed) { resolve(); return; }
-      const timer = setTimeout(resolve, timeout);
+      if (destroyed) { resolve(false); return; }
+      const timer = setTimeout(() => resolve(false), timeout);
       el.addEventListener(event, function handler() {
         el.removeEventListener(event, handler);
         clearTimeout(timer);
-        resolve();
+        resolve(true);
       }, { once: true });
     });
   }
@@ -270,8 +287,13 @@ export function createWalkthroughPlayer(
     if (needsSrcChange) {
       activeVideo.src = getVideoUrl(seg.videoFile);
       activeVideo.load();
-      await waitForEvent(activeVideo, 'loadeddata');
+      const loaded = await waitForEvent(activeVideo, 'loadeddata');
       if (destroyed) return;
+      if (!loaded) {
+        showError('Video load timeout');
+        loadingSegment = false;
+        return;
+      }
 
       texture.dispose();
       texture = new THREE.VideoTexture(activeVideo);
@@ -281,8 +303,13 @@ export function createWalkthroughPlayer(
     }
 
     activeVideo.currentTime = seekTime;
-    await waitForEvent(activeVideo, 'seeked');
+    const seeked = await waitForEvent(activeVideo, 'seeked');
     if (destroyed) return;
+    if (!seeked) {
+      showError('Video seek timeout');
+      loadingSegment = false;
+      return;
+    }
 
     currentSegmentIdx = segIdx;
     loadingSegment = false;
@@ -361,7 +388,11 @@ export function createWalkthroughPlayer(
       }
 
       // Update clip index based on target time (smooth, not dependent on decoder)
-      while (currentClipIdx < seg.clipEndIdx && targetTime >= clips[currentClipIdx].videoEnd) {
+      while (
+        currentClipIdx < seg.clipEndIdx &&
+        currentClipIdx + 1 < clips.length &&
+        targetTime >= clips[currentClipIdx].videoEnd
+      ) {
         currentClipIdx++;
         lon = clips[currentClipIdx].yaw;
       }
@@ -376,7 +407,11 @@ export function createWalkthroughPlayer(
     // Normal playback (rate <= 2x)
     const t = activeVideo.currentTime;
 
-    while (currentClipIdx < seg.clipEndIdx && t >= clips[currentClipIdx].videoEnd) {
+    while (
+      currentClipIdx < seg.clipEndIdx &&
+      currentClipIdx + 1 < clips.length &&
+      t >= clips[currentClipIdx].videoEnd
+    ) {
       currentClipIdx++;
       lon = clips[currentClipIdx].yaw;
     }
@@ -515,6 +550,13 @@ export function createWalkthroughPlayer(
       container.removeEventListener('pointerup', onPointerUp);
       container.removeEventListener('pointercancel', onPointerUp);
       container.removeEventListener('wheel', onWheel);
+
+      videoA.removeEventListener('error', onVideoError);
+      videoB.removeEventListener('error', onVideoError);
+      videoA.removeEventListener('ended', onVideoEnded);
+      videoB.removeEventListener('ended', onVideoEnded);
+      videoA.removeEventListener('loadeddata', onVideoLoaded);
+      videoB.removeEventListener('loadeddata', onVideoLoaded);
 
       videoA.pause(); videoA.src = '';
       videoB.pause(); videoB.src = '';

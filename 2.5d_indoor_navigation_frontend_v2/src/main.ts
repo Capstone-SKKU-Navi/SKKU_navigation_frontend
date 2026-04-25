@@ -12,11 +12,7 @@ import * as WalkthroughOverlay from './components/walkthroughOverlay';
 import { isMobileDevice } from './utils/deviceDetection';
 import * as RouteActions from './services/routeActions';
 import { setupApiModeBadge } from './components/apiModeBadge';
-
-// ===== Helpers =====
-function escapeHtml(s: string): string {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
+import { escapeHtml } from './utils/escapeHtml';
 
 // ===== Route 3D sync =====
 function syncRoute3D(): void {
@@ -186,17 +182,22 @@ function updateFloorWheelActive(activeLevel: number): void {
   if (descEl) descEl.textContent = `${activeLevel}F`;
 }
 
-// ===== Room Search =====
-function setupRoomSearch(): void {
-  const input = document.getElementById('roomSearchInput') as HTMLInputElement;
-  const dropdown = document.getElementById('searchAutocomplete');
-  if (!input || !dropdown) return;
-
+// ===== Generic autocomplete wiring =====
+//
+// Drives the input → debounced search → dropdown → keyboard nav loop for
+// both the top-bar search and the route start/end inputs. Caller supplies
+// the outside-click container selector and the per-pick handler.
+function setupAutocomplete(
+  input: HTMLInputElement,
+  dropdown: HTMLElement,
+  outsideSelector: string,
+  onPick: (room: RoomListItem) => void,
+): void {
   let highlightIdx = -1;
   let currentResults: RoomListItem[] = [];
+  let searchTimer: number | null = null;
 
-  input.addEventListener('input', async () => {
-    const query = input.value.trim();
+  const runSearch = async (query: string) => {
     const results = await apiSearchRooms(query);
     if (input.value.trim() !== query) return; // stale response — input changed during fetch
     currentResults = results;
@@ -218,14 +219,26 @@ function setupRoomSearch(): void {
 
     dropdown.classList.add('visible');
 
-    // Click handlers
     dropdown.querySelectorAll('.autocomplete-item').forEach(item => {
       item.addEventListener('click', () => {
         const idx = parseInt((item as HTMLElement).dataset.index ?? '0');
-        selectRoom(currentResults[idx]);
+        onPick(currentResults[idx]);
         dropdown.classList.remove('visible');
       });
     });
+  };
+
+  input.addEventListener('input', () => {
+    const query = input.value.trim();
+    if (searchTimer !== null) {
+      clearTimeout(searchTimer);
+      searchTimer = null;
+    }
+    // Debounce keystroke-driven calls (Korean IME composition fires per jamo).
+    searchTimer = window.setTimeout(() => {
+      searchTimer = null;
+      runSearch(query);
+    }, 180);
   });
 
   input.addEventListener('keydown', (e) => {
@@ -242,19 +255,26 @@ function setupRoomSearch(): void {
       updateHighlight(items, highlightIdx);
     } else if (e.key === 'Enter' && highlightIdx >= 0) {
       e.preventDefault();
-      selectRoom(currentResults[highlightIdx]);
+      onPick(currentResults[highlightIdx]);
       dropdown.classList.remove('visible');
     } else if (e.key === 'Escape') {
       dropdown.classList.remove('visible');
     }
   });
 
-  // Close on outside click
   document.addEventListener('click', (e) => {
-    if (!(e.target as HTMLElement).closest('#searchWrapper')) {
+    if (!(e.target as HTMLElement).closest(outsideSelector)) {
       dropdown.classList.remove('visible');
     }
   });
+}
+
+// ===== Room Search (top-bar) =====
+function setupRoomSearch(): void {
+  const input = document.getElementById('roomSearchInput') as HTMLInputElement;
+  const dropdown = document.getElementById('searchAutocomplete');
+  if (!input || !dropdown) return;
+  setupAutocomplete(input, dropdown, '#searchWrapper', selectRoom);
 }
 
 function updateHighlight(items: NodeListOf<Element>, idx: number): void {
@@ -337,73 +357,10 @@ function setupRouteUI(): void {
 function setupRouteAutocomplete(input: HTMLInputElement, dropdownId: string, onSelect?: () => void): void {
   const dropdown = document.getElementById(dropdownId);
   if (!dropdown) return;
-
-  let highlightIdx = -1;
-  let currentResults: RoomListItem[] = [];
-
-  input.addEventListener('input', async () => {
-    const query = input.value.trim();
-    const results = await apiSearchRooms(query);
-    if (input.value.trim() !== query) return; // stale response — input changed during fetch
-    currentResults = results;
-    highlightIdx = -1;
-
-    if (currentResults.length === 0) {
-      dropdown.classList.remove('visible');
-      return;
-    }
-
-    dropdown.innerHTML = currentResults.map((r, i) => {
-      const typeLabel = ROOM_TYPE_LABELS[r.roomType] ?? r.roomType;
-      const levelStr = r.level.join(',');
-      return `<div class="autocomplete-item" data-index="${i}">
-        <span class="room-ref">${escapeHtml(r.ref)}</span>
-        <span class="room-meta">${levelStr}F ${escapeHtml(typeLabel)}${r.name ? ` · ${escapeHtml(r.name)}` : ''}</span>
-      </div>`;
-    }).join('');
-
-    dropdown.classList.add('visible');
-
-    dropdown.querySelectorAll('.autocomplete-item').forEach(item => {
-      item.addEventListener('click', () => {
-        const idx = parseInt((item as HTMLElement).dataset.index ?? '0');
-        const room = currentResults[idx];
-        input.value = room.ref;
-        RouteActions.cacheRoomCentroid(room);
-        dropdown.classList.remove('visible');
-        onSelect?.();
-      });
-    });
-  });
-
-  input.addEventListener('keydown', (e) => {
-    const items = dropdown.querySelectorAll('.autocomplete-item');
-    if (!items.length) return;
-
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      highlightIdx = Math.min(highlightIdx + 1, items.length - 1);
-      updateHighlight(items, highlightIdx);
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      highlightIdx = Math.max(highlightIdx - 1, 0);
-      updateHighlight(items, highlightIdx);
-    } else if (e.key === 'Enter' && highlightIdx >= 0) {
-      e.preventDefault();
-      const room = currentResults[highlightIdx];
-      input.value = room.ref;
-      RouteActions.cacheRoomCentroid(room);
-      dropdown.classList.remove('visible');
-      onSelect?.();
-    } else if (e.key === 'Escape') {
-      dropdown.classList.remove('visible');
-    }
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!(e.target as HTMLElement).closest('.route-input-wrapper')) {
-      dropdown.classList.remove('visible');
-    }
+  setupAutocomplete(input, dropdown, '.route-input-wrapper', (room) => {
+    input.value = room.ref;
+    RouteActions.cacheRoomCentroid(room);
+    onSelect?.();
   });
 }
 

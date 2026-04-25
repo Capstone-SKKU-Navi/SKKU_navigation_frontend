@@ -5,6 +5,7 @@ import { suggestVideosForEdge, getAllVideos, getOppositeVideo, type VideoEntry }
 import { openVideoSettingsPanel } from './videoSettingsPanel';
 import { computeStairVideos, computeElevatorVideos } from '../utils/verticalVideoFilename';
 import * as RoomCodeLookup from './roomCodeLookup';
+import { escapeHtml } from '../utils/escapeHtml';
 
 let panelEl: HTMLElement | null = null;
 let callbacks: PanelCallbacks | null = null;
@@ -1052,19 +1053,6 @@ function setText(id: string, text: string): void {
 function setHtml(id: string, html: string): void {
   const el = document.getElementById(id);
   if (el) el.innerHTML = html;
-}
-
-function escapeHtml(s: string): string {
-  return s.replace(/[&<>"']/g, c => {
-    switch (c) {
-      case '&': return '&amp;';
-      case '<': return '&lt;';
-      case '>': return '&gt;';
-      case '"': return '&quot;';
-      case "'": return '&#39;';
-      default: return c;
-    }
-  });
 }
 
 function renderEndpoint(label: string, role: 'from' | 'to'): string {

@@ -12,6 +12,7 @@ import { MOBILE_IDS } from './mobileChrome';
 import { searchRooms as apiSearchRooms } from '../services/apiClient';
 import { ROOM_TYPE_LABELS, RoomListItem } from '../models/types';
 import * as RouteActions from '../services/routeActions';
+import { escapeHtml } from '../utils/escapeHtml';
 
 const HISTORY_STATE_TAG = '__mSearchModal';
 
@@ -38,15 +39,26 @@ export function initSearchModal(): void {
     input.focus();
   });
 
-  input.addEventListener('input', async () => {
+  // Debounce the search call — Korean IME composition fires `input` per
+  // jamo, which would otherwise spam the backend with one request per keystroke.
+  // The trailing stale-response guard below still handles late results.
+  let searchTimer: number | null = null;
+  input.addEventListener('input', () => {
     const query = input.value.trim();
     clearBtn.hidden = !query;
     lastQuery = query;
+    if (searchTimer !== null) {
+      clearTimeout(searchTimer);
+      searchTimer = null;
+    }
     if (!query) { renderResults(list, []); return; }
-    const results = await apiSearchRooms(query);
-    if (input.value.trim() !== lastQuery) return; // stale
-    currentResults = results;
-    renderResults(list, results);
+    searchTimer = window.setTimeout(async () => {
+      searchTimer = null;
+      const results = await apiSearchRooms(query);
+      if (input.value.trim() !== lastQuery) return; // stale
+      currentResults = results;
+      renderResults(list, results);
+    }, 180);
   });
 
   // Tap on result
@@ -143,6 +155,3 @@ function renderResults(list: HTMLElement, results: RoomListItem[]): void {
   }).join('');
 }
 
-function escapeHtml(s: string): string {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}

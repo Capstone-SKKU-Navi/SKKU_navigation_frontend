@@ -49,19 +49,40 @@ body[data-device="mobile"] {
 // CSS custom-property theme tokens, reused by mobile partials.
 // Mirrors DESIGN.md color table — wrapped in :root so they're accessible
 // regardless of device mode.
+//
+// Dark-mode override at the bottom of this block flips surface/text/border
+// tokens when the device is in system dark mode. Brand colors
+// (accent/route/start/end) stay constant across themes.
 :root {
   --m-accent: #42A5F5;
   --m-bg: #f0eee9;
   --m-surface: #ffffff;
   --m-surface-muted: #f7f6f4;
+  --m-surface-glass: rgba(255, 255, 255, 0.92);
   --m-text: #212121;
   --m-text-secondary: #757575;
   --m-border: #E0E0E0;
+  --m-press: rgba(0, 0, 0, 0.06);
   --m-route: #42A5F5;
   --m-start: #66BB6A;
   --m-end: #EF5350;
   --m-shadow-1: 0 2px 8px rgba(0,0,0,0.08);
   --m-shadow-2: 0 6px 24px rgba(0,0,0,0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --m-bg: #121417;
+    --m-surface: #1e2126;
+    --m-surface-muted: #262a31;
+    --m-surface-glass: rgba(30, 33, 38, 0.85);
+    --m-text: #ECEDEE;
+    --m-text-secondary: #9AA0A6;
+    --m-border: #2E3338;
+    --m-press: rgba(255, 255, 255, 0.08);
+    --m-shadow-1: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --m-shadow-2: 0 6px 24px rgba(0, 0, 0, 0.55);
+  }
 }
 
 // ============================================================
@@ -135,7 +156,7 @@ body[data-device="mobile"] #mSearchModal {
       color: var(--m-text);
       cursor: pointer;
       .material-icons { font-size: 22px; }
-      &:active { background: rgba(0,0,0,0.06); }
+      &:active { background: var(--m-press); }
     }
 
     .m-search-input {
@@ -166,7 +187,7 @@ body[data-device="mobile"] #mSearchModal {
       flex-direction: column;
       gap: 3px;
 
-      &:active { background: rgba(0,0,0,0.05); }
+      &:active { background: var(--m-press); }
 
       .m-search-ref {
         font: 600 16px 'Pretendard', system-ui, sans-serif;
@@ -205,7 +226,7 @@ body[data-device="mobile"] #mActions {
     height: 44px;
     border: 1px solid var(--m-border);
     border-radius: 22px;
-    background: rgba(255, 255, 255, 0.92);
+    background: var(--m-surface-glass);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     color: var(--m-text);
@@ -248,7 +269,7 @@ body[data-device="mobile"] #mFloorWheel {
   transform: translateY(-50%);
   width: 48px;
   max-height: 70vh;
-  background: rgba(255,255,255,0.92);
+  background: var(--m-surface-glass);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--m-border);
