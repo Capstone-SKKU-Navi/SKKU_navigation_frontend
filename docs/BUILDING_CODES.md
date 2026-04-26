@@ -53,6 +53,7 @@
 | E센터 | `ectr` | E Center | 8층
 | N센터 | `nctr` | N Center | (E센터)
 | 23실습동 | `lab23` | Lab Building 23 | 2층
+| 제약기술관 | `ptech` | Pharmacy technology Building | 4층
 
 ---
 
