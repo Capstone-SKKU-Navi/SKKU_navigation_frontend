@@ -51,26 +51,6 @@ public/geojson/{code}/
 5. **GeoJSON 내보내기** → 현재 층의 room 파일 다운로드
 6. 다운로드된 파일을 `public/geojson/{code}/`에 덮어쓰기
 
-### 방법 B: Sonnet 세션
-
-새 세션에서 아래 지시를 붙여넣으세요:
-
----
-
-`public/geojson/{code}/{code}_room_L{n}.geojson` 파일의 방 피처에 속성을 채워줘.
-
-1. 구조도 이미지 읽기: `SKKU_building_structure diagram_resize/{건물한국어명}_{층}.jpg`
-2. 각 방의 `_centroid` 좌표로 위치 파악 (lat↑=북/위, lng↑=동/오른쪽)
-3. 구조도에서 보이는 방 번호를 `ref`에, 유형을 `room_type`에 입력
-
-`room_type` 값: `classroom`, `lab`, `restroom`, `office`, `stairs`, `elevator`
-
-이 때 `public/geojson/{code}/{code}_room_L{n}.geojson`, `SKKU_building_structure diagram_resize/{건물한국어명}_{층}.jpg` 외 다른 파일은 보지 마.
-사진을 보정하거나 확대하려 하지 말고 사진 하나만 보고 나서 바로 geojson 파일을 입력해줘.
-**다른 파일을 생성하거나 스크립트를 실행하지 마.** 
-
-사진 각도가 틀어졌거나 방 번호가 안 보이는 경우 `ref`에 null을 입력해.
-
 ---
 
 ## 건물 코드

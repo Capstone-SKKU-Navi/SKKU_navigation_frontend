@@ -20,6 +20,8 @@ js/dist/
 coverage/
 tmp/
 map_images/
+geojson_convert/
+/geojson/
 
 # OS files
 .DS_Store
