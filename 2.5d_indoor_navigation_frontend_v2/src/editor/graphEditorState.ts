@@ -57,6 +57,47 @@ export function addNode(state: EditorState, partial: Omit<NavNode, 'id'>): NavNo
   return node;
 }
 
+/**
+ * Move a node to new coordinates. Re-derives the node's `building`, recomputes
+ * `weight` and `building` for every edge touching the node, and bundles
+ * everything into a single undoable command.
+ */
+export function moveNode(state: EditorState, nodeId: string, newCoords: [number, number]): void {
+  const node = state.graph.nodes[nodeId];
+  if (!node) return;
+  const oldCoords = node.coordinates;
+  if (oldCoords[0] === newCoords[0] && oldCoords[1] === newCoords[1]) return;
+
+  const oldNodeBuilding = node.building;
+  const newNodeBuilding = detectBuilding(newCoords, node.level);
+
+  const edgeChanges: Array<{
+    id: string;
+    oldWeight: number; newWeight: number;
+    oldBuilding: string; newBuilding: string;
+  }> = [];
+  for (const edge of state.graph.edges) {
+    if (edge.from !== nodeId && edge.to !== nodeId) continue;
+    const otherId = edge.from === nodeId ? edge.to : edge.from;
+    const other = state.graph.nodes[otherId];
+    if (!other) continue;
+    const horizontal = getDistanceBetweenCoordinatesInM(newCoords, other.coordinates);
+    const vertical = Math.abs(node.level - other.level) * DEFAULT_FLOOR_HEIGHT;
+    const newWeight = Math.round(horizontal + vertical);
+    const newEdgeBuilding = newNodeBuilding === other.building ? newNodeBuilding : 'outside';
+    edgeChanges.push({
+      id: edge.id,
+      oldWeight: edge.weight,
+      newWeight,
+      oldBuilding: edge.building,
+      newBuilding: newEdgeBuilding,
+    });
+  }
+
+  const cmd = new MoveNodeCmd(nodeId, oldCoords, newCoords, oldNodeBuilding, newNodeBuilding, edgeChanges);
+  executeCmd(state, cmd);
+}
+
 export function deleteNode(state: EditorState, nodeId: string): void {
   const node = state.graph.nodes[nodeId];
   if (!node) return;
@@ -156,9 +197,9 @@ export function clearAll(state: EditorState): void {
 
 /**
  * Delete every node located inside the given building (point-in-outline match)
- * and every edge touching one of those nodes. `node.building` holds the wing
- * prefix ("21"/"22"/"23"/"ENG1"), not the building code, so we resolve via
- * coordinates instead.
+ * and every edge touching one of those nodes. Resolves via coordinates rather
+ * than `node.building` so a node tagged "outside" but spatially inside the
+ * building (e.g., outline updated after node placement) still gets cleared.
  */
 export function clearBuildingNodesEdges(state: EditorState, building: string): { nodeCount: number; edgeCount: number } {
   const nodeIdsToRemove = new Set<string>();
@@ -217,6 +258,7 @@ export function exportGraph(graph: NavGraph): NavGraphExport {
       level: node.level,
       type: node.type,
       label: node.label,
+      building: node.building,
     };
     if (node.verticalId !== undefined) entry.verticalId = node.verticalId;
     nodes[id] = entry;
@@ -250,7 +292,9 @@ export function importGraph(data: NavGraphExport): NavGraph {
       id,
       coordinates: raw.coordinates,
       level,
-      building: detectBuilding(raw.coordinates, level),
+      // Prefer persisted building. Fallback to detectBuilding for legacy graphs
+      // that were exported before building was persisted.
+      building: raw.building ?? detectBuilding(raw.coordinates, level),
       type: raw.type as NavNode['type'],
       label: raw.label ?? '',
       ...(raw.verticalId !== undefined ? { verticalId: raw.verticalId } : {}),
@@ -291,13 +335,13 @@ function calcEdgeWeight(a: NavNode, b: NavNode): number {
 
 /**
  * Edge building: same on both ends → that building. Mismatch (cross-building
- * link) or missing endpoints → "outside".
+ * link) or missing endpoints → "outside". Missing endpoints indicate a
+ * dangling reference; surface it as "outside" rather than silently inheriting
+ * the surviving node's code.
  */
 function resolveEdgeBuilding(a: NavNode | undefined, b: NavNode | undefined): string {
-  const ab = a?.building;
-  const bb = b?.building;
-  if (ab && bb) return ab === bb ? ab : 'outside';
-  return ab ?? bb ?? 'outside';
+  if (!a || !b) return 'outside';
+  return a.building === b.building ? a.building : 'outside';
 }
 
 // ===== Room Detection =====
@@ -402,6 +446,37 @@ class UpdateNodeCmd implements Command {
   constructor(private nodeId: string, private before: Partial<NavNode>, private after: Partial<NavNode>) {}
   execute(graph: NavGraph) { Object.assign(graph.nodes[this.nodeId], this.after); }
   undo(graph: NavGraph) { Object.assign(graph.nodes[this.nodeId], this.before); }
+}
+
+class MoveNodeCmd implements Command {
+  constructor(
+    private nodeId: string,
+    private oldCoords: [number, number],
+    private newCoords: [number, number],
+    private oldNodeBuilding: string,
+    private newNodeBuilding: string,
+    private edgeChanges: Array<{ id: string; oldWeight: number; newWeight: number; oldBuilding: string; newBuilding: string }>,
+  ) {}
+  execute(graph: NavGraph) {
+    const node = graph.nodes[this.nodeId];
+    if (!node) return;
+    node.coordinates = this.newCoords;
+    node.building = this.newNodeBuilding;
+    for (const c of this.edgeChanges) {
+      const edge = graph.edges.find(e => e.id === c.id);
+      if (edge) { edge.weight = c.newWeight; edge.building = c.newBuilding; }
+    }
+  }
+  undo(graph: NavGraph) {
+    const node = graph.nodes[this.nodeId];
+    if (!node) return;
+    node.coordinates = this.oldCoords;
+    node.building = this.oldNodeBuilding;
+    for (const c of this.edgeChanges) {
+      const edge = graph.edges.find(e => e.id === c.id);
+      if (edge) { edge.weight = c.oldWeight; edge.building = c.oldBuilding; }
+    }
+  }
 }
 
 class AddEdgeCmd implements Command {

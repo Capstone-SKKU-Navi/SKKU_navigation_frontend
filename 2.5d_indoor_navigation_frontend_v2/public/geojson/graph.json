@@ -2,21 +2,23 @@
   "nodes": {
     "node-mogucles-g96z": {
       "coordinates": [
-        126.97488070780537,
-        37.293531519121274
+        126.97486380546178,
+        37.293574016115244
       ],
       "level": 1,
       "type": "corridor",
-      "label": ""
+      "label": "",
+      "building": "slib"
     },
     "node-mogucmz3-3ge9": {
       "coordinates": [
-        126.97502734610015,
-        37.29419768850357
+        126.9749681818787,
+        37.29417922759566
       ],
       "level": 1,
       "type": "corridor",
-      "label": ""
+      "label": "",
+      "building": "outside"
     },
     "node-mogucnz1-u285": {
       "coordinates": [
@@ -25,7 +27,8 @@
       ],
       "level": 1,
       "type": "corridor",
-      "label": ""
+      "label": "",
+      "building": "outside"
     },
     "node-mogucoeg-fmvc": {
       "coordinates": [
@@ -34,7 +37,8 @@
       ],
       "level": 1,
       "type": "corridor",
-      "label": ""
+      "label": "",
+      "building": "outside"
     },
     "node-mogucoz0-bg89": {
       "coordinates": [
@@ -43,7 +47,8 @@
       ],
       "level": 1,
       "type": "corridor",
-      "label": ""
+      "label": "",
+      "building": "outside"
     },
     "node-mogucs92-0imq": {
       "coordinates": [
@@ -52,7 +57,8 @@
       ],
       "level": 1,
       "type": "corridor",
-      "label": ""
+      "label": "",
+      "building": "eng1"
     },
     "node-moguct81-wk40": {
       "coordinates": [
@@ -61,45 +67,97 @@
       ],
       "level": 1,
       "type": "corridor",
-      "label": ""
+      "label": "",
+      "building": "eng1"
+    },
+    "node-mogz06n7-qnmz": {
+      "coordinates": [
+        126.97713871796407,
+        37.29419272049027
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": "",
+      "building": "eng1"
     }
   },
   "edges": [
     {
       "from": "node-mogucles-g96z",
       "to": "node-mogucmz3-3ge9",
-      "weight": 75,
-      "videoFwd": "eng1_c_F5_13_cw.mp4",
+      "weight": 68,
+      "videoFwd": "outside_1_ccw.mp4",
       "videoFwdStart": 0,
-      "videoFwdEnd": 0,
-      "videoRev": "eng1_c_F5_13_ccw.mp4",
+      "videoFwdEnd": 54.954967,
+      "videoRev": "outside_1_cw.mp4",
       "videoRevStart": 0,
-      "videoRevEnd": 0
+      "videoRevEnd": 51.184533
     },
     {
       "from": "node-mogucmz3-3ge9",
       "to": "node-mogucnz1-u285",
-      "weight": 71
+      "weight": 76,
+      "videoFwd": "outside_10_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 32.699367,
+      "videoRev": "outside_10_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 35.635633
     },
     {
       "from": "node-mogucnz1-u285",
       "to": "node-mogucoeg-fmvc",
-      "weight": 21
+      "weight": 21,
+      "videoFwd": "outside_13_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 37.103767,
+      "videoRev": "outside_13_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 38.9723
     },
     {
       "from": "node-mogucoeg-fmvc",
       "to": "node-mogucoz0-bg89",
-      "weight": 36
+      "weight": 36,
+      "videoFwd": "outside_16_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 55.9226,
+      "videoRev": "outside_16_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 55.6223
     },
     {
       "from": "node-mogucoz0-bg89",
       "to": "node-mogucs92-0imq",
-      "weight": 45
+      "weight": 45,
+      "videoFwd": "outside_18_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 49.049033,
+      "videoRev": "outside_18_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 47.547533
     },
     {
       "from": "node-mogucs92-0imq",
       "to": "node-moguct81-wk40",
-      "weight": 17
+      "weight": 17,
+      "videoFwd": "eng1_c_F1_1_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 33.039239,
+      "videoRev": "eng1_c_F1_1_cw.mp4",
+      "videoRevStart": 38.542688,
+      "videoRevEnd": 63.663667
+    },
+    {
+      "from": "node-moguct81-wk40",
+      "to": "node-mogz06n7-qnmz",
+      "weight": 55,
+      "videoFwd": "eng1_c_F1_1_ccw.mp4",
+      "videoFwdStart": 33.039239,
+      "videoFwdEnd": 64.331,
+      "videoRev": "eng1_c_F1_1_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 38.542688
     }
   ]
 }

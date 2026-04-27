@@ -40,11 +40,13 @@ export function initActionChipRow(): void {
 }
 
 function refresh(row: HTMLElement): void {
-  const { startRef, endRef } = RouteActions.getEndpoints();
-  const both = !!startRef && !!endRef;
+  const { start, end } = RouteActions.getEndpoints();
+  const both = !!start && !!end;
 
   if (both) {
-    row.innerHTML = `<button class="m-chip find" data-act="find">🔍 경로 찾기 (${escapeHtml(startRef)} → ${escapeHtml(endRef)})</button>`;
+    const startLabel = RouteActions.formatEndpointLabel(start);
+    const endLabel = RouteActions.formatEndpointLabel(end);
+    row.innerHTML = `<button class="m-chip find" data-act="find">🔍 경로 찾기 (${escapeHtml(startLabel)} → ${escapeHtml(endLabel)})</button>`;
     row.querySelector('[data-act="find"]')?.addEventListener('click', () => {
       RouteActions.triggerFindRoute();
     });

@@ -5,12 +5,14 @@ import * as BackendService from './services/backendService';
 import * as GeoMap from './components/geoMap';
 import * as IndoorLayer from './components/indoorLayer';
 import * as RouteOverlay from './components/routeOverlay';
+import * as RoutePinMarkers from './components/routePinMarkers';
 import { initRouting, searchRooms as apiSearchRooms } from './services/apiClient';
 import { ROOM_TYPE_LABELS, RoomListItem } from './models/types';
 import * as VideoSettings from './editor/videoSettings';
 import * as WalkthroughOverlay from './components/walkthroughOverlay';
 import { isMobileDevice } from './utils/deviceDetection';
 import * as RouteActions from './services/routeActions';
+import * as GraphService from './services/graphService';
 import { setupApiModeBadge } from './components/apiModeBadge';
 import { escapeHtml } from './utils/escapeHtml';
 import { formatLevel } from './utils/formatLevel';
@@ -35,6 +37,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     ]);
     GeoMap.initMap();
 
+    setupReloadDataShortcut();
+
     document.addEventListener('mapLoaded', async () => {
       const mobile = isMobileDevice();
       document.body.dataset.device = mobile ? 'mobile' : 'pc';
@@ -45,6 +49,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       setup3DToggle();
       setupFpsCounter();
       setupApiModeBadge();
+      setupPinChipDrop();
+      const map = GeoMap.getMap();
+      if (map) RoutePinMarkers.init(map);
 
       if (mobile) {
         // Mobile chrome — dynamic import keeps mobile code out of the PC bundle
@@ -318,9 +325,8 @@ function setupRouteUI(): void {
     }
   });
 
-  // Update endpoint preview markers when inputs change
-  function updateEndpointPreview(): void {
-    // Clear existing route and walkthrough when endpoints change
+  // Clear existing route and walkthrough when endpoints change
+  function maybeClearStaleRoute(): void {
     if (RouteOverlay.hasRoute()) {
       RouteOverlay.clearRoute();
       WalkthroughOverlay.hideWalkthroughOverlay();
@@ -329,25 +335,26 @@ function setupRouteUI(): void {
       if (routeInfo) routeInfo.style.display = 'none';
       if (buildingInfo) buildingInfo.style.display = 'flex';
     }
-    const startRef = startInput?.value.trim();
-    const endRef = endInput?.value.trim();
-    const startPos = startRef ? BackendService.getRoomCentroid(startRef) : null;
-    const endPos = endRef ? BackendService.getRoomCentroid(endRef) : null;
-    const startLevel = startRef ? BackendService.getRoomLevel(startRef) : null;
-    const endLevel = endRef ? BackendService.getRoomLevel(endRef) : null;
-    RouteOverlay.showEndpointPreview(startPos, endPos, startLevel, endLevel);
   }
 
-  // Listen for popup-triggered endpoint changes
-  document.addEventListener('routeEndpointChanged', updateEndpointPreview);
+  // Listen for popup-triggered endpoint changes — pin markers handle their own
+  // visual state via `routeEndpointChanged`, so we only invalidate stale routes.
+  document.addEventListener('routeEndpointChanged', maybeClearStaleRoute);
 
   // Autocomplete for start/end inputs
-  if (startInput) setupRouteAutocomplete(startInput, 'startAutocomplete', updateEndpointPreview);
-  if (endInput) setupRouteAutocomplete(endInput, 'endAutocomplete', updateEndpointPreview);
+  if (startInput) setupRouteAutocomplete(startInput, 'startAutocomplete');
+  if (endInput) setupRouteAutocomplete(endInput, 'endAutocomplete');
 
-  // Update preview as user types a valid ref
-  startInput?.addEventListener('input', updateEndpointPreview);
-  endInput?.addEventListener('input', updateEndpointPreview);
+  // User typing into the input → clear any coord override on that slot,
+  // and notify listeners so the pin markers re-resolve from the new ref.
+  startInput?.addEventListener('input', () => {
+    RouteActions.notifyInputChanged('start');
+    document.dispatchEvent(new Event('routeEndpointChanged'));
+  });
+  endInput?.addEventListener('input', () => {
+    RouteActions.notifyInputChanged('end');
+    document.dispatchEvent(new Event('routeEndpointChanged'));
+  });
 
   findBtn?.addEventListener('click', () => {
     RouteActions.triggerFindRoute();
@@ -358,13 +365,122 @@ function setupRouteUI(): void {
   });
 }
 
-function setupRouteAutocomplete(input: HTMLInputElement, dropdownId: string, onSelect?: () => void): void {
+// ===== Drag-source chips → drop on map =====
+//
+// PC: HTML5 drag-and-drop. Chips set a custom MIME payload (PIN_DRAG_MIME);
+// the map only accepts drops carrying that MIME, so text selections dragged
+// from inputs don't trigger a phantom pin drop.
+//
+// Mobile: HTML5 drag events don't fire on touch, so we implement a manual
+// touch-drag with a floating clone that follows the finger and a final
+// drop test against the map element's bounding rect.
+const PIN_DRAG_MIME = 'application/x-route-pin';
+
+function dropPinAtClientPoint(slot: 'start' | 'end', clientX: number, clientY: number): void {
+  const mapEl = document.getElementById('map');
+  const map = GeoMap.getMap();
+  if (!mapEl || !map) return;
+  const rect = mapEl.getBoundingClientRect();
+  if (clientX < rect.left || clientX > rect.right || clientY < rect.top || clientY > rect.bottom) return;
+  const { lng, lat } = map.unproject([clientX - rect.left, clientY - rect.top]);
+  RoutePinMarkers.dropPin(slot, lng, lat);
+}
+
+function setupPinChipDrop(): void {
+  const mapEl = document.getElementById('map');
+  if (!mapEl) return;
+  const chips = document.querySelectorAll<HTMLElement>('.route-pin-chip');
+  chips.forEach(chip => {
+    const slot: 'start' | 'end' = chip.dataset.pin === 'end' ? 'end' : 'start';
+
+    // PC: native HTML5 drag
+    chip.addEventListener('dragstart', (e) => {
+      e.dataTransfer?.setData(PIN_DRAG_MIME, slot);
+      if (e.dataTransfer) e.dataTransfer.effectAllowed = 'copy';
+      mapEl.classList.add('route-pin-drop-active');
+    });
+    chip.addEventListener('dragend', () => {
+      mapEl.classList.remove('route-pin-drop-active');
+    });
+
+    // Mobile: manual touch-drag with a floating ghost clone
+    setupChipTouchDrag(chip, slot, mapEl);
+  });
+
+  mapEl.addEventListener('dragover', (e) => {
+    if (!isPinDrag(e)) return;
+    e.preventDefault();
+    if (e.dataTransfer) e.dataTransfer.dropEffect = 'copy';
+  });
+
+  mapEl.addEventListener('drop', (e) => {
+    if (!isPinDrag(e)) return;
+    e.preventDefault();
+    mapEl.classList.remove('route-pin-drop-active');
+    const payload = e.dataTransfer?.getData(PIN_DRAG_MIME) ?? '';
+    const slot: 'start' | 'end' = payload === 'end' ? 'end' : 'start';
+    dropPinAtClientPoint(slot, e.clientX, e.clientY);
+  });
+}
+
+function setupChipTouchDrag(chip: HTMLElement, slot: 'start' | 'end', mapEl: HTMLElement): void {
+  let ghost: HTMLElement | null = null;
+  let activeId: number | null = null;
+
+  const moveGhost = (x: number, y: number) => {
+    if (!ghost) return;
+    ghost.style.left = `${x}px`;
+    ghost.style.top = `${y}px`;
+  };
+
+  chip.addEventListener('touchstart', (e) => {
+    if (activeId !== null) return;
+    const touch = e.changedTouches[0];
+    activeId = touch.identifier;
+    e.preventDefault();
+    ghost = chip.cloneNode(true) as HTMLElement;
+    ghost.classList.add('route-pin-chip-ghost');
+    document.body.appendChild(ghost);
+    moveGhost(touch.clientX, touch.clientY);
+    mapEl.classList.add('route-pin-drop-active');
+  }, { passive: false });
+
+  chip.addEventListener('touchmove', (e) => {
+    if (activeId === null) return;
+    const touch = Array.from(e.changedTouches).find(t => t.identifier === activeId);
+    if (!touch) return;
+    e.preventDefault();
+    moveGhost(touch.clientX, touch.clientY);
+  }, { passive: false });
+
+  const finish = (e: TouchEvent) => {
+    if (activeId === null) return;
+    const touch = Array.from(e.changedTouches).find(t => t.identifier === activeId);
+    if (!touch) return;
+    activeId = null;
+    mapEl.classList.remove('route-pin-drop-active');
+    if (ghost) { ghost.remove(); ghost = null; }
+    dropPinAtClientPoint(slot, touch.clientX, touch.clientY);
+  };
+
+  chip.addEventListener('touchend', finish);
+  chip.addEventListener('touchcancel', finish);
+}
+
+function isPinDrag(e: DragEvent): boolean {
+  const types = e.dataTransfer?.types;
+  if (!types) return false;
+  return Array.from(types).includes(PIN_DRAG_MIME);
+}
+
+function setupRouteAutocomplete(input: HTMLInputElement, dropdownId: string): void {
   const dropdown = document.getElementById(dropdownId);
   if (!dropdown) return;
+  const slot: 'start' | 'end' = input.id === 'startRoomInput' ? 'start' : 'end';
   setupAutocomplete(input, dropdown, '.route-input-wrapper', (room) => {
-    input.value = room.ref;
     RouteActions.cacheRoomCentroid(room);
-    onSelect?.();
+    if (slot === 'start') RouteActions.setStart(room.ref);
+    else RouteActions.setEnd(room.ref);
   });
 }
 
@@ -412,12 +528,7 @@ function setupRoomClickPopup(): void {
 
   // Right-click on a room that is set as start/end → clear that endpoint
   document.addEventListener('roomRightClicked', ((e: CustomEvent) => {
-    const ref = e.detail.ref;
-    const startInput = document.getElementById('startRoomInput') as HTMLInputElement;
-    const endInput = document.getElementById('endRoomInput') as HTMLInputElement;
-    if (startInput && startInput.value.trim() === ref) startInput.value = '';
-    if (endInput && endInput.value.trim() === ref) endInput.value = '';
-    document.dispatchEvent(new Event('routeEndpointChanged'));
+    RouteActions.clearEndpointByRef(e.detail.ref);
   }) as EventListener);
 
   document.addEventListener('keydown', (e) => {
@@ -468,6 +579,30 @@ function setupLayerToggle(): void {
     });
   }
 
+}
+
+// ===== Reload Data Shortcut (Ctrl+Alt+R) =====
+// Re-fetches geojson + graph from disk so newly-added refs appear without a full page refresh.
+function setupReloadDataShortcut(): void {
+  let reloading = false;
+  document.addEventListener('keydown', async (e) => {
+    if (!(e.ctrlKey && e.altKey && (e.key === 'r' || e.key === 'R'))) return;
+    e.preventDefault();
+    if (reloading) return;
+    reloading = true;
+    try {
+      const t0 = performance.now();
+      await BackendService.fetchBackendData();
+      await GraphService.loadGraph();
+      const map = GeoMap.getMap();
+      if (map) IndoorLayer.refreshAll(map);
+      console.log(`[Reload] backend + graph reloaded in ${Math.round(performance.now() - t0)}ms`);
+    } catch (err) {
+      console.warn('[Reload] failed:', err);
+    } finally {
+      reloading = false;
+    }
+  });
 }
 
 // ===== FPS Counter =====

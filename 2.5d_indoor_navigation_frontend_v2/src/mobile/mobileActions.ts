@@ -39,8 +39,8 @@ export function initMobileActions(): void {
   });
   // If endpoints were cleared (e.g. both inputs blank), hide the button too.
   document.addEventListener('routeEndpointChanged', () => {
-    const { startRef, endRef } = RouteActions.getEndpoints();
-    if (!startRef && !endRef) {
+    const { start, end } = RouteActions.getEndpoints();
+    if (!start && !end) {
       clear?.setAttribute('data-visible', 'false');
     }
   });

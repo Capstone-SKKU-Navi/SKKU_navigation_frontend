@@ -38,6 +38,27 @@ function parseCorridorFilename(filename: string): VideoEntry | null {
   };
 }
 
+// Outside walkways have no floor: `outside_{id}_{cw|ccw}.mp4`.
+function parseOutsideFilename(filename: string): VideoEntry | null {
+  const m = filename.match(/^outside_(\d+)_(cw|ccw)\.mp4$/i);
+  if (!m) return null;
+  const [, idStr, dir] = m;
+  const id = +idStr;
+  const dirLabel = dir === 'cw' ? '시계방향' : '반시계방향';
+  return {
+    filename,
+    type: 'corridor',
+    building: 'outside',
+    direction: dir,
+    id,
+    label: `outside seg${id} ${dirLabel}`,
+  };
+}
+
+function parseVideoFilename(filename: string): VideoEntry | null {
+  return parseCorridorFilename(filename) ?? parseOutsideFilename(filename);
+}
+
 // ===== Default eng1 fallback (used until /api/videos-list responds) =====
 
 function buildEng1Fallback(): VideoEntry[] {
@@ -69,7 +90,7 @@ export async function loadVideoCatalog(): Promise<void> {
     if (!Array.isArray(files)) return;
     const next: VideoEntry[] = [];
     for (const f of files) {
-      const entry = parseCorridorFilename(f);
+      const entry = parseVideoFilename(f);
       if (entry) next.push(entry);
     }
     if (next.length > 0) CATALOG = next;

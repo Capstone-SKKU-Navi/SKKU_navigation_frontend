@@ -91,6 +91,16 @@
         <label class="layer-toggle"><input type="checkbox" id="layerLabels" checked /><span>라벨 (Labels)</span></label>
     </div>
 
+    <!-- Route pin dock — always visible, drag chips onto map to set start/end -->
+    <div id="routePinDock" class="route-pin-dock" title="지도에 끌어 위치를 직접 지정">
+        <div class="route-pin-chip" draggable="true" data-pin="start" title="지도에 끌어 출발 지점 설정" aria-label="출발 핀">
+            <span class="route-pin-chip-label">출</span>
+        </div>
+        <div class="route-pin-chip" draggable="true" data-pin="end" title="지도에 끌어 도착 지점 설정" aria-label="도착 핀">
+            <span class="route-pin-chip-label">도</span>
+        </div>
+    </div>
+
     <!-- MAIN CONTENT -->
     <div id="mainContent">
         <div id="map"></div>

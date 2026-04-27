@@ -95,6 +95,7 @@ export interface NavGraphExport {
     type: string;
     label: string;
     verticalId?: number;
+    building?: string;            // persisted so backend handoff doesn't depend on outline-load timing
   }>;
   edges: Array<{
     from: string;

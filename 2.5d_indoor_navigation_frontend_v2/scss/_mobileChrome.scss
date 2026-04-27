@@ -209,6 +209,19 @@ body[data-device="mobile"] #mSearchModal {
 }
 
 // ============================================================
+// Route pin dock — reposition under the search pill on mobile
+// ============================================================
+
+body[data-device="mobile"] #routePinDock {
+  top: calc(env(safe-area-inset-top, 0px) + 72px); // below search pill
+  left: 12px;
+  background: var(--m-surface-glass);
+  border: 1px solid var(--m-border);
+  box-shadow: var(--m-shadow-1);
+  z-index: 410;
+}
+
+// ============================================================
 // Right-side floating action cluster (recenter, 3D, clear route)
 // ============================================================
 

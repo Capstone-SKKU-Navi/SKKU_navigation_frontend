@@ -332,6 +332,102 @@ export function removeClickHandlers(map: maplibregl.Map): void {
   map.getCanvas().style.cursor = '';
 }
 
+// ===== Drag-to-move =====
+//
+// Activates only on mousedown over a node circle in the 2D layer. Threshold-
+// gated (>3px movement) so a plain click still falls through to the click
+// handler — node selection still works as before.
+
+export interface DragHandlerCallbacks {
+  isEnabled: () => boolean;                                    // false → bail out (e.g. wrong mode, 3D)
+  onStart: (nodeId: string) => void;                           // about to drag
+  onMove: (nodeId: string, coords: [number, number]) => void;  // live preview
+  onCommit: (nodeId: string, coords: [number, number]) => void;// final position
+  onCancel: (nodeId: string) => void;                          // Esc during drag
+}
+
+let dragMousedownHandler: ((e: maplibregl.MapMouseEvent) => void) | null = null;
+let dragMoveHandler: ((e: maplibregl.MapMouseEvent) => void) | null = null;
+let dragUpHandler: ((e: maplibregl.MapMouseEvent) => void) | null = null;
+let dragKeyHandler: ((e: KeyboardEvent) => void) | null = null;
+let dragNodeId: string | null = null;
+let dragStartScreen: { x: number; y: number } | null = null;
+let dragMoved = false;
+
+export function setDragHandler(map: maplibregl.Map, cbs: DragHandlerCallbacks): void {
+  removeDragHandler(map);
+
+  const cleanup = () => {
+    if (dragMoveHandler) { map.off('mousemove', dragMoveHandler); dragMoveHandler = null; }
+    if (dragUpHandler) { map.off('mouseup', dragUpHandler); dragUpHandler = null; }
+    if (dragKeyHandler) { document.removeEventListener('keydown', dragKeyHandler); dragKeyHandler = null; }
+    map.dragPan.enable();
+    map.getCanvas().style.cursor = '';
+    dragNodeId = null;
+    dragStartScreen = null;
+    dragMoved = false;
+  };
+
+  dragMousedownHandler = (e: maplibregl.MapMouseEvent) => {
+    if (!cbs.isEnabled()) return;
+    if (e.originalEvent.button !== 0) return; // left button only
+    const features = map.queryRenderedFeatures(e.point, { layers: [LYR_NODES_CIRCLE] });
+    if (features.length === 0) return;
+    const nodeId = features[0].properties?.id;
+    if (!nodeId) return;
+
+    dragNodeId = nodeId;
+    dragStartScreen = { x: e.point.x, y: e.point.y };
+    dragMoved = false;
+    map.dragPan.disable();
+    cbs.onStart(nodeId);
+
+    dragMoveHandler = (me: maplibregl.MapMouseEvent) => {
+      if (!dragNodeId || !dragStartScreen) return;
+      if (!dragMoved) {
+        const dx = Math.abs(me.point.x - dragStartScreen.x);
+        const dy = Math.abs(me.point.y - dragStartScreen.y);
+        if (dx <= 3 && dy <= 3) return;
+        dragMoved = true;
+        map.getCanvas().style.cursor = 'grabbing';
+      }
+      cbs.onMove(dragNodeId, [me.lngLat.lng, me.lngLat.lat]);
+    };
+
+    dragUpHandler = (ue: maplibregl.MapMouseEvent) => {
+      const id = dragNodeId;
+      const moved = dragMoved;
+      cleanup();
+      if (id && moved) cbs.onCommit(id, [ue.lngLat.lng, ue.lngLat.lat]);
+      // If !moved this was a click — let the regular click handler fire.
+    };
+
+    dragKeyHandler = (ke: KeyboardEvent) => {
+      if (ke.key !== 'Escape' || !dragNodeId) return;
+      const id = dragNodeId;
+      cleanup();
+      cbs.onCancel(id);
+    };
+
+    map.on('mousemove', dragMoveHandler);
+    map.on('mouseup', dragUpHandler);
+    document.addEventListener('keydown', dragKeyHandler);
+  };
+
+  map.on('mousedown', dragMousedownHandler);
+}
+
+export function removeDragHandler(map: maplibregl.Map): void {
+  if (dragMousedownHandler) { map.off('mousedown', dragMousedownHandler); dragMousedownHandler = null; }
+  if (dragMoveHandler) { map.off('mousemove', dragMoveHandler); dragMoveHandler = null; }
+  if (dragUpHandler) { map.off('mouseup', dragUpHandler); dragUpHandler = null; }
+  if (dragKeyHandler) { document.removeEventListener('keydown', dragKeyHandler); dragKeyHandler = null; }
+  map.dragPan.enable();
+  dragNodeId = null;
+  dragStartScreen = null;
+  dragMoved = false;
+}
+
 // ===== Helpers =====
 
 const ARC_SEGMENTS = 24;

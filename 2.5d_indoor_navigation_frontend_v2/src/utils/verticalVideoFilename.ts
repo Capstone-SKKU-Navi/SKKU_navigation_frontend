@@ -8,6 +8,19 @@ export function toBuildingCode(building: string): string {
   return building.toLowerCase();
 }
 
+/**
+ * Pick the building code that should be used for vertical video filenames
+ * given the two endpoint buildings of a stair/elevator edge. "outside" means
+ * the node lives outside any loaded building outline — never a real video
+ * prefix. Returns null if no usable building can be determined; callers must
+ * handle this (skip the clip / show "(building unknown)").
+ */
+export function pickVerticalBuilding(a: string | undefined, b: string | undefined): string | null {
+  const aOk = a && a !== 'outside' ? a : null;
+  const bOk = b && b !== 'outside' ? b : null;
+  return aOk ?? bOk;
+}
+
 // ===== Stair Videos =====
 
 export interface StairVideoResult {

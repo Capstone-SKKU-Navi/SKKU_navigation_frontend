@@ -3,7 +3,7 @@
 import { NavNode, NavEdge, EditorMode, PanelCallbacks, ALL_NODE_TYPES, NODE_TYPE_LABELS, NavNodeType, ROOM_TYPES, RoomAutoApplyPreset, RoomType } from './graphEditorTypes';
 import { suggestVideosForEdge, getAllVideos, getOppositeVideo, type VideoEntry } from './videoCatalog';
 import { openVideoSettingsPanel } from './videoSettingsPanel';
-import { computeStairVideos, computeElevatorVideos } from '../utils/verticalVideoFilename';
+import { computeStairVideos, computeElevatorVideos, pickVerticalBuilding } from '../utils/verticalVideoFilename';
 import * as RoomCodeLookup from './roomCodeLookup';
 import { formatLevel } from '../utils/formatLevel';
 import { escapeHtml } from '../utils/escapeHtml';
@@ -471,15 +471,21 @@ export function showEdgeProperties(edge: NavEdge, fromNode: NavNode, toNode: Nav
       const tNode = dir === 'Fwd' ? toNode : fromNode;
       const vId = fNode.verticalId ?? tNode.verticalId;
 
-      if (vId !== undefined) {
-        const result = isVerticalStairs
-          ? computeStairVideos(fNode.building, vId, fNode.level, tNode.level)
-          : computeElevatorVideos(fNode.building, vId, fNode.level, tNode.level);
-        setText(`geEdge${dir}AutoEntry`, result.entryVideo);
-        setText(`geEdge${dir}AutoExit`, result.exitVideo);
-      } else {
+      if (vId === undefined) {
         setText(`geEdge${dir}AutoEntry`, '(verticalId 미설정)');
         setText(`geEdge${dir}AutoExit`, '(verticalId 미설정)');
+      } else {
+        const building = pickVerticalBuilding(fNode.building, tNode.building);
+        if (building === null) {
+          setText(`geEdge${dir}AutoEntry`, '(building 미설정 — 노드를 건물 안으로 이동)');
+          setText(`geEdge${dir}AutoExit`, '(building 미설정 — 노드를 건물 안으로 이동)');
+        } else {
+          const result = isVerticalStairs
+            ? computeStairVideos(building, vId, fNode.level, tNode.level)
+            : computeElevatorVideos(building, vId, fNode.level, tNode.level);
+          setText(`geEdge${dir}AutoEntry`, result.entryVideo);
+          setText(`geEdge${dir}AutoExit`, result.exitVideo);
+        }
       }
     } else {
       // === Corridor edge: show tree picker ===

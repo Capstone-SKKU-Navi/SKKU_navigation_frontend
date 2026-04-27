@@ -190,6 +190,128 @@ html, body {
   }
 }
 
+// ===== Route pin dock — always-visible drag source on top-left =====
+//
+// Floating pill-shaped vertical strip, modeled after Kakao Map's nav UI.
+// Each chip is a teardrop-shaped pin (출발 = green, 도착 = red) that the
+// user drags onto the map to set the corresponding endpoint.
+.route-pin-dock {
+  position: fixed;
+  top: $header-height + 12px;
+  left: $ui-padding;
+  z-index: 950;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 6px;
+  background: rgba(26, 26, 46, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 28px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+  pointer-events: auto;
+}
+
+// Teardrop pin chip — circular bubble with a downward stem
+.route-pin-chip {
+  --pin-color: #42A5F5;
+  position: relative;
+  width: 36px;
+  height: 44px; // bubble (36) + stem
+  cursor: grab;
+  user-select: none;
+  -webkit-user-drag: element;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none; // suppress browser pan/zoom so touch-drag works
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.35));
+  transition: transform 120ms;
+
+  &[data-pin="start"] { --pin-color: #66BB6A; }
+  &[data-pin="end"]   { --pin-color: #EF5350; }
+
+  &:hover  { transform: translateY(-1px); }
+  &:active { cursor: grabbing; transform: scale(0.96); }
+
+  .route-pin-chip-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--pin-color);
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.95);
+    border-radius: 50%;
+    font: 700 14px 'Pretendard', system-ui, sans-serif;
+    line-height: 1;
+  }
+
+  // Stem — small triangle pointing down from the bubble
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid var(--pin-color);
+  }
+}
+
+// Floating clone shown while a touch-drag is in progress on mobile
+.route-pin-chip-ghost {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.85;
+  transform: translate(-50%, -100%) scale(1.15);
+}
+
+#map.route-pin-drop-active {
+  outline: 2px dashed rgba(66, 165, 245, 0.55);
+  outline-offset: -2px;
+}
+
+// ===== Draggable map pins =====
+.route-pin-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: grab;
+  user-select: none;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.35));
+  transition: opacity 200ms;
+
+  &:active { cursor: grabbing; }
+
+  .route-pin-bubble {
+    background-color: var(--pin-color, #42A5F5);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 5px 10px;
+    border-radius: 14px;
+    border: 2px solid rgba(255,255,255,0.95);
+    white-space: nowrap;
+  }
+  .route-pin-stem {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid var(--pin-color, #42A5F5);
+    margin-top: -1px;
+  }
+}
+
 #routeInfo {
   display: flex;
   align-items: center;

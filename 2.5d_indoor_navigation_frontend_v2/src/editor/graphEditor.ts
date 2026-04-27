@@ -108,6 +108,15 @@ async function activateEditor(): Promise<void> {
     onEdgeClick: handleEdgeClick,
   });
 
+  // Drag-to-move (2D mode + select mode only)
+  EditorMap.setDragHandler(map, {
+    isEnabled: () => state.mode === 'select' && GeoMap.isFlatMode(),
+    onStart: handleDragStart,
+    onMove: handleDragMove,
+    onCommit: handleDragCommit,
+    onCancel: handleDragCancel,
+  });
+
   // Keyboard shortcuts & right-click cancel
   document.addEventListener('keydown', handleKeyDown);
   map.getCanvas().addEventListener('contextmenu', handleRightClick);
@@ -135,6 +144,7 @@ function deactivateEditor(): void {
 
   removeRoomClickListener();
   EditorMap.removeClickHandlers(map);
+  EditorMap.removeDragHandler(map);
   EditorMap.destroyFloatingNodes();
   EditorMap.destroyFloatingEdges();
   EditorMap.destroyEditorLayers(map);
@@ -385,6 +395,56 @@ function handleNodeClick(nodeId: string): void {
     Panel.setNodeIdData(nodeId);
     refreshMap();
   }
+}
+
+// ===== Node Drag-to-Move =====
+//
+// Live-mutates `node.coordinates` during the drag for visual feedback (no
+// undo entry per frame). On commit we revert the mutation, then delegate to
+// State.moveNode which produces a single proper Command capturing the full
+// before→after delta (coords + building + every touched edge's weight/building).
+
+let dragOriginalCoords: [number, number] | null = null;
+
+function handleDragStart(nodeId: string): void {
+  const node = state.graph.nodes[nodeId];
+  if (!node) return;
+  dragOriginalCoords = [node.coordinates[0], node.coordinates[1]];
+
+  // Select the node so the panel reflects what's being dragged.
+  state.selectedNodeId = nodeId;
+  state.selectedEdgeId = null;
+  state.selectedEdgeIds = [];
+  Panel.hideEdgeProperties();
+  Panel.showNodeProperties(node);
+  Panel.setNodeIdData(nodeId);
+  refreshMap();
+}
+
+function handleDragMove(nodeId: string, coords: [number, number]): void {
+  const node = state.graph.nodes[nodeId];
+  if (!node) return;
+  node.coordinates = coords;
+  refreshMap();
+}
+
+function handleDragCommit(nodeId: string, coords: [number, number]): void {
+  const node = state.graph.nodes[nodeId];
+  if (!node || !dragOriginalCoords) { dragOriginalCoords = null; return; }
+  // Restore so moveNode sees the real before-state and pushes one undo entry.
+  node.coordinates = dragOriginalCoords;
+  dragOriginalCoords = null;
+  State.moveNode(state, nodeId, coords);
+  const updated = state.graph.nodes[nodeId];
+  if (updated) Panel.showNodeProperties(updated);
+  refreshMap();
+}
+
+function handleDragCancel(nodeId: string): void {
+  const node = state.graph.nodes[nodeId];
+  if (node && dragOriginalCoords) node.coordinates = dragOriginalCoords;
+  dragOriginalCoords = null;
+  refreshMap();
 }
 
 function handleEdgeClick(edgeId: string, shiftKey: boolean = false): void {
@@ -869,7 +929,7 @@ function handleRoomExport(): void {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `eng1_room_L${level}.geojson`;
+  a.download = `all_room_L${level}.geojson`;
   a.click();
   URL.revokeObjectURL(url);
 }

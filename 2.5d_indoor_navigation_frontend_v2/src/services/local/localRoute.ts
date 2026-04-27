@@ -10,7 +10,7 @@ import type { NavEdge, NavNode } from '../../editor/graphEditorTypes';
 import type { RoomListItem } from '../../models/types';
 import type { ApiRouteResult, ApiRouteClip, RouteCoordinate } from '../api/apiRoute';
 import { getDistanceBetweenCoordinatesInM } from '../../utils/coordinateHelpers';
-import { computeStairVideos, computeElevatorVideos, STAIR_CLIP_DURATION, ELEVATOR_CLIP_DURATION } from '../../utils/verticalVideoFilename';
+import { computeStairVideos, computeElevatorVideos, pickVerticalBuilding, STAIR_CLIP_DURATION, ELEVATOR_CLIP_DURATION } from '../../utils/verticalVideoFilename';
 import * as VideoSettings from '../../editor/videoSettings';
 
 export async function init(): Promise<void> {
@@ -20,51 +20,23 @@ export async function init(): Promise<void> {
 /**
  * Find route between two coordinates locally.
  * Simulates the backend POST /api/route response.
+ *
+ * The input coordinates are used as-is (room centroid for room endpoints, drag
+ * pin position for coord endpoints) — no snap-to-nearest-room. `buildFullRoute`
+ * projects each onto the closest corridor edge for graph entry/exit.
  */
 export function findRoute(from: RouteCoordinate, to: RouteCoordinate): ApiRouteResult | null {
-  // 1. Find nearest room for each coordinate
-  const fromRef = findNearestRoomRef(from);
-  const toRef = findNearestRoomRef(to);
-  if (!fromRef || !toRef) {
-    console.warn('[LocalRoute] Room not found for coordinates:', from, to);
-    return null;
-  }
-
-  // 2. Run graph-based pathfinding
-  const fullResult = GraphService.buildFullRoute(fromRef, toRef);
+  const fullResult = GraphService.buildFullRoute(
+    { coord: [from.lng, from.lat], level: from.level },
+    { coord: [to.lng, to.lat], level: to.level },
+  );
   if (!fullResult) return null;
 
-  // 3. Convert FullRouteResult → ApiRouteResult (same shape as backend response)
   return convertToApiResult(fullResult);
 }
 
 export function searchRooms(query: string): RoomListItem[] {
   return BackendService.searchRooms(query);
-}
-
-// ===== Helpers =====
-
-/** Find the nearest room ref to a coordinate by distance */
-function findNearestRoomRef(coord: RouteCoordinate): string | null {
-  const rooms = BackendService.getRoomList();
-  let bestRef: string | null = null;
-  let bestDist = Infinity;
-
-  for (const room of rooms) {
-    // Filter by level
-    if (!room.level.includes(coord.level)) continue;
-
-    const centroid = BackendService.getRoomCentroid(room.ref);
-    if (!centroid) continue;
-
-    const dist = getDistanceBetweenCoordinatesInM([coord.lng, coord.lat], centroid);
-    if (dist < bestDist) {
-      bestDist = dist;
-      bestRef = room.ref;
-    }
-  }
-
-  return bestRef;
 }
 
 /**
@@ -133,10 +105,9 @@ function buildClips(
       const fNode0 = forward ? fromNode : toNode;
       const tNode0 = forward ? toNode : fromNode;
       const vId = fNode0.verticalId ?? tNode0.verticalId;
-      if (vId === undefined) continue;
-      const building = fNode0.building || tNode0.building;
 
-      // Group consecutive vertical edges of same type/id
+      // Group consecutive vertical edges of same type/id (computed before
+      // any skip so `i = groupEnd` advances past the whole group).
       let groupEnd = i;
       for (let j = i + 1; j < edgePath.length; j++) {
         const ej = edgePath[j];
@@ -145,6 +116,14 @@ function buildClips(
         if (!sameStairs && !sameElev) break;
         if ((ej.fromNode.verticalId ?? ej.toNode.verticalId) !== vId) break;
         groupEnd = j;
+      }
+
+      if (vId === undefined) { i = groupEnd; continue; }
+      const building = pickVerticalBuilding(fNode0.building, tNode0.building);
+      if (building === null) {
+        console.warn('[LocalRoute] vertical edge has no usable building (both endpoints outside):', fNode0.id, tNode0.id);
+        i = groupEnd;
+        continue;
       }
 
       // Entry clip

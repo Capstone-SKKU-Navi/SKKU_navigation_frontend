@@ -3,7 +3,6 @@
 import { NavGraph, NavNode, NavEdge, NavGraphExport } from '../editor/graphEditorTypes';
 import { getDistanceBetweenCoordinatesInM } from '../utils/coordinateHelpers';
 import { detectBuilding } from '../utils/buildingDetection';
-import * as BackendService from './backendService';
 
 const GRAPH_JSON_URL = '/geojson/graph.json';
 
@@ -33,10 +32,8 @@ export async function loadGraph(): Promise<void> {
 }
 
 function resolveEdgeBuilding(a: NavNode | undefined, b: NavNode | undefined): string {
-  const ab = a?.building;
-  const bb = b?.building;
-  if (ab && bb) return ab === bb ? ab : 'outside';
-  return ab ?? bb ?? 'outside';
+  if (!a || !b) return 'outside';
+  return a.building === b.building ? a.building : 'outside';
 }
 
 function importGraph(data: NavGraphExport): NavGraph {
@@ -47,7 +44,7 @@ function importGraph(data: NavGraphExport): NavGraph {
       id,
       coordinates: raw.coordinates,
       level,
-      building: detectBuilding(raw.coordinates, level),
+      building: raw.building ?? detectBuilding(raw.coordinates, level),
       type: raw.type as NavNode['type'],
       label: raw.label ?? '',
       ...(raw.verticalId !== undefined ? { verticalId: raw.verticalId } : {}),
@@ -259,25 +256,26 @@ export interface FullRouteResult {
 }
 
 /**
- * 방 ref → 방 ref 전체 경로 좌표 생성
+ * 좌표 → 좌표 전체 경로 좌표 생성
  *
  * 경로 구조:
- *   [centroid] → [복도 진입점 (수선의 발)] → [corridor nodes...] → [복도 진입점] → [centroid]
+ *   [from coord] → [복도 진입점 (수선의 발)] → [corridor nodes...] → [복도 진입점] → [to coord]
+ *
+ * 입력 좌표는 방 centroid 일 수도, 사용자가 드래그한 핀 위치일 수도 있다 — 어느 쪽이든
+ * 동일하게 가장 가까운 corridor edge 위에 수직 투영해 진입한다.
  *
  * Dijkstra는 edge의 양쪽 endpoint 4가지 조합 중 최단거리를 선택.
  */
-export function buildFullRoute(fromRef: string, toRef: string): FullRouteResult | null {
+export function buildFullRoute(
+  from: { coord: [number, number]; level: number },
+  to: { coord: [number, number]; level: number },
+): FullRouteResult | null {
   if (!graph) return null;
 
-  const fromCentroid = BackendService.getRoomCentroid(fromRef);
-  const toCentroid = BackendService.getRoomCentroid(toRef);
-  const fromLevel = BackendService.getRoomLevel(fromRef);
-  const toLevel = BackendService.getRoomLevel(toRef);
-
-  if (!fromCentroid || !toCentroid || fromLevel === null || toLevel === null) {
-    console.warn('[GraphService] 방 정보를 찾을 수 없습니다:', fromRef, toRef);
-    return null;
-  }
+  const fromCentroid = from.coord;
+  const toCentroid = to.coord;
+  const fromLevel = from.level;
+  const toLevel = to.level;
 
   const fromProj = projectOntoNearestEdge(fromCentroid, fromLevel);
   const toProj = projectOntoNearestEdge(toCentroid, toLevel);
