@@ -25,8 +25,11 @@ function syncRoute3D(): void {
 // ===== Entry Point =====
 document.addEventListener('DOMContentLoaded', async () => {
   try {
+    // Backend data must complete first: graph import (inside initRouting)
+    // calls detectBuilding() which depends on building outlines being loaded.
+    // Running them in parallel races and stamps every node "outside".
+    await BackendService.fetchBackendData();
     await Promise.all([
-      BackendService.fetchBackendData(),
       initRouting(),
       VideoSettings.loadVideoSettings(),
     ]);

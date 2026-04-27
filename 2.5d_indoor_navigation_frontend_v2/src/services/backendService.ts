@@ -531,24 +531,6 @@ export function getRoomCentroid(ref: string): [number, number] | null {
   return null;
 }
 
-/** Get room polygon coordinates (outer ring) by ref */
-export function getRoomPolygon(ref: string): number[][] | null {
-  for (const cache of levelDataCaches.values()) {
-    for (const data of cache.values()) {
-      for (const f of data.rooms.features) {
-        if (f.properties.ref !== ref) continue;
-        if (f.geometry.type === 'Polygon') {
-          return (f.geometry as GeoJSON.Polygon).coordinates[0];
-        }
-        if (f.geometry.type === 'MultiPolygon') {
-          return (f.geometry as GeoJSON.MultiPolygon).coordinates[0][0];
-        }
-      }
-    }
-  }
-  return null;
-}
-
 /** Get which level a room ref belongs to */
 export function getRoomLevel(ref: string): number | null {
   const room = roomList.find(r => r.ref === ref);
