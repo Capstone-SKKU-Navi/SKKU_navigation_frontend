@@ -1,4 +1,105 @@
 {
-  "nodes": {},
-  "edges": []
+  "nodes": {
+    "node-mogucles-g96z": {
+      "coordinates": [
+        126.97488070780537,
+        37.293531519121274
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": ""
+    },
+    "node-mogucmz3-3ge9": {
+      "coordinates": [
+        126.97502734610015,
+        37.29419768850357
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": ""
+    },
+    "node-mogucnz1-u285": {
+      "coordinates": [
+        126.97581842111032,
+        37.29411480139065
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": ""
+    },
+    "node-mogucoeg-fmvc": {
+      "coordinates": [
+        126.97579912659955,
+        37.29392293272201
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": ""
+    },
+    "node-mogucoz0-bg89": {
+      "coordinates": [
+        126.97620817026353,
+        37.293892233690045
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": ""
+    },
+    "node-mogucs92-0imq": {
+      "coordinates": [
+        126.97633551404556,
+        37.29428825024574
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": ""
+    },
+    "node-moguct81-wk40": {
+      "coordinates": [
+        126.97652460026836,
+        37.294260621251
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": ""
+    }
+  },
+  "edges": [
+    {
+      "from": "node-mogucles-g96z",
+      "to": "node-mogucmz3-3ge9",
+      "weight": 75,
+      "videoFwd": "eng1_c_F5_13_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 0,
+      "videoRev": "eng1_c_F5_13_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 0
+    },
+    {
+      "from": "node-mogucmz3-3ge9",
+      "to": "node-mogucnz1-u285",
+      "weight": 71
+    },
+    {
+      "from": "node-mogucnz1-u285",
+      "to": "node-mogucoeg-fmvc",
+      "weight": 21
+    },
+    {
+      "from": "node-mogucoeg-fmvc",
+      "to": "node-mogucoz0-bg89",
+      "weight": 36
+    },
+    {
+      "from": "node-mogucoz0-bg89",
+      "to": "node-mogucs92-0imq",
+      "weight": 45
+    },
+    {
+      "from": "node-mogucs92-0imq",
+      "to": "node-moguct81-wk40",
+      "weight": 17
+    }
+  ]
 }

@@ -1,13 +1,30 @@
 // ===== Video Settings Panel — bulk yaw assignment per video =====
 // Organized as a collapsible tree: Building > Type > Floor
+//
+// The tree is built from the actual files present under videos/ (any depth)
+// as reported by GET /api/videos-list, so newly dropped buildings/files
+// appear automatically. Filename conventions:
+//   Corridor : {building}_c_F{floor}_{id}_{cw|ccw}.mp4
+//   Stair    : {building}_s_{id}_{floor}{e|o}{u|d}.mp4
+//   Elevator : {building}_e_{id}_{floor}{e|o}.mp4
 
-import { getAllVideos, VideoEntry } from './videoCatalog';
-import { getAllVerticalVideos, ENG1_VERTICAL_CONFIG, VerticalVideoEntry } from '../utils/verticalVideoFilename';
 import * as VideoSettings from './videoSettings';
 import { VideoYawEntry } from './videoSettings';
 import { openVideoPreview } from './videoPreview';
 
 let overlayEl: HTMLElement | null = null;
+
+interface ParsedFile {
+  filename: string;
+  building: string;
+  kind: 'corridor' | 'stair' | 'elevator' | 'other';
+  floor?: number;
+  id?: number;
+  direction?: 'cw' | 'ccw';
+  action?: 'enter' | 'exit';
+  vDirection?: 'up' | 'down';
+  label: string;
+}
 
 export function openVideoSettingsPanel(): void {
   if (overlayEl) return;
@@ -31,8 +48,7 @@ export function openVideoSettingsPanel(): void {
   // Body — collapsible tree
   const body = document.createElement('div');
   body.className = 'ge-video-settings-body';
-
-  buildSettingsTree(body);
+  body.textContent = 'Loading…';
 
   panel.appendChild(header);
   panel.appendChild(body);
@@ -43,84 +59,191 @@ export function openVideoSettingsPanel(): void {
   backdrop.addEventListener('click', close);
   overlayEl = panel;
   (panel as any)._backdrop = backdrop;
+
+  void buildSettingsTree(body);
 }
 
-// ===== Build collapsible tree: Building > Type > Floor =====
+// ===== Build collapsible tree from actual files =====
 
-function buildSettingsTree(body: HTMLElement): void {
-  const corridorVideos = getAllVideos(); // corridor only
-  const verticalVideos = getAllVerticalVideos(ENG1_VERTICAL_CONFIG);
-
-  // Group corridors by floor
-  const corridorByFloor: Record<number, VideoEntry[]> = {};
-  for (const v of corridorVideos) {
-    const f = v.floor ?? 0;
-    if (!corridorByFloor[f]) corridorByFloor[f] = [];
-    corridorByFloor[f].push(v);
+async function buildSettingsTree(body: HTMLElement): Promise<void> {
+  let files: string[] = [];
+  try {
+    const res = await fetch('/api/videos-list');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    files = (await res.json()).files ?? [];
+  } catch (err) {
+    body.textContent = `Failed to load video list: ${err}`;
+    return;
   }
 
-  // Group vertical by type > id > floor
-  const stairEntries: Record<number, Record<number, VerticalVideoEntry[]>> = {};
-  const elevEntries: Record<number, Record<number, VerticalVideoEntry[]>> = {};
-  for (const v of verticalVideos) {
-    const target = v.type === 'stair' ? stairEntries : elevEntries;
-    if (!target[v.id]) target[v.id] = {};
-    if (!target[v.id][v.floor]) target[v.id][v.floor] = [];
-    target[v.id][v.floor].push(v);
+  body.textContent = '';
+
+  if (files.length === 0) {
+    body.textContent = 'No videos found under videos/.';
+    return;
   }
 
-  // Building folder (eng1)
-  const buildingFolder = createTreeFolder('eng1', true);
-  body.appendChild(buildingFolder.el);
+  const parsed = files.map(parseVideoFilename);
 
-  // --- Corridor folder ---
-  const corridorFolder = createTreeFolder('Corridor', false);
-  buildingFolder.children.appendChild(corridorFolder.el);
-
-  for (const floor of Object.keys(corridorByFloor).map(Number).sort()) {
-    const floorFolder = createTreeFolder(`F${floor}`, false);
-    corridorFolder.children.appendChild(floorFolder.el);
-
-    for (const v of corridorByFloor[floor]) {
-      floorFolder.children.appendChild(buildCorridorRow(v));
-    }
+  // Group by building
+  const byBuilding: Record<string, ParsedFile[]> = {};
+  for (const p of parsed) {
+    (byBuilding[p.building] ??= []).push(p);
   }
 
-  // --- Stairs folder ---
-  const stairsFolder = createTreeFolder('Stairs', false);
-  buildingFolder.children.appendChild(stairsFolder.el);
+  const buildings = Object.keys(byBuilding).sort();
+  for (const building of buildings) {
+    const buildingFolder = createTreeFolder(building, buildings.length === 1);
+    body.appendChild(buildingFolder.el);
+    buildBuildingSubtree(buildingFolder.children, byBuilding[building]);
+  }
+}
 
-  for (const stairId of Object.keys(stairEntries).map(Number).sort()) {
-    const stairFolder = createTreeFolder(`계단 ${stairId}`, false);
-    stairsFolder.children.appendChild(stairFolder.el);
+function buildBuildingSubtree(parent: HTMLElement, items: ParsedFile[]): void {
+  const corridors: ParsedFile[] = [];
+  const stairs: ParsedFile[] = [];
+  const elevators: ParsedFile[] = [];
+  const others: ParsedFile[] = [];
+  for (const p of items) {
+    if (p.kind === 'corridor') corridors.push(p);
+    else if (p.kind === 'stair') stairs.push(p);
+    else if (p.kind === 'elevator') elevators.push(p);
+    else others.push(p);
+  }
 
-    for (const floor of Object.keys(stairEntries[stairId]).map(Number).sort()) {
-      const floorFolder = createTreeFolder(`F${floor}`, false);
-      stairFolder.children.appendChild(floorFolder.el);
-
-      for (const v of stairEntries[stairId][floor]) {
-        floorFolder.children.appendChild(buildVerticalRow(v));
+  if (corridors.length) {
+    const folder = createTreeFolder('Corridor', false);
+    parent.appendChild(folder.el);
+    const byFloor = groupBy(corridors, (p) => p.floor ?? 0);
+    for (const floor of sortedNumKeys(byFloor)) {
+      const ff = createTreeFolder(`F${floor}`, false);
+      folder.children.appendChild(ff.el);
+      for (const v of byFloor[floor].sort(byFilename)) {
+        ff.children.appendChild(buildRow(v, 'yaw'));
       }
     }
   }
 
-  // --- Elevator folder ---
-  const elevFolder = createTreeFolder('Elevator', false);
-  buildingFolder.children.appendChild(elevFolder.el);
-
-  for (const elevId of Object.keys(elevEntries).map(Number).sort()) {
-    const eFolder = createTreeFolder(`엘리베이터 ${elevId}`, false);
-    elevFolder.children.appendChild(eFolder.el);
-
-    for (const floor of Object.keys(elevEntries[elevId]).map(Number).sort()) {
-      const floorFolder = createTreeFolder(`F${floor}`, false);
-      eFolder.children.appendChild(floorFolder.el);
-
-      for (const v of elevEntries[elevId][floor]) {
-        floorFolder.children.appendChild(buildVerticalRow(v));
+  if (stairs.length) {
+    const folder = createTreeFolder('Stairs', false);
+    parent.appendChild(folder.el);
+    const byId = groupBy(stairs, (p) => p.id ?? 0);
+    for (const id of sortedNumKeys(byId)) {
+      const idFolder = createTreeFolder(`계단 ${id}`, false);
+      folder.children.appendChild(idFolder.el);
+      const byFloor = groupBy(byId[id], (p) => p.floor ?? 0);
+      for (const floor of sortedNumKeys(byFloor)) {
+        const ff = createTreeFolder(`F${floor}`, false);
+        idFolder.children.appendChild(ff.el);
+        for (const v of byFloor[floor].sort(byFilename)) {
+          ff.children.appendChild(buildRow(v, v.action === 'enter' ? 'entryYaw' : 'exitYaw'));
+        }
       }
     }
   }
+
+  if (elevators.length) {
+    const folder = createTreeFolder('Elevator', false);
+    parent.appendChild(folder.el);
+    const byId = groupBy(elevators, (p) => p.id ?? 0);
+    for (const id of sortedNumKeys(byId)) {
+      const idFolder = createTreeFolder(`엘리베이터 ${id}`, false);
+      folder.children.appendChild(idFolder.el);
+      const byFloor = groupBy(byId[id], (p) => p.floor ?? 0);
+      for (const floor of sortedNumKeys(byFloor)) {
+        const ff = createTreeFolder(`F${floor}`, false);
+        idFolder.children.appendChild(ff.el);
+        for (const v of byFloor[floor].sort(byFilename)) {
+          ff.children.appendChild(buildRow(v, v.action === 'enter' ? 'entryYaw' : 'exitYaw'));
+        }
+      }
+    }
+  }
+
+  if (others.length) {
+    const folder = createTreeFolder('Other', false);
+    parent.appendChild(folder.el);
+    for (const v of others.sort(byFilename)) {
+      folder.children.appendChild(buildRow(v, 'yaw'));
+    }
+  }
+}
+
+// ===== Filename parser =====
+
+function parseVideoFilename(filename: string): ParsedFile {
+  const corridor = filename.match(/^(.+?)_c_F(\d+)_(\d+)_(cw|ccw)\.mp4$/i);
+  if (corridor) {
+    const [, building, floor, id, dir] = corridor;
+    return {
+      filename,
+      building,
+      kind: 'corridor',
+      floor: +floor,
+      id: +id,
+      direction: dir as 'cw' | 'ccw',
+      label: `F${floor} seg${id} ${dir === 'cw' ? '시계방향' : '반시계방향'}`,
+    };
+  }
+  const stair = filename.match(/^(.+?)_s_(\d+)_(\d+)([eo])([ud])\.mp4$/i);
+  if (stair) {
+    const [, building, id, floor, ae, ud] = stair;
+    const action = ae === 'e' ? 'enter' : 'exit';
+    const vDirection = ud === 'u' ? 'up' : 'down';
+    const arrow = ud === 'u' ? '↑' : '↓';
+    const verb = action === 'enter' ? '진입' : '나옴';
+    return {
+      filename,
+      building,
+      kind: 'stair',
+      id: +id,
+      floor: +floor,
+      action,
+      vDirection,
+      label: `계단${id} ${floor}F ${verb}${arrow}`,
+    };
+  }
+  const elev = filename.match(/^(.+?)_e_(\d+)_(\d+)([eo])\.mp4$/i);
+  if (elev) {
+    const [, building, id, floor, ae] = elev;
+    const action = ae === 'e' ? 'enter' : 'exit';
+    const verb = action === 'enter' ? '진입' : '나옴';
+    return {
+      filename,
+      building,
+      kind: 'elevator',
+      id: +id,
+      floor: +floor,
+      action,
+      label: `엘리베이터${id} ${floor}F ${verb}`,
+    };
+  }
+  const prefix = filename.match(/^([^_.]+)/);
+  return {
+    filename,
+    building: prefix?.[1] ?? 'other',
+    kind: 'other',
+    label: filename,
+  };
+}
+
+// ===== Grouping helpers =====
+
+function groupBy<T, K extends string | number>(items: T[], key: (item: T) => K): Record<K, T[]> {
+  const out = {} as Record<K, T[]>;
+  for (const item of items) {
+    const k = key(item);
+    (out[k] ??= []).push(item);
+  }
+  return out;
+}
+
+function sortedNumKeys<T>(rec: Record<number, T>): number[] {
+  return Object.keys(rec).map(Number).sort((a, b) => a - b);
+}
+
+function byFilename(a: ParsedFile, b: ParsedFile): number {
+  return a.filename.localeCompare(b.filename);
 }
 
 // ===== Tree folder helper =====
@@ -143,9 +266,9 @@ function createTreeFolder(label: string, startOpen: boolean): { el: HTMLElement;
   return { el, children };
 }
 
-// ===== Row builders =====
+// ===== Row builder =====
 
-function buildCorridorRow(v: VideoEntry): HTMLElement {
+function buildRow(v: ParsedFile, field: keyof VideoYawEntry): HTMLElement {
   const row = document.createElement('div');
   row.className = 'ge-vs-row';
 
@@ -154,29 +277,6 @@ function buildCorridorRow(v: VideoEntry): HTMLElement {
   label.textContent = v.label;
   label.title = v.filename;
 
-  const entry = VideoSettings.getEntry(v.filename);
-  const yawSpan = document.createElement('span');
-  yawSpan.className = 'ge-vs-yaw';
-  yawSpan.textContent = fmtYaw(entry?.yaw);
-
-  const btn = createPreviewBtn(v.filename, 'yaw', yawSpan);
-
-  row.appendChild(label);
-  row.appendChild(yawSpan);
-  row.appendChild(btn);
-  return row;
-}
-
-function buildVerticalRow(v: VerticalVideoEntry): HTMLElement {
-  const row = document.createElement('div');
-  row.className = 'ge-vs-row';
-
-  const label = document.createElement('span');
-  label.className = 'ge-vs-label';
-  label.textContent = v.label;
-  label.title = v.filename;
-
-  const field = v.action === 'enter' ? 'entryYaw' as const : 'exitYaw' as const;
   const entry = VideoSettings.getEntry(v.filename);
   const yawSpan = document.createElement('span');
   yawSpan.className = 'ge-vs-yaw';

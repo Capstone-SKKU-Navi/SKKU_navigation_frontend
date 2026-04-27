@@ -6,7 +6,7 @@ export interface NavNode {
   id: string;
   coordinates: [number, number]; // [lng, lat]
   level: number;
-  building: string;              // "21" | "22" | "23" | "ENG1"
+  building: string;              // building code (e.g. "eng1", "slib") or "outside"
   type: NavNodeType;
   label: string;
   verticalId?: number;           // stair 1-4, elevator 1-2 — which physical unit
@@ -17,7 +17,7 @@ export interface NavEdge {
   from: string;
   to: string;
   weight: number; // meters
-  building: string;     // "21" | "22" | "23" | "ENG1" — derived from `from` node at add/import
+  building: string;     // building code or "outside" — same on both ends, else "outside"
   videoFwd?: string;    // 360° video for from→to direction (or entry clip for stairs/elev)
   videoFwdStart?: number;
   videoFwdEnd?: number;

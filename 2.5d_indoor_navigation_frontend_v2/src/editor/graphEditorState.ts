@@ -88,7 +88,7 @@ export function addEdge(state: EditorState, from: string, to: string, weightOver
   if (exists) return null;
 
   const weight = weightOverride ?? calcEdgeWeight(nodeA, nodeB);
-  const edge: NavEdge = { id: genEdgeId(from, to), from, to, weight, building: nodeA.building };
+  const edge: NavEdge = { id: genEdgeId(from, to), from, to, weight, building: resolveEdgeBuilding(nodeA, nodeB) };
   const cmd = new AddEdgeCmd(edge);
   executeCmd(state, cmd);
   return edge;
@@ -261,7 +261,7 @@ export function importGraph(data: NavGraphExport): NavGraph {
     from: e.from,
     to: e.to,
     weight: e.weight,
-    building: nodes[e.from]?.building ?? nodes[e.to]?.building ?? 'ENG1',
+    building: resolveEdgeBuilding(nodes[e.from], nodes[e.to]),
     ...(e.videoFwd ? { videoFwd: e.videoFwd } : {}),
     ...(e.videoFwdStart !== undefined ? { videoFwdStart: e.videoFwdStart } : {}),
     ...(e.videoFwdEnd !== undefined ? { videoFwdEnd: e.videoFwdEnd } : {}),
@@ -287,6 +287,17 @@ function calcEdgeWeight(a: NavNode, b: NavNode): number {
   const horizontalDist = getDistanceBetweenCoordinatesInM(a.coordinates, b.coordinates);
   const verticalDist = Math.abs(a.level - b.level) * DEFAULT_FLOOR_HEIGHT;
   return Math.round(horizontalDist + verticalDist);
+}
+
+/**
+ * Edge building: same on both ends → that building. Mismatch (cross-building
+ * link) or missing endpoints → "outside".
+ */
+function resolveEdgeBuilding(a: NavNode | undefined, b: NavNode | undefined): string {
+  const ab = a?.building;
+  const bb = b?.building;
+  if (ab && bb) return ab === bb ? ab : 'outside';
+  return ab ?? bb ?? 'outside';
 }
 
 // ===== Room Detection =====

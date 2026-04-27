@@ -11,7 +11,7 @@ import * as BackendService from '../services/backendService';
 import * as IndoorLayerModule from '../components/indoorLayer';
 import * as VideoSettings from './videoSettings';
 import { openVideoPreview } from './videoPreview';
-import { getOppositeVideo } from './videoCatalog';
+import { getOppositeVideo, loadVideoCatalog } from './videoCatalog';
 import * as RoomCodeLookup from './roomCodeLookup';
 
 let state = State.createState();
@@ -38,6 +38,10 @@ export function setupGraphEditor(): void {
   }
 
   btn.addEventListener('click', () => toggleEditor());
+
+  // Hydrate the corridor catalog from the actual files under videos/ so the
+  // edge picker shows every building present, not just the eng1 fallback.
+  void loadVideoCatalog();
 }
 
 // ===== Toggle =====

@@ -4,12 +4,8 @@
 //   Stairs:    {building}_s_{stairId}_{floor}{e|o}{u|d}.mp4
 //   Elevators: {building}_e_{elevId}_{floor}{e|o}.mp4
 
-const BUILDING_CODE_MAP: Record<string, string> = {
-  '21': 'eng1', '22': 'eng1', '23': 'eng1', 'ENG1': 'eng1',
-};
-
 export function toBuildingCode(building: string): string {
-  return BUILDING_CODE_MAP[building] ?? building.toLowerCase();
+  return building.toLowerCase();
 }
 
 // ===== Stair Videos =====

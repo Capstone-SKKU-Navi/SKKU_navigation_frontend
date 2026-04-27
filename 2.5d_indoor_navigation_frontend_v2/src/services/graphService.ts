@@ -32,6 +32,13 @@ export async function loadGraph(): Promise<void> {
   }
 }
 
+function resolveEdgeBuilding(a: NavNode | undefined, b: NavNode | undefined): string {
+  const ab = a?.building;
+  const bb = b?.building;
+  if (ab && bb) return ab === bb ? ab : 'outside';
+  return ab ?? bb ?? 'outside';
+}
+
 function importGraph(data: NavGraphExport): NavGraph {
   const nodes: Record<string, NavNode> = {};
   for (const [id, raw] of Object.entries(data.nodes)) {
@@ -51,7 +58,7 @@ function importGraph(data: NavGraphExport): NavGraph {
     from: e.from,
     to: e.to,
     weight: e.weight,
-    building: nodes[e.from]?.building ?? nodes[e.to]?.building ?? 'ENG1',
+    building: resolveEdgeBuilding(nodes[e.from], nodes[e.to]),
     videoFwd: e.videoFwd, videoFwdStart: e.videoFwdStart, videoFwdEnd: e.videoFwdEnd,
     videoFwdExit: e.videoFwdExit, videoFwdExitStart: e.videoFwdExitStart, videoFwdExitEnd: e.videoFwdExitEnd,
     videoRev: e.videoRev, videoRevStart: e.videoRevStart, videoRevEnd: e.videoRevEnd,

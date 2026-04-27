@@ -639,7 +639,7 @@ function buildVideoTree(
   }
 
   for (const [building, floors] of Object.entries(tree)) {
-    const buildingFolder = createFolder(building, true);
+    const buildingFolder = createFolder(building, false);
     container.appendChild(buildingFolder.el);
 
     const sortedFloors = Object.keys(floors).sort();
