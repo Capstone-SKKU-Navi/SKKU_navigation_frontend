@@ -706,9 +706,9 @@
         "level": [
           1
         ],
-        "ref": "",
+        "ref": "34",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 13,
         "_centroid": [
           126.9771534,
@@ -1397,15 +1397,19 @@
         "level": [
           1
         ],
-        "ref": "",
+        "ref": "34",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 24,
         "_centroid": [
           126.9772076,
           37.2938395
         ],
-        "_area_m2": 153.4
+        "_area_m2": 153.4,
+        "_label_pos": [
+          126.97723992459339,
+          37.293905116793624
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -1801,9 +1805,9 @@
         "level": [
           1
         ],
-        "ref": "",
+        "ref": "34",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 32,
         "_centroid": [
           126.9771546,

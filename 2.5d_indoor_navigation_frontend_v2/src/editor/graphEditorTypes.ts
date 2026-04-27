@@ -37,7 +37,7 @@ export interface NavGraph {
   edges: NavEdge[];
 }
 
-export type EditorMode = 'select' | 'add-node' | 'add-edge' | 'label-room';
+export type EditorMode = 'select' | 'add-node' | 'add-edge' | 'label-room' | 'delete';
 
 export type RoomType =
   | 'classroom' | 'lab' | 'restroom' | 'office' | 'stairs' | 'elevator'
@@ -139,6 +139,8 @@ export interface PanelCallbacks {
   onImport(): void;
   onExport(): void;
   onClearAll(): void;
+  onClearBuildingGraph(building: string): void;
+  onClearBuildingRooms(building: string): void;
   onAutoApplyChange(preset: RoomAutoApplyPreset): void;
   onClose(): void;
 }

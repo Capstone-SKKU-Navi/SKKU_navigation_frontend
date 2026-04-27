@@ -8,9 +8,9 @@
         "level": [
           2
         ],
-        "ref": "123",
+        "ref": "",
         "name": "",
-        "room_type": "store",
+        "room_type": "",
         "_idx": 1,
         "_centroid": [
           126.9748185,
@@ -57,9 +57,9 @@
         "level": [
           2
         ],
-        "ref": "123",
+        "ref": "",
         "name": "",
-        "room_type": "store",
+        "room_type": "",
         "_idx": 2,
         "_centroid": [
           126.9746701,
@@ -722,9 +722,9 @@
         "level": [
           2
         ],
-        "ref": "123",
+        "ref": "",
         "name": "",
-        "room_type": "store",
+        "room_type": "",
         "_idx": 15,
         "_centroid": [
           126.9746008,
@@ -1313,9 +1313,9 @@
         "level": [
           2
         ],
-        "ref": "123",
+        "ref": "",
         "name": "",
-        "room_type": "store",
+        "room_type": "",
         "_idx": 26,
         "_centroid": [
           126.9749139,
@@ -1507,9 +1507,9 @@
         "level": [
           2
         ],
-        "ref": "123",
+        "ref": "",
         "name": "",
-        "room_type": "store",
+        "room_type": "",
         "_idx": 28,
         "_centroid": [
           126.9745163,
@@ -1568,9 +1568,9 @@
         "level": [
           2
         ],
-        "ref": "123",
+        "ref": "",
         "name": "",
-        "room_type": "store",
+        "room_type": "",
         "_idx": 29,
         "_centroid": [
           126.9746316,
@@ -1735,9 +1735,9 @@
         "level": [
           2
         ],
-        "ref": "123",
+        "ref": "",
         "name": "",
-        "room_type": "store",
+        "room_type": "",
         "_idx": 32,
         "_centroid": [
           126.9748645,

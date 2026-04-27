@@ -154,6 +154,45 @@ export function clearAll(state: EditorState): void {
   state.edgeStartNodeId = null;
 }
 
+/**
+ * Delete every node located inside the given building (point-in-outline match)
+ * and every edge touching one of those nodes. `node.building` holds the wing
+ * prefix ("21"/"22"/"23"/"ENG1"), not the building code, so we resolve via
+ * coordinates instead.
+ */
+export function clearBuildingNodesEdges(state: EditorState, building: string): { nodeCount: number; edgeCount: number } {
+  const nodeIdsToRemove = new Set<string>();
+  for (const [id, node] of Object.entries(state.graph.nodes)) {
+    if (BackendService.getBuildingForCoordinates(node.coordinates) === building) {
+      nodeIdsToRemove.add(id);
+    }
+  }
+  if (nodeIdsToRemove.size === 0) return { nodeCount: 0, edgeCount: 0 };
+
+  const removedNodes: NavNode[] = [];
+  for (const id of nodeIdsToRemove) removedNodes.push({ ...state.graph.nodes[id] });
+  const removedEdges: NavEdge[] = state.graph.edges
+    .filter(e => nodeIdsToRemove.has(e.from) || nodeIdsToRemove.has(e.to))
+    .map(e => ({ ...e }));
+
+  const cmd: Command = {
+    execute(graph) {
+      for (const id of nodeIdsToRemove) delete graph.nodes[id];
+      graph.edges = graph.edges.filter(e => !nodeIdsToRemove.has(e.from) && !nodeIdsToRemove.has(e.to));
+    },
+    undo(graph) {
+      for (const n of removedNodes) graph.nodes[n.id] = { ...n };
+      graph.edges.push(...removedEdges.map(e => ({ ...e })));
+    },
+  };
+  executeCmd(state, cmd);
+  state.selectedNodeId = null;
+  state.selectedEdgeId = null;
+  state.selectedEdgeIds = [];
+  state.edgeStartNodeId = null;
+  return { nodeCount: removedNodes.length, edgeCount: removedEdges.length };
+}
+
 // ===== Persistence (file-based) =====
 
 function saveToFile(graph: NavGraph): void {

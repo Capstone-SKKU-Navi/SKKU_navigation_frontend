@@ -91,6 +91,8 @@ async function activateEditor(): Promise<void> {
     onImport: handleImport,
     onExport: handleExport,
     onClearAll: handleClearAll,
+    onClearBuildingGraph: handleClearBuildingGraph,
+    onClearBuildingRooms: handleClearBuildingRooms,
     onAutoApplyChange: handleAutoApplyChange,
     onClose: deactivateEditor,
   });
@@ -715,6 +717,52 @@ function handleClearAll(): void {
   refreshMap();
 }
 
+function handleClearBuildingGraph(building: string): void {
+  if (!BackendService.getBuildingCodes().includes(building)) return;
+  const { nodeCount, edgeCount } = State.clearBuildingNodesEdges(state, building);
+  Panel.hideNodeProperties();
+  Panel.hideEdgeProperties();
+  refreshMap();
+  console.log(`[GraphEditor] cleared ${building}: ${nodeCount} nodes, ${edgeCount} edges`);
+}
+
+function handleClearBuildingRooms(building: string): void {
+  if (!map) return;
+  if (!BackendService.getBuildingCodes().includes(building)) return;
+
+  const levels = BackendService.getBuildingLevels(building);
+  let totalCleared = 0;
+  for (const level of levels) {
+    const features = BackendService.getLevelDataForBuilding(building, level).rooms.features;
+    let levelCleared = 0;
+    for (const f of features) {
+      const props = f.properties as any;
+      if (props.ref || props.name || props.room_type) {
+        props.ref = '';
+        props.name = '';
+        props.room_type = '';
+        levelCleared++;
+      }
+    }
+    if (levelCleared > 0) {
+      totalCleared += levelCleared;
+      IndoorLayerModule.refreshRoomLabels(map, level);
+      saveRoomData(building, level);
+    }
+  }
+
+  // Reset any in-progress room selection if it belonged to this building
+  if (selectedRoom?.building === building) {
+    selectedRoom = null;
+    const roomPropsEl = document.getElementById('geRoomProps');
+    if (roomPropsEl) {
+      roomPropsEl.dataset.featureIdx = '';
+      roomPropsEl.dataset.featureBuilding = '';
+    }
+  }
+  console.log(`[GraphEditor] cleared room data for ${building}: ${totalCleared} rooms`);
+}
+
 // ===== Room Label Editing =====
 
 function saveRoomData(building: string, level: number): void {
@@ -896,6 +944,8 @@ function handleKeyDown(e: KeyboardEvent): void {
     handleModeChange('add-edge');
   } else if (e.key === 'r' || e.key === 'R') {
     handleModeChange('label-room');
+  } else if (e.key === 't' || e.key === 'T') {
+    handleModeChange('delete');
   }
 }
 

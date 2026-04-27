@@ -155,9 +155,9 @@
         "level": [
           -1
         ],
-        "ref": "21",
+        "ref": "",
         "name": "",
-        "room_type": "storage",
+        "room_type": "",
         "_idx": 4,
         "_centroid": [
           126.974792,
@@ -268,9 +268,9 @@
         "level": [
           -1
         ],
-        "ref": "21",
+        "ref": "",
         "name": "",
-        "room_type": "storage",
+        "room_type": "",
         "_idx": 5,
         "_centroid": [
           126.9753822,
@@ -959,9 +959,9 @@
         "level": [
           -1
         ],
-        "ref": "21",
+        "ref": "",
         "name": "",
-        "room_type": "storage",
+        "room_type": "",
         "_idx": 20,
         "_centroid": [
           126.9751556,
@@ -1094,9 +1094,9 @@
         "level": [
           -1
         ],
-        "ref": "21",
+        "ref": "",
         "name": "",
-        "room_type": "storage",
+        "room_type": "",
         "_idx": 23,
         "_centroid": [
           126.9753981,

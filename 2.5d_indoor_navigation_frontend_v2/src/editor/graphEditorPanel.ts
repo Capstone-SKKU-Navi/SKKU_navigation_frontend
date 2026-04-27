@@ -7,6 +7,7 @@ import { computeStairVideos, computeElevatorVideos } from '../utils/verticalVide
 import * as RoomCodeLookup from './roomCodeLookup';
 import { formatLevel } from '../utils/formatLevel';
 import { escapeHtml } from '../utils/escapeHtml';
+import * as BackendService from '../services/backendService';
 
 let panelEl: HTMLElement | null = null;
 let callbacks: PanelCallbacks | null = null;
@@ -45,7 +46,24 @@ export function createPanel(cb: PanelCallbacks): HTMLElement {
           <button class="ge-mode-btn" data-mode="label-room" title="방 라벨 편집 (R)">
             <span class="material-icons">label</span>
           </button>
+          <button class="ge-mode-btn" data-mode="delete" title="삭제 명령 (T)">
+            <span class="material-icons">delete_sweep</span>
+          </button>
         </div>
+      </div>
+
+      <div class="ge-section" id="geDeleteSection" style="display:none">
+        <div class="ge-props-title"><span>삭제 명령</span></div>
+        <button class="ge-action-btn ge-danger-btn" id="geClearAll" style="width:100%;margin-bottom:8px;">Clear All (모든 노드/엣지)</button>
+        <div style="font-size:11px;opacity:0.7;margin-bottom:4px;">Per-building reset</div>
+        <select id="geBuildingResetSelect" class="ge-select" style="width:100%;margin-bottom:6px;">
+          ${BackendService.getBuildingCodes().map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('')}
+        </select>
+        <div class="ge-action-row">
+          <button class="ge-action-btn ge-danger-btn" id="geClearBuildingGraph" title="이 건물의 노드/엣지 삭제">Clear N+E</button>
+          <button class="ge-action-btn ge-danger-btn" id="geClearBuildingRooms" title="이 건물의 방 ref/name/type 초기화">Clear Rooms</button>
+        </div>
+        <p class="ge-hint">Clear N+E는 Undo로 복구 가능. Clear Rooms는 즉시 저장됩니다 (yaw 미영향).</p>
       </div>
 
       <div class="ge-section" id="geAddNodeOpts" style="display:none">
@@ -292,7 +310,6 @@ export function createPanel(cb: PanelCallbacks): HTMLElement {
         <button class="ge-action-btn" id="geVideoSettings">
             <span class="material-icons" style="font-size:16px">360</span> Video Settings
           </button>
-        <button class="ge-action-btn ge-danger-btn" id="geClearAll">Clear All</button>
       </div>
     </div>
   `;
@@ -373,6 +390,9 @@ export function setActiveMode(mode: EditorMode): void {
 
   const roomProps = document.getElementById('geRoomProps');
   if (roomProps) roomProps.style.display = mode === 'label-room' ? 'block' : 'none';
+
+  const deleteSection = document.getElementById('geDeleteSection');
+  if (deleteSection) deleteSection.style.display = mode === 'delete' ? 'block' : 'none';
 }
 
 export function getAddNodeType(): NavNodeType {
@@ -914,6 +934,26 @@ function wireEvents(): void {
   document.getElementById('geClearAll')?.addEventListener('click', () => {
     if (confirm('모든 노드와 엣지를 삭제하시겠습니까?')) {
       callbacks?.onClearAll();
+    }
+  });
+
+  // Per-building: clear nodes + edges
+  document.getElementById('geClearBuildingGraph')?.addEventListener('click', () => {
+    const sel = document.getElementById('geBuildingResetSelect') as HTMLSelectElement | null;
+    const building = sel?.value;
+    if (!building) return;
+    if (confirm(`${building} 건물의 모든 노드와 엣지를 삭제하시겠습니까?`)) {
+      callbacks?.onClearBuildingGraph(building);
+    }
+  });
+
+  // Per-building: clear room ref/name/type (yaw/video_settings unaffected)
+  document.getElementById('geClearBuildingRooms')?.addEventListener('click', () => {
+    const sel = document.getElementById('geBuildingResetSelect') as HTMLSelectElement | null;
+    const building = sel?.value;
+    if (!building) return;
+    if (confirm(`${building} 건물의 모든 방 ref / name / room_type을 초기화하시겠습니까?`)) {
+      callbacks?.onClearBuildingRooms(building);
     }
   });
 

@@ -403,6 +403,42 @@ export function getOutline(): number[][] {
   return (geom as GeoJSON.Polygon).coordinates[0];
 }
 
+/**
+ * Resolve which building owns a coordinate by point-in-polygon test against
+ * each building's outline. Returns null if no outline contains it. Used by
+ * the editor's per-building reset to filter graph nodes (whose `building`
+ * field is the wing prefix "21|22|23|ENG1", not the building-code namespace).
+ */
+export function getBuildingForCoordinates(coords: [number, number]): string | null {
+  const [lng, lat] = coords;
+  for (const [code, bi] of buildingInterfaces.entries()) {
+    const [w, s, e, n] = bi.boundingBox;
+    if (lng < w || lng > e || lat < s || lat > n) continue;
+    const geom = bi.feature.geometry;
+    const rings: number[][][] = geom.type === 'Polygon'
+      ? [(geom as GeoJSON.Polygon).coordinates[0]]
+      : geom.type === 'MultiPolygon'
+        ? (geom as GeoJSON.MultiPolygon).coordinates.map(p => p[0])
+        : [];
+    for (const ring of rings) {
+      if (pointInRing(lng, lat, ring)) return code;
+    }
+  }
+  return null;
+}
+
+function pointInRing(x: number, y: number, ring: number[][]): boolean {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const xi = ring[i][0], yi = ring[i][1];
+    const xj = ring[j][0], yj = ring[j][1];
+    if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) {
+      inside = !inside;
+    }
+  }
+  return inside;
+}
+
 /** All levels across all buildings, sorted descending */
 export function getAllLevels(): number[] {
   const set = new Set<number>();
