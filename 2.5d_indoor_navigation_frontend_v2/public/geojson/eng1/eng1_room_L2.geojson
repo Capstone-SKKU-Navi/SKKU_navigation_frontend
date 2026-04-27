@@ -110,9 +110,9 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "21",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 3,
         "_centroid": [
           126.9766737,
@@ -330,9 +330,9 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "21",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 7,
         "_centroid": [
           126.9769568,
@@ -436,9 +436,9 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "21",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 9,
         "_centroid": [
           126.9770275,
@@ -640,9 +640,9 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "21",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 13,
         "_centroid": [
           126.976486,
@@ -962,9 +962,9 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "21",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 19,
         "_centroid": [
           126.9766146,
@@ -1835,9 +1835,9 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "123",
         "name": "",
-        "room_type": "",
+        "room_type": "store",
         "_idx": 36,
         "_centroid": [
           126.9770576,
@@ -2156,9 +2156,9 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "123",
         "name": "",
-        "room_type": "",
+        "room_type": "store",
         "_idx": 41,
         "_centroid": [
           126.9770211,
@@ -2495,9 +2495,9 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "123",
         "name": "",
-        "room_type": "",
+        "room_type": "store",
         "_idx": 48,
         "_centroid": [
           126.9764318,
@@ -2704,9 +2704,9 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "123",
         "name": "",
-        "room_type": "",
+        "room_type": "store",
         "_idx": 51,
         "_centroid": [
           126.9765508,
@@ -2810,9 +2810,9 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "123",
         "name": "",
-        "room_type": "",
+        "room_type": "store",
         "_idx": 53,
         "_centroid": [
           126.9766192,

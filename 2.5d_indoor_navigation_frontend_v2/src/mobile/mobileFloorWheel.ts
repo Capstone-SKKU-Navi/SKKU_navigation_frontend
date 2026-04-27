@@ -9,6 +9,7 @@ import { MOBILE_IDS } from './mobileChrome';
 import { onVerticalWheelSwipe } from './gestures';
 import * as BackendService from '../services/backendService';
 import * as GeoMap from '../components/geoMap';
+import { formatLevel } from '../utils/formatLevel';
 
 const ITEM_HEIGHT = 44;
 
@@ -27,7 +28,7 @@ export function initFloorWheel(): void {
   for (const level of levels) {
     const btn = document.createElement('button');
     btn.className = 'm-floor-item';
-    btn.textContent = `${level}F`;
+    btn.textContent = formatLevel(level);
     btn.dataset.level = String(level);
     btn.addEventListener('click', () => {
       GeoMap.handleLevelChange(level);

@@ -6,6 +6,7 @@ import * as FloatingLabels from './floatingLabels';
 import { MapConfig } from '../config/mapConfig';
 import { ROOM_TYPE_LABELS } from '../models/types';
 import { polygonCenter } from '../utils/polygonCenter';
+import { formatLevel } from '../utils/formatLevel';
 
 /**
  * GeoMap — MapLibre GL JS based map component
@@ -264,7 +265,7 @@ function showRoomInfoPopup(ref: string, feature: GeoJSON.Feature, center: number
   content.innerHTML = `
     <div class="room-info-title">${ref}${name ? ` (${name})` : ''}</div>
     ${typeLabel ? `<div class="room-info-type">${typeLabel}</div>` : ''}
-    <div class="room-info-level">${IndoorLayer.getCurrentLevel()}F</div>
+    <div class="room-info-level">${formatLevel(IndoorLayer.getCurrentLevel())}</div>
   `;
 
   // Convert lngLat to screen position

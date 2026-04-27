@@ -1,0 +1,13 @@
+{
+  "building": "slib",
+  "name": "삼성학술정보관",
+  "loc_ref": "SLIB",
+  "levels": [
+    -1,
+    1,
+    2,
+    3,
+    4,
+    5
+  ]
+}

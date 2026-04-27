@@ -808,9 +808,9 @@
         "level": [
           1
         ],
-        "ref": "",
+        "ref": "21",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 15,
         "_centroid": [
           126.9764616,
@@ -861,9 +861,9 @@
         "level": [
           1
         ],
-        "ref": "23112",
+        "ref": "21",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 16,
         "_centroid": [
           126.9765408,
@@ -1112,15 +1112,19 @@
         "level": [
           1
         ],
-        "ref": "",
+        "ref": "21",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 19,
         "_centroid": [
           126.9770481,
           37.2941655
         ],
-        "_area_m2": 118.4
+        "_area_m2": 118.4,
+        "_label_pos": [
+          126.97519488823554,
+          37.293822152561305
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -1707,9 +1711,9 @@
         "level": [
           1
         ],
-        "ref": "22106",
+        "ref": "21",
         "name": "반응유동연구실",
-        "room_type": "lab",
+        "room_type": "storage",
         "_idx": 30,
         "_centroid": [
           126.9762803,
@@ -1891,9 +1895,9 @@
         "level": [
           1
         ],
-        "ref": "",
+        "ref": "21",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 34,
         "_centroid": [
           126.9764318,
@@ -1936,9 +1940,9 @@
         "level": [
           1
         ],
-        "ref": "",
+        "ref": "21",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 35,
         "_centroid": [
           126.9764827,
@@ -2116,9 +2120,9 @@
         "level": [
           1
         ],
-        "ref": "",
+        "ref": "21",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 39,
         "_centroid": [
           126.9768223,

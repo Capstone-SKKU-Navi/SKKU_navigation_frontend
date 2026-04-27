@@ -13,6 +13,7 @@ import { isMobileDevice } from './utils/deviceDetection';
 import * as RouteActions from './services/routeActions';
 import { setupApiModeBadge } from './components/apiModeBadge';
 import { escapeHtml } from './utils/escapeHtml';
+import { formatLevel } from './utils/formatLevel';
 
 // ===== Route 3D sync =====
 function syncRoute3D(): void {
@@ -99,7 +100,7 @@ function setupBuildingInfo(): void {
   const buildingEl = document.getElementById('selectedBuilding');
   const descEl = document.getElementById('description');
   if (buildingEl) buildingEl.textContent = BackendService.getBuildingDescription();
-  if (descEl) descEl.textContent = `${GeoMap.getCurrentLevel()}F`;
+  if (descEl) descEl.textContent = formatLevel(GeoMap.getCurrentLevel());
 }
 
 // ===== 2D/3D Toggle =====
@@ -135,7 +136,7 @@ function setupFloorWheel(): void {
   levels.forEach(level => {
     const btn = document.createElement('button');
     btn.className = 'floor-wheel-item';
-    btn.textContent = `${level}F`;
+    btn.textContent = formatLevel(level);
     btn.dataset.level = level.toString();
 
     btn.addEventListener('click', () => {
@@ -179,7 +180,7 @@ function updateFloorWheelActive(activeLevel: number): void {
   });
 
   const descEl = document.getElementById('description');
-  if (descEl) descEl.textContent = `${activeLevel}F`;
+  if (descEl) descEl.textContent = formatLevel(activeLevel);
 }
 
 // ===== Generic autocomplete wiring =====

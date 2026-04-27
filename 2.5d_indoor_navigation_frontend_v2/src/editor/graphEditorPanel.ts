@@ -5,6 +5,7 @@ import { suggestVideosForEdge, getAllVideos, getOppositeVideo, type VideoEntry }
 import { openVideoSettingsPanel } from './videoSettingsPanel';
 import { computeStairVideos, computeElevatorVideos } from '../utils/verticalVideoFilename';
 import * as RoomCodeLookup from './roomCodeLookup';
+import { formatLevel } from '../utils/formatLevel';
 import { escapeHtml } from '../utils/escapeHtml';
 
 let panelEl: HTMLElement | null = null;
@@ -312,7 +313,7 @@ export function destroyPanel(): void {
 }
 
 export function updateInfo(nodeCount: number, edgeCount: number, level: number): void {
-  setText('geInfoLevel', `${level}F`);
+  setText('geInfoLevel', formatLevel(level));
   setText('geInfoNodes', `${nodeCount} nodes`);
   setText('geInfoEdges', `${edgeCount} edges`);
 }
@@ -379,8 +380,8 @@ export function getAddNodeType(): NavNodeType {
   return (sel?.value as NavNodeType) || 'corridor';
 }
 
-export function showRoomProperties(props: { _idx?: number; _area_m2?: number; ref?: string; name?: string; room_type?: string }): void {
-  setText('geRoomIdx', String(props._idx ?? '?'));
+export function showRoomProperties(props: { _idx?: number; _area_m2?: number; ref?: string; name?: string; room_type?: string; building?: string }): void {
+  setText('geRoomIdx', `${props.building ?? '?'}#${props._idx ?? '?'}`);
   setText('geRoomArea', `${props._area_m2 ?? 0} m²`);
 
   const refInput = document.getElementById('geRoomRef') as HTMLInputElement;
@@ -392,9 +393,12 @@ export function showRoomProperties(props: { _idx?: number; _area_m2?: number; re
   const typeSelect = document.getElementById('geRoomType') as HTMLSelectElement;
   if (typeSelect) typeSelect.value = props.room_type ?? '';
 
-  // Store idx for updates
+  // Store building + idx for updates — _idx alone is not unique across buildings
   const roomPropsEl = document.getElementById('geRoomProps');
-  if (roomPropsEl) roomPropsEl.dataset.featureIdx = String(props._idx ?? '');
+  if (roomPropsEl) {
+    roomPropsEl.dataset.featureIdx = String(props._idx ?? '');
+    roomPropsEl.dataset.featureBuilding = props.building ?? '';
+  }
 }
 
 export function updateRoomRefInput(ref: string): void {
@@ -915,8 +919,10 @@ function wireEvents(): void {
 
   // Room ref change (with auto-lookup)
   document.getElementById('geRoomRef')?.addEventListener('change', (e) => {
-    const idx = parseInt(document.getElementById('geRoomProps')?.dataset.featureIdx ?? '');
-    if (isNaN(idx)) return;
+    const propsEl = document.getElementById('geRoomProps');
+    const idx = parseInt(propsEl?.dataset.featureIdx ?? '');
+    const building = propsEl?.dataset.featureBuilding ?? '';
+    if (isNaN(idx) || !building) return;
 
     const ref = (e.target as HTMLInputElement).value;
     const autoLookupToggle = document.getElementById('geRoomAutoLookup') as HTMLInputElement;
@@ -929,30 +935,34 @@ function wireEvents(): void {
       if (entry) {
         if (nameInput) nameInput.value = entry.name;
         if (typeSelect) typeSelect.value = entry.room_type;
-        callbacks?.onRoomUpdate(idx, { ref, name: entry.name, room_type: entry.room_type });
+        callbacks?.onRoomUpdate(building, idx, { ref, name: entry.name, room_type: entry.room_type });
       } else {
         if (nameInput) nameInput.value = '';
         if (typeSelect) typeSelect.value = '';
-        callbacks?.onRoomUpdate(idx, { ref, name: '', room_type: '' });
+        callbacks?.onRoomUpdate(building, idx, { ref, name: '', room_type: '' });
       }
       return;
     }
-    callbacks?.onRoomUpdate(idx, { ref });
+    callbacks?.onRoomUpdate(building, idx, { ref });
   });
 
   // Room name change
   document.getElementById('geRoomName')?.addEventListener('change', (e) => {
-    const idx = parseInt(document.getElementById('geRoomProps')?.dataset.featureIdx ?? '');
-    if (!isNaN(idx)) {
-      callbacks?.onRoomUpdate(idx, { name: (e.target as HTMLInputElement).value });
+    const propsEl = document.getElementById('geRoomProps');
+    const idx = parseInt(propsEl?.dataset.featureIdx ?? '');
+    const building = propsEl?.dataset.featureBuilding ?? '';
+    if (!isNaN(idx) && building) {
+      callbacks?.onRoomUpdate(building, idx, { name: (e.target as HTMLInputElement).value });
     }
   });
 
   // Room type change
   document.getElementById('geRoomType')?.addEventListener('change', (e) => {
-    const idx = parseInt(document.getElementById('geRoomProps')?.dataset.featureIdx ?? '');
-    if (!isNaN(idx)) {
-      callbacks?.onRoomUpdate(idx, { room_type: (e.target as HTMLSelectElement).value });
+    const propsEl = document.getElementById('geRoomProps');
+    const idx = parseInt(propsEl?.dataset.featureIdx ?? '');
+    const building = propsEl?.dataset.featureBuilding ?? '';
+    if (!isNaN(idx) && building) {
+      callbacks?.onRoomUpdate(building, idx, { room_type: (e.target as HTMLSelectElement).value });
     }
   });
 

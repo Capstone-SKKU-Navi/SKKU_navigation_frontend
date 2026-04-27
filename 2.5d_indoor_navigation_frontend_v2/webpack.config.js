@@ -134,7 +134,26 @@ module.exports = (env, argv) => {
           res.json({ ok: true });
         });
 
-        // PUT /api/save-rooms/:level → write to public/geojson/eng1/eng1_room_L{level}.geojson
+        // PUT /api/save-rooms/:building/:level → public/geojson/{building}/{building}_room_L{level}.geojson
+        // Level can be negative (basements: -1 = B1).
+        devServer.app.put('/api/save-rooms/:building/:level', jsonParser, (req, res) => {
+          const building = String(req.params.building);
+          const level = parseInt(req.params.level, 10);
+          if (!/^[a-z][a-z0-9_-]*$/i.test(building)) {
+            return res.status(400).json({ error: 'invalid building code' });
+          }
+          if (!Number.isInteger(level) || level === 0 || level < -5 || level > 20) {
+            return res.status(400).json({ error: 'invalid level' });
+          }
+          const filePath = path.join(
+            __dirname, 'public', 'geojson', building,
+            `${building}_room_L${level}.geojson`,
+          );
+          fs.writeFileSync(filePath, JSON.stringify(req.body, null, 2), 'utf-8');
+          res.json({ ok: true });
+        });
+
+        // Back-compat: legacy /api/save-rooms/:level → defaults to eng1.
         devServer.app.put('/api/save-rooms/:level', jsonParser, (req, res) => {
           const level = parseInt(req.params.level, 10);
           if (!Number.isInteger(level) || level < 1 || level > 10) {

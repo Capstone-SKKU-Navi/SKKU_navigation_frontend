@@ -132,7 +132,7 @@ export interface PanelCallbacks {
   onSetTime(edgeId: string, direction: 'fwd' | 'rev' | 'fwdExit' | 'revExit'): void;
   onBatchVideoAssign(edgeIds: string[], direction: 'fwd' | 'rev', video: string | undefined): void;
   onSplitAssign(edgeIds: string[], direction: 'fwd' | 'rev', video: string): void;
-  onRoomUpdate(featureIdx: number, props: { ref?: string; name?: string; room_type?: string }): void;
+  onRoomUpdate(building: string, featureIdx: number, props: { ref?: string; name?: string; room_type?: string }): void;
   onRoomExport(): void;
   onUndo(): void;
   onRedo(): void;

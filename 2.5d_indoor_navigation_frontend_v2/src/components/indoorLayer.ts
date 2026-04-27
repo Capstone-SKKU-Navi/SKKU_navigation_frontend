@@ -51,14 +51,20 @@ export function setFloorHeight(level: number, height: number): void {
   floorHeights.set(level, height);
 }
 
-/** Get the base altitude for a given level */
+/** Get the base altitude for a given level.
+ *  Iterates only EXISTING levels so non-existent floors (e.g. level 0 between
+ *  B1 and L1) don't accumulate phantom height.
+ *  Basement levels (negative) default to 0 height — they sit at the same base
+ *  as ground floor so 3D stacking starts from L1 upward. */
 export function getLevelBase(level: number): number {
-  const levels = BackendService.getAllLevels(); // [5,4,3,2,1] descending
-  const minLevel = Math.min(...levels);
-
+  const levels = [...BackendService.getAllLevels()].sort((a, b) => a - b);
   let base = 0;
-  for (let l = minLevel; l < level; l++) {
-    base += floorHeights.get(l) ?? DEFAULT_FLOOR_HEIGHT;
+  for (const l of levels) {
+    if (l >= level) break;
+    const h = floorHeights.has(l)
+      ? floorHeights.get(l)!
+      : (l < 0 ? 0 : DEFAULT_FLOOR_HEIGHT);
+    base += h;
   }
   return base;
 }
@@ -67,7 +73,14 @@ export function getLevelBase(level: number): number {
 
 export function addIndoorLayers(map: maplibregl.Map): void {
   const levels = BackendService.getAllLevels();
-  currentLevel = levels[levels.length - 1] || 1; // start at lowest
+  // Start at L1 if it exists; otherwise fall back to the lowest positive level
+  // (skip basements). If no positive level exists at all, use whatever's lowest.
+  const positives = levels.filter(l => l > 0);
+  currentLevel = positives.includes(1)
+    ? 1
+    : positives.length > 0
+      ? Math.min(...positives)
+      : levels[levels.length - 1] || 1;
 
   // Drop stale "already added" entries for layer ids that no longer exist on
   // the map (e.g. after a style reload wiped sources/layers but our Set is

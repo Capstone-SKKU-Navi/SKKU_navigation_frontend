@@ -147,7 +147,7 @@ function deactivateEditor(): void {
     levelCheckInterval = null;
   }
 
-  selectedRoomIdx = null;
+  selectedRoom = null;
   state.selectedEdgeId = null; state.selectedEdgeIds = [];
   autoApplyPreset = { enabled: false, roomType: '' as RoomType, refPrefix: '' };
   map = null;
@@ -171,8 +171,17 @@ function checkLevelChange(): void {
 
 // ===== Room click listener =====
 let roomClickHandler: ((e: maplibregl.MapMouseEvent) => void) | null = null;
-let selectedRoomIdx: number | null = null;
+// `_idx` is only unique within a building's geojson file, so we track building
+// alongside it. Without this, find(_idx === x) hits whichever building came
+// first in load order (e.g. iac before slib), silently misrouting edits.
+let selectedRoom: { building: string; idx: number } | null = null;
 let autoApplyPreset: RoomAutoApplyPreset = { enabled: false, roomType: '' as RoomType, refPrefix: '' };
+
+function buildingFromLayerId(layerId: string): string {
+  // Layer id is `${building}-floor-${level}-rooms-3d`. Building codes may
+  // contain hyphens, so split on the literal `-floor-` token rather than `-`.
+  return layerId.split('-floor-')[0];
+}
 
 function setupRoomClickListener(): void {
   if (!map) return;
@@ -191,15 +200,20 @@ function setupRoomClickListener(): void {
     const features = map.queryRenderedFeatures(e.point, { layers: roomLayerIds });
 
     if (features.length > 0 && features[0].properties) {
-      const props = features[0].properties;
+      const f = features[0];
+      const props = f.properties;
       const clickedIdx = props._idx;
+      const clickedBuilding = buildingFromLayerId(f.layer?.id ?? '');
+      if (!clickedBuilding) return;
 
-      if (selectedRoomIdx !== null && selectedRoomIdx === clickedIdx) {
+      if (selectedRoom !== null
+        && selectedRoom.building === clickedBuilding
+        && selectedRoom.idx === clickedIdx) {
         // 같은 방 재클릭 → 라벨을 클릭 위치로 이동
-        moveRoomLabel(selectedRoomIdx, [e.lngLat.lng, e.lngLat.lat]);
+        moveRoomLabel(selectedRoom.building, selectedRoom.idx, [e.lngLat.lng, e.lngLat.lat]);
       } else {
         // 다른 방 클릭 → 선택
-        selectedRoomIdx = clickedIdx;
+        selectedRoom = { building: clickedBuilding, idx: clickedIdx };
 
         if (autoApplyPreset.enabled) {
           // 프리셋 자동 적용
@@ -207,10 +221,10 @@ function setupRoomClickListener(): void {
           if (autoApplyPreset.refPrefix) applyProps.ref = autoApplyPreset.refPrefix;
           if (autoApplyPreset.roomType) applyProps.room_type = autoApplyPreset.roomType;
           if (Object.keys(applyProps).length > 0) {
-            handleRoomUpdate(clickedIdx, applyProps);
+            handleRoomUpdate(clickedBuilding, clickedIdx, applyProps);
           }
           // 업데이트된 값으로 패널 표시
-          const rooms = BackendService.getRoomFeaturesForLevel(state.currentLevel);
+          const rooms = BackendService.getLevelDataForBuilding(clickedBuilding, state.currentLevel).rooms.features;
           const updated = rooms.find(f => f.properties._idx === clickedIdx);
           if (updated) {
             Panel.showRoomProperties({
@@ -219,6 +233,7 @@ function setupRoomClickListener(): void {
               ref: updated.properties.ref,
               name: updated.properties.name,
               room_type: updated.properties.room_type,
+              building: clickedBuilding,
             });
           }
         } else {
@@ -228,22 +243,23 @@ function setupRoomClickListener(): void {
             ref: props.ref,
             name: props.name,
             room_type: props.room_type,
+            building: clickedBuilding,
           });
         }
       }
-    } else if (selectedRoomIdx !== null) {
+    } else if (selectedRoom !== null) {
       // 빈 공간 클릭 → 라벨 이동
-      moveRoomLabel(selectedRoomIdx, [e.lngLat.lng, e.lngLat.lat]);
+      moveRoomLabel(selectedRoom.building, selectedRoom.idx, [e.lngLat.lng, e.lngLat.lat]);
     }
   };
 
   map.on('click', roomClickHandler);
 }
 
-function moveRoomLabel(featureIdx: number, pos: [number, number]): void {
+function moveRoomLabel(building: string, featureIdx: number, pos: [number, number]): void {
   if (!map) return;
 
-  const rooms = BackendService.getRoomFeaturesForLevel(state.currentLevel);
+  const rooms = BackendService.getLevelDataForBuilding(building, state.currentLevel).rooms.features;
   const feature = rooms.find(f => f.properties._idx === featureIdx);
   if (!feature) return;
 
@@ -701,22 +717,28 @@ function handleClearAll(): void {
 
 // ===== Room Label Editing =====
 
-function saveRoomData(level: number): void {
-  const rooms = BackendService.getRoomFeaturesForLevel(level);
-  const fc: GeoJSON.FeatureCollection = { type: 'FeatureCollection', features: rooms };
-  fetch(`/api/save-rooms/${level}`, {
+function saveRoomData(building: string, level: number): void {
+  // Dev-server endpoint writes to `public/geojson/{building}/{building}_room_L{level}.geojson`.
+  if (!BackendService.getBuildingLevels(building).includes(level)) return;
+  const data = BackendService.getLevelDataForBuilding(building, level);
+  if (!data.rooms.features.length) return;
+  const fc: GeoJSON.FeatureCollection = {
+    type: 'FeatureCollection',
+    features: data.rooms.features,
+  };
+  fetch(`/api/save-rooms/${encodeURIComponent(building)}/${level}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(fc),
   }).then(res => {
-    if (!res.ok) console.warn('[GraphEditor] room save failed:', res.status);
-  }).catch(err => console.warn('[GraphEditor] room save error:', err));
+    if (!res.ok) console.warn(`[GraphEditor] room save failed (${building} L${level}):`, res.status);
+  }).catch(err => console.warn(`[GraphEditor] room save error (${building} L${level}):`, err));
 }
 
-function handleRoomUpdate(featureIdx: number, props: { ref?: string; name?: string; room_type?: string }): void {
+function handleRoomUpdate(building: string, featureIdx: number, props: { ref?: string; name?: string; room_type?: string }): void {
   if (!map) return;
 
-  const rooms = BackendService.getRoomFeaturesForLevel(state.currentLevel);
+  const rooms = BackendService.getLevelDataForBuilding(building, state.currentLevel).rooms.features;
   const feature = rooms.find(f => f.properties._idx === featureIdx);
   if (!feature) return;
 
@@ -725,12 +747,12 @@ function handleRoomUpdate(featureIdx: number, props: { ref?: string; name?: stri
   if (props.room_type !== undefined) feature.properties.room_type = props.room_type;
 
   IndoorLayerModule.refreshRoomLabels(map, state.currentLevel);
-  saveRoomData(state.currentLevel);
+  saveRoomData(building, state.currentLevel);
 }
 
-function appendToRoomRef(featureIdx: number, digit: string): void {
+function appendToRoomRef(building: string, featureIdx: number, digit: string): void {
   if (!map) return;
-  const rooms = BackendService.getRoomFeaturesForLevel(state.currentLevel);
+  const rooms = BackendService.getLevelDataForBuilding(building, state.currentLevel).rooms.features;
   const feature = rooms.find(f => f.properties._idx === featureIdx);
   if (!feature) return;
 
@@ -739,13 +761,13 @@ function appendToRoomRef(featureIdx: number, digit: string): void {
   feature.properties.ref = newRef;
   Panel.updateRoomRefInput(newRef);
   IndoorLayerModule.refreshRoomLabels(map, state.currentLevel);
-  saveRoomData(state.currentLevel);
-  tryAutoLookup(featureIdx, newRef);
+  saveRoomData(building, state.currentLevel);
+  tryAutoLookup(building, featureIdx, newRef);
 }
 
-function backspaceRoomRef(featureIdx: number): void {
+function backspaceRoomRef(building: string, featureIdx: number): void {
   if (!map) return;
-  const rooms = BackendService.getRoomFeaturesForLevel(state.currentLevel);
+  const rooms = BackendService.getLevelDataForBuilding(building, state.currentLevel).rooms.features;
   const feature = rooms.find(f => f.properties._idx === featureIdx);
   if (!feature) return;
 
@@ -755,18 +777,18 @@ function backspaceRoomRef(featureIdx: number): void {
   feature.properties.ref = newRef;
   Panel.updateRoomRefInput(newRef);
   IndoorLayerModule.refreshRoomLabels(map, state.currentLevel);
-  saveRoomData(state.currentLevel);
-  tryAutoLookup(featureIdx, newRef);
+  saveRoomData(building, state.currentLevel);
+  tryAutoLookup(building, featureIdx, newRef);
 }
 
-function tryAutoLookup(featureIdx: number, ref: string): void {
+function tryAutoLookup(building: string, featureIdx: number, ref: string): void {
   const autoLookupToggle = document.getElementById('geRoomAutoLookup') as HTMLInputElement;
   if (!autoLookupToggle?.checked) return;
 
   if (!map) return;
   const entry = RoomCodeLookup.lookup(ref);
 
-  const rooms = BackendService.getRoomFeaturesForLevel(state.currentLevel);
+  const rooms = BackendService.getLevelDataForBuilding(building, state.currentLevel).rooms.features;
   const feature = rooms.find(f => f.properties._idx === featureIdx);
   if (!feature) return;
 
@@ -777,7 +799,7 @@ function tryAutoLookup(featureIdx: number, ref: string): void {
   Panel.updateRoomTypeSelect(entry ? entry.room_type : '');
 
   IndoorLayerModule.refreshRoomLabels(map, state.currentLevel);
-  saveRoomData(state.currentLevel);
+  saveRoomData(building, state.currentLevel);
 }
 
 function handleAutoApplyChange(preset: RoomAutoApplyPreset): void {
@@ -822,10 +844,13 @@ function handleKeyDown(e: KeyboardEvent): void {
   if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
 
   if (e.key === 'Escape') {
-    if (state.mode === 'label-room' && selectedRoomIdx !== null) {
-      selectedRoomIdx = null;
+    if (state.mode === 'label-room' && selectedRoom !== null) {
+      selectedRoom = null;
       const roomPropsEl = document.getElementById('geRoomProps');
-      if (roomPropsEl) roomPropsEl.dataset.featureIdx = '';
+      if (roomPropsEl) {
+        roomPropsEl.dataset.featureIdx = '';
+        roomPropsEl.dataset.featureBuilding = '';
+      }
     } else if (state.edgeStartNodeId) {
       state.edgeStartNodeId = null;
       Panel.setEdgeHint('노드를 클릭하여 엣지 시작점을 선택하세요');
@@ -845,17 +870,17 @@ function handleKeyDown(e: KeyboardEvent): void {
   } else if (e.ctrlKey && e.key === 'y') {
     e.preventDefault();
     handleRedo();
-  } else if (state.mode === 'label-room' && selectedRoomIdx !== null && e.key >= '0' && e.key <= '9') {
+  } else if (state.mode === 'label-room' && selectedRoom !== null && e.key >= '0' && e.key <= '9') {
     // label-room 모드에서 숫자키 → ref에 숫자 추가
-    appendToRoomRef(selectedRoomIdx, e.key);
+    appendToRoomRef(selectedRoom.building, selectedRoom.idx, e.key);
     e.preventDefault();
-  } else if (state.mode === 'label-room' && selectedRoomIdx !== null && (e.key === 'a' || e.key === 'b' || e.key === 'c' || e.key === 'A' || e.key === 'B' || e.key === 'C')) {
+  } else if (state.mode === 'label-room' && selectedRoom !== null && (e.key === 'a' || e.key === 'b' || e.key === 'c' || e.key === 'A' || e.key === 'B' || e.key === 'C')) {
     // label-room 모드에서 a/b/c → ref에 대문자 추가
-    appendToRoomRef(selectedRoomIdx, e.key.toUpperCase());
+    appendToRoomRef(selectedRoom.building, selectedRoom.idx, e.key.toUpperCase());
     e.preventDefault();
-  } else if (state.mode === 'label-room' && selectedRoomIdx !== null && e.key === 'Backspace') {
+  } else if (state.mode === 'label-room' && selectedRoom !== null && e.key === 'Backspace') {
     // label-room 모드에서 Backspace → ref 마지막 글자 삭제
-    backspaceRoomRef(selectedRoomIdx);
+    backspaceRoomRef(selectedRoom.building, selectedRoom.idx);
     e.preventDefault();
   } else if (e.key === 'Delete' || e.key === 'Backspace') {
     if (state.selectedNodeId) {
