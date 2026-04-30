@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "webpack serve --mode development --open",
     "build": "webpack --mode production",
+    "build:prod": "cross-env PROD_BUILD=true webpack --mode production",
     "start": "webpack serve --mode development",
     "seed": "python scripts/seed.py",
     "dev:full": "powershell -ExecutionPolicy Bypass -File scripts/bootstrap.ps1",
@@ -21,12 +22,14 @@
   },
   "devDependencies": {
     "copy-webpack-plugin": "^12.0.2",
+    "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.3",
     "mini-css-extract-plugin": "^2.9.2",
     "sass": "^1.86.3",
     "sass-loader": "^16.0.4",
     "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.5.0",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.3",
     "webpack": "^5.98.0",

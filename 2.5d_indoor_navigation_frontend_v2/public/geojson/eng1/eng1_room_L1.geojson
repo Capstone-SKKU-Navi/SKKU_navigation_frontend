@@ -1715,9 +1715,9 @@
         "level": [
           1
         ],
-        "ref": "21",
-        "name": "반응유동연구실",
-        "room_type": "storage",
+        "ref": "21123415236",
+        "name": "",
+        "room_type": "",
         "_idx": 30,
         "_centroid": [
           126.9762803,
@@ -1944,9 +1944,9 @@
         "level": [
           1
         ],
-        "ref": "21",
+        "ref": "2113241",
         "name": "",
-        "room_type": "storage",
+        "room_type": "",
         "_idx": 35,
         "_centroid": [
           126.9764827,

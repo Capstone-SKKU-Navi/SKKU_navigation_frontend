@@ -1,9 +1,11 @@
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 function getLanAddresses() {
   const nets = os.networkInterfaces();
@@ -19,6 +21,9 @@ function getLanAddresses() {
 
 module.exports = (env, argv) => {
   const isDev = argv.mode === 'development';
+  const isProdBuild = process.env.PROD_BUILD === 'true';
+  const apiBaseUrl = process.env.API_BASE_URL || '';
+  const videoBaseUrl = process.env.VIDEO_BASE_URL || '';
 
   return {
     entry: './src/main.ts',
@@ -26,6 +31,15 @@ module.exports = (env, argv) => {
       path: path.resolve(__dirname, 'dist'),
       filename: isDev ? 'bundle.js' : 'bundle.[contenthash:8].js',
       clean: true,
+    },
+    optimization: isDev ? undefined : {
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            compress: { drop_console: isProdBuild },
+          },
+        }),
+      ],
     },
     resolve: {
       extensions: ['.ts', '.js', '.json'],
@@ -55,6 +69,16 @@ module.exports = (env, argv) => {
       ],
     },
     plugins: [
+      new webpack.DefinePlugin({
+        // IS_PROD_BUILD is injected as a *boolean literal* (not a string)
+        // so webpack's own optimizer constant-folds `if (!IS_PROD_BUILD)`
+        // before chunk-graph generation. This is what makes the editor
+        // chunk vanish entirely in `npm run build:prod` instead of just
+        // becoming an unreferenced file in dist/.
+        IS_PROD_BUILD: JSON.stringify(isProdBuild),
+        'process.env.API_BASE_URL': JSON.stringify(apiBaseUrl),
+        'process.env.VIDEO_BASE_URL': JSON.stringify(videoBaseUrl),
+      }),
       new HtmlWebpackPlugin({
         template: './public/index.html',
       }),
@@ -239,6 +263,8 @@ module.exports = (env, argv) => {
         return middlewares;
       },
     },
-    devtool: isDev ? 'eval-source-map' : 'source-map',
+    // Production builds (npm run build:prod) ship without sourcemaps so the
+    // editor / debug TypeScript source isn't reachable from the deployed JS.
+    devtool: isDev ? 'eval-source-map' : isProdBuild ? false : 'source-map',
   };
 };

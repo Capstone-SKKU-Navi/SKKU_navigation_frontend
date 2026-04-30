@@ -99,7 +99,7 @@ npm run build  # dist/ 폴더에 번들 생성
 
 ### 360° 영상 세팅
 
-1. [공유 드라이브](https://drive.google.com/file/d/10toUrH2QPkQCoq1o22d0djIxiuP59Muh/view?usp=sharing)에서 `eng1_mp4/` 폴더를 받는다 (114개 mp4)
+1. 영상 받는다
 2. `2.5d_indoor_navigation_frontend_v2/videos/` 에 넣는다
 
 영상 네이밍 규칙은 `docs/VIDEO_NAMING.md`, 상세 가이드는 `docs/360-video-guide.md` 참조.
@@ -151,15 +151,6 @@ src/services/
 
 두 모드 모두 동일한 `ApiRouteResult`를 출력하므로, `walkthroughPlanner.ts` 이후 코드는 모드에 무관하게 동작한다.
 
-### 연동 현황
-
-| 기능 | 로컬 모드 | API 모드 | 비고 |
-|------|-----------|----------|------|
-| 경로 탐색 | ✅ 자체 Dijkstra | ✅ POST /api/route | 좌표 기반, 동일한 ApiRouteResult 출력 |
-| 영상 클립 계산 | ✅ 로컬 clip builder | ✅ 백엔드에서 계산 | yaw, 시간, 계단/엘리베이터 포함 |
-| 방 검색 | ✅ GeoJSON 기반 | ✅ GeoJSON 기반 | 항상 로컬 처리 (백엔드 API 불필요) |
-| GeoJSON 서빙 | ✅ 로컬 /geojson/ | ✅ /api/geojson/... | `setGeojsonBase()`로 전환 |
-| 영상 서빙 | ✅ 로컬 /videos/ | ✅ /api/videos/ | `setVideoBase()`로 전환 |
 
 ### 알려진 제한사항
 
@@ -167,18 +158,6 @@ src/services/
 2. **모드 전환** — `apiClient.ts`에서 코드로 `useApi` 변경 필요 (UI 토글 미구현)
 
 > CORS: 백엔드가 `localhost:8082`, `localhost:3000` 허용.
-
----
-
-## 아키텍처
-
-| 레이어 | 기술 | 설명 |
-|--------|------|------|
-| 지도 렌더링 | MapLibre GL v4 | 2.5D 뷰, 층별 전환 |
-| 3D 렌더링 | deck.gl v9 | 방 바닥(room_type별 그룹), 벽(BufferGeometry merge), 계단 |
-| 경로 오버레이 | deck.gl PathLayer | 최단경로를 경로 라인으로 표시 (층별 색상 그라데이션) |
-| 360° 비디오 | Three.js SphereGeometry + VideoTexture | Apple Look Around 패턴 (상하 분할) |
-| 백엔드 | Java Spring Boot (별도 레포) | Dijkstra 길찾기 + 데이터 API |
 
 ---
 
@@ -202,27 +181,3 @@ src/services/
 | [docs/VIDEO_NAMING.md](docs/VIDEO_NAMING.md) | 360° 영상 네이밍 규칙 |
 
 ---
-
-## 최근 변경
-
-| 날짜 | 내용 |
-|------|------|
-| 04-24 | **모바일 UI 추가** — 터치 제스처, 풀스크린 검색, 바텀시트 워크스루, 라디얼 롱프레스 메뉴 ([docs/MOBILE.md](docs/MOBILE.md)) |
-| 04-03 | **API v2**: 좌표 기반 경로 API (`POST /api/route`), 프론트에서 그래프 제거, 로컬/API 동일 출력 |
-| 04-03 | 그래프 에디터 방 코드 자동 조회 |
-| 03-31 | room_type 지원, 백엔드 API 서비스 분리 (local/api) |
-| 03-30 | 계단/엘리베이터 영상 자동 계산, 다중 건물 로딩 준비 |
-| 03-28 | 360° Walkthrough 플레이어, Dijkstra 경로 탐색, 비디오 엣지 매핑 |
-
----
-
-## 향후 작업
-
-- [ ] **백엔드 API 연동 테스트** — Spring Boot 서버 연결 + 영상 스트리밍 확인
-- [ ] **API 주소 환경변수** — `localhost:8080` 하드코딩 → 빌드/런타임 설정으로 전환
-- [ ] **다중 건물 지원** — 2번째 건물 데이터 추가 + 건물 전환 UI
-- [ ] **그래프 데이터 완성** — 3~5층 노드/간선, 엣지-비디오 매핑
-- [x] ~~**모바일 반응형 최적화** — 터치 제스처, 레이아웃 조정~~ ([docs/MOBILE.md](docs/MOBILE.md))
-- [ ] **사용자 테스트** + 피드백 반영
-
-자세한 내용은 [docs/TODOS.md](docs/TODOS.md) 참조.

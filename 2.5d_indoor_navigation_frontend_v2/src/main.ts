@@ -37,7 +37,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     ]);
     GeoMap.initMap();
 
-    setupReloadDataShortcut();
+    if (!IS_PROD_BUILD) {
+      setupReloadDataShortcut();
+    }
 
     document.addEventListener('mapLoaded', async () => {
       const mobile = isMobileDevice();
@@ -47,8 +49,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       setupBuildingInfo();
       setupCenterButton();
       setup3DToggle();
-      setupFpsCounter();
-      setupApiModeBadge();
+      if (!IS_PROD_BUILD) {
+        setupFpsCounter();
+        setupApiModeBadge();
+      }
       setupPinChipDrop();
       const map = GeoMap.getMap();
       if (map) RoutePinMarkers.init(map);
@@ -70,9 +74,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         setupRoomClickPopup();
         setupLayerToggle();
 
-        // Editor is PC-only — dynamic import keeps editor code out of the mobile bundle
-        const editorModule = await import(/* webpackChunkName: "editor" */ './editor/graphEditor');
-        editorModule.setupGraphEditor();
+        // Editor is PC-only — dynamic import keeps editor code out of the mobile bundle.
+        // The IS_PROD_BUILD guard makes terser eliminate this branch entirely in
+        // `npm run build:prod`, so the editor chunk is never emitted into dist/.
+        if (!IS_PROD_BUILD) {
+          const editorModule = await import(/* webpackChunkName: "editor" */ './editor/graphEditor');
+          editorModule.setupGraphEditor();
+        }
 
         // Sync floor wheel when walkthrough changes level (PC floor wheel uses updateFloorWheelActive)
         document.addEventListener('walkthroughLevelChange', ((e: CustomEvent) => {

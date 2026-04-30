@@ -79,6 +79,26 @@
       "type": "corridor",
       "label": "",
       "building": "eng1"
+    },
+    "node-mogzbk6k-jjtd": {
+      "coordinates": [
+        126.9760864178217,
+        37.29361788762806
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": "",
+      "building": "eng1"
+    },
+    "node-mogzblt4-15ps": {
+      "coordinates": [
+        126.97687155480855,
+        37.29351223236577
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": "",
+      "building": "eng1"
     }
   },
   "edges": [
@@ -158,6 +178,28 @@
       "videoRev": "eng1_c_F1_1_cw.mp4",
       "videoRevStart": 0,
       "videoRevEnd": 38.542688
+    },
+    {
+      "from": "node-mogucoz0-bg89",
+      "to": "node-mogzbk6k-jjtd",
+      "weight": 32,
+      "videoFwd": "outside_28_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 36.67,
+      "videoRev": "outside_28_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 37.904567
+    },
+    {
+      "from": "node-mogzbk6k-jjtd",
+      "to": "node-mogzblt4-15ps",
+      "weight": 70,
+      "videoFwd": "eng1_c_F1_3_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 54.254267,
+      "videoRev": "eng1_c_F1_3_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 50.850867
     }
   ]
 }

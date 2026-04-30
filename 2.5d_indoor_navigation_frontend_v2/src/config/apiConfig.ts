@@ -14,15 +14,22 @@ declare global {
   }
 }
 
-// `process.env.NODE_ENV` is inlined at build time by webpack's DefinePlugin
-// (auto-set from the `mode` config). The exact literal `process.env.NODE_ENV`
-// is the only form that gets substituted — `typeof process`, optional
-// chaining, etc. would survive into the bundle and crash in the browser
-// (webpack 5 does not polyfill the `process` global).
-declare const process: { env: { NODE_ENV?: string } };
+// `process.env.*` is inlined at build time by webpack's DefinePlugin (NODE_ENV
+// is auto-set from the `mode` config; API_BASE_URL is injected explicitly in
+// webpack.config.js). The exact literal `process.env.X` is the only form that
+// gets substituted — `typeof process`, optional chaining, etc. would survive
+// into the bundle and crash in the browser (webpack 5 does not polyfill the
+// `process` global).
+declare const process: { env: { NODE_ENV?: string; API_BASE_URL?: string } };
 const IS_DEV = process.env.NODE_ENV === 'development';
 
-const DEFAULT_API_BASE = IS_DEV ? '/api' : 'http://localhost:8080/api';
+// Build-time API base URL. In dev: '/api' so webpack-dev-server proxy handles
+// it. In prod: whatever was injected via the API_BASE_URL env var at build
+// time (Vercel project setting). If unset, falls back to '/api' (relative)
+// so a same-origin reverse proxy can still work — an empty literal would
+// produce broken URLs like `/route?...`.
+const BUILD_API_BASE = process.env.API_BASE_URL || '';
+const DEFAULT_API_BASE = IS_DEV ? '/api' : (BUILD_API_BASE || '/api');
 
 export function getApiBase(): string {
   const raw = (typeof window !== 'undefined' && window.__API_BASE__) || DEFAULT_API_BASE;
