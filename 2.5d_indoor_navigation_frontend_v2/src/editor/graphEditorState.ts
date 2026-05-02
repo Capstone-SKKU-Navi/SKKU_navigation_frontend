@@ -1,14 +1,21 @@
 // ===== Navigation Graph Editor — State Management =====
 
-import { NavNode, NavEdge, NavGraph, EditorState, EditorMode, Command, NavGraphExport } from './graphEditorTypes';
+import {
+  NavNode, NavEdge, NavGraph, EditorState, Command, NavGraphExport,
+  EditorSaveFile, RoomEditEntry, EDITOR_SAVE_VERSION, VideoSettingsExport,
+} from './graphEditorTypes';
 import { getDistanceBetweenCoordinatesInM } from '../utils/coordinateHelpers';
 import { DEFAULT_FLOOR_HEIGHT } from '../components/indoorLayer';
 import { detectBuilding, pointInPolygon } from '../utils/buildingDetection';
 import * as BackendService from '../services/backendService';
 import * as GraphService from '../services/graphService';
+import * as VideoSettings from './videoSettings';
 
 const GRAPH_JSON_URL = '/geojson/graph.json';
-const SAVE_API_URL = '/api/save-graph';
+const EDITOR_SAVE_FILE_URL = '/geojson/editor/save.json';
+const SAVE_EDITOR_STATE_URL = '/api/save-editor-state';
+const PUBLISH_GRAPH_URL = '/api/save-graph';
+const PUBLISH_VIDEO_URL = '/api/save-video-settings';
 
 // ===== State Factory =====
 
@@ -26,14 +33,274 @@ export function createState(): EditorState {
   };
 }
 
-export async function loadGraphFromFile(): Promise<NavGraph | null> {
+// ===== Save bundle providers =====
+//
+// graphEditor.ts owns the room edits map and the user's free-text save note.
+// It registers providers here so saveEditorState() can assemble the full
+// bundle without circular imports.
+
+let roomsProvider: () => RoomEditEntry[] = () => [];
+let noteProvider: () => string = () => '';
+let activeStateRef: EditorState | null = null;
+
+export function setSaveBundleProviders(p: { rooms: () => RoomEditEntry[]; note: () => string }): void {
+  roomsProvider = p.rooms;
+  noteProvider = p.note;
+}
+
+export function setActiveState(s: EditorState | null): void {
+  activeStateRef = s;
+}
+
+/** Public trigger for autosave from non-graph mutations (videoSettings, room edits). */
+export function autosaveBundle(): void {
+  if (activeStateRef) saveEditorState(activeStateRef);
+}
+
+// ===== Load =====
+
+export interface LoadEditorSaveResult {
+  graph: NavGraph;
+  videoSettings: VideoSettingsExport | null;
+  rooms: RoomEditEntry[];
+  note: string;
+  source: 'save-file' | 'legacy-graph' | 'empty';
+}
+
+export async function loadEditorSave(): Promise<LoadEditorSaveResult> {
+  // Try the editor working file first.
+  try {
+    const res = await fetch(EDITOR_SAVE_FILE_URL);
+    if (res.ok) {
+      const data = await res.json() as EditorSaveFile;
+      if (data && data.version === EDITOR_SAVE_VERSION && data.graph && data.graph.nodes && data.graph.edges) {
+        return {
+          graph: importGraph(data.graph),
+          videoSettings: data.videoSettings ?? null,
+          rooms: Array.isArray(data.rooms) ? data.rooms : [],
+          note: data.metadata?.note ?? '',
+          source: 'save-file',
+        };
+      }
+    }
+  } catch { /* fall through */ }
+
+  // Legacy fallback: graph.json only. videoSettings already loaded by
+  // VideoSettings.loadVideoSettings(); rooms hydrate from per-building geojson
+  // properties (handled in graphEditor.ts).
   try {
     const res = await fetch(GRAPH_JSON_URL);
-    if (!res.ok) return null;
-    const data = await res.json() as NavGraphExport;
-    if (data.nodes && data.edges) return importGraph(data);
-  } catch { /* file not found or parse error */ }
-  return null;
+    if (res.ok) {
+      const data = await res.json() as NavGraphExport;
+      if (data.nodes && data.edges) {
+        return {
+          graph: importGraph(data),
+          videoSettings: null,
+          rooms: [],
+          note: '',
+          source: 'legacy-graph',
+        };
+      }
+    }
+  } catch { /* fall through */ }
+
+  return {
+    graph: { nodes: {}, edges: [] },
+    videoSettings: null,
+    rooms: [],
+    note: '',
+    source: 'empty',
+  };
+}
+
+// ===== Save (working file only — does NOT touch runtime files) =====
+
+function buildSaveBundle(state: EditorState): EditorSaveFile {
+  return {
+    version: EDITOR_SAVE_VERSION,
+    metadata: {
+      savedAt: new Date().toISOString(),
+      note: noteProvider(),
+    },
+    graph: exportGraph(state.graph),
+    videoSettings: VideoSettings.getAllSettings() as VideoSettingsExport,
+    rooms: roomsProvider(),
+  };
+}
+
+function saveEditorState(state: EditorState): void {
+  const bundle = buildSaveBundle(state);
+  fetch(SAVE_EDITOR_STATE_URL, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(bundle),
+  }).then(res => {
+    if (!res.ok) console.warn('[GraphEditor] editor save failed:', res.status);
+  }).catch(err => console.warn('[GraphEditor] editor save error:', err));
+}
+
+// ===== Publish (writes runtime files; called on editor close / Publish button) =====
+
+export interface PublishRoomFile {
+  building: string;
+  level: number;
+  features: GeoJSON.Feature[];
+}
+
+/**
+ * Push the current editor state out to the runtime files: graph.json,
+ * video_settings.json, and any per-building room geojson files passed in by
+ * the caller. Refreshes GraphService so the next walkthrough picks up the new
+ * graph. Throws on failure so the caller can keep the editor open and show
+ * an error.
+ */
+export async function publishCombined(state: EditorState, roomFiles: PublishRoomFile[]): Promise<void> {
+  const errors: string[] = [];
+
+  const graphPayload = exportGraph(state.graph);
+  const videoPayload = VideoSettings.getAllSettings();
+
+  // Serialize writes — 14+ parallel PUTs hit Chrome's 6-per-origin connection
+  // limit, and the dev-server's writeFileSync handler is single-threaded
+  // anyway, so concurrency buys nothing and just causes "Failed to fetch"
+  // timeouts on the queued requests.
+  await runSequential(`graph`, () => putJson(PUBLISH_GRAPH_URL, graphPayload), errors);
+  await runSequential(`video_settings`, () => putJson(PUBLISH_VIDEO_URL, videoPayload), errors);
+  for (const rf of roomFiles) {
+    const fc: GeoJSON.FeatureCollection = { type: 'FeatureCollection', features: rf.features };
+    const url = `/api/save-rooms/${encodeURIComponent(rf.building)}/${rf.level}`;
+    await runSequential(`rooms ${rf.building}/L${rf.level}`, () => putJson(url, fc), errors);
+  }
+
+  if (errors.length > 0) {
+    throw new Error(errors.join('; '));
+  }
+
+  // Refresh pathfinding graph so any walkthrough opened next sees the new data.
+  try { GraphService.loadGraph(); } catch { /* non-fatal */ }
+}
+
+async function putJson(url: string, body: unknown): Promise<void> {
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+}
+
+async function runSequential(label: string, fn: () => Promise<void>, errors: string[]): Promise<void> {
+  try {
+    await fn();
+  } catch (err) {
+    errors.push(`${label}: ${(err as Error).message ?? String(err)}`);
+  }
+}
+
+// ===== Import save file (graph = full replace; merge for video/rooms) =====
+
+export interface ImportApplyHandlers {
+  /** Snapshot the room edits map (for undo). */
+  snapshotRooms(): unknown;
+  /** Restore room edits map from a previous snapshot. */
+  restoreRooms(snapshot: unknown): void;
+  /** Validate fingerprints; returns {ok:false, mismatches} to abort import. */
+  validateRooms(rooms: RoomEditEntry[]): { ok: boolean; mismatches: Array<{ building: string; level: number; ref: string; fingerprint: string }> };
+  /** Apply the imported room edits via per-fingerprint recency merge. */
+  applyRoomMerge(rooms: RoomEditEntry[]): void;
+}
+
+export interface ImportSaveResult {
+  ok: boolean;
+  source: 'save-file';
+  mismatches?: Array<{ building: string; level: number; ref: string; fingerprint: string }>;
+}
+
+/**
+ * Replace the current graph wholesale, merge video settings per filename, and
+ * merge rooms per fingerprint. Pushes a single Command on the undo stack so a
+ * single Ctrl+Z reverts the full import.
+ */
+export function importSaveFile(
+  state: EditorState,
+  data: EditorSaveFile,
+  handlers: ImportApplyHandlers,
+): ImportSaveResult {
+  if (!data || data.version !== EDITOR_SAVE_VERSION || !data.graph || !data.graph.nodes || !data.graph.edges) {
+    throw new Error('invalid save file');
+  }
+
+  const incomingRooms = Array.isArray(data.rooms) ? data.rooms : [];
+  const validation = handlers.validateRooms(incomingRooms);
+  if (!validation.ok) {
+    return { ok: false, source: 'save-file', mismatches: validation.mismatches };
+  }
+
+  // Snapshot for one-step undo. Deep-clone every node/edge so subsequent
+  // in-place mutations (e.g. MoveNodeCmd) don't corrupt the snapshot.
+  const beforeNodes = cloneNodeMap(state.graph.nodes);
+  const beforeEdges = state.graph.edges.map(e => ({ ...e }));
+  const beforeVideo = VideoSettings.getAllSettings();
+  const beforeRooms = handlers.snapshotRooms();
+
+  // Apply the merge once now to compute the post-import state, capture it
+  // for redo, then leave the in-memory state pointing at the after-version.
+  // Suppress VideoSettings autosaves during the transaction — executeCmd
+  // fires a single bundled save at the end.
+  VideoSettings.suppressMutated();
+  let afterVideo: ReturnType<typeof VideoSettings.getAllSettings>;
+  let afterRooms: unknown;
+  try {
+    VideoSettings.replaceAll({ ...beforeVideo });
+    VideoSettings.mergeFromImport(data.videoSettings ?? {});
+    afterVideo = VideoSettings.getAllSettings();
+    handlers.restoreRooms(beforeRooms);
+    handlers.applyRoomMerge(incomingRooms);
+    afterRooms = handlers.snapshotRooms();
+  } finally {
+    VideoSettings.resumeMutated();
+  }
+
+  const newGraph = importGraph(data.graph);
+  const afterNodes = cloneNodeMap(newGraph.nodes);
+  const afterEdges = newGraph.edges.map(e => ({ ...e }));
+
+  const cmd: Command = {
+    execute(graph) {
+      graph.nodes = cloneNodeMap(afterNodes);
+      graph.edges = afterEdges.map(e => ({ ...e }));
+      VideoSettings.suppressMutated();
+      try {
+        VideoSettings.replaceAll(afterVideo);
+        handlers.restoreRooms(afterRooms);
+      } finally {
+        VideoSettings.resumeMutated();
+      }
+    },
+    undo(graph) {
+      graph.nodes = cloneNodeMap(beforeNodes);
+      graph.edges = beforeEdges.map(e => ({ ...e }));
+      VideoSettings.suppressMutated();
+      try {
+        VideoSettings.replaceAll(beforeVideo);
+        handlers.restoreRooms(beforeRooms);
+      } finally {
+        VideoSettings.resumeMutated();
+      }
+    },
+  };
+  executeCmd(state, cmd);
+  return { ok: true, source: 'save-file' };
+}
+
+function cloneNodeMap(src: Record<string, NavNode>): Record<string, NavNode> {
+  const out: Record<string, NavNode> = {};
+  for (const [id, n] of Object.entries(src)) out[id] = { ...n, coordinates: [n.coordinates[0], n.coordinates[1]] };
+  return out;
+}
+
+export function exportSaveData(state: EditorState): EditorSaveFile {
+  return buildSaveBundle(state);
 }
 
 // ===== ID Generation =====
@@ -161,7 +428,7 @@ function executeCmd(state: EditorState, cmd: Command): void {
   cmd.execute(state.graph);
   state.undoStack.push(cmd);
   state.redoStack = [];
-  saveToFile(state.graph);
+  saveEditorState(state);
 }
 
 export function undo(state: EditorState): boolean {
@@ -169,7 +436,7 @@ export function undo(state: EditorState): boolean {
   if (!cmd) return false;
   cmd.undo(state.graph);
   state.redoStack.push(cmd);
-  saveToFile(state.graph);
+  saveEditorState(state);
   return true;
 }
 
@@ -178,7 +445,7 @@ export function redo(state: EditorState): boolean {
   if (!cmd) return false;
   cmd.execute(state.graph);
   state.undoStack.push(cmd);
-  saveToFile(state.graph);
+  saveEditorState(state);
   return true;
 }
 
@@ -234,20 +501,6 @@ export function clearBuildingNodesEdges(state: EditorState, building: string): {
   return { nodeCount: removedNodes.length, edgeCount: removedEdges.length };
 }
 
-// ===== Persistence (file-based) =====
-
-function saveToFile(graph: NavGraph): void {
-  const data = exportGraph(graph);
-  fetch(SAVE_API_URL, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  }).then(res => {
-    if (!res.ok) console.warn('[GraphEditor] graph save failed:', res.status);
-    else GraphService.loadGraph(); // Refresh pathfinding graph so walkthrough uses latest data
-  }).catch(err => console.warn('[GraphEditor] graph save error:', err));
-}
-
 // ===== Import / Export =====
 
 export function exportGraph(graph: NavGraph): NavGraphExport {
@@ -300,7 +553,14 @@ export function importGraph(data: NavGraphExport): NavGraph {
       ...(raw.verticalId !== undefined ? { verticalId: raw.verticalId } : {}),
     };
   }
-  const edges: NavEdge[] = data.edges.map(e => ({
+  const droppedDanglers: Array<{ from: string; to: string }> = [];
+  const edges: NavEdge[] = data.edges
+    .filter(e => {
+      if (nodes[e.from] && nodes[e.to]) return true;
+      droppedDanglers.push({ from: e.from, to: e.to });
+      return false;
+    })
+    .map(e => ({
     id: genEdgeId(e.from, e.to),
     from: e.from,
     to: e.to,
@@ -319,6 +579,9 @@ export function importGraph(data: NavGraphExport): NavGraph {
     ...(e.videoRevExitStart !== undefined ? { videoRevExitStart: e.videoRevExitStart } : {}),
     ...(e.videoRevExitEnd !== undefined ? { videoRevExitEnd: e.videoRevExitEnd } : {}),
   }));
+  if (droppedDanglers.length > 0) {
+    console.warn(`[GraphEditor] dropped ${droppedDanglers.length} edge(s) referencing missing nodes:`, droppedDanglers);
+  }
   return { nodes, edges };
 }
 

@@ -224,6 +224,20 @@ module.exports = (env, argv) => {
           res.json({ ok: true });
         });
 
+        // PUT /api/save-editor-state → write to public/geojson/editor/save.json
+        // Editor's working file. Autosaved on every mutation. Distinct from
+        // /api/save-graph (which is hit only at publish time and feeds the
+        // runtime path-finding).
+        devServer.app.put('/api/save-editor-state', jsonParser, (req, res) => {
+          if (!req.body || typeof req.body !== 'object' || Array.isArray(req.body)) {
+            return res.status(400).json({ error: 'body must be an object' });
+          }
+          const filePath = path.join(__dirname, 'public', 'geojson', 'editor', 'save.json');
+          fs.mkdirSync(path.dirname(filePath), { recursive: true });
+          fs.writeFileSync(filePath, JSON.stringify(req.body, null, 2), 'utf-8');
+          res.json({ ok: true });
+        });
+
         // PUT /api/save-video-settings → write to public/geojson/video_settings.json
         devServer.app.put('/api/save-video-settings', jsonParser, (req, res) => {
           const filePath = path.join(__dirname, 'public', 'geojson', 'video_settings.json');

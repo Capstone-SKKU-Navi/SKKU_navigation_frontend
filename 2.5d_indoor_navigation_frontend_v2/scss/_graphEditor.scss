@@ -230,6 +230,33 @@
   gap: 6px;
 }
 
+.ge-save-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin: 4px 0;
+}
+
+.ge-save-info-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+}
+
+.ge-save-status {
+  flex: 1;
+}
+
+.ge-save-note {
+  font-size: 11px;
+  padding: 4px 6px;
+}
+
 .ge-action-btn {
   flex: 1;
   display: flex;
@@ -951,6 +978,83 @@
   text-transform: uppercase;
   letter-spacing: 0.3px;
   margin-bottom: 1px;
+}
+
+// ===== Edge Video Start-Frame Preview — Floating Window =====
+
+.ge-edge-preview-window {
+  position: fixed;
+  z-index: 9998;                  // below the modal videoPreview overlay (10000)
+  top: 80px;
+  right: 360px;                   // out of the way of the editor panel on the right
+  width: 320px;
+  background: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ge-edge-preview-window-header {
+  height: 28px;
+  background: #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px 0 10px;
+  cursor: move;
+  color: #ccc;
+  font-size: 12px;
+  font-family: 'Pretendard', sans-serif;
+  user-select: none;
+}
+
+.ge-edge-preview-close {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+
+  &:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.ge-edge-preview-window-body {
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+}
+
+.ge-edge-preview-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+}
+
+.ge-edge-preview-label {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.4px;
+}
+
+.ge-edge-preview-video {
+  width: 100%;
+  aspect-ratio: 2 / 1;            // 360° equirectangular ratio
+  background: #000;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 // ===== Editor-active body class: suppress room popup =====

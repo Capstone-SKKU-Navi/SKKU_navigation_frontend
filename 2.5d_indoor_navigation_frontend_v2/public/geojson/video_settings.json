@@ -1,221 +1,288 @@
 {
   "eng1_corridor_21_1F_cw.mp4": {
-    "yaw": 189.86665039062473
+    "yaw": 189.86665039062473,
+    "updatedAt": 0
   },
   "eng1_corridor_21_1F_ccw.mp4": {
-    "yaw": 181.46666259765624
+    "yaw": 181.46666259765624,
+    "updatedAt": 0
   },
   "eng1_corridor_21_2F_cw.mp4": {
-    "yaw": 154
+    "yaw": 154,
+    "updatedAt": 0
   },
   "eng1_corridor_21_2F_ccw.mp4": {
-    "yaw": 145.33333740234355
+    "yaw": 145.33333740234355,
+    "updatedAt": 0
   },
   "eng1_corridor_21_3F_cw.mp4": {
-    "yaw": 195.4666625976564
+    "yaw": 195.4666625976564,
+    "updatedAt": 0
   },
   "eng1_corridor_21_3F_ccw.mp4": {
-    "yaw": 199.33333740234357
+    "yaw": 199.33333740234357,
+    "updatedAt": 0
   },
   "eng1_corridor_21_4F_cw.mp4": {
-    "yaw": 178.53333740234393
+    "yaw": 178.53333740234393,
+    "updatedAt": 0
   },
   "eng1_corridor_21_4F_ccw.mp4": {
-    "yaw": 171.06666259765632
+    "yaw": 171.06666259765632,
+    "updatedAt": 0
   },
   "eng1_corridor_21_5F_cw.mp4": {
-    "yaw": 174.9333374023438
+    "yaw": 174.9333374023438,
+    "updatedAt": 0
   },
   "eng1_corridor_21_5F_ccw.mp4": {
-    "yaw": 180.4000061035158
+    "yaw": 180.4000061035158,
+    "updatedAt": 0
   },
   "eng1_corridor_22_1F_cw.mp4": {
-    "yaw": 173.20001220703136
+    "yaw": 173.20001220703136,
+    "updatedAt": 0
   },
   "eng1_corridor_22_1F_ccw.mp4": {
-    "yaw": 198.933349609375
+    "yaw": 198.933349609375,
+    "updatedAt": 0
   },
   "eng1_corridor_22_2F_cw.mp4": {
-    "yaw": 164.26666870117185
+    "yaw": 164.26666870117185,
+    "updatedAt": 0
   },
   "eng1_corridor_22_2F_ccw.mp4": {
-    "yaw": 165.20000610351553
+    "yaw": 165.20000610351553,
+    "updatedAt": 0
   },
   "eng1_corridor_22_3F_cw.mp4": {
-    "yaw": 196.26666870117185
+    "yaw": 196.26666870117185,
+    "updatedAt": 0
   },
   "eng1_corridor_22_3F_ccw.mp4": {
-    "yaw": 197.5999938964842
+    "yaw": 197.5999938964842,
+    "updatedAt": 0
   },
   "eng1_corridor_22_4F_cw.mp4": {
-    "yaw": 292.6666809082029
+    "yaw": 292.6666809082029,
+    "updatedAt": 0
   },
   "eng1_corridor_22_4F_ccw.mp4": {
-    "yaw": 194.40001220703118
+    "yaw": 194.40001220703118,
+    "updatedAt": 0
   },
   "eng1_corridor_22_5F_cw.mp4": {
-    "yaw": 200.13333129882824
+    "yaw": 200.13333129882824,
+    "updatedAt": 0
   },
   "eng1_corridor_22_5F_ccw.mp4": {
-    "yaw": 208.9333435058594
+    "yaw": 208.9333435058594,
+    "updatedAt": 0
   },
   "eng1_corridor_23_1F_cw.mp4": {
-    "yaw": 191.46665649414035
+    "yaw": 191.46665649414035,
+    "updatedAt": 0
   },
   "eng1_corridor_23_1F_ccw.mp4": {
-    "yaw": 180.13334350585956
+    "yaw": 180.13334350585956,
+    "updatedAt": 0
   },
   "eng1_corridor_23_2F_cw.mp4": {
-    "yaw": 217.06668090820335
+    "yaw": 217.06668090820335,
+    "updatedAt": 0
   },
   "eng1_corridor_23_2F_ccw.mp4": {
-    "yaw": 180.2666870117189
+    "yaw": 180.2666870117189,
+    "updatedAt": 0
   },
   "eng1_corridor_23_3F_cw.mp4": {
-    "yaw": 186.26667480468745
+    "yaw": 186.26667480468745,
+    "updatedAt": 0
   },
   "eng1_corridor_23_3F_ccw.mp4": {
-    "yaw": 210.13334350585944
+    "yaw": 210.13334350585944,
+    "updatedAt": 0
   },
   "eng1_corridor_23_4F_cw.mp4": {
-    "yaw": 196.0000000000001
+    "yaw": 196.0000000000001,
+    "updatedAt": 0
   },
   "eng1_corridor_23_4F_ccw.mp4": {
-    "yaw": 192.53334350585965
+    "yaw": 192.53334350585965,
+    "updatedAt": 0
   },
   "eng1_corridor_23_5F_cw.mp4": {
-    "yaw": 188.13333740234373
+    "yaw": 188.13333740234373,
+    "updatedAt": 0
   },
   "eng1_corridor_23_5F_ccw.mp4": {
-    "yaw": 201.46666870117178
+    "yaw": 201.46666870117178,
+    "updatedAt": 0
   },
   "eng1_stair_1_up.mp4": {
     "entryYaw": 206.66666259765645,
-    "exitYaw": 18.399999999999977
+    "exitYaw": 18.399999999999977,
+    "updatedAt": 0
   },
   "eng1_stair_1_down.mp4": {
     "entryYaw": 171.73334960937518,
-    "exitYaw": 352.2666748046875
+    "exitYaw": 352.2666748046875,
+    "updatedAt": 0
   },
   "eng1_stair_2_up.mp4": {
     "entryYaw": 217.4666625976564,
-    "exitYaw": 35.60001220703123
+    "exitYaw": 35.60001220703123,
+    "updatedAt": 0
   },
   "eng1_stair_2_down.mp4": {
     "entryYaw": 178.13333740234384,
-    "exitYaw": 359.6
+    "exitYaw": 359.6,
+    "updatedAt": 0
   },
   "eng1_stair_3_up.mp4": {
     "entryYaw": 261.3333435058596,
-    "exitYaw": 99.06666259765638
+    "exitYaw": 99.06666259765638,
+    "updatedAt": 0
   },
   "eng1_stair_3_down.mp4": {
     "entryYaw": 179.59998779296882,
-    "exitYaw": 356.53332519531244
+    "exitYaw": 356.53332519531244,
+    "updatedAt": 0
   },
   "eng1_stair_4_up.mp4": {
     "entryYaw": 208.8000000000004,
-    "exitYaw": 23.19999999999999
+    "exitYaw": 23.19999999999999,
+    "updatedAt": 0
   },
   "eng1_stair_4_down.mp4": {
     "entryYaw": 156.40001220703118,
-    "exitYaw": 327.19999389648433
+    "exitYaw": 327.19999389648433,
+    "updatedAt": 0
   },
   "eng1_elev_1_1F.mp4": {
     "entryYaw": 80.93333129882808,
-    "exitYaw": 258.6666625976561
+    "exitYaw": 258.6666625976561,
+    "updatedAt": 0
   },
   "eng1_elev_1_2F.mp4": {
     "entryYaw": 133.06667480468752,
-    "exitYaw": 312.1333374023437
+    "exitYaw": 312.1333374023437,
+    "updatedAt": 0
   },
   "eng1_elev_1_3F.mp4": {
     "entryYaw": 102.66667480468737,
-    "exitYaw": 283.4666625976563
+    "exitYaw": 283.4666625976563,
+    "updatedAt": 0
   },
   "eng1_elev_1_4F.mp4": {
     "entryYaw": 108,
-    "exitYaw": 288.93333740234385
+    "exitYaw": 288.93333740234385,
+    "updatedAt": 0
   },
   "eng1_elev_1_5F.mp4": {
     "entryYaw": 161.86666259765616,
-    "exitYaw": 342.26666259765625
+    "exitYaw": 342.26666259765625,
+    "updatedAt": 0
   },
   "eng1_elev_2_1F.mp4": {
     "entryYaw": 152.66666259765634,
-    "exitYaw": 331.20000000000005
+    "exitYaw": 331.20000000000005,
+    "updatedAt": 0
   },
   "eng1_elev_2_2F.mp4": {
     "entryYaw": 95.73334350585935,
-    "exitYaw": 270.93332519531236
+    "exitYaw": 270.93332519531236,
+    "updatedAt": 0
   },
   "eng1_elev_2_3F.mp4": {
     "entryYaw": 112.40000610351558,
-    "exitYaw": 287.8666625976563
+    "exitYaw": 287.8666625976563,
+    "updatedAt": 0
   },
   "eng1_elev_2_4F.mp4": {
     "entryYaw": 101.86666870117188,
-    "exitYaw": 281.6
+    "exitYaw": 281.6,
+    "updatedAt": 0
   },
   "eng1_elev_2_5F.mp4": {
     "entryYaw": 93.33333740234377,
-    "exitYaw": 266.9333251953125
+    "exitYaw": 266.9333251953125,
+    "updatedAt": 0
   },
   "eng1_c_F1_1_cw.mp4": {
-    "yaw": 187.06667480468752
+    "yaw": 187.06667480468752,
+    "updatedAt": 0
   },
   "eng1_c_F1_1_ccw.mp4": {
-    "yaw": 203.9999877929687
+    "yaw": 203.9999877929687,
+    "updatedAt": 0
   },
   "eng1_c_F1_2_cw.mp4": {
-    "yaw": 177.73333740234375
+    "yaw": 177.73333740234375,
+    "updatedAt": 0
   },
   "eng1_c_F1_2_ccw.mp4": {
-    "yaw": 190.13332519531244
+    "yaw": 190.13332519531244,
+    "updatedAt": 0
   },
   "eng1_c_F1_3_cw.mp4": {
-    "yaw": 193.20001220703125
+    "yaw": 193.20001220703125,
+    "updatedAt": 0
   },
   "eng1_c_F1_3_ccw.mp4": {
-    "yaw": 184.9333129882813
+    "yaw": 184.9333129882813,
+    "updatedAt": 0
   },
   "eng1_e_1_1e.mp4": {
-    "entryYaw": 83.06666259765626
+    "entryYaw": 83.06666259765626,
+    "updatedAt": 0
   },
   "eng1_e_1_1o.mp4": {
-    "exitYaw": 247.46663818359377
+    "exitYaw": 247.46663818359377,
+    "updatedAt": 0
   },
   "eng1_e_1_2e.mp4": {
-    "entryYaw": 135.06665649414066
+    "entryYaw": 135.06665649414066,
+    "updatedAt": 0
   },
   "eng1_e_1_2o.mp4": {
-    "exitYaw": 308.5333251953125
+    "exitYaw": 308.5333251953125,
+    "updatedAt": 0
   },
   "eng1_e_1_3e.mp4": {
-    "entryYaw": 113.20001220703125
+    "entryYaw": 113.20001220703125,
+    "updatedAt": 0
   },
   "eng1_e_1_3o.mp4": {
-    "exitYaw": 275.73333740234375
+    "exitYaw": 275.73333740234375,
+    "updatedAt": 0
   },
   "eng1_e_1_4e.mp4": {
-    "entryYaw": 123.19999999999999
+    "entryYaw": 123.19999999999999,
+    "updatedAt": 0
   },
   "eng1_e_1_4o.mp4": {
-    "exitYaw": 280.26665039062505
+    "exitYaw": 280.26665039062505,
+    "updatedAt": 0
   },
   "eng1_e_1_5e.mp4": {
-    "entryYaw": 170.4000122070313
+    "entryYaw": 170.4000122070313,
+    "updatedAt": 0
   },
   "eng1_e_1_5o.mp4": {
-    "exitYaw": 340.4
+    "exitYaw": 340.4,
+    "updatedAt": 0
   },
   "eng1_s_1_4eu.mp4": {
-    "entryYaw": 197.06665039062497
+    "entryYaw": 197.06665039062497,
+    "updatedAt": 0
   },
   "eng1_s_1_4ou.mp4": {
-    "exitYaw": 39.06667480468752
+    "exitYaw": 39.06667480468752,
+    "updatedAt": 0
   },
   "eng1_s_1_2ed.mp4": {
-    "entryYaw": 151.33334350585943
+    "entryYaw": 151.33334350585943,
+    "updatedAt": 0
   }
 }

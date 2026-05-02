@@ -1986,9 +1986,9 @@
         "level": [
           4
         ],
-        "ref": "",
+        "ref": "21",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 43,
         "_centroid": [
           126.9770285,
@@ -2039,9 +2039,9 @@
         "level": [
           4
         ],
-        "ref": "21",
+        "ref": "",
         "name": "",
-        "room_type": "storage",
+        "room_type": "",
         "_idx": 44,
         "_centroid": [
           126.9770285,

@@ -1,7 +1,7 @@
 // ===== Navigation Graph Editor — Main Orchestration =====
 
 import maplibregl from 'maplibre-gl';
-import { EditorMode, NavEdge, NavGraphExport, RoomAutoApplyPreset, RoomType } from './graphEditorTypes';
+import { EditorMode, NavEdge, EditorSaveFile, RoomAutoApplyPreset, RoomEditEntry, RoomType } from './graphEditorTypes';
 import * as State from './graphEditorState';
 import * as EditorMap from './graphEditorMap';
 import * as Panel from './graphEditorPanel';
@@ -17,6 +17,290 @@ import * as RoomCodeLookup from './roomCodeLookup';
 let state = State.createState();
 let active = false;
 let map: maplibregl.Map | null = null;
+
+// ===== Save bundle state (room edits + free-text note) =====
+//
+// Map key = `${building}|${level}|${fingerprint}`. Every entry in this map
+// represents a configured room (at least one of ref/name/room_type set).
+// Cleared when rooms become unconfigured. Hydrated from save.json at activate
+// and rebuilt as the user edits.
+
+const roomEdits = new Map<string, RoomEditEntry>();
+// (building, level) pairs touched this session. Includes "all rooms cleared"
+// cases where roomEdits no longer has any entries for the file but the
+// published geojson must still be rewritten with empty labels. Cleared on
+// editor close.
+const touchedRoomFiles = new Set<string>();
+let saveNote = '';
+
+function roomEditKey(building: string, level: number, fingerprint: string): string {
+  return `${building}|${level}|${fingerprint}`;
+}
+
+function touchedRoomFileKey(building: string, level: number): string {
+  return `${building}|${level}`;
+}
+
+function fingerprintFromProps(props: any): string | null {
+  const c = props?._centroid;
+  const a = props?._area_m2;
+  if (!Array.isArray(c) || c.length < 2 || a === undefined || a === null) return null;
+  // Match the precision the Python convert.py emits: lat/lng → toFixed(6)
+  // (~10cm), area → toFixed(1). Without this, "131" vs "131.0" produce
+  // different fingerprints across machines depending on JSON round-tripping.
+  return `${Number(c[0]).toFixed(6)}_${Number(c[1]).toFixed(6)}_${Number(a).toFixed(1)}`;
+}
+
+function findFeatureByFingerprint(building: string, level: number, fingerprint: string): GeoJSON.Feature | null {
+  const features = BackendService.getLevelDataForBuilding(building, level)?.rooms?.features ?? [];
+  let match: GeoJSON.Feature | null = null;
+  let collisionCount = 0;
+  for (const f of features) {
+    if (fingerprintFromProps(f.properties) === fingerprint) {
+      if (match) {
+        collisionCount++;
+      } else {
+        match = f;
+      }
+    }
+  }
+  if (collisionCount > 0) {
+    console.warn(
+      `[GraphEditor] fingerprint collision in ${building}/L${level} for "${fingerprint}" — ` +
+      `${collisionCount + 1} features share centroid+area; first match wins. ` +
+      `Room labels for these polygons may be applied to the wrong one.`
+    );
+  }
+  return match;
+}
+
+function recordRoomEdit(building: string, level: number, feature: GeoJSON.Feature, props: any): void {
+  const fingerprint = fingerprintFromProps(props);
+  if (!fingerprint) return;
+  touchedRoomFiles.add(touchedRoomFileKey(building, level));
+  const key = roomEditKey(building, level, fingerprint);
+  const ref = props.ref ?? '';
+  const name = props.name ?? '';
+  const roomType = props.room_type ?? '';
+  if (!ref && !name && !roomType) {
+    roomEdits.delete(key);
+    return;
+  }
+  roomEdits.set(key, {
+    building,
+    level,
+    fingerprint,
+    ref,
+    name,
+    room_type: roomType,
+    updatedAt: Date.now(),
+  });
+}
+
+function collectRoomEdits(): RoomEditEntry[] {
+  return Array.from(roomEdits.values());
+}
+
+function snapshotRoomEdits(): Map<string, RoomEditEntry> {
+  const snap = new Map<string, RoomEditEntry>();
+  for (const [k, v] of roomEdits) snap.set(k, { ...v });
+  return snap;
+}
+
+function restoreRoomEditsFromSnapshot(snap: unknown): void {
+  if (!(snap instanceof Map)) return;
+  const target = snap as Map<string, RoomEditEntry>;
+  // Diff: keys that disappear (current has, target doesn't) → blank the
+  // matching feature. Keys present in target → re-apply if value differs.
+  // Only touch features that actually change, so the runtime label layer
+  // doesn't blank-then-repaint every room on the map.
+  const touchedLevels = new Set<number>();
+  for (const [k, current] of roomEdits) {
+    if (target.has(k)) continue;
+    const feature = findFeatureByFingerprint(current.building, current.level, current.fingerprint);
+    if (feature) {
+      const props = feature.properties as any;
+      props.ref = '';
+      props.name = '';
+      props.room_type = '';
+      touchedLevels.add(current.level);
+    }
+  }
+  for (const [k, want] of target) {
+    const cur = roomEdits.get(k);
+    if (cur && cur.ref === want.ref && cur.name === want.name && cur.room_type === want.room_type) continue;
+    const feature = findFeatureByFingerprint(want.building, want.level, want.fingerprint);
+    if (feature) {
+      const props = feature.properties as any;
+      props.ref = want.ref;
+      props.name = want.name;
+      props.room_type = want.room_type;
+      touchedLevels.add(want.level);
+    }
+  }
+  roomEdits.clear();
+  for (const [k, v] of target) roomEdits.set(k, { ...v });
+  if (map) {
+    for (const lvl of touchedLevels) IndoorLayerModule.refreshRoomLabels(map, lvl);
+  }
+}
+
+function refreshAllVisibleRoomLabels(): void {
+  if (!map) return;
+  const seen = new Set<number>();
+  for (const entry of roomEdits.values()) {
+    if (!seen.has(entry.level)) {
+      IndoorLayerModule.refreshRoomLabels(map, entry.level);
+      seen.add(entry.level);
+    }
+  }
+  // Also refresh the current level in case rooms there were cleared.
+  if (!seen.has(state.currentLevel)) {
+    IndoorLayerModule.refreshRoomLabels(map, state.currentLevel);
+  }
+}
+
+function hydrateRoomsFromSave(savedRooms: RoomEditEntry[]): void {
+  // The save file is the source of truth: any feature on disk with a label
+  // not mentioned in the save must be blanked in memory (so the next publish
+  // overwrites stale on-disk labels). Mark such files as touched.
+  roomEdits.clear();
+  const wantedKeys = new Set<string>();
+  for (const entry of savedRooms) {
+    wantedKeys.add(roomEditKey(entry.building, entry.level, entry.fingerprint));
+  }
+  for (const code of BackendService.getBuildingCodes()) {
+    for (const level of BackendService.getBuildingLevels(code)) {
+      const features = BackendService.getLevelDataForBuilding(code, level)?.rooms?.features ?? [];
+      let levelChanged = false;
+      for (const f of features) {
+        const props = f.properties as any;
+        const fp = fingerprintFromProps(props);
+        if (!fp) continue;
+        const wantedKey = roomEditKey(code, level, fp);
+        if (wantedKeys.has(wantedKey)) continue;
+        if (props.ref || props.name || props.room_type) {
+          props.ref = '';
+          props.name = '';
+          props.room_type = '';
+          levelChanged = true;
+        }
+      }
+      if (levelChanged) touchedRoomFiles.add(touchedRoomFileKey(code, level));
+    }
+  }
+  for (const entry of savedRooms) {
+    const feature = findFeatureByFingerprint(entry.building, entry.level, entry.fingerprint);
+    if (!feature) {
+      console.warn(`[GraphEditor] save.json references room (${entry.building}/L${entry.level} ref="${entry.ref}") with no matching fingerprint in the loaded geojson — skipped`);
+      continue;
+    }
+    const props = feature.properties as any;
+    props.ref = entry.ref;
+    props.name = entry.name;
+    props.room_type = entry.room_type;
+    roomEdits.set(roomEditKey(entry.building, entry.level, entry.fingerprint), { ...entry });
+  }
+}
+
+/**
+ * Hydrate roomEdits from the legacy per-building geojson files when no save
+ * file existed (first run on an existing checkout). Mirrors what
+ * scripts/init-editor-save.js does, but in the browser.
+ */
+function hydrateRoomsFromGeojson(): void {
+  roomEdits.clear();
+  for (const code of BackendService.getBuildingCodes()) {
+    for (const level of BackendService.getBuildingLevels(code)) {
+      const features = BackendService.getLevelDataForBuilding(code, level)?.rooms?.features ?? [];
+      for (const f of features) {
+        const props = f.properties as any;
+        const ref = props.ref ?? '';
+        const name = props.name ?? '';
+        const roomType = props.room_type ?? '';
+        if (!ref && !name && !roomType) continue;
+        const fingerprint = fingerprintFromProps(props);
+        if (!fingerprint) continue;
+        roomEdits.set(roomEditKey(code, level, fingerprint), {
+          building: code, level, fingerprint, ref, name, room_type: roomType,
+          updatedAt: 0,
+        });
+      }
+    }
+  }
+}
+
+// ===== Save-file: validate / merge =====
+
+function validateRoomImport(rooms: RoomEditEntry[]) {
+  const mismatches: Array<{ building: string; level: number; ref: string; fingerprint: string }> = [];
+  for (const entry of rooms) {
+    const levels = BackendService.getBuildingLevels(entry.building);
+    if (!levels || levels.length === 0 || !levels.includes(entry.level)) {
+      // Recipient is missing this (building, level) — silently allowed.
+      console.warn(`[GraphEditor] import: ${entry.building}/L${entry.level} not loaded on this checkout — skipping room ref="${entry.ref}"`);
+      continue;
+    }
+    const feature = findFeatureByFingerprint(entry.building, entry.level, entry.fingerprint);
+    if (!feature) {
+      mismatches.push({
+        building: entry.building,
+        level: entry.level,
+        ref: entry.ref,
+        fingerprint: entry.fingerprint,
+      });
+    }
+  }
+  return { ok: mismatches.length === 0, mismatches };
+}
+
+function applyRoomMerge(incoming: RoomEditEntry[]): void {
+  for (const entry of incoming) {
+    const feature = findFeatureByFingerprint(entry.building, entry.level, entry.fingerprint);
+    if (!feature) continue;   // (building, level) not loaded — skip silently
+    const key = roomEditKey(entry.building, entry.level, entry.fingerprint);
+    const local = roomEdits.get(key);
+    const localTime = local?.updatedAt ?? -1;
+    const incTime = entry.updatedAt ?? -1;
+    if (incTime > localTime) {
+      roomEdits.set(key, { ...entry });
+      const props = feature.properties as any;
+      props.ref = entry.ref;
+      props.name = entry.name;
+      props.room_type = entry.room_type;
+    }
+  }
+  refreshAllVisibleRoomLabels();
+}
+
+function collectPublishRoomFiles(): State.PublishRoomFile[] {
+  // Publish every (building, level) that was touched this session (including
+  // a full clear, where roomEdits has nothing left). Plus any file that
+  // currently has configured labels — covers the legacy-fallback case where
+  // hydrateRoomsFromGeojson populated roomEdits without touching anything.
+  const out: State.PublishRoomFile[] = [];
+  const seen = new Set<string>();
+
+  const addFile = (code: string, level: number) => {
+    const fileKey = touchedRoomFileKey(code, level);
+    if (seen.has(fileKey)) return;
+    const features = BackendService.getLevelDataForBuilding(code, level)?.rooms?.features ?? [];
+    if (features.length === 0) return;
+    seen.add(fileKey);
+    out.push({ building: code, level, features });
+  };
+
+  for (const fileKey of touchedRoomFiles) {
+    const [code, levelStr] = fileKey.split('|');
+    const level = parseInt(levelStr, 10);
+    if (!code || Number.isNaN(level)) continue;
+    addFile(code, level);
+  }
+  for (const entry of roomEdits.values()) {
+    addFile(entry.building, entry.level);
+  }
+  return out;
+}
 
 // Track level changes and 3D mode
 let lastKnownLevel = 1;
@@ -48,9 +332,9 @@ export function setupGraphEditor(): void {
 
 function toggleEditor(): void {
   if (active) {
-    deactivateEditor();
+    void deactivateEditor();
   } else {
-    activateEditor();
+    void activateEditor();
   }
 }
 
@@ -63,10 +347,27 @@ async function activateEditor(): Promise<void> {
   state.currentLevel = IndoorLayer.getCurrentLevel();
   lastKnownLevel = state.currentLevel;
 
-  // Load graph, video settings, and room code lookup
-  const saved = await State.loadGraphFromFile();
-  if (saved) state.graph = saved;
-  await VideoSettings.loadVideoSettings();
+  // Wire save bundle providers BEFORE any mutation can fire
+  State.setActiveState(state);
+  State.setSaveBundleProviders({ rooms: collectRoomEdits, note: () => saveNote });
+  VideoSettings.setOnMutated(() => State.autosaveBundle());
+
+  // Load video catalog AND the editor save bundle
+  await VideoSettings.loadVideoSettings();           // baseline from /geojson/video_settings.json
+  const loaded = await State.loadEditorSave();
+  state.graph = loaded.graph;
+  saveNote = loaded.note;
+
+  if (loaded.source === 'save-file') {
+    VideoSettings.hydrateFromSave(loaded.videoSettings ?? undefined);
+    hydrateRoomsFromSave(loaded.rooms);
+  } else {
+    // Legacy fallback: room labels still live in the per-building geojson
+    // files at this point — pull them into roomEdits so subsequent
+    // autosaves persist them through the new pipeline.
+    hydrateRoomsFromGeojson();
+  }
+
   RoomCodeLookup.loadRoomCodes(); // non-blocking
 
   lastKnownFlatMode = GeoMap.isFlatMode();
@@ -92,14 +393,23 @@ async function activateEditor(): Promise<void> {
     onRoomExport: handleRoomExport,
     onUndo: handleUndo,
     onRedo: handleRedo,
-    onImport: handleImport,
-    onExport: handleExport,
+    onExportSave: handleExportSave,
+    onImportSave: handleImportSave,
+    onPublish: handlePublish,
     onClearAll: handleClearAll,
     onClearBuildingGraph: handleClearBuildingGraph,
     onClearBuildingRooms: handleClearBuildingRooms,
     onAutoApplyChange: handleAutoApplyChange,
-    onClose: deactivateEditor,
+    onNoteChange: handleNoteChange,
+    onClose: () => { void deactivateEditor(); },
   });
+
+  Panel.setSaveNoteValue(saveNote);
+
+  // First save fires immediately so the save file is created on a fresh
+  // checkout (legacy-fallback path) and the metadata.savedAt reflects this
+  // session start.
+  State.autosaveBundle();
 
   // Set up map click handlers
   EditorMap.setClickHandlers(map, {
@@ -137,8 +447,24 @@ async function activateEditor(): Promise<void> {
   refreshMap();
 }
 
-function deactivateEditor(): void {
+async function deactivateEditor(): Promise<void> {
   if (!map) return;
+
+  // Publish on the way out. If it fails (typically because the dev server is
+  // down or unreachable), close the editor anyway — the working save lives in
+  // editor/save.json regardless of publish, and blocking close means the user
+  // can't escape a broken backend. We surface the failure so they know to
+  // re-open and Publish once the server is back.
+  try {
+    await State.publishCombined(state, collectPublishRoomFiles());
+  } catch (err) {
+    const msg = (err as Error).message ?? String(err);
+    console.error('[GraphEditor] publish failed on close:', msg);
+    alert(
+      `Publish failed — your edits are still saved in editor/save.json.\n\n` +
+      `Re-open the editor when the server is back and click Publish to write the runtime files.\n\n${msg}`
+    );
+  }
 
   active = false;
 
@@ -163,9 +489,18 @@ function deactivateEditor(): void {
     levelCheckInterval = null;
   }
 
+  // Detach save providers so non-editor code paths don't accidentally
+  // trigger autosave writes.
+  State.setActiveState(null);
+  State.setSaveBundleProviders({ rooms: () => [], note: () => '' });
+  VideoSettings.setOnMutated(null);
+
   selectedRoom = null;
   state.selectedEdgeId = null; state.selectedEdgeIds = [];
   autoApplyPreset = { enabled: false, roomType: '' as RoomType, refPrefix: '' };
+  roomEdits.clear();
+  touchedRoomFiles.clear();
+  saveNote = '';
   map = null;
 }
 
@@ -734,43 +1069,104 @@ function handleRedo(): void {
   }
 }
 
-function handleImport(): void {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = '.json';
-  input.addEventListener('change', () => {
-    const file = input.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      try {
-        const data = JSON.parse(reader.result as string) as NavGraphExport;
-        state.graph = State.importGraph(data);
-        state.selectedNodeId = null;
-        state.edgeStartNodeId = null;
-        state.undoStack = [];
-        state.redoStack = [];
-        Panel.hideNodeProperties();
-        refreshMap();
-      } catch (err) {
-        alert('JSON 파싱 실패: ' + (err as Error).message);
-      }
-    };
-    reader.readAsText(file);
-  });
-  input.click();
-}
-
-function handleExport(): void {
-  const data = State.exportGraph(state.graph);
-  const json = JSON.stringify(data, null, 2);
+function handleExportSave(): void {
+  const bundle = State.exportSaveData(state);
+  const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 16);
+  const json = JSON.stringify(bundle, null, 2);
   const blob = new Blob([json], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'graph.json';
+  a.download = `nav_save_${stamp}.json`;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+function handleImportSave(file: File): void {
+  const reader = new FileReader();
+  reader.onload = () => {
+    let parsed: EditorSaveFile;
+    try {
+      parsed = JSON.parse(reader.result as string) as EditorSaveFile;
+    } catch (err) {
+      alert('Save file parsing failed: ' + (err as Error).message);
+      return;
+    }
+    const summary = describeSaveFile(parsed);
+    const ok = window.confirm(
+      `Import "${file.name}"?\n\n${summary}\n\n` +
+      `Graph (nodes + edges) will be REPLACED — your current graph is discarded.\n` +
+      `Video settings and room labels will be MERGED per item (newer entries win; unconfigured rooms in the import are skipped).\n\n` +
+      `Press OK to continue, Cancel to abort.`
+    );
+    if (!ok) return;
+
+    let result: State.ImportSaveResult;
+    try {
+      result = State.importSaveFile(state, parsed, {
+        snapshotRooms: snapshotRoomEdits,
+        restoreRooms: restoreRoomEditsFromSnapshot,
+        validateRooms: validateRoomImport,
+        applyRoomMerge,
+      });
+    } catch (err) {
+      alert('Import failed: ' + (err as Error).message);
+      return;
+    }
+
+    if (!result.ok) {
+      const lines = (result.mismatches ?? []).map(m =>
+        `  • ${m.building} L${m.level} ref="${m.ref}" (fingerprint ${m.fingerprint})`
+      );
+      alert(
+        `Import REJECTED — your room geojson differs from the sender's.\n\n` +
+        `${lines.length} room${lines.length === 1 ? '' : 's'} in the save file have no matching polygon in your loaded geojson:\n\n` +
+        `${lines.join('\n')}\n\n` +
+        `Update your geojson source files to match the sender's version, then retry.`
+      );
+      return;
+    }
+
+    state.selectedNodeId = null;
+    state.selectedEdgeId = null; state.selectedEdgeIds = [];
+    state.edgeStartNodeId = null;
+    Panel.hideNodeProperties();
+    Panel.hideEdgeProperties();
+    refreshAllVisibleRoomLabels();
+    refreshMap();
+  };
+  reader.readAsText(file);
+}
+
+function describeSaveFile(data: EditorSaveFile): string {
+  const nodeCount = data?.graph?.nodes ? Object.keys(data.graph.nodes).length : 0;
+  const edgeCount = data?.graph?.edges?.length ?? 0;
+  const videoCount = data?.videoSettings ? Object.keys(data.videoSettings).length : 0;
+  const roomCount = data?.rooms?.length ?? 0;
+  const note = data?.metadata?.note?.trim();
+  return [
+    `Saved at: ${data?.metadata?.savedAt ?? 'unknown'}`,
+    note ? `Note: ${note}` : null,
+    `Graph: ${nodeCount} nodes, ${edgeCount} edges`,
+    `Video settings: ${videoCount} files`,
+    `Configured rooms: ${roomCount}`,
+  ].filter(Boolean).join('\n');
+}
+
+function handleNoteChange(note: string): void {
+  saveNote = note;
+  State.autosaveBundle();
+}
+
+async function handlePublish(): Promise<void> {
+  try {
+    await State.publishCombined(state, collectPublishRoomFiles());
+    console.log('[GraphEditor] published runtime files');
+  } catch (err) {
+    const msg = (err as Error).message ?? String(err);
+    console.error('[GraphEditor] publish failed:', msg);
+    alert(`Publish failed:\n\n${msg}`);
+  }
 }
 
 function handleClearAll(): void {
@@ -805,15 +1201,18 @@ function handleClearBuildingRooms(building: string): void {
         props.ref = '';
         props.name = '';
         props.room_type = '';
+        // Drop the matching roomEdits entry too — recordRoomEdit on a fully
+        // cleared feature does this automatically.
+        recordRoomEdit(building, level, f, props);
         levelCleared++;
       }
     }
     if (levelCleared > 0) {
       totalCleared += levelCleared;
       IndoorLayerModule.refreshRoomLabels(map, level);
-      saveRoomData(building, level);
     }
   }
+  if (totalCleared > 0) State.autosaveBundle();
 
   // Reset any in-progress room selection if it belonged to this building
   if (selectedRoom?.building === building) {
@@ -828,23 +1227,16 @@ function handleClearBuildingRooms(building: string): void {
 }
 
 // ===== Room Label Editing =====
+//
+// Mutations update the in-memory feature (so labels redraw immediately) AND
+// the in-editor roomEdits map keyed by (building, level, fingerprint) — that
+// map is the source of truth carried into `editor/save.json`. The matching
+// per-building geojson file is only rewritten at publish time.
 
-function saveRoomData(building: string, level: number): void {
-  // Dev-server endpoint writes to `public/geojson/{building}/{building}_room_L{level}.geojson`.
-  if (!BackendService.getBuildingLevels(building).includes(level)) return;
-  const data = BackendService.getLevelDataForBuilding(building, level);
-  if (!data.rooms.features.length) return;
-  const fc: GeoJSON.FeatureCollection = {
-    type: 'FeatureCollection',
-    features: data.rooms.features,
-  };
-  fetch(`/api/save-rooms/${encodeURIComponent(building)}/${level}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(fc),
-  }).then(res => {
-    if (!res.ok) console.warn(`[GraphEditor] room save failed (${building} L${level}):`, res.status);
-  }).catch(err => console.warn(`[GraphEditor] room save error (${building} L${level}):`, err));
+function persistRoomEdit(building: string, feature: GeoJSON.Feature, level: number): void {
+  recordRoomEdit(building, level, feature, feature.properties);
+  if (map) IndoorLayerModule.refreshRoomLabels(map, level);
+  State.autosaveBundle();
 }
 
 function handleRoomUpdate(building: string, featureIdx: number, props: { ref?: string; name?: string; room_type?: string }): void {
@@ -858,8 +1250,7 @@ function handleRoomUpdate(building: string, featureIdx: number, props: { ref?: s
   if (props.name !== undefined) feature.properties.name = props.name;
   if (props.room_type !== undefined) feature.properties.room_type = props.room_type;
 
-  IndoorLayerModule.refreshRoomLabels(map, state.currentLevel);
-  saveRoomData(building, state.currentLevel);
+  persistRoomEdit(building, feature, state.currentLevel);
 }
 
 function appendToRoomRef(building: string, featureIdx: number, digit: string): void {
@@ -872,8 +1263,7 @@ function appendToRoomRef(building: string, featureIdx: number, digit: string): v
   const newRef = currentRef + digit;
   feature.properties.ref = newRef;
   Panel.updateRoomRefInput(newRef);
-  IndoorLayerModule.refreshRoomLabels(map, state.currentLevel);
-  saveRoomData(building, state.currentLevel);
+  persistRoomEdit(building, feature, state.currentLevel);
   tryAutoLookup(building, featureIdx, newRef);
 }
 
@@ -888,8 +1278,7 @@ function backspaceRoomRef(building: string, featureIdx: number): void {
   const newRef = currentRef.slice(0, -1);
   feature.properties.ref = newRef;
   Panel.updateRoomRefInput(newRef);
-  IndoorLayerModule.refreshRoomLabels(map, state.currentLevel);
-  saveRoomData(building, state.currentLevel);
+  persistRoomEdit(building, feature, state.currentLevel);
   tryAutoLookup(building, featureIdx, newRef);
 }
 
@@ -910,8 +1299,7 @@ function tryAutoLookup(building: string, featureIdx: number, ref: string): void 
   Panel.updateRoomNameInput(entry ? entry.name : '');
   Panel.updateRoomTypeSelect(entry ? entry.room_type : '');
 
-  IndoorLayerModule.refreshRoomLabels(map, state.currentLevel);
-  saveRoomData(building, state.currentLevel);
+  persistRoomEdit(building, feature, state.currentLevel);
 }
 
 function handleAutoApplyChange(preset: RoomAutoApplyPreset): void {

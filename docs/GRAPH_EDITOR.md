@@ -99,17 +99,36 @@ Chain walk:
 
 ## 저장 파일 구조
 
-에디터에서 저장하는 파일의 상세 구조는 [DATA_FORMAT.md](DATA_FORMAT.md) 참조.
+| 파일 | 종류 | 언제 쓰여지나 |
+|------|------|---------------|
+| `public/geojson/editor/save.json` | **working file** (editor 전용) | 에디터에서 수정할 때마다 자동저장 |
+| `public/geojson/graph.json` | runtime artifact | 에디터 종료 / `Publish` 버튼 클릭 시에만 |
+| `public/geojson/video_settings.json` | runtime artifact | 에디터 종료 / `Publish` 버튼 클릭 시에만 |
+| `public/geojson/{building}/{building}_room_L{n}.geojson` | runtime artifact (방 라벨) | 에디터 종료 / `Publish` 버튼 클릭 시에만 |
 
-| 파일 | 저장 내용 |
-|------|-----------|
-| `graph.json` | 노드(좌표, 층, 타입, verticalId) + 엣지(weight, 영상 파일/시간) |
-| `eng1_room_L{n}.geojson` | 방 properties (ref, name, room_type) |
-| `video_settings.json` | 영상별 yaw 값 |
+상세 구조는 [DATA_FORMAT.md](DATA_FORMAT.md) 참조.
+
+`save.json`은 단일 번들이다:
+```jsonc
+{
+  "version": 1,
+  "metadata": { "savedAt": "...", "note": "free-text" },
+  "graph":         { "nodes": {...}, "edges": [...] },   // graph.json과 동일
+  "videoSettings": { "<filename>": { yaw, updatedAt } }, // video_settings.json + updatedAt
+  "rooms":         [{ building, level, fingerprint, ref, name, room_type, updatedAt }]
+}
+```
+
+`fingerprint`는 `${centroid[0].toFixed(6)}_${centroid[1].toFixed(6)}_${_area_m2}` — geojson이 재생성되어 `_idx`가 바뀌어도 라벨이 올바른 polygon에 다시 매칭된다.
+
+Export save한 파일을 Import하거나 다른 사람의 `editor/save.json`을 덮어쓰고 에디터를 reload하면 불러와진다.
+
+
+`graph.json` + `video_settings.json` + 방 geojson에서 라벨을 모아 `editor/save.json`을 만든다. (선택사항 — 안 돌려도 에디터를 처음 열 때 자동으로 fallback 로드 → 첫 자동저장 시점에 `save.json`이 만들어진다.)
 
 ## 경로 탐색 연동
 
-- 에디터에서 수정한 `graph.json`은 **페이지 새로고침 후** 경로 탐색에 반영됨
+- Runtime path-finding은 **published** `graph.json`을 읽는다. 에디터가 열려 있는 동안에는 working file만 갱신되므로 walkthrough는 마지막 publish 시점의 데이터를 본다 — `Publish` 버튼이나 에디터 종료 후에 reload하면 새 데이터가 보인다.
 - 로컬 모드(`useApi=false`): `graph.json`을 직접 로드하여 Dijkstra 실행
 - API 모드(`useApi=true`): `graph.json`을 백엔드 DB로 가져간 후 `POST /api/route`로 탐색
 - 백엔드 DB 가져가기 방법은 [DATA_FORMAT.md](DATA_FORMAT.md)의 "백엔드 가져가기 요약" 참조

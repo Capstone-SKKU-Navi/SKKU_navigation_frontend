@@ -3,6 +3,7 @@
 import { NavNode, NavEdge, EditorMode, PanelCallbacks, ALL_NODE_TYPES, NODE_TYPE_LABELS, NavNodeType, ROOM_TYPES, RoomAutoApplyPreset, RoomType } from './graphEditorTypes';
 import { suggestVideosForEdge, getAllVideos, getOppositeVideo, type VideoEntry } from './videoCatalog';
 import { openVideoSettingsPanel } from './videoSettingsPanel';
+import { toggleEdgePreview, refreshEdgePreview, hideEdgePreview } from './edgePreviewWindow';
 import { computeStairVideos, computeElevatorVideos, pickVerticalBuilding } from '../utils/verticalVideoFilename';
 import * as RoomCodeLookup from './roomCodeLookup';
 import { formatLevel } from '../utils/formatLevel';
@@ -140,6 +141,9 @@ export function createPanel(cb: PanelCallbacks): HTMLElement {
 
         <div class="ge-props-title" style="margin-top:6px">
           <span id="geEdgeFwdLabel">→ From → To</span>
+          <button class="ge-small-btn" id="geEdgePreviewToggle" title="영상 시작 미리보기 창" style="display:none">
+            <span class="material-icons" style="font-size:16px">visibility</span>
+          </button>
         </div>
         <!-- FWD: corridor tree picker (hidden for vertical edges) -->
         <div id="geEdgeFwdCorridorSection">
@@ -299,14 +303,24 @@ export function createPanel(cb: PanelCallbacks): HTMLElement {
             <span class="material-icons" style="font-size:16px">redo</span> Redo
           </button>
         </div>
+        <div class="ge-save-info">
+          <div class="ge-save-info-row">
+            <span class="material-icons" style="font-size:14px;opacity:0.6">save</span>
+            <span id="geSaveStatus" class="ge-save-status">Autosaves on every edit · publishes on close</span>
+          </div>
+          <input type="text" class="ge-input ge-save-note" id="geSaveNote" placeholder="Save note (shown to whoever imports this)" />
+        </div>
         <div class="ge-action-row">
-          <button class="ge-action-btn" id="geImport">
-            <span class="material-icons" style="font-size:16px">file_upload</span> Import
+          <button class="ge-action-btn" id="geImportSave" title="Import a save file from a collaborator">
+            <span class="material-icons" style="font-size:16px">file_upload</span> Import save
           </button>
-          <button class="ge-action-btn" id="geExport">
-            <span class="material-icons" style="font-size:16px">file_download</span> Export
+          <button class="ge-action-btn" id="geExportSave" title="Download your current state as a save file">
+            <span class="material-icons" style="font-size:16px">file_download</span> Export save
           </button>
         </div>
+        <button class="ge-action-btn" id="gePublish" title="Write graph.json + video_settings.json + room geojson now (also runs on close)">
+          <span class="material-icons" style="font-size:16px">publish</span> Publish
+        </button>
         <button class="ge-action-btn" id="geVideoSettings">
             <span class="material-icons" style="font-size:16px">360</span> Video Settings
           </button>
@@ -457,6 +471,17 @@ export function showEdgeProperties(edge: NavEdge, fromNode: NavNode, toNode: Nav
   setHtml('geEdgeFwdLabel', `FWD&nbsp;&nbsp;${renderEndpoint(fromLabel, 'from')} → ${renderEndpoint(toLabel, 'to')}`);
   setHtml('geEdgeRevLabel', `REV&nbsp;&nbsp;${renderEndpoint(toLabel, 'to')} → ${renderEndpoint(fromLabel, 'from')}`);
 
+  const previewBtn = document.getElementById('geEdgePreviewToggle') as HTMLButtonElement | null;
+  if (previewBtn) {
+    if (isVertical) {
+      previewBtn.style.display = 'none';
+    } else {
+      previewBtn.style.display = '';
+      previewBtn.onclick = () => toggleEdgePreview(edge, fromNode, toNode);
+    }
+  }
+  refreshEdgePreview(edge, fromNode, toNode);
+
   for (const dir of ['Fwd', 'Rev'] as const) {
     const corridorSection = document.getElementById(`geEdge${dir}CorridorSection`);
     const autoSection = document.getElementById(`geEdge${dir}AutoSection`);
@@ -511,6 +536,7 @@ export function showEdgeProperties(edge: NavEdge, fromNode: NavNode, toNode: Nav
             callbacks?.onEdgeUpdate(edgeId, props);
             const timeRow = document.getElementById(`geEdge${dir}TimeRow`);
             if (timeRow) timeRow.style.display = 'none';
+            refreshEdgePreview({ ...edge, ...props } as NavEdge, fromNode, toNode);
             return;
           }
 
@@ -526,6 +552,7 @@ export function showEdgeProperties(edge: NavEdge, fromNode: NavNode, toNode: Nav
 
           // Auto-set start=0, end=duration by loading video metadata
           props[startKey] = 0;
+          refreshEdgePreview({ ...edge, ...props } as NavEdge, fromNode, toNode);
           getVideoDuration(filename).then(duration => {
             props[endKey] = duration;
             callbacks?.onEdgeUpdate(edgeId, props);
@@ -752,6 +779,7 @@ export function hideEdgeProperties(): void {
   if (propsEl) propsEl.style.display = 'none';
   const multiEl = document.getElementById('geMultiEdgeProps');
   if (multiEl) multiEl.style.display = 'none';
+  hideEdgePreview();
 }
 
 export function showMultiEdgeProperties(edges: NavEdge[], nodes: Record<string, NavNode>): void {
@@ -925,11 +953,35 @@ function wireEvents(): void {
   document.getElementById('geUndo')?.addEventListener('click', () => callbacks?.onUndo());
   document.getElementById('geRedo')?.addEventListener('click', () => callbacks?.onRedo());
 
-  // Import
-  document.getElementById('geImport')?.addEventListener('click', () => callbacks?.onImport());
+  // Import save (opens file picker; handler receives the File)
+  document.getElementById('geImportSave')?.addEventListener('click', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json,application/json';
+    input.addEventListener('change', () => {
+      const file = input.files?.[0];
+      if (file) callbacks?.onImportSave(file);
+    });
+    input.click();
+  });
 
-  // Export
-  document.getElementById('geExport')?.addEventListener('click', () => callbacks?.onExport());
+  // Export save
+  document.getElementById('geExportSave')?.addEventListener('click', () => callbacks?.onExportSave());
+
+  // Publish (manual)
+  document.getElementById('gePublish')?.addEventListener('click', () => callbacks?.onPublish());
+
+  // Save note — debounced fire on input pause
+  const noteInput = document.getElementById('geSaveNote') as HTMLInputElement | null;
+  if (noteInput) {
+    let noteTimer: number | null = null;
+    noteInput.addEventListener('input', () => {
+      if (noteTimer !== null) window.clearTimeout(noteTimer);
+      noteTimer = window.setTimeout(() => {
+        callbacks?.onNoteChange(noteInput.value);
+      }, 350);
+    });
+  }
 
   // Video settings
   document.getElementById('geVideoSettings')?.addEventListener('click', () => {
@@ -1099,6 +1151,11 @@ function emitAutoApplyChange(): void {
 export function setNodeIdData(nodeId: string): void {
   const propsEl = document.getElementById('geNodeProps');
   if (propsEl) propsEl.dataset.nodeId = nodeId;
+}
+
+export function setSaveNoteValue(note: string): void {
+  const input = document.getElementById('geSaveNote') as HTMLInputElement | null;
+  if (input) input.value = note;
 }
 
 function setText(id: string, text: string): void {

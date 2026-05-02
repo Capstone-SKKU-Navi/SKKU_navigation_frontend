@@ -116,6 +116,47 @@ export interface NavGraphExport {
   }>;
 }
 
+// ===== Editor save file (working file shared with collaborators) =====
+//
+// Single bundle that captures the whole editor state. Autosaved to
+// `public/geojson/editor/save.json` on every mutation; round-tripped between
+// collaborators via the panel's Export Save / Import Save buttons.
+//
+// Graph is replaced wholesale on import. Video settings and room labels merge
+// per-key by `updatedAt` recency — see graphEditorState.importSaveFile.
+
+export const EDITOR_SAVE_VERSION = 1;
+
+export interface VideoSettingsExport {
+  [filename: string]: {
+    yaw?: number;
+    entryYaw?: number;
+    exitYaw?: number;
+    updatedAt: number;          // epoch ms; bumped on every yaw edit
+  };
+}
+
+export interface RoomEditEntry {
+  building: string;
+  level: number;
+  fingerprint: string;          // `${centroid[0].toFixed(6)}_${centroid[1].toFixed(6)}_${_area_m2}` from the source geojson
+  ref: string;
+  name: string;
+  room_type: string;
+  updatedAt: number;            // epoch ms
+}
+
+export interface EditorSaveFile {
+  version: number;
+  metadata: {
+    savedAt: string;            // ISO 8601
+    note?: string;
+  };
+  graph: NavGraphExport;
+  videoSettings: VideoSettingsExport;
+  rooms: RoomEditEntry[];
+}
+
 // ===== Callback interfaces =====
 
 export interface EditorMapCallbacks {
@@ -137,12 +178,14 @@ export interface PanelCallbacks {
   onRoomExport(): void;
   onUndo(): void;
   onRedo(): void;
-  onImport(): void;
-  onExport(): void;
+  onExportSave(): void;
+  onImportSave(file: File): void;
+  onPublish(): void;
   onClearAll(): void;
   onClearBuildingGraph(building: string): void;
   onClearBuildingRooms(building: string): void;
   onAutoApplyChange(preset: RoomAutoApplyPreset): void;
+  onNoteChange(note: string): void;
   onClose(): void;
 }
 

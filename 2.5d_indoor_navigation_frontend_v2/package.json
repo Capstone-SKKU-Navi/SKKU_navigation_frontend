@@ -9,6 +9,7 @@
     "build:prod": "cross-env PROD_BUILD=true webpack --mode production",
     "start": "webpack serve --mode development",
     "seed": "python scripts/seed.py",
+    "init-editor-save": "node scripts/init-editor-save.js",
     "dev:full": "powershell -ExecutionPolicy Bypass -File scripts/bootstrap.ps1",
     "dev:full:bash": "bash scripts/bootstrap.sh"
   },
