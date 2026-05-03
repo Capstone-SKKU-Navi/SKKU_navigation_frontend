@@ -1,7 +1,7 @@
 {
   "version": 1,
   "metadata": {
-    "savedAt": "2026-05-03T03:47:06.108Z",
+    "savedAt": "2026-05-03T06:27:44.311Z",
     "note": ""
   },
   "graph": {
@@ -625,10 +625,10 @@
       "building": "eng1",
       "level": 3,
       "fingerprint": "126.976717_37.294202_18.4",
-      "ref": "123123",
+      "ref": "213",
       "name": "",
       "room_type": "",
-      "updatedAt": 0
+      "updatedAt": 1777789022429
     },
     {
       "building": "eng1",
@@ -1075,10 +1075,10 @@
       "building": "slib",
       "level": 1,
       "fingerprint": "126.975149_37.293843_1301.0",
-      "ref": "6323632",
+      "ref": "213",
       "name": "",
       "room_type": "",
-      "updatedAt": 0
+      "updatedAt": 1777789017876
     },
     {
       "building": "slib",
@@ -1142,6 +1142,105 @@
       "name": "",
       "room_type": "storage",
       "updatedAt": 0
+    },
+    {
+      "building": "slib",
+      "level": 2,
+      "fingerprint": "126.975155_37.293903_107.8",
+      "ref": "213",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1777789020746
+    },
+    {
+      "building": "eng1",
+      "level": 3,
+      "fingerprint": "126.976964_37.294272_88.3",
+      "ref": "213",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1777789027219
+    },
+    {
+      "building": "eng1",
+      "level": 3,
+      "fingerprint": "126.976586_37.294216_18.4",
+      "ref": "213",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1777789136397
+    },
+    {
+      "building": "eng1",
+      "level": 3,
+      "fingerprint": "126.976782_37.294195_19.1",
+      "ref": "213",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1777789105588
+    },
+    {
+      "building": "eng2",
+      "level": 3,
+      "fingerprint": "126.976248_37.294801_52.4",
+      "ref": "213",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1777789118538
+    },
+    {
+      "building": "eng1",
+      "level": 3,
+      "fingerprint": "126.976912_37.294180_18.8",
+      "ref": "213",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1777789120213
+    },
+    {
+      "building": "slib",
+      "level": 2,
+      "fingerprint": "126.974914_37.293838_374.0",
+      "ref": "213",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1777789122238
+    },
+    {
+      "building": "eng1",
+      "level": 3,
+      "fingerprint": "126.976816_37.294191_19.0",
+      "ref": "213",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1777789134752
+    },
+    {
+      "building": "eng2",
+      "level": 3,
+      "fingerprint": "126.976323_37.295504_339.4",
+      "ref": "213",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1777789147059
+    },
+    {
+      "building": "eng2",
+      "level": 3,
+      "fingerprint": "126.976477_37.295402_264.3",
+      "ref": "213",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1777789148160
+    },
+    {
+      "building": "eng2",
+      "level": 4,
+      "fingerprint": "126.976659_37.295545_54.8",
+      "ref": "213",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1777789150232
     }
   ]
 }

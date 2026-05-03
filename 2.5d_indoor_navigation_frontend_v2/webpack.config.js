@@ -264,16 +264,6 @@ module.exports = (env, argv) => {
           res.json({ ok: true });
         });
 
-        // Back-compat: legacy /api/save-rooms/:level → defaults to eng1.
-        devServer.app.put('/api/save-rooms/:level', jsonParser, (req, res) => {
-          const level = parseInt(req.params.level, 10);
-          if (!Number.isInteger(level) || level < 1 || level > 10) {
-            return res.status(400).json({ error: 'invalid level' });
-          }
-          const filePath = path.join(__dirname, 'public', 'geojson', 'eng1', `eng1_room_L${level}.geojson`);
-          fs.writeFileSync(filePath, JSON.stringify(req.body, null, 2), 'utf-8');
-          res.json({ ok: true });
-        });
         return middlewares;
       },
     },
