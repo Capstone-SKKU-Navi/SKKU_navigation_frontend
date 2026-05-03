@@ -39,6 +39,9 @@ BUILDING_NAMES = {
     "bio": "생명공학관", "chem": "화학관",
     "semi": "반도체관", "bas": "기초학문관",
     "med": "의학관", "phar": "약학관",
+    "ectr": "E센터", "nctr": "N센터",
+    "lab23": "23실습동", "util": "유틸리티동",
+    "ptech": "제약기술관",
 }
 
 
@@ -143,6 +146,8 @@ def convert(code, levels):
         if collider:
             collider_feats = []
             for i, feat in enumerate(collider["features"]):
+                if feat.get("geometry") is None:
+                    continue
                 geom = multi_to_single(feat["geometry"])
                 collider_feats.append({
                     "type": "Feature",
@@ -162,11 +167,17 @@ def convert(code, levels):
             room_entries = []
 
             for feat in rooms["features"]:
+                if feat.get("geometry") is None:
+                    sliver_n += 1
+                    continue
                 geom = multi_to_single(feat["geometry"])
                 if is_sliver(geom):
                     sliver_n += 1
                     continue
                 centroid = calc_centroid(geom)
+                if centroid is None:
+                    sliver_n += 1
+                    continue
                 area = round(coord_area_m2(geom), 1)
                 room_entries.append((centroid, area, geom))
 

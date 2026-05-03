@@ -1,12 +1,81 @@
 {
   "version": 1,
   "metadata": {
-    "savedAt": "2026-05-03T06:27:44.311Z",
+    "savedAt": "2026-05-03T08:15:43.469Z",
     "note": ""
   },
   "graph": {
-    "nodes": {},
-    "edges": []
+    "nodes": {
+      "node-mophsrz0-2kgq": {
+        "coordinates": [
+          126.97735013056695,
+          37.2946113041822
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "eng2"
+      },
+      "node-mophssui-p0ub": {
+        "coordinates": [
+          126.97750539411714,
+          37.2953845159042
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "eng2"
+      },
+      "node-mophstk5-mp0t": {
+        "coordinates": [
+          126.97630675951888,
+          37.29473729129866
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "eng2"
+      },
+      "node-mophsumw-x9gc": {
+        "coordinates": [
+          126.97662039188288,
+          37.295500620489136
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "eng2"
+      }
+    },
+    "edges": [
+      {
+        "from": "node-mophstk5-mp0t",
+        "to": "node-mophsrz0-2kgq",
+        "weight": 93,
+        "videoFwd": "eng2_c_F2_5_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 20.220233,
+        "videoRev": "eng2_c_F2_5_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 21.621633
+      },
+      {
+        "from": "node-mophsrz0-2kgq",
+        "to": "node-mophssui-p0ub",
+        "weight": 87,
+        "videoFwd": "eng2_c_F1_1_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 69.502833,
+        "videoRev": "eng2_c_F1_1_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 70.270267
+      },
+      {
+        "from": "node-mophssui-p0ub",
+        "to": "node-mophsumw-x9gc",
+        "weight": 79
+      }
+    ]
   },
   "videoSettings": {
     "eng1_corridor_21_1F_cw.mp4": {

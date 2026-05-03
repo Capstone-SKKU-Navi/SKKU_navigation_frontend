@@ -1,0 +1,9 @@
+{
+  "building": "util",
+  "name": "유틸리티동",
+  "loc_ref": "UTIL",
+  "levels": [
+    1,
+    2
+  ]
+}

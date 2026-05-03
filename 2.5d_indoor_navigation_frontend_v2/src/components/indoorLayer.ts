@@ -443,28 +443,6 @@ function addBuildingLevelLayers(map: maplibregl.Map, building: string, level: nu
       } as any,
     });
 
-    // Room outline — extract polygon edges into thin wall strips
-    const edgeFeatures = buildEdgePolygons(rooms);
-    if (edgeFeatures.length > 0) {
-      map.addSource(`${sourceId}-rooms-edges`, {
-        type: 'geojson',
-        data: { type: 'FeatureCollection', features: edgeFeatures },
-      });
-
-      map.addLayer({
-        id: `${sourceId}-rooms-outline`,
-        type: 'fill-extrusion',
-        source: `${sourceId}-rooms-edges`,
-        layout: { visibility: 'none' },
-        paint: {
-          'fill-extrusion-color': '#1A237E',
-          'fill-extrusion-height': 0,
-          'fill-extrusion-base': 0,
-          'fill-extrusion-opacity': 0.75,
-        },
-      });
-    }
-
     // Room labels — separate point source for manual positioning
     const labelPoints = buildLabelPoints(rooms);
     map.addSource(`${sourceId}-rooms-labelpts`, {
@@ -513,6 +491,29 @@ function addBuildingLevelLayers(map: maplibregl.Map, building: string, level: nu
         'fill-extrusion-height': 0,
         'fill-extrusion-base': 0,
         'fill-extrusion-opacity': 0.7,
+      },
+    });
+  }
+
+  // Room outline — extract polygon edges into thin wall strips.
+  // Includes stairs/elevator polygons so their walls render too.
+  const edgeFeatures = buildEdgePolygons([...rooms, ...stairs]);
+  if (edgeFeatures.length > 0) {
+    map.addSource(`${sourceId}-rooms-edges`, {
+      type: 'geojson',
+      data: { type: 'FeatureCollection', features: edgeFeatures },
+    });
+
+    map.addLayer({
+      id: `${sourceId}-rooms-outline`,
+      type: 'fill-extrusion',
+      source: `${sourceId}-rooms-edges`,
+      layout: { visibility: 'none' },
+      paint: {
+        'fill-extrusion-color': '#1A237E',
+        'fill-extrusion-height': 0,
+        'fill-extrusion-base': 0,
+        'fill-extrusion-opacity': 0.75,
       },
     });
   }
@@ -606,7 +607,7 @@ export function refreshAll(map: maplibregl.Map): void {
       set(`${sourceId}-corridors`,       { type: 'FeatureCollection', features: corridors });
       set(`${sourceId}-corridors-edges`, { type: 'FeatureCollection', features: buildEdgePolygons(corridors) });
       set(`${sourceId}-rooms`,           { type: 'FeatureCollection', features: rooms });
-      set(`${sourceId}-rooms-edges`,     { type: 'FeatureCollection', features: buildEdgePolygons(rooms) });
+      set(`${sourceId}-rooms-edges`,     { type: 'FeatureCollection', features: buildEdgePolygons([...rooms, ...stairs]) });
       set(`${sourceId}-rooms-labelpts`,  { type: 'FeatureCollection', features: buildLabelPoints(data.rooms.features) });
       set(`${sourceId}-stairs`,          { type: 'FeatureCollection', features: stairs });
       set(`${sourceId}-walls`,           data.walls);
@@ -620,21 +621,26 @@ export function refreshRoomLabels(map: maplibregl.Map, level: number): void {
     const allRooms = BackendService.getLevelDataForBuilding(building, level).rooms.features;
     const prefix = `${building}-floor-${level}`;
 
-    // Update label points source
-    const labelSource = map.getSource(`${prefix}-rooms-labelpts`) as maplibregl.GeoJSONSource | undefined;
-    if (labelSource) {
-      labelSource.setData({ type: 'FeatureCollection', features: buildLabelPoints(allRooms) });
+    const polygonRooms = allRooms.filter(
+      f => f.geometry.type === 'Polygon' || f.geometry.type === 'MultiPolygon'
+    );
+    const rooms: GeoJSON.Feature[] = [];
+    const stairs: GeoJSON.Feature[] = [];
+    for (const f of polygonRooms) {
+      const rt = f.properties?.room_type;
+      if (rt === 'stairs' || rt === 'elevator') stairs.push(f);
+      else rooms.push(f);
     }
 
-    // Update room polygon source (so click queries + colors reflect edits)
-    const roomSource = map.getSource(`${prefix}-rooms`) as maplibregl.GeoJSONSource | undefined;
-    if (roomSource) {
-      const rooms = allRooms.filter(f => {
-        const rt = f.properties.room_type;
-        return rt !== 'stairs' && rt !== 'elevator';
-      });
-      roomSource.setData({ type: 'FeatureCollection', features: rooms });
-    }
+    const setSource = (id: string, fc: GeoJSON.FeatureCollection) => {
+      const src = map.getSource(id) as maplibregl.GeoJSONSource | undefined;
+      if (src) src.setData(fc);
+    };
+
+    setSource(`${prefix}-rooms-labelpts`, { type: 'FeatureCollection', features: buildLabelPoints(allRooms) });
+    setSource(`${prefix}-rooms`,          { type: 'FeatureCollection', features: rooms });
+    setSource(`${prefix}-rooms-edges`,    { type: 'FeatureCollection', features: buildEdgePolygons([...rooms, ...stairs]) });
+    setSource(`${prefix}-stairs`,         { type: 'FeatureCollection', features: stairs });
   }
 }
 
