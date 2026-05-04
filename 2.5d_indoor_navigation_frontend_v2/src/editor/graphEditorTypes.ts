@@ -39,6 +39,9 @@ export interface NavGraph {
 
 export type EditorMode = 'select' | 'add-node' | 'add-edge' | 'label-room' | 'delete';
 
+/** How `Import save` integrates the incoming graph. Video and room edits always merge per-key. */
+export type ImportMode = 'replace' | 'append';
+
 export type RoomType =
   | 'classroom' | 'lab' | 'restroom' | 'office' | 'stairs' | 'elevator'
   | 'dormitory' | 'dining' | 'lounge' | 'facility' | 'storage' | 'store' | 'club' | 'reserved'
@@ -179,7 +182,7 @@ export interface PanelCallbacks {
   onUndo(): void;
   onRedo(): void;
   onExportSave(): void;
-  onImportSave(file: File): void;
+  onImportSave(file: File, mode: ImportMode): void;
   onPublish(): void;
   onClearAll(): void;
   onClearBuildingGraph(building: string): void;

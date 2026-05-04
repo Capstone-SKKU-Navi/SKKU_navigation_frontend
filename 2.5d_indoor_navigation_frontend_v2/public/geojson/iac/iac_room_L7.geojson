@@ -8,9 +8,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85701",
+        "name": "지능형소프트웨어학과",
+        "room_type": "office",
         "_idx": 1,
         "_centroid": [
           126.9752406,
@@ -53,9 +53,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85705",
+        "name": "지능형소프트웨어학과",
+        "room_type": "office",
         "_idx": 2,
         "_centroid": [
           126.9753191,
@@ -100,7 +100,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 3,
         "_centroid": [
           126.975582,
@@ -143,9 +143,9 @@
         "level": [
           7
         ],
-        "ref": "123",
-        "name": "",
-        "room_type": "store",
+        "ref": "85709",
+        "name": "지능형소프트웨어학과",
+        "room_type": "office",
         "_idx": 4,
         "_centroid": [
           126.9754805,
@@ -194,7 +194,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 5,
         "_centroid": [
           126.9756346,
@@ -241,9 +241,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85727",
+        "name": "지능형소프트웨어학과",
+        "room_type": "office",
         "_idx": 6,
         "_centroid": [
           126.9757429,
@@ -288,7 +288,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 7,
         "_centroid": [
           126.9755946,
@@ -337,7 +337,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 8,
         "_centroid": [
           126.9756469,
@@ -380,9 +380,9 @@
         "level": [
           7
         ],
-        "ref": "123",
-        "name": "",
-        "room_type": "store",
+        "ref": "85731",
+        "name": "전자전기공학실험실4",
+        "room_type": "lab",
         "_idx": 9,
         "_centroid": [
           126.9758015,
@@ -429,9 +429,9 @@
         "level": [
           7
         ],
-        "ref": "123",
-        "name": "",
-        "room_type": "store",
+        "ref": "85702",
+        "name": "첨단e+강의실",
+        "room_type": "classroom",
         "_idx": 10,
         "_centroid": [
           126.9752647,
@@ -474,7 +474,7 @@
         "level": [
           7
         ],
-        "ref": "",
+        "ref": "85733",
         "name": "",
         "room_type": "",
         "_idx": 11,
@@ -519,9 +519,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85729",
+        "name": "지능형소프트웨어학과",
+        "room_type": "office",
         "_idx": 12,
         "_centroid": [
           126.9757337,
@@ -564,9 +564,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85712",
+        "name": "첨단e+강의실",
+        "room_type": "classroom",
         "_idx": 13,
         "_centroid": [
           126.9754194,
@@ -609,9 +609,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85718",
+        "name": "첨단e+강의실",
+        "room_type": "classroom",
         "_idx": 14,
         "_centroid": [
           126.9755658,
@@ -658,9 +658,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85743",
+        "name": "세미나실 VI",
+        "room_type": "classroom",
         "_idx": 15,
         "_centroid": [
           126.9758724,
@@ -705,7 +705,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "elevator",
         "_idx": 16,
         "_centroid": [
           126.9757475,
@@ -750,7 +750,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 17,
         "_centroid": [
           126.9757426,
@@ -793,9 +793,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85745",
+        "name": "컴퓨터비전연구실",
+        "room_type": "lab",
         "_idx": 18,
         "_centroid": [
           126.9758631,
@@ -838,9 +838,9 @@
         "level": [
           7
         ],
-        "ref": "21",
+        "ref": "",
         "name": "",
-        "room_type": "storage",
+        "room_type": "restroom",
         "_idx": 19,
         "_centroid": [
           126.9757354,
@@ -883,9 +883,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85745",
+        "name": "컴퓨터비전연구실",
+        "room_type": "lab",
         "_idx": 20,
         "_centroid": [
           126.9758533,
@@ -930,7 +930,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 21,
         "_centroid": [
           126.9757291,
@@ -973,9 +973,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85756",
+        "name": "교수회의실 III",
+        "room_type": "lounge",
         "_idx": 22,
         "_centroid": [
           126.9757245,
@@ -1018,9 +1018,9 @@
         "level": [
           7
         ],
-        "ref": "21",
-        "name": "",
-        "room_type": "storage",
+        "ref": "85745",
+        "name": "컴퓨터비전연구실",
+        "room_type": "lab",
         "_idx": 23,
         "_centroid": [
           126.9758441,
@@ -1063,9 +1063,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85758",
+        "name": "박준은교수실",
+        "room_type": "office",
         "_idx": 24,
         "_centroid": [
           126.9757192,
@@ -1108,9 +1108,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85760",
+        "name": "차세대디스플레이/나노소자연구실",
+        "room_type": "lab",
         "_idx": 25,
         "_centroid": [
           126.9757147,
@@ -1153,9 +1153,9 @@
         "level": [
           7
         ],
-        "ref": "21",
-        "name": "",
-        "room_type": "storage",
+        "ref": "85757",
+        "name": "제어로봇연구실Ⅰ",
+        "room_type": "lab",
         "_idx": 26,
         "_centroid": [
           126.9758348,
@@ -1198,9 +1198,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85762",
+        "name": "이준호교수실",
+        "room_type": "office",
         "_idx": 27,
         "_centroid": [
           126.9757102,
@@ -1243,9 +1243,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85764",
+        "name": "최병덕교수실",
+        "room_type": "office",
         "_idx": 28,
         "_centroid": [
           126.9757054,
@@ -1288,9 +1288,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85761",
+        "name": "제어로봇연구실Ⅱ",
+        "room_type": "lab",
         "_idx": 29,
         "_centroid": [
           126.9758257,
@@ -1333,9 +1333,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85766",
+        "name": "박현진교수실",
+        "room_type": "office",
         "_idx": 30,
         "_centroid": [
           126.9757007,
@@ -1378,9 +1378,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85768",
+        "name": "예비",
+        "room_type": "reserved",
         "_idx": 31,
         "_centroid": [
           126.9756962,
@@ -1423,9 +1423,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85765",
+        "name": "의료영상처리연구실",
+        "room_type": "lab",
         "_idx": 32,
         "_centroid": [
           126.9758167,
@@ -1468,9 +1468,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85770",
+        "name": "국태용교수실",
+        "room_type": "office",
         "_idx": 33,
         "_centroid": [
           126.9756919,
@@ -1513,9 +1513,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85772",
+        "name": "박종구교수실",
+        "room_type": "office",
         "_idx": 34,
         "_centroid": [
           126.9756877,
@@ -1558,9 +1558,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85769",
+        "name": "혼성신호직접회로및시스템연구실1",
+        "room_type": "lab",
         "_idx": 35,
         "_centroid": [
           126.9758076,
@@ -1605,7 +1605,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 36,
         "_centroid": [
           126.9756833,
@@ -1650,7 +1650,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 37,
         "_centroid": [
           126.9758008,
@@ -1693,9 +1693,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85796",
+        "name": "전기화학계면공학연구실",
+        "room_type": "lab",
         "_idx": 38,
         "_centroid": [
           126.9755062,
@@ -1740,7 +1740,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 39,
         "_centroid": [
           126.9756707,
@@ -1793,7 +1793,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 40,
         "_centroid": [
           126.9756304,
@@ -1852,9 +1852,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85792",
+        "name": "김재현교수Lab",
+        "room_type": "lab",
         "_idx": 41,
         "_centroid": [
           126.9755768,
@@ -1903,7 +1903,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 42,
         "_centroid": [
           126.975631,
@@ -1960,7 +1960,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "elevator",
         "_idx": 43,
         "_centroid": [
           126.9756874,
@@ -2003,9 +2003,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85773",
+        "name": "윤진희교수Lab",
+        "room_type": "lab",
         "_idx": 44,
         "_centroid": [
           126.9757927,
@@ -2048,9 +2048,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85797",
+        "name": "유창식교수실",
+        "room_type": "office",
         "_idx": 45,
         "_centroid": [
           126.9754785,
@@ -2093,9 +2093,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85795",
+        "name": "에너지변환나노소재연구실",
+        "room_type": "lab",
         "_idx": 46,
         "_centroid": [
           126.9755127,
@@ -2138,9 +2138,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85793",
+        "name": "에너지프론티어연구소",
+        "room_type": "lab",
         "_idx": 47,
         "_centroid": [
           126.9755471,
@@ -2183,9 +2183,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85791",
+        "name": "김재현교수실",
+        "room_type": "office",
         "_idx": 48,
         "_centroid": [
           126.9755797,
@@ -2228,9 +2228,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85789",
+        "name": "윤진희교수실",
+        "room_type": "office",
         "_idx": 49,
         "_centroid": [
           126.9756125,
@@ -2273,9 +2273,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85787",
+        "name": "에너지환경재료연구실",
+        "room_type": "lab",
         "_idx": 50,
         "_centroid": [
           126.9756461,
@@ -2318,9 +2318,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85785",
+        "name": "에너지프론티어연구소",
+        "room_type": "lab",
         "_idx": 51,
         "_centroid": [
           126.9756794,
@@ -2363,9 +2363,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85777",
+        "name": "강의실(85777)",
+        "room_type": "classroom",
         "_idx": 52,
         "_centroid": [
           126.9757734,
@@ -2412,9 +2412,9 @@
         "level": [
           7
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "85783",
+        "name": "에너지변환나노소재멤리스터측정실",
+        "room_type": "lab",
         "_idx": 53,
         "_centroid": [
           126.9757156,

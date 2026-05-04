@@ -1,7 +1,7 @@
 // ===== Navigation Graph Editor — Main Orchestration =====
 
 import maplibregl from 'maplibre-gl';
-import { EditorMode, NavEdge, EditorSaveFile, RoomAutoApplyPreset, RoomEditEntry, RoomType } from './graphEditorTypes';
+import { EditorMode, NavEdge, EditorSaveFile, ImportMode, RoomAutoApplyPreset, RoomEditEntry, RoomType } from './graphEditorTypes';
 import * as State from './graphEditorState';
 import * as EditorMap from './graphEditorMap';
 import * as Panel from './graphEditorPanel';
@@ -1082,7 +1082,7 @@ function handleExportSave(): void {
   URL.revokeObjectURL(url);
 }
 
-function handleImportSave(file: File): void {
+function handleImportSave(file: File, mode: ImportMode): void {
   const reader = new FileReader();
   reader.onload = () => {
     let parsed: EditorSaveFile;
@@ -1093,9 +1093,13 @@ function handleImportSave(file: File): void {
       return;
     }
     const summary = describeSaveFile(parsed);
+    const graphLine = mode === 'append'
+      ? `Graph (nodes + edges) from the import will be ADDED on top of your current graph. ` +
+        `On the rare chance an incoming node id collides with a local one, the local entry is kept (a warning is logged).`
+      : `Graph (nodes + edges) will be REPLACED — your current graph is discarded.`;
     const ok = window.confirm(
-      `Import "${file.name}"?\n\n${summary}\n\n` +
-      `Graph (nodes + edges) will be REPLACED — your current graph is discarded.\n` +
+      `Import "${file.name}" (${mode.toUpperCase()} mode)?\n\n${summary}\n\n` +
+      `${graphLine}\n` +
       `Video settings and room labels will be MERGED per item (newer entries win; unconfigured rooms in the import are skipped).\n\n` +
       `Press OK to continue, Cancel to abort.`
     );
@@ -1108,7 +1112,7 @@ function handleImportSave(file: File): void {
         restoreRooms: restoreRoomEditsFromSnapshot,
         validateRooms: validateRoomImport,
         applyRoomMerge,
-      });
+      }, mode);
     } catch (err) {
       alert('Import failed: ' + (err as Error).message);
       return;

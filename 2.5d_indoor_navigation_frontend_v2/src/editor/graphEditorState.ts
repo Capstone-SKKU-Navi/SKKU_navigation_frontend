@@ -3,6 +3,7 @@
 import {
   NavNode, NavEdge, NavGraph, EditorState, Command, NavGraphExport,
   EditorSaveFile, RoomEditEntry, EDITOR_SAVE_VERSION, VideoSettingsExport,
+  ImportMode,
 } from './graphEditorTypes';
 import { getDistanceBetweenCoordinatesInM } from '../utils/coordinateHelpers';
 import { DEFAULT_FLOOR_HEIGHT } from '../components/indoorLayer';
@@ -217,14 +218,20 @@ export interface ImportSaveResult {
 }
 
 /**
- * Replace the current graph wholesale, merge video settings per filename, and
- * merge rooms per fingerprint. Pushes a single Command on the undo stack so a
- * single Ctrl+Z reverts the full import.
+ * Integrate a save file:
+ *   - graph: replaced wholesale (`mode='replace'`) OR added on top, keeping local
+ *     entries on id collision (`mode='append'`)
+ *   - video settings: merged per filename (newer `updatedAt` wins)
+ *   - rooms: merged per (building, level, fingerprint), newer `updatedAt` wins
+ *
+ * Pushes a single Command on the undo stack so a single Ctrl+Z reverts the
+ * full import.
  */
 export function importSaveFile(
   state: EditorState,
   data: EditorSaveFile,
   handlers: ImportApplyHandlers,
+  mode: ImportMode = 'replace',
 ): ImportSaveResult {
   if (!data || data.version !== EDITOR_SAVE_VERSION || !data.graph || !data.graph.nodes || !data.graph.edges) {
     throw new Error('invalid save file');
@@ -261,9 +268,17 @@ export function importSaveFile(
     VideoSettings.resumeMutated();
   }
 
-  const newGraph = importGraph(data.graph);
-  const afterNodes = cloneNodeMap(newGraph.nodes);
-  const afterEdges = newGraph.edges.map(e => ({ ...e }));
+  const incomingGraph = importGraph(data.graph);
+  let afterNodes: Record<string, NavNode>;
+  let afterEdges: NavEdge[];
+  if (mode === 'append') {
+    const merged = mergeAppend(beforeNodes, beforeEdges, incomingGraph);
+    afterNodes = merged.nodes;
+    afterEdges = merged.edges;
+  } else {
+    afterNodes = cloneNodeMap(incomingGraph.nodes);
+    afterEdges = incomingGraph.edges.map(e => ({ ...e }));
+  }
 
   const cmd: Command = {
     execute(graph) {
@@ -297,6 +312,56 @@ function cloneNodeMap(src: Record<string, NavNode>): Record<string, NavNode> {
   const out: Record<string, NavNode> = {};
   for (const [id, n] of Object.entries(src)) out[id] = { ...n, coordinates: [n.coordinates[0], n.coordinates[1]] };
   return out;
+}
+
+/**
+ * Append merge for `Import save`. Local entries always win on id collision —
+ * `genNodeId()` uses `Date.now() + random base36`, so cross-collaborator
+ * collisions only happen when two nodes were created within the same ms AND
+ * their 4-char random tails matched (~1/1.68M). The collision is rare enough
+ * that we just skip the incoming entry and warn, rather than remapping ids.
+ *
+ * Edges referencing a node that was skipped (or not present locally) are
+ * dropped — same posture as `importGraph`'s dangling-edge handling.
+ */
+function mergeAppend(
+  beforeNodes: Record<string, NavNode>,
+  beforeEdges: NavEdge[],
+  incoming: NavGraph,
+): { nodes: Record<string, NavNode>; edges: NavEdge[] } {
+  const nodes = cloneNodeMap(beforeNodes);
+  const skippedNodeIds: string[] = [];
+  for (const [id, node] of Object.entries(incoming.nodes)) {
+    if (nodes[id]) {
+      skippedNodeIds.push(id);
+      continue;
+    }
+    nodes[id] = { ...node, coordinates: [node.coordinates[0], node.coordinates[1]] };
+  }
+
+  const existingEdgeIds = new Set(beforeEdges.map(e => e.id));
+  const edges = beforeEdges.map(e => ({ ...e }));
+  const droppedEdges: Array<{ from: string; to: string; reason: string }> = [];
+  for (const e of incoming.edges) {
+    if (!nodes[e.from] || !nodes[e.to]) {
+      droppedEdges.push({ from: e.from, to: e.to, reason: 'endpoint missing' });
+      continue;
+    }
+    if (existingEdgeIds.has(e.id)) {
+      droppedEdges.push({ from: e.from, to: e.to, reason: 'duplicate edge id' });
+      continue;
+    }
+    existingEdgeIds.add(e.id);
+    edges.push({ ...e });
+  }
+
+  if (skippedNodeIds.length > 0) {
+    console.warn(`[GraphEditor] append import: ${skippedNodeIds.length} incoming node(s) collided with local ids and were skipped:`, skippedNodeIds);
+  }
+  if (droppedEdges.length > 0) {
+    console.warn(`[GraphEditor] append import: ${droppedEdges.length} incoming edge(s) dropped:`, droppedEdges);
+  }
+  return { nodes, edges };
 }
 
 export function exportSaveData(state: EditorState): EditorSaveFile {

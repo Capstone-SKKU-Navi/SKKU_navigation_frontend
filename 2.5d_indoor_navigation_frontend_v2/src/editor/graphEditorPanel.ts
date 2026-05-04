@@ -65,6 +65,14 @@ export function createPanel(cb: PanelCallbacks): HTMLElement {
           <button class="ge-action-btn ge-danger-btn" id="geClearBuildingRooms" title="이 건물의 방 ref/name/type 초기화">Clear Rooms</button>
         </div>
         <p class="ge-hint">Clear N+E는 Undo로 복구 가능. Clear Rooms는 즉시 저장됩니다 (yaw 미영향).</p>
+        <div class="ge-prop-row" style="justify-content:space-between;margin-top:8px;">
+          <label for="geImportAppend">Import: append (현재 그래프 유지)</label>
+          <label class="ge-toggle-switch">
+            <input type="checkbox" id="geImportAppend" />
+            <span class="ge-toggle-slider"></span>
+          </label>
+        </div>
+        <p class="ge-hint">체크 시, Import save가 기존 노드/엣지를 지우지 않고 위에 추가합니다.</p>
       </div>
 
       <div class="ge-section" id="geAddNodeOpts" style="display:none">
@@ -953,14 +961,17 @@ function wireEvents(): void {
   document.getElementById('geUndo')?.addEventListener('click', () => callbacks?.onUndo());
   document.getElementById('geRedo')?.addEventListener('click', () => callbacks?.onRedo());
 
-  // Import save (opens file picker; handler receives the File)
+  // Import save (opens file picker; handler receives the File and the chosen
+  // mode from the Append toggle in the delete-mode tab)
   document.getElementById('geImportSave')?.addEventListener('click', () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.json,application/json';
     input.addEventListener('change', () => {
       const file = input.files?.[0];
-      if (file) callbacks?.onImportSave(file);
+      if (!file) return;
+      const append = (document.getElementById('geImportAppend') as HTMLInputElement | null)?.checked === true;
+      callbacks?.onImportSave(file, append ? 'append' : 'replace');
     });
     input.click();
   });

@@ -5,10 +5,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27515",
+        "name": "일반강의실",
+        "room_type": "classroom",
         "_idx": 1,
         "_centroid": [
           126.9763133,
@@ -48,10 +50,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27511",
+        "name": "SSIT 강의실",
+        "room_type": "classroom",
         "_idx": 2,
         "_centroid": [
           126.9764694,
@@ -111,7 +115,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -154,7 +160,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -163,7 +171,7 @@
           126.9766508,
           37.2955456
         ],
-        "_area_m2": 58.0
+        "_area_m2": 58
       },
       "geometry": {
         "type": "Polygon",
@@ -197,10 +205,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27507D",
+        "name": "창업-회의실",
+        "room_type": "lounge",
         "_idx": 5,
         "_centroid": [
           126.97672,
@@ -240,8 +250,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
+        "level": [
+          5
+        ],
+        "ref": "27507C",
         "name": "",
         "room_type": "",
         "_idx": 6,
@@ -283,16 +295,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
+        "level": [
+          5
+        ],
+        "ref": "27507B",
+        "name": "창업-㈜나노엠",
         "room_type": "",
         "_idx": 7,
         "_centroid": [
           126.9768234,
           37.295527
         ],
-        "_area_m2": 54.0
+        "_area_m2": 54
       },
       "geometry": {
         "type": "Polygon",
@@ -326,9 +340,11 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
+        "level": [
+          5
+        ],
+        "ref": "27507A",
+        "name": "비드오리진(주)",
         "room_type": "",
         "_idx": 8,
         "_centroid": [
@@ -369,10 +385,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27517",
+        "name": "일반강의실",
+        "room_type": "classroom",
         "_idx": 9,
         "_centroid": [
           126.9763075,
@@ -416,9 +434,11 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
+        "level": [
+          5
+        ],
+        "ref": "27505B",
+        "name": "창업-(주)엔돌핀코스메틱",
         "room_type": "",
         "_idx": 10,
         "_centroid": [
@@ -459,9 +479,11 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
+        "level": [
+          5
+        ],
+        "ref": "27505A",
+        "name": "창업-(주)엔돌핀코스메틱",
         "room_type": "",
         "_idx": 11,
         "_centroid": [
@@ -502,10 +524,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27503B",
+        "name": "지능공정시스템연구실",
+        "room_type": "lab",
         "_idx": 12,
         "_centroid": [
           126.9770656,
@@ -545,10 +569,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27503A",
+        "name": "경입자충돌물리실험실",
+        "room_type": "lab",
         "_idx": 13,
         "_centroid": [
           126.9771186,
@@ -588,8 +614,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
+        "level": [
+          5
+        ],
+        "ref": "27501A",
         "name": "",
         "room_type": "",
         "_idx": 14,
@@ -635,10 +663,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27528",
+        "name": "스마트팩토리융합학과행정실스마트팩토리UNIC센터",
+        "room_type": "lab",
         "_idx": 15,
         "_centroid": [
           126.9764911,
@@ -694,10 +724,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27526A",
+        "name": "김경환교수실",
+        "room_type": "office",
         "_idx": 16,
         "_centroid": [
           126.9765818,
@@ -737,7 +769,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -780,10 +814,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27526B",
+        "name": "정종필교수실",
+        "room_type": "office",
         "_idx": 18,
         "_centroid": [
           126.9766161,
@@ -823,7 +859,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -870,10 +908,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27530",
+        "name": "프레시맨강의실",
+        "room_type": "classroom",
         "_idx": 20,
         "_centroid": [
           126.9764228,
@@ -913,8 +953,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
+        "level": [
+          5
+        ],
+        "ref": "27524",
         "name": "",
         "room_type": "",
         "_idx": 21,
@@ -956,10 +998,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27522",
+        "name": "연성재료 하이브리드 실험실",
+        "room_type": "lab",
         "_idx": 22,
         "_centroid": [
           126.9767196,
@@ -999,10 +1043,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27518",
+        "name": "연성재료하이브리드 실험실",
+        "room_type": "lab",
         "_idx": 23,
         "_centroid": [
           126.9767885,
@@ -1042,10 +1088,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27516",
+        "name": "BK연구교수실",
+        "room_type": "office",
         "_idx": 24,
         "_centroid": [
           126.9768568,
@@ -1085,7 +1133,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1156,10 +1206,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27519A",
+        "name": "예비",
+        "room_type": "reserved",
         "_idx": 26,
         "_centroid": [
           126.9762813,
@@ -1199,7 +1251,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1242,10 +1296,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27514",
+        "name": "대학원생 연구실",
+        "room_type": "lab",
         "_idx": 28,
         "_centroid": [
           126.9769607,
@@ -1285,10 +1341,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27512",
+        "name": "대학원생연구실",
+        "room_type": "lab",
         "_idx": 29,
         "_centroid": [
           126.9769956,
@@ -1328,10 +1386,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27510",
+        "name": "교강사휴게실",
+        "room_type": "lounge",
         "_idx": 30,
         "_centroid": [
           126.9770474,
@@ -1371,10 +1431,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27508B",
+        "name": "이명재교수실",
+        "room_type": "office",
         "_idx": 31,
         "_centroid": [
           126.9770997,
@@ -1414,10 +1476,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27508A",
+        "name": "경입자 충돌 물리 연구실",
+        "room_type": "lab",
         "_idx": 32,
         "_centroid": [
           126.9771346,
@@ -1457,10 +1521,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27506",
+        "name": "신소재공학부 산학교수실",
+        "room_type": "office",
         "_idx": 33,
         "_centroid": [
           126.9771689,
@@ -1500,10 +1566,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27504",
+        "name": "연안환경관리센터",
+        "room_type": "lab",
         "_idx": 34,
         "_centroid": [
           126.9772042,
@@ -1543,7 +1611,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1598,10 +1668,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27502",
+        "name": "창업보육실",
+        "room_type": "lab",
         "_idx": 36,
         "_centroid": [
           126.9772684,
@@ -1645,10 +1717,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27532",
+        "name": "SSIT 강의실",
+        "room_type": "classroom",
         "_idx": 37,
         "_centroid": [
           126.976409,
@@ -1688,7 +1762,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1735,10 +1811,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "27519B",
+        "name": "스마트팩토리융합연구실",
+        "room_type": "lab",
         "_idx": 39,
         "_centroid": [
           126.9762674,
@@ -1778,10 +1856,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26515",
+        "name": "첨단e+강의실",
+        "room_type": "classroom",
         "_idx": 40,
         "_centroid": [
           126.977544,
@@ -1825,8 +1905,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
+        "level": [
+          5
+        ],
+        "ref": "27521",
         "name": "",
         "room_type": "",
         "_idx": 41,
@@ -1868,10 +1950,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26514",
+        "name": "세미나실",
+        "room_type": "classroom",
         "_idx": 42,
         "_centroid": [
           126.9774037,
@@ -1911,7 +1995,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1958,10 +2044,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26512",
+        "name": "기술경영강의실",
+        "room_type": "classroom",
         "_idx": 44,
         "_centroid": [
           126.9773885,
@@ -2001,10 +2089,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26513",
+        "name": "첨단강의실",
+        "room_type": "classroom",
         "_idx": 45,
         "_centroid": [
           126.9775263,
@@ -2044,10 +2134,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26510",
+        "name": "SME Meeting Room",
+        "room_type": "lab",
         "_idx": 46,
         "_centroid": [
           126.9773707,
@@ -2087,10 +2179,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26511",
+        "name": "산업공학과스마트공장트랙, 신성-성균관대 산업AI 솔루션 연구센터",
+        "room_type": "lab",
         "_idx": 47,
         "_centroid": [
           126.9775086,
@@ -2130,7 +2224,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -2173,8 +2269,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
+        "level": [
+          5
+        ],
+        "ref": "26516",
         "name": "",
         "room_type": "",
         "_idx": 49,
@@ -2216,10 +2314,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26508",
+        "name": "일반강의실",
+        "room_type": "classroom",
         "_idx": 50,
         "_centroid": [
           126.977343,
@@ -2259,10 +2359,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26509",
+        "name": "일반강의실",
+        "room_type": "classroom",
         "_idx": 51,
         "_centroid": [
           126.9774813,
@@ -2302,10 +2404,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26506",
+        "name": "일반강의실",
+        "room_type": "classroom",
         "_idx": 52,
         "_centroid": [
           126.977328,
@@ -2345,10 +2449,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26507",
+        "name": "첨단e+강의실",
+        "room_type": "classroom",
         "_idx": 53,
         "_centroid": [
           126.9774665,
@@ -2388,10 +2494,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26504",
+        "name": "일반강의실",
+        "room_type": "classroom",
         "_idx": 54,
         "_centroid": [
           126.977313,
@@ -2431,10 +2539,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25502",
+        "name": "고분자기술연구소가공실험실",
+        "room_type": "lab",
         "_idx": 55,
         "_centroid": [
           126.9762505,
@@ -2474,10 +2584,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26505",
+        "name": "첨단e+강의실",
+        "room_type": "classroom",
         "_idx": 56,
         "_centroid": [
           126.9774516,
@@ -2517,10 +2629,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25504",
+        "name": "나노융합복합소재실험실",
+        "room_type": "lab",
         "_idx": 57,
         "_centroid": [
           126.9763192,
@@ -2560,10 +2674,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25506",
+        "name": "에너지나노재료소자연구실",
+        "room_type": "lab",
         "_idx": 58,
         "_centroid": [
           126.9763859,
@@ -2603,10 +2719,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25508",
+        "name": "분자광전자연구실",
+        "room_type": "lab",
         "_idx": 59,
         "_centroid": [
           126.9764539,
@@ -2646,10 +2764,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25510",
+        "name": "바이오표면공학연구실",
+        "room_type": "lab",
         "_idx": 60,
         "_centroid": [
           126.9765222,
@@ -2689,10 +2809,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25512",
+        "name": "예비",
+        "room_type": "reserved",
         "_idx": 61,
         "_centroid": [
           126.976589,
@@ -2732,7 +2854,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -2741,7 +2865,7 @@
           126.9766568,
           37.2947515
         ],
-        "_area_m2": 57.0
+        "_area_m2": 57
       },
       "geometry": {
         "type": "Polygon",
@@ -2775,7 +2899,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -2818,10 +2944,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26503B",
+        "name": "고분자공학과대학원연구실",
+        "room_type": "lab",
         "_idx": 64,
         "_centroid": [
           126.9774415,
@@ -2861,10 +2989,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25414",
+        "name": "유기전자재료연구실",
+        "room_type": "lab",
         "_idx": 65,
         "_centroid": [
           126.9767934,
@@ -2904,10 +3034,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26502",
+        "name": "일반강의실",
+        "room_type": "classroom",
         "_idx": 66,
         "_centroid": [
           126.9772979,
@@ -2947,16 +3079,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25518A",
+        "name": "고분자재료실험실",
+        "room_type": "lab",
         "_idx": 67,
         "_centroid": [
           126.9768948,
           37.2947229
         ],
-        "_area_m2": 112.0
+        "_area_m2": 112
       },
       "geometry": {
         "type": "Polygon",
@@ -2990,10 +3124,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25518B",
+        "name": "가공기기실",
+        "room_type": "lab",
         "_idx": 68,
         "_centroid": [
           126.9769983,
@@ -3033,7 +3169,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -3076,10 +3214,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25520",
+        "name": "생체의료용고분자실험실",
+        "room_type": "lab",
         "_idx": 70,
         "_centroid": [
           126.9770671,
@@ -3119,16 +3259,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26503A",
+        "name": "바이오표면공학연구실",
+        "room_type": "lab",
         "_idx": 71,
         "_centroid": [
           126.977434,
           37.2947011
         ],
-        "_area_m2": 54.0
+        "_area_m2": 54
       },
       "geometry": {
         "type": "Polygon",
@@ -3162,10 +3304,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25501",
+        "name": "고분자기술연구소전임연구원실",
+        "room_type": "lab",
         "_idx": 72,
         "_centroid": [
           126.9762846,
@@ -3205,10 +3349,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25503",
+        "name": "서종환교수실",
+        "room_type": "office",
         "_idx": 73,
         "_centroid": [
           126.9763183,
@@ -3248,10 +3394,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25505A",
+        "name": "김정규교수실",
+        "room_type": "office",
         "_idx": 74,
         "_centroid": [
           126.9763524,
@@ -3291,10 +3439,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25522",
+        "name": "고분자재료연구실",
+        "room_type": "lab",
         "_idx": 75,
         "_centroid": [
           126.9771489,
@@ -3342,16 +3492,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25505B",
+        "name": "에너지나노재료소자연구실",
+        "room_type": "lab",
         "_idx": 76,
         "_centroid": [
           126.976386,
           37.294687
         ],
-        "_area_m2": 18.0
+        "_area_m2": 18
       },
       "geometry": {
         "type": "Polygon",
@@ -3385,10 +3537,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25507",
+        "name": "김동환교수실",
+        "room_type": "office",
         "_idx": 77,
         "_centroid": [
           126.9764195,
@@ -3428,10 +3582,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25509",
+        "name": "조새벽교수실",
+        "room_type": "office",
         "_idx": 78,
         "_centroid": [
           126.9764535,
@@ -3471,8 +3627,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
+        "level": [
+          5
+        ],
+        "ref": "25511A",
         "name": "",
         "room_type": "",
         "_idx": 79,
@@ -3480,7 +3638,7 @@
           126.9764878,
           37.2946745
         ],
-        "_area_m2": 19.0
+        "_area_m2": 19
       },
       "geometry": {
         "type": "Polygon",
@@ -3514,8 +3672,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
+        "level": [
+          5
+        ],
+        "ref": "25511B",
         "name": "",
         "room_type": "",
         "_idx": 80,
@@ -3557,7 +3717,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -3608,10 +3770,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25513",
+        "name": "조수연교수실",
+        "room_type": "office",
         "_idx": 82,
         "_centroid": [
           126.9765555,
@@ -3651,10 +3815,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25515",
+        "name": "고분자기술연구소",
+        "room_type": "lab",
         "_idx": 83,
         "_centroid": [
           126.9766059,
@@ -3694,10 +3860,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25517",
+        "name": "교수회의실",
+        "room_type": "lounge",
         "_idx": 84,
         "_centroid": [
           126.9766562,
@@ -3737,7 +3905,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -3780,10 +3950,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25519",
+        "name": "남재도교수실",
+        "room_type": "office",
         "_idx": 86,
         "_centroid": [
           126.9767584,
@@ -3823,10 +3995,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25521",
+        "name": "친환경에너지복합재료연구실",
+        "room_type": "lab",
         "_idx": 87,
         "_centroid": [
           126.9767918,
@@ -3866,10 +4040,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25523",
+        "name": "정동준교수실",
+        "room_type": "office",
         "_idx": 88,
         "_centroid": [
           126.9768255,
@@ -3909,10 +4085,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25525",
+        "name": "비품보관실",
+        "room_type": "storage",
         "_idx": 89,
         "_centroid": [
           126.9768601,
@@ -3952,10 +4130,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25527",
+        "name": "배진영교수실",
+        "room_type": "office",
         "_idx": 90,
         "_centroid": [
           126.9768938,
@@ -3995,10 +4175,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25529",
+        "name": "BT강소기업상생지원센터행정실1",
+        "room_type": "office",
         "_idx": 91,
         "_centroid": [
           126.9769278,
@@ -4038,10 +4220,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25531",
+        "name": "나노메디슨중개의학연구소",
+        "room_type": "lab",
         "_idx": 92,
         "_centroid": [
           126.9769631,
@@ -4081,10 +4265,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25533",
+        "name": "고분자공학과세미나실",
+        "room_type": "classroom",
         "_idx": 93,
         "_centroid": [
           126.9770324,
@@ -4124,10 +4310,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "26501B",
+        "name": "화학공학실험실",
+        "room_type": "lab",
         "_idx": 94,
         "_centroid": [
           126.97739,
@@ -4187,10 +4375,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25535A",
+        "name": "양우석교수실",
+        "room_type": "office",
         "_idx": 95,
         "_centroid": [
           126.9771014,
@@ -4230,10 +4420,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "25535B",
+        "name": "세포배양실",
+        "room_type": "lab",
         "_idx": 96,
         "_centroid": [
           126.9771393,
@@ -4277,7 +4469,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -4336,7 +4530,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
