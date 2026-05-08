@@ -21,6 +21,7 @@ export const MOBILE_IDS = {
   actCenter: 'mActCenter',
   act3D: 'mAct3D',
   actClear: 'mActClear',
+  toast: 'mToast',
 } as const;
 
 export function buildMobileChrome(): void {
@@ -38,8 +39,23 @@ export function buildMobileChrome(): void {
   root.appendChild(buildRadial());
   root.appendChild(buildSearchModal());
   root.appendChild(buildSheet());
+  root.appendChild(buildToast());
 
   document.body.appendChild(root);
+}
+
+function buildToast(): HTMLElement {
+  const toast = document.createElement('div');
+  toast.id = MOBILE_IDS.toast;
+  toast.className = 'm-toast';
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
+  toast.setAttribute('data-visible', 'false');
+  toast.innerHTML = `
+    <span class="material-icons m-toast-icon">error_outline</span>
+    <span class="m-toast-text"></span>
+  `;
+  return toast;
 }
 
 function buildSearchPill(): HTMLElement {

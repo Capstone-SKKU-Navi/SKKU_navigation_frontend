@@ -6,7 +6,8 @@ import * as GeoMap from './components/geoMap';
 import * as IndoorLayer from './components/indoorLayer';
 import * as RouteOverlay from './components/routeOverlay';
 import * as RoutePinMarkers from './components/routePinMarkers';
-import { initRouting, searchRooms as apiSearchRooms } from './services/apiClient';
+import { initRouting, searchRooms as apiSearchRooms, setUseApi, isApiMode } from './services/apiClient';
+import { getApiBase } from './config/apiConfig';
 import { ROOM_TYPE_LABELS, RoomListItem } from './models/types';
 import * as VideoSettings from './editor/videoSettings';
 import * as WalkthroughOverlay from './components/walkthroughOverlay';
@@ -49,7 +50,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       setupBuildingInfo();
       setupCenterButton();
       setup3DToggle();
-      if (!IS_PROD_BUILD) {
+      if (!IS_PROD_BUILD && !mobile) {
+        // API mode toggle is dev-only and PC-only. Mobile devices can't reach
+        // localhost:8080 anyway, so the badge is hidden and API mode is forced
+        // unconditionally below.
         setupFpsCounter();
         setupApiModeBadge();
       }
@@ -66,6 +70,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         // internal projection stays stale, so pan/zoom doesn't match where
         // overlays (route, markers, indoor layers) are drawn.
         requestAnimationFrame(() => GeoMap.getMap()?.resize());
+        // Mobile clients can't reach `localhost:8080` directly; force API mode
+        // so routing and geojson load from the deployed backend instead of
+        // the local-only fallback. Best-effort — failure leaves the local
+        // snapshot in place so the UI is still navigable.
+        forceApiModeForMobile().catch(err => {
+          console.warn('[Mobile] forceApiMode failed:', err);
+        });
       } else {
         // PC chrome
         setupFloorWheel();
@@ -99,6 +110,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     showError(err?.message ?? '데이터를 불러올 수 없습니다.');
   }
 });
+
+// Mirrors the API-direction half of apiModeBadge.onToggleClick: switch the
+// router to API mode, refresh BackendService from /api/geojson/all, and
+// rebuild the map sources. Idempotent.
+async function forceApiModeForMobile(): Promise<void> {
+  if (isApiMode()) return;
+  setUseApi(true);
+  await initRouting();
+  await BackendService.fetchBackendDataFromApi(getApiBase());
+  const map = GeoMap.getMap();
+  if (map) IndoorLayer.refreshAll(map);
+}
 
 // ===== Loading =====
 function hideLoading(): void {
@@ -182,7 +205,64 @@ function setupFloorWheel(): void {
         updateFloorWheelActive(newLevel);
       }
     }, { passive: false });
+
+    // Drag (pointer) to advance floors. Items are ~46px tall in the PC wheel
+    // (40px + 6px gap), so each ~46px of vertical travel = one floor step.
+    setupFloorWheelDrag(wheel, levels);
   }
+}
+
+function setupFloorWheelDrag(wheel: HTMLElement, levels: number[]): void {
+  const STEP = 46;
+  let activeId: number | null = null;
+  let startY = 0;
+  let startIdx = 0;
+  let moved = false;
+  let lastTargetIdx = -1;
+
+  wheel.addEventListener('pointerdown', (e) => {
+    // Don't hijack clicks on the floor item buttons unless the user actually drags.
+    if (activeId !== null) return;
+    activeId = e.pointerId;
+    startY = e.clientY;
+    startIdx = levels.indexOf(GeoMap.getCurrentLevel());
+    lastTargetIdx = startIdx;
+    moved = false;
+  });
+
+  wheel.addEventListener('pointermove', (e) => {
+    if (e.pointerId !== activeId) return;
+    const dy = e.clientY - startY;
+    if (!moved && Math.abs(dy) > 6) {
+      moved = true;
+      try { wheel.setPointerCapture(e.pointerId); } catch { /* noop */ }
+    }
+    if (!moved) return;
+    // Drag DOWN → rotate wheel forward → higher floor (smaller idx in the
+    // descending levels array). Subtract the step.
+    const targetIdx = Math.max(0, Math.min(levels.length - 1, startIdx - Math.round(dy / STEP)));
+    if (targetIdx !== lastTargetIdx) {
+      lastTargetIdx = targetIdx;
+      const newLevel = levels[targetIdx];
+      if (newLevel !== GeoMap.getCurrentLevel()) {
+        GeoMap.handleLevelChange(newLevel);
+        updateFloorWheelActive(newLevel);
+      }
+    }
+  });
+
+  const release = (e: PointerEvent) => {
+    if (e.pointerId !== activeId) return;
+    activeId = null;
+    if (moved) {
+      // Suppress the synthetic click that would otherwise fire on the
+      // floor item under the pointer when the drag ends.
+      const stop = (ev: Event) => { ev.stopPropagation(); ev.preventDefault(); };
+      wheel.addEventListener('click', stop, { capture: true, once: true });
+    }
+  };
+  wheel.addEventListener('pointerup', release);
+  wheel.addEventListener('pointercancel', release);
 }
 
 function updateFloorWheelActive(activeLevel: number): void {

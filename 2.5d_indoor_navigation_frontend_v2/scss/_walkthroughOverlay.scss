@@ -106,6 +106,42 @@
   }
 }
 
+// ===== Tap-toggle play/pause indicator =====
+// Briefly pops up at the center of the canvas when the user taps to
+// toggle play/pause. Idle state is invisible (opacity 0); the
+// `--show` modifier triggers a 600ms pop animation.
+.walkthrough-tap-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 5;
+  transform: translate(-50%, -50%) scale(0.7);
+
+  .material-icons {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 40px;
+  }
+
+  &--show {
+    animation: walkthrough-tap-pop 600ms ease-out forwards;
+  }
+}
+
+@keyframes walkthrough-tap-pop {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+  20%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); }
+}
+
 // ===== Controls bar =====
 .walkthrough-controls {
   display: flex;

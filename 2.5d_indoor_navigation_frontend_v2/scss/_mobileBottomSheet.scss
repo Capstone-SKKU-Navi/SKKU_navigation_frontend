@@ -115,9 +115,34 @@ body[data-device="mobile"] #mSheet {
       -webkit-overflow-scrolling: touch;
     }
 
-    // Hide speed selector on mobile (rare need, clutters compact bar)
+    // Speed selector — restyled as a compact pill matching the follow toggle
     .walkthrough-speed-select {
-      display: none;
+      flex-shrink: 0;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 6px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    // Progress bar — enlarge touch target so taps near (but not exactly on)
+    // the 6px track still register. The negative margin keeps the visual
+    // height of the controls bar unchanged while the padded hit area
+    // extends 10px above and below the track.
+    .walkthrough-progress {
+      padding: 10px 0;
+      margin: -10px 0;
+    }
+    .walkthrough-progress-track {
+      height: 8px;
+      touch-action: none;
+    }
+    .walkthrough-progress-thumb {
+      width: 16px;
+      height: 16px;
+      top: -4px;
     }
 
     // Restyle follow toggle as a compact button in the controls bar.

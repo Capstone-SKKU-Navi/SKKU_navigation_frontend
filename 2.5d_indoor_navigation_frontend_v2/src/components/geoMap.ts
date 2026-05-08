@@ -83,6 +83,9 @@ export function initMap(): void {
   // Middle-click (wheel button) drag to pan
   setupMiddleClickPan(map);
 
+  // Relax MapLibre's two-finger pitch detection — see fn doc.
+  relaxTouchPitch(map);
+
   initRoomInfoPopup();
 
   map.on('load', () => {
@@ -216,6 +219,19 @@ export function setIndoorFocusPin(buildings: Iterable<string>): void {
 export function clearIndoorFocusPin(): void {
   if (!map) return;
   IndoorLayer.clearPinnedFocus(map);
+}
+
+/** Tell the indoor layer which floors the active route covers, so upper-floor
+ *  route segments aren't hidden behind filtered-out floors in 3D. */
+export function setIndoorRouteLevels(levels: Iterable<number>): void {
+  if (!map) return;
+  IndoorLayer.setRouteLevels(map, levels);
+}
+
+/** Clear the route-levels override (paired with route clear). */
+export function clearIndoorRouteLevels(): void {
+  if (!map) return;
+  IndoorLayer.clearRouteLevels(map);
 }
 
 function setupRoomClick(): void {
@@ -364,4 +380,46 @@ function setupMiddleClickPan(m: maplibregl.Map): void {
   canvas.addEventListener('auxclick', (e) => {
     if (e.button === 1) e.preventDefault();
   });
+}
+
+// MapLibre's TwoFingersTouchPitchHandler has two over-strict rules that make
+// the pitch gesture flaky on touch:
+//   1. _start sets _valid=false the moment fingers are stacked vertically.
+//   2. gestureBeginsVertically requires BOTH finger vectors to be individually
+//      vertical-dominant — natural hand jitter on either finger disqualifies
+//      the gesture forever (since _valid is one-shot).
+// Override those checks on the handler instance so the gesture commits when
+// the average motion is vertical-dominant and both fingers move the same way.
+// We leave the rest (handler-manager wiring, zoom/rotate handlers) alone, so
+// pinch and twist gestures continue to work as before.
+function relaxTouchPitch(m: maplibregl.Map): void {
+  const handler = (m as any).touchPitch;
+  if (!handler) return;
+
+  handler._start = function (points: any) {
+    this._lastPoints = points;
+  };
+
+  handler.gestureBeginsVertically = function (vectorA: any, vectorB: any, timeStamp: number) {
+    if (this._valid !== undefined) return this._valid;
+
+    const threshold = 2;
+    const movedA = vectorA.mag() >= threshold;
+    const movedB = vectorB.mag() >= threshold;
+    if (!movedA && !movedB) return undefined;
+
+    if (!movedA || !movedB) {
+      if (this._firstMove === undefined) this._firstMove = timeStamp;
+      if (timeStamp - this._firstMove < 100) return undefined;
+      const v = movedA ? vectorA : vectorB;
+      return Math.abs(v.y) > Math.abs(v.x);
+    }
+
+    const sameDirection = (vectorA.y > 0) === (vectorB.y > 0);
+    if (!sameDirection) return false;
+
+    const sumX = vectorA.x + vectorB.x;
+    const sumY = vectorA.y + vectorB.y;
+    return Math.abs(sumY) > Math.abs(sumX);
+  };
 }

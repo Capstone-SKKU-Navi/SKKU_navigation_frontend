@@ -15,6 +15,7 @@ import { initFloorWheel } from './mobileFloorWheel';
 import { initSearchModal } from './searchModal';
 import { initWalkthroughSheet } from './walkthroughSheet';
 import { initMobileActions } from './mobileActions';
+import { initMobileToast } from './mobileToast';
 
 export function setupMobileChrome(): void {
   buildMobileChrome();
@@ -28,6 +29,7 @@ export function setupMobileChrome(): void {
   initFloorWheel();
   initSearchModal();
   initMobileActions();
+  initMobileToast();
 
   // Phase 4: walkthrough bottom sheet
   initWalkthroughSheet();

@@ -42,4 +42,20 @@ declare module '@deck.gl/core' {
   export class Deck {
     constructor(props: any);
   }
+
+  export class WebMercatorViewport {
+    constructor(props: {
+      longitude?: number;
+      latitude?: number;
+      zoom?: number;
+      pitch?: number;
+      bearing?: number;
+      width?: number;
+      height?: number;
+      altitude?: number;
+      fovy?: number;
+    });
+    project(xyz: number[], opts?: { topLeft?: boolean }): number[];
+    unproject(xyz: number[], opts?: { topLeft?: boolean; targetZ?: number }): number[];
+  }
 }

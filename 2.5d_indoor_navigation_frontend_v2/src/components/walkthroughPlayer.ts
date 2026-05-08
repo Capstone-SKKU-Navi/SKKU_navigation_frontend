@@ -1,6 +1,7 @@
 // ===== Walkthrough Player — Three.js 360° Segment-Based Playback Engine =====
-// Double-buffered: activeVideo plays, standbyVideo preloads the next segment.
-// Segment transition = instant texture swap. No gap.
+// LRU pool (N=4 desktop / N=2 mobile): persistent VideoTexture per slot.
+// Cross-segment swap = material.map reassignment (no dispose/recreate → no flicker).
+// Cold loads go onto a standby slot first, then swap when ready (active keeps last frame).
 
 import * as THREE from 'three';
 import type { WalkthroughPlaylist } from './walkthroughTypes';
@@ -23,8 +24,22 @@ export interface WalkthroughPlayerInstance {
   setPlaybackRate(rate: number): void;
   getPlaybackRate(): number;
   resize(width: number, height: number): void;
+  /** Hint that segment `segIdx` may be visited soon — load it into a free pool slot. */
+  preloadSegment(segIdx: number): void;
   destroy(): void;
 }
+
+interface PoolSlot {
+  video: HTMLVideoElement;
+  texture: THREE.VideoTexture;
+  segIdx: number;        // -1 = empty
+  ready: boolean;        // loadeddata + seeked complete
+  lastUsedTs: number;    // for LRU
+  loadToken: number;     // monotonic guard against stale callbacks
+}
+
+const IS_MOBILE = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+const POOL_SIZE = IS_MOBILE ? 2 : 4;
 
 export function createWalkthroughPlayer(
   container: HTMLElement,
@@ -45,11 +60,10 @@ export function createWalkthroughPlayer(
 
   // Seek-based fast-forward for rates > 2x.
   // Native playbackRate causes decoder stalls at high speeds (H.264 inter-frame deps).
-  // Instead: pause video, advance currentTime in steps, let decoder handle one frame at a time.
   const SEEK_THRESHOLD = 2;
   let seekMode = false;
-  let seekBaseReal = 0;    // performance.now() when seek mode started
-  let seekBaseVideo = 0;   // video time when seek mode started
+  let seekBaseReal = 0;
+  let seekBaseVideo = 0;
 
   // ===== Error overlay =====
   const errorOverlay = document.createElement('div');
@@ -70,42 +84,6 @@ export function createWalkthroughPlayer(
     errorOverlay.style.display = 'none';
   }
 
-  // ===== Double-buffered video elements =====
-  const videoA = createVideoElement();
-  const videoB = createVideoElement();
-  let activeVideo = videoA;
-  let standbyVideo = videoB;
-  let standbyReady = false;
-  let standbySegIdx = -1;
-
-  function onVideoError(this: HTMLVideoElement): void {
-    if (destroyed || this !== activeVideo) return;
-    showError('Video not found');
-    if (currentSegmentIdx < segments.length - 1) {
-      advanceToNextSegment();
-    } else {
-      playing = false;
-      callbacks.onEnd();
-    }
-  }
-
-  function onVideoEnded(this: HTMLVideoElement): void {
-    if (destroyed || !playing || loadingSegment || this !== activeVideo) return;
-    console.log(`[Walkthrough] video ended naturally at ${this.currentTime.toFixed(2)}, duration=${this.duration.toFixed(2)}`);
-    advanceToNextSegment();
-  }
-
-  function onVideoLoaded(this: HTMLVideoElement): void {
-    if (this === activeVideo) hideError();
-  }
-
-  videoA.addEventListener('error', onVideoError);
-  videoB.addEventListener('error', onVideoError);
-  videoA.addEventListener('ended', onVideoEnded);
-  videoB.addEventListener('ended', onVideoEnded);
-  videoA.addEventListener('loadeddata', onVideoLoaded);
-  videoB.addEventListener('loadeddata', onVideoLoaded);
-
   // ===== Three.js scene =====
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
@@ -120,11 +98,57 @@ export function createWalkthroughPlayer(
   const geometry = new THREE.SphereGeometry(500, 60, 40);
   geometry.scale(-1, 1, 1);
 
-  let texture = new THREE.VideoTexture(activeVideo);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  const material = new THREE.MeshBasicMaterial({ map: texture });
+  // ===== Pool of video elements + persistent VideoTextures =====
+  const pool: PoolSlot[] = [];
+  for (let i = 0; i < POOL_SIZE; i++) {
+    const v = createVideoElement();
+    const t = new THREE.VideoTexture(v);
+    t.colorSpace = THREE.SRGBColorSpace;
+    v.addEventListener('error', onVideoErrorPool);
+    v.addEventListener('ended', onVideoEndedPool);
+    v.addEventListener('loadeddata', onVideoLoadedPool);
+    pool.push({ video: v, texture: t, segIdx: -1, ready: false, lastUsedTs: 0, loadToken: 0 });
+  }
+  let activeSlot: PoolSlot = pool[0];
+
+  const material = new THREE.MeshBasicMaterial({ map: activeSlot.texture });
   const sphere = new THREE.Mesh(geometry, material);
   scene.add(sphere);
+
+  function findSlotByVideo(v: HTMLVideoElement): PoolSlot | null {
+    for (const s of pool) if (s.video === v) return s;
+    return null;
+  }
+
+  function onVideoErrorPool(this: HTMLVideoElement): void {
+    if (destroyed) return;
+    const slot = findSlotByVideo(this);
+    if (!slot) return;
+    if (slot !== activeSlot) {
+      // Standby load failed — invalidate the slot, no UI impact.
+      slot.segIdx = -1;
+      slot.ready = false;
+      slot.loadToken++;
+      return;
+    }
+    showError('Video not found');
+    if (currentSegmentIdx < segments.length - 1) {
+      advanceToNextSegment();
+    } else {
+      playing = false;
+      callbacks.onEnd();
+    }
+  }
+
+  function onVideoEndedPool(this: HTMLVideoElement): void {
+    if (destroyed || !playing || loadingSegment) return;
+    if (this !== activeSlot.video) return;  // ignore standby `ended`
+    advanceToNextSegment();
+  }
+
+  function onVideoLoadedPool(this: HTMLVideoElement): void {
+    if (this === activeSlot.video) hideError();
+  }
 
   // ===== Camera control =====
   let lon = 0;
@@ -163,187 +187,210 @@ export function createWalkthroughPlayer(
   container.addEventListener('pointercancel', onPointerUp);
   container.addEventListener('wheel', onWheel, { passive: false });
 
-  // ===== Preload next segment onto standby =====
+  // ===== Pool helpers =====
 
-  // Monotonic token guards against an older preload's loadeddata/seeked
-  // callbacks firing after a newer preload has started — without it, a stale
-  // closure could flip `standbyReady = true` while `standbySegIdx` already
-  // refers to a different segment.
-  let preloadToken = 0;
+  function findSlotForSeg(segIdx: number): PoolSlot | null {
+    for (const s of pool) if (s.segIdx === segIdx && s.ready) return s;
+    return null;
+  }
 
-  function preloadNextSegment(segIdx: number): void {
-    if (segIdx >= segments.length) return;
-    const myToken = ++preloadToken;
-    standbyReady = false;
-    standbySegIdx = segIdx;
+  function pickEvictionVictim(protectSegIdx: number[]): PoolSlot {
+    // 1) Empty slot first.
+    for (const s of pool) if (s.segIdx === -1) return s;
+    // 2) LRU among non-protected, non-active.
+    let victim: PoolSlot | null = null;
+    for (const s of pool) {
+      if (s === activeSlot) continue;
+      if (protectSegIdx.includes(s.segIdx)) continue;
+      if (!victim || s.lastUsedTs < victim.lastUsedTs) victim = s;
+    }
+    if (victim) return victim;
+    // 3) Force-evict the LRU non-active (all others were protected).
+    for (const s of pool) {
+      if (s === activeSlot) continue;
+      if (!victim || s.lastUsedTs < victim.lastUsedTs) victim = s;
+    }
+    return victim!;
+  }
+
+  function loadIntoSlot(slot: PoolSlot, segIdx: number, seekTime: number): Promise<boolean> {
+    const myToken = ++slot.loadToken;
+    slot.segIdx = segIdx;
+    slot.ready = false;
     const seg = segments[segIdx];
-    const vid = standbyVideo; // capture reference — survives swaps
-    vid.src = getVideoUrl(seg.videoFile);
-    vid.load();
-    vid.addEventListener('loadeddata', function onLoad() {
-      vid.removeEventListener('loadeddata', onLoad);
-      if (preloadToken !== myToken || destroyed) return;
-      vid.currentTime = seg.videoStart;
-      vid.addEventListener('seeked', function onSeek() {
-        vid.removeEventListener('seeked', onSeek);
-        if (preloadToken !== myToken || destroyed) return;
-        standbyReady = true;
-        console.log(`[Walkthrough] standby ready: segment ${segIdx} (${seg.videoFile} @${seg.videoStart.toFixed(2)})`);
-      });
+    slot.video.src = getVideoUrl(seg.videoFile);
+    slot.video.load();
+    return new Promise(resolve => {
+      const onLoaded = (): void => {
+        slot.video.removeEventListener('loadeddata', onLoaded);
+        slot.video.removeEventListener('error', onErr);
+        if (slot.loadToken !== myToken || destroyed) { resolve(false); return; }
+        slot.video.currentTime = seekTime;
+        const onSeek = (): void => {
+          slot.video.removeEventListener('seeked', onSeek);
+          slot.video.removeEventListener('error', onErr2);
+          if (slot.loadToken !== myToken || destroyed) { resolve(false); return; }
+          slot.ready = true;
+          slot.lastUsedTs = performance.now();
+          slot.texture.needsUpdate = true;
+          resolve(true);
+        };
+        const onErr2 = (): void => {
+          slot.video.removeEventListener('seeked', onSeek);
+          slot.video.removeEventListener('error', onErr2);
+          resolve(false);
+        };
+        slot.video.addEventListener('seeked', onSeek);
+        slot.video.addEventListener('error', onErr2);
+      };
+      const onErr = (): void => {
+        slot.video.removeEventListener('loadeddata', onLoaded);
+        slot.video.removeEventListener('error', onErr);
+        resolve(false);
+      };
+      slot.video.addEventListener('loadeddata', onLoaded);
+      slot.video.addEventListener('error', onErr);
     });
   }
 
-  // ===== Instant swap: standby → active =====
-
-  function swapToStandby(segIdx: number): void {
-    activeVideo.pause();
-
-    // Swap references
-    const tmp = activeVideo;
-    activeVideo = standbyVideo;
-    standbyVideo = tmp;
-
-    // Update Three.js texture
-    texture.dispose();
-    texture = new THREE.VideoTexture(activeVideo);
-    texture.colorSpace = THREE.SRGBColorSpace;
-    material.map = texture;
-    material.needsUpdate = true;
-
-    // Update state
-    currentSegmentIdx = segIdx;
-    currentClipIdx = segments[segIdx].clipStartIdx;
-    lon = clips[currentClipIdx].yaw;
-
-    console.log(`[Walkthrough] instant swap → segment ${segIdx}, yaw=${lon.toFixed(1)}`);
+  function swapToSlot(slot: PoolSlot): void {
+    if (slot !== activeSlot) {
+      activeSlot.video.pause();
+      activeSlot = slot;
+      material.map = slot.texture;
+      slot.texture.needsUpdate = true;
+    }
+    activeSlot.lastUsedTs = performance.now();
 
     if (seekMode) {
-      // In seek mode: keep paused, reset seek base to new segment start
       seekBaseReal = performance.now();
-      seekBaseVideo = activeVideo.currentTime;
+      seekBaseVideo = activeSlot.video.currentTime;
     } else {
-      activeVideo.playbackRate = playbackRate;
-      if (playing) {
-        activeVideo.play().catch(e => console.warn('[Walkthrough] play:', e));
-      }
+      activeSlot.video.playbackRate = playbackRate;
+      if (playing) activeSlot.video.play().catch(e => console.warn('[Walkthrough] play:', e));
     }
-
-    // Preload the NEXT segment on the now-standby element
-    preloadNextSegment(segIdx + 1);
   }
 
-  // ===== Advance to next segment =====
+  // Maps (segIdx, video time) → global time. Used to remember a user's
+  // intended seek target while a load is in flight.
+  function computeGlobalTime(segIdx: number, videoTime: number): number {
+    const seg = segments[segIdx];
+    for (let i = seg.clipStartIdx; i <= seg.clipEndIdx; i++) {
+      const clip = clips[i];
+      if (videoTime >= clip.videoStart && videoTime <= clip.videoEnd) {
+        return clip.globalStart + (videoTime - clip.videoStart);
+      }
+    }
+    return clips[seg.clipStartIdx].globalStart;
+  }
+
+  function drainPendingSeek(): void {
+    if (pendingSeek === null) return;
+    const t = pendingSeek;
+    pendingSeek = null;
+    seekToGlobalTime(t);
+  }
+
+  // ===== Core: go to a segment (cached → instant swap; cold → load-then-swap) =====
+
+  // `targetClipIdx` lets seekToGlobalTime preserve the target clip when the
+  // user seeks into the middle of a segment, so yaw doesn't briefly reset.
+  async function gotoSegment(segIdx: number, seekTime: number, targetClipIdx?: number): Promise<void> {
+    if (loadingSegment) {
+      pendingSeek = computeGlobalTime(segIdx, seekTime);
+      return;
+    }
+
+    const clipIdx = targetClipIdx ?? segments[segIdx].clipStartIdx;
+
+    const cached = findSlotForSeg(segIdx);
+    if (cached) {
+      if (Math.abs(cached.video.currentTime - seekTime) > 0.05) {
+        cached.video.currentTime = seekTime;
+        // No await for `seeked`: texture.needsUpdate on next render is sufficient,
+        // and the active video stays visible in the meantime.
+      }
+      currentSegmentIdx = segIdx;
+      currentClipIdx = clipIdx;
+      lon = clips[currentClipIdx].yaw;
+      swapToSlot(cached);
+      console.log(`[Walkthrough] instant swap → segment ${segIdx}`);
+      schedulePrefetchNeighbors(segIdx);
+      drainPendingSeek();
+      return;
+    }
+
+    // Cold load: bring the new segment up on a non-active slot, then swap.
+    // Active video keeps showing its last frame the whole time → no black flash.
+    loadingSegment = true;
+    let target: PoolSlot;
+    if (activeSlot.segIdx === -1) {
+      // Initial load: use the active slot (no swap, just plays in-place).
+      target = activeSlot;
+    } else {
+      const protect = [segIdx - 1, segIdx, segIdx + 1, currentSegmentIdx];
+      target = pickEvictionVictim(protect);
+    }
+    const ok = await loadIntoSlot(target, segIdx, seekTime);
+    loadingSegment = false;
+    if (destroyed) return;
+    if (!ok) {
+      showError('Video load timeout');
+      drainPendingSeek();
+      return;
+    }
+
+    currentSegmentIdx = segIdx;
+    currentClipIdx = clipIdx;
+    lon = clips[currentClipIdx].yaw;
+    swapToSlot(target);
+    console.log(`[Walkthrough] cold load → segment ${segIdx}`);
+    schedulePrefetchNeighbors(segIdx);
+    drainPendingSeek();
+  }
+
+  // ===== Auto-advance =====
 
   function advanceToNextSegment(): void {
-    if (loadingSegment) return; // already advancing — guard against double-call
+    if (loadingSegment) return;
     const nextSegIdx = currentSegmentIdx + 1;
     if (nextSegIdx >= segments.length) {
       playing = false;
-      activeVideo.pause();
+      activeSlot.video.pause();
       callbacks.onEnd();
       return;
     }
+    void gotoSegment(nextSegIdx, segments[nextSegIdx].videoStart);
+  }
 
-    // Mark loading immediately so the same animate() frame's stall-detection
-    // and any synchronous re-entry won't fire a second advance.
-    loadingSegment = true;
+  // ===== Prefetch + neighbor warming =====
 
-    if (standbyReady && standbySegIdx === nextSegIdx) {
-      loadingSegment = false; // swapToStandby is synchronous; clear before swap
-      swapToStandby(nextSegIdx);
-    } else {
-      console.log(`[Walkthrough] fallback load for segment ${nextSegIdx}`);
-      currentClipIdx = segments[nextSegIdx].clipStartIdx;
-      lon = clips[currentClipIdx].yaw;
-      // loadSegment sets loadingSegment=true again internally; keep it set here
-      // so the gap before its first await is also covered.
-      loadSegment(nextSegIdx, segments[nextSegIdx].videoStart);
+  let httpCacheWarmed = false;
+  function warmHttpCacheAll(): void {
+    if (httpCacheWarmed) return;
+    httpCacheWarmed = true;
+    const seen = new Set<string>();
+    for (const seg of segments) {
+      if (seen.has(seg.videoFile)) continue;
+      seen.add(seg.videoFile);
+      // Body discarded — browser stores response in HTTP cache (Cache-Control: immutable).
+      fetch(getVideoUrl(seg.videoFile), { method: 'GET' }).catch(() => {});
     }
   }
 
-  // ===== Sequential load (fallback + initial + seek) =====
-
-  function waitForEvent(el: HTMLMediaElement, event: string, timeout = 2000): Promise<boolean> {
-    return new Promise(resolve => {
-      if (destroyed) { resolve(false); return; }
-      const timer = setTimeout(() => resolve(false), timeout);
-      el.addEventListener(event, function handler() {
-        el.removeEventListener(event, handler);
-        clearTimeout(timer);
-        resolve(true);
-      }, { once: true });
-    });
-  }
-
-  async function loadSegment(segIdx: number, seekTime: number): Promise<void> {
-    if (destroyed) return;
-    loadingSegment = true;
-
-    const seg = segments[segIdx];
-    const currentSrc = activeVideo.src;
-    const targetSrc = new URL(getVideoUrl(seg.videoFile), location.href).href;
-    const needsSrcChange = currentSrc !== targetSrc;
-
-    if (needsSrcChange) {
-      activeVideo.src = getVideoUrl(seg.videoFile);
-      activeVideo.load();
-      const loaded = await waitForEvent(activeVideo, 'loadeddata');
-      if (destroyed) return;
-      if (!loaded) {
-        showError('Video load timeout');
-        loadingSegment = false;
-        return;
-      }
-
-      texture.dispose();
-      texture = new THREE.VideoTexture(activeVideo);
-      texture.colorSpace = THREE.SRGBColorSpace;
-      material.map = texture;
-      material.needsUpdate = true;
+  function schedulePrefetchNeighbors(segIdx: number): void {
+    warmHttpCacheAll();
+    for (const adj of [segIdx + 1, segIdx - 1]) {
+      if (adj < 0 || adj >= segments.length) continue;
+      if (findSlotForSeg(adj)) continue;
+      // Don't kick off a neighbor load while we're in the middle of one — the
+      // pool is small and we'd churn slots. Wait until the cold path finishes.
+      if (loadingSegment) continue;
+      const protect = [segIdx, segIdx + 1, segIdx - 1];
+      const victim = pickEvictionVictim(protect);
+      if (victim === activeSlot) continue;  // never preload onto the displayed slot
+      void loadIntoSlot(victim, adj, segments[adj].videoStart);
     }
-
-    activeVideo.currentTime = seekTime;
-    const seeked = await waitForEvent(activeVideo, 'seeked');
-    if (destroyed) return;
-    if (!seeked) {
-      showError('Video seek timeout');
-      loadingSegment = false;
-      return;
-    }
-
-    currentSegmentIdx = segIdx;
-    loadingSegment = false;
-
-    console.log(`[Walkthrough] segment ${segIdx} loaded (fallback), seeked to ${seekTime.toFixed(2)}`);
-
-    if (seekMode) {
-      seekBaseReal = performance.now();
-      seekBaseVideo = seekTime;
-    } else {
-      activeVideo.playbackRate = playbackRate;
-      if (playing) {
-        activeVideo.play().catch(e => console.warn('[Walkthrough] play:', e));
-      }
-    }
-
-    preloadNextSegment(segIdx + 1);
-
-    if (pendingSeek !== null) {
-      const t = pendingSeek;
-      pendingSeek = null;
-      seekToGlobalTime(t);
-    }
-  }
-
-  // ===== Helpers =====
-
-  function findSegmentForClip(clipIdx: number): number {
-    for (let i = 0; i < segments.length; i++) {
-      if (clipIdx >= segments[i].clipStartIdx && clipIdx <= segments[i].clipEndIdx) {
-        return i;
-      }
-    }
-    return 0;
   }
 
   // ===== Init =====
@@ -351,7 +398,8 @@ export function createWalkthroughPlayer(
     console.log('[Walkthrough] segments:', segments.map((s, i) =>
       `[${i}] ${s.videoFile} ${s.videoStart.toFixed(2)}→${s.videoEnd.toFixed(2)}`));
     lon = clips[0].yaw;
-    loadSegment(0, clips[0].videoStart);
+    warmHttpCacheAll();
+    void gotoSegment(0, clips[0].videoStart);
   }
 
   // ===== Render loop =====
@@ -371,9 +419,10 @@ export function createWalkthroughPlayer(
     if (!playing || loadingSegment || segments.length === 0) return;
 
     const seg = segments[currentSegmentIdx];
+    const activeVideo = activeSlot.video;
 
     if (seekMode) {
-      // Seek-based fast-forward: advance currentTime based on real elapsed time
+      // Seek-based fast-forward: advance currentTime based on real elapsed time.
       const elapsed = (performance.now() - seekBaseReal) / 1000;
       const targetTime = seekBaseVideo + elapsed * playbackRate;
 
@@ -382,12 +431,10 @@ export function createWalkthroughPlayer(
         return;
       }
 
-      // Only seek if decoder finished the previous seek
       if (!activeVideo.seeking) {
         activeVideo.currentTime = targetTime;
       }
 
-      // Update clip index based on target time (smooth, not dependent on decoder)
       while (
         currentClipIdx < seg.clipEndIdx &&
         currentClipIdx + 1 < clips.length &&
@@ -397,7 +444,6 @@ export function createWalkthroughPlayer(
         lon = clips[currentClipIdx].yaw;
       }
 
-      // Use calculated target time for progress (no jitter from decoder lag)
       const clip = clips[currentClipIdx];
       const globalTime = clip.globalStart + (Math.min(targetTime, clip.videoEnd) - clip.videoStart);
       callbacks.onProgress(globalTime);
@@ -426,19 +472,28 @@ export function createWalkthroughPlayer(
       return;
     }
 
-    // Stall detection (normal mode only)
+    // Stall detection
     if (activeVideo.paused && !activeVideo.seeking) {
       advanceToNextSegment();
     }
   }
   animate();
 
-  // ===== Core functions =====
+  // ===== Helpers =====
+
+  function findSegmentForClip(clipIdx: number): number {
+    for (let i = 0; i < segments.length; i++) {
+      if (clipIdx >= segments[i].clipStartIdx && clipIdx <= segments[i].clipEndIdx) {
+        return i;
+      }
+    }
+    return 0;
+  }
 
   function getCurrentGlobalTime(): number {
     if (clips.length === 0) return 0;
     const clip = clips[currentClipIdx];
-    const localTime = activeVideo.currentTime;
+    const localTime = activeSlot.video.currentTime;
     const clamped = Math.max(clip.videoStart, Math.min(clip.videoEnd, localTime));
     return clip.globalStart + (clamped - clip.videoStart);
   }
@@ -470,9 +525,9 @@ export function createWalkthroughPlayer(
     }
 
     if (targetSegIdx !== currentSegmentIdx) {
-      loadSegment(targetSegIdx, localTime);
+      void gotoSegment(targetSegIdx, localTime, targetIdx);
     } else {
-      activeVideo.currentTime = localTime;
+      activeSlot.video.currentTime = localTime;
     }
 
     callbacks.onProgress(t);
@@ -486,15 +541,15 @@ export function createWalkthroughPlayer(
       playing = true;
       if (seekMode) {
         seekBaseReal = performance.now();
-        seekBaseVideo = activeVideo.currentTime;
+        seekBaseVideo = activeSlot.video.currentTime;
       } else if (!loadingSegment) {
-        activeVideo.play().catch(e => console.warn('[Walkthrough] play:', e));
+        activeSlot.video.play().catch(e => console.warn('[Walkthrough] play:', e));
       }
     },
 
     pause(): void {
       playing = false;
-      if (!seekMode) activeVideo.pause();
+      if (!seekMode) activeSlot.video.pause();
     },
 
     togglePlayPause(): void {
@@ -519,19 +574,23 @@ export function createWalkthroughPlayer(
         if (!seekMode) {
           seekMode = true;
           seekBaseReal = performance.now();
-          seekBaseVideo = activeVideo.currentTime;
-          activeVideo.pause();
+          seekBaseVideo = activeSlot.video.currentTime;
+          activeSlot.video.pause();
         }
       } else {
         if (seekMode) {
           seekMode = false;
-          activeVideo.playbackRate = rate;
-          if (playing) activeVideo.play().catch(e => console.warn('[Walkthrough] play:', e));
+          activeSlot.video.playbackRate = rate;
+          if (playing) activeSlot.video.play().catch(e => console.warn('[Walkthrough] play:', e));
         } else {
-          activeVideo.playbackRate = rate;
+          activeSlot.video.playbackRate = rate;
         }
       }
-      standbyVideo.playbackRate = Math.min(rate, SEEK_THRESHOLD);
+      // Standby slots play at clamped rate so seekMode swaps don't have to fight playback.
+      const standbyRate = Math.min(rate, SEEK_THRESHOLD);
+      for (const s of pool) {
+        if (s !== activeSlot) s.video.playbackRate = standbyRate;
+      }
     },
     getPlaybackRate(): number { return playbackRate; },
 
@@ -539,6 +598,17 @@ export function createWalkthroughPlayer(
       renderer.setSize(width, height);
       camera.aspect = width / Math.max(1, height);
       camera.updateProjectionMatrix();
+    },
+
+    preloadSegment(segIdx: number): void {
+      if (segIdx < 0 || segIdx >= segments.length) return;
+      if (findSlotForSeg(segIdx)) return;
+      if (loadingSegment) return;
+      const protect = [currentSegmentIdx, currentSegmentIdx - 1, currentSegmentIdx + 1, segIdx];
+      const victim = pickEvictionVictim(protect);
+      if (victim === activeSlot) return;
+      console.log(`[Walkthrough] preload segment ${segIdx}`);
+      void loadIntoSlot(victim, segIdx, segments[segIdx].videoStart);
     },
 
     destroy(): void {
@@ -551,17 +621,16 @@ export function createWalkthroughPlayer(
       container.removeEventListener('pointercancel', onPointerUp);
       container.removeEventListener('wheel', onWheel);
 
-      videoA.removeEventListener('error', onVideoError);
-      videoB.removeEventListener('error', onVideoError);
-      videoA.removeEventListener('ended', onVideoEnded);
-      videoB.removeEventListener('ended', onVideoEnded);
-      videoA.removeEventListener('loadeddata', onVideoLoaded);
-      videoB.removeEventListener('loadeddata', onVideoLoaded);
+      for (const s of pool) {
+        s.video.removeEventListener('error', onVideoErrorPool);
+        s.video.removeEventListener('ended', onVideoEndedPool);
+        s.video.removeEventListener('loadeddata', onVideoLoadedPool);
+        s.video.pause();
+        s.video.src = '';
+        s.texture.dispose();
+      }
+      pool.length = 0;
 
-      videoA.pause(); videoA.src = '';
-      videoB.pause(); videoB.src = '';
-
-      texture.dispose();
       material.dispose();
       geometry.dispose();
       renderer.dispose();

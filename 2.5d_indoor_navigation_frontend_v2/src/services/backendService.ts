@@ -456,6 +456,50 @@ function pointInRing(x: number, y: number, ring: number[][]): boolean {
   return inside;
 }
 
+function pointInGeometry(lng: number, lat: number, geom: GeoJSON.Geometry): boolean {
+  if (geom.type === 'Polygon') {
+    const rings = (geom as GeoJSON.Polygon).coordinates;
+    if (rings.length === 0 || !pointInRing(lng, lat, rings[0])) return false;
+    for (let i = 1; i < rings.length; i++) {
+      if (pointInRing(lng, lat, rings[i])) return false;
+    }
+    return true;
+  }
+  if (geom.type === 'MultiPolygon') {
+    for (const poly of (geom as GeoJSON.MultiPolygon).coordinates) {
+      if (poly.length === 0 || !pointInRing(lng, lat, poly[0])) continue;
+      let inHole = false;
+      for (let i = 1; i < poly.length; i++) {
+        if (pointInRing(lng, lat, poly[i])) { inHole = true; break; }
+      }
+      if (!inHole) return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Indoor test: point falls inside a building outline OR inside any room /
+ * collider polygon. Rooms can extend beyond the outline (overhangs,
+ * balconies), and some indoor space is only covered by colliders (walls,
+ * stairs, lifts), so neither check alone is sufficient.
+ */
+export function isPointIndoors(coords: [number, number]): boolean {
+  const [lng, lat] = coords;
+  if (getBuildingForCoordinates(coords) !== null) return true;
+  for (const cache of levelDataCaches.values()) {
+    for (const data of cache.values()) {
+      for (const f of data.rooms.features) {
+        if (pointInGeometry(lng, lat, f.geometry)) return true;
+      }
+      for (const f of data.colliders.features) {
+        if (pointInGeometry(lng, lat, f.geometry)) return true;
+      }
+    }
+  }
+  return false;
+}
+
 /** All levels across all buildings, sorted descending */
 export function getAllLevels(): number[] {
   const set = new Set<number>();

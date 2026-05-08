@@ -38,8 +38,16 @@ export function init(mapInstance: maplibregl.Map): void {
   map.on('render', updatePositions);
 }
 
-/** Show floating labels for a specific level at a given altitude */
-export function updateLabels(level: number, is3D: boolean, altitude: number): void {
+/** Show floating labels for a specific level at a given altitude.
+ *  `focusedBuildings`, when provided, restricts labels to those buildings only —
+ *  matches the 3D interior-rendering filter so we don't surface refs for
+ *  buildings whose geometry is hidden. */
+export function updateLabels(
+  level: number,
+  is3D: boolean,
+  altitude: number,
+  focusedBuildings?: ReadonlySet<string>,
+): void {
   if (!container) return;
 
   // Clear existing labels
@@ -52,8 +60,16 @@ export function updateLabels(level: number, is3D: boolean, altitude: number): vo
 
   active = true;
 
-  // Get room features for this level
-  const roomFeatures = BackendService.getRoomFeaturesForLevel(level);
+  // Collect room features only from focused buildings (or all, if unset).
+  const roomFeatures: GeoJSON.Feature[] = [];
+  if (focusedBuildings && focusedBuildings.size > 0) {
+    for (const building of focusedBuildings) {
+      const data = BackendService.getLevelDataForBuilding(building, level);
+      roomFeatures.push(...data.rooms.features);
+    }
+  } else {
+    roomFeatures.push(...BackendService.getRoomFeaturesForLevel(level));
+  }
 
   for (const f of roomFeatures) {
     if (f.geometry.type !== 'Polygon' && f.geometry.type !== 'MultiPolygon') continue;

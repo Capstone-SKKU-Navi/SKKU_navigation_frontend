@@ -252,31 +252,9 @@ function rebuildLayers(): void {
       );
     });
 
-    // Start/end POIs
-    if (path3d.length >= 2) {
-      const startLevel = storedLevels?.[0] ?? curLevel;
-      const endLevel = storedLevels?.[storedLevels.length - 1] ?? curLevel;
-      layers.push(
-        new ScatterplotLayer<PoiData>({
-          id: 'route-endpoints',
-          data: [
-            { position: path3d[0], color: [...R.startColor] as [number, number, number], radius: R.endpointRadius },
-            { position: path3d[path3d.length - 1], color: [...R.endColor] as [number, number, number], radius: R.endpointRadius },
-          ],
-          getPosition: (d) => d.position as [number, number, number],
-          getFillColor: (d, { index }) => {
-            const lvl = index === 0 ? startLevel : endLevel;
-            const c = d.color;
-            return lvl === curLevel
-              ? [c[0], c[1], c[2], R.activeOpacity]
-              : [c[0], c[1], c[2], R.inactiveOpacity];
-          },
-          getRadius: (d) => d.radius,
-          radiusMinPixels: R.endpointMinPx,
-          radiusMaxPixels: R.endpointMaxPx,
-        }),
-      );
-    }
+    // Endpoint POIs are rendered as DOM teardrop pins by routePinMarkers,
+    // which already carries the 출발/도착 affordance — drawing a separate
+    // dot here would duplicate the marker at ground level.
   }
 
   // Position indicator

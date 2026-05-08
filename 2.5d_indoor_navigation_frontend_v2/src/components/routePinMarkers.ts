@@ -1,7 +1,9 @@
 import maplibregl from 'maplibre-gl';
+import { WebMercatorViewport } from '@deck.gl/core';
 import * as BackendService from '../services/backendService';
 import * as RouteActions from '../services/routeActions';
 import * as GeoMap from './geoMap';
+import { getLevelBase, ROOM_THICKNESS } from './indoorLayer';
 import { MapConfig } from '../config/mapConfig';
 import type { RouteEndpoint } from '../services/routeActions';
 
@@ -45,7 +47,14 @@ function makePinElement(slot: Slot): HTMLElement {
 export function init(mapInstance: maplibregl.Map): void {
   map = mapInstance;
   document.addEventListener('routeEndpointChanged', syncFromState);
-  document.addEventListener('levelChanged', updateOpacity);
+  document.addEventListener('levelChanged', () => {
+    updateOpacity();
+    updateAltitudeOffsets();
+  });
+  // Marker DOM is anchored at [lng, lat] (ground); to make the pin track
+  // its floor's altitude in 3D we project [lng, lat, alt] vs [lng, lat, 0]
+  // each frame and feed the delta back through `marker.setOffset`.
+  mapInstance.on('move', updateAltitudeOffsets);
   syncFromState();
 }
 
@@ -101,9 +110,11 @@ function syncSlot(slot: Slot, ep: RouteEndpoint | null): void {
       anchor: 'bottom',
     });
     marker.on('dragend', () => onDragEnd(slot));
+    marker.on('drag', () => updateAltitudeOffsetForSlot(slot));
     // Set position before addTo — otherwise the marker briefly renders at
     // (0, 0) for one frame between attachment and the first setLngLat.
     marker.setLngLat([resolved.lng, resolved.lat]);
+    marker.setOffset(computeOffset(resolved.lng, resolved.lat, resolved.level));
     marker.addTo(map);
   } else {
     // Avoid writing back the same position during the dragend → setStartCoord
@@ -117,6 +128,7 @@ function syncSlot(slot: Slot, ep: RouteEndpoint | null): void {
     }
   }
   setMarker(slot, marker, resolved.level);
+  updateAltitudeOffsetForSlot(slot);
 }
 
 function onDragEnd(slot: Slot): void {
@@ -156,4 +168,50 @@ function applyOpacity(marker: maplibregl.Marker | null, markerLevel: number | nu
   if (!marker) return;
   const el = marker.getElement();
   el.style.opacity = (markerLevel != null && markerLevel !== curLevel) ? '0.45' : '1';
+}
+
+/**
+ * Project the marker's [lng, lat, altitude] through a deck.gl viewport that
+ * mirrors MapLibre's camera, then return the screen-space delta from the
+ * ground projection. In 2D mode (or with no level) the delta is zero.
+ *
+ * deck.gl ships with `MapboxOverlay` interleaved into this map, so a
+ * `WebMercatorViewport` constructed from the same camera state projects
+ * identically — adding the delta on top of MapLibre's ground projection is
+ * equivalent to projecting the elevated point natively.
+ */
+function computeOffset(lng: number, lat: number, level: number | null): [number, number] {
+  if (!map) return [0, 0];
+  if (GeoMap.isFlatMode() || level == null) return [0, 0];
+  const center = map.getCenter();
+  const canvas = map.getCanvas();
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+  if (width === 0 || height === 0) return [0, 0];
+  const viewport = new WebMercatorViewport({
+    longitude: center.lng,
+    latitude: center.lat,
+    zoom: map.getZoom(),
+    pitch: map.getPitch(),
+    bearing: map.getBearing(),
+    width,
+    height,
+  });
+  const altitude = getLevelBase(level) + ROOM_THICKNESS + 0.5;
+  const ground = viewport.project([lng, lat, 0]);
+  const top = viewport.project([lng, lat, altitude]);
+  return [top[0] - ground[0], top[1] - ground[1]];
+}
+
+function updateAltitudeOffsetForSlot(slot: Slot): void {
+  const marker = getMarker(slot);
+  if (!marker) return;
+  const level = slot === 'start' ? startMarkerLevel : endMarkerLevel;
+  const { lng, lat } = marker.getLngLat();
+  marker.setOffset(computeOffset(lng, lat, level));
+}
+
+function updateAltitudeOffsets(): void {
+  updateAltitudeOffsetForSlot('start');
+  updateAltitudeOffsetForSlot('end');
 }

@@ -32,10 +32,6 @@ export const MapConfig = {
     /** 최소/최대 픽셀 두께 */
     lineWidthMinPx: 3,
     lineWidthMaxPx: 8,
-    /** 출발/도착 마커 반지름 (meters) */
-    endpointRadius: 8,
-    endpointMinPx: 6,
-    endpointMaxPx: 14,
     /** 층별 색상 그라데이션: 파란색 → 보라색 */
     colorFrom: [66, 165, 245] as readonly [number, number, number],   // #42A5F5
     colorTo: [171, 71, 188] as readonly [number, number, number],     // #AB47BC

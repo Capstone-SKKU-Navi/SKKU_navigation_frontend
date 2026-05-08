@@ -21,6 +21,12 @@ import { polygonGeomCenter } from '../utils/polygonCenter';
  * 3D mode: active floor at full opacity, floors below translucent (active +
  * all-below stack). Floors above the active level are filtered out.
  *
+ * Route mode (3D): when `routeLevels` is set, the `-below` layer pair
+ * switches role — instead of "all floors below current at low opacity" it
+ * becomes "all route floors except current at full opacity". This surfaces
+ * upper-floor route segments (which would otherwise float above hidden
+ * floors) and keeps lower route floors readable. Cleared with the route.
+ *
  * 2D mode: only the active floor is visible; below layers hidden, walls
  * hidden, corridor outlines hidden (they overlap rooms).
  */
@@ -76,6 +82,12 @@ let focusedBuildings: Set<string> = new Set();
 /** Pin override — when set, takes precedence over camera-driven focus.
  *  Cleared by clearPinnedFocus(). Used by route + search flows. */
 let pinnedBuildings: Set<string> | null = null;
+
+/** Active route levels — when non-null, the -below layer pair shows these
+ *  floors at full opacity (instead of the translucent below-stack) so route
+ *  segments on upper floors are visible. Set by setRouteLevels(); cleared
+ *  with the route. Only affects 3D rendering. */
+let routeLevels: Set<number> | null = null;
 
 /** Cached outline centroid per building (for "outside" fallback). Computed
  *  once when addIndoorLayers runs. */
@@ -331,6 +343,28 @@ export function clearPinnedFocus(map: maplibregl.Map): void {
   applyVisibility(map);
 }
 
+/** Mark which floors the active route covers. While set, the -below layers
+ *  render those floors at full opacity (route mode); when null, the layers
+ *  fall back to "all floors below current at low opacity". */
+export function setRouteLevels(map: maplibregl.Map, levels: Iterable<number>): void {
+  const next = new Set(levels);
+  if (next.size === 0) {
+    if (routeLevels === null) return;
+    routeLevels = null;
+  } else {
+    if (routeLevels && setsEqual(next, routeLevels)) return;
+    routeLevels = next;
+  }
+  applyVisibility(map);
+}
+
+/** Clear the route-levels override; -below layers return to translucent stack. */
+export function clearRouteLevels(map: maplibregl.Map): void {
+  if (routeLevels === null) return;
+  routeLevels = null;
+  applyVisibility(map);
+}
+
 /** Diagnostic: read the current effective focus set. */
 export function getFocusedBuildings(): ReadonlySet<string> {
   return effectiveFocusSet();
@@ -342,6 +376,10 @@ function effectiveFocusSet(): Set<string> {
   if (focusedBuildings.size > 0) return focusedBuildings;
   // Initial state — focus not yet computed; allow all buildings to render.
   return new Set(BackendService.getBuildingCodes());
+}
+
+function isRouteMode(): boolean {
+  return routeLevels !== null && routeLevels.size > 0;
 }
 
 function setsEqual<T>(a: Set<T>, b: Set<T>): boolean {
@@ -429,7 +467,7 @@ function applyVisibility(map: maplibregl.Map): void {
 
   if (is3DMode) {
     const altitude = getLevelBase(currentLevel) + ROOM_THICKNESS + 0.5;
-    FloatingLabels.updateLabels(currentLevel, true, altitude);
+    FloatingLabels.updateLabels(currentLevel, true, altitude, effectiveFocusSet());
   } else {
     FloatingLabels.updateLabels(currentLevel, false, 0);
   }
@@ -441,7 +479,15 @@ function groupVis(group: LayerGroup, modeVis: string): string {
 
 function applyBuildingVisibility(map: maplibregl.Map, building: string): void {
   const activeFilter: any = ['==', ['get', '_level'], currentLevel];
-  const belowFilter: any = ['<', ['get', '_level'], currentLevel];
+  // Route mode hijacks the "below" layer pair: instead of every floor under
+  // the current one (translucent stack), we render only the floors the route
+  // touches — above, below, or both — at full opacity.
+  const belowFilter: any = isRouteMode()
+    ? ['all',
+        ['!=', ['get', '_level'], currentLevel],
+        ['in', ['get', '_level'], ['literal', [...routeLevels!]]],
+      ]
+    : ['<', ['get', '_level'], currentLevel];
 
   // Update filters on every layer (sub-frame cost; doesn't re-tessellate).
   const activeLayers = [
@@ -484,8 +530,12 @@ function applyBuildingVisibility(map: maplibregl.Map, building: string): void {
     setLayerVis(map, `${building}-corridors-edges-below`,   'none');
     setLayerVis(map, `${building}-stairs-active`,           focused ? groupVis('rooms', 'visible') : 'none');
     setLayerVis(map, `${building}-stairs-below`,            focused ? groupVis('rooms', 'visible') : 'none');
-    setLayerVis(map, `${building}-walls-active`,            focused ? groupVis('walls', 'visible') : 'none');
-    setLayerVis(map, `${building}-walls-below`,             focused ? groupVis('walls', 'visible') : 'none');
+    // Wall extrusions formed a translucent shell above the active rooms
+    // that read as a low-quality "upper-floor silhouette" — hide them in 3D
+    // too. Room edges still trace the room outlines so the floor remains
+    // visually defined.
+    setLayerVis(map, `${building}-walls-active`,            'none');
+    setLayerVis(map, `${building}-walls-below`,             'none');
     setLayerVis(map, `${building}-rooms-labels`,            'none');                        // FloatingLabels handles 3D
 
     if (focused) setExtrusionPaint(map, building);
@@ -515,12 +565,15 @@ function setExtrusionPaint(map: maplibregl.Map, building: string): void {
     map.setPaintProperty(id, 'fill-extrusion-height', ['get', '_alt_top'] as any);
     map.setPaintProperty(id, 'fill-extrusion-opacity', opacity);
   };
+  // In route mode, -below layers render route floors at full opacity so the
+  // route line on those floors is readable instead of floating in air.
+  const route = isRouteMode();
   setLayer(`${building}-rooms-active`,           ACTIVE_ROOM_OPACITY);
-  setLayer(`${building}-rooms-below`,            INACTIVE_ROOM_OPACITY);
+  setLayer(`${building}-rooms-below`,            route ? ACTIVE_ROOM_OPACITY     : INACTIVE_ROOM_OPACITY);
   setLayer(`${building}-corridors-active`,       ACTIVE_CORRIDOR_OPACITY);
-  setLayer(`${building}-corridors-below`,        INACTIVE_CORRIDOR_OPACITY);
+  setLayer(`${building}-corridors-below`,        route ? ACTIVE_CORRIDOR_OPACITY : INACTIVE_CORRIDOR_OPACITY);
   setLayer(`${building}-stairs-active`,          ACTIVE_STAIRS_OPACITY);
-  setLayer(`${building}-stairs-below`,           INACTIVE_STAIRS_OPACITY);
+  setLayer(`${building}-stairs-below`,           route ? ACTIVE_STAIRS_OPACITY   : INACTIVE_STAIRS_OPACITY);
   setLayer(`${building}-walls-active`,           ACTIVE_WALL_OPACITY);
   setLayer(`${building}-walls-below`,            INACTIVE_WALL_OPACITY);
   setLayer(`${building}-rooms-edges-active`,     ACTIVE_ROOM_OUTLINE_OPACITY);

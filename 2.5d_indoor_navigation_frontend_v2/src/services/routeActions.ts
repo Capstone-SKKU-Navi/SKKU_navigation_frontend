@@ -115,9 +115,20 @@ export function setEnd(ref: string): void {
   maybeAutoFindRoute();
 }
 
+/**
+ * If the coord falls outside every building outline AND outside every room
+ * polygon, the user is pointing at outdoor space (lawn, road, plaza) —
+ * there is no notion of "3F outside", so force level 1 regardless of the
+ * current floor. Outline alone isn't enough because some rooms can extend
+ * past the outline.
+ */
+function normalizeOutdoorLevel(lng: number, lat: number, level: number): number {
+  return BackendService.isPointIndoors([lng, lat]) ? level : 1;
+}
+
 /** Set the start endpoint to raw map coordinates (drag-drop / pin reposition). */
 export function setStartCoord(lng: number, lat: number, level: number): void {
-  startCoordOverride = { lng, lat, level };
+  startCoordOverride = { lng, lat, level: normalizeOutdoorLevel(lng, lat, level) };
   const input = getStartInput();
   if (input) input.value = '';
   revealRouteInputs();
@@ -128,7 +139,7 @@ export function setStartCoord(lng: number, lat: number, level: number): void {
 
 /** Set the end endpoint to raw map coordinates (drag-drop / pin reposition). */
 export function setEndCoord(lng: number, lat: number, level: number): void {
-  endCoordOverride = { lng, lat, level };
+  endCoordOverride = { lng, lat, level: normalizeOutdoorLevel(lng, lat, level) };
   const input = getEndInput();
   if (input) input.value = '';
   revealRouteInputs();
@@ -207,6 +218,7 @@ export function clearRoute(): void {
   if (endInput) endInput.value = '';
   RouteOverlay.clearRoute();
   WalkthroughOverlay.hideWalkthroughOverlay();
+  GeoMap.clearIndoorRouteLevels();
   const routeInfo = document.getElementById('routeInfo');
   const buildingInfo = document.getElementById('buildingInfo');
   if (routeInfo) routeInfo.style.display = 'none';
@@ -252,9 +264,14 @@ function resolveCoordinate(ep: RouteEndpoint): RouteCoordinate | null {
 // path overwrites the latest one.
 let routeAbortController: AbortController | null = null;
 
+function dispatchRouteNotFound(reason: 'unresolved' | 'no-path' | 'error', message: string): void {
+  document.dispatchEvent(new CustomEvent('routeNotFound', { detail: { reason, message } }));
+}
+
 /**
  * Run the full find-route flow: resolve coords from each endpoint kind, fetch,
- * render, start walkthrough. Dispatches `routeFound` on success.
+ * render, start walkthrough. Dispatches `routeFound` on success and
+ * `routeNotFound` (with `{reason, message}`) on any failure.
  */
 export async function triggerFindRoute(): Promise<void> {
   const { start, end } = getEndpoints();
@@ -265,6 +282,7 @@ export async function triggerFindRoute(): Promise<void> {
 
   if (!from || !to) {
     console.warn('[Route] Could not resolve endpoint coords:', start, end);
+    dispatchRouteNotFound('unresolved', '출발지 또는 도착지를 찾을 수 없습니다');
     return;
   }
 
@@ -279,6 +297,7 @@ export async function triggerFindRoute(): Promise<void> {
     if (controller.signal.aborted || routeAbortController !== controller) return;
     if (!routeResult) {
       console.warn('[Route] No route found:', from, '→', to);
+      dispatchRouteNotFound('no-path', '경로를 찾을 수 없습니다');
       return;
     }
 
@@ -289,6 +308,9 @@ export async function triggerFindRoute(): Promise<void> {
         routeResult.clips,
         !GeoMap.isFlatMode(),
       );
+      // Make every floor the route touches opaque in 3D — otherwise upper-
+      // floor segments float over filtered-out floors and disappear.
+      GeoMap.setIndoorRouteLevels(routeResult.levels ?? []);
     }
 
     showRouteInfo(routeResult.estimatedTime, routeResult.totalDistance);
@@ -303,6 +325,7 @@ export async function triggerFindRoute(): Promise<void> {
   } catch (err: any) {
     if (err?.name === 'AbortError') return; // superseded by newer request
     console.error('경로 검색 실패:', err);
+    dispatchRouteNotFound('error', '경로 검색 중 오류가 발생했습니다');
   } finally {
     if (routeAbortController === controller) routeAbortController = null;
   }

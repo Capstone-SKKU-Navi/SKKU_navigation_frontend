@@ -128,6 +128,13 @@ function buildDOM(playlist: WalkthroughPlaylist): void {
   const canvasContainer = document.createElement('div');
   canvasContainer.className = 'walkthrough-canvas';
 
+  // Tap-feedback indicator: a circular icon that briefly pops up in the
+  // center of the canvas whenever the user toggles play/pause via tap.
+  const tapIndicator = document.createElement('div');
+  tapIndicator.className = 'walkthrough-tap-indicator';
+  tapIndicator.innerHTML = '<span class="material-icons"></span>';
+  canvasContainer.appendChild(tapIndicator);
+
   // Controls bar
   const controls = document.createElement('div');
   controls.className = 'walkthrough-controls';
@@ -166,33 +173,59 @@ function buildDOM(playlist: WalkthroughPlaylist): void {
   progressTrack.append(progressFill, progressThumb);
   progressContainer.appendChild(progressTrack);
 
-  // Seek on click
-  progressTrack.addEventListener('click', (e) => {
+  // Seek: pointerdown anywhere on the track seeks immediately and starts a
+  // drag-to-scrub gesture. Using the whole track (not just the 12px thumb)
+  // gives finger-sized hit area on mobile.
+  let seekDragging = false;
+  // Predictive preload: if the cursor lingers over a segment during a drag,
+  // ask the player to warm that segment's pool slot. By the time the user
+  // releases there, the swap is instant.
+  let scrubHoverSeg = -1;
+  let scrubHoverTimer = 0;
+
+  const seekToClientX = (clientX: number) => {
     const rect = progressTrack.getBoundingClientRect();
-    const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    const pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     const t = progressToGlobalTime(playlist, pct);
     player?.seekToGlobalTime(t);
     updateProgressUI(t);
-  });
 
-  // Seek drag (document-level listeners stored for cleanup)
-  let seekDragging = false;
-  progressThumb.addEventListener('pointerdown', (e) => {
+    if (seekDragging) {
+      const hoveredSeg = playlist.segments.findIndex(
+        (s) => t >= s.globalStart && t < s.globalEnd,
+      );
+      if (hoveredSeg !== scrubHoverSeg) {
+        scrubHoverSeg = hoveredSeg;
+        if (scrubHoverTimer) { clearTimeout(scrubHoverTimer); scrubHoverTimer = 0; }
+        if (hoveredSeg >= 0) {
+          scrubHoverTimer = window.setTimeout(() => {
+            player?.preloadSegment(hoveredSeg);
+            scrubHoverTimer = 0;
+          }, 100);
+        }
+      }
+    }
+  };
+
+  progressTrack.addEventListener('pointerdown', (e) => {
     seekDragging = true;
-    progressThumb.setPointerCapture(e.pointerId);
+    try { progressTrack.setPointerCapture(e.pointerId); } catch { /* noop */ }
+    seekToClientX(e.clientX);
+    e.preventDefault();
   });
 
   docSeekMove = (e: PointerEvent) => {
     if (!seekDragging) return;
-    const rect = progressTrack.getBoundingClientRect();
-    const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    const t = progressToGlobalTime(playlist, pct);
-    player?.seekToGlobalTime(t);
-    updateProgressUI(t);
+    seekToClientX(e.clientX);
   };
-  docSeekUp = () => { seekDragging = false; };
+  docSeekUp = () => {
+    seekDragging = false;
+    scrubHoverSeg = -1;
+    if (scrubHoverTimer) { clearTimeout(scrubHoverTimer); scrubHoverTimer = 0; }
+  };
   document.addEventListener('pointermove', docSeekMove as EventListener);
   document.addEventListener('pointerup', docSeekUp);
+  document.addEventListener('pointercancel', docSeekUp);
 
   // Time label
   const timeLabel = document.createElement('span');
@@ -248,6 +281,36 @@ function buildDOM(playlist: WalkthroughPlaylist): void {
 
   // Setup drag (move overlay by title bar)
   setupDrag(header);
+
+  // Tap-to-toggle play/pause on the video canvas. Coexists with the
+  // player's own pan-to-look drag: if the pointer moves > 8px or stays
+  // down > 300ms, we treat it as a drag and skip the toggle.
+  let tapStartX = 0, tapStartY = 0, tapStartT = 0, tapTracking = false;
+  canvasContainer.addEventListener('pointerdown', (e) => {
+    tapStartX = e.clientX;
+    tapStartY = e.clientY;
+    tapStartT = performance.now();
+    tapTracking = true;
+  });
+  canvasContainer.addEventListener('pointermove', (e) => {
+    if (!tapTracking) return;
+    if (Math.hypot(e.clientX - tapStartX, e.clientY - tapStartY) > 8) {
+      tapTracking = false;
+    }
+  });
+  canvasContainer.addEventListener('pointerup', () => {
+    if (!tapTracking) return;
+    tapTracking = false;
+    if (performance.now() - tapStartT > 300) return;
+    player?.togglePlayPause();
+    const isNowPlaying = !!player?.isPlaying();
+    const icon = playBtn.querySelector('.material-icons');
+    if (icon) icon.textContent = isNowPlaying ? 'pause' : 'play_arrow';
+    // Show what just happened: play_arrow if playback started, pause if it
+    // stopped — matches the YouTube/Apple convention.
+    flashTapIndicator(tapIndicator, isNowPlaying ? 'play_arrow' : 'pause');
+  });
+  canvasContainer.addEventListener('pointercancel', () => { tapTracking = false; });
 
   // Store typed refs
   overlayRefs = { progressFill, progressThumb, timeLabel, playBtn, expandBtn, canvasContainer };
@@ -458,7 +521,11 @@ function setupResize(handle: HTMLElement): void {
 
 function removeDocumentListeners(): void {
   if (docSeekMove) { document.removeEventListener('pointermove', docSeekMove as EventListener); docSeekMove = null; }
-  if (docSeekUp) { document.removeEventListener('pointerup', docSeekUp); docSeekUp = null; }
+  if (docSeekUp) {
+    document.removeEventListener('pointerup', docSeekUp);
+    document.removeEventListener('pointercancel', docSeekUp);
+    docSeekUp = null;
+  }
   if (docResizeMove) { document.removeEventListener('pointermove', docResizeMove as EventListener); docResizeMove = null; }
   if (docResizeUp) { document.removeEventListener('pointerup', docResizeUp); docResizeUp = null; }
   if (docKeydown) { document.removeEventListener('keydown', docKeydown); docKeydown = null; }
@@ -534,6 +601,16 @@ function removeMapInteractionListener(): void {
 }
 
 // ===== Helpers =====
+
+function flashTapIndicator(el: HTMLElement, iconName: string): void {
+  const span = el.querySelector('.material-icons');
+  if (!span) return;
+  span.textContent = iconName;
+  el.classList.remove('walkthrough-tap-indicator--show');
+  // Force reflow so the animation restarts on rapid repeat taps.
+  void el.offsetWidth;
+  el.classList.add('walkthrough-tap-indicator--show');
+}
 
 function fmtTime(s: number): string {
   const m = Math.floor(s / 60);
