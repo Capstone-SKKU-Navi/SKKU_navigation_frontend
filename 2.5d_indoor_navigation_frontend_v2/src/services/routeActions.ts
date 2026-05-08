@@ -50,6 +50,34 @@ export function selectRoom(room: RoomListItem): void {
     GeoMap.handleLevelChange(room.level[0]);
   }
   GeoMap.flyToRoom(room.ref);
+  // Pin 3D focus to the searched building so panning the camera away
+  // doesn't make it disappear in 3D.
+  GeoMap.setIndoorFocusPin([room.building]);
+}
+
+/** Resolve which building owns an endpoint (room ref or raw coord). */
+function buildingForEndpoint(ep: RouteEndpoint): string | null {
+  if (ep.kind === 'coord') {
+    return BackendService.getBuildingForCoordinates([ep.lng, ep.lat]);
+  }
+  const found = BackendService.getRoomList().find(r => r.ref === ep.ref);
+  return found?.building ?? null;
+}
+
+/** Recompute the 3D focus pin from whichever endpoints are currently set. */
+function updateFocusPinFromEndpoints(): void {
+  const { start, end } = getEndpoints();
+  const buildings = new Set<string>();
+  if (start) {
+    const b = buildingForEndpoint(start);
+    if (b) buildings.add(b);
+  }
+  if (end) {
+    const b = buildingForEndpoint(end);
+    if (b) buildings.add(b);
+  }
+  if (buildings.size > 0) GeoMap.setIndoorFocusPin(buildings);
+  else GeoMap.clearIndoorFocusPin();
 }
 
 function getStartInput(): HTMLInputElement | null {
@@ -72,6 +100,7 @@ export function setStart(ref: string): void {
   if (input) input.value = ref;
   revealRouteInputs();
   document.dispatchEvent(new Event('routeEndpointChanged'));
+  updateFocusPinFromEndpoints();
   maybeAutoFindRoute();
 }
 
@@ -82,6 +111,7 @@ export function setEnd(ref: string): void {
   if (input) input.value = ref;
   revealRouteInputs();
   document.dispatchEvent(new Event('routeEndpointChanged'));
+  updateFocusPinFromEndpoints();
   maybeAutoFindRoute();
 }
 
@@ -92,6 +122,7 @@ export function setStartCoord(lng: number, lat: number, level: number): void {
   if (input) input.value = '';
   revealRouteInputs();
   document.dispatchEvent(new Event('routeEndpointChanged'));
+  updateFocusPinFromEndpoints();
   maybeAutoFindRoute();
 }
 
@@ -102,6 +133,7 @@ export function setEndCoord(lng: number, lat: number, level: number): void {
   if (input) input.value = '';
   revealRouteInputs();
   document.dispatchEvent(new Event('routeEndpointChanged'));
+  updateFocusPinFromEndpoints();
   maybeAutoFindRoute();
 }
 
@@ -188,6 +220,8 @@ export function clearRoute(): void {
   // route-specific UI like the mobile clear button).
   document.dispatchEvent(new Event('routeEndpointChanged'));
   document.dispatchEvent(new Event('routeCleared'));
+  // Release the 3D focus pin — camera-driven focus takes over again.
+  GeoMap.clearIndoorFocusPin();
 }
 
 function showRouteInfo(time: string, distance: number): void {

@@ -8,7 +8,6 @@ import * as Panel from './graphEditorPanel';
 import * as GeoMap from '../components/geoMap';
 import * as IndoorLayer from '../components/indoorLayer';
 import * as BackendService from '../services/backendService';
-import * as IndoorLayerModule from '../components/indoorLayer';
 import * as VideoSettings from './videoSettings';
 import { openVideoPreview } from './videoPreview';
 import { getOppositeVideo, loadVideoCatalog } from './videoCatalog';
@@ -141,7 +140,7 @@ function restoreRoomEditsFromSnapshot(snap: unknown): void {
   roomEdits.clear();
   for (const [k, v] of target) roomEdits.set(k, { ...v });
   if (map) {
-    for (const lvl of touchedLevels) IndoorLayerModule.refreshRoomLabels(map, lvl);
+    for (const lvl of touchedLevels) IndoorLayer.refreshRoomLabels(map, lvl);
   }
 }
 
@@ -150,13 +149,13 @@ function refreshAllVisibleRoomLabels(): void {
   const seen = new Set<number>();
   for (const entry of roomEdits.values()) {
     if (!seen.has(entry.level)) {
-      IndoorLayerModule.refreshRoomLabels(map, entry.level);
+      IndoorLayer.refreshRoomLabels(map, entry.level);
       seen.add(entry.level);
     }
   }
   // Also refresh the current level in case rooms there were cleared.
   if (!seen.has(state.currentLevel)) {
-    IndoorLayerModule.refreshRoomLabels(map, state.currentLevel);
+    IndoorLayer.refreshRoomLabels(map, state.currentLevel);
   }
 }
 
@@ -284,10 +283,13 @@ function collectPublishRoomFiles(): State.PublishRoomFile[] {
   const addFile = (code: string, level: number) => {
     const fileKey = touchedRoomFileKey(code, level);
     if (seen.has(fileKey)) return;
-    const features = BackendService.getLevelDataForBuilding(code, level)?.rooms?.features ?? [];
+    const features: GeoJSON.Feature[] = BackendService.getLevelDataForBuilding(code, level)?.rooms?.features ?? [];
     if (features.length === 0) return;
     seen.add(fileKey);
-    out.push({ building: code, level, features });
+    // Strip runtime extrusion props (`_alt_base/_alt_top/_level`) so saved
+    // .geojson files stay free of rendering metadata.
+    const cleaned: GeoJSON.Feature[] = features.map(IndoorLayer.stripRuntimeProps);
+    out.push({ building: code, level, features: cleaned });
   };
 
   for (const fileKey of touchedRoomFiles) {
@@ -529,9 +531,9 @@ let selectedRoom: { building: string; idx: number } | null = null;
 let autoApplyPreset: RoomAutoApplyPreset = { enabled: false, roomType: '' as RoomType, refPrefix: '' };
 
 function buildingFromLayerId(layerId: string): string {
-  // Layer id is `${building}-floor-${level}-rooms-3d`. Building codes may
-  // contain hyphens, so split on the literal `-floor-` token rather than `-`.
-  return layerId.split('-floor-')[0];
+  // Layer id is `${building}-rooms-active`. Building codes don't contain
+  // `-rooms-`, so splitting on that token recovers the building reliably.
+  return layerId.split('-rooms-')[0];
 }
 
 function setupRoomClickListener(): void {
@@ -541,10 +543,15 @@ function setupRoomClickListener(): void {
   roomClickHandler = (e: maplibregl.MapMouseEvent) => {
     if (state.mode !== 'label-room' || !map) return;
 
-    const level = state.currentLevel;
-    // Query room layers across all buildings for this level
+    // Source-of-truth for the level is IndoorLayer (the active layer's
+    // filter is keyed off it). state.currentLevel is updated by polling and
+    // can briefly diverge; using the editor's mirror would race the filter.
+    const level = IndoorLayer.getCurrentLevel();
+
+    // Query the merged rooms-active layer per building. Filter handles the
+    // current-level scoping; no per-level layer iteration needed.
     const roomLayerIds = BackendService.getBuildingCodes()
-      .map(b => `${b}-floor-${level}-rooms-3d`)
+      .map(b => `${b}-rooms-active`)
       .filter(id => map!.getLayer(id));
     if (roomLayerIds.length === 0) return;
 
@@ -575,7 +582,7 @@ function setupRoomClickListener(): void {
             handleRoomUpdate(clickedBuilding, clickedIdx, applyProps);
           }
           // 업데이트된 값으로 패널 표시
-          const rooms = BackendService.getLevelDataForBuilding(clickedBuilding, state.currentLevel).rooms.features;
+          const rooms = BackendService.getLevelDataForBuilding(clickedBuilding, level).rooms.features;
           const updated = rooms.find(f => f.properties._idx === clickedIdx);
           if (updated) {
             Panel.showRoomProperties({
@@ -610,12 +617,15 @@ function setupRoomClickListener(): void {
 function moveRoomLabel(building: string, featureIdx: number, pos: [number, number]): void {
   if (!map) return;
 
-  const rooms = BackendService.getLevelDataForBuilding(building, state.currentLevel).rooms.features;
+  // Use IndoorLayer as level source-of-truth (same reason as the click handler —
+  // state.currentLevel is poll-updated and can briefly lag the active filter).
+  const level = IndoorLayer.getCurrentLevel();
+  const rooms = BackendService.getLevelDataForBuilding(building, level).rooms.features;
   const feature = rooms.find(f => f.properties._idx === featureIdx);
   if (!feature) return;
 
   feature.properties._label_pos = pos;
-  IndoorLayerModule.refreshRoomLabels(map, state.currentLevel);
+  IndoorLayer.refreshRoomLabels(map, level);
 }
 
 function removeRoomClickListener(): void {
@@ -1213,7 +1223,7 @@ function handleClearBuildingRooms(building: string): void {
     }
     if (levelCleared > 0) {
       totalCleared += levelCleared;
-      IndoorLayerModule.refreshRoomLabels(map, level);
+      IndoorLayer.refreshRoomLabels(map, level);
     }
   }
   if (totalCleared > 0) State.autosaveBundle();
@@ -1239,7 +1249,7 @@ function handleClearBuildingRooms(building: string): void {
 
 function persistRoomEdit(building: string, feature: GeoJSON.Feature, level: number): void {
   recordRoomEdit(building, level, feature, feature.properties);
-  if (map) IndoorLayerModule.refreshRoomLabels(map, level);
+  if (map) IndoorLayer.refreshRoomLabels(map, level);
   State.autosaveBundle();
 }
 
@@ -1314,7 +1324,10 @@ function handleRoomExport(): void {
   // 현재 층의 room 파일만 내보내기
   const level = state.currentLevel;
   const rooms = BackendService.getRoomFeaturesForLevel(level);
-  const output: GeoJSON.FeatureCollection = { type: 'FeatureCollection', features: rooms };
+  // Strip runtime extrusion props before serializing — keeps the downloaded
+  // .geojson clean of rendering metadata.
+  const cleaned: GeoJSON.Feature[] = rooms.map(IndoorLayer.stripRuntimeProps);
+  const output: GeoJSON.FeatureCollection = { type: 'FeatureCollection', features: cleaned };
 
   const json = JSON.stringify(output, null, 2);
   const blob = new Blob([json], { type: 'application/json' });

@@ -404,6 +404,23 @@ export function getOutline(): number[][] {
 }
 
 /**
+ * All buildings' outline polygons as a single FeatureCollection. Each feature
+ * carries `_building` in its properties so the consumer can filter/style by
+ * building code. Used by IndoorLayer's footprints layer (rendered for
+ * non-focused buildings in 3D mode).
+ */
+export function getAllBuildingOutlines(): GeoJSON.FeatureCollection {
+  const features: GeoJSON.Feature[] = [];
+  for (const [code, bi] of buildingInterfaces.entries()) {
+    features.push({
+      ...bi.feature,
+      properties: { ...(bi.feature.properties ?? {}), _building: code },
+    });
+  }
+  return { type: 'FeatureCollection', features };
+}
+
+/**
  * Resolve which building owns a coordinate by point-in-polygon test against
  * each building's outline. Returns null if no outline contains it. Used by
  * the editor's per-building reset to filter graph nodes (whose `building`

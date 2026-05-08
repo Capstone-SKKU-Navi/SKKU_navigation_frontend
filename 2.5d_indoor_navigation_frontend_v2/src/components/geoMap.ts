@@ -91,6 +91,11 @@ export function initMap(): void {
       FloatingLabels.init(map!);
       RouteOverlay.initOverlay(map!);
       setupRoomClick();
+      // Prime camera-driven focus and listen for camera changes. The focus
+      // rule only affects 3D rendering, but we keep the focused set updated
+      // even in 2D so toggling to 3D snaps immediately to the right building.
+      IndoorLayer.updateCameraFocus(map!);
+      map!.on('moveend', () => IndoorLayer.updateCameraFocus(map!));
     } catch (e) {
       console.error('Map init error:', e);
     }
@@ -196,60 +201,68 @@ export function clearHighlight(): void {
   if (!map) return;
   IndoorLayer.highlightRoom(map, null);
   hideRoomInfoPopup();
+  // Releasing the highlight also releases the focus pin — matches the
+  // spec for popup close / ESC / empty-space click.
+  IndoorLayer.clearPinnedFocus(map);
+}
+
+/** Pin the 3D focus to a specific set of buildings (route active / search). */
+export function setIndoorFocusPin(buildings: Iterable<string>): void {
+  if (!map) return;
+  IndoorLayer.setPinnedFocus(map, buildings);
+}
+
+/** Release the 3D focus pin (camera-driven focus takes over). */
+export function clearIndoorFocusPin(): void {
+  if (!map) return;
+  IndoorLayer.clearPinnedFocus(map);
 }
 
 function setupRoomClick(): void {
   if (!map) return;
 
-  // Make room layers clickable (iterate buildings × levels)
+  // Click handlers attach only to the merged `-rooms-active` layer per
+  // building. The active layer's `_level == currentLevel` filter eliminates
+  // cross-floor hit-testing naturally — no per-level guard needed. The
+  // `-below` layers stay click-inert.
   for (const building of BackendService.getBuildingCodes()) {
-    const levels = BackendService.getBuildingLevels(building);
+    const layerId = `${building}-rooms-active`;
+    if (!map.getLayer(layerId)) continue;
 
-    for (const level of levels) {
-      const layerId = `${building}-floor-${level}-rooms-3d`;
-      if (!map.getLayer(layerId)) continue;
+    map.on('click', layerId, (e) => {
+      if (performance.now() < suppressClickUntil) return; // mobile long-press ate this click
+      if (!e.features || e.features.length === 0) return;
+      const feature = e.features[0];
+      const ref = feature.properties?.ref;
+      if (!ref) return;
 
-      map.on('click', layerId, (e) => {
-        if (performance.now() < suppressClickUntil) return; // mobile long-press ate this click
-        // 3D mode stacks every floor's extrusion on the same XY footprint, so a
-        // single click hits each floor's layer. Only let the active floor's
-        // handler win, otherwise the last-registered (lowest) floor overwrites
-        // the dispatch and we always end up selecting a 1F room.
-        if (level !== IndoorLayer.getCurrentLevel()) return;
-        if (!e.features || e.features.length === 0) return;
-        const feature = e.features[0];
-        const ref = feature.properties?.ref;
-        if (!ref) return;
+      document.dispatchEvent(new CustomEvent('roomClicked', {
+        detail: {
+          ref,
+          name: feature.properties?.name ?? '',
+          roomType: feature.properties?.room_type ?? '',
+          level: IndoorLayer.getCurrentLevel(),
+          screenX: e.point.x,
+          screenY: e.point.y + 56, // offset by header height
+        },
+      }));
+    });
 
-        document.dispatchEvent(new CustomEvent('roomClicked', {
-          detail: {
-            ref,
-            name: feature.properties?.name ?? '',
-            roomType: feature.properties?.room_type ?? '',
-            level: IndoorLayer.getCurrentLevel(),
-            screenX: e.point.x,
-            screenY: e.point.y + 56, // offset by header height
-          },
-        }));
-      });
+    map.on('contextmenu', layerId, (e) => {
+      if (!e.features || e.features.length === 0) return;
+      const ref = e.features[0].properties?.ref;
+      if (!ref) return;
+      e.preventDefault();
+      document.dispatchEvent(new CustomEvent('roomRightClicked', { detail: { ref } }));
+    });
 
-      map.on('contextmenu', layerId, (e) => {
-        if (level !== IndoorLayer.getCurrentLevel()) return;
-        if (!e.features || e.features.length === 0) return;
-        const ref = e.features[0].properties?.ref;
-        if (!ref) return;
-        e.preventDefault();
-        document.dispatchEvent(new CustomEvent('roomRightClicked', { detail: { ref } }));
-      });
+    map.on('mouseenter', layerId, () => {
+      if (map) map.getCanvas().style.cursor = 'pointer';
+    });
 
-      map.on('mouseenter', layerId, () => {
-        if (map) map.getCanvas().style.cursor = 'pointer';
-      });
-
-      map.on('mouseleave', layerId, () => {
-        if (map) map.getCanvas().style.cursor = '';
-      });
-    }
+    map.on('mouseleave', layerId, () => {
+      if (map) map.getCanvas().style.cursor = '';
+    });
   }
 }
 

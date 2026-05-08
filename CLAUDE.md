@@ -1,8 +1,4 @@
 
-# Save the Token: Response to English
-When I ask you to korean, you should asnwer me to english. Korean is 7 times expensive then english.
-
-
 
 # Project Instructions
 
