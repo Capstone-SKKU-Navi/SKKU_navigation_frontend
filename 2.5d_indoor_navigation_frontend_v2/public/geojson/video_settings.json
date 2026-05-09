@@ -980,5 +980,1309 @@
   "ectr_c_F1_1_cw.mp4": {
     "yaw": 233.19998779296867,
     "updatedAt": 1778210763675
+  },
+  "outside_1_ccw.mp4": {
+    "yaw": 181.20000000000005,
+    "updatedAt": 1778330810329
+  },
+  "outside_1_cw.mp4": {
+    "yaw": 188.13333740234384,
+    "updatedAt": 1778330933668
+  },
+  "outside_10_ccw.mp4": {
+    "yaw": 175.60000762939467,
+    "updatedAt": 1778330941049
+  },
+  "outside_10_cw.mp4": {
+    "yaw": 197.73334960937495,
+    "updatedAt": 1778330945114
+  },
+  "outside_100_ccw.mp4": {
+    "yaw": 152.26667480468757,
+    "updatedAt": 1778330949609
+  },
+  "outside_100_cw.mp4": {
+    "yaw": 147.33334655761723,
+    "updatedAt": 1778330953585
+  },
+  "outside_101_ccw.mp4": {
+    "yaw": 146.26667022705078,
+    "updatedAt": 1778330957312
+  },
+  "outside_101_cw.mp4": {
+    "yaw": 53.46666564941404,
+    "updatedAt": 1778330962482
+  },
+  "outside_102_ccw.mp4": {
+    "yaw": 146.80000000000007,
+    "updatedAt": 1778330972447
+  },
+  "outside_102_cw.mp4": {
+    "yaw": 120.40000381469719,
+    "updatedAt": 1778330979099
+  },
+  "outside_103_ccw.mp4": {
+    "yaw": 140.5333312988281,
+    "updatedAt": 1778330986000
+  },
+  "outside_103_cw.mp4": {
+    "yaw": 131.4666748046875,
+    "updatedAt": 1778330990369
+  },
+  "outside_104_ccw.mp4": {
+    "yaw": 112.00000305175786,
+    "updatedAt": 1778330995111
+  },
+  "outside_104_cw.mp4": {
+    "yaw": 116.6666748046876,
+    "updatedAt": 1778331000855
+  },
+  "outside_105_ccw.mp4": {
+    "yaw": 55.06666259765626,
+    "updatedAt": 1778331004772
+  },
+  "outside_105_cw.mp4": {
+    "yaw": 144.13334960937516,
+    "updatedAt": 1778331008516
+  },
+  "outside_106_ccw.mp4": {
+    "yaw": 126.80000305175776,
+    "updatedAt": 1778331014755
+  },
+  "outside_106_cw.mp4": {
+    "yaw": 57.19999999999999,
+    "updatedAt": 1778331021555
+  },
+  "outside_107_ccw.mp4": {
+    "yaw": 128.2666748046874,
+    "updatedAt": 1778331028641
+  },
+  "outside_107_cw.mp4": {
+    "yaw": 191.20000610351565,
+    "updatedAt": 1778331032665
+  },
+  "outside_108_ccw.mp4": {
+    "yaw": 87.46666564941393,
+    "updatedAt": 1778331038679
+  },
+  "outside_108_cw.mp4": {
+    "yaw": 152.9333374023439,
+    "updatedAt": 1778331041950
+  },
+  "outside_109_ccw.mp4": {
+    "yaw": 118.40001525878915,
+    "updatedAt": 1778331046095
+  },
+  "outside_109_cw.mp4": {
+    "yaw": 126.53334960937497,
+    "updatedAt": 1778331051288
+  },
+  "outside_11_ccw.mp4": {
+    "yaw": 174.80000000000007,
+    "updatedAt": 1778331056458
+  },
+  "outside_11_cw.mp4": {
+    "yaw": 189.06666660308838,
+    "updatedAt": 1778331061282
+  },
+  "outside_110_ccw.mp4": {
+    "yaw": 141.8666748046876,
+    "updatedAt": 1778331066089
+  },
+  "outside_110_cw.mp4": {
+    "yaw": 40.80000000000001,
+    "updatedAt": 1778331069941
+  },
+  "outside_111_ccw.mp4": {
+    "yaw": 113.86667785644539,
+    "updatedAt": 1778331075837
+  },
+  "outside_111_cw.mp4": {
+    "yaw": 124.00000305175786,
+    "updatedAt": 1778331080160
+  },
+  "outside_112_ccw.mp4": {
+    "yaw": 117.33334045410157,
+    "updatedAt": 1778331085399
+  },
+  "outside_112_cw.mp4": {
+    "yaw": 117.86666564941424,
+    "updatedAt": 1778331092491
+  },
+  "outside_113_ccw.mp4": {
+    "yaw": 133.60000000000008,
+    "updatedAt": 1778331098115
+  },
+  "outside_113_cw.mp4": {
+    "yaw": 109.06666564941406,
+    "updatedAt": 1778331102149
+  },
+  "outside_114_ccw.mp4": {
+    "yaw": 106.266665649414,
+    "updatedAt": 1778331108326
+  },
+  "outside_114_cw.mp4": {
+    "yaw": 83.73333740234375,
+    "updatedAt": 1778331114274
+  },
+  "outside_115_ccw.mp4": {
+    "yaw": 90.79999999999995,
+    "updatedAt": 1778331120372
+  },
+  "outside_115_cw.mp4": {
+    "yaw": 121.73334121704096,
+    "updatedAt": 1778331123952
+  },
+  "outside_116_ccw.mp4": {
+    "yaw": 142.6666656494143,
+    "updatedAt": 1778331174948
+  },
+  "outside_116_cw.mp4": {
+    "yaw": 169.6000040054322,
+    "updatedAt": 1778331179097
+  },
+  "outside_117_ccw.mp4": {
+    "yaw": 145.73333129882815,
+    "updatedAt": 1778331235526
+  },
+  "outside_117_cw.mp4": {
+    "yaw": 139.06667480468758,
+    "updatedAt": 1778331239792
+  },
+  "outside_118_ccw.mp4": {
+    "yaw": 110.0000030517578,
+    "updatedAt": 1778331243047
+  },
+  "outside_118_cw.mp4": {
+    "yaw": 122.00000610351566,
+    "updatedAt": 1778331246899
+  },
+  "outside_119_ccw.mp4": {
+    "yaw": 123.73332519531249,
+    "updatedAt": 1778331250622
+  },
+  "outside_119_cw.mp4": {
+    "yaw": 114.66667480468726,
+    "updatedAt": 1778331254658
+  },
+  "outside_12_ccw.mp4": {
+    "yaw": 211.33332519531237,
+    "updatedAt": 1778331260130
+  },
+  "outside_12_cw.mp4": {
+    "yaw": 217.46668243408203,
+    "updatedAt": 1778331263280
+  },
+  "outside_120_ccw.mp4": {
+    "yaw": 90.53333740234348,
+    "updatedAt": 1778331267578
+  },
+  "outside_120_cw.mp4": {
+    "yaw": 139.46668090820316,
+    "updatedAt": 1778331271066
+  },
+  "outside_121_ccw.mp4": {
+    "yaw": 116.66667480468755,
+    "updatedAt": 1778331274717
+  },
+  "outside_121_cw.mp4": {
+    "yaw": 105.0666687011718,
+    "updatedAt": 1778331278391
+  },
+  "outside_122_ccw.mp4": {
+    "yaw": 108.93334045410154,
+    "updatedAt": 1778331282345
+  },
+  "outside_122_cw.mp4": {
+    "yaw": 118.66666259765623,
+    "updatedAt": 1778331285333
+  },
+  "outside_123_ccw.mp4": {
+    "yaw": 96.93333129882808,
+    "updatedAt": 1778331289405
+  },
+  "outside_123_cw.mp4": {
+    "yaw": 100.79999999999995,
+    "updatedAt": 1778331293355
+  },
+  "outside_124_ccw.mp4": {
+    "yaw": 88.13333129882818,
+    "updatedAt": 1778331297861
+  },
+  "outside_124_cw.mp4": {
+    "yaw": 99.2000000000001,
+    "updatedAt": 1778331301262
+  },
+  "outside_125_ccw.mp4": {
+    "yaw": 85.60000000000002,
+    "updatedAt": 1778331305388
+  },
+  "outside_125_cw.mp4": {
+    "yaw": 41.4666748046875,
+    "updatedAt": 1778331311169
+  },
+  "outside_126_ccw.mp4": {
+    "yaw": 81.0666625976562,
+    "updatedAt": 1778331316418
+  },
+  "outside_126_cw.mp4": {
+    "yaw": 72,
+    "updatedAt": 1778331319605
+  },
+  "outside_127_ccw.mp4": {
+    "yaw": 103.19999084472659,
+    "updatedAt": 1778331323364
+  },
+  "outside_127_cw.mp4": {
+    "yaw": 96.933349609375,
+    "updatedAt": 1778331327130
+  },
+  "outside_128_ccw.mp4": {
+    "yaw": 104.93334045410154,
+    "updatedAt": 1778331330438
+  },
+  "outside_128_cw.mp4": {
+    "yaw": 130.26667480468757,
+    "updatedAt": 1778331333373
+  },
+  "outside_129_ccw.mp4": {
+    "yaw": 97.33333129882828,
+    "updatedAt": 1778331337682
+  },
+  "outside_129_cw.mp4": {
+    "yaw": 153.86666870117165,
+    "updatedAt": 1778331341821
+  },
+  "outside_13_ccw.mp4": {
+    "yaw": 251.73333740234386,
+    "updatedAt": 1778331347523
+  },
+  "outside_13_cw.mp4": {
+    "yaw": 200.26666259765636,
+    "updatedAt": 1778331351429
+  },
+  "outside_130_ccw.mp4": {
+    "yaw": 102.8000038146971,
+    "updatedAt": 1778331355244
+  },
+  "outside_130_cw.mp4": {
+    "yaw": 167.33333740234366,
+    "updatedAt": 1778331359633
+  },
+  "outside_131_ccw.mp4": {
+    "yaw": 180.00000762939453,
+    "updatedAt": 1778331363072
+  },
+  "outside_131_cw.mp4": {
+    "yaw": 147.33333129882828,
+    "updatedAt": 1778331366686
+  },
+  "outside_132_ccw.mp4": {
+    "yaw": 167.60000000000014,
+    "updatedAt": 1778331371581
+  },
+  "outside_132_cw.mp4": {
+    "yaw": 144.1333282470702,
+    "updatedAt": 1778331377096
+  },
+  "outside_133_ccw.mp4": {
+    "yaw": 123.86667480468753,
+    "updatedAt": 1778331381876
+  },
+  "outside_133_cw.mp4": {
+    "yaw": 148.66667861938492,
+    "updatedAt": 1778331385413
+  },
+  "outside_134_ccw.mp4": {
+    "yaw": 158.13333129882812,
+    "updatedAt": 1778331392347
+  },
+  "outside_134_cw.mp4": {
+    "yaw": 169.8666748046876,
+    "updatedAt": 1778331398012
+  },
+  "outside_135_ccw.mp4": {
+    "yaw": 137.3333374023439,
+    "updatedAt": 1778331402146
+  },
+  "outside_135_cw.mp4": {
+    "yaw": 155.466668701172,
+    "updatedAt": 1778331406387
+  },
+  "outside_136_ccw.mp4": {
+    "yaw": 146.53333740234365,
+    "updatedAt": 1778331410847
+  },
+  "outside_136_cw.mp4": {
+    "yaw": 140.93332519531236,
+    "updatedAt": 1778331417351
+  },
+  "outside_137_ccw.mp4": {
+    "yaw": 154.8000061035159,
+    "updatedAt": 1778331422491
+  },
+  "outside_137_cw.mp4": {
+    "yaw": 174.00000000000023,
+    "updatedAt": 1778331426956
+  },
+  "outside_138_ccw.mp4": {
+    "yaw": 148.00000400543217,
+    "updatedAt": 1778331430702
+  },
+  "outside_138_cw.mp4": {
+    "yaw": 122.26667480468745,
+    "updatedAt": 1778331435241
+  },
+  "outside_139_ccw.mp4": {
+    "yaw": 131.8666748046876,
+    "updatedAt": 1778331439179
+  },
+  "outside_139_cw.mp4": {
+    "yaw": 163.60001220703134,
+    "updatedAt": 1778331445150
+  },
+  "outside_14_ccw.mp4": {
+    "yaw": 197.60000000000014,
+    "updatedAt": 1778331449525
+  },
+  "outside_14_cw.mp4": {
+    "yaw": 211.33334350585938,
+    "updatedAt": 1778331453861
+  },
+  "outside_140_ccw.mp4": {
+    "yaw": 152.93333740234402,
+    "updatedAt": 1778331458803
+  },
+  "outside_140_cw.mp4": {
+    "yaw": 141.4666748046876,
+    "updatedAt": 1778331464219
+  },
+  "outside_141_ccw.mp4": {
+    "yaw": 176.53333129882822,
+    "updatedAt": 1778331468704
+  },
+  "outside_141_cw.mp4": {
+    "yaw": 88.00000610351537,
+    "updatedAt": 1778331473740
+  },
+  "outside_142_ccw.mp4": {
+    "yaw": 148.66666564941414,
+    "updatedAt": 1778331477492
+  },
+  "outside_142_cw.mp4": {
+    "yaw": 148.39999084472652,
+    "updatedAt": 1778331482045
+  },
+  "outside_143_ccw.mp4": {
+    "yaw": 169.33334140777595,
+    "updatedAt": 1778331485828
+  },
+  "outside_143_cw.mp4": {
+    "yaw": 160.40000801086455,
+    "updatedAt": 1778331491319
+  },
+  "outside_144_ccw.mp4": {
+    "yaw": 166.66667175292957,
+    "updatedAt": 1778331497616
+  },
+  "outside_144_cw.mp4": {
+    "yaw": 139.06666564941423,
+    "updatedAt": 1778331502681
+  },
+  "outside_145_ccw.mp4": {
+    "yaw": 141.06667175292966,
+    "updatedAt": 1778331506427
+  },
+  "outside_145_cw.mp4": {
+    "yaw": 148,
+    "updatedAt": 1778331510204
+  },
+  "outside_146_ccw.mp4": {
+    "yaw": 101.60000000000002,
+    "updatedAt": 1778331514761
+  },
+  "outside_146_cw.mp4": {
+    "yaw": 64.39999999999998,
+    "updatedAt": 1778331518011
+  },
+  "outside_147_ccw.mp4": {
+    "yaw": 114.40000305175789,
+    "updatedAt": 1778331523298
+  },
+  "outside_147_cw.mp4": {
+    "yaw": 124.26667022705072,
+    "updatedAt": 1778331526636
+  },
+  "outside_148_ccw.mp4": {
+    "yaw": 143.20000305175796,
+    "updatedAt": 1778331530360
+  },
+  "outside_148_cw.mp4": {
+    "yaw": 144.5333404541018,
+    "updatedAt": 1778331534095
+  },
+  "outside_149_ccw.mp4": {
+    "yaw": 148.80000305175753,
+    "updatedAt": 1778331544120
+  },
+  "outside_149_cw.mp4": {
+    "yaw": 121.33334960937509,
+    "updatedAt": 1778331550239
+  },
+  "outside_15_ccw.mp4": {
+    "yaw": 142.6666748046875,
+    "updatedAt": 1778331560089
+  },
+  "outside_15_cw.mp4": {
+    "yaw": 187.3333435058595,
+    "updatedAt": 1778331567411
+  },
+  "outside_150_ccw.mp4": {
+    "yaw": 83.73333129882809,
+    "updatedAt": 1778331571280
+  },
+  "outside_150_cw.mp4": {
+    "yaw": 117.33334350585932,
+    "updatedAt": 1778331578369
+  },
+  "outside_151_ccw.mp4": {
+    "yaw": 108.6666870117187,
+    "updatedAt": 1778331583951
+  },
+  "outside_151_cw.mp4": {
+    "yaw": 172.66666259765634,
+    "updatedAt": 1778331587577
+  },
+  "outside_152_ccw.mp4": {
+    "yaw": 130.13332824707038,
+    "updatedAt": 1778331592087
+  },
+  "outside_152_cw.mp4": {
+    "yaw": 109.33333740234372,
+    "updatedAt": 1778331599524
+  },
+  "outside_153_ccw.mp4": {
+    "yaw": 164,
+    "updatedAt": 1778331603077
+  },
+  "outside_153_cw.mp4": {
+    "yaw": 88.0000030517578,
+    "updatedAt": 1778331609893
+  },
+  "outside_154_ccw.mp4": {
+    "yaw": 112.40000305175784,
+    "updatedAt": 1778331614695
+  },
+  "outside_154_cw.mp4": {
+    "yaw": 94.6666748046876,
+    "updatedAt": 1778331622359
+  },
+  "outside_155_ccw.mp4": {
+    "yaw": 87.19999694824207,
+    "updatedAt": 1778331625979
+  },
+  "outside_155_cw.mp4": {
+    "yaw": 129.06666641235353,
+    "updatedAt": 1778331630376
+  },
+  "outside_156_ccw.mp4": {
+    "yaw": 118.40000305175784,
+    "updatedAt": 1778331637964
+  },
+  "outside_156_cw.mp4": {
+    "yaw": 115.86666870117176,
+    "updatedAt": 1778331645192
+  },
+  "outside_157_ccw.mp4": {
+    "yaw": 94.3999954223633,
+    "updatedAt": 1778331648851
+  },
+  "outside_157_cw.mp4": {
+    "yaw": 125.60000305175782,
+    "updatedAt": 1778331653997
+  },
+  "outside_158_ccw.mp4": {
+    "yaw": 86.8000030517577,
+    "updatedAt": 1778331658677
+  },
+  "outside_158_cw.mp4": {
+    "yaw": 82.00000305175774,
+    "updatedAt": 1778331663328
+  },
+  "outside_159_ccw.mp4": {
+    "yaw": 86.53334960937497,
+    "updatedAt": 1778331670567
+  },
+  "outside_159_cw.mp4": {
+    "yaw": 80.79999999999995,
+    "updatedAt": 1778331677552
+  },
+  "outside_16_ccw.mp4": {
+    "yaw": 140.2666656494141,
+    "updatedAt": 1778331681675
+  },
+  "outside_16_cw.mp4": {
+    "yaw": 188.66667480468755,
+    "updatedAt": 1778331688741
+  },
+  "outside_160_ccw.mp4": {
+    "yaw": 135.4666687011719,
+    "updatedAt": 1778331694475
+  },
+  "outside_160_cw.mp4": {
+    "yaw": 141.06666564941412,
+    "updatedAt": 1778331699527
+  },
+  "outside_161_ccw.mp4": {
+    "yaw": 108.9333374023438,
+    "updatedAt": 1778331705397
+  },
+  "outside_161_cw.mp4": {
+    "yaw": 121.8666870117188,
+    "updatedAt": 1778331710704
+  },
+  "outside_162_ccw.mp4": {
+    "yaw": 111.06667480468752,
+    "updatedAt": 1778331718413
+  },
+  "outside_162_cw.mp4": {
+    "yaw": 150.93332824707028,
+    "updatedAt": 1778331724013
+  },
+  "outside_163_ccw.mp4": {
+    "yaw": 116.80000305175781,
+    "updatedAt": 1778331728611
+  },
+  "outside_163_cw.mp4": {
+    "yaw": 69.8666625976561,
+    "updatedAt": 1778331733466
+  },
+  "outside_17_ccw.mp4": {
+    "yaw": 145.3333374023439,
+    "updatedAt": 1778331738829
+  },
+  "outside_17_cw.mp4": {
+    "yaw": 185.99999694824237,
+    "updatedAt": 1778331742782
+  },
+  "outside_18_ccw.mp4": {
+    "yaw": 140.53334045410168,
+    "updatedAt": 1778331747060
+  },
+  "outside_18_cw.mp4": {
+    "yaw": 153.20000000000005,
+    "updatedAt": 1778331751791
+  },
+  "outside_19_ccw.mp4": {
+    "yaw": 116.53333740234359,
+    "updatedAt": 1778331757153
+  },
+  "outside_19_cw.mp4": {
+    "yaw": 77.46667480468733,
+    "updatedAt": 1778331762136
+  },
+  "outside_2_ccw.mp4": {
+    "yaw": 214.933349609375,
+    "updatedAt": 1778331769291
+  },
+  "outside_2_cw.mp4": {
+    "yaw": 180.00000305175797,
+    "updatedAt": 1778331773600
+  },
+  "outside_20_ccw.mp4": {
+    "yaw": 97.19999999999993,
+    "updatedAt": 1778331786428
+  },
+  "outside_20_cw.mp4": {
+    "yaw": 133.2000000000001,
+    "updatedAt": 1778331790647
+  },
+  "outside_21_ccw.mp4": {
+    "yaw": 179.73334045410127,
+    "updatedAt": 1778331796204
+  },
+  "outside_21_cw.mp4": {
+    "yaw": 158.2666656494141,
+    "updatedAt": 1778331800546
+  },
+  "outside_22_ccw.mp4": {
+    "yaw": 173.60000000000002,
+    "updatedAt": 1778331806153
+  },
+  "outside_22_cw.mp4": {
+    "yaw": 236.00001220703143,
+    "updatedAt": 1778331810983
+  },
+  "outside_23_ccw.mp4": {
+    "yaw": 162.13334045410159,
+    "updatedAt": 1778331816975
+  },
+  "outside_23_cw.mp4": {
+    "yaw": 167.06666259765632,
+    "updatedAt": 1778331823887
+  },
+  "outside_24_ccw.mp4": {
+    "yaw": 96.26667785644514,
+    "updatedAt": 1778331831638
+  },
+  "outside_24_cw.mp4": {
+    "yaw": 233.86667480468748,
+    "updatedAt": 1778331836393
+  },
+  "outside_25_ccw.mp4": {
+    "yaw": 180.66666259765623,
+    "updatedAt": 1778331841990
+  },
+  "outside_25_cw.mp4": {
+    "yaw": 203.2000080108644,
+    "updatedAt": 1778331847856
+  },
+  "outside_26_ccw.mp4": {
+    "yaw": 181.73333740234364,
+    "updatedAt": 1778331852848
+  },
+  "outside_26_cw.mp4": {
+    "yaw": 220.4000000000002,
+    "updatedAt": 1778331856971
+  },
+  "outside_27_ccw.mp4": {
+    "yaw": 226.26666564941422,
+    "updatedAt": 1778331863765
+  },
+  "outside_27_cw.mp4": {
+    "yaw": 130.13332519531247,
+    "updatedAt": 1778331870574
+  },
+  "outside_28_ccw.mp4": {
+    "yaw": 178.26667060852037,
+    "updatedAt": 1778331878463
+  },
+  "outside_28_cw.mp4": {
+    "yaw": 210.26668090820317,
+    "updatedAt": 1778331882631
+  },
+  "outside_29_ccw.mp4": {
+    "yaw": 177.33333740234366,
+    "updatedAt": 1778331887589
+  },
+  "outside_29_cw.mp4": {
+    "yaw": 176.0000000000001,
+    "updatedAt": 1778331892525
+  },
+  "outside_3_ccw.mp4": {
+    "yaw": 118.66667480468743,
+    "updatedAt": 1778331896894
+  },
+  "outside_3_cw.mp4": {
+    "yaw": 223.99998931884784,
+    "updatedAt": 1778331903091
+  },
+  "outside_30_ccw.mp4": {
+    "yaw": 162.26667480468757,
+    "updatedAt": 1778331907348
+  },
+  "outside_30_cw.mp4": {
+    "yaw": 155.33333740234377,
+    "updatedAt": 1778331912215
+  },
+  "outside_31_ccw.mp4": {
+    "yaw": 78.9333374023438,
+    "updatedAt": 1778331925089
+  },
+  "outside_31_cw.mp4": {
+    "yaw": 188.93334541320826,
+    "updatedAt": 1778331932309
+  },
+  "outside_32_ccw.mp4": {
+    "yaw": 145.20000000000005,
+    "updatedAt": 1778331935991
+  },
+  "outside_32_cw.mp4": {
+    "yaw": 139.06666564941418,
+    "updatedAt": 1778331939248
+  },
+  "outside_33_ccw.mp4": {
+    "yaw": 234.13332824707038,
+    "updatedAt": 1778331944135
+  },
+  "outside_33_cw.mp4": {
+    "yaw": 168.26666641235363,
+    "updatedAt": 1778331948727
+  },
+  "outside_34_ccw.mp4": {
+    "yaw": 156.26667480468745,
+    "updatedAt": 1778331952919
+  },
+  "outside_34_cw.mp4": {
+    "yaw": 145.73334960937524,
+    "updatedAt": 1778331957901
+  },
+  "outside_35_ccw.mp4": {
+    "yaw": 75.06667480468752,
+    "updatedAt": 1778331962341
+  },
+  "outside_35_cw.mp4": {
+    "yaw": 155.73333740234398,
+    "updatedAt": 1778331967108
+  },
+  "outside_36_ccw.mp4": {
+    "yaw": 86.66666564941397,
+    "updatedAt": 1778331975083
+  },
+  "outside_36_cw.mp4": {
+    "yaw": 228.40000381469713,
+    "updatedAt": 1778331980283
+  },
+  "outside_37_ccw.mp4": {
+    "yaw": 178.26666259765636,
+    "updatedAt": 1778331986330
+  },
+  "outside_37_cw.mp4": {
+    "yaw": 127.19999999999987,
+    "updatedAt": 1778331990585
+  },
+  "outside_38_ccw.mp4": {
+    "yaw": 94.53333129882793,
+    "updatedAt": 1778331996523
+  },
+  "outside_38_cw.mp4": {
+    "yaw": 120.26666870117174,
+    "updatedAt": 1778332001373
+  },
+  "outside_39_ccw.mp4": {
+    "yaw": 172.9333389282226,
+    "updatedAt": 1778332007615
+  },
+  "outside_39_cw.mp4": {
+    "yaw": 60.133340454101585,
+    "updatedAt": 1778332011543
+  },
+  "outside_4_ccw.mp4": {
+    "yaw": 127.73334350585935,
+    "updatedAt": 1778332016357
+  },
+  "outside_4_cw.mp4": {
+    "yaw": 140.0000061035156,
+    "updatedAt": 1778332020916
+  },
+  "outside_40_ccw.mp4": {
+    "yaw": 155.60001220703123,
+    "updatedAt": 1778332027018
+  },
+  "outside_40_cw.mp4": {
+    "yaw": 118.26667480468751,
+    "updatedAt": 1778332031208
+  },
+  "outside_41_ccw.mp4": {
+    "yaw": 33.06665649414066,
+    "updatedAt": 1778332041046
+  },
+  "outside_41_cw.mp4": {
+    "yaw": 182.53334960937502,
+    "updatedAt": 1778332048435
+  },
+  "outside_42_ccw.mp4": {
+    "yaw": 106.93332519531248,
+    "updatedAt": 1778332052447
+  },
+  "outside_42_cw.mp4": {
+    "yaw": 106.79999999999984,
+    "updatedAt": 1778332057591
+  },
+  "outside_43_ccw.mp4": {
+    "yaw": 16.666674804687545,
+    "updatedAt": 1778332067729
+  },
+  "outside_43_cw.mp4": {
+    "yaw": 38.66667480468749,
+    "updatedAt": 1778332071173
+  },
+  "outside_44_ccw.mp4": {
+    "yaw": 78.13333129882812,
+    "updatedAt": 1778332074550
+  },
+  "outside_44_cw.mp4": {
+    "yaw": 155.33333740234366,
+    "updatedAt": 1778332079122
+  },
+  "outside_45_ccw.mp4": {
+    "yaw": 107.20000000000005,
+    "updatedAt": 1778332082012
+  },
+  "outside_45_cw.mp4": {
+    "yaw": 353.8666625976563,
+    "updatedAt": 1778332086552
+  },
+  "outside_46_ccw.mp4": {
+    "yaw": 109.46667480468756,
+    "updatedAt": 1778332091533
+  },
+  "outside_46_cw.mp4": {
+    "yaw": 120.53333740234376,
+    "updatedAt": 1778332094995
+  },
+  "outside_47_ccw.mp4": {
+    "yaw": 205.33334045410163,
+    "updatedAt": 1778332101469
+  },
+  "outside_47_cw.mp4": {
+    "yaw": 253.06666870117175,
+    "updatedAt": 1778332107392
+  },
+  "outside_48_ccw.mp4": {
+    "yaw": 232.533352661133,
+    "updatedAt": 1778332114989
+  },
+  "outside_48_cw.mp4": {
+    "yaw": 205.20000610351576,
+    "updatedAt": 1778332119068
+  },
+  "outside_49_ccw.mp4": {
+    "yaw": 212.79999389648427,
+    "updatedAt": 1778332124427
+  },
+  "outside_49_cw.mp4": {
+    "yaw": 240.26668701171877,
+    "updatedAt": 1778332130113
+  },
+  "outside_5_ccw.mp4": {
+    "yaw": 197.4666748046875,
+    "updatedAt": 1778332136062
+  },
+  "outside_5_cw.mp4": {
+    "yaw": 201.86667060852074,
+    "updatedAt": 1778332146216
+  },
+  "outside_50_ccw.mp4": {
+    "yaw": 159.06666259765643,
+    "updatedAt": 1778332159534
+  },
+  "outside_50_cw.mp4": {
+    "yaw": 224.6666740417479,
+    "updatedAt": 1778332163595
+  },
+  "outside_51_ccw.mp4": {
+    "yaw": 200.39999999999992,
+    "updatedAt": 1778332170532
+  },
+  "outside_51_cw.mp4": {
+    "yaw": 216.26667480468757,
+    "updatedAt": 1778332174738
+  },
+  "outside_52_ccw.mp4": {
+    "yaw": 168.93333892822272,
+    "updatedAt": 1778332179288
+  },
+  "outside_52_cw.mp4": {
+    "yaw": 301.20001220703125,
+    "updatedAt": 1778332184345
+  },
+  "outside_53_ccw.mp4": {
+    "yaw": 210.13333282470705,
+    "updatedAt": 1778332191248
+  },
+  "outside_53_cw.mp4": {
+    "yaw": 169.73333282470708,
+    "updatedAt": 1778332194650
+  },
+  "outside_54_ccw.mp4": {
+    "yaw": 211.33334045410152,
+    "updatedAt": 1778332200155
+  },
+  "outside_54_cw.mp4": {
+    "yaw": 114.39999999999998,
+    "updatedAt": 1778332206415
+  },
+  "outside_55_ccw.mp4": {
+    "yaw": 139.33333740234355,
+    "updatedAt": 1778332210241
+  },
+  "outside_55_cw.mp4": {
+    "yaw": 204.26666870117197,
+    "updatedAt": 1778332215270
+  },
+  "outside_56_ccw.mp4": {
+    "yaw": 141.73334960937484,
+    "updatedAt": 1778332219341
+  },
+  "outside_56_cw.mp4": {
+    "yaw": 273.06667480468747,
+    "updatedAt": 1778332223558
+  },
+  "outside_57_ccw.mp4": {
+    "yaw": 219.33334045410152,
+    "updatedAt": 1778332230012
+  },
+  "outside_57_cw.mp4": {
+    "yaw": 205.73332519531246,
+    "updatedAt": 1778332235273
+  },
+  "outside_58_ccw.mp4": {
+    "yaw": 231.3333450317383,
+    "updatedAt": 1778332241125
+  },
+  "outside_58_cw.mp4": {
+    "yaw": 194.6666748046875,
+    "updatedAt": 1778332246115
+  },
+  "outside_59_ccw.mp4": {
+    "yaw": 206.53332519531253,
+    "updatedAt": 1778332252208
+  },
+  "outside_59_cw.mp4": {
+    "yaw": 174.66667480468755,
+    "updatedAt": 1778332255744
+  },
+  "outside_6_ccw.mp4": {
+    "yaw": 254.93334960937534,
+    "updatedAt": 1778332263035
+  },
+  "outside_6_cw.mp4": {
+    "yaw": 154.40000000000032,
+    "updatedAt": 1778332267403
+  },
+  "outside_60_ccw.mp4": {
+    "yaw": 257.8666702270507,
+    "updatedAt": 1778332275095
+  },
+  "outside_60_cw.mp4": {
+    "yaw": 130.13333740234378,
+    "updatedAt": 1778332278962
+  },
+  "outside_61_ccw.mp4": {
+    "yaw": 194.80001220703127,
+    "updatedAt": 1778332283674
+  },
+  "outside_61_cw.mp4": {
+    "yaw": 171.46667060852053,
+    "updatedAt": 1778332287438
+  },
+  "outside_62_ccw.mp4": {
+    "yaw": 206.66667060852058,
+    "updatedAt": 1778332291977
+  },
+  "outside_62_cw.mp4": {
+    "yaw": 129.73333740234375,
+    "updatedAt": 1778332296610
+  },
+  "outside_63_ccw.mp4": {
+    "yaw": 240.6666664123536,
+    "updatedAt": 1778332304374
+  },
+  "outside_63_cw.mp4": {
+    "yaw": 216.00000305175774,
+    "updatedAt": 1778332390303
+  },
+  "outside_64_ccw.mp4": {
+    "yaw": 236.66667480468755,
+    "updatedAt": 1778332399476
+  },
+  "outside_64_cw.mp4": {
+    "yaw": 158.66667480468755,
+    "updatedAt": 1778332404192
+  },
+  "outside_65_ccw.mp4": {
+    "yaw": 217.19999999999993,
+    "updatedAt": 1778332408362
+  },
+  "outside_65_cw.mp4": {
+    "yaw": 126.93333320617666,
+    "updatedAt": 1778332411730
+  },
+  "outside_66_ccw.mp4": {
+    "yaw": 184.5333374023437,
+    "updatedAt": 1778332416076
+  },
+  "outside_66_cw.mp4": {
+    "yaw": 205.33333740234366,
+    "updatedAt": 1778332419822
+  },
+  "outside_67_ccw.mp4": {
+    "yaw": 200.5333312988281,
+    "updatedAt": 1778332423804
+  },
+  "outside_67_cw.mp4": {
+    "yaw": 176.5333374023437,
+    "updatedAt": 1778332429417
+  },
+  "outside_68_ccw.mp4": {
+    "yaw": 188.39999999999986,
+    "updatedAt": 1778332433583
+  },
+  "outside_68_cw.mp4": {
+    "yaw": 126.00000400543195,
+    "updatedAt": 1778332437976
+  },
+  "outside_69_ccw.mp4": {
+    "yaw": 176.6666687011716,
+    "updatedAt": 1778332447291
+  },
+  "outside_69_cw.mp4": {
+    "yaw": 156.9333374023438,
+    "updatedAt": 1778332452959
+  },
+  "outside_7_ccw.mp4": {
+    "yaw": 200.3999916076657,
+    "updatedAt": 1778332460388
+  },
+  "outside_7_cw.mp4": {
+    "yaw": 173.3333282470703,
+    "updatedAt": 1778332464895
+  },
+  "outside_70_ccw.mp4": {
+    "yaw": 166.66667060852058,
+    "updatedAt": 1778332471087
+  },
+  "outside_70_cw.mp4": {
+    "yaw": 155.20000762939458,
+    "updatedAt": 1778332477942
+  },
+  "outside_71_ccw.mp4": {
+    "yaw": 170.66666660308852,
+    "updatedAt": 1778332483524
+  },
+  "outside_71_cw.mp4": {
+    "yaw": 140.80000000000018,
+    "updatedAt": 1778332488478
+  },
+  "outside_72_ccw.mp4": {
+    "yaw": 180.7999958038331,
+    "updatedAt": 1778332492648
+  },
+  "outside_72_cw.mp4": {
+    "yaw": 148.93333320617683,
+    "updatedAt": 1778332496025
+  },
+  "outside_73_ccw.mp4": {
+    "yaw": 159.33334350585938,
+    "updatedAt": 1778332500639
+  },
+  "outside_73_cw.mp4": {
+    "yaw": 165.8666625976564,
+    "updatedAt": 1778332505552
+  },
+  "outside_74_ccw.mp4": {
+    "yaw": 149.46667022705083,
+    "updatedAt": 1778332509372
+  },
+  "outside_74_cw.mp4": {
+    "yaw": 159.0666666030886,
+    "updatedAt": 1778332512516
+  },
+  "outside_75_ccw.mp4": {
+    "yaw": 159.33332901000972,
+    "updatedAt": 1778332517399
+  },
+  "outside_75_cw.mp4": {
+    "yaw": 153.1999977111816,
+    "updatedAt": 1778332522011
+  },
+  "outside_76_ccw.mp4": {
+    "yaw": 179.0666725158692,
+    "updatedAt": 1778332527563
+  },
+  "outside_76_cw.mp4": {
+    "yaw": 178.53333435058596,
+    "updatedAt": 1778332532014
+  },
+  "outside_77_ccw.mp4": {
+    "yaw": 144.0000030517578,
+    "updatedAt": 1778332535349
+  },
+  "outside_77_cw.mp4": {
+    "yaw": 110.13334045410159,
+    "updatedAt": 1778332540513
+  },
+  "outside_78_ccw.mp4": {
+    "yaw": 153.06666259765643,
+    "updatedAt": 1778332544504
+  },
+  "outside_78_cw.mp4": {
+    "yaw": 145.99999542236333,
+    "updatedAt": 1778332548434
+  },
+  "outside_79_ccw.mp4": {
+    "yaw": 149.3333328247071,
+    "updatedAt": 1778332552464
+  },
+  "outside_79_cw.mp4": {
+    "yaw": 169.7333332061769,
+    "updatedAt": 1778332557149
+  },
+  "outside_8_ccw.mp4": {
+    "yaw": 174,
+    "updatedAt": 1778332648676
+  },
+  "outside_8_cw.mp4": {
+    "yaw": 186.79999999999995,
+    "updatedAt": 1778332653660
+  },
+  "outside_80_ccw.mp4": {
+    "yaw": 157.2000038146973,
+    "updatedAt": 1778332656914
+  },
+  "outside_80_cw.mp4": {
+    "yaw": 173.2000038146973,
+    "updatedAt": 1778332660953
+  },
+  "outside_81_ccw.mp4": {
+    "yaw": 110.80000305175781,
+    "updatedAt": 1778332663978
+  },
+  "outside_81_cw.mp4": {
+    "yaw": 166.9333435058595,
+    "updatedAt": 1778332667345
+  },
+  "outside_82_ccw.mp4": {
+    "yaw": 89.4666580200194,
+    "updatedAt": 1778332672135
+  },
+  "outside_82_cw.mp4": {
+    "yaw": 131.20000801086428,
+    "updatedAt": 1778332675183
+  },
+  "outside_83_ccw.mp4": {
+    "yaw": 153.0666664123537,
+    "updatedAt": 1778332678808
+  },
+  "outside_83_cw.mp4": {
+    "yaw": 177.46668090820322,
+    "updatedAt": 1778332682604
+  },
+  "outside_84_ccw.mp4": {
+    "yaw": 110.53333740234359,
+    "updatedAt": 1778332686270
+  },
+  "outside_84_cw.mp4": {
+    "yaw": 160.26666870117185,
+    "updatedAt": 1778332691373
+  },
+  "outside_85_ccw.mp4": {
+    "yaw": 163.46666564941415,
+    "updatedAt": 1778332696131
+  },
+  "outside_85_cw.mp4": {
+    "yaw": 172.4000061035157,
+    "updatedAt": 1778332700405
+  },
+  "outside_86_ccw.mp4": {
+    "yaw": 132.26667480468757,
+    "updatedAt": 1778332705638
+  },
+  "outside_86_cw.mp4": {
+    "yaw": 147.33333740234366,
+    "updatedAt": 1778332714700
+  },
+  "outside_87_ccw.mp4": {
+    "yaw": 215.60001220703123,
+    "updatedAt": 1778332720735
+  },
+  "outside_87_cw.mp4": {
+    "yaw": 167.0666748046874,
+    "updatedAt": 1778332724563
+  },
+  "outside_88_ccw.mp4": {
+    "yaw": 91.20000801086422,
+    "updatedAt": 1778332728644
+  },
+  "outside_88_cw.mp4": {
+    "yaw": 143.06667480468752,
+    "updatedAt": 1778332731892
+  },
+  "outside_89_ccw.mp4": {
+    "yaw": 153.86667022705092,
+    "updatedAt": 1778332735619
+  },
+  "outside_89_cw.mp4": {
+    "yaw": 144.80000381469745,
+    "updatedAt": 1778332739150
+  },
+  "outside_9_ccw.mp4": {
+    "yaw": 214.66666259765617,
+    "updatedAt": 1778332744463
+  },
+  "outside_9_cw.mp4": {
+    "yaw": 239.0666687011718,
+    "updatedAt": 1778332747898
+  },
+  "outside_90_ccw.mp4": {
+    "yaw": 160.9333312988283,
+    "updatedAt": 1778332752652
+  },
+  "outside_90_cw.mp4": {
+    "yaw": 141.46666564941415,
+    "updatedAt": 1778332756047
+  },
+  "outside_91_ccw.mp4": {
+    "yaw": 59.599996948242165,
+    "updatedAt": 1778332760014
+  },
+  "outside_91_cw.mp4": {
+    "yaw": 83.33333740234366,
+    "updatedAt": 1778332764474
+  },
+  "outside_92_ccw.mp4": {
+    "yaw": 153.86667251586914,
+    "updatedAt": 1778332769320
+  },
+  "outside_92_cw.mp4": {
+    "yaw": 77.86666641235342,
+    "updatedAt": 1778332773188
+  },
+  "outside_93_ccw.mp4": {
+    "yaw": 176.66666870117183,
+    "updatedAt": 1778332776647
+  },
+  "outside_93_cw.mp4": {
+    "yaw": 165.5999999999999,
+    "updatedAt": 1778332781272
+  },
+  "outside_94_ccw.mp4": {
+    "yaw": 155.33333740234377,
+    "updatedAt": 1778332785139
+  },
+  "outside_94_cw.mp4": {
+    "yaw": 172.79999999999995,
+    "updatedAt": 1778332789238
+  },
+  "outside_95_ccw.mp4": {
+    "yaw": 133.6000038146973,
+    "updatedAt": 1778332794645
+  },
+  "outside_95_cw.mp4": {
+    "yaw": 149.60001220703128,
+    "updatedAt": 1778332797801
+  },
+  "outside_96_ccw.mp4": {
+    "yaw": 188.66668243408196,
+    "updatedAt": 1778332801678
+  },
+  "outside_96_cw.mp4": {
+    "yaw": 179.33333892822247,
+    "updatedAt": 1778332805140
+  },
+  "outside_97_ccw.mp4": {
+    "yaw": 157.8666748046876,
+    "updatedAt": 1778332808234
+  },
+  "outside_97_cw.mp4": {
+    "yaw": 160.00000801086435,
+    "updatedAt": 1778332812133
+  },
+  "outside_98_ccw.mp4": {
+    "yaw": 158.9333374023438,
+    "updatedAt": 1778332815699
+  },
+  "outside_98_cw.mp4": {
+    "yaw": 149.4666748046876,
+    "updatedAt": 1778332818814
+  },
+  "outside_99_ccw.mp4": {
+    "yaw": 156.93332901000986,
+    "updatedAt": 1778332822122
+  },
+  "outside_99_cw.mp4": {
+    "yaw": 200.80001220703127,
+    "updatedAt": 1778332828280
   }
 }

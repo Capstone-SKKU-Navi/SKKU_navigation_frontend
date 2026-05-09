@@ -5,16 +5,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85301",
+        "name": "창업보육실",
+        "room_type": "lab",
         "_idx": 1,
         "_centroid": [
           126.9752293,
           37.2960554
         ],
-        "_area_m2": 35.0
+        "_area_m2": 35
       },
       "geometry": {
         "type": "Polygon",
@@ -48,10 +50,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85303",
+        "name": "창업보육실",
+        "room_type": "lab",
         "_idx": 2,
         "_centroid": [
           126.97529,
@@ -91,10 +95,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85307",
+        "name": "창업보육실",
+        "room_type": "lab",
         "_idx": 3,
         "_centroid": [
           126.9753573,
@@ -134,10 +140,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85311",
+        "name": "창업보육실",
+        "room_type": "lab",
         "_idx": 4,
         "_centroid": [
           126.9754228,
@@ -177,10 +185,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 5,
         "_centroid": [
           126.9755992,
@@ -220,10 +230,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85313",
+        "name": "창업보육실",
+        "room_type": "lab",
         "_idx": 6,
         "_centroid": [
           126.9754898,
@@ -263,10 +275,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 7,
         "_centroid": [
           126.9756512,
@@ -310,10 +324,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85317",
+        "name": "창업보육실",
+        "room_type": "lab",
         "_idx": 8,
         "_centroid": [
           126.9755562,
@@ -357,10 +373,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 9,
         "_centroid": [
           126.9756118,
@@ -404,10 +422,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 10,
         "_centroid": [
           126.9756632,
@@ -447,10 +467,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85302",
+        "name": "창업보육실",
+        "room_type": "lab",
         "_idx": 11,
         "_centroid": [
           126.9752111,
@@ -490,16 +512,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85304",
+        "name": "창업보육실",
+        "room_type": "lab",
         "_idx": 12,
         "_centroid": [
           126.9752731,
           37.2959648
         ],
-        "_area_m2": 43.0
+        "_area_m2": 43
       },
       "geometry": {
         "type": "Polygon",
@@ -533,10 +557,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85308",
+        "name": "창업보육실",
+        "room_type": "lab",
         "_idx": 13,
         "_centroid": [
           126.9753408,
@@ -576,16 +602,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85312",
+        "name": "창업보육실",
+        "room_type": "lab",
         "_idx": 14,
         "_centroid": [
           126.9754053,
           37.2959477
         ],
-        "_area_m2": 39.0
+        "_area_m2": 39
       },
       "geometry": {
         "type": "Polygon",
@@ -619,10 +647,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85314",
+        "name": "글로벌창업대학원행정실/과학수사학과행정실",
+        "room_type": "office",
         "_idx": 15,
         "_centroid": [
           126.9754705,
@@ -662,10 +692,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85318",
+        "name": "창업보육실",
+        "room_type": "lab",
         "_idx": 16,
         "_centroid": [
           126.975531,
@@ -705,10 +737,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85320",
+        "name": "회의실",
+        "room_type": "lounge",
         "_idx": 17,
         "_centroid": [
           126.9755775,
@@ -752,10 +786,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85324",
+        "name": "창업보육실",
+        "room_type": "lab",
         "_idx": 18,
         "_centroid": [
           126.9756334,
@@ -795,10 +831,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "elevator",
         "_idx": 19,
         "_centroid": [
           126.9757445,
@@ -838,10 +876,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 20,
         "_centroid": [
           126.9757399,
@@ -881,10 +921,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85345",
+        "name": "구매운영팀",
+        "room_type": "office",
         "_idx": 21,
         "_centroid": [
           126.975856,
@@ -924,10 +966,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 22,
         "_centroid": [
           126.975733,
@@ -967,10 +1011,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 23,
         "_centroid": [
           126.9757269,
@@ -1010,8 +1056,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
+        "level": [
+          3
+        ],
+        "ref": "85351",
         "name": "",
         "room_type": "",
         "_idx": 24,
@@ -1053,16 +1101,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85356",
+        "name": "복합재료및구조해석연구실",
+        "room_type": "lab",
         "_idx": 25,
         "_centroid": [
           126.9757149,
           37.2957183
         ],
-        "_area_m2": 66.0
+        "_area_m2": 66
       },
       "geometry": {
         "type": "Polygon",
@@ -1096,10 +1146,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85357",
+        "name": "창업지원단장실",
+        "room_type": "office",
         "_idx": 26,
         "_centroid": [
           126.9758305,
@@ -1139,10 +1191,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85361",
+        "name": "창업지원단행정실",
+        "room_type": "office",
         "_idx": 27,
         "_centroid": [
           126.9758178,
@@ -1182,10 +1236,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85364",
+        "name": "차량시스템연구실",
+        "room_type": "lab",
         "_idx": 28,
         "_centroid": [
           126.9756941,
@@ -1225,10 +1281,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85367",
+        "name": "창업지원단사무공간",
+        "room_type": "office",
         "_idx": 29,
         "_centroid": [
           126.9758053,
@@ -1268,16 +1326,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 30,
         "_centroid": [
           126.9756753,
           37.2955559
         ],
-        "_area_m2": 13.0
+        "_area_m2": 13
       },
       "geometry": {
         "type": "Polygon",
@@ -1315,10 +1375,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85396",
+        "name": "열전달연구실",
+        "room_type": "lab",
         "_idx": 31,
         "_centroid": [
           126.9755091,
@@ -1358,10 +1420,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 32,
         "_centroid": [
           126.9757969,
@@ -1401,10 +1465,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 33,
         "_centroid": [
           126.9756677,
@@ -1452,10 +1518,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85392",
+        "name": "트라이볼로지연구실",
+        "room_type": "lab",
         "_idx": 34,
         "_centroid": [
           126.9755737,
@@ -1495,16 +1563,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 35,
         "_centroid": [
           126.9756176,
           37.2955266
         ],
-        "_area_m2": 11.0
+        "_area_m2": 11
       },
       "geometry": {
         "type": "Polygon",
@@ -1546,10 +1616,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 36,
         "_centroid": [
           126.9756378,
@@ -1593,10 +1665,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "elevator",
         "_idx": 37,
         "_centroid": [
           126.975684,
@@ -1636,10 +1710,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85373",
+        "name": "차세대디스플레이연구실",
+        "room_type": "lab",
         "_idx": 38,
         "_centroid": [
           126.9757891,
@@ -1679,10 +1755,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85397",
+        "name": "열전달연구실",
+        "room_type": "lab",
         "_idx": 39,
         "_centroid": [
           126.975478,
@@ -1722,16 +1800,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85395",
+        "name": "열전달연구실",
+        "room_type": "lab",
         "_idx": 40,
         "_centroid": [
           126.9755102,
           37.2954763
         ],
-        "_area_m2": 13.0
+        "_area_m2": 13
       },
       "geometry": {
         "type": "Polygon",
@@ -1765,10 +1845,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85393",
+        "name": "예비(기계)",
+        "room_type": "reserved",
         "_idx": 41,
         "_centroid": [
           126.9755438,
@@ -1808,10 +1890,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85391",
+        "name": "트라이볼로지연구실",
+        "room_type": "lab",
         "_idx": 42,
         "_centroid": [
           126.9755768,
@@ -1851,10 +1935,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85389",
+        "name": "다기능유연소자연구실",
+        "room_type": "lab",
         "_idx": 43,
         "_centroid": [
           126.975608,
@@ -1894,10 +1980,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85387",
+        "name": "예비(기계)",
+        "room_type": "reserved",
         "_idx": 44,
         "_centroid": [
           126.9756408,
@@ -1937,10 +2025,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85385",
+        "name": "김학준연구교수실",
+        "room_type": "office",
         "_idx": 45,
         "_centroid": [
           126.9756736,
@@ -1980,10 +2070,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85383",
+        "name": "비파괴평가연구실",
+        "room_type": "lab",
         "_idx": 46,
         "_centroid": [
           126.9757119,
@@ -2027,10 +2119,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "85377",
+        "name": "예비(기계)",
+        "room_type": "reserved",
         "_idx": 47,
         "_centroid": [
           126.9757677,

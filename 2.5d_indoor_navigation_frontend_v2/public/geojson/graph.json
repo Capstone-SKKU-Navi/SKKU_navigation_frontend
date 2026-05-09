@@ -176,18 +176,8 @@
     },
     "node-mopc6py6-xdbs": {
       "coordinates": [
-        126.97563222974173,
-        37.29556499883792
-      ],
-      "level": 1,
-      "type": "entrance",
-      "label": "",
-      "building": "outside"
-    },
-    "node-mopc6r83-x4eb": {
-      "coordinates": [
-        126.97587317292522,
-        37.295530578410364
+        126.97558785466543,
+        37.2955716970815
       ],
       "level": 1,
       "type": "entrance",
@@ -2276,6 +2266,1546 @@
       "type": "corridor",
       "label": "",
       "building": "eng2"
+    },
+    "node-moxzsnmj-gc2m": {
+      "coordinates": [
+        126.9756274895891,
+        37.2934100579467
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moxzss5l-lioc": {
+      "coordinates": [
+        126.97574773395394,
+        37.294115224246596
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moxzsx2h-esy5": {
+      "coordinates": [
+        126.97405089588688,
+        37.293625655389434
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moxzsyd2-mcrr": {
+      "coordinates": [
+        126.97415872512192,
+        37.29426505501419
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moxzx0fh-m22n": {
+      "coordinates": [
+        126.97433087429158,
+        37.29443013381068
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moxzxg7l-ix42": {
+      "coordinates": [
+        126.97402380723662,
+        37.29474266455473
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moxzy07g-3kpq": {
+      "coordinates": [
+        126.97384038190188,
+        37.29492033824691
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moxzz70v-cvcy": {
+      "coordinates": [
+        126.97353341889203,
+        37.29524214316855
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0055m-tz0o": {
+      "coordinates": [
+        126.97338426907953,
+        37.295410451082205
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy007r6-3rmi": {
+      "coordinates": [
+        126.97316320222365,
+        37.29569826917131
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0086z-1qn7": {
+      "coordinates": [
+        126.97315175673441,
+        37.29575455524889
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy01sdt-yszr": {
+      "coordinates": [
+        126.97315006695374,
+        37.296104167522984
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy025ta-3qsx": {
+      "coordinates": [
+        126.97348868530332,
+        37.296182455811234
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy02uam-2bvd": {
+      "coordinates": [
+        126.97403681372992,
+        37.296274963645345
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy033j5-k5v7": {
+      "coordinates": [
+        126.97442007893318,
+        37.296347969535816
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy03ljo-1rys": {
+      "coordinates": [
+        126.97502049674455,
+        37.29639855851168
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy049xe-4zxd": {
+      "coordinates": [
+        126.97579967666474,
+        37.29625488252732
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy04t48-robk": {
+      "coordinates": [
+        126.97606843001074,
+        37.29608032654993
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy05drp-mbhf": {
+      "coordinates": [
+        126.97594932181983,
+        37.29535770730374
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy05fmd-vyvh": {
+      "coordinates": [
+        126.97598868714681,
+        37.29551545006194
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0dw1g-hg43": {
+      "coordinates": [
+        126.9754269104941,
+        37.29542831722266
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0ez5b-lac9": {
+      "coordinates": [
+        126.97532886785672,
+        37.295525377010165
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0g3cb-hk30": {
+      "coordinates": [
+        126.97521124866404,
+        37.29586938954614
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0haw6-qhlx": {
+      "coordinates": [
+        126.97549885630661,
+        37.29564282817175
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0j52w-zt0c": {
+      "coordinates": [
+        126.97584362356992,
+        37.294892613765
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0keeu-zoib": {
+      "coordinates": [
+        126.97582294347211,
+        37.294607250848074
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0khhi-8sfh": {
+      "coordinates": [
+        126.97583218858802,
+        37.29471941074809
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0nzua-n3dw": {
+      "coordinates": [
+        126.97580453561238,
+        37.29400559417694
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0ol9o-4ib9": {
+      "coordinates": [
+        126.97608439708648,
+        37.293763233103306
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0pgw0-79dd": {
+      "coordinates": [
+        126.97621518636169,
+        37.2939587623156
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0qh2v-q0ny": {
+      "coordinates": [
+        126.97622998435321,
+        37.29406422582288
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0r4x0-hexg": {
+      "coordinates": [
+        126.97588483772125,
+        37.29455394033721
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0ro0l-18tp": {
+      "coordinates": [
+        126.97626799330033,
+        37.29451452390667
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0rp4x-6okf": {
+      "coordinates": [
+        126.97624712434498,
+        37.294328582277544
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0sjj1-dpbn": {
+      "coordinates": [
+        126.9759028448488,
+        37.29487181143695
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0sro7-n9ak": {
+      "coordinates": [
+        126.97599508837499,
+        37.295328139437345
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0tpex-xuou": {
+      "coordinates": [
+        126.97607832440627,
+        37.29574451409019
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0uwih-t80u": {
+      "coordinates": [
+        126.9761442946849,
+        37.2960453862098
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0wwcg-ldkg": {
+      "coordinates": [
+        126.97622820783863,
+        37.29620838013642
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0xmnb-0y0k": {
+      "coordinates": [
+        126.97648748222213,
+        37.29635758267176
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0yywm-xgs1": {
+      "coordinates": [
+        126.9789924645957,
+        37.293780800410886
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy0z0ft-o80u": {
+      "coordinates": [
+        126.97828560866475,
+        37.29384494296019
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy143rq-ybbk": {
+      "coordinates": [
+        126.97838323945916,
+        37.294326082302504
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy14cbm-4i2o": {
+      "coordinates": [
+        126.97812908741861,
+        37.29281639832476
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy16gn2-1ouq": {
+      "coordinates": [
+        126.9769506344216,
+        37.29409507734741
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy16lwl-v7fb": {
+      "coordinates": [
+        126.97752027905995,
+        37.29405575825943
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy1azg4-1vch": {
+      "coordinates": [
+        126.97758840443589,
+        37.29447467469167
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy1cmzg-ksmc": {
+      "coordinates": [
+        126.97775859752278,
+        37.2954114437878
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy1cpmq-x28m": {
+      "coordinates": [
+        126.97754576347319,
+        37.29565931966776
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy1ctp0-7yiv": {
+      "coordinates": [
+        126.97695893604617,
+        37.295879933480066
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy1iq4c-cv92": {
+      "coordinates": [
+        126.97648754157854,
+        37.292083629146916
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy1irc7-9f04": {
+      "coordinates": [
+        126.9765185502107,
+        37.29222267375542
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy1jcss-wfpo": {
+      "coordinates": [
+        126.97755837357823,
+        37.29176885904715
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy1ji32-cmvm": {
+      "coordinates": [
+        126.97563914908653,
+        37.29236200479086
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy1uj1x-g8e2": {
+      "coordinates": [
+        126.97704089426986,
+        37.292399334104516
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy1xqzn-r8dv": {
+      "coordinates": [
+        126.97764486640727,
+        37.292095811640536
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy203xg-7crv": {
+      "coordinates": [
+        126.97843842439028,
+        37.29196206596673
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy22ln2-zxy2": {
+      "coordinates": [
+        126.97779090669093,
+        37.29206643192876
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy22oek-ecfs": {
+      "coordinates": [
+        126.9778736139171,
+        37.292431027638244
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy23q26-7s1g": {
+      "coordinates": [
+        126.97831739569074,
+        37.29211975659386
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy2a01s-psk3": {
+      "coordinates": [
+        126.9780684678596,
+        37.29125940278935
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy2a1kd-wi15": {
+      "coordinates": [
+        126.97848466109332,
+        37.2916557659843
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy2a49j-hbt7": {
+      "coordinates": [
+        126.97873167839401,
+        37.29201995504212
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy2kucy-i8x1": {
+      "coordinates": [
+        126.97879967936143,
+        37.29232164579774
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy2rc5j-o0r5": {
+      "coordinates": [
+        126.978323342446,
+        37.29237974214436
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy2yuw4-lvpt": {
+      "coordinates": [
+        126.97729841273747,
+        37.29279278219052
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy4ag9f-pypc": {
+      "coordinates": [
+        126.97569361235048,
+        37.29355189175928
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy4arup-cmj4": {
+      "coordinates": [
+        126.97738562065462,
+        37.29334844778215
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy4aspw-obok": {
+      "coordinates": [
+        126.9775839811656,
+        37.29337731759489
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy4et0x-she9": {
+      "coordinates": [
+        126.97633057090019,
+        37.29587501018368
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy4etwv-8n95": {
+      "coordinates": [
+        126.9763610854842,
+        37.29601112274756
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy4gpl1-6ofr": {
+      "coordinates": [
+        126.97691544411504,
+        37.29578938106174
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy4kqhj-jj8b": {
+      "coordinates": [
+        126.97611524598432,
+        37.29590911298236
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy4miyb-76v3": {
+      "coordinates": [
+        126.97701523986802,
+        37.29570638944932
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy4tak5-atpx": {
+      "coordinates": [
+        126.97735099762724,
+        37.295660887607866
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy4u12e-thfc": {
+      "coordinates": [
+        126.9773566359533,
+        37.29572924695023
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy4xk9g-hp7v": {
+      "coordinates": [
+        126.97619661263411,
+        37.29531536488892
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy4xtdx-vnb8": {
+      "coordinates": [
+        126.97624797894082,
+        37.295889222484206
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy51ip7-39mo": {
+      "coordinates": [
+        126.97624889715934,
+        37.29504966596801
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy5ihv9-bvsk": {
+      "coordinates": [
+        126.97658894140238,
+        37.29501453269859
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy5irl7-hgrx": {
+      "coordinates": [
+        126.97656800283244,
+        37.29493820801251
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy5it3z-w48m": {
+      "coordinates": [
+        126.97660563711293,
+        37.29513628311908
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy5iufq-81pi": {
+      "coordinates": [
+        126.97664597800656,
+        37.295340504194115
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy5lc67-jc9c": {
+      "coordinates": [
+        126.97694024994928,
+        37.29530052375047
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy5lcxw-db5i": {
+      "coordinates": [
+        126.9772019667472,
+        37.29527095662836
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy5ldmg-ztk2": {
+      "coordinates": [
+        126.97716634848462,
+        37.29506521841253
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy5lev7-jcm9": {
+      "coordinates": [
+        126.97713692470217,
+        37.29486440751589
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy5lgsb-5bcm": {
+      "coordinates": [
+        126.97686127032495,
+        37.29490259858672
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy5r48d-4znm": {
+      "coordinates": [
+        126.97691150108477,
+        37.29510579202896
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy6034w-jh7r": {
+      "coordinates": [
+        126.97611515382397,
+        37.29497221259017
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy63pod-i5gl": {
+      "coordinates": [
+        126.97633151223653,
+        37.2940522170432
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy6dl9v-0mz0": {
+      "coordinates": [
+        126.97635183721172,
+        37.29415190237303
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy6h184-smty": {
+      "coordinates": [
+        126.97655045147167,
+        37.293923024648706
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy6j3pe-lajf": {
+      "coordinates": [
+        126.97687852220815,
+        37.293694906399935
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy6j68n-jnom": {
+      "coordinates": [
+        126.97687528728937,
+        37.29341235302715
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy6mc9m-cxta": {
+      "coordinates": [
+        126.97543836281216,
+        37.29479077905178
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy6mdzl-guve": {
+      "coordinates": [
+        126.975484541779,
+        37.29494027957588
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy6mf3p-gxvl": {
+      "coordinates": [
+        126.97525211536868,
+        37.29501374214172
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy6mge8-6hcc": {
+      "coordinates": [
+        126.97505133637839,
+        37.29527374085383
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy6pbz2-tsxf": {
+      "coordinates": [
+        126.97490273489763,
+        37.294449338314564
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy6rv6o-s1sg": {
+      "coordinates": [
+        126.974954454917,
+        37.29484238936328
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy6rwx6-prxr": {
+      "coordinates": [
+        126.97466730754974,
+        37.29470394452211
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy6updj-glmy": {
+      "coordinates": [
+        126.97524717015966,
+        37.294683011981874
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy71fse-q61o": {
+      "coordinates": [
+        126.97450886956403,
+        37.29452576680832
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy71hr8-dfat": {
+      "coordinates": [
+        126.97452073889934,
+        37.29470766108517
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy77fgx-n6ec": {
+      "coordinates": [
+        126.97449497742059,
+        37.29444287949612
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "1과학관 출입구",
+      "building": "outside"
+    },
+    "node-moy79fx9-07wh": {
+      "coordinates": [
+        126.97407491564849,
+        37.294936331045946
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy79i2v-q3u0": {
+      "coordinates": [
+        126.97395907975363,
+        37.29498188862527
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy79jkz-8nof": {
+      "coordinates": [
+        126.97456842310146,
+        37.294948134342604
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy79nag-o1k9": {
+      "coordinates": [
+        126.97413312145613,
+        37.295165054513376
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy79o3u-ow4e": {
+      "coordinates": [
+        126.9742906062109,
+        37.29516712530659
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy79sbc-1hlp": {
+      "coordinates": [
+        126.97410578939014,
+        37.29504494840147
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy79w8d-jhko": {
+      "coordinates": [
+        126.97475909161614,
+        37.295432328476465
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy7a9p9-cxir": {
+      "coordinates": [
+        126.97468645006614,
+        37.29499297904624
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy9m9ra-yl2r": {
+      "coordinates": [
+        126.97448437553663,
+        37.29509550816171
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy9qgl5-r4ov": {
+      "coordinates": [
+        126.97460872830118,
+        37.29570803787766
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy9w6qq-9vhm": {
+      "coordinates": [
+        126.97447375023921,
+        37.295961842993606
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy9w7qf-ts98": {
+      "coordinates": [
+        126.97501493075072,
+        37.29589202925432
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moy9wdqf-5s9d": {
+      "coordinates": [
+        126.9747395623092,
+        37.295934409345094
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyabrgv-xi43": {
+      "coordinates": [
+        126.97434747680893,
+        37.29589225242526
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyabxsc-1v5a": {
+      "coordinates": [
+        126.97434848100107,
+        37.29552623764839
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyabygi-1vnd": {
+      "coordinates": [
+        126.97403762176208,
+        37.295444389966406
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyabzm6-mbpq": {
+      "coordinates": [
+        126.97390142492958,
+        37.29566020148354
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyac04z-4731": {
+      "coordinates": [
+        126.97411994112662,
+        37.29578778586611
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyac3xi-ip41": {
+      "coordinates": [
+        126.97368333405768,
+        37.29545907916628
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyaccwa-j5ep": {
+      "coordinates": [
+        126.9735716008471,
+        37.29551112249291
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyacf1z-jfld": {
+      "coordinates": [
+        126.97374638348026,
+        37.2956628038787
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyacfzs-e38s": {
+      "coordinates": [
+        126.97372291846278,
+        37.295570905359426
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyahxyr-dr4t": {
+      "coordinates": [
+        126.97429228435044,
+        37.29738689442472
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyb9u0o-fsoj": {
+      "coordinates": [
+        126.97273119312518,
+        37.29610786436909
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyba7it-e4b4": {
+      "coordinates": [
+        126.97310996376564,
+        37.29603059601253
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moybefgz-4d36": {
+      "coordinates": [
+        126.97057889252648,
+        37.29642507980519
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moybf35g-0aez": {
+      "coordinates": [
+        126.97054586493539,
+        37.29630914147074
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moybf6h2-g8cl": {
+      "coordinates": [
+        126.9727113856136,
+        37.295955179472344
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moybf8ly-vfn6": {
+      "coordinates": [
+        126.97287183318934,
+        37.295776945364366
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moybf96l-ubt3": {
+      "coordinates": [
+        126.97260163584406,
+        37.295585914988706
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moybgrpb-oze6": {
+      "coordinates": [
+        126.97279237188422,
+        37.295857837763975
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moybj1z8-a9cz": {
+      "coordinates": [
+        126.97331095951245,
+        37.295151739980156
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moybke76-0l76": {
+      "coordinates": [
+        126.97322753046006,
+        37.294533135103094
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyblbza-90x9": {
+      "coordinates": [
+        126.97281298016492,
+        37.29424518876847
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyblwko-nt3h": {
+      "coordinates": [
+        126.9732575365532,
+        37.29419362813391
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moybmsl7-mirh": {
+      "coordinates": [
+        126.97411997091507,
+        37.29404795915933
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyboz3f-3qsh": {
+      "coordinates": [
+        126.97157542588292,
+        37.294262878306256
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moybqgzv-9w31": {
+      "coordinates": [
+        126.97308970871592,
+        37.29336072954143
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moybqjar-fdiu": {
+      "coordinates": [
+        126.97297299433404,
+        37.29276558604131
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moybssc5-6w1b": {
+      "coordinates": [
+        126.97387897549243,
+        37.29332933953053
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moybu33b-01vi": {
+      "coordinates": [
+        126.97429235653794,
+        37.29359279835225
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moybxco3-ph8i": {
+      "coordinates": [
+        126.97338587160618,
+        37.29242743443514
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyby736-nmz6": {
+      "coordinates": [
+        126.97407607650604,
+        37.29072934093712
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyby9el-stih": {
+      "coordinates": [
+        126.97446498479496,
+        37.29254183335888
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moybzdco-hg6z": {
+      "coordinates": [
+        126.97541587428577,
+        37.29244569722643
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyc0gzv-41ml": {
+      "coordinates": [
+        126.97143123565132,
+        37.292937881985395
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyc4aj2-gk35": {
+      "coordinates": [
+        126.97151390342623,
+        37.29361507015817
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
+    },
+    "node-moyc73pn-ypk7": {
+      "coordinates": [
+        126.97142882019665,
+        37.293625558909596
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "",
+      "building": "outside"
     }
   },
   "edges": [
@@ -2818,8 +4348,8 @@
       "videoFwdStart": 0,
       "videoFwdEnd": 21.980876,
       "videoRev": "iac_c_F1_4_cw.mp4",
-      "videoRevStart": 0,
-      "videoRevEnd": 7.753286
+      "videoRevStart": 7.863172,
+      "videoRevEnd": 28.5619
     },
     {
       "from": "node-moppy00a-3oeg",
@@ -2829,8 +4359,8 @@
       "videoFwdStart": 21.969195,
       "videoFwdEnd": 27.9613,
       "videoRev": "iac_c_F1_4_cw.mp4",
-      "videoRevStart": 7.822484,
-      "videoRevEnd": 28.5619
+      "videoRevStart": 0,
+      "videoRevEnd": 7.751666
     },
     {
       "from": "node-mopbtgdf-ot2p",
@@ -3392,12 +4922,13 @@
     {
       "from": "node-mopc6l53-y4aa",
       "to": "node-mopc6py6-xdbs",
-      "weight": 9
-    },
-    {
-      "from": "node-mopc6l53-y4aa",
-      "to": "node-mopc6r83-x4eb",
-      "weight": 13
+      "weight": 13,
+      "videoFwd": "outside_122_ccw.mp4",
+      "videoFwdStart": 17.934873,
+      "videoFwdEnd": 39.2726,
+      "videoRev": "outside_122_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 21.965965
     },
     {
       "from": "node-mopc8x05-stn6",
@@ -4342,6 +5873,2400 @@
       "from": "node-moq2rza7-ib9t",
       "to": "node-mopvvmfm-y3to",
       "weight": 3
+    },
+    {
+      "from": "node-moxzsnmj-gc2m",
+      "to": "node-moxzss5l-lioc",
+      "weight": 79,
+      "videoFwd": "outside_1_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 54.954967,
+      "videoRev": "outside_1_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 51.184533
+    },
+    {
+      "from": "node-moxzsyd2-mcrr",
+      "to": "node-moxzss5l-lioc",
+      "weight": 142,
+      "videoFwd": "outside_3_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 90.957633,
+      "videoRev": "outside_3_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 97.430767
+    },
+    {
+      "from": "node-moxzx0fh-m22n",
+      "to": "node-moxzsyd2-mcrr",
+      "weight": 24,
+      "videoFwd": "outside_5_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 16.649967,
+      "videoRev": "outside_5_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 14.948267
+    },
+    {
+      "from": "node-moxzy07g-3kpq",
+      "to": "node-moxzxg7l-ix42",
+      "weight": 26,
+      "videoFwd": "outside_6_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 47.213867,
+      "videoRev": "outside_6_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 47.013667
+    },
+    {
+      "from": "node-moxzxg7l-ix42",
+      "to": "node-moxzx0fh-m22n",
+      "weight": 44,
+      "videoFwd": "outside_6_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 47.213867,
+      "videoRev": "outside_6_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 47.013667
+    },
+    {
+      "from": "node-moxzz70v-cvcy",
+      "to": "node-moxzy07g-3kpq",
+      "weight": 45,
+      "videoFwd": "outside_7_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 45.745733,
+      "videoRev": "outside_7_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 49.0824
+    },
+    {
+      "from": "node-moy0086z-1qn7",
+      "to": "node-moy007r6-3rmi",
+      "weight": 6,
+      "videoFwd": "outside_8_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 52.686033,
+      "videoRev": "outside_8_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 52.152167
+    },
+    {
+      "from": "node-moy007r6-3rmi",
+      "to": "node-moy0055m-tz0o",
+      "weight": 38,
+      "videoFwd": "outside_8_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 52.686033,
+      "videoRev": "outside_8_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 52.152167
+    },
+    {
+      "from": "node-moy0055m-tz0o",
+      "to": "node-moxzz70v-cvcy",
+      "weight": 23,
+      "videoFwd": "outside_8_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 52.686033,
+      "videoRev": "outside_8_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 52.152167
+    },
+    {
+      "from": "node-moy025ta-3qsx",
+      "to": "node-moy01sdt-yszr",
+      "weight": 31,
+      "videoFwd": "outside_10_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 35.635633,
+      "videoRev": "outside_10_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 32.699367
+    },
+    {
+      "from": "node-moy02uam-2bvd",
+      "to": "node-moy025ta-3qsx",
+      "weight": 50,
+      "videoFwd": "outside_11_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 35.835833,
+      "videoRev": "outside_11_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 37.837833
+    },
+    {
+      "from": "node-moy033j5-k5v7",
+      "to": "node-moy02uam-2bvd",
+      "weight": 35,
+      "videoFwd": "outside_12_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 23.923933,
+      "videoRev": "outside_12_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 25.091767
+    },
+    {
+      "from": "node-moy03ljo-1rys",
+      "to": "node-moy033j5-k5v7",
+      "weight": 53,
+      "videoFwd": "outside_13_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 37.103767,
+      "videoRev": "outside_13_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 38.9723
+    },
+    {
+      "from": "node-moy049xe-4zxd",
+      "to": "node-moy03ljo-1rys",
+      "weight": 71,
+      "videoFwd": "outside_14_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 55.355367,
+      "videoRev": "outside_14_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 53.787133
+    },
+    {
+      "from": "node-moy04t48-robk",
+      "to": "node-moy049xe-4zxd",
+      "weight": 31,
+      "videoFwd": "outside_15_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 22.322333,
+      "videoRev": "outside_15_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 21.921933
+    },
+    {
+      "from": "node-moy04t48-robk",
+      "to": "node-moy05fmd-vyvh",
+      "weight": 63,
+      "videoFwd": "outside_16_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 55.6223,
+      "videoRev": "outside_16_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 55.9226
+    },
+    {
+      "from": "node-moy05drp-mbhf",
+      "to": "node-moy05fmd-vyvh",
+      "weight": 18,
+      "videoFwd": "outside_17_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 54.7214,
+      "videoRev": "outside_17_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 53.6203
+    },
+    {
+      "from": "node-moy05drp-mbhf",
+      "to": "node-moy0dw1g-hg43",
+      "weight": 47,
+      "videoFwd": "outside_121_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 34.2676,
+      "videoRev": "outside_121_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 33.7671
+    },
+    {
+      "from": "node-moy0dw1g-hg43",
+      "to": "node-moy0ez5b-lac9",
+      "weight": 14,
+      "videoFwd": "outside_120_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 14.280933,
+      "videoRev": "outside_120_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 14.280933
+    },
+    {
+      "from": "node-mopbqewd-8mcr",
+      "to": "node-moy0haw6-qhlx",
+      "weight": 19,
+      "videoFwd": "outside_124_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 14.37801,
+      "videoRev": "outside_124_cw.mp4",
+      "videoRevStart": 10.528531,
+      "videoRevEnd": 26.092767
+    },
+    {
+      "from": "node-moy0haw6-qhlx",
+      "to": "node-moy0ez5b-lac9",
+      "weight": 20,
+      "videoFwd": "outside_124_ccw.mp4",
+      "videoFwdStart": 14.946463,
+      "videoFwdEnd": 24.991667,
+      "videoRev": "outside_124_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 10.880223
+    },
+    {
+      "from": "node-mopc6py6-xdbs",
+      "to": "node-moy0haw6-qhlx",
+      "weight": 11,
+      "videoFwd": "outside_123_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 13.834079,
+      "videoRev": "outside_123_cw.mp4",
+      "videoRevStart": 30.091623,
+      "videoRevEnd": 43.5769
+    },
+    {
+      "from": "node-moy0haw6-qhlx",
+      "to": "node-moy0g3cb-hk30",
+      "weight": 36,
+      "videoFwd": "outside_123_ccw.mp4",
+      "videoFwdStart": 14.182052,
+      "videoFwdEnd": 44.2776,
+      "videoRev": "outside_123_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 29.84582
+    },
+    {
+      "from": "node-moxzss5l-lioc",
+      "to": "node-moy0keeu-zoib",
+      "weight": 55,
+      "videoFwd": "outside_18_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 47.547533,
+      "videoRev": "outside_18_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 49.049033
+    },
+    {
+      "from": "node-moy0keeu-zoib",
+      "to": "node-moy0khhi-8sfh",
+      "weight": 12,
+      "videoFwd": "outside_18_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 47.547533,
+      "videoRev": "outside_18_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 49.049033
+    },
+    {
+      "from": "node-moy0khhi-8sfh",
+      "to": "node-moy0j52w-zt0c",
+      "weight": 19,
+      "videoFwd": "outside_17_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 54.7214,
+      "videoRev": "outside_17_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 53.6203
+    },
+    {
+      "from": "node-moy0j52w-zt0c",
+      "to": "node-moy05drp-mbhf",
+      "weight": 53,
+      "videoFwd": "outside_17_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 54.7214,
+      "videoRev": "outside_17_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 53.6203
+    },
+    {
+      "from": "node-moy0ol9o-4ib9",
+      "to": "node-moy0nzua-n3dw",
+      "weight": 37,
+      "videoFwd": "outside_20_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 30.430433,
+      "videoRev": "outside_20_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 29.1625
+    },
+    {
+      "from": "node-moy0nzua-n3dw",
+      "to": "node-moxzss5l-lioc",
+      "weight": 13,
+      "videoFwd": "outside_19_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 9.376033,
+      "videoRev": "outside_19_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 9.6096
+    },
+    {
+      "from": "node-moy0ol9o-4ib9",
+      "to": "node-moy0pgw0-79dd",
+      "weight": 25,
+      "videoFwd": "outside_22_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 17.2506,
+      "videoRev": "outside_22_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 15.482133
+    },
+    {
+      "from": "node-moy0pgw0-79dd",
+      "to": "node-moy0nzua-n3dw",
+      "weight": 37,
+      "videoFwd": "outside_21_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 28.228233,
+      "videoRev": "outside_21_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 26.926933
+    },
+    {
+      "from": "node-moy0pgw0-79dd",
+      "to": "node-moy0qh2v-q0ny",
+      "weight": 12,
+      "videoFwd": "outside_23_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 20.186867,
+      "videoRev": "outside_23_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 21.0544
+    },
+    {
+      "from": "node-moy0nzua-n3dw",
+      "to": "node-moy0r4x0-hexg",
+      "weight": 61,
+      "videoFwd": "outside_24_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 44.678,
+      "videoRev": "outside_24_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 44.344333
+    },
+    {
+      "from": "node-moy0ro0l-18tp",
+      "to": "node-moy0r4x0-hexg",
+      "weight": 34,
+      "videoFwd": "outside_25_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 23.289967,
+      "videoRev": "outside_25_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 21.8552
+    },
+    {
+      "from": "node-moy0rp4x-6okf",
+      "to": "node-moy0ro0l-18tp",
+      "weight": 21,
+      "videoFwd": "outside_26_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 15.982633,
+      "videoRev": "outside_26_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 15.6156
+    },
+    {
+      "from": "node-moy0r4x0-hexg",
+      "to": "node-moy0sjj1-dpbn",
+      "weight": 35,
+      "videoFwd": "outside_27_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 21.187867,
+      "videoRev": "outside_27_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 21.655
+    },
+    {
+      "from": "node-moy0sjj1-dpbn",
+      "to": "node-moy0sro7-n9ak",
+      "weight": 51,
+      "videoFwd": "outside_28_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 37.904567,
+      "videoRev": "outside_28_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 36.67
+    },
+    {
+      "from": "node-moy0sro7-n9ak",
+      "to": "node-moy0tpex-xuou",
+      "weight": 47,
+      "videoFwd": "outside_29_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 35.435433,
+      "videoRev": "outside_29_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 32.4658
+    },
+    {
+      "from": "node-moy0uwih-t80u",
+      "to": "node-moy04t48-robk",
+      "weight": 8,
+      "videoFwd": "outside_31_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 8.5085,
+      "videoRev": "outside_31_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 9.476133
+    },
+    {
+      "from": "node-moy0uwih-t80u",
+      "to": "node-moy0wwcg-ldkg",
+      "weight": 20,
+      "videoFwd": "outside_32_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 13.6136,
+      "videoRev": "outside_32_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 15.148467
+    },
+    {
+      "from": "node-moy04t48-robk",
+      "to": "node-moy0wwcg-ldkg",
+      "weight": 20,
+      "videoFwd": "outside_33_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 18.585267,
+      "videoRev": "outside_33_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 17.3507
+    },
+    {
+      "from": "node-moy0wwcg-ldkg",
+      "to": "node-moy0xmnb-0y0k",
+      "weight": 28,
+      "videoFwd": "outside_34_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 15.048367,
+      "videoRev": "outside_34_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 16.2162
+    },
+    {
+      "from": "node-moy0yywm-xgs1",
+      "to": "node-moy0z0ft-o80u",
+      "weight": 63,
+      "videoFwd": "outside_35_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 48.548533,
+      "videoRev": "outside_35_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 48.014667
+    },
+    {
+      "from": "node-moy0z0ft-o80u",
+      "to": "node-moy143rq-ybbk",
+      "weight": 54,
+      "videoFwd": "outside_36_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 42.809467,
+      "videoRev": "outside_36_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 43.309967
+    },
+    {
+      "from": "node-moy14cbm-4i2o",
+      "to": "node-moy0z0ft-o80u",
+      "weight": 115,
+      "videoFwd": "outside_37_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 86.6867,
+      "videoRev": "outside_37_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 83.450133
+    },
+    {
+      "from": "node-moy0z0ft-o80u",
+      "to": "node-moy16lwl-v7fb",
+      "weight": 72,
+      "videoFwd": "outside_38_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 51.4181,
+      "videoRev": "outside_38_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 52.852867
+    },
+    {
+      "from": "node-moy16lwl-v7fb",
+      "to": "node-moy1azg4-1vch",
+      "weight": 47,
+      "videoFwd": "outside_40_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 48.248233,
+      "videoRev": "outside_40_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 51.8185
+    },
+    {
+      "from": "node-moy1azg4-1vch",
+      "to": "node-moy1cmzg-ksmc",
+      "weight": 105,
+      "videoFwd": "outside_42_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 86.3864,
+      "videoRev": "outside_42_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 89.0891
+    },
+    {
+      "from": "node-moy1cmzg-ksmc",
+      "to": "node-moy1cpmq-x28m",
+      "weight": 33,
+      "videoFwd": "outside_43_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 20.4538,
+      "videoRev": "outside_43_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 20.320333
+    },
+    {
+      "from": "node-moy0uwih-t80u",
+      "to": "node-moy0xmnb-0y0k",
+      "weight": 46,
+      "videoFwd": "outside_46_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 21.488167,
+      "videoRev": "outside_46_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 21.721733
+    },
+    {
+      "from": "node-moy1iq4c-cv92",
+      "to": "node-moy1irc7-9f04",
+      "weight": 16,
+      "videoFwd": "outside_47_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 10.343667,
+      "videoRev": "outside_47_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 11.1111
+    },
+    {
+      "from": "node-moy1irc7-9f04",
+      "to": "node-moy1jcss-wfpo",
+      "weight": 105,
+      "videoFwd": "outside_48_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 60.6273,
+      "videoRev": "outside_48_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 58.0247
+    },
+    {
+      "from": "node-moy1ji32-cmvm",
+      "to": "node-moy1irc7-9f04",
+      "weight": 79,
+      "videoFwd": "outside_49_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 59.4261,
+      "videoRev": "outside_49_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 59.793133
+    },
+    {
+      "from": "node-moy1irc7-9f04",
+      "to": "node-moy1uj1x-g8e2",
+      "weight": 50,
+      "videoFwd": "outside_50_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 31.635597,
+      "videoRev": "outside_50_cw.mp4",
+      "videoRevStart": 26.673646,
+      "videoRevEnd": 57.691033
+    },
+    {
+      "from": "node-moy1uj1x-g8e2",
+      "to": "node-moy1xqzn-r8dv",
+      "weight": 63,
+      "videoFwd": "outside_53_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 37.9713,
+      "videoRev": "outside_53_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 38.104767
+    },
+    {
+      "from": "node-moy1jcss-wfpo",
+      "to": "node-moy1xqzn-r8dv",
+      "weight": 37,
+      "videoFwd": "outside_52_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 26.292967,
+      "videoRev": "outside_52_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 26.226233
+    },
+    {
+      "from": "node-moy1irc7-9f04",
+      "to": "node-moy1xqzn-r8dv",
+      "weight": 101,
+      "videoFwd": "outside_51_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 53.32,
+      "videoRev": "outside_51_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 54.2209
+    },
+    {
+      "from": "node-moy22ln2-zxy2",
+      "to": "node-moy22oek-ecfs",
+      "weight": 41,
+      "videoFwd": "outside_55_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 36.4698,
+      "videoRev": "outside_55_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 34.734733
+    },
+    {
+      "from": "node-moy1xqzn-r8dv",
+      "to": "node-moy22ln2-zxy2",
+      "weight": 13,
+      "videoFwd": "outside_54_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 13.509247,
+      "videoRev": "outside_54_cw.mp4",
+      "videoRevStart": 34.246134,
+      "videoRevEnd": 47.681
+    },
+    {
+      "from": "node-moy22ln2-zxy2",
+      "to": "node-moy203xg-7crv",
+      "weight": 58,
+      "videoFwd": "outside_54_ccw.mp4",
+      "videoFwdStart": 13.402371,
+      "videoFwdEnd": 46.613267,
+      "videoRev": "outside_54_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 34.148252
+    },
+    {
+      "from": "node-moy203xg-7crv",
+      "to": "node-moy23q26-7s1g",
+      "weight": 21,
+      "videoFwd": "outside_56_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 14.3143,
+      "videoRev": "outside_56_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 13.980633
+    },
+    {
+      "from": "node-moy2a1kd-wi15",
+      "to": "node-moy203xg-7crv",
+      "weight": 34,
+      "videoFwd": "outside_57_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 20.020033,
+      "videoRev": "outside_57_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 17.817833
+    },
+    {
+      "from": "node-moy2a01s-psk3",
+      "to": "node-moy2a1kd-wi15",
+      "weight": 57,
+      "videoFwd": "outside_58_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 57.2239,
+      "videoRev": "outside_58_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 63.496833
+    },
+    {
+      "from": "node-moy2a1kd-wi15",
+      "to": "node-moy2a49j-hbt7",
+      "weight": 46,
+      "videoFwd": "outside_59_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 26.693367,
+      "videoRev": "outside_59_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 25.225233
+    },
+    {
+      "from": "node-moy23q26-7s1g",
+      "to": "node-moy2a49j-hbt7",
+      "weight": 38,
+      "videoFwd": "outside_60_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 31.931933,
+      "videoRev": "outside_60_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 29.596267
+    },
+    {
+      "from": "node-moy2a49j-hbt7",
+      "to": "node-moy2kucy-i8x1",
+      "weight": 34,
+      "videoFwd": "outside_61_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 27.2606,
+      "videoRev": "outside_61_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 30.630633
+    },
+    {
+      "from": "node-moy2kucy-i8x1",
+      "to": "node-moy2rc5j-o0r5",
+      "weight": 43,
+      "videoFwd": "outside_62_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 56.990333,
+      "videoRev": "outside_62_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 57.891233
+    },
+    {
+      "from": "node-moy2rc5j-o0r5",
+      "to": "node-moy22oek-ecfs",
+      "weight": 40,
+      "videoFwd": "outside_62_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 56.990333,
+      "videoRev": "outside_62_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 57.891233
+    },
+    {
+      "from": "node-moy2rc5j-o0r5",
+      "to": "node-moy14cbm-4i2o",
+      "weight": 52,
+      "videoFwd": "outside_63_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 33.633633,
+      "videoRev": "outside_63_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 35.802467
+    },
+    {
+      "from": "node-moy2yuw4-lvpt",
+      "to": "node-moy14cbm-4i2o",
+      "weight": 74,
+      "videoFwd": "outside_64_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 49.416067,
+      "videoRev": "outside_64_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 48.4818
+    },
+    {
+      "from": "node-moy1uj1x-g8e2",
+      "to": "node-moy2yuw4-lvpt",
+      "weight": 49,
+      "videoFwd": "outside_50_ccw.mp4",
+      "videoFwdStart": 31.551306,
+      "videoFwdEnd": 58.1248,
+      "videoRev": "outside_50_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 57.691033
+    },
+    {
+      "from": "node-moy2yuw4-lvpt",
+      "to": "node-moy16lwl-v7fb",
+      "weight": 142,
+      "videoFwd": "outside_39_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 85.5856,
+      "videoRev": "outside_39_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 91.958633
+    },
+    {
+      "from": "node-moy1azg4-1vch",
+      "to": "node-moy0ro0l-18tp",
+      "weight": 117,
+      "videoFwd": "outside_41_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 95.028367,
+      "videoRev": "outside_41_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 93.1932
+    },
+    {
+      "from": "node-moy05fmd-vyvh",
+      "to": "node-mopc6l53-y4aa",
+      "weight": 23,
+      "videoFwd": "outside_122_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 17.732453,
+      "videoRev": "outside_122_cw.mp4",
+      "videoRevStart": 21.518595,
+      "videoRevEnd": 43.910567
+    },
+    {
+      "from": "node-moy4ag9f-pypc",
+      "to": "node-moy4arup-cmj4",
+      "weight": 151,
+      "videoFwd": "outside_65_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 96.044319,
+      "videoRev": "outside_65_cw.mp4",
+      "videoRevStart": 6.121826,
+      "videoRevEnd": 100.367033
+    },
+    {
+      "from": "node-moy4arup-cmj4",
+      "to": "node-moy4aspw-obok",
+      "weight": 18,
+      "videoFwd": "outside_65_ccw.mp4",
+      "videoFwdStart": 97.151983,
+      "videoFwdEnd": 103.8038,
+      "videoRev": "outside_65_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 6.207254
+    },
+    {
+      "from": "node-moy4ag9f-pypc",
+      "to": "node-moy0nzua-n3dw",
+      "weight": 51,
+      "videoFwd": "outside_66_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 37.203867,
+      "videoRev": "outside_66_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 37.0704
+    },
+    {
+      "from": "node-moy4et0x-she9",
+      "to": "node-moy4etwv-8n95",
+      "weight": 15,
+      "videoFwd": "outside_67_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 15.9159,
+      "videoRev": "outside_67_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 15.9159
+    },
+    {
+      "from": "node-moy1ctp0-7yiv",
+      "to": "node-moy4etwv-8n95",
+      "weight": 55,
+      "videoFwd": "outside_45_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 44.916979,
+      "videoRev": "outside_45_cw.mp4",
+      "videoRevStart": 13.73563,
+      "videoRevEnd": 82.0487
+    },
+    {
+      "from": "node-moy4etwv-8n95",
+      "to": "node-moy0uwih-t80u",
+      "weight": 20,
+      "videoFwd": "outside_45_ccw.mp4",
+      "videoFwdStart": 44.564325,
+      "videoFwdEnd": 58.491833,
+      "videoRev": "outside_45_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 13.55625
+    },
+    {
+      "from": "node-moy4et0x-she9",
+      "to": "node-moy4gpl1-6ofr",
+      "weight": 53,
+      "videoFwd": "outside_68_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 34.634633,
+      "videoRev": "outside_68_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 34.334333
+    },
+    {
+      "from": "node-moy0tpex-xuou",
+      "to": "node-moy4kqhj-jj8b",
+      "weight": 19,
+      "videoFwd": "outside_29_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 35.435433,
+      "videoRev": "outside_29_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 32.4658
+    },
+    {
+      "from": "node-moy4kqhj-jj8b",
+      "to": "node-moy0uwih-t80u",
+      "weight": 15,
+      "videoFwd": "outside_30_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 16.9503,
+      "videoRev": "outside_30_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 15.582233
+    },
+    {
+      "from": "node-moy4miyb-76v3",
+      "to": "node-moy4gpl1-6ofr",
+      "weight": 13,
+      "videoFwd": "outside_70_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 8.797241,
+      "videoRev": "outside_70_cw.mp4",
+      "videoRevStart": 7.942253,
+      "videoRevEnd": 15.949267
+    },
+    {
+      "from": "node-moy4gpl1-6ofr",
+      "to": "node-moy1ctp0-7yiv",
+      "weight": 11,
+      "videoFwd": "outside_70_ccw.mp4",
+      "videoFwdStart": 8.635266,
+      "videoFwdEnd": 15.348667,
+      "videoRev": "outside_70_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 8.173156
+    },
+    {
+      "from": "node-moy4tak5-atpx",
+      "to": "node-moy4miyb-76v3",
+      "weight": 30,
+      "videoFwd": "outside_71_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 27.9613,
+      "videoRev": "outside_71_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 25.525533
+    },
+    {
+      "from": "node-mopb17cm-f7qv",
+      "to": "node-moy4tak5-atpx",
+      "weight": 24,
+      "videoFwd": "outside_72_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 18.282739,
+      "videoRev": "outside_72_cw.mp4",
+      "videoRevStart": 4.132601,
+      "videoRevEnd": 23.823833
+    },
+    {
+      "from": "node-moy4tak5-atpx",
+      "to": "node-moy4u12e-thfc",
+      "weight": 8,
+      "videoFwd": "outside_72_ccw.mp4",
+      "videoFwdStart": 18.462394,
+      "videoFwdEnd": 22.7561,
+      "videoRev": "outside_72_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 4.223894
+    },
+    {
+      "from": "node-moy1cpmq-x28m",
+      "to": "node-moy4u12e-thfc",
+      "weight": 18,
+      "videoFwd": "outside_44_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 16.275318,
+      "videoRev": "outside_44_cw.mp4",
+      "videoRevStart": 34.059188,
+      "videoRevEnd": 54.487833
+    },
+    {
+      "from": "node-moy4u12e-thfc",
+      "to": "node-moy1ctp0-7yiv",
+      "weight": 39,
+      "videoFwd": "outside_44_ccw.mp4",
+      "videoFwdStart": 16.452281,
+      "videoFwdEnd": 49.149133,
+      "videoRev": "outside_44_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 34.058959
+    },
+    {
+      "from": "node-moy4xk9g-hp7v",
+      "to": "node-moy4xtdx-vnb8",
+      "weight": 64
+    },
+    {
+      "from": "node-moy4et0x-she9",
+      "to": "node-moy4xtdx-vnb8",
+      "weight": 7,
+      "videoFwd": "outside_69_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 12.30264,
+      "videoRev": "outside_69_cw.mp4",
+      "videoRevStart": 5.588014,
+      "videoRevEnd": 16.483133
+    },
+    {
+      "from": "node-moy4xtdx-vnb8",
+      "to": "node-moy4kqhj-jj8b",
+      "weight": 12,
+      "videoFwd": "outside_69_ccw.mp4",
+      "videoFwdStart": 12.569112,
+      "videoFwdEnd": 19.1525,
+      "videoRev": "outside_69_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 5.396912
+    },
+    {
+      "from": "node-moy4xk9g-hp7v",
+      "to": "node-moy0sro7-n9ak",
+      "weight": 18,
+      "videoFwd": "outside_74_ccw.mp4",
+      "videoFwdStart": 8.257771,
+      "videoFwdEnd": 18.318333,
+      "videoRev": "outside_74_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 11.198825
+    },
+    {
+      "from": "node-mopab8qd-afme",
+      "to": "node-moy4xk9g-hp7v",
+      "weight": 6,
+      "videoFwd": "outside_74_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 7.946069,
+      "videoRev": "outside_74_cw.mp4",
+      "videoRevStart": 11.274302,
+      "videoRevEnd": 20.520533
+    },
+    {
+      "from": "node-moy51ip7-39mo",
+      "to": "node-moy4xk9g-hp7v",
+      "weight": 30,
+      "videoFwd": "outside_75_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 20.9543,
+      "videoRev": "outside_75_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 21.187867
+    },
+    {
+      "from": "node-moy51ip7-39mo",
+      "to": "node-moy0sro7-n9ak",
+      "weight": 38,
+      "videoFwd": "outside_77_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 28.928933,
+      "videoRev": "outside_77_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 29.1625
+    },
+    {
+      "from": "node-moy5ihv9-bvsk",
+      "to": "node-moy51ip7-39mo",
+      "weight": 30,
+      "videoFwd": "outside_78_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 22.0554,
+      "videoRev": "outside_78_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 20.5539
+    },
+    {
+      "from": "node-mopaqxem-g4ai",
+      "to": "node-moy5iufq-81pi",
+      "weight": 12,
+      "videoFwd": "outside_79_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 9.533151,
+      "videoRev": "outside_79_cw.mp4",
+      "videoRevStart": 41.424806,
+      "videoRevEnd": 50.283633
+    },
+    {
+      "from": "node-moy5it3z-w48m",
+      "to": "node-moy5ihv9-bvsk",
+      "weight": 14,
+      "videoFwd": "outside_79_ccw.mp4",
+      "videoFwdStart": 24.985062,
+      "videoFwdEnd": 34.472921,
+      "videoRev": "outside_79_cw.mp4",
+      "videoRevStart": 16.215356,
+      "videoRevEnd": 25.944754
+    },
+    {
+      "from": "node-moy5ihv9-bvsk",
+      "to": "node-moy5irl7-hgrx",
+      "weight": 9,
+      "videoFwd": "outside_79_ccw.mp4",
+      "videoFwdStart": 34.57599,
+      "videoFwdEnd": 40.114836,
+      "videoRev": "outside_79_cw.mp4",
+      "videoRevStart": 11.073731,
+      "videoRevEnd": 16.682099
+    },
+    {
+      "from": "node-moy5irl7-hgrx",
+      "to": "node-mopcw7bz-zf0u",
+      "weight": 19,
+      "videoFwd": "outside_79_ccw.mp4",
+      "videoFwdStart": 40.06645,
+      "videoFwdEnd": 52.686033,
+      "videoRev": "outside_79_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 10.944367
+    },
+    {
+      "from": "node-mopbb89a-ok2w",
+      "to": "node-moy5lev7-jcm9",
+      "weight": 17,
+      "videoFwd": "outside_80_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 10.987087,
+      "videoRev": "outside_80_cw.mp4",
+      "videoRevStart": 36.502133,
+      "videoRevEnd": 48.014667
+    },
+    {
+      "from": "node-moy5lev7-jcm9",
+      "to": "node-moy5lgsb-5bcm",
+      "weight": 25,
+      "videoFwd": "outside_80_ccw.mp4",
+      "videoFwdStart": 10.78793,
+      "videoFwdEnd": 25.093016,
+      "videoRev": "outside_80_cw.mp4",
+      "videoRevStart": 22.122051,
+      "videoRevEnd": 36.767335
+    },
+    {
+      "from": "node-moy5lgsb-5bcm",
+      "to": "node-moy5irl7-hgrx",
+      "weight": 26,
+      "videoFwd": "outside_80_ccw.mp4",
+      "videoFwdStart": 25.204142,
+      "videoFwdEnd": 44.811467,
+      "videoRev": "outside_80_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 22.227492
+    },
+    {
+      "from": "node-moy5lev7-jcm9",
+      "to": "node-moy5ldmg-ztk2",
+      "weight": 22,
+      "videoFwd": "outside_82_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 15.766706,
+      "videoRev": "outside_82_cw.mp4",
+      "videoRevStart": 15.693746,
+      "videoRevEnd": 32.232233
+    },
+    {
+      "from": "node-moy5ldmg-ztk2",
+      "to": "node-moy5lcxw-db5i",
+      "weight": 23,
+      "videoFwd": "outside_82_ccw.mp4",
+      "videoFwdStart": 15.582757,
+      "videoFwdEnd": 30.5639,
+      "videoRev": "outside_82_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 15.668013
+    },
+    {
+      "from": "node-moy5ldmg-ztk2",
+      "to": "node-moy5r48d-4znm",
+      "weight": 23,
+      "videoFwd": "outside_83_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 16.016015,
+      "videoRev": "outside_83_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 33.900567
+    },
+    {
+      "from": "node-moy5r48d-4znm",
+      "to": "node-moy5it3z-w48m",
+      "weight": 27,
+      "videoFwd": "outside_83_ccw.mp4",
+      "videoFwdStart": 15.938799,
+      "videoFwdEnd": 33.8672,
+      "videoRev": "outside_83_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 33.900567
+    },
+    {
+      "from": "node-moy5lgsb-5bcm",
+      "to": "node-moy5r48d-4znm",
+      "weight": 23,
+      "videoFwd": "outside_81_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 15.770606,
+      "videoRev": "outside_81_cw.mp4",
+      "videoRevStart": 14.595217,
+      "videoRevEnd": 29.8632
+    },
+    {
+      "from": "node-moy5r48d-4znm",
+      "to": "node-moy5lc67-jc9c",
+      "weight": 22,
+      "videoFwd": "outside_81_ccw.mp4",
+      "videoFwdStart": 15.821443,
+      "videoFwdEnd": 30.2636,
+      "videoRev": "outside_81_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 14.715244
+    },
+    {
+      "from": "node-moy5lcxw-db5i",
+      "to": "node-moy5lc67-jc9c",
+      "weight": 23,
+      "videoFwd": "outside_84_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 15.927232,
+      "videoRev": "outside_84_cw.mp4",
+      "videoRevStart": 19.850459,
+      "videoRevEnd": 34.668
+    },
+    {
+      "from": "node-moy5lc67-jc9c",
+      "to": "node-moy5iufq-81pi",
+      "weight": 26,
+      "videoFwd": "outside_84_ccw.mp4",
+      "videoFwdStart": 15.778353,
+      "videoFwdEnd": 35.402067,
+      "videoRev": "outside_84_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 20.114693
+    },
+    {
+      "from": "node-moy5iufq-81pi",
+      "to": "node-moy5it3z-w48m",
+      "weight": 23,
+      "videoFwd": "outside_79_ccw.mp4",
+      "videoFwdStart": 9.903675,
+      "videoFwdEnd": 25.541056,
+      "videoRev": "outside_79_cw.mp4",
+      "videoRevStart": 25.771307,
+      "videoRevEnd": 40.096731
+    },
+    {
+      "from": "node-moy6034w-jh7r",
+      "to": "node-moy0ro0l-18tp",
+      "weight": 53,
+      "videoFwd": "outside_86_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 35.935933,
+      "videoRev": "outside_86_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 37.404067
+    },
+    {
+      "from": "node-moy0sjj1-dpbn",
+      "to": "node-moy6034w-jh7r",
+      "weight": 22,
+      "videoFwd": "outside_76_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 21.246051,
+      "videoRev": "outside_76_cw.mp4",
+      "videoRevStart": 5.178459,
+      "videoRevEnd": 24.924933
+    },
+    {
+      "from": "node-moy6034w-jh7r",
+      "to": "node-moy51ip7-39mo",
+      "weight": 15,
+      "videoFwd": "outside_76_ccw.mp4",
+      "videoFwdStart": 21.159375,
+      "videoFwdEnd": 26.5599,
+      "videoRev": "outside_76_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 4.813262
+    },
+    {
+      "from": "node-moy0qh2v-q0ny",
+      "to": "node-moy0rp4x-6okf",
+      "weight": 29,
+      "videoFwd": "outside_87_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 23.123133,
+      "videoRev": "outside_87_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 23.123133
+    },
+    {
+      "from": "node-moy63pod-i5gl",
+      "to": "node-moy0qh2v-q0ny",
+      "weight": 9,
+      "videoFwd": "outside_88_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 7.6076,
+      "videoRev": "outside_88_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 7.9079
+    },
+    {
+      "from": "node-moy63pod-i5gl",
+      "to": "node-moy6dl9v-0mz0",
+      "weight": 11,
+      "videoFwd": "outside_89_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 13.079733,
+      "videoRev": "outside_89_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 14.881533
+    },
+    {
+      "from": "node-moy16lwl-v7fb",
+      "to": "node-moy16gn2-1ouq",
+      "weight": 51,
+      "videoFwd": "outside_90_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 34.822534,
+      "videoRev": "outside_90_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 79.813133
+    },
+    {
+      "from": "node-moy16gn2-1ouq",
+      "to": "node-moy6dl9v-0mz0",
+      "weight": 53,
+      "videoFwd": "outside_90_ccw.mp4",
+      "videoFwdStart": 34.822534,
+      "videoFwdEnd": 85.018367,
+      "videoRev": "outside_90_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 79.813133
+    },
+    {
+      "from": "node-moy6h184-smty",
+      "to": "node-moy0pgw0-79dd",
+      "weight": 30,
+      "videoFwd": "outside_91_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 21.3547,
+      "videoRev": "outside_91_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 22.3557
+    },
+    {
+      "from": "node-moy6j3pe-lajf",
+      "to": "node-moy0ol9o-4ib9",
+      "weight": 71
+    },
+    {
+      "from": "node-moy6j68n-jnom",
+      "to": "node-moy6j3pe-lajf",
+      "weight": 31,
+      "videoFwd": "outside_93_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 23.548558,
+      "videoRev": "outside_93_cw.mp4",
+      "videoRevStart": 35.519682,
+      "videoRevEnd": 56.456467
+    },
+    {
+      "from": "node-moy6j3pe-lajf",
+      "to": "node-moy16gn2-1ouq",
+      "weight": 45,
+      "videoFwd": "outside_93_ccw.mp4",
+      "videoFwdStart": 23.094146,
+      "videoFwdEnd": 60.393733,
+      "videoRev": "outside_93_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 34.232952
+    },
+    {
+      "from": "node-moy0keeu-zoib",
+      "to": "node-moy6mc9m-cxta",
+      "weight": 40,
+      "videoFwd": "outside_95_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 29.295967,
+      "videoRev": "outside_95_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 29.5629
+    },
+    {
+      "from": "node-moy6mc9m-cxta",
+      "to": "node-moy6mdzl-guve",
+      "weight": 17,
+      "videoFwd": "outside_96_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 16.2162,
+      "videoRev": "outside_96_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 14.247567
+    },
+    {
+      "from": "node-moy6mc9m-cxta",
+      "to": "node-moy6mf3p-gxvl",
+      "weight": 30,
+      "videoFwd": "outside_97_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 19.541775,
+      "videoRev": "outside_97_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 42.108767
+    },
+    {
+      "from": "node-moy6mf3p-gxvl",
+      "to": "node-moy6mge8-6hcc",
+      "weight": 34,
+      "videoFwd": "outside_97_ccw.mp4",
+      "videoFwdStart": 20.372127,
+      "videoFwdEnd": 42.442433,
+      "videoRev": "outside_97_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 42.108767
+    },
+    {
+      "from": "node-moy0j52w-zt0c",
+      "to": "node-moy6mdzl-guve",
+      "weight": 32,
+      "videoFwd": "outside_99_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 22.93966,
+      "videoRev": "outside_99_cw.mp4",
+      "videoRevStart": 15.586692,
+      "videoRevEnd": 37.1705
+    },
+    {
+      "from": "node-moy6mdzl-guve",
+      "to": "node-moy6mf3p-gxvl",
+      "weight": 22,
+      "videoFwd": "outside_99_ccw.mp4",
+      "videoFwdStart": 22.598433,
+      "videoFwdEnd": 40.0734,
+      "videoRev": "outside_99_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 15.825914
+    },
+    {
+      "from": "node-moy6mf3p-gxvl",
+      "to": "node-moy6rv6o-s1sg",
+      "weight": 33,
+      "videoFwd": "outside_100_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 21.101999,
+      "videoRev": "outside_100_cw.mp4",
+      "videoRevStart": 26.920181,
+      "videoRevEnd": 49.115767
+    },
+    {
+      "from": "node-moy6rv6o-s1sg",
+      "to": "node-moy6rwx6-prxr",
+      "weight": 30,
+      "videoFwd": "outside_100_ccw.mp4",
+      "videoFwdStart": 20.891886,
+      "videoFwdEnd": 47.347333,
+      "videoRev": "outside_100_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 26.725811
+    },
+    {
+      "from": "node-moy6mc9m-cxta",
+      "to": "node-moy6updj-glmy",
+      "weight": 21,
+      "videoFwd": "outside_98_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 20.070197,
+      "videoRev": "outside_98_cw.mp4",
+      "videoRevStart": 26.045915,
+      "videoRevEnd": 46.513167
+    },
+    {
+      "from": "node-moy6updj-glmy",
+      "to": "node-moy6pbz2-tsxf",
+      "weight": 40,
+      "videoFwd": "outside_98_ccw.mp4",
+      "videoFwdStart": 20.831505,
+      "videoFwdEnd": 47.213867,
+      "videoRev": "outside_98_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 26.352699
+    },
+    {
+      "from": "node-moy6updj-glmy",
+      "to": "node-moy6rv6o-s1sg",
+      "weight": 31,
+      "videoFwd": "outside_101_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 19.686367,
+      "videoRev": "outside_101_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 22.022033
+    },
+    {
+      "from": "node-moy6pbz2-tsxf",
+      "to": "node-moy6rwx6-prxr",
+      "weight": 35,
+      "videoFwd": "outside_102_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 15.582233,
+      "videoRev": "outside_102_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 18.084767
+    },
+    {
+      "from": "node-moy6rwx6-prxr",
+      "to": "node-moy71hr8-dfat",
+      "weight": 13,
+      "videoFwd": "outside_103_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 8.644846,
+      "videoRev": "outside_103_cw.mp4",
+      "videoRevStart": 34.899375,
+      "videoRevEnd": 43.1765
+    },
+    {
+      "from": "node-moy71hr8-dfat",
+      "to": "node-moxzxg7l-ix42",
+      "weight": 44,
+      "videoFwd": "outside_103_ccw.mp4",
+      "videoFwdStart": 9.210401,
+      "videoFwdEnd": 41.8752,
+      "videoRev": "outside_103_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 34.588735
+    },
+    {
+      "from": "node-moy6rwx6-prxr",
+      "to": "node-moy71fse-q61o",
+      "weight": 24,
+      "videoFwd": "outside_104_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 9.80748,
+      "videoRev": "outside_104_cw.mp4",
+      "videoRevStart": 20.846748,
+      "videoRevEnd": 32.666
+    },
+    {
+      "from": "node-moy71fse-q61o",
+      "to": "node-moxzx0fh-m22n",
+      "weight": 19,
+      "videoFwd": "outside_104_ccw.mp4",
+      "videoFwdStart": 10.320934,
+      "videoFwdEnd": 30.8642,
+      "videoRev": "outside_104_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 20.307633
+    },
+    {
+      "from": "node-moy71hr8-dfat",
+      "to": "node-moy71fse-q61o",
+      "weight": 20,
+      "videoFwd": "outside_105_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 15.7157,
+      "videoRev": "outside_105_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 15.181833
+    },
+    {
+      "from": "node-moy77fgx-n6ec",
+      "to": "node-moxzx0fh-m22n",
+      "weight": 15,
+      "videoFwd": "outside_106_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 12.379033,
+      "videoRev": "outside_106_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 14.3143
+    },
+    {
+      "from": "node-moy79o3u-ow4e",
+      "to": "node-moy79sbc-1hlp",
+      "weight": 21,
+      "videoFwd": "outside_107_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 11.249005,
+      "videoRev": "outside_107_cw.mp4",
+      "videoRevStart": 16.476303,
+      "videoRevEnd": 29.5629
+    },
+    {
+      "from": "node-moy79sbc-1hlp",
+      "to": "node-moy79i2v-q3u0",
+      "weight": 15,
+      "videoFwd": "outside_107_ccw.mp4",
+      "videoFwdStart": 11.080652,
+      "videoFwdEnd": 22.376275,
+      "videoRev": "outside_107_cw.mp4",
+      "videoRevStart": 8.008917,
+      "videoRevEnd": 16.78828
+    },
+    {
+      "from": "node-moy79i2v-q3u0",
+      "to": "node-moxzy07g-3kpq",
+      "weight": 13,
+      "videoFwd": "outside_107_ccw.mp4",
+      "videoFwdStart": 21.956546,
+      "videoFwdEnd": 29.629633,
+      "videoRev": "outside_107_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 8.245234
+    },
+    {
+      "from": "node-moy79fx9-07wh",
+      "to": "node-moy79i2v-q3u0",
+      "weight": 11,
+      "videoFwd": "outside_108_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 15.782433,
+      "videoRev": "outside_108_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 15.8158
+    },
+    {
+      "from": "node-moy79jkz-8nof",
+      "to": "node-moy79i2v-q3u0",
+      "weight": 54,
+      "videoFwd": "outside_109_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 34.734733,
+      "videoRev": "outside_109_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 33.099767
+    },
+    {
+      "from": "node-moy79nag-o1k9",
+      "to": "node-moy79sbc-1hlp",
+      "weight": 14,
+      "videoFwd": "outside_110_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 14.389776,
+      "videoRev": "outside_110_cw.mp4",
+      "videoRevStart": 2.930272,
+      "videoRevEnd": 17.984667
+    },
+    {
+      "from": "node-moy79o3u-ow4e",
+      "to": "node-moy79nag-o1k9",
+      "weight": 14,
+      "videoFwd": "outside_111_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 7.942321,
+      "videoRev": "outside_111_cw.mp4",
+      "videoRevStart": 33.563104,
+      "videoRevEnd": 41.608267
+    },
+    {
+      "from": "node-moy79nag-o1k9",
+      "to": "node-moxzz70v-cvcy",
+      "weight": 54,
+      "videoFwd": "outside_111_ccw.mp4",
+      "videoFwdStart": 8.231983,
+      "videoFwdEnd": 42.142133,
+      "videoRev": "outside_111_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 34.183582
+    },
+    {
+      "from": "node-moy79w8d-jhko",
+      "to": "node-moy79o3u-ow4e",
+      "weight": 51,
+      "videoFwd": "outside_112_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 46.4798,
+      "videoRev": "outside_112_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 43.8772
+    },
+    {
+      "from": "node-moy6mge8-6hcc",
+      "to": "node-moy7a9p9-cxir",
+      "weight": 45,
+      "videoFwd": "outside_113_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 43.8772,
+      "videoRev": "outside_113_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 42.7761
+    },
+    {
+      "from": "node-moy7a9p9-cxir",
+      "to": "node-moy79jkz-8nof",
+      "weight": 12,
+      "videoFwd": "outside_113_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 43.8772,
+      "videoRev": "outside_113_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 42.7761
+    },
+    {
+      "from": "node-moy79w8d-jhko",
+      "to": "node-moy7a9p9-cxir",
+      "weight": 49,
+      "videoFwd": "outside_114_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 33.667,
+      "videoRev": "outside_114_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 35.235233
+    },
+    {
+      "from": "node-moy79o3u-ow4e",
+      "to": "node-moy9m9ra-yl2r",
+      "weight": 19,
+      "videoFwd": "outside_115_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 16.523225,
+      "videoRev": "outside_115_cw.mp4",
+      "videoRevStart": 13.712788,
+      "videoRevEnd": 28.795467
+    },
+    {
+      "from": "node-moy9m9ra-yl2r",
+      "to": "node-moy7a9p9-cxir",
+      "weight": 21,
+      "videoFwd": "outside_115_ccw.mp4",
+      "videoFwdStart": 16.219695,
+      "videoFwdEnd": 28.7621,
+      "videoRev": "outside_115_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 13.69353
+    },
+    {
+      "from": "node-moy79w8d-jhko",
+      "to": "node-moy9m9ra-yl2r",
+      "weight": 45,
+      "videoFwd": "outside_116_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 22.5559,
+      "videoRev": "outside_116_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 22.5559
+    },
+    {
+      "from": "node-moy79w8d-jhko",
+      "to": "node-moy6mge8-6hcc",
+      "weight": 31,
+      "videoFwd": "outside_117_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 18.685367,
+      "videoRev": "outside_117_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 18.9523
+    },
+    {
+      "from": "node-moy9qgl5-r4ov",
+      "to": "node-moy79w8d-jhko",
+      "weight": 33,
+      "videoFwd": "outside_118_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 36.036033,
+      "videoRev": "outside_118_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 34.534533
+    },
+    {
+      "from": "node-moy0ez5b-lac9",
+      "to": "node-moy6mge8-6hcc",
+      "weight": 37,
+      "videoFwd": "outside_119_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 31.531533,
+      "videoRev": "outside_119_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 32.132133
+    },
+    {
+      "from": "node-moy0g3cb-hk30",
+      "to": "node-moy9w7qf-ts98",
+      "weight": 18,
+      "videoFwd": "outside_125_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 10.315086,
+      "videoRev": "outside_125_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 38.838833
+    },
+    {
+      "from": "node-moy9w7qf-ts98",
+      "to": "node-moy9wdqf-5s9d",
+      "weight": 25,
+      "videoFwd": "outside_125_ccw.mp4",
+      "videoFwdStart": 11.896881,
+      "videoFwdEnd": 33.820675,
+      "videoRev": "outside_125_cw.mp4",
+      "videoRevStart": 14.166003,
+      "videoRevEnd": 38.838833
+    },
+    {
+      "from": "node-moy9wdqf-5s9d",
+      "to": "node-moy9w6qq-9vhm",
+      "weight": 24,
+      "videoFwd": "outside_125_ccw.mp4",
+      "videoFwdStart": 33.949637,
+      "videoFwdEnd": 48.8822,
+      "videoRev": "outside_125_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 14.353538
+    },
+    {
+      "from": "node-moy03ljo-1rys",
+      "to": "node-moy9w7qf-ts98",
+      "weight": 56,
+      "videoFwd": "outside_126_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 41.441433,
+      "videoRev": "outside_126_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 39.639633
+    },
+    {
+      "from": "node-moy9w7qf-ts98",
+      "to": "node-moy9qgl5-r4ov",
+      "weight": 41,
+      "videoFwd": "outside_127_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 36.302967,
+      "videoRev": "outside_127_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 37.137133
+    },
+    {
+      "from": "node-moy9wdqf-5s9d",
+      "to": "node-moy9qgl5-r4ov",
+      "weight": 28,
+      "videoFwd": "outside_128_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 17.5509,
+      "videoRev": "outside_128_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 17.283967
+    },
+    {
+      "from": "node-moyabrgv-xi43",
+      "to": "node-moy9qgl5-r4ov",
+      "weight": 31,
+      "videoFwd": "outside_129_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 23.5569,
+      "videoRev": "outside_129_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 22.989667
+    },
+    {
+      "from": "node-moy9qgl5-r4ov",
+      "to": "node-moyabxsc-1v5a",
+      "weight": 31,
+      "videoFwd": "outside_130_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 17.472093,
+      "videoRev": "outside_130_cw.mp4",
+      "videoRevStart": 17.78257,
+      "videoRevEnd": 37.4708
+    },
+    {
+      "from": "node-moyabxsc-1v5a",
+      "to": "node-moyabygi-1vnd",
+      "weight": 29,
+      "videoFwd": "outside_130_ccw.mp4",
+      "videoFwdStart": 17.903921,
+      "videoFwdEnd": 36.436433,
+      "videoRev": "outside_130_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 17.967324
+    },
+    {
+      "from": "node-moy02uam-2bvd",
+      "to": "node-moyabrgv-xi43",
+      "weight": 51,
+      "videoFwd": "outside_131_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 40.1735,
+      "videoRev": "outside_131_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 40.8742
+    },
+    {
+      "from": "node-moyahxyr-dr4t",
+      "to": "node-moy02uam-2bvd",
+      "weight": 126,
+      "videoFwd": "outside_132_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 94.427767,
+      "videoRev": "outside_132_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 105.438767
+    },
+    {
+      "from": "node-moyac04z-4731",
+      "to": "node-moyabxsc-1v5a",
+      "weight": 35,
+      "videoFwd": "outside_133_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 21.888567,
+      "videoRev": "outside_133_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 23.223233
+    },
+    {
+      "from": "node-moyabzm6-mbpq",
+      "to": "node-moyabygi-1vnd",
+      "weight": 27,
+      "videoFwd": "outside_134_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 12.245567,
+      "videoRev": "outside_134_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 13.1131
+    },
+    {
+      "from": "node-moyabzm6-mbpq",
+      "to": "node-moyacfzs-e38s",
+      "weight": 19,
+      "videoFwd": "outside_135_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 8.530917,
+      "videoRev": "outside_135_cw.mp4",
+      "videoRevStart": 22.833917,
+      "videoRevEnd": 33.099767
+    },
+    {
+      "from": "node-moyacfzs-e38s",
+      "to": "node-moyaccwa-j5ep",
+      "weight": 15,
+      "videoFwd": "outside_135_ccw.mp4",
+      "videoFwdStart": 8.776692,
+      "videoFwdEnd": 23.387009,
+      "videoRev": "outside_135_cw.mp4",
+      "videoRevStart": 7.69236,
+      "videoRevEnd": 21.940525
+    },
+    {
+      "from": "node-moyaccwa-j5ep",
+      "to": "node-moy0055m-tz0o",
+      "weight": 20,
+      "videoFwd": "outside_135_ccw.mp4",
+      "videoFwdStart": 22.782786,
+      "videoFwdEnd": 31.131133,
+      "videoRev": "outside_135_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 7.65149
+    },
+    {
+      "from": "node-moy007r6-3rmi",
+      "to": "node-moyacf1z-jfld",
+      "weight": 52,
+      "videoFwd": "outside_136_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 34.816514,
+      "videoRev": "outside_136_cw.mp4",
+      "videoRevStart": 9.430092,
+      "videoRevEnd": 42.1755
+    },
+    {
+      "from": "node-moyacf1z-jfld",
+      "to": "node-moyabzm6-mbpq",
+      "weight": 14,
+      "videoFwd": "outside_136_ccw.mp4",
+      "videoFwdStart": 34.936673,
+      "videoFwdEnd": 45.545533,
+      "videoRev": "outside_136_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 8.428666
+    },
+    {
+      "from": "node-moyac3xi-ip41",
+      "to": "node-moyaccwa-j5ep",
+      "weight": 11,
+      "videoFwd": "outside_138_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 16.9503,
+      "videoRev": "outside_138_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 17.617633
+    },
+    {
+      "from": "node-moyacf1z-jfld",
+      "to": "node-moyacfzs-e38s",
+      "weight": 10,
+      "videoFwd": "outside_137_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 11.94036,
+      "videoRev": "outside_137_cw.mp4",
+      "videoRevStart": 5.340162,
+      "videoRevEnd": 17.283967
+    },
+    {
+      "from": "node-moyabygi-1vnd",
+      "to": "node-moyaccwa-j5ep",
+      "weight": 42,
+      "videoFwd": "outside_139_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 38.638633,
+      "videoRev": "outside_139_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 33.700367
+    },
+    {
+      "from": "node-moyba7it-e4b4",
+      "to": "node-moy0086z-1qn7",
+      "weight": 31,
+      "videoFwd": "outside_8_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 52.686033,
+      "videoRev": "outside_8_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 52.152167
+    },
+    {
+      "from": "node-moy01sdt-yszr",
+      "to": "node-moyba7it-e4b4",
+      "weight": 9,
+      "videoFwd": "outside_9_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 13.646967,
+      "videoRev": "outside_9_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 11.778433
+    },
+    {
+      "from": "node-moyb9u0o-fsoj",
+      "to": "node-moyba7it-e4b4",
+      "weight": 35,
+      "videoRev": "outside_140_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 23.323333
+    },
+    {
+      "from": "node-moybefgz-4d36",
+      "to": "node-moyb9u0o-fsoj",
+      "weight": 194,
+      "videoFwd": "outside_141_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 131.665,
+      "videoRev": "outside_141_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 125.225233
+    },
+    {
+      "from": "node-moybf6h2-g8cl",
+      "to": "node-moybf35g-0aez",
+      "weight": 196,
+      "videoFwd": "outside_143_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 133.900567,
+      "videoRev": "outside_143_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 137.704367
+    },
+    {
+      "from": "node-moybf8ly-vfn6",
+      "to": "node-moybgrpb-oze6",
+      "weight": 11,
+      "videoFwd": "outside_142_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 6.125505,
+      "videoRev": "outside_142_cw.mp4",
+      "videoRevStart": 12.83404,
+      "videoRevEnd": 17.083767
+    },
+    {
+      "from": "node-moybgrpb-oze6",
+      "to": "node-moybf6h2-g8cl",
+      "weight": 13,
+      "videoFwd": "outside_142_ccw.mp4",
+      "videoFwdStart": 5.92136,
+      "videoFwdEnd": 14.447767,
+      "videoRev": "outside_142_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 12.379068
+    },
+    {
+      "from": "node-moybgrpb-oze6",
+      "to": "node-moybf96l-ubt3",
+      "weight": 35,
+      "videoFwd": "outside_144_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 32.032033,
+      "videoRev": "outside_144_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 30.030033
+    },
+    {
+      "from": "node-moybf8ly-vfn6",
+      "to": "node-moybj1z8-a9cz",
+      "weight": 80,
+      "videoFwd": "outside_145_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 68.568567,
+      "videoRev": "outside_145_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 68.4351
+    },
+    {
+      "from": "node-moxzz70v-cvcy",
+      "to": "node-moybj1z8-a9cz",
+      "weight": 22,
+      "videoFwd": "outside_146_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 12.545867,
+      "videoRev": "outside_146_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 12.145467
+    },
+    {
+      "from": "node-moybj1z8-a9cz",
+      "to": "node-moybke76-0l76",
+      "weight": 69,
+      "videoFwd": "outside_147_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 51.551567,
+      "videoRev": "outside_147_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 46.646633
+    },
+    {
+      "from": "node-moybke76-0l76",
+      "to": "node-moyblbza-90x9",
+      "weight": 49,
+      "videoFwd": "outside_148_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 33.733733,
+      "videoRev": "outside_148_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 30.9643
+    },
+    {
+      "from": "node-moybke76-0l76",
+      "to": "node-moyblwko-nt3h",
+      "weight": 38,
+      "videoFwd": "outside_149_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 30.897567,
+      "videoRev": "outside_149_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 32.8662
+    },
+    {
+      "from": "node-moyblwko-nt3h",
+      "to": "node-moybmsl7-mirh",
+      "weight": 78,
+      "videoFwd": "outside_150_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 62.562567,
+      "videoRev": "outside_150_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 65.965967
+    },
+    {
+      "from": "node-moxzsx2h-esy5",
+      "to": "node-moybmsl7-mirh",
+      "weight": 47,
+      "videoFwd": "outside_4_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 36.979459,
+      "videoRev": "outside_4_ccw.mp4",
+      "videoRevStart": 16.87359,
+      "videoRevEnd": 54.0207
+    },
+    {
+      "from": "node-moybmsl7-mirh",
+      "to": "node-moxzsyd2-mcrr",
+      "weight": 24,
+      "videoFwd": "outside_4_cw.mp4",
+      "videoFwdStart": 37.153386,
+      "videoFwdEnd": 55.388733,
+      "videoRev": "outside_4_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 17.708128
+    },
+    {
+      "from": "node-moyboz3f-3qsh",
+      "to": "node-moyblbza-90x9",
+      "weight": 109,
+      "videoFwd": "outside_151_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 78.472312,
+      "videoRev": "outside_151_cw.mp4",
+      "videoRevStart": 24.318671,
+      "videoRevEnd": 102.135467
+    },
+    {
+      "from": "node-moyblbza-90x9",
+      "to": "node-moyblwko-nt3h",
+      "weight": 40,
+      "videoFwd": "outside_151_ccw.mp4",
+      "videoFwdStart": 78.998414,
+      "videoFwdEnd": 101.935267,
+      "videoRev": "outside_151_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 24.030658
+    },
+    {
+      "from": "node-moyblwko-nt3h",
+      "to": "node-moybqgzv-9w31",
+      "weight": 94,
+      "videoFwd": "outside_152_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 66.305434,
+      "videoRev": "outside_152_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 123.690367
+    },
+    {
+      "from": "node-moybqgzv-9w31",
+      "to": "node-moybqjar-fdiu",
+      "weight": 67,
+      "videoFwd": "outside_152_ccw.mp4",
+      "videoFwdStart": 66.221478,
+      "videoFwdEnd": 120.820833,
+      "videoRev": "outside_152_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 123.690367
+    },
+    {
+      "from": "node-moybqgzv-9w31",
+      "to": "node-moybssc5-6w1b",
+      "weight": 70,
+      "videoFwd": "outside_153_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 53.353367,
+      "videoRev": "outside_153_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 54.287633
+    },
+    {
+      "from": "node-moybu33b-01vi",
+      "to": "node-moybssc5-6w1b",
+      "weight": 47,
+      "videoFwd": "outside_154_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 31.676598,
+      "videoRev": "outside_154_cw.mp4",
+      "videoRevStart": 73.463058,
+      "videoRevEnd": 107.4074
+    },
+    {
+      "from": "node-moybssc5-6w1b",
+      "to": "node-moybqjar-fdiu",
+      "weight": 102,
+      "videoFwd": "outside_154_ccw.mp4",
+      "videoFwdStart": 33.122517,
+      "videoFwdEnd": 109.4094,
+      "videoRev": "outside_154_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 74.495647
+    },
+    {
+      "from": "node-moxzsx2h-esy5",
+      "to": "node-moybu33b-01vi",
+      "weight": 22,
+      "videoFwd": "outside_2_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 17.745468,
+      "videoRev": "outside_2_cw.mp4",
+      "videoRevStart": 77.291367,
+      "videoRevEnd": 93.226567
+    },
+    {
+      "from": "node-moybu33b-01vi",
+      "to": "node-moxzsnmj-gc2m",
+      "weight": 120,
+      "videoFwd": "outside_2_ccw.mp4",
+      "videoFwdStart": 17.479623,
+      "videoFwdEnd": 100.767433,
+      "videoRev": "outside_2_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 76.032838
+    },
+    {
+      "from": "node-moybxco3-ph8i",
+      "to": "node-moybqjar-fdiu",
+      "weight": 52,
+      "videoFwd": "outside_156_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 28.828833,
+      "videoRev": "outside_156_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 30.030033
+    },
+    {
+      "from": "node-moyby736-nmz6",
+      "to": "node-moyby9el-stih",
+      "weight": 204,
+      "videoFwd": "outside_157_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 141.007667,
+      "videoRev": "outside_157_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 146.2796
+    },
+    {
+      "from": "node-moybzdco-hg6z",
+      "to": "node-moxzsnmj-gc2m",
+      "weight": 109,
+      "videoFwd": "outside_158_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 82.349,
+      "videoRev": "outside_158_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 82.382367
+    },
+    {
+      "from": "node-moybzdco-hg6z",
+      "to": "node-moy1ji32-cmvm",
+      "weight": 22,
+      "videoFwd": "outside_159_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 14.647967,
+      "videoRev": "outside_159_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 17.183867
+    },
+    {
+      "from": "node-moyc0gzv-41ml",
+      "to": "node-moybqjar-fdiu",
+      "weight": 138,
+      "videoFwd": "outside_160_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 110.01,
+      "videoRev": "outside_160_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 109.342667
+    },
+    {
+      "from": "node-moybqjar-fdiu",
+      "to": "node-moyby9el-stih",
+      "weight": 134,
+      "videoFwd": "outside_155_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 88.548313,
+      "videoRev": "outside_155_cw.mp4",
+      "videoRevStart": 65.143624,
+      "videoRevEnd": 157.0237
+    },
+    {
+      "from": "node-moyby9el-stih",
+      "to": "node-moybzdco-hg6z",
+      "weight": 85,
+      "videoFwd": "outside_155_ccw.mp4",
+      "videoFwdStart": 88.633793,
+      "videoFwdEnd": 154.287633,
+      "videoRev": "outside_155_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 65.509363
+    },
+    {
+      "from": "node-moyc4aj2-gk35",
+      "to": "node-moyc0gzv-41ml",
+      "weight": 76,
+      "videoFwd": "outside_161_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 53.8205,
+      "videoRev": "outside_161_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 52.986333
+    },
+    {
+      "from": "node-moyboz3f-3qsh",
+      "to": "node-moyc4aj2-gk35",
+      "weight": 72,
+      "videoFwd": "outside_162_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 53.887233,
+      "videoRev": "outside_162_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 55.488833
+    },
+    {
+      "from": "node-moyboz3f-3qsh",
+      "to": "node-moyc73pn-ypk7",
+      "weight": 72,
+      "videoFwd": "outside_163_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 63.747185,
+      "videoRev": "outside_163_cw.mp4",
+      "videoRevStart": 33.431111,
+      "videoRevEnd": 98.965633
+    },
+    {
+      "from": "node-moyc73pn-ypk7",
+      "to": "node-moyc0gzv-41ml",
+      "weight": 76,
+      "videoFwd": "outside_163_ccw.mp4",
+      "videoFwdStart": 64.295206,
+      "videoFwdEnd": 99.332667,
+      "videoRev": "outside_163_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 33.690799
     }
   ]
 }
