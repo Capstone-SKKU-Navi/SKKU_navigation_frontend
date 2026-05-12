@@ -3,7 +3,8 @@
 //
 // The tree is built from the actual files present under videos/ (any depth)
 // as reported by GET /api/videos-list, so newly dropped buildings/files
-// appear automatically. Filename conventions:
+// appear automatically. Filename conventions ({floor} is a bare number for
+// above-ground floors and "B1"/"B2"… for basements — e.g. slib_c_FB1_3_cw.mp4):
 //   Corridor : {building}_c_F{floor}_{id}_{cw|ccw}.mp4
 //   Stair    : {building}_s_{id}_{floor}{e|o}{u|d}.mp4
 //   Elevator : {building}_e_{id}_{floor}{e|o}.mp4
@@ -11,6 +12,7 @@
 import * as VideoSettings from './videoSettings';
 import { VideoYawEntry } from './videoSettings';
 import { openVideoPreview } from './videoPreview';
+import { formatLevel, parseFloorToken } from '../utils/formatLevel';
 
 let overlayEl: HTMLElement | null = null;
 
@@ -116,7 +118,7 @@ function buildBuildingSubtree(parent: HTMLElement, items: ParsedFile[]): void {
     parent.appendChild(folder.el);
     const byFloor = groupBy(corridors, (p) => p.floor ?? 0);
     for (const floor of sortedNumKeys(byFloor)) {
-      const ff = createTreeFolder(`F${floor}`, false);
+      const ff = createTreeFolder(formatLevel(floor), false);
       folder.children.appendChild(ff.el);
       for (const v of byFloor[floor].sort(byFilename)) {
         ff.children.appendChild(buildRow(v, 'yaw'));
@@ -133,7 +135,7 @@ function buildBuildingSubtree(parent: HTMLElement, items: ParsedFile[]): void {
       folder.children.appendChild(idFolder.el);
       const byFloor = groupBy(byId[id], (p) => p.floor ?? 0);
       for (const floor of sortedNumKeys(byFloor)) {
-        const ff = createTreeFolder(`F${floor}`, false);
+        const ff = createTreeFolder(formatLevel(floor), false);
         idFolder.children.appendChild(ff.el);
         for (const v of byFloor[floor].sort(byFilename)) {
           ff.children.appendChild(buildRow(v, v.action === 'enter' ? 'entryYaw' : 'exitYaw'));
@@ -151,7 +153,7 @@ function buildBuildingSubtree(parent: HTMLElement, items: ParsedFile[]): void {
       folder.children.appendChild(idFolder.el);
       const byFloor = groupBy(byId[id], (p) => p.floor ?? 0);
       for (const floor of sortedNumKeys(byFloor)) {
-        const ff = createTreeFolder(`F${floor}`, false);
+        const ff = createTreeFolder(formatLevel(floor), false);
         idFolder.children.appendChild(ff.el);
         for (const v of byFloor[floor].sort(byFilename)) {
           ff.children.appendChild(buildRow(v, v.action === 'enter' ? 'entryYaw' : 'exitYaw'));
@@ -171,52 +173,65 @@ function buildBuildingSubtree(parent: HTMLElement, items: ParsedFile[]): void {
 
 // ===== Filename parser =====
 
+// A floor token is a bare number ("1".."5") or a basement marker ("B1", "B2"…).
+const FLOOR_TOK = String.raw`B?-?\d+`;
+
 function parseVideoFilename(filename: string): ParsedFile {
-  const corridor = filename.match(/^(.+?)_c_F(\d+)_(\d+)_(cw|ccw)\.mp4$/i);
+  const corridor = filename.match(new RegExp(String.raw`^(.+?)_c_F(${FLOOR_TOK})_(\d+)_(cw|ccw)\.mp4$`, 'i'));
   if (corridor) {
-    const [, building, floor, id, dir] = corridor;
-    return {
-      filename,
-      building,
-      kind: 'corridor',
-      floor: +floor,
-      id: +id,
-      direction: dir as 'cw' | 'ccw',
-      label: `F${floor} seg${id} ${dir === 'cw' ? '시계방향' : '반시계방향'}`,
-    };
+    const [, building, floorTok, id, dir] = corridor;
+    const floor = parseFloorToken(floorTok);
+    if (floor !== null) {
+      const cw = dir.toLowerCase() === 'cw';
+      return {
+        filename,
+        building,
+        kind: 'corridor',
+        floor,
+        id: +id,
+        direction: cw ? 'cw' : 'ccw',
+        label: `${formatLevel(floor)} seg${id} ${cw ? '시계방향' : '반시계방향'}`,
+      };
+    }
   }
-  const stair = filename.match(/^(.+?)_s_(\d+)_(\d+)([eo])([ud])\.mp4$/i);
+  const stair = filename.match(new RegExp(String.raw`^(.+?)_s_(\d+)_(${FLOOR_TOK})([eo])([ud])\.mp4$`, 'i'));
   if (stair) {
-    const [, building, id, floor, ae, ud] = stair;
-    const action = ae === 'e' ? 'enter' : 'exit';
-    const vDirection = ud === 'u' ? 'up' : 'down';
-    const arrow = ud === 'u' ? '↑' : '↓';
-    const verb = action === 'enter' ? '진입' : '나옴';
-    return {
-      filename,
-      building,
-      kind: 'stair',
-      id: +id,
-      floor: +floor,
-      action,
-      vDirection,
-      label: `계단${id} ${floor}F ${verb}${arrow}`,
-    };
+    const [, building, id, floorTok, ae, ud] = stair;
+    const floor = parseFloorToken(floorTok);
+    if (floor !== null) {
+      const action = ae.toLowerCase() === 'e' ? 'enter' : 'exit';
+      const vDirection = ud.toLowerCase() === 'u' ? 'up' : 'down';
+      const arrow = vDirection === 'up' ? '↑' : '↓';
+      const verb = action === 'enter' ? '진입' : '나옴';
+      return {
+        filename,
+        building,
+        kind: 'stair',
+        id: +id,
+        floor,
+        action,
+        vDirection,
+        label: `계단${id} ${formatLevel(floor)} ${verb}${arrow}`,
+      };
+    }
   }
-  const elev = filename.match(/^(.+?)_e_(\d+)_(\d+)([eo])\.mp4$/i);
+  const elev = filename.match(new RegExp(String.raw`^(.+?)_e_(\d+)_(${FLOOR_TOK})([eo])\.mp4$`, 'i'));
   if (elev) {
-    const [, building, id, floor, ae] = elev;
-    const action = ae === 'e' ? 'enter' : 'exit';
-    const verb = action === 'enter' ? '진입' : '나옴';
-    return {
-      filename,
-      building,
-      kind: 'elevator',
-      id: +id,
-      floor: +floor,
-      action,
-      label: `엘리베이터${id} ${floor}F ${verb}`,
-    };
+    const [, building, id, floorTok, ae] = elev;
+    const floor = parseFloorToken(floorTok);
+    if (floor !== null) {
+      const action = ae.toLowerCase() === 'e' ? 'enter' : 'exit';
+      const verb = action === 'enter' ? '진입' : '나옴';
+      return {
+        filename,
+        building,
+        kind: 'elevator',
+        id: +id,
+        floor,
+        action,
+        label: `엘리베이터${id} ${formatLevel(floor)} ${verb}`,
+      };
+    }
   }
   const prefix = filename.match(/^([^_.]+)/);
   return {

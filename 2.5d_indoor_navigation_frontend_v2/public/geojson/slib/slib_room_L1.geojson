@@ -8,9 +8,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480103",
+        "name": "학생성공센터",
+        "room_type": "lab",
         "_idx": 1,
         "_centroid": [
           126.9747978,
@@ -837,9 +837,9 @@
         "level": [
           1
         ],
-        "ref": "345213523",
-        "name": "",
-        "room_type": "",
+        "ref": "480102",
+        "name": "컴넷",
+        "room_type": "lounge",
         "_idx": 18,
         "_centroid": [
           126.9746756,
@@ -946,9 +946,9 @@
         "level": [
           1
         ],
-        "ref": "213",
-        "name": "",
-        "room_type": "",
+        "ref": "480104",
+        "name": "북라운지",
+        "room_type": "lounge",
         "_idx": 19,
         "_centroid": [
           126.9751489,
@@ -1108,9 +1108,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480101",
+        "name": "역사홍보실",
+        "room_type": "lounge",
         "_idx": 21,
         "_centroid": [
           126.974688,

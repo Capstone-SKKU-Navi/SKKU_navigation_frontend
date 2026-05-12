@@ -7,6 +7,7 @@
 // the editor still works synchronously on first paint.
 
 import { NavNode } from './graphEditorTypes';
+import { formatLevel, parseFloorToken } from '../utils/formatLevel';
 
 export interface VideoEntry {
   filename: string;
@@ -19,12 +20,15 @@ export interface VideoEntry {
 }
 
 // ===== Filename parser: {building}_c_F{floor}_{id}_{cw|ccw}.mp4 =====
+// {floor} is a bare number for above-ground floors ("F1".."F5") and "B1"/"B2"…
+// for basements (e.g. slib_c_FB1_3_cw.mp4 → level -1).
 
 function parseCorridorFilename(filename: string): VideoEntry | null {
-  const m = filename.match(/^(.+?)_c_F(-?\d+)_(\d+)_(cw|ccw)\.mp4$/i);
+  const m = filename.match(/^(.+?)_c_F(B?-?\d+)_(\d+)_(cw|ccw)\.mp4$/i);
   if (!m) return null;
   const [, building, floorStr, idStr, dir] = m;
-  const floor = +floorStr;
+  const floor = parseFloorToken(floorStr);
+  if (floor === null) return null;
   const id = +idStr;
   const dirLabel = dir === 'cw' ? '시계방향' : '반시계방향';
   return {
@@ -34,7 +38,7 @@ function parseCorridorFilename(filename: string): VideoEntry | null {
     floor,
     direction: dir,
     id,
-    label: `${building} F${floor} seg${id} ${dirLabel}`,
+    label: `${building} ${formatLevel(floor)} seg${id} ${dirLabel}`,
   };
 }
 

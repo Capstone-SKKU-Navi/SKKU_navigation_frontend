@@ -155,9 +155,9 @@
         "level": [
           -1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "48B107",
+        "name": "기계실",
+        "room_type": "facility",
         "_idx": 4,
         "_centroid": [
           126.974792,
@@ -268,9 +268,9 @@
         "level": [
           -1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "48B109",
+        "name": "전기실",
+        "room_type": "facility",
         "_idx": 5,
         "_centroid": [
           126.9753822,
@@ -644,9 +644,9 @@
         "level": [
           -1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "48B110",
+        "name": "발전기실",
+        "room_type": "facility",
         "_idx": 13,
         "_centroid": [
           126.9754431,
@@ -959,9 +959,9 @@
         "level": [
           -1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "48B112",
+        "name": "Creative Community Zone",
+        "room_type": "lounge",
         "_idx": 20,
         "_centroid": [
           126.9751556,
@@ -1004,9 +1004,9 @@
         "level": [
           -1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "48B104",
+        "name": "복사실",
+        "room_type": "store",
         "_idx": 21,
         "_centroid": [
           126.9743152,
@@ -1094,9 +1094,9 @@
         "level": [
           -1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "48B111",
+        "name": "제1서고",
+        "room_type": "lounge",
         "_idx": 23,
         "_centroid": [
           126.9753981,
@@ -1143,9 +1143,9 @@
         "level": [
           -1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "48B103",
+        "name": "노트북존",
+        "room_type": "lounge",
         "_idx": 24,
         "_centroid": [
           126.9743902,
@@ -1188,9 +1188,9 @@
         "level": [
           -1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "48B102",
+        "name": "B열람실",
+        "room_type": "lounge",
         "_idx": 25,
         "_centroid": [
           126.9745357,
@@ -1323,7 +1323,7 @@
         "level": [
           -1
         ],
-        "ref": "",
+        "ref": "48A114",
         "name": "",
         "room_type": "",
         "_idx": 28,
@@ -1368,9 +1368,9 @@
         "level": [
           -1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "48B108",
+        "name": "오디토리움",
+        "room_type": "lounge",
         "_idx": 29,
         "_centroid": [
           126.9749012,
@@ -1481,9 +1481,9 @@
         "level": [
           -1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "48B114",
+        "name": "응용AI융합학부강의실2",
+        "room_type": "classroom",
         "_idx": 30,
         "_centroid": [
           126.9753074,
@@ -1526,9 +1526,9 @@
         "level": [
           -1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "48B113",
+        "name": "응용AI융합학부강의실1",
+        "room_type": "classroom",
         "_idx": 31,
         "_centroid": [
           126.9754498,
@@ -1571,9 +1571,9 @@
         "level": [
           -1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "48B101",
+        "name": "A열람실",
+        "room_type": "lounge",
         "_idx": 32,
         "_centroid": [
           126.9744932,
@@ -2022,9 +2022,9 @@
         "level": [
           -1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "48B115",
+        "name": "응용AI융합학부강의실3",
+        "room_type": "classroom",
         "_idx": 39,
         "_centroid": [
           126.9751347,

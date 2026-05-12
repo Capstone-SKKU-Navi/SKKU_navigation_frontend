@@ -8,9 +8,9 @@
         "level": [
           4
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480404",
+        "name": "공조실-5",
+        "room_type": "facility",
         "_idx": 1,
         "_centroid": [
           126.9748204,
@@ -57,9 +57,9 @@
         "level": [
           4
         ],
-        "ref": "34",
-        "name": "",
-        "room_type": "storage",
+        "ref": "480405",
+        "name": "공조실-6",
+        "room_type": "facility",
         "_idx": 2,
         "_centroid": [
           126.9751095,
@@ -543,9 +543,9 @@
         "level": [
           4
         ],
-        "ref": "34",
-        "name": "",
-        "room_type": "storage",
+        "ref": "480402",
+        "name": "F열람실",
+        "room_type": "lounge",
         "_idx": 12,
         "_centroid": [
           126.9745995,
@@ -661,9 +661,9 @@
         "level": [
           4
         ],
-        "ref": "34",
-        "name": "",
-        "room_type": "storage",
+        "ref": "480406",
+        "name": "G열람실",
+        "room_type": "lounge",
         "_idx": 14,
         "_centroid": [
           126.9752552,
@@ -783,9 +783,9 @@
         "level": [
           4
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480403",
+        "name": "스터디룸4-1",
+        "room_type": "classroom",
         "_idx": 16,
         "_centroid": [
           126.9747944,
@@ -999,9 +999,9 @@
         "level": [
           4
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480401",
+        "name": "스터디룸4-2",
+        "room_type": "classroom",
         "_idx": 20,
         "_centroid": [
           126.9748405,
@@ -1044,9 +1044,9 @@
         "level": [
           4
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480407",
+        "name": "스터디룸4-3",
+        "room_type": "classroom",
         "_idx": 21,
         "_centroid": [
           126.9749687,

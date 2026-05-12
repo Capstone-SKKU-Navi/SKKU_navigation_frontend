@@ -8,9 +8,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480207",
+        "name": "공조실-1",
+        "room_type": "facility",
         "_idx": 1,
         "_centroid": [
           126.9748185,
@@ -57,9 +57,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480206",
+        "name": "정보교육실",
+        "room_type": "classroom",
         "_idx": 2,
         "_centroid": [
           126.9746701,
@@ -118,9 +118,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480208",
+        "name": "공조실-2",
+        "room_type": "facility",
         "_idx": 3,
         "_centroid": [
           126.9751096,
@@ -338,9 +338,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480209",
+        "name": "솦공방_인",
+        "room_type": "lounge",
         "_idx": 7,
         "_centroid": [
           126.9752382,
@@ -722,9 +722,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480205",
+        "name": "Lab Space / Digital A/V Room",
+        "room_type": "lab",
         "_idx": 15,
         "_centroid": [
           126.9746008,
@@ -779,9 +779,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480210",
+        "name": "HQ_SW중심대학사업단,SKKU",
+        "room_type": "lab",
         "_idx": 16,
         "_centroid": [
           126.9752565,
@@ -934,9 +934,9 @@
         "level": [
           2
         ],
-        "ref": "213",
-        "name": "",
-        "room_type": "",
+        "ref": "480211",
+        "name": "시네마룸",
+        "room_type": "lounge",
         "_idx": 19,
         "_centroid": [
           126.9751548,
@@ -983,9 +983,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480212",
+        "name": "솦공방_의",
+        "room_type": "lounge",
         "_idx": 20,
         "_centroid": [
           126.975271,
@@ -1036,9 +1036,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480204",
+        "name": "셀프 스튜디오",
+        "room_type": "lounge",
         "_idx": 21,
         "_centroid": [
           126.9747791,
@@ -1093,9 +1093,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480214",
+        "name": "솦공방_격물",
+        "room_type": "lounge",
         "_idx": 22,
         "_centroid": [
           126.9753036,
@@ -1211,9 +1211,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480213",
+        "name": "솦공방_예",
+        "room_type": "lounge",
         "_idx": 24,
         "_centroid": [
           126.975246,
@@ -1260,9 +1260,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480216",
+        "name": "솦공방_치지",
+        "room_type": "lounge",
         "_idx": 25,
         "_centroid": [
           126.9753644,
@@ -1462,9 +1462,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480215",
+        "name": "솦공방_치지",
+        "room_type": "lounge",
         "_idx": 27,
         "_centroid": [
           126.975297,
@@ -1507,9 +1507,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480203",
+        "name": "Multimedia Zone",
+        "room_type": "lounge",
         "_idx": 28,
         "_centroid": [
           126.9745163,
@@ -1568,9 +1568,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480202",
+        "name": "미디어자료실",
+        "room_type": "lounge",
         "_idx": 29,
         "_centroid": [
           126.9746316,
@@ -1621,9 +1621,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480217",
+        "name": "솦공방_지",
+        "room_type": "lounge",
         "_idx": 30,
         "_centroid": [
           126.975048,
@@ -1678,9 +1678,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480201",
+        "name": "스터디룸2-2",
+        "room_type": "classroom",
         "_idx": 31,
         "_centroid": [
           126.9748214,

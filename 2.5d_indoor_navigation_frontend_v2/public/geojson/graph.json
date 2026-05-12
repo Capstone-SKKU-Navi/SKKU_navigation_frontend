@@ -1272,7 +1272,7 @@
       "type": "stairs",
       "label": "27동 중앙계단",
       "building": "eng2",
-      "verticalId": 1
+      "verticalId": 4
     },
     "node-mopb17cm-f7qv": {
       "coordinates": [
@@ -1293,7 +1293,7 @@
       "type": "stairs",
       "label": "26동 구석 계산",
       "building": "eng2",
-      "verticalId": 1
+      "verticalId": 3
     },
     "node-mopbb89a-ok2w": {
       "coordinates": [
@@ -1314,7 +1314,7 @@
       "type": "stairs",
       "label": "26동 구석 계단",
       "building": "eng2",
-      "verticalId": 1
+      "verticalId": 2
     },
     "node-mopbx0p2-e8wu": {
       "coordinates": [
@@ -1325,7 +1325,7 @@
       "type": "stairs",
       "label": "25동 중앙계단",
       "building": "eng2",
-      "verticalId": 1
+      "verticalId": 0
     },
     "node-mopcss1q-jxmd": {
       "coordinates": [
@@ -1407,7 +1407,7 @@
       "type": "elevator",
       "label": "27동 엘리베이터",
       "building": "eng2",
-      "verticalId": 1
+      "verticalId": 2
     },
     "node-mopj2k8m-9aku": {
       "coordinates": [
@@ -1468,7 +1468,7 @@
       "type": "stairs",
       "label": "25동 중앙계단 2층",
       "building": "eng2",
-      "verticalId": 2
+      "verticalId": 0
     },
     "node-mopj47ob-myb9": {
       "coordinates": [
@@ -1490,7 +1490,7 @@
       "type": "stairs",
       "label": "26동 구석계단 2층",
       "building": "eng2",
-      "verticalId": 2
+      "verticalId": 3
     },
     "node-mopj4qaj-0t9w": {
       "coordinates": [
@@ -1501,7 +1501,7 @@
       "type": "stairs",
       "label": "27동 중앙계단 2층",
       "building": "eng2",
-      "verticalId": 2
+      "verticalId": 4
     },
     "node-mopj4utg-o9pf": {
       "coordinates": [
@@ -1512,7 +1512,7 @@
       "type": "stairs",
       "label": "27동 구석계단 2층",
       "building": "eng2",
-      "verticalId": 2
+      "verticalId": 1
     },
     "node-mopj54f7-achr": {
       "coordinates": [
@@ -1534,7 +1534,7 @@
       "type": "elevator",
       "label": "25동 엘리베이터",
       "building": "eng2",
-      "verticalId": 2
+      "verticalId": 1
     },
     "node-mopkjn0n-khc0": {
       "coordinates": [
@@ -1545,7 +1545,7 @@
       "type": "elevator",
       "label": "27동 엘리베이터",
       "building": "eng2",
-      "verticalId": 3
+      "verticalId": 2
     },
     "node-mopkk59i-davj": {
       "coordinates": [
@@ -1556,7 +1556,7 @@
       "type": "elevator",
       "label": "25동 엘리베이터",
       "building": "eng2",
-      "verticalId": 3
+      "verticalId": 1
     },
     "node-mopkkiu6-m4k3": {
       "coordinates": [
@@ -1617,7 +1617,7 @@
       "type": "stairs",
       "label": "25동 중앙계단 3층",
       "building": "eng2",
-      "verticalId": 3
+      "verticalId": 0
     },
     "node-mopkoide-fx94": {
       "coordinates": [
@@ -1628,7 +1628,7 @@
       "type": "stairs",
       "label": "26동 구석계단 3층",
       "building": "eng2",
-      "verticalId": 3
+      "verticalId": 2
     },
     "node-mopkotg4-gxg5": {
       "coordinates": [
@@ -1650,7 +1650,7 @@
       "type": "stairs",
       "label": "27동 중앙계단 3층",
       "building": "eng2",
-      "verticalId": 3
+      "verticalId": 4
     },
     "node-mopkv9x7-het4": {
       "coordinates": [
@@ -1661,7 +1661,7 @@
       "type": "stairs",
       "label": "27동 구석계단 3층",
       "building": "eng2",
-      "verticalId": 3
+      "verticalId": 1
     },
     "node-mopmzfjb-p6e5": {
       "coordinates": [
@@ -1722,7 +1722,7 @@
       "type": "stairs",
       "label": "25동 중앙계단 4층",
       "building": "eng2",
-      "verticalId": 4
+      "verticalId": 0
     },
     "node-mopn0gzc-wx7u": {
       "coordinates": [
@@ -1744,7 +1744,7 @@
       "type": "stairs",
       "label": "26동 구석계단 4층",
       "building": "eng2",
-      "verticalId": 4
+      "verticalId": 3
     },
     "node-mopn0xg8-7cdy": {
       "coordinates": [
@@ -1766,7 +1766,7 @@
       "type": "stairs",
       "label": "27동 구석계단 4층",
       "building": "eng2",
-      "verticalId": 4
+      "verticalId": 1
     },
     "node-mopn1d9l-rn87": {
       "coordinates": [
@@ -1788,7 +1788,7 @@
       "type": "elevator",
       "label": "25동 엘리베이터",
       "building": "eng2",
-      "verticalId": 4
+      "verticalId": 1
     },
     "node-mopumsis-y2ig": {
       "coordinates": [
@@ -1859,7 +1859,7 @@
       "type": "stairs",
       "label": "27동 구석계단 5층",
       "building": "eng2",
-      "verticalId": 5
+      "verticalId": 1
     },
     "node-mopuospd-fxyq": {
       "coordinates": [
@@ -1870,7 +1870,7 @@
       "type": "stairs",
       "label": "27동 중앙계단 5층",
       "building": "eng2",
-      "verticalId": 5
+      "verticalId": 4
     },
     "node-mopupd0p-j97z": {
       "coordinates": [
@@ -1881,7 +1881,7 @@
       "type": "stairs",
       "label": "26동 구석계단 5층",
       "building": "eng2",
-      "verticalId": 5
+      "verticalId": 3
     },
     "node-mopupon5-5qgt": {
       "coordinates": [
@@ -1903,7 +1903,7 @@
       "type": "stairs",
       "label": "25동 중앙계단 5층",
       "building": "eng2",
-      "verticalId": 5
+      "verticalId": 0
     },
     "node-mopvl9rm-1ve4": {
       "coordinates": [
@@ -1914,7 +1914,7 @@
       "type": "elevator",
       "label": "25동 엘리베이터",
       "building": "eng2",
-      "verticalId": 5
+      "verticalId": 1
     },
     "node-mopvvmfm-y3to": {
       "coordinates": [
@@ -3806,6 +3806,709 @@
       "type": "entrance",
       "label": "",
       "building": "outside"
+    },
+    "node-mp1fxexb-jg4e": {
+      "coordinates": [
+        126.97491920678948,
+        37.293914881027874
+      ],
+      "level": -1,
+      "type": "elevator",
+      "label": "디도 지하1층 엘리베이터",
+      "building": "slib",
+      "verticalId": -1
+    },
+    "node-mp1g1ev2-7yy1": {
+      "coordinates": [
+        126.97503464760649,
+        37.29360954422877
+      ],
+      "level": -1,
+      "type": "stairs",
+      "label": "디도 지하1층 계단",
+      "building": "slib",
+      "verticalId": 0
+    },
+    "node-mp1g44pr-o9t5": {
+      "coordinates": [
+        126.9750363371864,
+        37.2937278716001
+      ],
+      "level": -1,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1g45xb-9zzh": {
+      "coordinates": [
+        126.97507846601013,
+        37.293938346484964
+      ],
+      "level": -1,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1g4aa7-copm": {
+      "coordinates": [
+        126.97492680224718,
+        37.29396426479519
+      ],
+      "level": -1,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1g4gvi-2r01": {
+      "coordinates": [
+        126.97478749627396,
+        37.2939776708145
+      ],
+      "level": -1,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1g7arj-sxhw": {
+      "coordinates": [
+        126.97470202895329,
+        37.29359563334117
+      ],
+      "level": -1,
+      "type": "corridor",
+      "label": "",
+      "building": "outside"
+    },
+    "node-mp1g7cby-qm7w": {
+      "coordinates": [
+        126.9749740036903,
+        37.29355385209381
+      ],
+      "level": -1,
+      "type": "corridor",
+      "label": "",
+      "building": "outside"
+    },
+    "node-mp1g7d1b-8c0h": {
+      "coordinates": [
+        126.974995574101,
+        37.29361727004908
+      ],
+      "level": -1,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1g7f4f-gog4": {
+      "coordinates": [
+        126.97534538989021,
+        37.29367621139346
+      ],
+      "level": -1,
+      "type": "corridor",
+      "label": "",
+      "building": "outside"
+    },
+    "node-mp1g7fuf-gy3n": {
+      "coordinates": [
+        126.97549638276342,
+        37.293659051259894
+      ],
+      "level": -1,
+      "type": "corridor",
+      "label": "",
+      "building": "outside"
+    },
+    "node-mp1g7hha-c6ct": {
+      "coordinates": [
+        126.97521507786553,
+        37.29354302216255
+      ],
+      "level": -1,
+      "type": "corridor",
+      "label": "",
+      "building": "outside"
+    },
+    "node-mp1gcc2f-c6qg": {
+      "coordinates": [
+        126.97486000636115,
+        37.294032640836946
+      ],
+      "level": 1,
+      "type": "stairs",
+      "label": "디도 1층 계단",
+      "building": "slib",
+      "verticalId": 1
+    },
+    "node-mp1gd8dd-ba8x": {
+      "coordinates": [
+        126.97499209229358,
+        37.29378858114529
+      ],
+      "level": 1,
+      "type": "stairs",
+      "label": "디도 1층-2층 계단",
+      "building": "slib",
+      "verticalId": 0
+    },
+    "node-mp1gdugn-s0zx": {
+      "coordinates": [
+        126.97485154668465,
+        37.29356885502676
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "디도 1층 출입구",
+      "building": "slib"
+    },
+    "node-mp1ge693-69m3": {
+      "coordinates": [
+        126.97495087504518,
+        37.294123368194406
+      ],
+      "level": 1,
+      "type": "entrance",
+      "label": "디도 1층 출입구",
+      "building": "slib"
+    },
+    "node-mp1gedaf-m10c": {
+      "coordinates": [
+        126.97491658338743,
+        37.293924994637294
+      ],
+      "level": 1,
+      "type": "elevator",
+      "label": "디도 1층 엘리베이터",
+      "building": "slib",
+      "verticalId": 1
+    },
+    "node-mp1get7b-vs9r": {
+      "coordinates": [
+        126.97493657762504,
+        37.29401993728018
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1gfa27-18za": {
+      "coordinates": [
+        126.97488246205688,
+        37.293679150239285
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1gfgf3-c6f8": {
+      "coordinates": [
+        126.97478434597843,
+        37.29368639248317
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1gfnv2-npdm": {
+      "coordinates": [
+        126.97489561164696,
+        37.29373950224627
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1gfr2n-6yf3": {
+      "coordinates": [
+        126.97499322197075,
+        37.2937334670474
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1gfulb-73ew": {
+      "coordinates": [
+        126.97503014193899,
+        37.2939366518068
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1gfx0e-h1du": {
+      "coordinates": [
+        126.97484655360694,
+        37.293967632405014
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1gfycg-c72k": {
+      "coordinates": [
+        126.9747823229788,
+        37.29375720549291
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1gg3lr-v6d1": {
+      "coordinates": [
+        126.97490623245807,
+        37.293856585006466
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1gg7lb-p34e": {
+      "coordinates": [
+        126.97493101435458,
+        37.293966425368936
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1h99fz-p4z4": {
+      "coordinates": [
+        126.97486389881732,
+        37.29402927065291
+      ],
+      "level": 2,
+      "type": "stairs",
+      "label": "디도 2층 계단",
+      "building": "slib",
+      "verticalId": 1
+    },
+    "node-mp1ha047-g1pt": {
+      "coordinates": [
+        126.97491699166676,
+        37.293928350082496
+      ],
+      "level": 2,
+      "type": "elevator",
+      "label": "디도 2층 엘리베이터",
+      "building": "slib",
+      "verticalId": 2
+    },
+    "node-mp1hab7r-1t7z": {
+      "coordinates": [
+        126.97493356731889,
+        37.293964640722734
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hajkn-0k2v": {
+      "coordinates": [
+        126.97507705022088,
+        37.29393620723678
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1ham1s-z04q": {
+      "coordinates": [
+        126.97519203830183,
+        37.29399058004519
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hapt3-la79": {
+      "coordinates": [
+        126.97520809595619,
+        37.29378660052497
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1haswn-fdp0": {
+      "coordinates": [
+        126.97508947651625,
+        37.29381173742601
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1havnz-kmg6": {
+      "coordinates": [
+        126.97505995115307,
+        37.29373138173062
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hb2gf-qzu4": {
+      "coordinates": [
+        126.97494794643745,
+        37.294013165592844
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hb4dz-n9y3": {
+      "coordinates": [
+        126.97498679559959,
+        37.29415203614322
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hb5kv-rg5p": {
+      "coordinates": [
+        126.97489044967926,
+        37.294165222651245
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hb6e8-d93z": {
+      "coordinates": [
+        126.97505827805611,
+        37.29414379457451
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hb9cu-w7zd": {
+      "coordinates": [
+        126.9747459307984,
+        37.29398432005186
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hbbyf-4j0c": {
+      "coordinates": [
+        126.97467394954282,
+        37.294037463004926
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hbewn-ejqx": {
+      "coordinates": [
+        126.97470917278719,
+        37.29384873057455
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hbg72-ggsw": {
+      "coordinates": [
+        126.97461386284448,
+        37.293859444655
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hbj7r-6kgd": {
+      "coordinates": [
+        126.97470140295479,
+        37.29376013330791
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1huf4f-g6nd": {
+      "coordinates": [
+        126.97491819650094,
+        37.29392302930388
+      ],
+      "level": 3,
+      "type": "elevator",
+      "label": "디도 3층 엘리베이터",
+      "building": "slib",
+      "verticalId": 3
+    },
+    "node-mp1hut7z-2u84": {
+      "coordinates": [
+        126.97487683473565,
+        37.29402672799358
+      ],
+      "level": 3,
+      "type": "stairs",
+      "label": "디도 3층 계단",
+      "building": "slib",
+      "verticalId": 1
+    },
+    "node-mp1hv6af-a5tn": {
+      "coordinates": [
+        126.97470775612754,
+        37.29369399635007
+      ],
+      "level": 3,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hv6zr-xhko": {
+      "coordinates": [
+        126.97507671716244,
+        37.29363790560089
+      ],
+      "level": 3,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hv91z-hhn0": {
+      "coordinates": [
+        126.97513695569756,
+        37.293942864508566
+      ],
+      "level": 3,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hvby7-6txk": {
+      "coordinates": [
+        126.9747618339054,
+        37.2939755386041
+      ],
+      "level": 3,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hvd9b-669k": {
+      "coordinates": [
+        126.9749322815806,
+        37.293966280944986
+      ],
+      "level": 3,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hve07-e8sr": {
+      "coordinates": [
+        126.97494391857083,
+        37.29401365836391
+      ],
+      "level": 3,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hvghb-z478": {
+      "coordinates": [
+        126.97497882954144,
+        37.29414816650538
+      ],
+      "level": 3,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hvh93-b540": {
+      "coordinates": [
+        126.97488641814869,
+        37.29415851327573
+      ],
+      "level": 3,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1hvi9b-fl1j": {
+      "coordinates": [
+        126.97505823488387,
+        37.294139453434966
+      ],
+      "level": 3,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1i5oso-3lc3": {
+      "coordinates": [
+        126.97491626611458,
+        37.2939253907805
+      ],
+      "level": 4,
+      "type": "elevator",
+      "label": "디도 4층 계단",
+      "building": "slib",
+      "verticalId": 4
+    },
+    "node-mp1i628n-aqeh": {
+      "coordinates": [
+        126.97487314080445,
+        37.294026135886995
+      ],
+      "level": 4,
+      "type": "stairs",
+      "label": "디도 4층 계단",
+      "building": "slib",
+      "verticalId": 1
+    },
+    "node-mp1i6grb-k4cl": {
+      "coordinates": [
+        126.97487587890231,
+        37.29402613588972
+      ],
+      "level": 5,
+      "type": "stairs",
+      "label": "디도 5층 계단",
+      "building": "slib",
+      "verticalId": 1
+    },
+    "node-mp1i6pi7-ruj3": {
+      "coordinates": [
+        126.97492037328175,
+        37.29392756905929
+      ],
+      "level": 5,
+      "type": "elevator",
+      "label": "디도 5층 엘리베이터",
+      "building": "slib",
+      "verticalId": 5
+    },
+    "node-mp1i7ajj-8886": {
+      "coordinates": [
+        126.9749398133905,
+        37.29396220269213
+      ],
+      "level": 5,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1i7bcn-m8vj": {
+      "coordinates": [
+        126.97495213490953,
+        37.29400794640988
+      ],
+      "level": 5,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1i7d13-bpt6": {
+      "coordinates": [
+        126.9749993673991,
+        37.29416096983479
+      ],
+      "level": 5,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1i7fo7-swb1": {
+      "coordinates": [
+        126.97482070537757,
+        37.29398071800806
+      ],
+      "level": 5,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1i7gfz-fooe": {
+      "coordinates": [
+        126.97475635966941,
+        37.29382388223188
+      ],
+      "level": 5,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1i7hdr-bh6j": {
+      "coordinates": [
+        126.97503907007115,
+        37.293786306945435
+      ],
+      "level": 5,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1i7i8o-3weg": {
+      "coordinates": [
+        126.97505207611897,
+        37.29394259823158
+      ],
+      "level": 5,
+      "type": "corridor",
+      "label": "",
+      "building": "slib"
+    },
+    "node-mp1iofkf-kfel": {
+      "coordinates": [
+        126.97486534400298,
+        37.29402828906629
+      ],
+      "level": -1,
+      "type": "corridor",
+      "label": "디도 지하1층-1층 계단",
+      "building": "slib"
+    },
+    "node-mp1iozr3-ryzz": {
+      "coordinates": [
+        126.97503383401676,
+        37.29364959610088
+      ],
+      "level": 1,
+      "type": "corridor",
+      "label": "디도 지하1층-1층 계단",
+      "building": "slib"
+    },
+    "node-mp1jfwmn-u1as": {
+      "coordinates": [
+        126.97501695235866,
+        37.29389302991561
+      ],
+      "level": 2,
+      "type": "corridor",
+      "label": "디도 1층-2층 계단",
+      "building": "slib"
     }
   },
   "edges": [
@@ -8267,6 +8970,702 @@
       "videoRev": "outside_163_cw.mp4",
       "videoRevStart": 0,
       "videoRevEnd": 33.690799
+    },
+    {
+      "from": "node-mp1g44pr-o9t5",
+      "to": "node-mp1g45xb-9zzh",
+      "weight": 24
+    },
+    {
+      "from": "node-mp1g45xb-9zzh",
+      "to": "node-mp1g4aa7-copm",
+      "weight": 14
+    },
+    {
+      "from": "node-mp1g4aa7-copm",
+      "to": "node-mp1g4gvi-2r01",
+      "weight": 12
+    },
+    {
+      "from": "node-mp1fxexb-jg4e",
+      "to": "node-mp1g4aa7-copm",
+      "weight": 6
+    },
+    {
+      "from": "node-mp1g4gvi-2r01",
+      "to": "node-mp1g7arj-sxhw",
+      "weight": 43
+    },
+    {
+      "from": "node-mp1g7arj-sxhw",
+      "to": "node-mp1g7cby-qm7w",
+      "weight": 25
+    },
+    {
+      "from": "node-mp1g7cby-qm7w",
+      "to": "node-mp1g7d1b-8c0h",
+      "weight": 7
+    },
+    {
+      "from": "node-mp1g7d1b-8c0h",
+      "to": "node-mp1g44pr-o9t5",
+      "weight": 13
+    },
+    {
+      "from": "node-mp1g44pr-o9t5",
+      "to": "node-mp1g7f4f-gog4",
+      "weight": 28
+    },
+    {
+      "from": "node-mp1g7f4f-gog4",
+      "to": "node-mp1g7hha-c6ct",
+      "weight": 19
+    },
+    {
+      "from": "node-mp1g7d1b-8c0h",
+      "to": "node-mp1g1ev2-7yy1",
+      "weight": 4
+    },
+    {
+      "from": "node-mp1g7f4f-gog4",
+      "to": "node-mp1g7fuf-gy3n",
+      "weight": 13
+    },
+    {
+      "from": "node-mp1gdugn-s0zx",
+      "to": "node-mp1gfa27-18za",
+      "weight": 13,
+      "videoFwd": "slib_c_F1_10_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 4.633109,
+      "videoRev": "slib_c_F1_10_ccw.mp4",
+      "videoRevStart": 3.399849,
+      "videoRevEnd": 6.639967
+    },
+    {
+      "from": "node-mp1gfa27-18za",
+      "to": "node-mp1gfnv2-npdm",
+      "weight": 7,
+      "videoFwd": "slib_c_F1_10_cw.mp4",
+      "videoFwdStart": 5.483771,
+      "videoFwdEnd": 7.440767,
+      "videoRev": "slib_c_F1_10_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 2.861404
+    },
+    {
+      "from": "node-mp1gfnv2-npdm",
+      "to": "node-mp1gfycg-c72k",
+      "weight": 10,
+      "videoFwd": "slib_c_F1_11_cw.mp4",
+      "videoFwdStart": 6.089848,
+      "videoFwdEnd": 15.7157,
+      "videoRev": "slib_c_F1_11_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 6.443547
+    },
+    {
+      "from": "node-mp1gfycg-c72k",
+      "to": "node-mp1gfx0e-h1du",
+      "weight": 24,
+      "videoFwd": "slib_c_F1_12_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 14.481133,
+      "videoRev": "slib_c_F1_12_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 14.8148
+    },
+    {
+      "from": "node-mp1gfx0e-h1du",
+      "to": "node-mp1gg7lb-p34e",
+      "weight": 7,
+      "videoFwd": "slib_c_F1_13_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 7.01307,
+      "videoRev": "slib_c_F1_13_ccw.mp4",
+      "videoRevStart": 7.562274,
+      "videoRevEnd": 14.581233
+    },
+    {
+      "from": "node-mp1gg7lb-p34e",
+      "to": "node-mp1gfulb-73ew",
+      "weight": 9,
+      "videoFwd": "slib_c_F1_13_cw.mp4",
+      "videoFwdStart": 6.820862,
+      "videoFwdEnd": 14.8148,
+      "videoRev": "slib_c_F1_13_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 7.424973
+    },
+    {
+      "from": "node-mp1gfulb-73ew",
+      "to": "node-mp1gfr2n-6yf3",
+      "weight": 23,
+      "videoFwd": "slib_c_F1_14_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 21.321333,
+      "videoRev": "slib_c_F1_14_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 19.619633
+    },
+    {
+      "from": "node-mp1gfr2n-6yf3",
+      "to": "node-mp1gfnv2-npdm",
+      "weight": 9,
+      "videoFwd": "slib_c_F1_11_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 6.794221,
+      "videoRev": "slib_c_F1_11_ccw.mp4",
+      "videoRevStart": 6.933496,
+      "videoRevEnd": 15.482133
+    },
+    {
+      "from": "node-mp1gfgf3-c6f8",
+      "to": "node-mp1gfa27-18za",
+      "weight": 9,
+      "videoFwd": "slib_c_F1_9_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 7.221131,
+      "videoRev": "slib_c_F1_9_cw.mp4",
+      "videoRevStart": 5.498209,
+      "videoRevEnd": 13.980633
+    },
+    {
+      "from": "node-mp1gedaf-m10c",
+      "to": "node-mp1gg7lb-p34e",
+      "weight": 5
+    },
+    {
+      "from": "node-mp1gg7lb-p34e",
+      "to": "node-mp1get7b-vs9r",
+      "weight": 6,
+      "videoFwd": "slib_c_F1_17_cw.mp4",
+      "videoFwdStart": 14.801861,
+      "videoFwdEnd": 19.231107,
+      "videoRev": "slib_c_F1_17_ccw.mp4",
+      "videoRevStart": 4.854147,
+      "videoRevEnd": 9.830973
+    },
+    {
+      "from": "node-mp1get7b-vs9r",
+      "to": "node-mp1ge693-69m3",
+      "weight": 12,
+      "videoFwd": "slib_c_F1_17_cw.mp4",
+      "videoFwdStart": 18.714024,
+      "videoFwdEnd": 23.490167,
+      "videoRev": "slib_c_F1_17_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 4.928633
+    },
+    {
+      "from": "node-mp1gcc2f-c6qg",
+      "to": "node-mp1get7b-vs9r",
+      "weight": 7
+    },
+    {
+      "from": "node-mp1gfycg-c72k",
+      "to": "node-mp1gg3lr-v6d1",
+      "weight": 16,
+      "videoFwd": "slib_c_F1_18_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 9.548434,
+      "videoRev": "slib_c_F1_18_ccw.mp4",
+      "videoRevStart": 9.060963,
+      "videoRevEnd": 19.74714
+    },
+    {
+      "from": "node-mp1gg3lr-v6d1",
+      "to": "node-mp1gfulb-73ew",
+      "weight": 14,
+      "videoFwd": "slib_c_F1_18_cw.mp4",
+      "videoFwdStart": 9.637468,
+      "videoFwdEnd": 19.786467,
+      "videoRev": "slib_c_F1_18_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 8.320206
+    },
+    {
+      "from": "node-mp1gfr2n-6yf3",
+      "to": "node-mp1gg3lr-v6d1",
+      "weight": 16,
+      "videoFwd": "slib_c_F1_16_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 8.628866,
+      "videoRev": "slib_c_F1_16_ccw.mp4",
+      "videoRevStart": 8.451058,
+      "videoRevEnd": 18.418433
+    },
+    {
+      "from": "node-mp1gg3lr-v6d1",
+      "to": "node-mp1gfx0e-h1du",
+      "weight": 13,
+      "videoFwd": "slib_c_F1_16_cw.mp4",
+      "videoFwdStart": 9.027708,
+      "videoFwdEnd": 17.9513,
+      "videoRev": "slib_c_F1_16_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 8.118033
+    },
+    {
+      "from": "node-mp1gfnv2-npdm",
+      "to": "node-mp1gg3lr-v6d1",
+      "weight": 13,
+      "videoFwd": "slib_c_F1_17_cw.mp4",
+      "videoFwdStart": 1.481568,
+      "videoFwdEnd": 8.738967,
+      "videoRev": "slib_c_F1_17_ccw.mp4",
+      "videoRevStart": 14.177177,
+      "videoRevEnd": 23.423433
+    },
+    {
+      "from": "node-mp1gfr2n-6yf3",
+      "to": "node-mp1gd8dd-ba8x",
+      "weight": 6,
+      "videoFwd": "slib_c_F1_14_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 7.096237,
+      "videoRev": "slib_c_F1_14_cw.mp4",
+      "videoRevStart": 12.552746,
+      "videoRevEnd": 21.321333
+    },
+    {
+      "from": "node-mp1gg3lr-v6d1",
+      "to": "node-mp1gg7lb-p34e",
+      "weight": 12,
+      "videoFwd": "slib_c_F1_17_cw.mp4",
+      "videoFwdStart": 9.438201,
+      "videoFwdEnd": 14.704184,
+      "videoRev": "slib_c_F1_17_ccw.mp4",
+      "videoRevStart": 8.622758,
+      "videoRevEnd": 17.08327
+    },
+    {
+      "from": "node-mp1hbj7r-6kgd",
+      "to": "node-mp1hbewn-ejqx",
+      "weight": 10,
+      "videoFwd": "slib_c_F2_28_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 6.026456,
+      "videoRev": "slib_c_F2_28_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 8.682878
+    },
+    {
+      "from": "node-mp1hbewn-ejqx",
+      "to": "node-mp1hb9cu-w7zd",
+      "weight": 15,
+      "videoFwd": "slib_c_F2_28_cw.mp4",
+      "videoFwdStart": 5.804378,
+      "videoFwdEnd": 15.9159,
+      "videoRev": "slib_c_F2_28_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 8.1464
+    },
+    {
+      "from": "node-mp1hb9cu-w7zd",
+      "to": "node-mp1hab7r-1t7z",
+      "weight": 17,
+      "videoFwd": "slib_c_F2_19_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 13.310519,
+      "videoRev": "slib_c_F2_19_ccw.mp4",
+      "videoRevStart": 7.951952,
+      "videoRevEnd": 22.5559
+    },
+    {
+      "from": "node-mp1hab7r-1t7z",
+      "to": "node-mp1hajkn-0k2v",
+      "weight": 13,
+      "videoFwd": "slib_c_F2_19_cw.mp4",
+      "videoFwdStart": 13.62023,
+      "videoFwdEnd": 23.523533,
+      "videoRev": "slib_c_F2_19_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 8.240835
+    },
+    {
+      "from": "node-mp1hajkn-0k2v",
+      "to": "node-mp1haswn-fdp0",
+      "weight": 14,
+      "videoFwd": "slib_c_F2_23_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 13.446767,
+      "videoRev": "slib_c_F2_23_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 13.380033
+    },
+    {
+      "from": "node-mp1haswn-fdp0",
+      "to": "node-mp1havnz-kmg6",
+      "weight": 9,
+      "videoFwd": "slib_c_F2_25_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 6.539867,
+      "videoRev": "slib_c_F2_25_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 7.2072
+    },
+    {
+      "from": "node-mp1hbg72-ggsw",
+      "to": "node-mp1hbewn-ejqx",
+      "weight": 9,
+      "videoFwd": "slib_c_F2_29_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 8.041367,
+      "videoRev": "slib_c_F2_29_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 8.7087
+    },
+    {
+      "from": "node-mp1hb9cu-w7zd",
+      "to": "node-mp1hbbyf-4j0c",
+      "weight": 9,
+      "videoFwd": "slib_c_F2_27_ccw.mp4",
+      "videoFwdStart": 1.168813,
+      "videoFwdEnd": 5.5055,
+      "videoRev": "slib_c_F2_27_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 5.238567
+    },
+    {
+      "from": "node-mp1ha047-g1pt",
+      "to": "node-mp1hab7r-1t7z",
+      "weight": 4
+    },
+    {
+      "from": "node-mp1hab7r-1t7z",
+      "to": "node-mp1hb2gf-qzu4",
+      "weight": 6,
+      "videoFwd": "slib_c_F2_20_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 5.935268,
+      "videoRev": "slib_c_F2_20_cw.mp4",
+      "videoRevStart": 9.116927,
+      "videoRevEnd": 14.6146
+    },
+    {
+      "from": "node-mp1hb2gf-qzu4",
+      "to": "node-mp1hb4dz-n9y3",
+      "weight": 16,
+      "videoFwd": "slib_c_F2_20_ccw.mp4",
+      "videoFwdStart": 5.781631,
+      "videoFwdEnd": 14.381033,
+      "videoRev": "slib_c_F2_20_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 8.144764
+    },
+    {
+      "from": "node-mp1hb5kv-rg5p",
+      "to": "node-mp1hb4dz-n9y3",
+      "weight": 9,
+      "videoFwd": "slib_c_F2_21_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 6.935221,
+      "videoRev": "slib_c_F2_21_ccw.mp4",
+      "videoRevStart": 7.41224,
+      "videoRevEnd": 15.3153
+    },
+    {
+      "from": "node-mp1hb4dz-n9y3",
+      "to": "node-mp1hb6e8-d93z",
+      "weight": 6,
+      "videoFwd": "slib_c_F2_21_cw.mp4",
+      "videoFwdStart": 7.511809,
+      "videoFwdEnd": 14.080733,
+      "videoRev": "slib_c_F2_21_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 8.434746
+    },
+    {
+      "from": "node-mp1hajkn-0k2v",
+      "to": "node-mp1ham1s-z04q",
+      "weight": 12,
+      "videoFwd": "slib_c_F2_22_cw.mp4",
+      "videoFwdStart": 1.5284,
+      "videoFwdEnd": 12.879533,
+      "videoRev": "slib_c_F2_22_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 12.1121
+    },
+    {
+      "from": "node-mp1ham1s-z04q",
+      "to": "node-mp1hapt3-la79",
+      "weight": 23,
+      "videoFwd": "slib_c_F2_26_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 18.985667,
+      "videoRev": "slib_c_F2_26_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 18.818833
+    },
+    {
+      "from": "node-mp1hapt3-la79",
+      "to": "node-mp1haswn-fdp0",
+      "weight": 11,
+      "videoFwd": "slib_c_F2_24_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 13.279933,
+      "videoRev": "slib_c_F2_24_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 14.381033
+    },
+    {
+      "from": "node-mp1hb2gf-qzu4",
+      "to": "node-mp1h99fz-p4z4",
+      "weight": 8
+    },
+    {
+      "from": "node-mp1hv6af-a5tn",
+      "to": "node-mp1hvby7-6txk",
+      "weight": 32,
+      "videoFwd": "slib_c_F3_34_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 17.884567,
+      "videoRev": "slib_c_F3_34_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 18.585267
+    },
+    {
+      "from": "node-mp1hvby7-6txk",
+      "to": "node-mp1hvd9b-669k",
+      "weight": 15,
+      "videoFwd": "slib_c_F3_30_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 12.137075,
+      "videoRev": "slib_c_F3_30_ccw.mp4",
+      "videoRevStart": 9.959562,
+      "videoRevEnd": 22.689367
+    },
+    {
+      "from": "node-mp1hvd9b-669k",
+      "to": "node-mp1hv91z-hhn0",
+      "weight": 18,
+      "videoFwd": "slib_c_F3_30_cw.mp4",
+      "videoFwdStart": 12.274605,
+      "videoFwdEnd": 23.823833,
+      "videoRev": "slib_c_F3_30_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 10.108817
+    },
+    {
+      "from": "node-mp1hv91z-hhn0",
+      "to": "node-mp1hv6zr-xhko",
+      "weight": 34,
+      "videoFwd": "slib_c_F3_31_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 22.022033,
+      "videoRev": "slib_c_F3_31_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 20.887567
+    },
+    {
+      "from": "node-mp1hv6zr-xhko",
+      "to": "node-mp1hv6af-a5tn",
+      "weight": 33,
+      "videoFwd": "slib_c_F3_35_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 24.491167,
+      "videoRev": "slib_c_F3_35_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 22.589267
+    },
+    {
+      "from": "node-mp1huf4f-g6nd",
+      "to": "node-mp1hvd9b-669k",
+      "weight": 5
+    },
+    {
+      "from": "node-mp1hvd9b-669k",
+      "to": "node-mp1hve07-e8sr",
+      "weight": 5,
+      "videoFwd": "slib_c_F3_32_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 5.057393,
+      "videoRev": "slib_c_F3_32_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 8.617128
+    },
+    {
+      "from": "node-mp1hve07-e8sr",
+      "to": "node-mp1hvghb-z478",
+      "weight": 15,
+      "videoFwd": "slib_c_F3_32_cw.mp4",
+      "videoFwdStart": 4.767808,
+      "videoFwdEnd": 14.014,
+      "videoRev": "slib_c_F3_32_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 8.403036
+    },
+    {
+      "from": "node-mp1hvh93-b540",
+      "to": "node-mp1hvghb-z478",
+      "weight": 8,
+      "videoFwd": "slib_c_F3_33_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 8.94278,
+      "videoRev": "slib_c_F3_33_ccw.mp4",
+      "videoRevStart": 6.947601,
+      "videoRevEnd": 14.981633
+    },
+    {
+      "from": "node-mp1hvghb-z478",
+      "to": "node-mp1hvi9b-fl1j",
+      "weight": 7,
+      "videoFwd": "slib_c_F3_33_cw.mp4",
+      "videoFwdStart": 8.584323,
+      "videoFwdEnd": 14.748067,
+      "videoRev": "slib_c_F3_33_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 5.356651
+    },
+    {
+      "from": "node-mp1hut7z-2u84",
+      "to": "node-mp1hve07-e8sr",
+      "weight": 6
+    },
+    {
+      "from": "node-mp1i7gfz-fooe",
+      "to": "node-mp1i7fo7-swb1",
+      "weight": 18,
+      "videoFwd": "slib_c_F5_43_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 18.785467,
+      "videoRev": "slib_c_F5_43_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 19.185867
+    },
+    {
+      "from": "node-mp1i7fo7-swb1",
+      "to": "node-mp1i7ajj-8886",
+      "weight": 11,
+      "videoFwd": "slib_c_F5_40_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 8.321122,
+      "videoRev": "slib_c_F5_40_ccw.mp4",
+      "videoRevStart": 8.50325,
+      "videoRevEnd": 17.884567
+    },
+    {
+      "from": "node-mp1i7ajj-8886",
+      "to": "node-mp1i7i8o-3weg",
+      "weight": 10,
+      "videoFwd": "slib_c_F5_40_cw.mp4",
+      "videoFwdStart": 8.374212,
+      "videoFwdEnd": 18.685367,
+      "videoRev": "slib_c_F5_40_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 8.500121
+    },
+    {
+      "from": "node-mp1i7i8o-3weg",
+      "to": "node-mp1i7hdr-bh6j",
+      "weight": 17,
+      "videoFwd": "slib_c_F5_42_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 19.519533,
+      "videoRev": "slib_c_F5_42_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 19.2526
+    },
+    {
+      "from": "node-mp1i7hdr-bh6j",
+      "to": "node-mp1i7gfz-fooe",
+      "weight": 25,
+      "videoFwd": "slib_c_F5_44_cw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 19.653,
+      "videoRev": "slib_c_F5_44_ccw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 18.284967
+    },
+    {
+      "from": "node-mp1i6pi7-ruj3",
+      "to": "node-mp1i7ajj-8886",
+      "weight": 4
+    },
+    {
+      "from": "node-mp1i7ajj-8886",
+      "to": "node-mp1i7bcn-m8vj",
+      "weight": 5,
+      "videoFwd": "slib_c_F5_41_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 4.451486,
+      "videoRev": "slib_c_F5_41_cw.mp4",
+      "videoRevStart": 13.447791,
+      "videoRevEnd": 18.084767
+    },
+    {
+      "from": "node-mp1i7bcn-m8vj",
+      "to": "node-mp1i7d13-bpt6",
+      "weight": 18,
+      "videoFwd": "slib_c_F5_41_ccw.mp4",
+      "videoFwdStart": 5.175023,
+      "videoFwdEnd": 17.617633,
+      "videoRev": "slib_c_F5_41_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 12.360917
+    },
+    {
+      "from": "node-mp1i6grb-k4cl",
+      "to": "node-mp1i7bcn-m8vj",
+      "weight": 7
+    },
+    {
+      "from": "node-mp1gcc2f-c6qg",
+      "to": "node-mp1h99fz-p4z4",
+      "weight": 9
+    },
+    {
+      "from": "node-mp1h99fz-p4z4",
+      "to": "node-mp1hut7z-2u84",
+      "weight": 9
+    },
+    {
+      "from": "node-mp1hut7z-2u84",
+      "to": "node-mp1i628n-aqeh",
+      "weight": 8
+    },
+    {
+      "from": "node-mp1i628n-aqeh",
+      "to": "node-mp1i6grb-k4cl",
+      "weight": 8
+    },
+    {
+      "from": "node-mp1g4aa7-copm",
+      "to": "node-mp1iofkf-kfel",
+      "weight": 9
+    },
+    {
+      "from": "node-mp1gfa27-18za",
+      "to": "node-mp1iozr3-ryzz",
+      "weight": 14,
+      "videoFwd": "slib_c_F1_9_ccw.mp4",
+      "videoFwdStart": 6.475204,
+      "videoFwdEnd": 12.846167,
+      "videoRev": "slib_c_F1_9_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 4.901413
+    },
+    {
+      "from": "node-mp1iozr3-ryzz",
+      "to": "node-mp1g1ev2-7yy1",
+      "weight": 20
+    },
+    {
+      "from": "node-mp1jfwmn-u1as",
+      "to": "node-mp1hab7r-1t7z",
+      "weight": 11
+    },
+    {
+      "from": "node-mp1jfwmn-u1as",
+      "to": "node-mp1gd8dd-ba8x",
+      "weight": 20,
+      "videoFwd": "slib_c_F1_15_ccw.mp4",
+      "videoFwdStart": 0,
+      "videoFwdEnd": 22.2556,
+      "videoRev": "slib_c_F1_15_cw.mp4",
+      "videoRevStart": 0,
+      "videoRevEnd": 19.886567
     }
   ]
 }

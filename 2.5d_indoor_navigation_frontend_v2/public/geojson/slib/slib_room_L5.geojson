@@ -568,9 +568,9 @@
         "level": [
           5
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "480501",
+        "name": "FREE COMMUNITY ZONE",
+        "room_type": "lounge",
         "_idx": 13,
         "_centroid": [
           126.974915,

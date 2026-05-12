@@ -673,7 +673,7 @@ function buildVideoTree(
   const tree: Record<string, Record<string, VideoEntry[]>> = {};
   for (const v of videos) {
     const building = v.filename.split('_')[0] || 'unknown';
-    const floor = v.floor !== undefined ? `F${v.floor}` : 'N/A';
+    const floor = v.floor !== undefined ? formatLevel(v.floor) : 'N/A';
     if (!tree[building]) tree[building] = {};
     if (!tree[building][floor]) tree[building][floor] = [];
     tree[building][floor].push(v);

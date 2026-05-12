@@ -5,10 +5,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "480304",
+        "name": "공조실-3",
+        "room_type": "facility",
         "_idx": 1,
         "_centroid": [
           126.9748076,
@@ -52,10 +54,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "480305",
+        "name": "공조실-4",
+        "room_type": "facility",
         "_idx": 2,
         "_centroid": [
           126.9751101,
@@ -95,7 +99,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -146,7 +152,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -193,7 +201,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -244,7 +254,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -287,10 +299,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "480306",
+        "name": "Service+ Center",
+        "room_type": "lab",
         "_idx": 7,
         "_centroid": [
           126.9752205,
@@ -354,7 +368,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -397,7 +413,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -406,7 +424,7 @@
           126.9751148,
           37.294043
         ],
-        "_area_m2": 32.0
+        "_area_m2": 32
       },
       "geometry": {
         "type": "Polygon",
@@ -440,7 +458,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -483,7 +503,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -526,7 +548,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -569,7 +593,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -612,7 +638,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -655,10 +683,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "480303",
+        "name": "자료실-1",
+        "room_type": "lounge",
         "_idx": 15,
         "_centroid": [
           126.9746073,
@@ -746,7 +776,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -789,10 +821,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "480308",
+        "name": "교수 라운지",
+        "room_type": "lounge",
         "_idx": 17,
         "_centroid": [
           126.975054,
@@ -844,10 +878,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "480307",
+        "name": "자료실-2",
+        "room_type": "lounge",
         "_idx": 18,
         "_centroid": [
           126.9752632,
@@ -927,10 +963,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "480302",
+        "name": "스터디룸3-1",
+        "room_type": "classroom",
         "_idx": 19,
         "_centroid": [
           126.9747941,
@@ -978,7 +1016,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1021,10 +1061,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "480301",
+        "name": "스터디룸3-2",
+        "room_type": "classroom",
         "_idx": 21,
         "_centroid": [
           126.9748936,
@@ -1064,7 +1106,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
         "room_type": "",

@@ -1,8 +1,11 @@
 // ===== Vertical Video Filename Computation =====
 // Computes stair/elevator video filenames from node properties.
-// Naming convention:
+// Naming convention ({floor} is a bare number above ground, "B1"/"B2"… for
+// basements — e.g. slib_s_1_B1eu.mp4):
 //   Stairs:    {building}_s_{stairId}_{floor}{e|o}{u|d}.mp4
 //   Elevators: {building}_e_{elevId}_{floor}{e|o}.mp4
+
+import { formatLevel, floorFilenameToken } from './formatLevel';
 
 export function toBuildingCode(building: string): string {
   return building.toLowerCase();
@@ -41,8 +44,8 @@ export function computeStairVideos(
   const prefix = toBuildingCode(building);
   const dir = toFloor > fromFloor ? 'u' : 'd';
   return {
-    entryVideo: `${prefix}_s_${stairId}_${fromFloor}e${dir}.mp4`,
-    exitVideo: `${prefix}_s_${stairId}_${toFloor}o${dir}.mp4`,
+    entryVideo: `${prefix}_s_${stairId}_${floorFilenameToken(fromFloor)}e${dir}.mp4`,
+    exitVideo: `${prefix}_s_${stairId}_${floorFilenameToken(toFloor)}o${dir}.mp4`,
   };
 }
 
@@ -65,8 +68,8 @@ export function computeElevatorVideos(
 ): ElevatorVideoResult {
   const prefix = toBuildingCode(building);
   return {
-    entryVideo: `${prefix}_e_${elevId}_${fromFloor}e.mp4`,
-    exitVideo: `${prefix}_e_${elevId}_${toFloor}o.mp4`,
+    entryVideo: `${prefix}_e_${elevId}_${floorFilenameToken(fromFloor)}e.mp4`,
+    exitVideo: `${prefix}_e_${elevId}_${floorFilenameToken(toFloor)}o.mp4`,
   };
 }
 
@@ -102,36 +105,38 @@ export function getAllVerticalVideos(config: VerticalVideoConfig): VerticalVideo
   // Stairs
   for (const stairId of config.stairs) {
     for (const floor of config.floors) {
+      const tok = floorFilenameToken(floor);
+      const lvl = formatLevel(floor);
       // Enter going up — exists on floors 1..4 (can't go up from top floor)
       if (floor < maxFloor) {
         entries.push({
-          filename: `${prefix}_s_${stairId}_${floor}eu.mp4`,
+          filename: `${prefix}_s_${stairId}_${tok}eu.mp4`,
           type: 'stair', id: stairId, floor, action: 'enter', direction: 'up',
-          label: `계단${stairId} ${floor}F 진입↑`,
+          label: `계단${stairId} ${lvl} 진입↑`,
         });
       }
       // Enter going down — exists on floors 2..5 (can't go down from bottom floor)
       if (floor > minFloor) {
         entries.push({
-          filename: `${prefix}_s_${stairId}_${floor}ed.mp4`,
+          filename: `${prefix}_s_${stairId}_${tok}ed.mp4`,
           type: 'stair', id: stairId, floor, action: 'enter', direction: 'down',
-          label: `계단${stairId} ${floor}F 진입↓`,
+          label: `계단${stairId} ${lvl} 진입↓`,
         });
       }
       // Exit after ascending — exists on floors 2..5 (arrived here going up)
       if (floor > minFloor) {
         entries.push({
-          filename: `${prefix}_s_${stairId}_${floor}ou.mp4`,
+          filename: `${prefix}_s_${stairId}_${tok}ou.mp4`,
           type: 'stair', id: stairId, floor, action: 'exit', direction: 'up',
-          label: `계단${stairId} ${floor}F 나옴↑`,
+          label: `계단${stairId} ${lvl} 나옴↑`,
         });
       }
       // Exit after descending — exists on floors 1..4 (arrived here going down)
       if (floor < maxFloor) {
         entries.push({
-          filename: `${prefix}_s_${stairId}_${floor}od.mp4`,
+          filename: `${prefix}_s_${stairId}_${tok}od.mp4`,
           type: 'stair', id: stairId, floor, action: 'exit', direction: 'down',
-          label: `계단${stairId} ${floor}F 나옴↓`,
+          label: `계단${stairId} ${lvl} 나옴↓`,
         });
       }
     }
@@ -140,15 +145,17 @@ export function getAllVerticalVideos(config: VerticalVideoConfig): VerticalVideo
   // Elevators
   for (const elevId of config.elevators) {
     for (const floor of config.floors) {
+      const tok = floorFilenameToken(floor);
+      const lvl = formatLevel(floor);
       entries.push({
-        filename: `${prefix}_e_${elevId}_${floor}e.mp4`,
+        filename: `${prefix}_e_${elevId}_${tok}e.mp4`,
         type: 'elevator', id: elevId, floor, action: 'enter',
-        label: `엘리베이터${elevId} ${floor}F 진입`,
+        label: `엘리베이터${elevId} ${lvl} 진입`,
       });
       entries.push({
-        filename: `${prefix}_e_${elevId}_${floor}o.mp4`,
+        filename: `${prefix}_e_${elevId}_${tok}o.mp4`,
         type: 'elevator', id: elevId, floor, action: 'exit',
-        label: `엘리베이터${elevId} ${floor}F 나옴`,
+        label: `엘리베이터${elevId} ${lvl} 나옴`,
       });
     }
   }
