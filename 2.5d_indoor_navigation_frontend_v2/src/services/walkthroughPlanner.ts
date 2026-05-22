@@ -6,6 +6,7 @@
 
 import type { ApiRouteResult, ApiRouteClip } from './api/apiRoute';
 import { getDistanceBetweenCoordinatesInM } from '../utils/coordinateHelpers';
+import { isVideoAvailable } from './backendService';
 import type { WalkthroughClip, WalkthroughPlaylist, VideoSegment } from '../components/walkthroughTypes';
 
 const TIME_EPSILON = 0.05; // seconds — clips within this gap are "contiguous"
@@ -52,6 +53,7 @@ export function buildWalkthroughPlaylist(
       globalStart: globalTime,
       globalEnd: globalTime + raw.duration,
       contiguous,
+      hasVideo: isVideoAvailable(raw.videoFile),
     });
     globalTime += raw.duration;
   }
@@ -173,6 +175,7 @@ function buildSegments(clips: WalkthroughClip[]): VideoSegment[] {
         clipEndIdx: i - 1,
         globalStart: first.globalStart,
         globalEnd: last.globalEnd,
+        hasVideo: first.hasVideo, // contiguous clips share one file → same availability
       });
       segStart = i;
     }

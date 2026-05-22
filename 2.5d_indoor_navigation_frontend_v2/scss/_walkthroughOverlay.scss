@@ -215,6 +215,25 @@
   transition: width 0.05s linear;
 }
 
+.walkthrough-progress-gap {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  // Hatched gray so a missing-video stretch reads as "no footage" even when
+  // the played fill passes under it.
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(150, 150, 150, 0.55),
+      rgba(150, 150, 150, 0.55) 4px,
+      rgba(110, 110, 110, 0.55) 4px,
+      rgba(110, 110, 110, 0.55) 8px
+    );
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .walkthrough-progress-thumb {
   position: absolute;
   top: -3px;

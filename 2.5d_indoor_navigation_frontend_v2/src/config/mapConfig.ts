@@ -51,5 +51,7 @@ export const MapConfig = {
   walkthrough: {
     /** 배속 선택지 */
     playbackRates: [0.5, 1, 2, 5, 10] as readonly number[],
+    /** 360° 영상 없는 구간(회색 구간)을 건너뛰는 속도 배율. 클수록 빨리 넘어감. */
+    gapSkipRate: 8,
   },
 } as const;

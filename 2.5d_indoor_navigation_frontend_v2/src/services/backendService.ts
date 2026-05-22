@@ -50,6 +50,30 @@ export function getVideoUrl(filename: string): string {
   return `${videoBase}/${filename}`;
 }
 
+// ===== Video availability =====
+// Which video files actually exist on the server (from GET /api/videos-list).
+// Lets the walkthrough gray out missing clips instead of 404-ing and freezing.
+let availableVideos: Set<string> | null = null;
+
+export async function loadAvailableVideos(): Promise<void> {
+  if (availableVideos) return; // already loaded
+  try {
+    const res = await fetch('/api/videos-list');
+    if (!res.ok) return;
+    const { files } = (await res.json()) as { files?: string[] };
+    if (!Array.isArray(files)) return;
+    // Store by basename — clips reference files flat (e.g. "slib_e_1_1e.mp4").
+    availableVideos = new Set(files.map(f => f.split('/').pop() ?? f));
+  } catch {
+    // Leave null → isVideoAvailable assumes present (never a false "missing").
+  }
+}
+
+export function isVideoAvailable(filename: string): boolean {
+  if (!availableVideos) return true; // list unknown → assume present, never block
+  return availableVideos.has(filename);
+}
+
 // ===== Fetching =====
 
 async function fetchJson<T>(url: string): Promise<T | null> {

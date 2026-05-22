@@ -162,6 +162,18 @@ function buildDOM(playlist: WalkthroughPlaylist): void {
   const progressThumb = document.createElement('div');
   progressThumb.className = 'walkthrough-progress-thumb';
 
+  // Missing-video segments: gray blocks so the user sees there is no footage
+  // for those stretches (the player skips them during playback).
+  for (const seg of playlist.segments) {
+    if (seg.hasVideo) continue;
+    const gap = document.createElement('div');
+    gap.className = 'walkthrough-progress-gap';
+    gap.style.left = `${(seg.globalStart / playlist.totalDuration) * 100}%`;
+    gap.style.width = `${((seg.globalEnd - seg.globalStart) / playlist.totalDuration) * 100}%`;
+    gap.title = '이 구간은 360° 영상이 없습니다';
+    progressTrack.appendChild(gap);
+  }
+
   // Clip boundary markers
   for (const boundary of playlist.segmentBoundaries) {
     const marker = document.createElement('div');

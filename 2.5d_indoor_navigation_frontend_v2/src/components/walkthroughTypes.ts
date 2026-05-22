@@ -20,6 +20,8 @@ export interface WalkthroughClip {
   routeDistEnd: number;
   /** Can continue from previous clip without seeking (same video, contiguous time) */
   contiguous: boolean;
+  /** False if this clip's video file is missing on the server (shown grayed out) */
+  hasVideo: boolean;
 }
 
 export interface VideoSegment {
@@ -31,6 +33,8 @@ export interface VideoSegment {
   clipEndIdx: number;    // last clip index (inclusive)
   globalStart: number;
   globalEnd: number;
+  /** False if this segment's video file is missing on the server */
+  hasVideo: boolean;
 }
 
 export interface WalkthroughPlaylist {
