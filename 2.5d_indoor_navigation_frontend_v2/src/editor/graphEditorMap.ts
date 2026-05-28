@@ -12,6 +12,7 @@ const SRC_EDGES = `${PREFIX}-edges`;
 // Layer IDs
 const LYR_EDGES_LINE = `${PREFIX}-edges-line`;
 const LYR_EDGES_CROSS = `${PREFIX}-edges-cross`;
+const LYR_EDGES_WEIGHT = `${PREFIX}-edges-weight`;
 const LYR_NODES_CIRCLE = `${PREFIX}-nodes-circle`;
 const LYR_NODES_SELECTED = `${PREFIX}-nodes-selected`;
 const LYR_NODES_EDGE_ENDPOINT = `${PREFIX}-nodes-edge-endpoint`;
@@ -22,9 +23,20 @@ const LYR_EDGE_START = `${PREFIX}-edge-start`;
 const EDGE_FROM_COLOR = '#EF5350'; // red — "from" end of selected edge
 const EDGE_TO_COLOR = '#2979FF';   // blue — "to" end of selected edge
 
+// Debug toggle: edge weight label visibility (user checkbox in panel) — 2D mode only.
+// Resets to false on each initEditorLayers call so the label can't get stuck on
+// across editor close/reopen cycles.
+let showEdgeWeights = false;
+// Whether the editor is currently in 2D mode. Source of truth for the weight
+// label visibility together with showEdgeWeights. In 3D mode the symbol layer
+// is force-hidden regardless of the checkbox.
+let in2DMode = true;
+
 // ===== Init / Destroy =====
 
 export function initEditorLayers(map: maplibregl.Map): void {
+  showEdgeWeights = false;
+  in2DMode = true;
   // Empty GeoJSON sources
   const emptyFC: GeoJSON.FeatureCollection = { type: 'FeatureCollection', features: [] };
 
@@ -55,6 +67,28 @@ export function initEditorLayers(map: maplibregl.Map): void {
       'line-width': ['case', ['==', ['get', 'selected'], true], 5, 3],
       'line-opacity': 0.75,
       'line-dasharray': [4, 3],
+    },
+  });
+
+  // Edge weight label — placed at line center. Hidden by default; toggled by
+  // the "edge weight 표시" checkbox in the editor panel.
+  map.addLayer({
+    id: LYR_EDGES_WEIGHT,
+    type: 'symbol',
+    source: SRC_EDGES,
+    layout: {
+      'text-field': ['to-string', ['get', 'weight']],
+      'text-size': 11,
+      'text-font': ['Noto Sans Regular'],
+      'symbol-placement': 'line-center',
+      'text-allow-overlap': true,
+      'text-ignore-placement': true,
+      'visibility': 'none',
+    },
+    paint: {
+      'text-color': '#FFEB3B',
+      'text-halo-color': 'rgba(0,0,0,0.85)',
+      'text-halo-width': 1.5,
     },
   });
 
@@ -172,7 +206,7 @@ export function initEditorLayers(map: maplibregl.Map): void {
 }
 
 export function destroyEditorLayers(map: maplibregl.Map): void {
-  const layers = [LYR_NODES_LABELS, LYR_EDGE_START, LYR_NODES_EDGE_ENDPOINT, LYR_NODES_SELECTED, LYR_NODES_CIRCLE, LYR_EDGES_HIT, LYR_EDGES_CROSS, LYR_EDGES_LINE];
+  const layers = [LYR_NODES_LABELS, LYR_EDGE_START, LYR_NODES_EDGE_ENDPOINT, LYR_NODES_SELECTED, LYR_NODES_CIRCLE, LYR_EDGES_HIT, LYR_EDGES_WEIGHT, LYR_EDGES_CROSS, LYR_EDGES_LINE];
   for (const id of layers) {
     if (map.getLayer(id)) map.removeLayer(id);
   }
@@ -512,12 +546,27 @@ export function set2DNodeLayersVisible(map: maplibregl.Map, visible: boolean): v
 }
 
 export function set2DEdgeLayersVisible(map: maplibregl.Map, visible: boolean): void {
+  in2DMode = visible;
   const vis = visible ? 'visible' : 'none';
   for (const id of [LYR_EDGES_LINE, LYR_EDGES_CROSS, LYR_EDGES_HIT]) {
     if (map.getLayer(id)) {
       map.setLayoutProperty(id, 'visibility', vis);
     }
   }
+  // Weight label is debug-only and 2D-only: force hidden in 3D, follow the
+  // checkbox in 2D.
+  applyEdgeWeightVisibility(map);
+}
+
+export function setEdgeWeightLabelVisible(map: maplibregl.Map, visible: boolean): void {
+  showEdgeWeights = visible;
+  applyEdgeWeightVisibility(map);
+}
+
+function applyEdgeWeightVisibility(map: maplibregl.Map): void {
+  if (!map.getLayer(LYR_EDGES_WEIGHT)) return;
+  const shouldShow = showEdgeWeights && in2DMode;
+  map.setLayoutProperty(LYR_EDGES_WEIGHT, 'visibility', shouldShow ? 'visible' : 'none');
 }
 
 // ===== Floating 3D Node Overlay =====

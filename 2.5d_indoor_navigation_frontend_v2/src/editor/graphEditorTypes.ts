@@ -189,6 +189,7 @@ export interface PanelCallbacks {
   onClearBuildingRooms(building: string): void;
   onAutoApplyChange(preset: RoomAutoApplyPreset): void;
   onNoteChange(note: string): void;
+  onToggleEdgeWeights(visible: boolean): void;
   onClose(): void;
 }
 

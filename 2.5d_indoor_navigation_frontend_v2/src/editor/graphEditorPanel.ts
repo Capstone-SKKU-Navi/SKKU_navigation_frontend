@@ -33,6 +33,12 @@ export function createPanel(cb: PanelCallbacks): HTMLElement {
       </div>
     </div>
     <div class="ge-panel-body" id="gePanelBody">
+      <div class="ge-tabs" id="geTabs">
+        <button class="ge-tab active" data-tab="main">편집</button>
+        <button class="ge-tab" data-tab="settings">설정</button>
+      </div>
+
+      <div id="geTabMain">
       <div class="ge-section">
         <div class="ge-mode-buttons">
           <button class="ge-mode-btn active" data-mode="select" title="선택 (Q)">
@@ -332,6 +338,21 @@ export function createPanel(cb: PanelCallbacks): HTMLElement {
         <button class="ge-action-btn" id="geVideoSettings">
             <span class="material-icons" style="font-size:16px">360</span> Video Settings
           </button>
+      </div>
+      </div>
+
+      <div id="geTabSettings" style="display:none">
+        <div class="ge-section">
+          <div class="ge-props-title"><span>디버그 표시</span></div>
+          <div class="ge-prop-row" style="justify-content:space-between;">
+            <label for="geShowEdgeWeights">Edge weight 라벨 (2D)</label>
+            <label class="ge-toggle-switch">
+              <input type="checkbox" id="geShowEdgeWeights" />
+              <span class="ge-toggle-slider"></span>
+            </label>
+          </div>
+          <p class="ge-hint">각 edge 중앙에 weight 숫자를 표시합니다. 디버그용. 패널 닫으면 자동 OFF.</p>
+        </div>
       </div>
     </div>
   `;
@@ -960,6 +981,25 @@ function wireEvents(): void {
   // Undo / Redo
   document.getElementById('geUndo')?.addEventListener('click', () => callbacks?.onUndo());
   document.getElementById('geRedo')?.addEventListener('click', () => callbacks?.onRedo());
+
+  // Edge weight label visibility
+  document.getElementById('geShowEdgeWeights')?.addEventListener('change', (e) => {
+    callbacks?.onToggleEdgeWeights((e.target as HTMLInputElement).checked);
+  });
+
+  // Tab switching (편집 / 설정)
+  const tabMain = document.getElementById('geTabMain');
+  const tabSettings = document.getElementById('geTabSettings');
+  document.querySelectorAll('#geTabs .ge-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = (btn as HTMLElement).dataset.tab;
+      if (!tabMain || !tabSettings) return;
+      tabMain.style.display    = tab === 'main'     ? '' : 'none';
+      tabSettings.style.display = tab === 'settings' ? '' : 'none';
+      document.querySelectorAll('#geTabs .ge-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
 
   // Import save (opens file picker; handler receives the File and the chosen
   // mode from the Append toggle in the delete-mode tab)

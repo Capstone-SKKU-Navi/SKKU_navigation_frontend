@@ -403,6 +403,9 @@ async function activateEditor(): Promise<void> {
     onClearBuildingRooms: handleClearBuildingRooms,
     onAutoApplyChange: handleAutoApplyChange,
     onNoteChange: handleNoteChange,
+    onToggleEdgeWeights: (visible: boolean) => {
+      if (map) EditorMap.setEdgeWeightLabelVisible(map, visible);
+    },
     onClose: () => { void deactivateEditor(); },
   });
 
