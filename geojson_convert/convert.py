@@ -42,6 +42,7 @@ BUILDING_NAMES = {
     "ectr": "E센터", "nctr": "N센터",
     "lab23": "23실습동", "util": "유틸리티동",
     "ptech": "제약기술관",
+    "benz": "벤젠고리관",
 }
 
 

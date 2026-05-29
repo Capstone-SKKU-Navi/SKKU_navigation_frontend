@@ -5,7 +5,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -52,10 +54,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "11215",
+        "name": "회의실2",
+        "room_type": "lounge",
         "_idx": 2,
         "_centroid": [
           126.9786515,
@@ -103,7 +107,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -146,7 +152,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -189,7 +197,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -244,7 +254,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -287,8 +299,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
+        "level": [
+          2
+        ],
+        "ref": "11214",
         "name": "",
         "room_type": "",
         "_idx": 7,
@@ -330,10 +344,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "11204",
+        "name": "안전보건팀",
+        "room_type": "office",
         "_idx": 8,
         "_centroid": [
           126.9784861,
@@ -373,10 +389,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "11213",
+        "name": "샤워실",
+        "room_type": "restroom",
         "_idx": 9,
         "_centroid": [
           126.9786142,
@@ -428,10 +446,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "11212",
+        "name": "세탁실",
+        "room_type": "store",
         "_idx": 10,
         "_centroid": [
           126.9785825,
@@ -475,8 +495,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
+        "level": [
+          2
+        ],
+        "ref": "11202",
         "name": "",
         "room_type": "",
         "_idx": 11,
@@ -518,10 +540,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "11203",
+        "name": "도면창고",
+        "room_type": "storage",
         "_idx": 12,
         "_centroid": [
           126.9786032,
@@ -565,16 +589,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "11201",
+        "name": "(자)관리팀",
+        "room_type": "office",
         "_idx": 13,
         "_centroid": [
           126.9784672,
           37.2940163
         ],
-        "_area_m2": 65.0
+        "_area_m2": 65
       },
       "geometry": {
         "type": "Polygon",
@@ -608,7 +634,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
