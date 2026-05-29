@@ -5,7 +5,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -14,7 +16,7 @@
           126.9779218,
           37.2952281
         ],
-        "_area_m2": 14.0
+        "_area_m2": 14
       },
       "geometry": {
         "type": "Polygon",
@@ -52,7 +54,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -95,7 +99,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -138,7 +144,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -181,7 +189,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -232,9 +242,11 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
+        "level": [
+          1
+        ],
+        "ref": "36131",
+        "name": "사무",
         "room_type": "",
         "_idx": 6,
         "_centroid": [
@@ -275,7 +287,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -318,10 +332,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "36101",
         "name": "",
-        "room_type": "",
+        "room_type": "classroom",
         "_idx": 8,
         "_centroid": [
           126.978162,
@@ -361,16 +377,22 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
+        "level": [
+          1
+        ],
+        "ref": "36119",
+        "name": "시편처리실",
         "room_type": "",
         "_idx": 9,
         "_centroid": [
           126.9779224,
           37.2950683
         ],
-        "_area_m2": 36.3
+        "_area_m2": 36.3,
+        "_label_pos": [
+          126.97792763117121,
+          37.29506544326925
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -404,10 +426,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "36103",
         "name": "",
-        "room_type": "",
+        "room_type": "classroom",
         "_idx": 10,
         "_centroid": [
           126.9781692,
@@ -447,7 +471,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -490,10 +516,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "36105",
         "name": "",
-        "room_type": "",
+        "room_type": "classroom",
         "_idx": 12,
         "_centroid": [
           126.9781762,
@@ -533,7 +561,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -672,10 +702,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "36107",
         "name": "",
-        "room_type": "",
+        "room_type": "classroom",
         "_idx": 14,
         "_centroid": [
           126.9781831,
@@ -715,7 +747,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -758,10 +792,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "36109",
         "name": "",
-        "room_type": "",
+        "room_type": "classroom",
         "_idx": 16,
         "_centroid": [
           126.9781899,
@@ -801,7 +837,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -852,8 +890,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "36117",
         "name": "",
         "room_type": "",
         "_idx": 18,
@@ -895,7 +935,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -938,7 +980,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -981,7 +1025,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1024,8 +1070,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "36115",
         "name": "",
         "room_type": "",
         "_idx": 22,
@@ -1067,7 +1115,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1110,7 +1160,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1153,7 +1205,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1162,7 +1216,7 @@
           126.9780436,
           37.2946987
         ],
-        "_area_m2": 33.0
+        "_area_m2": 33
       },
       "geometry": {
         "type": "Polygon",
@@ -1196,7 +1250,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1239,7 +1295,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1282,8 +1340,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "37125",
         "name": "",
         "room_type": "",
         "_idx": 28,
@@ -1325,8 +1385,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "37121",
         "name": "",
         "room_type": "",
         "_idx": 29,
@@ -1334,7 +1396,11 @@
           126.9779937,
           37.2946603
         ],
-        "_area_m2": 16.2
+        "_area_m2": 16.2,
+        "_label_pos": [
+          126.97799431497754,
+          37.294656952667964
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -1372,7 +1438,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1415,8 +1483,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "37123",
         "name": "",
         "room_type": "",
         "_idx": 31,
@@ -1458,7 +1528,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1501,8 +1573,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "37127",
         "name": "",
         "room_type": "",
         "_idx": 33,
@@ -1544,7 +1618,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1587,7 +1663,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1630,8 +1708,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "37109",
         "name": "",
         "room_type": "",
         "_idx": 36,
@@ -1639,7 +1719,11 @@
           126.9779169,
           37.2946258
         ],
-        "_area_m2": 74.9
+        "_area_m2": 74.9,
+        "_label_pos": [
+          126.97792870450564,
+          37.29463148324038
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -1697,7 +1781,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1740,7 +1826,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1783,7 +1871,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1826,7 +1916,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1835,7 +1927,7 @@
           126.9778903,
           37.2945644
         ],
-        "_area_m2": 13.0
+        "_area_m2": 13
       },
       "geometry": {
         "type": "Polygon",
@@ -1881,7 +1973,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -2064,8 +2158,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "37129",
         "name": "",
         "room_type": "",
         "_idx": 42,
@@ -2107,8 +2203,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "37131",
         "name": "",
         "room_type": "",
         "_idx": 43,
@@ -2150,8 +2248,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "37105",
         "name": "",
         "room_type": "",
         "_idx": 44,
@@ -2193,7 +2293,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -2236,7 +2338,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -2279,7 +2383,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -2322,8 +2428,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "37107",
         "name": "",
         "room_type": "",
         "_idx": 48,
@@ -2331,7 +2439,11 @@
           126.9779076,
           37.294289
         ],
-        "_area_m2": 123.8
+        "_area_m2": 123.8,
+        "_label_pos": [
+          126.97788960780201,
+          37.29425597751944
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -2377,7 +2489,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -2420,7 +2534,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",

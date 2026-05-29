@@ -5,10 +5,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "81102",
+        "name": "반도체Fab",
+        "room_type": "lab",
         "_idx": 1,
         "_centroid": [
           126.9779832,
@@ -48,8 +50,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "81104",
         "name": "",
         "room_type": "",
         "_idx": 2,
@@ -91,10 +95,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "81106",
+        "name": "반도체Fab",
+        "room_type": "lab",
         "_idx": 3,
         "_centroid": [
           126.9781138,
@@ -134,10 +140,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "81108",
+        "name": "반도체Fab",
+        "room_type": "lab",
         "_idx": 4,
         "_centroid": [
           126.978178,
@@ -177,10 +185,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 5,
         "_centroid": [
           126.9782165,
@@ -220,10 +230,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 6,
         "_centroid": [
           126.9782401,
@@ -263,10 +275,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "elevator",
         "_idx": 7,
         "_centroid": [
           126.9782704,
@@ -306,10 +320,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 8,
         "_centroid": [
           126.9783382,
@@ -349,10 +365,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 9,
         "_centroid": [
           126.9783695,
@@ -392,10 +410,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 10,
         "_centroid": [
           126.9783946,
@@ -435,10 +455,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "81110",
+        "name": "삼성SDI-SKKU이차전지산학협력연구센터",
+        "room_type": "lab",
         "_idx": 11,
         "_centroid": [
           126.9784534,
@@ -482,10 +504,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "81112",
+        "name": "삼성SDI-SKKU이차전지산학협력연구센터",
+        "room_type": "lab",
         "_idx": 12,
         "_centroid": [
           126.9785293,
@@ -525,10 +549,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "81114",
+        "name": "삼성SDI-SKKU이차전지산학협력연구센터",
+        "room_type": "lab",
         "_idx": 13,
         "_centroid": [
           126.9785786,
@@ -568,7 +594,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -611,10 +639,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "81116",
+        "name": "반도체Fab",
+        "room_type": "lab",
         "_idx": 15,
         "_centroid": [
           126.9786325,
@@ -662,10 +692,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "81101",
+        "name": "반도체Fab",
+        "room_type": "lab",
         "_idx": 16,
         "_centroid": [
           126.9779481,
@@ -705,8 +737,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "81103",
         "name": "",
         "room_type": "",
         "_idx": 17,
@@ -748,8 +782,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "81105",
         "name": "",
         "room_type": "",
         "_idx": 18,
@@ -791,8 +827,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "81107",
         "name": "",
         "room_type": "",
         "_idx": 19,
@@ -834,10 +872,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 20,
         "_centroid": [
           126.9782287,
@@ -877,10 +917,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 21,
         "_centroid": [
           126.9783351,
@@ -920,10 +962,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "81109",
+        "name": "경비실",
+        "room_type": "office",
         "_idx": 22,
         "_centroid": [
           126.9783894,
@@ -963,10 +1007,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "81111",
+        "name": "응용역학 및 재료설계연구실",
+        "room_type": "lab",
         "_idx": 23,
         "_centroid": [
           126.9784251,
@@ -1006,10 +1052,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "81113",
+        "name": "예비",
+        "room_type": "reserved",
         "_idx": 24,
         "_centroid": [
           126.9784581,
@@ -1049,10 +1097,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "81115",
+        "name": "김종순 교수 연구실",
+        "room_type": "lab",
         "_idx": 25,
         "_centroid": [
           126.9784903,
@@ -1092,10 +1142,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "81117",
+        "name": "자연모사생체재료공학연구실",
+        "room_type": "lab",
         "_idx": 26,
         "_centroid": [
           126.9785218,
@@ -1135,8 +1187,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "81119",
         "name": "",
         "room_type": "",
         "_idx": 27,
@@ -1178,10 +1232,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "81121",
+        "name": "반도체Fab",
+        "room_type": "lab",
         "_idx": 28,
         "_centroid": [
           126.9786031,

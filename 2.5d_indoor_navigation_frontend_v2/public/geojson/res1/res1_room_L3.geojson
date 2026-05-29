@@ -5,10 +5,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "81302",
+        "name": "예비",
+        "room_type": "reserved",
         "_idx": 1,
         "_centroid": [
           126.9780157,
@@ -56,10 +58,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "81304",
+        "name": "이준엽교수연구실",
+        "room_type": "lab",
         "_idx": 2,
         "_centroid": [
           126.9781138,
@@ -99,10 +103,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "81306",
+        "name": "실험실",
+        "room_type": "lab",
         "_idx": 3,
         "_centroid": [
           126.978178,
@@ -142,10 +148,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 4,
         "_centroid": [
           126.9782165,
@@ -185,10 +193,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 5,
         "_centroid": [
           126.9782401,
@@ -228,10 +238,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "elevator",
         "_idx": 6,
         "_centroid": [
           126.9782704,
@@ -271,10 +283,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 7,
         "_centroid": [
           126.9783382,
@@ -314,10 +328,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 8,
         "_centroid": [
           126.9783695,
@@ -357,10 +373,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 9,
         "_centroid": [
           126.9783946,
@@ -400,16 +418,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "81310",
+        "name": "양자정보연구지원센터 클린룸",
+        "room_type": "lab",
         "_idx": 10,
         "_centroid": [
           126.9784984,
           37.2922621
         ],
-        "_area_m2": 53.0
+        "_area_m2": 53
       },
       "geometry": {
         "type": "Polygon",
@@ -447,10 +467,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "81306",
+        "name": "실험실",
+        "room_type": "lab",
         "_idx": 11,
         "_centroid": [
           126.9784273,
@@ -498,10 +520,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
+        "level": [
+          3
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "elevator",
         "_idx": 12,
         "_centroid": [
           126.9786806,
@@ -541,10 +565,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "81312",
+        "name": "양자정보연구지원센터 클린룸",
+        "room_type": "lab",
         "_idx": 13,
         "_centroid": [
           126.9786014,
@@ -616,10 +642,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "81301",
+        "name": "SNL연구실",
+        "room_type": "lab",
         "_idx": 14,
         "_centroid": [
           126.9779533,
@@ -663,16 +691,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "81303",
+        "name": "SNL연구실",
+        "room_type": "lab",
         "_idx": 15,
         "_centroid": [
           126.9780365,
           37.2921991
         ],
-        "_area_m2": 131.0
+        "_area_m2": 131
       },
       "geometry": {
         "type": "Polygon",
@@ -730,10 +760,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "81305",
+        "name": "복합재료동시설계산업기술거점센터",
+        "room_type": "lab",
         "_idx": 16,
         "_centroid": [
           126.9781557,
@@ -773,10 +805,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "81307",
+        "name": "복합재료동시설계산업기술거점센터",
+        "room_type": "lab",
         "_idx": 17,
         "_centroid": [
           126.9782199,
@@ -816,10 +850,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "81309",
+        "name": "양자정보연구지원센터",
+        "room_type": "lab",
         "_idx": 18,
         "_centroid": [
           126.9782832,
@@ -859,10 +895,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "81311",
+        "name": "양자정보지원센터",
+        "room_type": "lab",
         "_idx": 19,
         "_centroid": [
           126.9783434,
@@ -902,10 +940,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "81313",
+        "name": "양자정보지원센터",
+        "room_type": "lab",
         "_idx": 20,
         "_centroid": [
           126.9784135,
@@ -957,10 +997,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "81315",
+        "name": "양자정보지원센터",
+        "room_type": "lab",
         "_idx": 21,
         "_centroid": [
           126.9784775,
@@ -1020,10 +1062,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "3",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          3
+        ],
+        "ref": "81317",
+        "name": "양자정보연구지원센터 유틸리티룸",
+        "room_type": "facility",
         "_idx": 22,
         "_centroid": [
           126.978564,

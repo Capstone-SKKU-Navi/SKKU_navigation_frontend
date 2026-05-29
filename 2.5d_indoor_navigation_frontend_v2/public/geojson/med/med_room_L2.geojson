@@ -5,10 +5,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712121",
+        "name": "의학실습실1",
+        "room_type": "classroom",
         "_idx": 1,
         "_centroid": [
           126.972977,
@@ -48,10 +50,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712119",
+        "name": "의학실습실2",
+        "room_type": "classroom",
         "_idx": 2,
         "_centroid": [
           126.9731397,
@@ -91,10 +95,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712120",
+        "name": "바이러스질병연구실",
+        "room_type": "lab",
         "_idx": 3,
         "_centroid": [
           126.972962,
@@ -134,10 +140,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712118",
+        "name": "초저온냉동고보관실",
+        "room_type": "facility",
         "_idx": 4,
         "_centroid": [
           126.9731283,
@@ -177,9 +185,11 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
+        "level": [
+          2
+        ],
+        "ref": "712114-1",
+        "name": "PBL1",
         "room_type": "",
         "_idx": 5,
         "_centroid": [
@@ -220,9 +230,11 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
+        "level": [
+          2
+        ],
+        "ref": "712114-5",
+        "name": "PBL5",
         "room_type": "",
         "_idx": 6,
         "_centroid": [
@@ -267,10 +279,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712117",
+        "name": "임상간호대학원장실",
+        "room_type": "office",
         "_idx": 7,
         "_centroid": [
           126.9732095,
@@ -310,10 +324,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712116",
+        "name": "김균환교수실",
+        "room_type": "office",
         "_idx": 8,
         "_centroid": [
           126.9732345,
@@ -353,10 +369,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 9,
         "_centroid": [
           126.9732773,
@@ -396,10 +414,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 10,
         "_centroid": [
           126.9733374,
@@ -439,10 +459,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712115",
+        "name": "의학교육연구소",
+        "room_type": "classroom",
         "_idx": 11,
         "_centroid": [
           126.973627,
@@ -490,10 +512,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 12,
         "_centroid": [
           126.9733954,
@@ -533,10 +557,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "storage",
         "_idx": 13,
         "_centroid": [
           126.9738798,
@@ -576,10 +602,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 14,
         "_centroid": [
           126.9734525,
@@ -619,10 +647,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 15,
         "_centroid": [
           126.9735113,
@@ -662,10 +692,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712114",
+        "name": "PBL실",
+        "room_type": "classroom",
         "_idx": 16,
         "_centroid": [
           126.9738149,
@@ -705,16 +737,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
+        "level": [
+          2
+        ],
+        "ref": "712114-2",
+        "name": "PBL2",
         "room_type": "",
         "_idx": 17,
         "_centroid": [
           126.9737557,
           37.2922573
         ],
-        "_area_m2": 27.0
+        "_area_m2": 27
       },
       "geometry": {
         "type": "Polygon",
@@ -748,10 +782,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "elevator",
         "_idx": 18,
         "_centroid": [
           126.9729298,
@@ -791,9 +827,11 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
+        "level": [
+          2
+        ],
+        "ref": "712114-7",
+        "name": "PBL7",
         "room_type": "",
         "_idx": 19,
         "_centroid": [
@@ -834,10 +872,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 20,
         "_centroid": [
           126.9728896,
@@ -877,9 +917,11 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
+        "level": [
+          2
+        ],
+        "ref": "712114-3",
+        "name": "PBL3",
         "room_type": "",
         "_idx": 21,
         "_centroid": [
@@ -920,10 +962,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 22,
         "_centroid": [
           126.9729224,
@@ -963,10 +1007,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712110",
+        "name": "세미나실",
+        "room_type": "classroom",
         "_idx": 23,
         "_centroid": [
           126.9732324,
@@ -1006,9 +1052,11 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
+        "level": [
+          2
+        ],
+        "ref": "712114-8",
+        "name": "PBL8",
         "room_type": "",
         "_idx": 24,
         "_centroid": [
@@ -1049,16 +1097,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "elevator",
         "_idx": 25,
         "_centroid": [
           126.9733766,
           37.2921888
         ],
-        "_area_m2": 17.0
+        "_area_m2": 17
       },
       "geometry": {
         "type": "Polygon",
@@ -1092,8 +1142,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
+        "level": [
+          2
+        ],
+        "ref": "712112-1",
         "name": "",
         "room_type": "",
         "_idx": 26,
@@ -1143,10 +1195,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712111",
+        "name": "기초의학연구실",
+        "room_type": "lab",
         "_idx": 27,
         "_centroid": [
           126.9731026,
@@ -1186,10 +1240,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712107",
+        "name": "운영실",
+        "room_type": "office",
         "_idx": 28,
         "_centroid": [
           126.9734959,
@@ -1229,10 +1285,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712112",
+        "name": "실습지원실",
+        "room_type": "office",
         "_idx": 29,
         "_centroid": [
           126.9730128,
@@ -1272,10 +1330,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712105",
+        "name": "교수회의실",
+        "room_type": "office",
         "_idx": 30,
         "_centroid": [
           126.9735977,
@@ -1315,8 +1375,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
+        "level": [
+          2
+        ],
+        "ref": "712104",
         "name": "",
         "room_type": "",
         "_idx": 31,
@@ -1358,10 +1420,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
-        "name": "",
-        "room_type": "",
+        "name": "탕비실",
+        "room_type": "lounge",
         "_idx": 32,
         "_centroid": [
           126.9738083,
@@ -1409,16 +1473,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712109",
+        "name": "이사장실",
+        "room_type": "office",
         "_idx": 33,
         "_centroid": [
           126.9731881,
           37.2921306
         ],
-        "_area_m2": 65.0
+        "_area_m2": 65
       },
       "geometry": {
         "type": "Polygon",
@@ -1452,10 +1518,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712108",
+        "name": "총장실",
+        "room_type": "office",
         "_idx": 34,
         "_centroid": [
           126.9732458,
@@ -1495,10 +1563,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 35,
         "_centroid": [
           126.9738621,
@@ -1538,10 +1608,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 36,
         "_centroid": [
           126.973821,
@@ -1585,10 +1657,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712106",
+        "name": "의무부총장실",
+        "room_type": "office",
         "_idx": 37,
         "_centroid": [
           126.9735093,
@@ -1636,10 +1710,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712103",
+        "name": "임상간호대학원장실",
+        "room_type": "office",
         "_idx": 38,
         "_centroid": [
           126.9736395,
@@ -1687,10 +1763,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712102",
+        "name": "컴퓨터실습실",
+        "room_type": "classroom",
         "_idx": 39,
         "_centroid": [
           126.9737189,
@@ -1730,10 +1808,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "712101",
+        "name": "초저온냉동고실",
+        "room_type": "facility",
         "_idx": 40,
         "_centroid": [
           126.9737823,

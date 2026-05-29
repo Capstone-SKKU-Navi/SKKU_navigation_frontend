@@ -127,9 +127,9 @@
         "level": [
           1
         ],
-        "ref": "21123",
-        "name": "",
-        "room_type": "",
+        "ref": "23101",
+        "name": "반도체융합공학실험실A",
+        "room_type": "lab",
         "_idx": 2,
         "_centroid": [
           126.9766083,
@@ -192,9 +192,9 @@
         "level": [
           1
         ],
-        "ref": "23131",
-        "name": "",
-        "room_type": "",
+        "ref": "23111",
+        "name": "소프트웨어학과공용연구실",
+        "room_type": "lab",
         "_idx": 3,
         "_centroid": [
           126.9766902,
@@ -237,9 +237,9 @@
         "level": [
           1
         ],
-        "ref": "2115",
-        "name": "",
-        "room_type": "",
+        "ref": "23113",
+        "name": "반도체융합공학과",
+        "room_type": "office",
         "_idx": 4,
         "_centroid": [
           126.9767318,
@@ -290,9 +290,9 @@
         "level": [
           1
         ],
-        "ref": "23111",
-        "name": "????????????",
-        "room_type": "lab",
+        "ref": "23115",
+        "name": "",
+        "room_type": "",
         "_idx": 5,
         "_centroid": [
           126.9767967,
@@ -343,9 +343,9 @@
         "level": [
           1
         ],
-        "ref": "23115",
-        "name": "???????",
-        "room_type": "classroom",
+        "ref": "23121",
+        "name": "분자광전자연구실",
+        "room_type": "lab",
         "_idx": 6,
         "_centroid": [
           126.9768517,
@@ -396,8 +396,8 @@
         "level": [
           1
         ],
-        "ref": "2311",
-        "name": "????????????",
+        "ref": "23123",
+        "name": "스마트재료이미징연구실",
         "room_type": "lab",
         "_idx": 7,
         "_centroid": [
@@ -449,9 +449,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23127",
+        "name": "교육매체지원실",
+        "room_type": "office",
         "_idx": 8,
         "_centroid": [
           126.9769524,
@@ -494,9 +494,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23129",
+        "name": "첨단디스플레이공학과사무실",
+        "room_type": "office",
         "_idx": 9,
         "_centroid": [
           126.9769832,
@@ -547,9 +547,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23131",
+        "name": "디스플레이혁신인재양성센터",
+        "room_type": "lab",
         "_idx": 10,
         "_centroid": [
           126.9770306,
@@ -608,9 +608,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23135A",
+        "name": "청랑",
+        "room_type": "club",
         "_idx": 11,
         "_centroid": [
           126.9770825,
@@ -653,9 +653,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23135B",
+        "name": "S-Angel",
+        "room_type": "club",
         "_idx": 12,
         "_centroid": [
           126.9771136,
@@ -706,9 +706,9 @@
         "level": [
           1
         ],
-        "ref": "34",
-        "name": "",
-        "room_type": "storage",
+        "ref": "23135C",
+        "name": "알리미",
+        "room_type": "club",
         "_idx": 13,
         "_centroid": [
           126.9771534,
@@ -751,9 +751,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23100",
+        "name": "경비실/본부",
+        "room_type": "office",
         "_idx": 14,
         "_centroid": [
           126.9763939,
@@ -861,9 +861,9 @@
         "level": [
           1
         ],
-        "ref": "21",
-        "name": "",
-        "room_type": "storage",
+        "ref": "23102",
+        "name": "노동조합사무실",
+        "room_type": "office",
         "_idx": 16,
         "_centroid": [
           126.9765408,
@@ -930,9 +930,9 @@
         "level": [
           1
         ],
-        "ref": "2124",
-        "name": "",
-        "room_type": "",
+        "ref": "23108",
+        "name": "스마트그린시티연구실",
+        "room_type": "lab",
         "_idx": 17,
         "_centroid": [
           126.9766538,
@@ -1007,9 +1007,9 @@
         "level": [
           1
         ],
-        "ref": "21213",
-        "name": "이재현교수실",
-        "room_type": "office",
+        "ref": "23114",
+        "name": "학부대학강의실",
+        "room_type": "classroom",
         "_idx": 18,
         "_centroid": [
           126.9768327,
@@ -1112,9 +1112,9 @@
         "level": [
           1
         ],
-        "ref": "21",
-        "name": "",
-        "room_type": "storage",
+        "ref": "23130",
+        "name": "해동학습실",
+        "room_type": "classroom",
         "_idx": 19,
         "_centroid": [
           126.9770481,
@@ -1193,9 +1193,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22112",
+        "name": "예비(전자전기)",
+        "room_type": "reserved",
         "_idx": 20,
         "_centroid": [
           126.9770872,
@@ -1246,9 +1246,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22111",
+        "name": "디지털첨단강의실",
+        "room_type": "classroom",
         "_idx": 21,
         "_centroid": [
           126.9772332,
@@ -1295,9 +1295,9 @@
         "level": [
           1
         ],
-        "ref": "22112",
-        "name": "",
-        "room_type": "",
+        "ref": "22110",
+        "name": "첨단강의실",
+        "room_type": "classroom",
         "_idx": 22,
         "_centroid": [
           126.9770625,
@@ -1348,8 +1348,8 @@
         "level": [
           1
         ],
-        "ref": "22101",
-        "name": "???????",
+        "ref": "22108",
+        "name": "에너지변환시스템연구실",
         "room_type": "lab",
         "_idx": 23,
         "_centroid": [
@@ -1397,9 +1397,9 @@
         "level": [
           1
         ],
-        "ref": "34",
-        "name": "",
-        "room_type": "storage",
+        "ref": "22109",
+        "name": "기계공학부클린룸",
+        "room_type": "lab",
         "_idx": 24,
         "_centroid": [
           126.9772076,
@@ -1458,9 +1458,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22106",
+        "name": "반응유동연구실",
+        "room_type": "lab",
         "_idx": 25,
         "_centroid": [
           126.9770356,
@@ -1511,9 +1511,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22107",
+        "name": "마이크로나노시스템연구실",
+        "room_type": "lab",
         "_idx": 26,
         "_centroid": [
           126.9771787,
@@ -1564,9 +1564,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22104B",
+        "name": "소프트로보틱스연구실",
+        "room_type": "lab",
         "_idx": 27,
         "_centroid": [
           126.977022,
@@ -1625,9 +1625,9 @@
         "level": [
           1
         ],
-        "ref": "22105",
-        "name": "?????????",
-        "room_type": "lab",
+        "ref": "21102",
+        "name": "정보통신/소프트웨어/공과대학행정실",
+        "room_type": "office",
         "_idx": 28,
         "_centroid": [
           126.9761437,
@@ -1670,8 +1670,8 @@
         "level": [
           1
         ],
-        "ref": "22106",
-        "name": "???????",
+        "ref": "21108",
+        "name": "반도체소자측정실Ⅰ",
         "room_type": "lab",
         "_idx": 29,
         "_centroid": [
@@ -1805,9 +1805,9 @@
         "level": [
           1
         ],
-        "ref": "34",
-        "name": "",
-        "room_type": "storage",
+        "ref": "22105",
+        "name": "미세유체융합연구실",
+        "room_type": "lab",
         "_idx": 32,
         "_centroid": [
           126.9771546,
@@ -2034,9 +2034,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22104A",
+        "name": "나노소재및나노공정연구실",
+        "room_type": "lab",
         "_idx": 37,
         "_centroid": [
           126.9770079,
@@ -2124,9 +2124,9 @@
         "level": [
           1
         ],
-        "ref": "21",
-        "name": "",
-        "room_type": "storage",
+        "ref": "21116C",
+        "name": "반도체나노소자연구실Ⅱ",
+        "room_type": "lab",
         "_idx": 39,
         "_centroid": [
           126.9768223,
@@ -2222,9 +2222,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22103",
+        "name": "미세유체융합연구실",
+        "room_type": "lab",
         "_idx": 41,
         "_centroid": [
           126.9771616,
@@ -2458,9 +2458,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22102",
+        "name": "다중물리나노유체연구실",
+        "room_type": "lab",
         "_idx": 45,
         "_centroid": [
           126.9769951,
@@ -2751,9 +2751,9 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22101",
+        "name": "반응유동연구실",
+        "room_type": "lab",
         "_idx": 50,
         "_centroid": [
           126.9771332,

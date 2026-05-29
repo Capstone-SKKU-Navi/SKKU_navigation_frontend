@@ -5,8 +5,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
+        "level": [
+          8
+        ],
+        "ref": "86826",
         "name": "",
         "room_type": "",
         "_idx": 1,
@@ -60,8 +62,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
+        "level": [
+          8
+        ],
+        "ref": "86822",
         "name": "",
         "room_type": "",
         "_idx": 2,
@@ -103,10 +107,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          8
+        ],
+        "ref": "86816",
+        "name": "IQB학생연구실",
+        "room_type": "lab",
         "_idx": 3,
         "_centroid": [
           126.9756066,
@@ -154,8 +160,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
+        "level": [
+          8
+        ],
+        "ref": "86814",
         "name": "",
         "room_type": "",
         "_idx": 4,
@@ -205,8 +213,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
+        "level": [
+          8
+        ],
+        "ref": "86810",
         "name": "",
         "room_type": "",
         "_idx": 5,
@@ -256,8 +266,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
+        "level": [
+          8
+        ],
+        "ref": "86806",
         "name": "",
         "room_type": "",
         "_idx": 6,
@@ -319,10 +331,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          8
+        ],
+        "ref": "86802",
+        "name": "HKLEELAMP",
+        "room_type": "lab",
         "_idx": 7,
         "_centroid": [
           126.9759512,
@@ -370,10 +384,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 8,
         "_centroid": [
           126.9760758,
@@ -413,10 +429,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 9,
         "_centroid": [
           126.9754384,
@@ -456,10 +474,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 10,
         "_centroid": [
           126.9755303,
@@ -499,10 +519,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 11,
         "_centroid": [
           126.9754997,
@@ -546,10 +568,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "elevator",
         "_idx": 12,
         "_centroid": [
           126.9755875,
@@ -593,7 +617,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -636,10 +662,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          8
+        ],
+        "ref": "86815",
+        "name": "IQB원장실",
+        "room_type": "office",
         "_idx": 14,
         "_centroid": [
           126.9757134,
@@ -679,10 +707,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          8
+        ],
+        "ref": "86813",
+        "name": "회의실",
+        "room_type": "lounge",
         "_idx": 15,
         "_centroid": [
           126.975756,
@@ -722,10 +752,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          8
+        ],
+        "ref": "86811",
+        "name": "LAMP-ERC 방문교수실2",
+        "room_type": "office",
         "_idx": 16,
         "_centroid": [
           126.9757999,
@@ -765,10 +797,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          8
+        ],
+        "ref": "86809",
+        "name": "조규진교수실",
+        "room_type": "office",
         "_idx": 17,
         "_centroid": [
           126.9758424,
@@ -808,10 +842,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          8
+        ],
+        "ref": "86807",
+        "name": "안중호교수실",
+        "room_type": "office",
         "_idx": 18,
         "_centroid": [
           126.9758847,
@@ -851,10 +887,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          8
+        ],
+        "ref": "86801",
+        "name": "LAMP-ERC실험실",
+        "room_type": "lab",
         "_idx": 19,
         "_centroid": [
           126.9759704,
@@ -898,10 +936,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 20,
         "_centroid": [
           126.9760482,

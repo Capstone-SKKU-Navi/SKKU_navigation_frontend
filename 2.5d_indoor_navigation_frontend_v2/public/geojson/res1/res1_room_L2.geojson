@@ -5,10 +5,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "81202",
+        "name": "차세대 전자연구실",
+        "room_type": "lab",
         "_idx": 1,
         "_centroid": [
           126.9780157,
@@ -56,10 +58,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "81204",
+        "name": "에너지 및 광자연구실",
+        "room_type": "lab",
         "_idx": 2,
         "_centroid": [
           126.9781138,
@@ -99,10 +103,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "81206",
+        "name": "에너지 및 광자연구실",
+        "room_type": "lab",
         "_idx": 3,
         "_centroid": [
           126.978178,
@@ -142,10 +148,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 4,
         "_centroid": [
           126.9782165,
@@ -185,10 +193,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 5,
         "_centroid": [
           126.9782401,
@@ -228,10 +238,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "elevator",
         "_idx": 6,
         "_centroid": [
           126.9782704,
@@ -271,10 +283,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "facility",
         "_idx": 7,
         "_centroid": [
           126.9783382,
@@ -314,10 +328,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 8,
         "_centroid": [
           126.9783695,
@@ -357,10 +373,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 9,
         "_centroid": [
           126.9783946,
@@ -400,9 +418,11 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
+        "level": [
+          2
+        ],
+        "ref": "81208",
+        "name": "카이랄 물질 입체구조 분석 시스템실",
         "room_type": "",
         "_idx": 10,
         "_centroid": [
@@ -451,10 +471,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "81210",
+        "name": "반데르발스반도체소재연구실",
+        "room_type": "lab",
         "_idx": 11,
         "_centroid": [
           126.9785772,
@@ -510,10 +532,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "elevator",
         "_idx": 12,
         "_centroid": [
           126.9786806,
@@ -553,10 +577,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 13,
         "_centroid": [
           126.9786414,
@@ -604,10 +630,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "81201",
+        "name": "시스템통합실험실",
+        "room_type": "lab",
         "_idx": 14,
         "_centroid": [
           126.9779644,
@@ -655,10 +683,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "81205",
+        "name": "반도체공정실험실",
+        "room_type": "lab",
         "_idx": 15,
         "_centroid": [
           126.9780903,
@@ -698,10 +728,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "81203",
+        "name": "자연모사생체재료공학연구실",
+        "room_type": "lab",
         "_idx": 16,
         "_centroid": [
           126.9780307,
@@ -745,10 +777,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "81207",
+        "name": "반도체Fab",
+        "room_type": "lab",
         "_idx": 17,
         "_centroid": [
           126.9781557,
@@ -788,10 +822,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
+        "level": [
+          2
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 18,
         "_centroid": [
           126.978282,
@@ -831,10 +867,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "81209",
+        "name": "비대칭촉매반응디자인센터행정실",
+        "room_type": "office",
         "_idx": 19,
         "_centroid": [
           126.9784135,
@@ -886,8 +924,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
+        "level": [
+          2
+        ],
+        "ref": "81211",
         "name": "",
         "room_type": "",
         "_idx": 20,
@@ -949,10 +989,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          2
+        ],
+        "ref": "81213",
+        "name": "적층형 반데르발스 반도체 사업단",
+        "room_type": "lab",
         "_idx": 21,
         "_centroid": [
           126.978538,
@@ -1000,8 +1042,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "2",
-        "ref": "",
+        "level": [
+          2
+        ],
+        "ref": "81215",
         "name": "",
         "room_type": "",
         "_idx": 22,

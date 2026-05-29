@@ -5,10 +5,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715315",
+        "name": "정지욱 교수실",
+        "room_type": "office",
         "_idx": 1,
         "_centroid": [
           126.9730611,
@@ -48,10 +50,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715316",
+        "name": "한명준교수실",
+        "room_type": "office",
         "_idx": 2,
         "_centroid": [
           126.9730282,
@@ -103,10 +107,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715314",
+        "name": "안진현교수실",
+        "room_type": "office",
         "_idx": 3,
         "_centroid": [
           126.9730914,
@@ -146,10 +152,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715318",
+        "name": "분자생물학연구실",
+        "room_type": "lab",
         "_idx": 4,
         "_centroid": [
           126.9729212,
@@ -189,16 +197,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715317",
+        "name": "바이러스학 연구실",
+        "room_type": "lab",
         "_idx": 5,
         "_centroid": [
           126.9729817,
           37.2923352
         ],
-        "_area_m2": 46.0
+        "_area_m2": 46
       },
       "geometry": {
         "type": "Polygon",
@@ -232,10 +242,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715313",
+        "name": "류희주교수실",
+        "room_type": "office",
         "_idx": 6,
         "_centroid": [
           126.9731227,
@@ -287,10 +299,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715312",
+        "name": "분자바이러스학연구실",
+        "room_type": "lab",
         "_idx": 7,
         "_centroid": [
           126.9731954,
@@ -350,10 +364,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715311",
+        "name": "분자바이러스학연구실",
+        "room_type": "lab",
         "_idx": 8,
         "_centroid": [
           126.9732193,
@@ -393,10 +409,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715320",
+        "name": "지원실",
+        "room_type": "office",
         "_idx": 9,
         "_centroid": [
           126.9730672,
@@ -436,10 +454,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715310",
+        "name": "차세대면역유전체 연구실",
+        "room_type": "lab",
         "_idx": 10,
         "_centroid": [
           126.9732785,
@@ -479,10 +499,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 11,
         "_centroid": [
           126.9733373,
@@ -522,10 +544,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 12,
         "_centroid": [
           126.9733954,
@@ -565,10 +589,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 13,
         "_centroid": [
           126.9734542,
@@ -608,10 +634,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715306",
+        "name": "신주호교수실",
+        "room_type": "office",
         "_idx": 14,
         "_centroid": [
           126.9736761,
@@ -659,10 +687,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715309",
+        "name": "분자신경생리학연구실",
+        "room_type": "lab",
         "_idx": 15,
         "_centroid": [
           126.9735142,
@@ -710,10 +740,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715304",
+        "name": "원태형 교수실",
+        "room_type": "office",
         "_idx": 16,
         "_centroid": [
           126.9737486,
@@ -757,16 +789,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715305",
+        "name": "정호창교수실",
+        "room_type": "office",
         "_idx": 17,
         "_centroid": [
           126.9737149,
           37.2922657
         ],
-        "_area_m2": 20.0
+        "_area_m2": 20
       },
       "geometry": {
         "type": "Polygon",
@@ -800,10 +834,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715303",
+        "name": "김현진교수실",
+        "room_type": "office",
         "_idx": 18,
         "_centroid": [
           126.9737746,
@@ -847,10 +883,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715308",
+        "name": "만능줄기세포/차세대면역유전체연구실",
+        "room_type": "lab",
         "_idx": 19,
         "_centroid": [
           126.9735704,
@@ -890,10 +928,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715307",
+        "name": "만능줄기세표 연구실",
+        "room_type": "lab",
         "_idx": 20,
         "_centroid": [
           126.9736183,
@@ -941,10 +981,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 21,
         "_centroid": [
           126.9729298,
@@ -984,10 +1026,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715218",
+        "name": "방사성동위원소실",
+        "room_type": "lab",
         "_idx": 22,
         "_centroid": [
           126.9730709,
@@ -1027,10 +1071,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 23,
         "_centroid": [
           126.9728896,
@@ -1070,10 +1116,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715302",
+        "name": "신경재생실험실",
+        "room_type": "lab",
         "_idx": 24,
         "_centroid": [
           126.9738085,
@@ -1113,16 +1161,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715216",
+        "name": "방사성동위원소실",
+        "room_type": "lab",
         "_idx": 25,
         "_centroid": [
           126.9729988,
           37.292227
         ],
-        "_area_m2": 45.0
+        "_area_m2": 45
       },
       "geometry": {
         "type": "Polygon",
@@ -1168,10 +1218,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715117",
+        "name": "김성태교수실",
+        "room_type": "office",
         "_idx": 26,
         "_centroid": [
           126.9730666,
@@ -1211,10 +1263,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715301",
+        "name": "신경재생실험실",
+        "room_type": "lab",
         "_idx": 27,
         "_centroid": [
           126.9738707,
@@ -1254,16 +1308,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715319",
+        "name": "지원실",
+        "room_type": "office",
         "_idx": 28,
         "_centroid": [
           126.97372,
           37.292218
         ],
-        "_area_m2": 35.0
+        "_area_m2": 35
       },
       "geometry": {
         "type": "Polygon",
@@ -1325,10 +1381,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715214",
+        "name": "방사성동위원소실",
+        "room_type": "lab",
         "_idx": 29,
         "_centroid": [
           126.9731271,
@@ -1368,10 +1426,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 30,
         "_centroid": [
           126.9729224,
@@ -1411,10 +1471,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715213",
+        "name": "세포배양실",
+        "room_type": "lab",
         "_idx": 31,
         "_centroid": [
           126.9731576,
@@ -1454,10 +1516,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715211",
+        "name": "세포배양실",
+        "room_type": "lab",
         "_idx": 32,
         "_centroid": [
           126.9732636,
@@ -1497,10 +1561,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 33,
         "_centroid": [
           126.973189,
@@ -1540,10 +1606,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715212",
+        "name": "냉동냉장실",
+        "room_type": "office",
         "_idx": 34,
         "_centroid": [
           126.9732191,
@@ -1583,16 +1651,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "elevator",
         "_idx": 35,
         "_centroid": [
           126.9733766,
           37.2921888
         ],
-        "_area_m2": 17.0
+        "_area_m2": 17
       },
       "geometry": {
         "type": "Polygon",
@@ -1626,10 +1696,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715210",
+        "name": "공동기기실",
+        "room_type": "lab",
         "_idx": 36,
         "_centroid": [
           126.9732577,
@@ -1669,10 +1741,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715209",
+        "name": "공동기기실",
+        "room_type": "lab",
         "_idx": 37,
         "_centroid": [
           126.9734893,
@@ -1720,10 +1794,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715208",
+        "name": "공동기기실",
+        "room_type": "lab",
         "_idx": 38,
         "_centroid": [
           126.9735313,
@@ -1763,10 +1839,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715119",
+        "name": "감염 및 종양면역학 연구실",
+        "room_type": "lab",
         "_idx": 39,
         "_centroid": [
           126.9729393,
@@ -1818,10 +1896,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715121",
+        "name": "지원실",
+        "room_type": "office",
         "_idx": 40,
         "_centroid": [
           126.9731023,
@@ -1861,16 +1941,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 41,
         "_centroid": [
           126.9735617,
           37.2921576
         ],
-        "_area_m2": 16.0
+        "_area_m2": 16
       },
       "geometry": {
         "type": "Polygon",
@@ -1904,16 +1986,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715206",
+        "name": "TRC연구실",
+        "room_type": "lab",
         "_idx": 42,
         "_centroid": [
           126.9736035,
           37.2921519
         ],
-        "_area_m2": 30.0
+        "_area_m2": 30
       },
       "geometry": {
         "type": "Polygon",
@@ -1947,10 +2031,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715118",
+        "name": "감염 및 종양면역학 연구실",
+        "room_type": "lab",
         "_idx": 43,
         "_centroid": [
           126.9730062,
@@ -1990,10 +2076,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715205",
+        "name": "세정실",
+        "room_type": "lab",
         "_idx": 44,
         "_centroid": [
           126.9736802,
@@ -2033,10 +2121,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715204",
+        "name": "분자세포신호전달연구실",
+        "room_type": "lab",
         "_idx": 45,
         "_centroid": [
           126.9737117,
@@ -2076,10 +2166,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715203",
+        "name": "암실",
+        "room_type": "lab",
         "_idx": 46,
         "_centroid": [
           126.9737389,
@@ -2119,10 +2211,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715201",
+        "name": "냉동냉장실",
+        "room_type": "office",
         "_idx": 47,
         "_centroid": [
           126.973766,
@@ -2170,10 +2264,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715113",
+        "name": "근육노화재생연구실",
+        "room_type": "lab",
         "_idx": 48,
         "_centroid": [
           126.973185,
@@ -2213,16 +2309,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715117",
+        "name": "김성태교수실",
+        "room_type": "office",
         "_idx": 49,
         "_centroid": [
           126.973043,
           37.2921153
         ],
-        "_area_m2": 18.0
+        "_area_m2": 18
       },
       "geometry": {
         "type": "Polygon",
@@ -2260,10 +2358,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715116",
+        "name": "배창대교수실",
+        "room_type": "office",
         "_idx": 50,
         "_centroid": [
           126.9730764,
@@ -2303,10 +2403,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715112",
+        "name": "줄기세포분화연구실",
+        "room_type": "lab",
         "_idx": 51,
         "_centroid": [
           126.9732427,
@@ -2346,10 +2448,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715115",
+        "name": "임세진교수실",
+        "room_type": "office",
         "_idx": 52,
         "_centroid": [
           126.9731062,
@@ -2389,10 +2493,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715111",
+        "name": "줄기세포분화연구실",
+        "room_type": "lab",
         "_idx": 53,
         "_centroid": [
           126.9733018,
@@ -2432,10 +2538,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 54,
         "_centroid": [
           126.9738621,
@@ -2475,10 +2583,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715114",
+        "name": "강종순교수실",
+        "room_type": "office",
         "_idx": 55,
         "_centroid": [
           126.9731393,
@@ -2522,10 +2632,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
+        "level": [
+          5
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 56,
         "_centroid": [
           126.973821,
@@ -2569,10 +2681,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715110",
+        "name": "세미나실",
+        "room_type": "classroom",
         "_idx": 57,
         "_centroid": [
           126.9733596,
@@ -2612,10 +2726,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715109",
+        "name": "분자신경약리학연구실",
+        "room_type": "lab",
         "_idx": 58,
         "_centroid": [
           126.9734182,
@@ -2655,10 +2771,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715120",
+        "name": "지원실",
+        "room_type": "office",
         "_idx": 59,
         "_centroid": [
           126.9736297,
@@ -2698,10 +2816,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715108",
+        "name": "분자독성약리학/분자신경약리학",
+        "room_type": "lab",
         "_idx": 60,
         "_centroid": [
           126.9734778,
@@ -2741,10 +2861,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715107",
+        "name": "분자독성약리학연구실",
+        "room_type": "lab",
         "_idx": 61,
         "_centroid": [
           126.9735357,
@@ -2784,10 +2906,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715101",
+        "name": "약리대사체학",
+        "room_type": "lab",
         "_idx": 62,
         "_centroid": [
           126.9737797,
@@ -2835,8 +2959,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
+        "level": [
+          5
+        ],
+        "ref": "715102",
         "name": "",
         "room_type": "",
         "_idx": 63,
@@ -2878,10 +3004,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715106",
+        "name": "이윤송교수실",
+        "room_type": "office",
         "_idx": 64,
         "_centroid": [
           126.9735713,
@@ -2925,10 +3053,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715105",
+        "name": "박성진교수실",
+        "room_type": "office",
         "_idx": 65,
         "_centroid": [
           126.9736054,
@@ -2968,10 +3098,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715104",
+        "name": "최정윤교수실",
+        "room_type": "office",
         "_idx": 66,
         "_centroid": [
           126.973635,
@@ -3011,10 +3143,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "5",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          5
+        ],
+        "ref": "715103",
+        "name": "이연종교수실",
+        "room_type": "office",
         "_idx": 67,
         "_centroid": [
           126.9736672,

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "metadata": {
-    "savedAt": "2026-05-29T16:21:34.031Z",
+    "savedAt": "2026-05-29T22:30:26.762Z",
     "note": ""
   },
   "graph": {
@@ -9105,6 +9105,373 @@
         "type": "entrance",
         "label": "",
         "building": "outside"
+      },
+      "node-mpqx3idt-9vne": {
+        "coordinates": [
+          126.97829438317046,
+          37.29222902066368
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqx3j8b-ef0v": {
+        "coordinates": [
+          126.97830994797687,
+          37.29230719581358
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqx3k2i-vjkj": {
+        "coordinates": [
+          126.97827568555209,
+          37.292143758765334
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "outside"
+      },
+      "node-mpqx4m02-6za5": {
+        "coordinates": [
+          126.97827152630487,
+          37.292282736883564
+        ],
+        "level": 1,
+        "type": "elevator",
+        "label": "",
+        "building": "res1",
+        "verticalId": 1
+      },
+      "node-mpqx6hv1-qev5": {
+        "coordinates": [
+          126.97819764722385,
+          37.29224152506434
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqx6jz1-w3vx": {
+        "coordinates": [
+          126.97863997377124,
+          37.29218146098236
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxepsg-sbg9": {
+        "coordinates": [
+          126.97830682226368,
+          37.29229283250187
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxerpe-clkf": {
+        "coordinates": [
+          126.97795014346752,
+          37.29227289646701
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxev4k-u92b": {
+        "coordinates": [
+          126.97829241716818,
+          37.29222884494145
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxewx0-cng0": {
+        "coordinates": [
+          126.97863658997818,
+          37.292182618241995
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxf0ss-b7gs": {
+        "coordinates": [
+          126.97827335379958,
+          37.29228337106075
+        ],
+        "level": 2,
+        "type": "elevator",
+        "label": "",
+        "building": "res1",
+        "verticalId": 1
+      },
+      "node-mpqxit06-tvwx": {
+        "coordinates": [
+          126.97826987903068,
+          37.29228342638851
+        ],
+        "level": 3,
+        "type": "elevator",
+        "label": "",
+        "building": "res1",
+        "verticalId": 1
+      },
+      "node-mpqxixyn-6oxm": {
+        "coordinates": [
+          126.97830970658754,
+          37.29230415324851
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxizcw-5rnh": {
+        "coordinates": [
+          126.97829131537009,
+          37.29222662551261
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxj1ih-xknv": {
+        "coordinates": [
+          126.97795209176076,
+          37.29227272559895
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxj3hs-d5pt": {
+        "coordinates": [
+          126.97863541936755,
+          37.292181800714175
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxnyem-rme3": {
+        "coordinates": [
+          126.97827052218588,
+          37.29228295698556
+        ],
+        "level": 4,
+        "type": "elevator",
+        "label": "",
+        "building": "res1",
+        "verticalId": 1
+      },
+      "node-mpqxo1u2-1qb6": {
+        "coordinates": [
+          126.97831031363813,
+          37.29230636758801
+        ],
+        "level": 4,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxo2ti-okp1": {
+        "coordinates": [
+          126.97829440040738,
+          37.2922271006658
+        ],
+        "level": 4,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxo41c-fwgw": {
+        "coordinates": [
+          126.97814562477504,
+          37.292246774209275
+        ],
+        "level": 4,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxo5n6-yhtr": {
+        "coordinates": [
+          126.97863765102602,
+          37.292181614751726
+        ],
+        "level": 4,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxswnq-8cd0": {
+        "coordinates": [
+          126.97826989134126,
+          37.29228237947049
+        ],
+        "level": 5,
+        "type": "elevator",
+        "label": "",
+        "building": "res1",
+        "verticalId": 1
+      },
+      "node-mpqxszoe-8g09": {
+        "coordinates": [
+          126.97830820589007,
+          37.29230144871151
+        ],
+        "level": 5,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxt0kd-ifpb": {
+        "coordinates": [
+          126.97829160895185,
+          37.292227940096566
+        ],
+        "level": 5,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxt23s-t9p4": {
+        "coordinates": [
+          126.97795120715705,
+          37.292272248698794
+        ],
+        "level": 5,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxt3of-5udl": {
+        "coordinates": [
+          126.97864078063554,
+          37.292180890101164
+        ],
+        "level": 5,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxxci1-ojqy": {
+        "coordinates": [
+          126.97826959235641,
+          37.29228183677992
+        ],
+        "level": 6,
+        "type": "elevator",
+        "label": "",
+        "building": "res1",
+        "verticalId": 1
+      },
+      "node-mpqxxfmz-afi5": {
+        "coordinates": [
+          126.97831044383679,
+          37.2923095900486
+        ],
+        "level": 6,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxxghw-hund": {
+        "coordinates": [
+          126.97829406513108,
+          37.29222647018315
+        ],
+        "level": 6,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxxidi-c0j6": {
+        "coordinates": [
+          126.97794899479106,
+          37.2922731817075
+        ],
+        "level": 6,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqxxk20-tohw": {
+        "coordinates": [
+          126.97863705254059,
+          37.292182618552445
+        ],
+        "level": 6,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqy1bei-7h8e": {
+        "coordinates": [
+          126.97827010417365,
+          37.29228307394801
+        ],
+        "level": 7,
+        "type": "elevator",
+        "label": "",
+        "building": "res1",
+        "verticalId": 1
+      },
+      "node-mpqy1e1r-23pb": {
+        "coordinates": [
+          126.97830994359737,
+          37.2923054630964
+        ],
+        "level": 7,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqy1f58-ka3c": {
+        "coordinates": [
+          126.97829344057544,
+          37.292227203784606
+        ],
+        "level": 7,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqy1gnh-ahri": {
+        "coordinates": [
+          126.97863325681396,
+          37.2921816260949
+        ],
+        "level": 7,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
+      },
+      "node-mpqy1igs-s8s0": {
+        "coordinates": [
+          126.9779534882461,
+          37.292272952622184
+        ],
+        "level": 7,
+        "type": "corridor",
+        "label": "",
+        "building": "res1"
       }
     },
     "edges": [
@@ -18836,6 +19203,389 @@
         "from": "node-moy4ag9f-pypc",
         "to": "node-moxzsnmj-gc2m",
         "weight": 17
+      },
+      {
+        "from": "node-moy14cbm-4i2o",
+        "to": "node-moy0z0ft-o80u",
+        "weight": 115,
+        "videoFwd": "outside_37_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 86.6867,
+        "videoRev": "outside_37_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 83.450133
+      },
+      {
+        "from": "node-moy4ag9f-pypc",
+        "to": "node-moy4arup-cmj4",
+        "weight": 152,
+        "videoFwd": "outside_65_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 96.044319,
+        "videoRev": "outside_65_cw.mp4",
+        "videoRevStart": 6.121826,
+        "videoRevEnd": 100.367033
+      },
+      {
+        "from": "node-moy0qh2v-q0ny",
+        "to": "node-moy0rp4x-6okf",
+        "weight": 29,
+        "videoFwd": "outside_87_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 23.123133,
+        "videoRev": "outside_87_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 23.123133
+      },
+      {
+        "from": "node-moy16lwl-v7fb",
+        "to": "node-moy16gn2-1ouq",
+        "weight": 51,
+        "videoFwd": "outside_90_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 34.822534,
+        "videoRev": "outside_90_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 79.813133
+      },
+      {
+        "from": "node-moy16gn2-1ouq",
+        "to": "node-moy6dl9v-0mz0",
+        "weight": 53,
+        "videoFwd": "outside_90_ccw.mp4",
+        "videoFwdStart": 34.822534,
+        "videoFwdEnd": 85.018367,
+        "videoRev": "outside_90_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 79.813133
+      },
+      {
+        "from": "node-moy6j68n-jnom",
+        "to": "node-moy6j3pe-lajf",
+        "weight": 31,
+        "videoFwd": "outside_93_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 23.548558,
+        "videoRev": "outside_93_cw.mp4",
+        "videoRevStart": 35.519682,
+        "videoRevEnd": 56.456467
+      },
+      {
+        "from": "node-moy23q26-7s1g",
+        "to": "node-mpqx3k2i-vjkj",
+        "weight": 5
+      },
+      {
+        "from": "node-mpqx3j8b-ef0v",
+        "to": "node-mpqx3idt-9vne",
+        "weight": 9,
+        "videoFwd": "res1_c_F1_1_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 8.306782,
+        "videoRev": "res1_c_F1_1_cw.mp4",
+        "videoRevStart": 7.017171,
+        "videoRevEnd": 14.5145
+      },
+      {
+        "from": "node-mpqx3idt-9vne",
+        "to": "node-mpqx3k2i-vjkj",
+        "weight": 10,
+        "videoFwd": "res1_c_F1_1_ccw.mp4",
+        "videoFwdStart": 8.47308,
+        "videoFwdEnd": 13.947267,
+        "videoRev": "res1_c_F1_1_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 7.001389
+      },
+      {
+        "from": "node-mpqx4m02-6za5",
+        "to": "node-mpqx3j8b-ef0v",
+        "weight": 4
+      },
+      {
+        "from": "node-mpqx6jz1-w3vx",
+        "to": "node-mpqx3idt-9vne",
+        "weight": 31,
+        "videoFwd": "res1_c_F1_2_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 27.050145,
+        "videoRev": "res1_c_F1_2_cw.mp4",
+        "videoRevStart": 7.650363,
+        "videoRevEnd": 34.501167
+      },
+      {
+        "from": "node-mpqx3idt-9vne",
+        "to": "node-mpqx6hv1-qev5",
+        "weight": 9,
+        "videoFwd": "res1_c_F1_2_ccw.mp4",
+        "videoFwdStart": 27.483085,
+        "videoFwdEnd": 34.668,
+        "videoRev": "res1_c_F1_2_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 7.479695
+      },
+      {
+        "from": "node-mpqxf0ss-b7gs",
+        "to": "node-mpqxepsg-sbg9",
+        "weight": 3
+      },
+      {
+        "from": "node-mpqxepsg-sbg9",
+        "to": "node-mpqxev4k-u92b",
+        "weight": 7,
+        "videoFwd": "res1_c_F2_3_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 10.377033,
+        "videoRev": "res1_c_F2_3_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 9.976633
+      },
+      {
+        "from": "node-mpqxewx0-cng0",
+        "to": "node-mpqxev4k-u92b",
+        "weight": 31,
+        "videoFwd": "res1_c_F2_4_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 23.93066,
+        "videoRev": "res1_c_F2_4_cw.mp4",
+        "videoRevStart": 28.32269,
+        "videoRevEnd": 52.052067
+      },
+      {
+        "from": "node-mpqxev4k-u92b",
+        "to": "node-mpqxerpe-clkf",
+        "weight": 31,
+        "videoFwd": "res1_c_F2_4_ccw.mp4",
+        "videoFwdStart": 24.124638,
+        "videoFwdEnd": 52.452467,
+        "videoRev": "res1_c_F2_4_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 28.492157
+      },
+      {
+        "from": "node-mpqxit06-tvwx",
+        "to": "node-mpqxixyn-6oxm",
+        "weight": 4
+      },
+      {
+        "from": "node-mpqxixyn-6oxm",
+        "to": "node-mpqxizcw-5rnh",
+        "weight": 9,
+        "videoFwd": "res1_c_F3_5_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 9.442767,
+        "videoRev": "res1_c_F3_5_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 8.742067
+      },
+      {
+        "from": "node-mpqxj3hs-d5pt",
+        "to": "node-mpqxizcw-5rnh",
+        "weight": 31,
+        "videoFwd": "res1_c_F3_6_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 26.68896,
+        "videoRev": "res1_c_F3_6_cw.mp4",
+        "videoRevStart": 25.507564,
+        "videoRevEnd": 52.0187
+      },
+      {
+        "from": "node-mpqxizcw-5rnh",
+        "to": "node-mpqxj1ih-xknv",
+        "weight": 30,
+        "videoFwd": "res1_c_F3_6_ccw.mp4",
+        "videoFwdStart": 26.551759,
+        "videoFwdEnd": 52.285633,
+        "videoRev": "res1_c_F3_6_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 25.561554
+      },
+      {
+        "from": "node-mpqxnyem-rme3",
+        "to": "node-mpqxo1u2-1qb6",
+        "weight": 4
+      },
+      {
+        "from": "node-mpqxo1u2-1qb6",
+        "to": "node-mpqxo2ti-okp1",
+        "weight": 9,
+        "videoFwd": "res1_c_F4_7_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 8.2082,
+        "videoRev": "res1_c_F4_7_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 7.3073
+      },
+      {
+        "from": "node-mpqxo5n6-yhtr",
+        "to": "node-mpqxo2ti-okp1",
+        "weight": 31,
+        "videoFwd": "res1_c_F4_8_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 26.28051,
+        "videoRev": "res1_c_F4_8_cw.mp4",
+        "videoRevStart": 9.17996,
+        "videoRevEnd": 35.1685
+      },
+      {
+        "from": "node-mpqxo2ti-okp1",
+        "to": "node-mpqxo41c-fwgw",
+        "weight": 13,
+        "videoFwd": "res1_c_F4_8_ccw.mp4",
+        "videoFwdStart": 26.433057,
+        "videoFwdEnd": 35.201867,
+        "videoRev": "res1_c_F4_8_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 9.290366
+      },
+      {
+        "from": "node-mpqxswnq-8cd0",
+        "to": "node-mpqxszoe-8g09",
+        "weight": 4
+      },
+      {
+        "from": "node-mpqxszoe-8g09",
+        "to": "node-mpqxt0kd-ifpb",
+        "weight": 8,
+        "videoFwd": "res1_c_F5_9_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 8.742067,
+        "videoRev": "res1_c_F5_9_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 8.641967
+      },
+      {
+        "from": "node-mpqxt3of-5udl",
+        "to": "node-mpqxt0kd-ifpb",
+        "weight": 31,
+        "videoFwd": "res1_c_F5_10_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 27.157495,
+        "videoRev": "res1_c_F5_10_cw.mp4",
+        "videoRevStart": 26.048681,
+        "videoRevEnd": 52.8195
+      },
+      {
+        "from": "node-mpqxt0kd-ifpb",
+        "to": "node-mpqxt23s-t9p4",
+        "weight": 31,
+        "videoFwd": "res1_c_F5_10_ccw.mp4",
+        "videoFwdStart": 27.25299,
+        "videoFwdEnd": 53.9206,
+        "videoRev": "res1_c_F5_10_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 25.992299
+      },
+      {
+        "from": "node-moy2rc5j-o0r5",
+        "to": "node-mpqxepsg-sbg9",
+        "weight": 18
+      },
+      {
+        "from": "node-mpqxxci1-ojqy",
+        "to": "node-mpqxxfmz-afi5",
+        "weight": 5
+      },
+      {
+        "from": "node-mpqxxfmz-afi5",
+        "to": "node-mpqxxghw-hund",
+        "weight": 9,
+        "videoFwd": "res1_c_F6_11_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 8.9089,
+        "videoRev": "res1_c_F6_11_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 9.142467
+      },
+      {
+        "from": "node-mpqxxk20-tohw",
+        "to": "node-mpqxxghw-hund",
+        "weight": 31,
+        "videoFwd": "res1_c_F6_12_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 25.248019,
+        "videoRev": "res1_c_F6_12_cw.mp4",
+        "videoRevStart": 26.3883,
+        "videoRevEnd": 52.0187
+      },
+      {
+        "from": "node-mpqxxghw-hund",
+        "to": "node-mpqxxidi-c0j6",
+        "weight": 31,
+        "videoFwd": "res1_c_F6_12_ccw.mp4",
+        "videoFwdStart": 25.272764,
+        "videoFwdEnd": 50.450467,
+        "videoRev": "res1_c_F6_12_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 26.333621
+      },
+      {
+        "from": "node-mpqy1bei-7h8e",
+        "to": "node-mpqy1e1r-23pb",
+        "weight": 4
+      },
+      {
+        "from": "node-mpqy1e1r-23pb",
+        "to": "node-mpqy1f58-ka3c",
+        "weight": 9,
+        "videoFwd": "res1_c_F7_13_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 9.1091,
+        "videoRev": "res1_c_F7_13_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 9.642967
+      },
+      {
+        "from": "node-mpqy1gnh-ahri",
+        "to": "node-mpqy1f58-ka3c",
+        "weight": 30,
+        "videoFwd": "res1_c_F7_14_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 26.203179,
+        "videoRev": "res1_c_F7_14_cw.mp4",
+        "videoRevStart": 26.041298,
+        "videoRevEnd": 51.751767
+      },
+      {
+        "from": "node-mpqy1f58-ka3c",
+        "to": "node-mpqy1igs-s8s0",
+        "weight": 30,
+        "videoFwd": "res1_c_F7_14_ccw.mp4",
+        "videoFwdStart": 26.227623,
+        "videoFwdEnd": 51.451467,
+        "videoRev": "res1_c_F7_14_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 26.121404
+      },
+      {
+        "from": "node-mpqx4m02-6za5",
+        "to": "node-mpqxf0ss-b7gs",
+        "weight": 8
+      },
+      {
+        "from": "node-mpqxf0ss-b7gs",
+        "to": "node-mpqxit06-tvwx",
+        "weight": 8
+      },
+      {
+        "from": "node-mpqxit06-tvwx",
+        "to": "node-mpqxnyem-rme3",
+        "weight": 8
+      },
+      {
+        "from": "node-mpqxnyem-rme3",
+        "to": "node-mpqxswnq-8cd0",
+        "weight": 8
+      },
+      {
+        "from": "node-mpqxswnq-8cd0",
+        "to": "node-mpqxxci1-ojqy",
+        "weight": 8
+      },
+      {
+        "from": "node-mpqxxci1-ojqy",
+        "to": "node-mpqy1bei-7h8e",
+        "weight": 8
       }
     ]
   },
@@ -24101,6 +24851,422 @@
     "res2_e_3_6o.mp4": {
       "exitYaw": 242,
       "updatedAt": 1780071694030
+    },
+    "ptech_c_F1_1_ccw.mp4": {
+      "yaw": 237.73333740234375,
+      "updatedAt": 1780060729352
+    },
+    "ptech_c_F1_1_cw.mp4": {
+      "yaw": 267.9999938964844,
+      "updatedAt": 1780060731683
+    },
+    "ptech_c_F2_2_ccw.mp4": {
+      "yaw": 313.46666259765624,
+      "updatedAt": 1780060735964
+    },
+    "ptech_c_F2_2_cw.mp4": {
+      "yaw": 288,
+      "updatedAt": 1780060738511
+    },
+    "ptech_c_F3_3_ccw.mp4": {
+      "yaw": 278.26666870117185,
+      "updatedAt": 1780060744438
+    },
+    "ptech_c_F3_3_cw.mp4": {
+      "yaw": 283.46667480468756,
+      "updatedAt": 1780060747947
+    },
+    "ptech_c_F4_4_ccw.mp4": {
+      "yaw": 289.066668701172,
+      "updatedAt": 1780060752668
+    },
+    "ptech_c_F4_4_cw.mp4": {
+      "yaw": 263.7333251953125,
+      "updatedAt": 1780060756672
+    },
+    "ptech_s_1_1eu.mp4": {
+      "entryYaw": 261.3333435058594,
+      "updatedAt": 1780060763151
+    },
+    "ptech_s_1_1od.mp4": {
+      "exitYaw": 84.39998168945277,
+      "updatedAt": 1780060769257
+    },
+    "ptech_s_1_2ed.mp4": {
+      "entryYaw": 266.6666625976564,
+      "updatedAt": 1780060774725
+    },
+    "ptech_s_1_2eu.mp4": {
+      "entryYaw": 259.86666259765633,
+      "updatedAt": 1780060778721
+    },
+    "ptech_s_1_2od.mp4": {
+      "exitYaw": 90.13332519531201,
+      "updatedAt": 1780060783460
+    },
+    "ptech_s_1_2ou.mp4": {
+      "exitYaw": 80.26667480468745,
+      "updatedAt": 1780060787164
+    },
+    "ptech_s_1_3ed.mp4": {
+      "entryYaw": 269.8666625976564,
+      "updatedAt": 1780060791993
+    },
+    "ptech_s_1_3eu.mp4": {
+      "entryYaw": 256.6666625976562,
+      "updatedAt": 1780060795358
+    },
+    "ptech_s_1_3od.mp4": {
+      "exitYaw": 92.53333129882793,
+      "updatedAt": 1780060800122
+    },
+    "ptech_s_1_3ou.mp4": {
+      "exitYaw": 78.00000610351555,
+      "updatedAt": 1780060803501
+    },
+    "ptech_s_1_4ed.mp4": {
+      "entryYaw": 271.866650390625,
+      "updatedAt": 1780060808757
+    },
+    "ptech_s_1_4ou.mp4": {
+      "exitYaw": 76.00000305175774,
+      "updatedAt": 1780060812893
+    },
+    "res1_c_F1_1_ccw.mp4": {
+      "yaw": 249.33332519531257,
+      "updatedAt": 1780060823792
+    },
+    "res1_c_F1_1_cw.mp4": {
+      "yaw": 240.93333740234374,
+      "updatedAt": 1780060828000
+    },
+    "res1_c_F1_2_ccw.mp4": {
+      "yaw": 241.73331909179686,
+      "updatedAt": 1780060831781
+    },
+    "res1_c_F1_2_cw.mp4": {
+      "yaw": 344.53333333730694,
+      "updatedAt": 1780060836542
+    },
+    "res1_c_F2_3_ccw.mp4": {
+      "yaw": 246.93333129882814,
+      "updatedAt": 1780060840775
+    },
+    "res1_c_F2_3_cw.mp4": {
+      "yaw": 231.06665649414066,
+      "updatedAt": 1780060845400
+    },
+    "res1_c_F2_4_ccw.mp4": {
+      "yaw": 228.1333251953125,
+      "updatedAt": 1780060848442
+    },
+    "res1_c_F2_4_cw.mp4": {
+      "yaw": 227.46666259765624,
+      "updatedAt": 1780060852472
+    },
+    "res1_c_F3_5_ccw.mp4": {
+      "yaw": 241.0666625976563,
+      "updatedAt": 1780060857950
+    },
+    "res1_c_F3_5_cw.mp4": {
+      "yaw": 158.3999877929688,
+      "updatedAt": 1780060862065
+    },
+    "res1_c_F3_6_ccw.mp4": {
+      "yaw": 230.5333374023438,
+      "updatedAt": 1780060865089
+    },
+    "res1_c_F3_6_cw.mp4": {
+      "yaw": 225.99999389648423,
+      "updatedAt": 1780060868729
+    },
+    "res1_c_F4_7_ccw.mp4": {
+      "yaw": 25.99999589920037,
+      "updatedAt": 1780060873950
+    },
+    "res1_c_F4_7_cw.mp4": {
+      "yaw": 243.33333129882814,
+      "updatedAt": 1780060876816
+    },
+    "res1_c_F4_8_ccw.mp4": {
+      "yaw": 222.00000000000003,
+      "updatedAt": 1780060881233
+    },
+    "res1_c_F4_8_cw.mp4": {
+      "yaw": 99.99998779296862,
+      "updatedAt": 1780060884671
+    },
+    "res1_c_F5_10_ccw.mp4": {
+      "yaw": 227.33332519531248,
+      "updatedAt": 1780060888893
+    },
+    "res1_c_F5_10_cw.mp4": {
+      "yaw": 198.9333251953126,
+      "updatedAt": 1780060893008
+    },
+    "res1_c_F5_9_ccw.mp4": {
+      "yaw": 246.39998779296877,
+      "updatedAt": 1780060896175
+    },
+    "res1_c_F5_9_cw.mp4": {
+      "yaw": 216.26665649414073,
+      "updatedAt": 1780060899653
+    },
+    "res1_c_F6_11_ccw.mp4": {
+      "yaw": 267.86665649414056,
+      "updatedAt": 1780060904309
+    },
+    "res1_c_F6_11_cw.mp4": {
+      "yaw": 254.2666625976563,
+      "updatedAt": 1780060908496
+    },
+    "res1_c_F6_12_ccw.mp4": {
+      "yaw": 265.4666625976563,
+      "updatedAt": 1780060911634
+    },
+    "res1_c_F6_12_cw.mp4": {
+      "yaw": 317.33333435058586,
+      "updatedAt": 1780060916895
+    },
+    "res1_c_F7_13_ccw.mp4": {
+      "yaw": 281.8666687011719,
+      "updatedAt": 1780060921310
+    },
+    "res1_c_F7_13_cw.mp4": {
+      "yaw": 259.7333312988283,
+      "updatedAt": 1780060925458
+    },
+    "res1_c_F7_14_ccw.mp4": {
+      "yaw": 266.5333251953125,
+      "updatedAt": 1780060928636
+    },
+    "res1_c_F7_14_cw.mp4": {
+      "yaw": 256.53333129882816,
+      "updatedAt": 1780060932308
+    },
+    "res1_c_F8_15_ccw.mp4": {
+      "yaw": 235.4666625976563,
+      "updatedAt": 1780060938060
+    },
+    "res1_c_F8_15_cw.mp4": {
+      "yaw": 252.39998779296877,
+      "updatedAt": 1780060941805
+    },
+    "res1_c_F8_16_ccw.mp4": {
+      "yaw": 249.99998779296882,
+      "updatedAt": 1780060945927
+    },
+    "res1_c_F8_16_cw.mp4": {
+      "yaw": 95.73331909179666,
+      "updatedAt": 1780060951059
+    },
+    "res1_e_1_1e.mp4": {
+      "entryYaw": 244.13332519531258,
+      "updatedAt": 1780060957701
+    },
+    "res1_e_1_1o.mp4": {
+      "exitYaw": 70.26667480468745,
+      "updatedAt": 1780060961112
+    },
+    "res1_e_1_2e.mp4": {
+      "entryYaw": 234.26665649414065,
+      "updatedAt": 1780060965869
+    },
+    "res1_e_1_2o.mp4": {
+      "exitYaw": 55.60000000000002,
+      "updatedAt": 1780060969317
+    },
+    "res1_e_1_3e.mp4": {
+      "entryYaw": 205.59998779296893,
+      "updatedAt": 1780060974005
+    },
+    "res1_e_1_3o.mp4": {
+      "exitYaw": 23.866674804687477,
+      "updatedAt": 1780060976894
+    },
+    "res1_e_1_4e.mp4": {
+      "entryYaw": 185.1999877929689,
+      "updatedAt": 1780060981584
+    },
+    "res1_e_1_4o.mp4": {
+      "exitYaw": 5.600000000000023,
+      "updatedAt": 1780060985046
+    },
+    "res1_e_1_5o.mp4": {
+      "exitYaw": 144.66666259765628,
+      "updatedAt": 1780060989786
+    },
+    "res1_e_1_6e.mp4": {
+      "entryYaw": 212.53333740234402,
+      "updatedAt": 1780061020146
+    },
+    "res1_e_1_6o.mp4": {
+      "exitYaw": 32.933331298828136,
+      "updatedAt": 1780061024605
+    },
+    "res1_e_1_8e.mp4": {
+      "entryYaw": 212.13333129882815,
+      "updatedAt": 1780061030233
+    },
+    "res1_e_1_8o.mp4": {
+      "exitYaw": 31.599993896484364,
+      "updatedAt": 1780061033857
+    },
+    "semi_c_F1_1_ccw.mp4": {
+      "yaw": 162.53332519531222,
+      "updatedAt": 1780061068059
+    },
+    "semi_c_F1_1_cw.mp4": {
+      "yaw": 168.40000810623178,
+      "updatedAt": 1780061071473
+    },
+    "semi_c_F1_2_ccw.mp4": {
+      "yaw": 233.86665649414067,
+      "updatedAt": 1780061078259
+    },
+    "semi_c_F1_2_cw.mp4": {
+      "yaw": 234.93334321975703,
+      "updatedAt": 1780061082669
+    },
+    "semi_c_F1_3_ccw.mp4": {
+      "yaw": 233.06666870117178,
+      "updatedAt": 1780061086405
+    },
+    "semi_c_F1_3_cw.mp4": {
+      "yaw": 236.0000040769578,
+      "updatedAt": 1780061092901
+    },
+    "semi_c_F2_4_ccw.mp4": {
+      "yaw": 308.66667022705076,
+      "updatedAt": 1780061100224
+    },
+    "semi_c_F2_4_cw.mp4": {
+      "yaw": 237.73333435058584,
+      "updatedAt": 1780061105990
+    },
+    "semi_c_F2_5_ccw.mp4": {
+      "yaw": 248.40000000000003,
+      "updatedAt": 1780061110101
+    },
+    "semi_c_F2_5_cw.mp4": {
+      "yaw": 252.53333740234365,
+      "updatedAt": 1780061114502
+    },
+    "semi_c_F3_6_ccw.mp4": {
+      "yaw": 225.8666564941407,
+      "updatedAt": 1780061120906
+    },
+    "semi_c_F3_6_cw.mp4": {
+      "yaw": 215.5999938964842,
+      "updatedAt": 1780061124427
+    },
+    "semi_c_F3_7_ccw.mp4": {
+      "yaw": 336.4,
+      "updatedAt": 1780061127386
+    },
+    "semi_c_F3_7_cw.mp4": {
+      "yaw": 261.3333312988283,
+      "updatedAt": 1780061132824
+    },
+    "semi_c_F4_8_ccw.mp4": {
+      "yaw": 197.73333129882812,
+      "updatedAt": 1780061138584
+    },
+    "semi_c_F4_8_cw.mp4": {
+      "yaw": 196.93334045410165,
+      "updatedAt": 1780061141331
+    },
+    "semi_c_F4_9_ccw.mp4": {
+      "yaw": 206.26666259765616,
+      "updatedAt": 1780061144435
+    },
+    "semi_c_F4_9_cw.mp4": {
+      "yaw": 237.4666442871096,
+      "updatedAt": 1780061152082
+    },
+    "semi_c_F5_10_ccw.mp4": {
+      "yaw": 192.5333251953127,
+      "updatedAt": 1780061159049
+    },
+    "semi_c_F5_10_cw.mp4": {
+      "yaw": 180.39998168945326,
+      "updatedAt": 1780061163898
+    },
+    "semi_c_F5_11_ccw.mp4": {
+      "yaw": 188.26665649414076,
+      "updatedAt": 1780061168185
+    },
+    "semi_c_F5_11_cw.mp4": {
+      "yaw": 195.46665649414072,
+      "updatedAt": 1780061173810
+    },
+    "semi_c_F6_12_ccw.mp4": {
+      "yaw": 176.39998168945309,
+      "updatedAt": 1780061179394
+    },
+    "semi_c_F6_12_cw.mp4": {
+      "yaw": 185.33333129882809,
+      "updatedAt": 1780061183434
+    },
+    "semi_c_F6_13_ccw.mp4": {
+      "yaw": 174.39999389648443,
+      "updatedAt": 1780061186918
+    },
+    "semi_c_F6_13_cw.mp4": {
+      "yaw": 168.80000610351567,
+      "updatedAt": 1780061192870
+    },
+    "semi_e_1_1e.mp4": {
+      "entryYaw": 166.266650390625,
+      "updatedAt": 1780061201988
+    },
+    "semi_e_1_1o.mp4": {
+      "exitYaw": 344.26666870117185,
+      "updatedAt": 1780061204700
+    },
+    "semi_e_1_2e.mp4": {
+      "entryYaw": 220.40000000000012,
+      "updatedAt": 1780061210737
+    },
+    "semi_e_1_2o.mp4": {
+      "exitYaw": 45.33333740234377,
+      "updatedAt": 1780061213769
+    },
+    "semi_e_1_3e.mp4": {
+      "entryYaw": 203.73332519531255,
+      "updatedAt": 1780061219802
+    },
+    "semi_e_1_3o.mp4": {
+      "exitYaw": 24.666662597656284,
+      "updatedAt": 1780061222617
+    },
+    "semi_e_1_4e.mp4": {
+      "entryYaw": 183.86665649414044,
+      "updatedAt": 1780061227436
+    },
+    "semi_e_1_4o.mp4": {
+      "exitYaw": 9.600000000000023,
+      "updatedAt": 1780061230160
+    },
+    "semi_e_1_5e.mp4": {
+      "entryYaw": 239.7333312988282,
+      "updatedAt": 1780061235854
+    },
+    "semi_e_1_5o.mp4": {
+      "exitYaw": 63.86666870117182,
+      "updatedAt": 1780061240756
+    },
+    "semi_e_1_6e.mp4": {
+      "entryYaw": 201.73331909179686,
+      "updatedAt": 1780061245285
+    },
+    "semi_e_1_6o.mp4": {
+      "exitYaw": 24,
+      "updatedAt": 1780061248854
+    },
+    "res1_e_1_5e.mp4": {
+      "entryYaw": 325.6,
+      "updatedAt": 1780061312615
     }
   },
   "rooms": [
@@ -48304,6 +49470,2157 @@
       "name": "학생연구실Ⅰ",
       "room_type": "lab",
       "updatedAt": 1780070523238
+    },
+    {
+      "building": "eng1",
+      "level": 1,
+      "fingerprint": "126.976462_37.294230_38.6",
+      "ref": "21",
+      "name": "",
+      "room_type": "storage",
+      "updatedAt": 0
+    },
+    {
+      "building": "eng1",
+      "level": 1,
+      "fingerprint": "126.976280_37.293662_60.5",
+      "ref": "21123415236",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 0
+    },
+    {
+      "building": "eng1",
+      "level": 1,
+      "fingerprint": "126.976348_37.293654_63.2",
+      "ref": "221",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 0
+    },
+    {
+      "building": "eng1",
+      "level": 1,
+      "fingerprint": "126.976432_37.293645_31.5",
+      "ref": "21",
+      "name": "",
+      "room_type": "storage",
+      "updatedAt": 0
+    },
+    {
+      "building": "eng1",
+      "level": 1,
+      "fingerprint": "126.976483_37.293639_62.2",
+      "ref": "2113241",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 0
+    },
+    {
+      "building": "eng1",
+      "level": 3,
+      "fingerprint": "126.976552_37.294315_63.6",
+      "ref": "23261",
+      "name": "",
+      "room_type": "classroom",
+      "updatedAt": 0
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978335_37.292176_51.1",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780058735302
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978229_37.292190_51.4",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780058736487
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978389_37.292160_29.9",
+      "ref": "81109",
+      "name": "경비실",
+      "room_type": "office",
+      "updatedAt": 1780058750397
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978425_37.292156_29.4",
+      "ref": "81111",
+      "name": "응용역학 및 재료설계연구실",
+      "room_type": "lab",
+      "updatedAt": 1780058754150
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978458_37.292151_25.5",
+      "ref": "81113",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780058757871
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978490_37.292147_28.2",
+      "ref": "81115",
+      "name": "김종순 교수 연구실",
+      "room_type": "lab",
+      "updatedAt": 1780058761253
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978522_37.292143_24.2",
+      "ref": "81117",
+      "name": "자연모사생체재료공학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780058764672
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978554_37.292138_29.3",
+      "ref": "81119",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780058767129
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978603_37.292132_52.3",
+      "ref": "81121",
+      "name": "반도체Fab",
+      "room_type": "lab",
+      "updatedAt": 1780058775271
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978633_37.292224_48.8",
+      "ref": "81116",
+      "name": "반도체Fab",
+      "room_type": "lab",
+      "updatedAt": 1780058782168
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978579_37.292243_30.5",
+      "ref": "81114",
+      "name": "삼성SDI-SKKU이차전지산학협력연구센터",
+      "room_type": "lab",
+      "updatedAt": 1780058786958
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978453_37.292252_77.2",
+      "ref": "81110",
+      "name": "삼성SDI-SKKU이차전지산학협력연구센터",
+      "room_type": "lab",
+      "updatedAt": 1780058819662
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978529_37.292250_48.3",
+      "ref": "81112",
+      "name": "삼성SDI-SKKU이차전지산학협력연구센터",
+      "room_type": "lab",
+      "updatedAt": 1780058817286
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978395_37.292268_12.4",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780058823667
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978369_37.292271_27.8",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780058826570
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978270_37.292285_22.3",
+      "ref": "",
+      "name": "",
+      "room_type": "elevator",
+      "updatedAt": 1780058834675
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978338_37.292275_22.1",
+      "ref": "",
+      "name": "",
+      "room_type": "stairs",
+      "updatedAt": 1780058836640
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978240_37.292288_26.1",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780058841615
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978217_37.292292_11.6",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780058843241
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978178_37.292297_49.9",
+      "ref": "81108",
+      "name": "반도체Fab",
+      "room_type": "lab",
+      "updatedAt": 1780058846144
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978114_37.292305_52.7",
+      "ref": "81106",
+      "name": "반도체Fab",
+      "room_type": "lab",
+      "updatedAt": 1780058848869
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978049_37.292314_50.4",
+      "ref": "81104",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780058852394
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.977983_37.292323_55.2",
+      "ref": "81102",
+      "name": "반도체Fab",
+      "room_type": "lab",
+      "updatedAt": 1780058855660
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.977948_37.292220_28.3",
+      "ref": "81101",
+      "name": "반도체Fab",
+      "room_type": "lab",
+      "updatedAt": 1780058859562
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978012_37.292211_77.4",
+      "ref": "81103",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780058862430
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978090_37.292200_53.6",
+      "ref": "81105",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780058865193
+    },
+    {
+      "building": "res1",
+      "level": 1,
+      "fingerprint": "126.978156_37.292192_55.3",
+      "ref": "81107",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780058868844
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978282_37.292184_119.2",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780059223544
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978270_37.292285_22.3",
+      "ref": "",
+      "name": "",
+      "room_type": "elevator",
+      "updatedAt": 1780059230020
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978240_37.292288_26.1",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780059232042
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978369_37.292271_27.8",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780059234733
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978338_37.292275_22.1",
+      "ref": "",
+      "name": "",
+      "room_type": "facility",
+      "updatedAt": 1780059239315
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978395_37.292268_12.4",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780059244055
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978217_37.292292_11.6",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780059246310
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978178_37.292297_49.9",
+      "ref": "81206",
+      "name": "에너지 및 광자연구실",
+      "room_type": "lab",
+      "updatedAt": 1780059252443
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978114_37.292305_52.7",
+      "ref": "81204",
+      "name": "에너지 및 광자연구실",
+      "room_type": "lab",
+      "updatedAt": 1780059255708
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978016_37.292319_105.7",
+      "ref": "81202",
+      "name": "차세대 전자연구실",
+      "room_type": "lab",
+      "updatedAt": 1780059392254
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.977964_37.292217_54.7",
+      "ref": "81201",
+      "name": "시스템통합실험실",
+      "room_type": "lab",
+      "updatedAt": 1780059282343
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978031_37.292200_51.1",
+      "ref": "81203",
+      "name": "자연모사생체재료공학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780059285687
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978090_37.292200_53.6",
+      "ref": "81205",
+      "name": "반도체공정실험실",
+      "room_type": "lab",
+      "updatedAt": 1780059287915
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978156_37.292192_55.3",
+      "ref": "81207",
+      "name": "반도체Fab",
+      "room_type": "lab",
+      "updatedAt": 1780059290663
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978414_37.292163_59.3",
+      "ref": "81209",
+      "name": "비대칭촉매반응디자인센터행정실",
+      "room_type": "office",
+      "updatedAt": 1780059295206
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978477_37.292144_54.7",
+      "ref": "81211",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780059298269
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978538_37.292141_50.4",
+      "ref": "81213",
+      "name": "적층형 반데르발스 반도체 사업단",
+      "room_type": "lab",
+      "updatedAt": 1780059301657
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978592_37.292133_54.4",
+      "ref": "81215",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780059304580
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978681_37.292235_28.9",
+      "ref": "",
+      "name": "",
+      "room_type": "elevator",
+      "updatedAt": 1780059310851
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978641_37.292223_27.5",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780059313904
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978577_37.292243_75.9",
+      "ref": "81210",
+      "name": "반데르발스반도체소재연구실",
+      "room_type": "lab",
+      "updatedAt": 1780059319025
+    },
+    {
+      "building": "res1",
+      "level": 2,
+      "fingerprint": "126.978466_37.292258_101.4",
+      "ref": "81208",
+      "name": "카이랄 물질 입체구조 분석 시스템실",
+      "room_type": "",
+      "updatedAt": 1780059322022
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978270_37.292285_22.3",
+      "ref": "",
+      "name": "",
+      "room_type": "elevator",
+      "updatedAt": 1780059640025
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978240_37.292288_26.1",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780059638332
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978217_37.292292_11.6",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780059641565
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978178_37.292297_49.9",
+      "ref": "81306",
+      "name": "실험실",
+      "room_type": "lab",
+      "updatedAt": 1780059644375
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978114_37.292305_52.7",
+      "ref": "81304",
+      "name": "이준엽교수연구실",
+      "room_type": "lab",
+      "updatedAt": 1780059739183
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978338_37.292275_22.1",
+      "ref": "",
+      "name": "",
+      "room_type": "stairs",
+      "updatedAt": 1780059668748
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978369_37.292271_27.8",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780059677618
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978395_37.292268_12.4",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780059679392
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978427_37.292250_48.4",
+      "ref": "81306",
+      "name": "실험실",
+      "room_type": "lab",
+      "updatedAt": 1780059683782
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978498_37.292262_53.0",
+      "ref": "81310",
+      "name": "양자정보연구지원센터 클린룸",
+      "room_type": "lab",
+      "updatedAt": 1780059687151
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978601_37.292234_103.4",
+      "ref": "81312",
+      "name": "양자정보연구지원센터 클린룸",
+      "room_type": "lab",
+      "updatedAt": 1780059690555
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978681_37.292235_28.9",
+      "ref": "",
+      "name": "",
+      "room_type": "elevator",
+      "updatedAt": 1780059692697
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978564_37.292137_104.8",
+      "ref": "81317",
+      "name": "양자정보연구지원센터 유틸리티룸",
+      "room_type": "facility",
+      "updatedAt": 1780059696337
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978477_37.292144_54.7",
+      "ref": "81315",
+      "name": "양자정보지원센터",
+      "room_type": "lab",
+      "updatedAt": 1780059699798
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978414_37.292163_59.3",
+      "ref": "81313",
+      "name": "양자정보지원센터",
+      "room_type": "lab",
+      "updatedAt": 1780059702616
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978343_37.292167_46.6",
+      "ref": "81311",
+      "name": "양자정보지원센터",
+      "room_type": "lab",
+      "updatedAt": 1780059705910
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978283_37.292175_53.5",
+      "ref": "81309",
+      "name": "양자정보연구지원센터",
+      "room_type": "lab",
+      "updatedAt": 1780059709193
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978220_37.292183_51.7",
+      "ref": "81307",
+      "name": "복합재료동시설계산업기술거점센터",
+      "room_type": "lab",
+      "updatedAt": 1780059712533
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978156_37.292192_55.3",
+      "ref": "81305",
+      "name": "복합재료동시설계산업기술거점센터",
+      "room_type": "lab",
+      "updatedAt": 1780059716519
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978037_37.292199_131.0",
+      "ref": "81303",
+      "name": "SNL연구실",
+      "room_type": "lab",
+      "updatedAt": 1780059720229
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.977953_37.292227_28.3",
+      "ref": "81301",
+      "name": "SNL연구실",
+      "room_type": "lab",
+      "updatedAt": 1780059723767
+    },
+    {
+      "building": "res1",
+      "level": 3,
+      "fingerprint": "126.978016_37.292319_105.7",
+      "ref": "81302",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780059726451
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978270_37.292285_22.3",
+      "ref": "",
+      "name": "",
+      "room_type": "elevator",
+      "updatedAt": 1780059760794
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978338_37.292275_22.1",
+      "ref": "",
+      "name": "",
+      "room_type": "stairs",
+      "updatedAt": 1780059763216
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978240_37.292288_26.1",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780059765195
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978369_37.292271_27.8",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780059766866
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978217_37.292292_11.6",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780059768608
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978395_37.292268_12.4",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780059770203
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978178_37.292297_49.9",
+      "ref": "81402",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780059773490
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978037_37.292261_364.6",
+      "ref": "81401",
+      "name": "크린룸",
+      "room_type": "lab",
+      "updatedAt": 1780059776524
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978156_37.292192_55.3",
+      "ref": "81403",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780059779644
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978220_37.292183_51.7",
+      "ref": "81405",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780059782073
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978283_37.292175_53.5",
+      "ref": "81407",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780059784553
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978343_37.292167_46.6",
+      "ref": "81409",
+      "name": "교육실",
+      "room_type": "",
+      "updatedAt": 1780059787446
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978414_37.292163_59.3",
+      "ref": "81411",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780059790557
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978477_37.292144_54.7",
+      "ref": "81414",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780059793843
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978528_37.292142_33.0",
+      "ref": "81415",
+      "name": "서수정교수 연구실",
+      "room_type": "lab",
+      "updatedAt": 1780059797215
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978571_37.292136_38.2",
+      "ref": "81417",
+      "name": "세미나실",
+      "room_type": "classroom",
+      "updatedAt": 1780059799894
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978614_37.292130_33.5",
+      "ref": "81419",
+      "name": "자료실",
+      "room_type": "lab",
+      "updatedAt": 1780059802514
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978681_37.292235_28.9",
+      "ref": "",
+      "name": "",
+      "room_type": "elevator",
+      "updatedAt": 1780059805090
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978628_37.292233_48.8",
+      "ref": "81410",
+      "name": "기업체연구실",
+      "room_type": "lab",
+      "updatedAt": 1780059808250
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978561_37.292235_54.6",
+      "ref": "81408",
+      "name": "서수정교수 연구실",
+      "room_type": "lab",
+      "updatedAt": 1780059827357
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978427_37.292250_48.4",
+      "ref": "81404",
+      "name": "자성재료연구실",
+      "room_type": "lab",
+      "updatedAt": 1780059816369
+    },
+    {
+      "building": "res1",
+      "level": 4,
+      "fingerprint": "126.978498_37.292262_53.0",
+      "ref": "81406",
+      "name": "자성재료연구실",
+      "room_type": "lab",
+      "updatedAt": 1780059823905
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978270_37.292285_22.3",
+      "ref": "",
+      "name": "",
+      "room_type": "elevator",
+      "updatedAt": 1780059971976
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978338_37.292275_22.1",
+      "ref": "",
+      "name": "",
+      "room_type": "stairs",
+      "updatedAt": 1780059973688
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978369_37.292271_27.8",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780059978727
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978240_37.292288_26.1",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780059980756
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978217_37.292292_11.6",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780059982304
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978395_37.292268_12.4",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780059983912
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978178_37.292297_49.9",
+      "ref": "81506",
+      "name": "분자광전자연구실",
+      "room_type": "lab",
+      "updatedAt": 1780059987038
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978114_37.292305_52.7",
+      "ref": "81504",
+      "name": "도금실",
+      "room_type": "",
+      "updatedAt": 1780059990496
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978016_37.292319_105.7",
+      "ref": "81502",
+      "name": "CMP실",
+      "room_type": "",
+      "updatedAt": 1780059994771
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.977973_37.292221_56.1",
+      "ref": "81501",
+      "name": "응용역학및재료설계연구실",
+      "room_type": "lab",
+      "updatedAt": 1780059998034
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978039_37.292197_51.9",
+      "ref": "81503",
+      "name": "유연소자 및 패키징 연구실",
+      "room_type": "lab",
+      "updatedAt": 1780060000731
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978082_37.292202_35.1",
+      "ref": "81505",
+      "name": "유기전자재료연구실",
+      "room_type": "lab",
+      "updatedAt": 1780060003953
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978124_37.292196_35.7",
+      "ref": "81507",
+      "name": "이태훈교수실",
+      "room_type": "office",
+      "updatedAt": 1780060006920
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978167_37.292190_34.4",
+      "ref": "81509",
+      "name": "전자파실험실",
+      "room_type": "lab",
+      "updatedAt": 1780060024786
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978201_37.292192_35.5",
+      "ref": "81511",
+      "name": "가스센서측정실",
+      "room_type": "lab",
+      "updatedAt": 1780060026845
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978251_37.292179_35.0",
+      "ref": "81513",
+      "name": "GRRC협회",
+      "room_type": "",
+      "updatedAt": 1780060029478
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978294_37.292173_36.1",
+      "ref": "81515",
+      "name": "신뢰성시험실",
+      "room_type": "",
+      "updatedAt": 1780060032633
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978343_37.292167_46.6",
+      "ref": "81517",
+      "name": "RIC협회",
+      "room_type": "",
+      "updatedAt": 1780060037252
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978414_37.292163_59.3",
+      "ref": "81519",
+      "name": "이보믹스연구실",
+      "room_type": "lab",
+      "updatedAt": 1780060040053
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978477_37.292144_54.7",
+      "ref": "81521",
+      "name": "이보믹스연구실",
+      "room_type": "lab",
+      "updatedAt": 1780060043141
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978535_37.292141_48.3",
+      "ref": "81523",
+      "name": "이태훈교수Lab",
+      "room_type": "lab",
+      "updatedAt": 1780060046043
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978585_37.292134_56.5",
+      "ref": "81525",
+      "name": "지능형정밀헬스케어연구소실험실2",
+      "room_type": "lab",
+      "updatedAt": 1780060048384
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978681_37.292235_28.9",
+      "ref": "",
+      "name": "",
+      "room_type": "elevator",
+      "updatedAt": 1780060052066
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978622_37.292230_56.9",
+      "ref": "81512",
+      "name": "디스플레이특성분석실",
+      "room_type": "lab",
+      "updatedAt": 1780060055372
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978557_37.292246_46.5",
+      "ref": "81510",
+      "name": "환자맞춤형면역함암치료연구센터(MRC)",
+      "room_type": "lab",
+      "updatedAt": 1780060058247
+    },
+    {
+      "building": "res1",
+      "level": 5,
+      "fingerprint": "126.978459_37.292255_101.4",
+      "ref": "81508",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780060060617
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978270_37.292285_22.3",
+      "ref": "",
+      "name": "",
+      "room_type": "elevator",
+      "updatedAt": 1780060146727
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978240_37.292288_26.1",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780060178303
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978338_37.292275_22.1",
+      "ref": "",
+      "name": "",
+      "room_type": "stairs",
+      "updatedAt": 1780060180099
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978369_37.292271_27.8",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780060182104
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978395_37.292268_12.4",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780060183613
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978217_37.292292_11.6",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780060185290
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978094_37.292308_153.0",
+      "ref": "81604",
+      "name": "공동기기원실험실",
+      "room_type": "lab",
+      "updatedAt": 1780060188384
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.977983_37.292323_55.2",
+      "ref": "81602",
+      "name": "마약포렌식연구실",
+      "room_type": "lab",
+      "updatedAt": 1780060210233
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978040_37.292197_52.9",
+      "ref": "81603",
+      "name": "공동기기원실험실",
+      "room_type": "lab",
+      "updatedAt": 1780060198377
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978093_37.292200_49.7",
+      "ref": "81605",
+      "name": "공동기기원원장실/회의실",
+      "room_type": "lab",
+      "updatedAt": 1780060204167
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.977973_37.292221_56.8",
+      "ref": "81601",
+      "name": "공동기기원실험실",
+      "room_type": "lab",
+      "updatedAt": 1780060207511
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978156_37.292192_55.3",
+      "ref": "81607",
+      "name": "기기분석실Ⅲ",
+      "room_type": "lab",
+      "updatedAt": 1780060214617
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978220_37.292183_51.7",
+      "ref": "81609",
+      "name": "공동기기원실험실",
+      "room_type": "lab",
+      "updatedAt": 1780060217410
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978283_37.292175_53.5",
+      "ref": "81611",
+      "name": "공동기기원실험실",
+      "room_type": "lab",
+      "updatedAt": 1780060220657
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978394_37.292160_130.8",
+      "ref": "81613",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780060223693
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978498_37.292146_42.0",
+      "ref": "81615A",
+      "name": "무기분석실Ⅱ",
+      "room_type": "lab",
+      "updatedAt": 1780060232632
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978578_37.292127_92.6",
+      "ref": "81615B",
+      "name": "공동기기원실험실",
+      "room_type": "lab",
+      "updatedAt": 1780060236370
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978619_37.292204_14.8",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780060239235
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978624_37.292258_40.5",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780060242073
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978681_37.292235_28.9",
+      "ref": "",
+      "name": "",
+      "room_type": "stairs",
+      "updatedAt": 1780060243662
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978548_37.292214_12.9",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780060244951
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978563_37.292262_35.3",
+      "ref": "81610",
+      "name": "방사성동위원소중앙실험실",
+      "room_type": "lab",
+      "updatedAt": 1780060247742
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978511_37.292230_14.2",
+      "ref": "81608",
+      "name": "방사성동위원소중앙관리실",
+      "room_type": "lab",
+      "updatedAt": 1780060257686
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978475_37.292237_13.0",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780060261719
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978515_37.292277_13.5",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780060263049
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978483_37.292277_12.3",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780060264669
+    },
+    {
+      "building": "res1",
+      "level": 6,
+      "fingerprint": "126.978427_37.292250_48.4",
+      "ref": "81606",
+      "name": "공동기기원실험실",
+      "room_type": "lab",
+      "updatedAt": 1780060266863
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978270_37.292285_22.3",
+      "ref": "",
+      "name": "",
+      "room_type": "elevator",
+      "updatedAt": 1780060344306
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978338_37.292275_22.1",
+      "ref": "",
+      "name": "",
+      "room_type": "stairs",
+      "updatedAt": 1780060346118
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978240_37.292288_26.1",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780060347779
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978369_37.292271_27.8",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780060349517
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978217_37.292292_11.6",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780060351420
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978395_37.292268_12.4",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780060353207
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978194_37.292295_24.2",
+      "ref": "81708",
+      "name": "고분자나노구조및물성연구실",
+      "room_type": "lab",
+      "updatedAt": 1780060363006
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978134_37.292303_78.4",
+      "ref": "81706",
+      "name": "고분자나노구조및물성실험실",
+      "room_type": "lab",
+      "updatedAt": 1780060366412
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978037_37.292316_75.2",
+      "ref": "81704",
+      "name": "유무기하이브리드광전자소재및소자실험실",
+      "room_type": "lab",
+      "updatedAt": 1780060369607
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.977968_37.292325_30.5",
+      "ref": "81702",
+      "name": "유기전자재료실연구공간",
+      "room_type": "",
+      "updatedAt": 1780060372634
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.977953_37.292227_28.3",
+      "ref": "81701",
+      "name": "이차전지연구실",
+      "room_type": "lab",
+      "updatedAt": 1780060376216
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.977982_37.292215_28.5",
+      "ref": "81703",
+      "name": "이차전지연구실",
+      "room_type": "lab",
+      "updatedAt": 1780060378830
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978032_37.292208_53.7",
+      "ref": "81703A",
+      "name": "문형필교수Lab",
+      "room_type": "lab",
+      "updatedAt": 1780060382651
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978112_37.292198_79.6",
+      "ref": "81703B",
+      "name": "박재형교수연구실",
+      "room_type": "lab",
+      "updatedAt": 1780060386495
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978176_37.292189_27.7",
+      "ref": "81705",
+      "name": "박재형교수연구실",
+      "room_type": "lab",
+      "updatedAt": 1780060393656
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978252_37.292167_50.9",
+      "ref": "81709",
+      "name": "정보통신소자연구실Ⅴ",
+      "room_type": "lab",
+      "updatedAt": 1780060403874
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978207_37.292185_24.7",
+      "ref": "81707",
+      "name": "정보통신소자연구실Ⅴ",
+      "room_type": "lab",
+      "updatedAt": 1780060400632
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978315_37.292158_50.8",
+      "ref": "81711",
+      "name": "에너지나노재료·소자연구실",
+      "room_type": "lab",
+      "updatedAt": 1780060407917
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978364_37.292164_25.2",
+      "ref": "81713",
+      "name": "에너지나노재료·소자연구실",
+      "room_type": "lab",
+      "updatedAt": 1780060411296
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978396_37.292159_28.6",
+      "ref": "81715",
+      "name": "학생창의지능SCI실",
+      "room_type": "",
+      "updatedAt": 1780060414667
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978428_37.292155_24.2",
+      "ref": "81717",
+      "name": "김종웅교수Lab",
+      "room_type": "lab",
+      "updatedAt": 1780060419898
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978510_37.292152_87.9",
+      "ref": "81719",
+      "name": "김덕준교수실험실",
+      "room_type": "lab",
+      "updatedAt": 1780060424388
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978550_37.292163_18.8",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780060427811
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978586_37.292134_25.2",
+      "ref": "81721",
+      "name": "김재윤교수연구실",
+      "room_type": "lab",
+      "updatedAt": 1780060430269
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978623_37.292153_12.4",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780060432349
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978611_37.292112_15.5",
+      "ref": "",
+      "name": "",
+      "room_type": "reserved",
+      "updatedAt": 1780060433608
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978681_37.292235_28.9",
+      "ref": "",
+      "name": "",
+      "room_type": "stairs",
+      "updatedAt": 1780060435998
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978627_37.292233_52.2",
+      "ref": "81718",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780060438558
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978560_37.292246_51.2",
+      "ref": "81716",
+      "name": "김태일교수Lab",
+      "room_type": "lab",
+      "updatedAt": 1780060442316
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978498_37.292262_53.0",
+      "ref": "81714",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780060445609
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978447_37.292261_25.1",
+      "ref": "81712",
+      "name": "바이오공정디지털트윈연구실Ⅱ",
+      "room_type": "lab",
+      "updatedAt": 1780060449491
+    },
+    {
+      "building": "res1",
+      "level": 7,
+      "fingerprint": "126.978416_37.292257_23.3",
+      "ref": "81710",
+      "name": "바이오공정디지털트윈연구실Ⅰ",
+      "room_type": "lab",
+      "updatedAt": 1780060452871
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.977922_37.295068_36.3",
+      "ref": "36119",
+      "name": "시편처리실",
+      "room_type": "",
+      "updatedAt": 1780093016917
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.978043_37.295126_29.4",
+      "ref": "36131",
+      "name": "사무",
+      "room_type": "",
+      "updatedAt": 1780093096275
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.978162_37.295119_81.5",
+      "ref": "36101",
+      "name": "",
+      "room_type": "classroom",
+      "updatedAt": 1780093135699
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.978169_37.295053_72.6",
+      "ref": "36103",
+      "name": "",
+      "room_type": "classroom",
+      "updatedAt": 1780093138784
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.978176_37.294989_76.6",
+      "ref": "36105",
+      "name": "",
+      "room_type": "classroom",
+      "updatedAt": 1780093132934
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.978183_37.294926_71.7",
+      "ref": "36107",
+      "name": "",
+      "room_type": "classroom",
+      "updatedAt": 1780093154822
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.978190_37.294864_73.8",
+      "ref": "36109",
+      "name": "",
+      "room_type": "classroom",
+      "updatedAt": 1780093165335
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.978076_37.294666_17.8",
+      "ref": "37125",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093199855
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.978074_37.294633_26.6",
+      "ref": "37127",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093208371
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.978118_37.294378_264.4",
+      "ref": "37105",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093238037
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.978041_37.294493_46.5",
+      "ref": "37129",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093254637
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.978026_37.294424_49.8",
+      "ref": "37131",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093262686
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.977908_37.294289_123.8",
+      "ref": "37107",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093327750
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.978025_37.294654_20.7",
+      "ref": "37123",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093343314
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.977994_37.294660_16.2",
+      "ref": "37121",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093355333
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.977917_37.294626_74.9",
+      "ref": "37109",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093375159
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.977900_37.294757_98.5",
+      "ref": "36115",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093390070
+    },
+    {
+      "building": "ectr",
+      "level": 1,
+      "fingerprint": "126.977890_37.294847_70.9",
+      "ref": "36117",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093397712
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.977999_37.294791_27.4",
+      "ref": "36247",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093429788
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978002_37.294861_24.7",
+      "ref": "36245",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093447757
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.977998_37.294894_24.8",
+      "ref": "36243",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093460978
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.977994_37.294925_23.9",
+      "ref": "36241",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093468332
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.977963_37.294960_9.7",
+      "ref": "36239",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093477746
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.977987_37.294962_10.5",
+      "ref": "36237",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093486705
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978011_37.294963_10.2",
+      "ref": "36235",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093493409
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978036_37.294965_10.6",
+      "ref": "36233",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093500871
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978061_37.294967_10.0",
+      "ref": "36231",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093515815
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978085_37.294969_10.2",
+      "ref": "36229",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093522583
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.977923_37.295030_86.3",
+      "ref": "36219",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093533250
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.977927_37.295094_70.2",
+      "ref": "36221",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093540862
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.977927_37.295163_57.2",
+      "ref": "36223",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093547531
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.977926_37.295209_41.0",
+      "ref": "36225",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093558199
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978035_37.295189_55.5",
+      "ref": "36227",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093565568
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978162_37.295119_81.5",
+      "ref": "36201",
+      "name": "",
+      "room_type": "classroom",
+      "updatedAt": 1780093591143
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978169_37.295053_72.6",
+      "ref": "36203",
+      "name": "",
+      "room_type": "classroom",
+      "updatedAt": 1780093602186
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978176_37.294989_76.6",
+      "ref": "36205",
+      "name": "",
+      "room_type": "classroom",
+      "updatedAt": 1780093609419
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978183_37.294926_71.7",
+      "ref": "36207",
+      "name": "",
+      "room_type": "classroom",
+      "updatedAt": 1780093619707
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978190_37.294864_73.8",
+      "ref": "36209",
+      "name": "",
+      "room_type": "classroom",
+      "updatedAt": 1780093627657
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978184_37.294807_46.3",
+      "ref": "36211",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093635837
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978053_37.294740_75.8",
+      "ref": "36215",
+      "name": "",
+      "room_type": "classroom",
+      "updatedAt": 1780093646678
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978173_37.294638_40.9",
+      "ref": "37201",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093658782
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978160_37.294566_38.3",
+      "ref": "37203",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093670226
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978145_37.294503_38.2",
+      "ref": "37205",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093677740
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978036_37.294456_105.4",
+      "ref": "37227",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093685967
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978131_37.294440_37.1",
+      "ref": "37207",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093693019
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978117_37.294377_38.2",
+      "ref": "37209",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093699581
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978104_37.294314_36.6",
+      "ref": "37211",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093712604
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978090_37.294252_38.0",
+      "ref": "37213",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093719574
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.978076_37.294189_37.8",
+      "ref": "37215",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093726844
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.977981_37.294195_35.7",
+      "ref": "37217",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093732137
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.977891_37.294216_45.4",
+      "ref": "37219",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093741928
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.977905_37.294280_43.0",
+      "ref": "37221",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093750639
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.977917_37.294332_30.1",
+      "ref": "37223",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093757186
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.977905_37.294604_149.6",
+      "ref": "37225",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093789633
+    },
+    {
+      "building": "ectr",
+      "level": 2,
+      "fingerprint": "126.977891_37.294870_263.0",
+      "ref": "36217",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780093806192
     }
   ]
 }

@@ -8,9 +8,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "classroom",
+        "ref": "23201",
+        "name": "나노전자소자및센서연구실",
+        "room_type": "lab",
         "_idx": 1,
         "_centroid": [
           126.9765523,
@@ -53,9 +53,9 @@
         "level": [
           2
         ],
-        "ref": "23212",
-        "name": "",
-        "room_type": "classroom",
+        "ref": "23203",
+        "name": "오픈랩 Ⅱ",
+        "room_type": "lab",
         "_idx": 2,
         "_centroid": [
           126.9766087,
@@ -110,9 +110,9 @@
         "level": [
           2
         ],
-        "ref": "21",
-        "name": "",
-        "room_type": "storage",
+        "ref": "23205",
+        "name": "권민혜교수연구실",
+        "room_type": "lab",
         "_idx": 3,
         "_centroid": [
           126.9766737,
@@ -163,9 +163,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23207A",
+        "name": "에너지메카트로닉스연구실Ⅱ",
+        "room_type": "lab",
         "_idx": 4,
         "_centroid": [
           126.9767436,
@@ -220,9 +220,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23207B",
+        "name": "나노광소자공정실",
+        "room_type": "lab",
         "_idx": 5,
         "_centroid": [
           126.9768207,
@@ -273,9 +273,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23209",
+        "name": "유현승교수연구실",
+        "room_type": "lab",
         "_idx": 6,
         "_centroid": [
           126.9768865,
@@ -330,9 +330,9 @@
         "level": [
           2
         ],
-        "ref": "21",
-        "name": "",
-        "room_type": "storage",
+        "ref": "23211",
+        "name": "정보통신소자연구실Ⅳ",
+        "room_type": "lab",
         "_idx": 7,
         "_centroid": [
           126.9769568,
@@ -383,9 +383,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23213",
+        "name": "최창순교수연구실",
+        "room_type": "lab",
         "_idx": 8,
         "_centroid": [
           126.9770004,
@@ -436,9 +436,9 @@
         "level": [
           2
         ],
-        "ref": "21",
+        "ref": "23215A",
         "name": "",
-        "room_type": "storage",
+        "room_type": "",
         "_idx": 9,
         "_centroid": [
           126.9770275,
@@ -481,7 +481,7 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "23215B",
         "name": "",
         "room_type": "",
         "_idx": 10,
@@ -534,9 +534,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23221",
+        "name": "전자소자응용연구실",
+        "room_type": "lab",
         "_idx": 11,
         "_centroid": [
           126.9771396,
@@ -587,9 +587,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23202",
+        "name": "전자전기공학부 서버실",
+        "room_type": "lab",
         "_idx": 12,
         "_centroid": [
           126.9763819,
@@ -640,9 +640,9 @@
         "level": [
           2
         ],
-        "ref": "21",
-        "name": "",
-        "room_type": "storage",
+        "ref": "23206A",
+        "name": "전자전기공학부 세미나실",
+        "room_type": "classroom",
         "_idx": 13,
         "_centroid": [
           126.976486,
@@ -689,9 +689,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23204",
+        "name": "교수회의실Ⅱ",
+        "room_type": "lounge",
         "_idx": 14,
         "_centroid": [
           126.9764448,
@@ -738,9 +738,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23206B",
+        "name": "디스플레이융합공학과 사무실",
+        "room_type": "office",
         "_idx": 15,
         "_centroid": [
           126.9765208,
@@ -799,9 +799,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23210",
+        "name": "김길호교수실",
+        "room_type": "office",
         "_idx": 16,
         "_centroid": [
           126.9765848,
@@ -856,9 +856,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23208",
+        "name": "김용상교수실",
+        "room_type": "office",
         "_idx": 17,
         "_centroid": [
           126.9765536,
@@ -901,9 +901,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23214",
+        "name": "송봉식교수실",
+        "room_type": "office",
         "_idx": 18,
         "_centroid": [
           126.9766519,
@@ -962,9 +962,9 @@
         "level": [
           2
         ],
-        "ref": "21",
-        "name": "",
-        "room_type": "storage",
+        "ref": "23212",
+        "name": "유현승교수실",
+        "room_type": "office",
         "_idx": 19,
         "_centroid": [
           126.9766146,
@@ -1011,9 +1011,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23218",
+        "name": "최창순교수실",
+        "room_type": "office",
         "_idx": 20,
         "_centroid": [
           126.9767153,
@@ -1068,9 +1068,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23216",
+        "name": "원충연교수실",
+        "room_type": "office",
         "_idx": 21,
         "_centroid": [
           126.9766845,
@@ -1113,9 +1113,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23222",
+        "name": "예비(전자전기)",
+        "room_type": "reserved",
         "_idx": 22,
         "_centroid": [
           126.976788,
@@ -1166,9 +1166,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23220",
+        "name": "비탈리파노프교수실",
+        "room_type": "office",
         "_idx": 23,
         "_centroid": [
           126.9767512,
@@ -1223,9 +1223,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23224",
+        "name": "예비",
+        "room_type": "reserved",
         "_idx": 24,
         "_centroid": [
           126.976821,
@@ -1276,9 +1276,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23228",
+        "name": "나노전자소자및센서연구실Ⅲ",
+        "room_type": "lab",
         "_idx": 25,
         "_centroid": [
           126.9768783,
@@ -1325,9 +1325,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23226",
+        "name": "최계원교수실",
+        "room_type": "office",
         "_idx": 26,
         "_centroid": [
           126.9768504,
@@ -1374,9 +1374,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23230",
+        "name": "반도체나노소자연구실",
+        "room_type": "lab",
         "_idx": 27,
         "_centroid": [
           126.9769135,
@@ -1435,9 +1435,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23232",
+        "name": "나노전자소자및센서연구실Ⅱ",
+        "room_type": "lab",
         "_idx": 28,
         "_centroid": [
           126.9769703,
@@ -1484,9 +1484,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23236",
+        "name": "박형원교수실",
+        "room_type": "office",
         "_idx": 29,
         "_centroid": [
           126.9770121,
@@ -1537,9 +1537,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23240",
+        "name": "반도체소자측정실Ⅱ",
+        "room_type": "lab",
         "_idx": 30,
         "_centroid": [
           126.9770817,
@@ -1586,9 +1586,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23238",
+        "name": "이명현교수실",
+        "room_type": "office",
         "_idx": 31,
         "_centroid": [
           126.9770465,
@@ -1643,9 +1643,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "23242",
+        "name": "세미나실Ⅰ",
+        "room_type": "classroom",
         "_idx": 32,
         "_centroid": [
           126.9771193,
@@ -1692,8 +1692,8 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
+        "ref": "22222",
+        "name": "학생회실",
         "room_type": "",
         "_idx": 33,
         "_centroid": [
@@ -1737,9 +1737,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22221",
+        "name": "시스템컨설턴트그룹실",
+        "room_type": "club",
         "_idx": 34,
         "_centroid": [
           126.9772183,
@@ -1786,9 +1786,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22217",
+        "name": "정보검색실",
+        "room_type": "classroom",
         "_idx": 35,
         "_centroid": [
           126.9772316,
@@ -1835,9 +1835,9 @@
         "level": [
           2
         ],
-        "ref": "123",
-        "name": "",
-        "room_type": "store",
+        "ref": "22214",
+        "name": "정보라운지",
+        "room_type": "lounge",
         "_idx": 36,
         "_centroid": [
           126.9770576,
@@ -1912,9 +1912,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22211",
+        "name": "첨단강의실",
+        "room_type": "classroom",
         "_idx": 37,
         "_centroid": [
           126.9772045,
@@ -1973,9 +1973,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22212",
+        "name": "반도체소자공정실Ⅳ",
+        "room_type": "lab",
         "_idx": 38,
         "_centroid": [
           126.9770323,
@@ -2034,9 +2034,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22207",
+        "name": "전자전기공학실험실1B",
+        "room_type": "lab",
         "_idx": 39,
         "_centroid": [
           126.9771803,
@@ -2103,9 +2103,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22210",
+        "name": "전자전기공학실험준비실Ⅰ",
+        "room_type": "lab",
         "_idx": 40,
         "_centroid": [
           126.9770258,
@@ -2156,9 +2156,9 @@
         "level": [
           2
         ],
-        "ref": "123",
+        "ref": "22208",
         "name": "",
-        "room_type": "store",
+        "room_type": "",
         "_idx": 41,
         "_centroid": [
           126.9770211,
@@ -2209,9 +2209,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21202",
+        "name": "네트워크기술연구실",
+        "room_type": "lab",
         "_idx": 42,
         "_centroid": [
           126.9761437,
@@ -2254,7 +2254,7 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "22206",
         "name": "",
         "room_type": "",
         "_idx": 43,
@@ -2315,9 +2315,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21204",
+        "name": "디지탈미디어연구실Ⅰ",
+        "room_type": "lab",
         "_idx": 44,
         "_centroid": [
           126.976212,
@@ -2360,9 +2360,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21206",
+        "name": "김세정교수 Lab",
+        "room_type": "lab",
         "_idx": 45,
         "_centroid": [
           126.9762803,
@@ -2405,9 +2405,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21208",
+        "name": "지능형신호처리연구실",
+        "room_type": "lab",
         "_idx": 46,
         "_centroid": [
           126.9763475,
@@ -2450,9 +2450,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21210",
+        "name": "교수회의실Ⅰ",
+        "room_type": "lounge",
         "_idx": 47,
         "_centroid": [
           126.9763982,
@@ -2495,9 +2495,9 @@
         "level": [
           2
         ],
-        "ref": "123",
-        "name": "",
-        "room_type": "store",
+        "ref": "21212",
+        "name": "디스플레이디바이스및재료연구실",
+        "room_type": "lab",
         "_idx": 48,
         "_centroid": [
           126.9764318,
@@ -2540,9 +2540,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21214",
+        "name": "디스플레이디바이스및재료연구실",
+        "room_type": "lab",
         "_idx": 49,
         "_centroid": [
           126.9764827,
@@ -2704,9 +2704,9 @@
         "level": [
           2
         ],
-        "ref": "123",
-        "name": "",
-        "room_type": "store",
+        "ref": "21216",
+        "name": "IT융합연구원",
+        "room_type": "lab",
         "_idx": 51,
         "_centroid": [
           126.9765508,
@@ -2749,9 +2749,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "22203",
+        "name": "전자전기공학실험실1A",
+        "room_type": "lab",
         "_idx": 52,
         "_centroid": [
           126.9771616,
@@ -2810,9 +2810,9 @@
         "level": [
           2
         ],
-        "ref": "123",
-        "name": "",
-        "room_type": "store",
+        "ref": "21220",
+        "name": "통신시스템연구실",
+        "room_type": "lab",
         "_idx": 53,
         "_centroid": [
           126.9766192,
@@ -2855,7 +2855,7 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "22204",
         "name": "",
         "room_type": "",
         "_idx": 54,
@@ -2916,9 +2916,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21226",
+        "name": "양자소재및소자연구실",
+        "room_type": "lab",
         "_idx": 55,
         "_centroid": [
           126.9768223,
@@ -2965,9 +2965,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21222",
+        "name": "광학 및 초음파 공학 연구실",
+        "room_type": "lab",
         "_idx": 56,
         "_centroid": [
           126.9767113,
@@ -3014,7 +3014,7 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "22202B",
         "name": "",
         "room_type": "",
         "_idx": 57,
@@ -3067,9 +3067,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21203A",
+        "name": "김세정교수실",
+        "room_type": "office",
         "_idx": 58,
         "_centroid": [
           126.9761425,
@@ -3128,9 +3128,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21201",
+        "name": "BK 문서고",
+        "room_type": "office",
         "_idx": 59,
         "_centroid": [
           126.9761097,
@@ -3185,9 +3185,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21203B",
+        "name": "정민영교수실",
+        "room_type": "office",
         "_idx": 60,
         "_centroid": [
           126.976177,
@@ -3246,7 +3246,7 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "22201B",
         "name": "",
         "room_type": "",
         "_idx": 61,
@@ -3307,9 +3307,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21205",
+        "name": "지능형통신네트워크연구실",
+        "room_type": "lab",
         "_idx": 62,
         "_centroid": [
           126.9762539,
@@ -3368,9 +3368,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21207",
+        "name": "전종욱교수실",
+        "room_type": "office",
         "_idx": 63,
         "_centroid": [
           126.9763157,
@@ -3433,9 +3433,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21209",
+        "name": "그래핀나노소자연구실",
+        "room_type": "lab",
         "_idx": 64,
         "_centroid": [
           126.9763483,
@@ -3486,9 +3486,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21211",
+        "name": "박진홍교수실",
+        "room_type": "office",
         "_idx": 65,
         "_centroid": [
           126.9763772,
@@ -3547,7 +3547,7 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "22202A",
         "name": "",
         "room_type": "",
         "_idx": 66,
@@ -3600,9 +3600,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21213",
+        "name": "이재현교수실",
+        "room_type": "office",
         "_idx": 67,
         "_centroid": [
           126.976413,
@@ -3665,9 +3665,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21215",
+        "name": "이병국교수실",
+        "room_type": "office",
         "_idx": 68,
         "_centroid": [
           126.9764505,
@@ -3734,9 +3734,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21217",
+        "name": "송장근교수실",
+        "room_type": "office",
         "_idx": 69,
         "_centroid": [
           126.9764847,
@@ -3787,7 +3787,7 @@
         "level": [
           2
         ],
-        "ref": "",
+        "ref": "22201A",
         "name": "",
         "room_type": "",
         "_idx": 70,
@@ -3844,9 +3844,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21219",
+        "name": "디스플레이디바이스및재료연구실Ⅱ",
+        "room_type": "lab",
         "_idx": 71,
         "_centroid": [
           126.9765136,
@@ -3905,9 +3905,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21221",
+        "name": "전병우교수실",
+        "room_type": "office",
         "_idx": 72,
         "_centroid": [
           126.9765479,
@@ -3966,9 +3966,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21223",
+        "name": "광학 및 초음파 공학 연구실",
+        "room_type": "lab",
         "_idx": 73,
         "_centroid": [
           126.9765818,
@@ -4027,9 +4027,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21227",
+        "name": "권민혜교수실",
+        "room_type": "office",
         "_idx": 74,
         "_centroid": [
           126.976658,
@@ -4084,9 +4084,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21225",
+        "name": "서효운교수실",
+        "room_type": "office",
         "_idx": 75,
         "_centroid": [
           126.9766197,
@@ -4153,9 +4153,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21229",
+        "name": "전일용교수실",
+        "room_type": "office",
         "_idx": 76,
         "_centroid": [
           126.9766883,
@@ -4214,9 +4214,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21235",
+        "name": "광정보시스템연구실Ⅱ",
+        "room_type": "lab",
         "_idx": 77,
         "_centroid": [
           126.9767916,
@@ -4263,9 +4263,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21233",
+        "name": "이연호교수실",
+        "room_type": "office",
         "_idx": 78,
         "_centroid": [
           126.9767578,
@@ -4332,9 +4332,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21231",
+        "name": "원상민교수실",
+        "room_type": "office",
         "_idx": 79,
         "_centroid": [
           126.9767197,
@@ -4389,9 +4389,9 @@
         "level": [
           2
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "21237",
+        "name": "반도체소자그룹학생연구실Ⅱ",
+        "room_type": "lab",
         "_idx": 80,
         "_centroid": [
           126.9768214,

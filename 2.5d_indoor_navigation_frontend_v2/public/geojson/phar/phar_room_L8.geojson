@@ -5,10 +5,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "facility",
         "_idx": 1,
         "_centroid": [
           126.9763989,
@@ -48,7 +50,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -57,7 +61,7 @@
           126.9765658,
           37.2919905
         ],
-        "_area_m2": 363.0
+        "_area_m2": 363
       },
       "geometry": {
         "type": "Polygon",
@@ -123,10 +127,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "facility",
         "_idx": 3,
         "_centroid": [
           126.9764684,
@@ -166,10 +172,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 4,
         "_centroid": [
           126.9765375,
@@ -209,10 +217,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 5,
         "_centroid": [
           126.9766262,
@@ -252,10 +262,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "facility",
         "_idx": 6,
         "_centroid": [
           126.9763963,
@@ -319,10 +331,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "facility",
         "_idx": 7,
         "_centroid": [
           126.976459,
@@ -366,10 +380,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          8
+        ],
+        "ref": "530817",
+        "name": "동물사체보관실",
+        "room_type": "storage",
         "_idx": 8,
         "_centroid": [
           126.9767204,
@@ -413,7 +429,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -456,10 +474,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          8
+        ],
+        "ref": "530811",
+        "name": "실험동물실8~10",
+        "room_type": "lab",
         "_idx": 10,
         "_centroid": [
           126.9767802,
@@ -499,10 +519,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          8
+        ],
+        "ref": "530827",
+        "name": "실험동물실11~14",
+        "room_type": "lab",
         "_idx": 11,
         "_centroid": [
           126.9765375,
@@ -574,7 +596,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -617,10 +641,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 13,
         "_centroid": [
           126.9765944,
@@ -668,10 +694,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "facility",
         "_idx": 14,
         "_centroid": [
           126.9768748,
@@ -715,10 +743,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 15,
         "_centroid": [
           126.9766281,
@@ -766,10 +796,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "elevator",
         "_idx": 16,
         "_centroid": [
           126.9766524,
@@ -813,10 +845,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 17,
         "_centroid": [
           126.9766812,
@@ -856,9 +890,11 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
-        "name": "",
+        "level": [
+          8
+        ],
+        "ref": "530818",
+        "name": "세척실",
         "room_type": "",
         "_idx": 18,
         "_centroid": [
@@ -899,7 +935,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -908,7 +946,7 @@
           126.9767446,
           37.2918892
         ],
-        "_area_m2": 9.0
+        "_area_m2": 9
       },
       "geometry": {
         "type": "Polygon",
@@ -942,7 +980,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -985,7 +1025,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1028,10 +1070,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          8
+        ],
+        "ref": "530808",
+        "name": "실험동물실1",
+        "room_type": "lab",
         "_idx": 22,
         "_centroid": [
           126.9768987,
@@ -1075,10 +1119,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          8
+        ],
+        "ref": "530810",
+        "name": "실험동물실2~7",
+        "room_type": "lab",
         "_idx": 23,
         "_centroid": [
           126.9768233,
@@ -1118,10 +1164,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "facility",
         "_idx": 24,
         "_centroid": [
           126.9769683,
@@ -1161,7 +1209,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1204,7 +1254,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -1247,10 +1299,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "8",
+        "level": [
+          8
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 27,
         "_centroid": [
           126.977038,

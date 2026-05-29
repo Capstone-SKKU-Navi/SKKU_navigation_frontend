@@ -5,10 +5,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24101",
+        "name": "정보통신소자연구실Ⅰ",
+        "room_type": "lab",
         "_idx": 1,
         "_centroid": [
           126.9777631,
@@ -48,16 +50,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24111",
+        "name": "연류체설계실습실",
+        "room_type": "classroom",
         "_idx": 2,
         "_centroid": [
           126.9780783,
           37.2937455
         ],
-        "_area_m2": 193.0
+        "_area_m2": 193
       },
       "geometry": {
         "type": "Polygon",
@@ -91,10 +95,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24102",
+        "name": "정보통신소자연구실",
+        "room_type": "lab",
         "_idx": 3,
         "_centroid": [
           126.9777477,
@@ -134,10 +140,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24112C",
+        "name": "차량시스템실험실",
+        "room_type": "lab",
         "_idx": 4,
         "_centroid": [
           126.9781149,
@@ -177,7 +185,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -220,8 +230,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "24103",
         "name": "",
         "room_type": "",
         "_idx": 6,
@@ -263,10 +275,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24105",
+        "name": "다상유동 및 분체공학연구실",
+        "room_type": "lab",
         "_idx": 7,
         "_centroid": [
           126.977714,
@@ -306,10 +320,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24112A",
+        "name": "기계공작실",
+        "room_type": "lab",
         "_idx": 8,
         "_centroid": [
           126.9780037,
@@ -385,10 +401,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24106",
+        "name": "안전교육장ㆍ시험실ㆍ보건실",
+        "room_type": "classroom",
         "_idx": 9,
         "_centroid": [
           126.9777003,
@@ -428,10 +446,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24112B",
+        "name": "공구실",
+        "room_type": "storage",
         "_idx": 10,
         "_centroid": [
           126.9780568,
@@ -471,10 +491,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24107",
+        "name": "경비실",
+        "room_type": "office",
         "_idx": 11,
         "_centroid": [
           126.9776319,
@@ -514,7 +536,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -523,7 +547,7 @@
           126.9777176,
           37.2933195
         ],
-        "_area_m2": 30.0
+        "_area_m2": 30
       },
       "geometry": {
         "type": "Polygon",
@@ -557,10 +581,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24113",
+        "name": "지속가능설계및생산연구실",
+        "room_type": "lab",
         "_idx": 13,
         "_centroid": [
           126.978035,
@@ -608,10 +634,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24114",
+        "name": "기계역학실험실",
+        "room_type": "lab",
         "_idx": 14,
         "_centroid": [
           126.9779451,
@@ -655,10 +683,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24108",
+        "name": "근로자 휴게실",
+        "room_type": "lounge",
         "_idx": 15,
         "_centroid": [
           126.9776653,
@@ -702,7 +732,9 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
+        "level": [
+          1
+        ],
         "ref": "",
         "name": "",
         "room_type": "",
@@ -745,16 +777,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24116B",
+        "name": "동아리실",
+        "room_type": "lounge",
         "_idx": 17,
         "_centroid": [
           126.9780343,
           37.2932142
         ],
-        "_area_m2": 45.0
+        "_area_m2": 45
       },
       "geometry": {
         "type": "Polygon",
@@ -788,10 +822,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24115",
+        "name": "휴고로드리그실험실",
+        "room_type": "lab",
         "_idx": 18,
         "_centroid": [
           126.9779326,
@@ -831,10 +867,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24116A",
+        "name": "공동재료실험실",
+        "room_type": "lab",
         "_idx": 19,
         "_centroid": [
           126.9779728,
@@ -874,16 +912,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24117B",
+        "name": "피로및파괴실험실",
+        "room_type": "lab",
         "_idx": 20,
         "_centroid": [
           126.9779356,
           37.2930576
         ],
-        "_area_m2": 79.0
+        "_area_m2": 79
       },
       "geometry": {
         "type": "Polygon",
@@ -921,10 +961,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24117A",
+        "name": "휴고로드리그실험실",
+        "room_type": "lab",
         "_idx": 21,
         "_centroid": [
           126.9780215,
@@ -964,8 +1006,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "24109",
         "name": "",
         "room_type": "",
         "_idx": 22,
@@ -1007,10 +1051,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24118",
+        "name": "신소재공학부 공동실험실 I",
+        "room_type": "lab",
         "_idx": 23,
         "_centroid": [
           126.9779492,
@@ -1050,8 +1096,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "24119A",
         "name": "",
         "room_type": "",
         "_idx": 24,
@@ -1097,8 +1145,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
+        "level": [
+          1
+        ],
+        "ref": "24119B",
         "name": "",
         "room_type": "",
         "_idx": 25,
@@ -1140,10 +1190,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "1",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          1
+        ],
+        "ref": "24120",
+        "name": "신소재공학부 공동실험실 Ⅱ",
+        "room_type": "lab",
         "_idx": 26,
         "_centroid": [
           126.977932,

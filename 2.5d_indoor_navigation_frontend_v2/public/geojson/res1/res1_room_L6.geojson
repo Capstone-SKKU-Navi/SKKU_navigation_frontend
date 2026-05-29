@@ -5,10 +5,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          6
+        ],
+        "ref": "81602",
+        "name": "마약포렌식연구실",
+        "room_type": "lab",
         "_idx": 1,
         "_centroid": [
           126.9779832,
@@ -48,16 +50,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          6
+        ],
+        "ref": "81604",
+        "name": "공동기기원실험실",
+        "room_type": "lab",
         "_idx": 2,
         "_centroid": [
           126.9780945,
           37.292308
         ],
-        "_area_m2": 153.0
+        "_area_m2": 153
       },
       "geometry": {
         "type": "Polygon",
@@ -115,10 +119,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
+        "level": [
+          6
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 3,
         "_centroid": [
           126.9782165,
@@ -158,10 +164,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
+        "level": [
+          6
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 4,
         "_centroid": [
           126.9782401,
@@ -201,10 +209,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
+        "level": [
+          6
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "elevator",
         "_idx": 5,
         "_centroid": [
           126.9782704,
@@ -244,10 +254,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
+        "level": [
+          6
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 6,
         "_centroid": [
           126.9784832,
@@ -287,10 +299,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
+        "level": [
+          6
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 7,
         "_centroid": [
           126.9785145,
@@ -334,10 +348,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
+        "level": [
+          6
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 8,
         "_centroid": [
           126.9783382,
@@ -377,10 +393,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
+        "level": [
+          6
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 9,
         "_centroid": [
           126.9783695,
@@ -420,10 +438,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
+        "level": [
+          6
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 10,
         "_centroid": [
           126.9783946,
@@ -463,10 +483,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          6
+        ],
+        "ref": "81610",
+        "name": "방사성동위원소중앙실험실",
+        "room_type": "lab",
         "_idx": 11,
         "_centroid": [
           126.9785629,
@@ -510,10 +532,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
+        "level": [
+          6
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 12,
         "_centroid": [
           126.9786241,
@@ -561,10 +585,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          6
+        ],
+        "ref": "81606",
+        "name": "공동기기원실험실",
+        "room_type": "lab",
         "_idx": 13,
         "_centroid": [
           126.9784273,
@@ -612,16 +638,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
+        "level": [
+          6
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 14,
         "_centroid": [
           126.9784748,
           37.2922372
         ],
-        "_area_m2": 13.0
+        "_area_m2": 13
       },
       "geometry": {
         "type": "Polygon",
@@ -655,10 +683,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
+        "level": [
+          6
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "stairs",
         "_idx": 15,
         "_centroid": [
           126.9786806,
@@ -698,10 +728,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          6
+        ],
+        "ref": "81608",
+        "name": "방사성동위원소중앙관리실",
+        "room_type": "lab",
         "_idx": 16,
         "_centroid": [
           126.9785109,
@@ -745,10 +777,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          6
+        ],
+        "ref": "81601",
+        "name": "공동기기원실험실",
+        "room_type": "lab",
         "_idx": 17,
         "_centroid": [
           126.9779732,
@@ -808,10 +842,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
+        "level": [
+          6
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 18,
         "_centroid": [
           126.9785476,
@@ -859,10 +895,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
+        "level": [
+          6
+        ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "reserved",
         "_idx": 19,
         "_centroid": [
           126.9786194,
@@ -918,10 +956,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          6
+        ],
+        "ref": "81605",
+        "name": "공동기기원원장실/회의실",
+        "room_type": "lab",
         "_idx": 20,
         "_centroid": [
           126.9780927,
@@ -961,10 +1001,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          6
+        ],
+        "ref": "81603",
+        "name": "공동기기원실험실",
+        "room_type": "lab",
         "_idx": 21,
         "_centroid": [
           126.9780401,
@@ -1020,10 +1062,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          6
+        ],
+        "ref": "81607",
+        "name": "기기분석실Ⅲ",
+        "room_type": "lab",
         "_idx": 22,
         "_centroid": [
           126.9781557,
@@ -1063,10 +1107,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          6
+        ],
+        "ref": "81609",
+        "name": "공동기기원실험실",
+        "room_type": "lab",
         "_idx": 23,
         "_centroid": [
           126.9782199,
@@ -1106,10 +1152,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          6
+        ],
+        "ref": "81611",
+        "name": "공동기기원실험실",
+        "room_type": "lab",
         "_idx": 24,
         "_centroid": [
           126.9782832,
@@ -1149,8 +1197,10 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
-        "ref": "",
+        "level": [
+          6
+        ],
+        "ref": "81613",
         "name": "",
         "room_type": "",
         "_idx": 25,
@@ -1192,16 +1242,18 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          6
+        ],
+        "ref": "81615A",
+        "name": "무기분석실Ⅱ",
+        "room_type": "lab",
         "_idx": 26,
         "_centroid": [
           126.9784979,
           37.2921459
         ],
-        "_area_m2": 42.0
+        "_area_m2": 42
       },
       "geometry": {
         "type": "Polygon",
@@ -1235,10 +1287,12 @@
       "type": "Feature",
       "properties": {
         "indoor": "room",
-        "level": "6",
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "level": [
+          6
+        ],
+        "ref": "81615B",
+        "name": "공동기기원실험실",
+        "room_type": "lab",
         "_idx": 27,
         "_centroid": [
           126.9785785,
