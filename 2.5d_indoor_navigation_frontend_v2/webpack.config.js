@@ -87,7 +87,19 @@ module.exports = (env, argv) => {
       }),
       new CopyWebpackPlugin({
         patterns: [
-          { from: 'public/geojson', to: 'geojson' },
+          {
+            from: 'public/geojson',
+            to: 'geojson',
+            // Editor-only data must never ship to the public deploy:
+            //   editor/save.json   — the editor's autosaved working state (~1.3 MiB)
+            //   room_codes.json    — lookup table read only by src/editor/roomCodeLookup.ts (~580 KiB)
+            // Both are dead weight (and internal data) once the editor chunk is
+            // stripped, so the real-deploy build (build:prod) excludes them.
+            // `npm run build` (internal test build, keeps the editor) still copies them.
+            globOptions: isProdBuild
+              ? { ignore: ['**/editor/**', '**/room_codes.json'] }
+              : undefined,
+          },
           { from: 'public/strings', to: 'strings' },
           { from: 'public/images', to: 'images', noErrorOnMissing: true },
         ],

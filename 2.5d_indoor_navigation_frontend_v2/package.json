@@ -17,6 +17,7 @@
     "@deck.gl/core": "^9.1.0",
     "@deck.gl/layers": "^9.1.0",
     "@deck.gl/mapbox": "^9.1.0",
+    "@deck.gl/mesh-layers": "^9.2.11",
     "@types/three": "^0.183.1",
     "maplibre-gl": "^4.7.0",
     "three": "^0.183.2"

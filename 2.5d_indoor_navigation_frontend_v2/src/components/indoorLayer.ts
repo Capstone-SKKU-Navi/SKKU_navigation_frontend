@@ -266,11 +266,13 @@ export function highlightRoom(map: maplibregl.Map, ref: string | null): void {
       if (!map.getLayer(layerId)) continue;
 
       if (ref) {
+        // Matched room pops orange; everything else dims to a neutral gray so
+        // a single result is unambiguous in a dense floor plan.
         map.setPaintProperty(layerId, 'fill-extrusion-color', [
           'case',
           ['==', ['get', 'ref'], ref],
           '#FF6F03',
-          buildRoomColorExpression(),
+          '#d6d9e0',
         ] as any);
       } else {
         map.setPaintProperty(layerId, 'fill-extrusion-color', buildRoomColorExpression());

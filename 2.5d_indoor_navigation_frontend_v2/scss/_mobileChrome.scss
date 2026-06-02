@@ -565,3 +565,61 @@ body[data-device="mobile"] #mToast {
     transform: translate(-50%, 0);
   }
 }
+
+// ============================================================
+// Compass FAB (rotates with bearing) + active recenter state
+// ============================================================
+body[data-device="mobile"] #mActions {
+  .m-act-compass .material-icons {
+    transition: transform 0.2s ease-out;
+    color: var(--m-end);
+  }
+  .m-act.m-act--active {
+    background: var(--m-accent);
+    border-color: var(--m-accent);
+    color: #fff;
+  }
+}
+
+// ============================================================
+// Route summary pill (distance + ETA + swap) — below the search pill
+// ============================================================
+body[data-device="mobile"] #mRouteSummary {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 68px);
+  left: 12px;
+  right: 72px;
+  height: 40px;
+  padding: 0 6px 0 14px;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: var(--m-surface);
+  border: 1px solid var(--m-border);
+  border-radius: 20px;
+  box-shadow: var(--m-shadow-1);
+  color: var(--m-text);
+  font: 600 14px/1 'Pretendard', system-ui, sans-serif;
+  z-index: 460;
+
+  &[data-visible="true"] { display: flex; }
+
+  .m-route-summary-icon { font-size: 20px; color: var(--m-accent); }
+  .m-route-summary-text { flex: 1; }
+
+  .m-route-summary-swap {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 16px;
+    background: var(--m-surface-muted);
+    color: var(--m-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    .material-icons { font-size: 18px; }
+    &:active { transform: scale(0.94); }
+  }
+}

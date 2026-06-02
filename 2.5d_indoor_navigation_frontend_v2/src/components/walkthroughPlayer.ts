@@ -12,6 +12,10 @@ export interface WalkthroughPlayerCallbacks {
   onProgress(globalTime: number): void;
   onClipChange(clipIndex: number): void;
   onEnd(): void;
+  /** Fired when a cold segment load starts/finishes, so the UI can show a spinner. */
+  onLoadingChange?(isLoading: boolean): void;
+  /** Fired when the look direction (yaw, degrees) changes, for a map facing wedge. */
+  onHeadingChange?(headingDeg: number): void;
 }
 
 export interface WalkthroughPlayerInstance {
@@ -20,7 +24,19 @@ export interface WalkthroughPlayerInstance {
   togglePlayPause(): void;
   isPlaying(): boolean;
   seekToGlobalTime(time: number): void;
+  /** Seek relative to the current position by `deltaSeconds` (clamped). */
+  seekBy(deltaSeconds: number): void;
   getCurrentGlobalTime(): number;
+  /** Current look direction (yaw) in degrees, normalized to [0, 360). */
+  getHeading(): number;
+  /**
+   * How far the user has panned away from the clip's forward (= travel)
+   * direction, in degrees, normalized to (-180, 180]. 0 = looking straight
+   * ahead. The map marker faces routeBearing + this offset.
+   */
+  getLookOffset(): number;
+  /** Snap the look direction back to the current clip's forward yaw. */
+  recenterView(): void;
   getCurrentClipIndex(): number;
   setPlaybackRate(rate: number): void;
   getPlaybackRate(): number;
@@ -67,6 +83,12 @@ export function createWalkthroughPlayer(
   let currentSegmentIdx = 0;
   let destroyed = false;
   let loadingSegment = false;
+  // Wraps loadingSegment writes so the overlay can show a buffering spinner.
+  function setLoadingSegment(v: boolean): void {
+    if (loadingSegment === v) return;
+    loadingSegment = v;
+    callbacks.onLoadingChange?.(v);
+  }
   let pendingSeek: number | null = null;
   let animId = 0;
   let playbackRate = 1;
@@ -181,17 +203,48 @@ export function createWalkthroughPlayer(
   // ===== Camera control =====
   let lon = 0;
   let lat = 0;
+  let lastHeading = -999;     // last value pushed to onHeadingChange
   let isDown = false;
   let prevX = 0;
   let prevY = 0;
+  // Pinch-to-zoom FOV (touch): two-pointer distance ↔ camera.fov.
+  const activePointers = new Map<number, { x: number; y: number }>();
+  let pinchStartDist = 0;
+  let pinchStartFov = 0;
+
+  const FOV_MIN = 30;
+  const FOV_MAX = 100;
 
   function onPointerDown(e: PointerEvent): void {
-    isDown = true;
-    prevX = e.clientX;
-    prevY = e.clientY;
-    container.setPointerCapture(e.pointerId);
+    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    try { container.setPointerCapture(e.pointerId); } catch { /* noop */ }
+    if (activePointers.size >= 2) {
+      // Enter pinch: suspend single-finger look.
+      const pts = [...activePointers.values()];
+      pinchStartDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+      pinchStartFov = camera.fov;
+      isDown = false;
+    } else {
+      isDown = true;
+      prevX = e.clientX;
+      prevY = e.clientY;
+    }
   }
   function onPointerMove(e: PointerEvent): void {
+    if (activePointers.has(e.pointerId)) {
+      activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    }
+    if (activePointers.size >= 2) {
+      const pts = [...activePointers.values()];
+      const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+      if (pinchStartDist > 0) {
+        // Fingers apart → zoom in → smaller FOV.
+        const fov = pinchStartFov * (pinchStartDist / Math.max(1, dist));
+        camera.fov = Math.max(FOV_MIN, Math.min(FOV_MAX, fov));
+        camera.updateProjectionMatrix();
+      }
+      return;
+    }
     if (!isDown) return;
     lon += (prevX - e.clientX) * 0.2;
     lat += (e.clientY - prevY) * 0.2;
@@ -200,13 +253,30 @@ export function createWalkthroughPlayer(
     prevY = e.clientY;
   }
   function onPointerUp(e: PointerEvent): void {
-    isDown = false;
-    container.releasePointerCapture(e.pointerId);
+    activePointers.delete(e.pointerId);
+    try { container.releasePointerCapture(e.pointerId); } catch { /* noop */ }
+    if (activePointers.size < 2) pinchStartDist = 0;
+    if (activePointers.size === 1) {
+      // Resume single-finger look from the remaining pointer.
+      const [p] = [...activePointers.values()];
+      isDown = true;
+      prevX = p.x;
+      prevY = p.y;
+    } else if (activePointers.size === 0) {
+      isDown = false;
+    }
   }
   function onWheel(e: WheelEvent): void {
     e.preventDefault();
-    camera.fov = Math.max(30, Math.min(100, camera.fov + e.deltaY * 0.05));
+    camera.fov = Math.max(FOV_MIN, Math.min(FOV_MAX, camera.fov + e.deltaY * 0.05));
     camera.updateProjectionMatrix();
+  }
+
+  /** Snap the look direction back to the current clip's forward yaw. */
+  function recenterHeading(): void {
+    if (clips.length === 0) return;
+    lon = clips[currentClipIdx]?.yaw ?? lon;
+    lat = 0;
   }
 
   container.addEventListener('pointerdown', onPointerDown);
@@ -427,10 +497,10 @@ export function createWalkthroughPlayer(
       if (Math.abs(cached.video.currentTime - seekTime) > 0.05) {
         // Reseek and wait for the frame before swapping, so the swap doesn't
         // flash the slot's previous (stale) frame. Active stays visible meanwhile.
-        loadingSegment = true;
+        setLoadingSegment(true);
         cached.video.currentTime = seekTime;
         await awaitSlotFrame(cached);
-        loadingSegment = false;
+        setLoadingSegment(false);
         if (destroyed) return;
       }
       gapMode = false;
@@ -446,7 +516,7 @@ export function createWalkthroughPlayer(
     }
 
     // Cold load: bring the new segment up on a non-active slot, then swap.
-    loadingSegment = true;
+    setLoadingSegment(true);
 
     // If a prefetch is already loading this exact segment, ride it instead of
     // starting a duplicate load (avoids slot churn and a second seek).
@@ -479,7 +549,7 @@ export function createWalkthroughPlayer(
     } else {
       loadResult = await loadWithRetry(target, segIdx, seekTime);
     }
-    loadingSegment = false;
+    setLoadingSegment(false);
     if (destroyed) return;
     if (loadResult !== 'ready') {
       if (loadResult === 'error') {
@@ -608,6 +678,13 @@ export function createWalkthroughPlayer(
   function animate(): void {
     if (destroyed) return;
     animId = requestAnimationFrame(animate);
+
+    // Push heading changes to the map facing-wedge (throttled by a 0.5° gate).
+    const h = ((lon % 360) + 360) % 360;
+    if (Math.abs(h - lastHeading) > 0.5) {
+      lastHeading = h;
+      callbacks.onHeadingChange?.(h);
+    }
 
     const phi = THREE.MathUtils.degToRad(90 - lat);
     const theta = THREE.MathUtils.degToRad(lon);
@@ -811,6 +888,26 @@ export function createWalkthroughPlayer(
 
     seekToGlobalTime,
     getCurrentGlobalTime,
+
+    seekBy(deltaSeconds: number): void {
+      seekToGlobalTime(getCurrentGlobalTime() + deltaSeconds);
+    },
+
+    getHeading(): number {
+      return ((lon % 360) + 360) % 360;
+    },
+
+    getLookOffset(): number {
+      const fwd = clips[currentClipIdx]?.yaw ?? 0;
+      let d = (lon - fwd) % 360;
+      if (d > 180) d -= 360;
+      if (d <= -180) d += 360;
+      return d;
+    },
+
+    recenterView(): void {
+      recenterHeading();
+    },
 
     getCurrentClipIndex(): number {
       return currentClipIdx;

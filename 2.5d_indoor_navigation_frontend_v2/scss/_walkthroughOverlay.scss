@@ -328,3 +328,141 @@
   top: auto !important;
   right: auto !important;
 }
+
+// ===== Buffering spinner (cold 360° segment loads) =====
+.walkthrough-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 4;
+
+  &--show { opacity: 1; }
+
+  &-ring {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.25);
+    border-top-color: rgba(255, 255, 255, 0.95);
+    animation: walkthrough-spin 0.8s linear infinite;
+  }
+}
+
+@keyframes walkthrough-spin {
+  to { transform: rotate(360deg); }
+}
+
+// ===== Directional seek OSD (double-tap ±10s) =====
+.walkthrough-seek-osd {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 14px 18px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.95);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 5;
+
+  .material-icons { font-size: 32px; }
+  &-text { font-size: 12px; font-weight: 600; }
+
+  &--left { left: 12%; }
+  &--right { right: 12%; }
+  &--show { animation: walkthrough-seek-pop 550ms ease-out forwards; }
+}
+
+@keyframes walkthrough-seek-pop {
+  0%   { opacity: 0; }
+  20%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+// ===== Keyboard cheat-sheet =====
+.walkthrough-cheatsheet {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 20;
+
+  &--show { display: flex; }
+
+  &-card {
+    background: #1a1a2e;
+    color: #f5f5f5;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 16px 20px;
+    max-width: 86%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  }
+  &-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+
+  ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  li { font-size: 12px; color: rgba(255, 255, 255, 0.8); }
+
+  kbd {
+    display: inline-block;
+    min-width: 18px;
+    padding: 1px 5px;
+    font-size: 11px;
+    font-family: inherit;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+  &-hint { margin-top: 10px; font-size: 10px; color: rgba(255, 255, 255, 0.45); }
+}
+
+// ===== Facing wedge (map cursor) =====
+// The marker element IS a down-pointing CSS triangle; its apex is the
+// bottom-center. MapLibre anchor 'bottom' pins that bottom-center to the dot
+// and rotates around it, so the tip stays on the dot and the fan sweeps to the
+// heading (up = north at rotation 0). Shown only in 2D (see geoMap.applyWedge).
+.walkthrough-wedge {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 40px solid rgba(255, 152, 0, 0.5);
+  pointer-events: none;
+  // The apex (bottom-center) is the anchor pinned to the dot. MapLibre rotates
+  // the element via its own transform, whose default origin is the box center —
+  // that swings the apex off the dot as the heading turns. Pin the rotation
+  // pivot to the apex so the fan sweeps around the dot center instead.
+  transform-origin: 50% 100%;
+}
+
+// ===== Floor-change (stairs/elevator) route markers =====
+.floor-transition-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 4px 7px;
+  border: none;
+  border-radius: 14px;
+  background: #5b4bc4;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  font: inherit;
+
+  .material-icons { font-size: 16px; line-height: 1; }
+  .ft-label { font-size: 11px; font-weight: 700; line-height: 1; }
+
+  &:hover { background: #6d5cd6; }
+}

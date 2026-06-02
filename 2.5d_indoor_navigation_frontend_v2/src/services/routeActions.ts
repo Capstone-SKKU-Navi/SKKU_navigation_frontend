@@ -20,10 +20,19 @@ import * as RouteOverlay from '../components/routeOverlay';
 import * as WalkthroughOverlay from '../components/walkthroughOverlay';
 import * as GeoMap from '../components/geoMap';
 import { fetchRoute } from './apiClient';
-import type { RouteCoordinate } from './apiClient';
+import type { RouteCoordinate, ApiRouteResult } from './apiClient';
 import type { RoomListItem } from '../models/types';
 import { buildWalkthroughPlaylist } from './walkthroughPlanner';
 import { getFlag } from '../config/featureFlags';
+import { writeSelectedRoom, writeRoute, clearUrlState } from './urlState';
+
+/** A point on the route where the floor changes (stairs/elevator). */
+export interface FloorTransition {
+  lng: number;
+  lat: number;
+  fromLevel: number;
+  toLevel: number;
+}
 
 export type RouteEndpoint =
   | { kind: 'room'; ref: string }
@@ -53,6 +62,38 @@ export function selectRoom(room: RoomListItem): void {
   // Pin 3D focus to the searched building so panning the camera away
   // doesn't make it disappear in 3D.
   GeoMap.setIndoorFocusPin([room.building]);
+  // Deep-link the selection so it's bookmarkable / shareable.
+  if (room.level.length > 0) writeSelectedRoom(room.ref, room.level[0]);
+}
+
+/** Swap the start and end endpoints (room refs and coord overrides together). */
+export function swapEndpoints(): void {
+  const startInput = getStartInput();
+  const endInput = getEndInput();
+  const sVal = startInput?.value ?? '';
+  const eVal = endInput?.value ?? '';
+  if (startInput) startInput.value = eVal;
+  if (endInput) endInput.value = sVal;
+  const tmp = startCoordOverride;
+  startCoordOverride = endCoordOverride;
+  endCoordOverride = tmp;
+  document.dispatchEvent(new Event('routeEndpointChanged'));
+  updateFocusPinFromEndpoints();
+  maybeAutoFindRoute();
+}
+
+/** Where does the route change floor? Drives the stairs/elevator markers. */
+function computeFloorTransitions(r: ApiRouteResult): FloorTransition[] {
+  const out: FloorTransition[] = [];
+  const { coordinates, levels } = r;
+  if (!levels || levels.length !== coordinates.length) return out;
+  for (let i = 0; i < levels.length - 1; i++) {
+    if (levels[i] !== levels[i + 1]) {
+      const c = coordinates[i + 1];
+      out.push({ lng: c[0], lat: c[1], fromLevel: levels[i], toLevel: levels[i + 1] });
+    }
+  }
+  return out;
 }
 
 /** Resolve which building owns an endpoint (room ref or raw coord). */
@@ -219,6 +260,8 @@ export function clearRoute(): void {
   RouteOverlay.clearRoute();
   WalkthroughOverlay.hideWalkthroughOverlay();
   GeoMap.clearIndoorRouteLevels();
+  GeoMap.clearFloorTransitions();
+  clearUrlState();
   const routeInfo = document.getElementById('routeInfo');
   const buildingInfo = document.getElementById('buildingInfo');
   if (routeInfo) routeInfo.style.display = 'none';
@@ -311,6 +354,8 @@ export async function triggerFindRoute(): Promise<void> {
       // Make every floor the route touches opaque in 3D — otherwise upper-
       // floor segments float over filtered-out floors and disappear.
       GeoMap.setIndoorRouteLevels(routeResult.levels ?? []);
+      // Mark where the route changes floor (stairs/elevator).
+      GeoMap.showFloorTransitions(computeFloorTransitions(routeResult));
     }
 
     showRouteInfo(routeResult.estimatedTime, routeResult.totalDistance);
@@ -324,7 +369,27 @@ export async function triggerFindRoute(): Promise<void> {
       WalkthroughOverlay.showWalkthroughOverlay(playlist);
     }
 
-    document.dispatchEvent(new Event('routeFound'));
+    // Frame the whole path so a route-find never finishes off-screen. Done
+    // AFTER the walkthrough sheet mounts (mobile) so its bottom inset is
+    // already applied and the route isn't framed behind the sheet.
+    if (routeResult.coordinates && routeResult.coordinates.length >= 2) {
+      GeoMap.fitRouteBounds(routeResult.coordinates);
+    }
+
+    // Carry the summary on the event so mobile chrome (PC header is hidden
+    // there) can show distance/ETA without recomputing.
+    document.dispatchEvent(new CustomEvent('routeFound', {
+      detail: {
+        estimatedTime: routeResult.estimatedTime,
+        totalDistance: routeResult.totalDistance,
+        levels: routeResult.levels ?? [],
+      },
+    }));
+    // Deep-link the route (room-ref endpoints only; coord pins are skipped).
+    writeRoute(
+      start.kind === 'room' ? start.ref : null,
+      end.kind === 'room' ? end.ref : null,
+    );
   } catch (err: any) {
     if (err?.name === 'AbortError') return; // superseded by newer request
     console.error('경로 검색 실패:', err);

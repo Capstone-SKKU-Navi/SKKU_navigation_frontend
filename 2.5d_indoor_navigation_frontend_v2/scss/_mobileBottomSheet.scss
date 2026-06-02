@@ -174,3 +174,30 @@ body[data-device="mobile"] #mSheet {
 body[data-device="mobile"] #mSheet[data-state="peek"] .walkthrough-overlay.in-mobile-sheet {
   .walkthrough-canvas { display: none; }
 }
+
+// ============================================================
+// Dedicated sheet close button (dismiss walkthrough, KEEP route)
+// ============================================================
+body[data-device="mobile"] #mSheet {
+  .m-sheet-close {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 17px;
+    background: var(--m-surface-muted);
+    color: var(--m-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    cursor: pointer;
+
+    .material-icons { font-size: 20px; }
+    &:active { transform: scale(0.94); }
+  }
+
+  &[data-state="hidden"] .m-sheet-close { display: none; }
+}

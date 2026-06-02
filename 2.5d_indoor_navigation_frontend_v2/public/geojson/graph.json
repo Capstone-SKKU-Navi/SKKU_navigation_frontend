@@ -3239,23 +3239,23 @@
     },
     "node-moy6mf3p-gxvl": {
       "coordinates": [
-        126.97525211536868,
-        37.29501374214172
+        126.97520442561455,
+        37.29500546867713
       ],
       "level": 1,
       "type": "entrance",
       "label": "",
-      "building": "outside"
+      "building": "benz"
     },
     "node-moy6mge8-6hcc": {
       "coordinates": [
-        126.97505133637839,
-        37.29527374085383
+        126.97500864875008,
+        37.29524280885013
       ],
       "level": 1,
       "type": "entrance",
       "label": "",
-      "building": "outside"
+      "building": "benz"
     },
     "node-moy6pbz2-tsxf": {
       "coordinates": [
@@ -12834,7 +12834,7 @@
     {
       "from": "node-moy6mc9m-cxta",
       "to": "node-moy6mf3p-gxvl",
-      "weight": 30,
+      "weight": 32,
       "videoFwd": "outside_97_ccw.mp4",
       "videoFwdStart": 0,
       "videoFwdEnd": 19.541775,
@@ -12845,7 +12845,7 @@
     {
       "from": "node-moy6mf3p-gxvl",
       "to": "node-moy6mge8-6hcc",
-      "weight": 34,
+      "weight": 32,
       "videoFwd": "outside_97_ccw.mp4",
       "videoFwdStart": 20.372127,
       "videoFwdEnd": 42.442433,
@@ -12867,7 +12867,7 @@
     {
       "from": "node-moy6mdzl-guve",
       "to": "node-moy6mf3p-gxvl",
-      "weight": 22,
+      "weight": 26,
       "videoFwd": "outside_99_ccw.mp4",
       "videoFwdStart": 22.598433,
       "videoFwdEnd": 40.0734,
@@ -12878,7 +12878,7 @@
     {
       "from": "node-moy6mf3p-gxvl",
       "to": "node-moy6rv6o-s1sg",
-      "weight": 33,
+      "weight": 29,
       "videoFwd": "outside_100_ccw.mp4",
       "videoFwdStart": 0,
       "videoFwdEnd": 21.101999,
@@ -13109,7 +13109,7 @@
     {
       "from": "node-moy6mge8-6hcc",
       "to": "node-moy7a9p9-cxir",
-      "weight": 45,
+      "weight": 40,
       "videoFwd": "outside_113_ccw.mp4",
       "videoFwdStart": 0,
       "videoFwdEnd": 43.8772,
@@ -13197,7 +13197,7 @@
     {
       "from": "node-moy0ez5b-lac9",
       "to": "node-moy6mge8-6hcc",
-      "weight": 37,
+      "weight": 42,
       "videoFwd": "outside_119_ccw.mp4",
       "videoFwdStart": 0,
       "videoFwdEnd": 31.531533,

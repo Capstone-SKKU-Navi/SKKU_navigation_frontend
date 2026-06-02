@@ -32,7 +32,19 @@ declare module '@deck.gl/layers' {
     id: string;
   }
 
+  export class SolidPolygonLayer<D = any> {
+    constructor(props: any);
+    id: string;
+  }
+
   export class GeoJsonLayer<D = any> {
+    constructor(props: any);
+    id: string;
+  }
+}
+
+declare module '@deck.gl/mesh-layers' {
+  export class SimpleMeshLayer<D = any> {
     constructor(props: any);
     id: string;
   }

@@ -32,6 +32,11 @@ export function initMobileToast(): void {
     const detail = (e as CustomEvent<{ message?: string }>).detail;
     show(detail?.message ?? '경로를 찾을 수 없습니다');
   });
+  // Generic toast channel (e.g. share confirmation).
+  document.addEventListener('mToast', (e: Event) => {
+    const detail = (e as CustomEvent<{ message?: string }>).detail;
+    if (detail?.message) show(detail.message);
+  });
   // A successful route supersedes any pending warning.
   document.addEventListener('routeFound', () => {
     if (hideTimer !== null) window.clearTimeout(hideTimer);

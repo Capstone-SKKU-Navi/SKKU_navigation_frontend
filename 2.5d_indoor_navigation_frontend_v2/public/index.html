@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#121417" media="(prefers-color-scheme: dark)">
@@ -62,6 +62,9 @@
                     <input type="text" id="startRoomInput" placeholder="출발" autocomplete="off" />
                     <div id="startAutocomplete" class="autocomplete-dropdown"></div>
                 </div>
+                <button id="swapEndpointsBtn" class="header-icon-btn" title="출발↔도착 바꾸기">
+                    <span class="material-icons">swap_vert</span>
+                </button>
                 <div class="route-input-wrapper">
                     <input type="text" id="endRoomInput" placeholder="도착" autocomplete="off" />
                     <div id="endAutocomplete" class="autocomplete-dropdown"></div>
@@ -78,6 +81,9 @@
             </button>
             <button id="layerToggleBtn" class="header-icon-btn" title="레이어 토글">
                 <span class="material-icons">layers</span>
+            </button>
+            <button id="shareBtn" class="header-icon-btn" title="현재 위치/경로 링크 공유">
+                <span class="material-icons">share</span>
             </button>
         </div>
     </header>

@@ -203,7 +203,7 @@ export async function fetchBackendDataFromApi(apiBase: string): Promise<void> {
 
   // Partition features by _building / _level / _featureType
   type Bucket = { rooms: GeoJSON.Feature[]; colliders: GeoJSON.Feature[]; walls: GeoJSON.Feature[]; outline?: GeoJSON.Feature };
-  const byBuilding = new Map<string, { outline?: GeoJSON.Feature; perLevel: Map<number, Bucket> }>();
+  const byBuilding = new Map<string, { outlines: GeoJSON.Feature[]; perLevel: Map<number, Bucket> }>();
 
   for (const f of fc.features) {
     const props = (f.properties ?? {}) as Record<string, unknown>;
@@ -213,10 +213,10 @@ export async function fetchBackendDataFromApi(apiBase: string): Promise<void> {
     if (!building || !featureType) continue;
 
     let entry = byBuilding.get(building);
-    if (!entry) { entry = { perLevel: new Map() }; byBuilding.set(building, entry); }
+    if (!entry) { entry = { outlines: [], perLevel: new Map() }; byBuilding.set(building, entry); }
 
     if (featureType === 'outline') {
-      entry.outline = f;
+      entry.outlines.push(f);
       continue;
     }
     if (level === null || Number.isNaN(level)) continue;
@@ -272,8 +272,9 @@ export async function fetchBackendDataFromApi(apiBase: string): Promise<void> {
       levels: sortedLevels,
     });
 
-    // Interface: bbox from outline (if present), else from union of all coords
-    const outline = entry.outline ?? localSnapshot?.interfaces.get(code)?.feature;
+    // Interface: bbox from outline (if present), else from union of all coords.
+    // Multiple outline features (disjoint wings) merge into one MultiPolygon.
+    const outline = mergeOutlineFeatures(entry.outlines) ?? localSnapshot?.interfaces.get(code)?.feature;
     if (outline) {
       const allCoords = extractAllCoords(outline.geometry);
       let minLng = Infinity, minLat = Infinity, maxLng = -Infinity, maxLat = -Infinity;
@@ -340,9 +341,11 @@ async function loadBuilding(code: string): Promise<void> {
   if (!m) throw new Error(`${code}/manifest.json 로딩 실패`);
   buildingManifests.set(code, m);
 
-  // Outline
+  // Outline — an outline file may hold multiple disjoint pieces as separate
+  // features (e.g. detached wings). Merge every feature's polygon(s) into one
+  // MultiPolygon so the whole footprint renders, not just the first piece.
   const outlineGeoJson = await fetchJson<GeoJSON.FeatureCollection>(`${base}/${code}_outline.geojson`);
-  const outlineFeature = outlineGeoJson?.features?.[0];
+  const outlineFeature = mergeOutlineFeatures(outlineGeoJson?.features);
   if (!outlineFeature) throw new Error(`${code} 건물 외곽선을 찾을 수 없습니다.`);
 
   const allCoords = extractAllCoords(outlineFeature.geometry);
@@ -386,6 +389,30 @@ async function loadBuilding(code: string): Promise<void> {
   }));
 
   levelDataCaches.set(code, cache);
+}
+
+/**
+ * Combine every outline feature (each Polygon or MultiPolygon) into a single
+ * MultiPolygon feature. Properties are taken from the first feature. Returns
+ * null when there are no usable features.
+ */
+function mergeOutlineFeatures(features: GeoJSON.Feature[] | undefined): GeoJSON.Feature | null {
+  if (!features || features.length === 0) return null;
+  const polygons: GeoJSON.Position[][][] = [];
+  for (const f of features) {
+    const geom = f.geometry;
+    if (geom.type === 'Polygon') {
+      polygons.push((geom as GeoJSON.Polygon).coordinates);
+    } else if (geom.type === 'MultiPolygon') {
+      for (const poly of (geom as GeoJSON.MultiPolygon).coordinates) polygons.push(poly);
+    }
+  }
+  if (polygons.length === 0) return null;
+  return {
+    type: 'Feature',
+    properties: { ...(features[0].properties ?? {}) },
+    geometry: { type: 'MultiPolygon', coordinates: polygons },
+  };
 }
 
 function extractAllCoords(geom: GeoJSON.Geometry): number[][] {

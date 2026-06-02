@@ -13,13 +13,20 @@
  */
 
 import { getSheet, type SheetState } from './bottomSheet';
+import { MOBILE_IDS } from './mobileChrome';
 import * as GeoMap from '../components/geoMap';
-import * as RouteActions from '../services/routeActions';
+import * as WalkthroughOverlay from '../components/walkthroughOverlay';
 
 const PEEK_VISIBLE_PX = 88;
 
 export function initWalkthroughSheet(): void {
   const sheet = getSheet();
+
+  // Dedicated close button: dismiss the 360° walkthrough but KEEP the route on
+  // the map. Removing the route is a separate, explicit action (clear FAB).
+  document.getElementById(MOBILE_IDS.sheetClose)?.addEventListener('click', () => {
+    WalkthroughOverlay.hideWalkthroughOverlay();
+  });
 
   document.addEventListener('walkthroughShown', ((e: CustomEvent) => {
     const overlay = e.detail?.overlayEl as HTMLElement | undefined;
@@ -50,12 +57,12 @@ export function initWalkthroughSheet(): void {
 
   // Sheet state changes: update map padding so camera-follow and flyTo
   // operations treat the visible-above-sheet area as the centering target.
-  // If the user drags the sheet down to `hidden`, that's a deliberate
-  // cancel — clear the entire route, not just the walkthrough.
+  // Dragging the sheet down to `hidden` dismisses the walkthrough but KEEPS
+  // the route — accidental drags no longer wipe the user's start/end.
   sheet.onStateChange((state: SheetState) => {
     applyMapPadding(state);
     if (state === 'hidden') {
-      RouteActions.clearRoute();
+      WalkthroughOverlay.hideWalkthroughOverlay();
     }
   });
 
@@ -88,5 +95,7 @@ function applyMapPadding(state: SheetState): void {
   // projection). Cap at 80% of viewport height.
   bottom = Math.min(bottom, Math.round(h * 0.8));
 
-  map.setPadding({ top: 0, right: 0, bottom, left: 0 });
+  // Single source of truth for camera padding (centerMapToBuilding / flyTo /
+  // fitRouteBounds all read it), so the focal point stays above the sheet.
+  GeoMap.setBottomInset(bottom);
 }

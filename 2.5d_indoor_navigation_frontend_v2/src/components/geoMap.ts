@@ -135,6 +135,13 @@ export function toggle3D(): void {
     map.setMaxPitch(MapConfig.maxPitch3D);
     IndoorLayer.setExtrusionHeight(map, true);
   }
+  // Wedge is 2D-only (DOM marker can't elevate to the route in 3D); the 3D
+  // facing fan + cylinder are drawn by the deck.gl overlay instead.
+  applyWedge();
+  // Notify listeners (route overlay) so altitudes AND the position marker
+  // re-render immediately — including while walkthrough playback is paused,
+  // when no onProgress tick would otherwise reposition the marker.
+  document.dispatchEvent(new Event('mode3DChanged'));
 }
 
 /** Center the map on the building */
@@ -193,6 +200,8 @@ export function flyToRoom(ref: string): void {
     });
 
     IndoorLayer.highlightRoom(map, ref);
+    // Drop a marker at the result so it's also legible when zoomed out.
+    RouteOverlay.showPois([center]);
 
     // Show room info popup
     showRoomInfoPopup(ref, feature, center);
@@ -203,6 +212,7 @@ export function flyToRoom(ref: string): void {
 export function clearHighlight(): void {
   if (!map) return;
   IndoorLayer.highlightRoom(map, null);
+  RouteOverlay.clearPois();
   hideRoomInfoPopup();
   // Releasing the highlight also releases the focus pin — matches the
   // spec for popup close / ESC / empty-space click.
@@ -232,6 +242,143 @@ export function setIndoorRouteLevels(levels: Iterable<number>): void {
 export function clearIndoorRouteLevels(): void {
   if (!map) return;
   IndoorLayer.clearRouteLevels(map);
+}
+
+// ===== Viewport padding (bottom sheets / popups occlude the map) =====
+// Persistent camera padding so every easeTo/fitBounds keeps the focal point
+// in the *visible* part of the map, above whatever chrome covers the bottom.
+const viewportPadding = { top: 0, right: 0, bottom: 0, left: 0 };
+
+/** Set the bottom inset (px) occluded by mobile chrome; applied to all camera moves. */
+export function setBottomInset(px: number): void {
+  viewportPadding.bottom = Math.max(0, Math.round(px));
+  map?.setPadding(viewportPadding);
+}
+
+// ===== Fit camera to a route's bounding box =====
+/** Frame the whole route so a find never finishes off-screen. Preserves 3D tilt. */
+export function fitRouteBounds(coordinates: GeoJSON.Position[]): void {
+  if (!map || !coordinates || coordinates.length < 2) return;
+  let minLng = Infinity, minLat = Infinity, maxLng = -Infinity, maxLat = -Infinity;
+  for (const c of coordinates) {
+    if (c[0] < minLng) minLng = c[0];
+    if (c[0] > maxLng) maxLng = c[0];
+    if (c[1] < minLat) minLat = c[1];
+    if (c[1] > maxLat) maxLat = c[1];
+  }
+  if (!isFinite(minLng)) return;
+
+  const PAD = 64;
+  // Cap bottom padding so top+bottom can't exceed the viewport height — past
+  // that, cameraForBounds returns null and the fit silently no-ops (e.g. a
+  // tall bottom-sheet inset on a short landscape viewport).
+  const canvasH = map.getCanvas().clientHeight || window.innerHeight;
+  const maxBottom = Math.max(0, canvasH - PAD - 40);
+  const padding = {
+    top: PAD + viewportPadding.top,
+    right: PAD + viewportPadding.right,
+    bottom: Math.min(PAD + viewportPadding.bottom, maxBottom),
+    left: PAD + viewportPadding.left,
+  };
+  // cameraForBounds + easeTo (instead of fitBounds) so the current pitch is
+  // preserved — fitBounds would flatten a 3D view.
+  const cam = map.cameraForBounds([[minLng, minLat], [maxLng, maxLat]], {
+    padding,
+    bearing: map.getBearing(),
+    maxZoom: MapConfig.flyToRoomZoom,
+  });
+  if (!cam) return;
+  map.easeTo({ ...cam, pitch: map.getPitch(), duration: MapConfig.flyToRoomDuration });
+}
+
+// ===== Floor-change (stairs/elevator) route markers =====
+interface FloorTransitionPoint { lng: number; lat: number; fromLevel: number; toLevel: number; }
+let transitionMarkers: maplibregl.Marker[] = [];
+
+/** Drop a tappable marker wherever the route changes floor. */
+export function showFloorTransitions(transitions: FloorTransitionPoint[]): void {
+  clearFloorTransitions();
+  if (!map) return;
+  for (const t of transitions) {
+    const up = t.toLevel > t.fromLevel;
+    const el = document.createElement('button');
+    el.className = 'floor-transition-marker';
+    el.type = 'button';
+    el.title = `${formatLevel(t.fromLevel)} → ${formatLevel(t.toLevel)} 층 이동`;
+    el.innerHTML =
+      `<span class="material-icons">${up ? 'arrow_upward' : 'arrow_downward'}</span>` +
+      `<span class="ft-label">${formatLevel(t.toLevel)}</span>`;
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      handleLevelChange(t.toLevel);
+      // Keep the PC floor wheel's active styling in sync.
+      document.dispatchEvent(new CustomEvent('walkthroughLevelChange', { detail: { level: t.toLevel } }));
+    });
+    const marker = new maplibregl.Marker({ element: el, anchor: 'bottom' })
+      .setLngLat([t.lng, t.lat])
+      .addTo(map);
+    transitionMarkers.push(marker);
+  }
+}
+
+/** Remove all floor-change markers (paired with route clear). */
+export function clearFloorTransitions(): void {
+  for (const m of transitionMarkers) m.remove();
+  transitionMarkers = [];
+}
+
+// ===== Walkthrough facing wedge =====
+// A rotating cone whose apex pins to the walkthrough position dot, showing which
+// way the 360° view is looking — the key orientation cue in a featureless indoor
+// sphere. DOM markers can't sit at altitude, so it would detach from the
+// elevated route in 3D; shown only in flat (2D) mode.
+let wedgeMarker: maplibregl.Marker | null = null;
+let wedgeAdded = false;
+let wedgeLngLat: [number, number] | null = null;
+let wedgeHeading = 0;
+
+function ensureWedge(): void {
+  if (wedgeMarker || !map) return;
+  const el = document.createElement('div');
+  el.className = 'walkthrough-wedge';
+  // The element IS the down-pointing triangle; anchor 'bottom' pins its apex
+  // (bottom-center) to the lnglat and rotates around that apex. rotationAlignment
+  // 'map' tracks the compass heading as the map is rotated.
+  wedgeMarker = new maplibregl.Marker({ element: el, anchor: 'bottom', rotationAlignment: 'map', pitchAlignment: 'map' });
+}
+
+function applyWedge(): void {
+  if (!map) return;
+  if (!wedgeLngLat || !flatMode) {
+    wedgeMarker?.remove();
+    wedgeAdded = false;
+    return;
+  }
+  ensureWedge();
+  if (!wedgeMarker) return;
+  wedgeMarker.setLngLat(wedgeLngLat).setRotation(wedgeHeading);
+  if (!wedgeAdded) { wedgeMarker.addTo(map); wedgeAdded = true; }
+}
+
+/** Position the facing wedge and point it along `headingDeg` (compass degrees). */
+export function setWalkthroughCursor(lngLat: [number, number], headingDeg: number): void {
+  wedgeLngLat = lngLat;
+  wedgeHeading = headingDeg;
+  applyWedge();
+}
+
+/** Update only the wedge rotation (called as the user looks around). */
+export function setWalkthroughHeading(headingDeg: number): void {
+  wedgeHeading = headingDeg;
+  if (wedgeMarker && wedgeAdded) wedgeMarker.setRotation(headingDeg);
+}
+
+/** Remove the facing wedge (paired with walkthrough close). */
+export function clearWalkthroughCursor(): void {
+  wedgeMarker?.remove();
+  wedgeMarker = null;
+  wedgeAdded = false;
+  wedgeLngLat = null;
 }
 
 function setupRoomClick(): void {

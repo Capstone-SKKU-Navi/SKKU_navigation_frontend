@@ -34,6 +34,10 @@ grep -r graphEditor dist/         # 결과 없어야 함
 grep -r setupGraphEditor dist/    # 결과 없어야 함
 grep -r apiModeBadge dist/        # 결과 없어야 함
 
+# 1b) editor 전용 데이터가 dist/에 안 들어갔는지 (build:prod 전용 제외 규칙)
+ls dist/geojson/editor/ 2>/dev/null         # "No such file" 나와야 정상 (save.json ~1.3MB)
+ls dist/geojson/room_codes.json 2>/dev/null # "No such file" 나와야 정상 (~580KB)
+
 # 2) sourcemap이 안 나왔는지 (있으면 .ts 원본이 그대로 노출됨)
 ls dist/*.map 2>/dev/null         # "No such file or directory"가 나와야 정상
 
@@ -51,12 +55,28 @@ ls dist/*.bundle.*.js
 ```bash
 npx serve dist -p 3000
 # 브라우저에서 http://localhost:3000 접속
-# - 지도 떠야 함
+# --- prod 빌드 위생 (있으면 안 되는 것) ---
 # - 우상단에 "Graph Editor (Dev)" 버튼 없어야 함
 # - 우측 하단에 FPS 표시 없어야 함
 # - LOCAL/API 토글 뱃지 없어야 함
 # - Ctrl+Alt+R 눌러도 아무 일 안 일어나야 함 (DevTools 콘솔 로그 없음)
 ```
+
+PC 신규 UI 확인 (http://localhost:3000):
+- [ ] 지도 표시 + 헤더에 공유(share) 버튼
+- [ ] 경로 검색 시 출발↔도착 swap 버튼, 경로가 화면에 자동으로 fit
+- [ ] 멀티층 경로에 층 전환(↑/↓ + 층) 마커 표시, 탭하면 해당 층으로 전환
+- [ ] 방 검색 시 결과 외 방이 회색으로 디밍 + 마커 표시
+- [ ] 워크스루: 단축키(Space/K, ←→, J/L, <>, C, Shift+?), 키보드 아이콘 클릭 시 단축키 시트
+- [ ] 360° 콜드 로딩 시 스피너, 맵 점에 보는 방향 부채꼴(wedge)
+- [ ] `?room=21517&floor=5` / `?from=21517&to=21620` 로 접속 시 상태 복원
+
+모바일 확인 (`?device=mobile` 또는 실제 폰, http://<lan-ip>:8082 dev 서버 권장):
+- [ ] 노치/홈 인디케이터에 UI 안 가림 (viewport-fit=cover + safe-area)
+- [ ] 우측 FAB: 줌 +/−, 나침반(회전 시만 표시·탭하면 북향), 리센터(이탈 시 강조), 공유
+- [ ] 경로 찾으면 상단에 거리·예상시간 요약 pill + swap
+- [ ] 워크스루 시트: 닫기(X) 버튼으로 영상만 닫고 경로 유지, 시트 아래로 끌어도 경로 유지
+- [ ] 360° 화면 좌/우 더블탭 = ±10초 이동(OSD), 두 손가락 핀치 = FOV 줌
 
 ---
 

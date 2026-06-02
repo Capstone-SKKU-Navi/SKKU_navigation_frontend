@@ -17,6 +17,7 @@ import * as GraphService from './services/graphService';
 import { setupApiModeBadge } from './components/apiModeBadge';
 import { escapeHtml } from './utils/escapeHtml';
 import { formatLevel } from './utils/formatLevel';
+import { readUrlState, shareCurrentView, writeSelectedRoom } from './services/urlState';
 
 // ===== Route 3D sync =====
 function syncRoute3D(): void {
@@ -58,6 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         setupApiModeBadge();
       }
       setupPinChipDrop();
+      setupShareButton();
       const map = GeoMap.getMap();
       if (map) RoutePinMarkers.init(map);
 
@@ -104,6 +106,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         RouteOverlay.onLevelChange();
       });
 
+      // Re-render route + position marker at the new altitude on 2D↔3D toggle
+      // (shared — fires for both the PC button and the mobile FAB).
+      document.addEventListener('mode3DChanged', () => {
+        syncRoute3D();
+      });
+
+      restoreFromUrl();
       hideLoading();
     });
   } catch (err: any) {
@@ -155,7 +164,7 @@ function setup3DToggle(): void {
     const is3D = !GeoMap.isFlatMode();
     if (icon) icon.textContent = is3D ? 'map' : '3d_rotation';
     btn.classList.toggle('active', is3D);
-    syncRoute3D();
+    // Route/marker re-render handled by the shared 'mode3DChanged' listener.
   });
 }
 
@@ -390,6 +399,7 @@ function selectRoom(room: RoomListItem): void {
   if (room.level.length > 0) {
     GeoMap.handleLevelChange(room.level[0]);
     updateFloorWheelActive(room.level[0]);
+    writeSelectedRoom(room.ref, room.level[0]);
   }
   GeoMap.flyToRoom(room.ref);
 }
@@ -451,6 +461,49 @@ function setupRouteUI(): void {
   clearBtn?.addEventListener('click', () => {
     RouteActions.clearRoute();
   });
+
+  document.getElementById('swapEndpointsBtn')?.addEventListener('click', () => {
+    RouteActions.swapEndpoints();
+  });
+}
+
+// ===== Share button (PC header) =====
+function setupShareButton(): void {
+  const btn = document.getElementById('shareBtn');
+  if (!btn) return;
+  btn.addEventListener('click', async () => {
+    const result = await shareCurrentView();
+    if (result === 'failed') return;
+    // Brief inline confirmation (PC has no toast component).
+    const icon = btn.querySelector('.material-icons');
+    if (!icon) return;
+    const prev = icon.textContent;
+    icon.textContent = 'check';
+    btn.setAttribute('title', result === 'copied' ? '링크 복사됨' : '공유됨');
+    window.setTimeout(() => {
+      icon.textContent = prev;
+      btn.setAttribute('title', '현재 위치/경로 링크 공유');
+    }, 1500);
+  });
+}
+
+// ===== Deep-link restore (?room=/&floor= or ?from=&to=) =====
+function restoreFromUrl(): void {
+  const state = readUrlState();
+  if (state.from && state.to) {
+    // setStart/setEnd auto-find the route (resolveCoordinate falls back to
+    // BackendService lookups, so no cached centroid is required).
+    RouteActions.setStart(state.from);
+    RouteActions.setEnd(state.to);
+    return;
+  }
+  if (state.room) {
+    if (state.floor !== undefined) {
+      GeoMap.handleLevelChange(state.floor);
+      if (!isMobileDevice()) updateFloorWheelActive(state.floor);
+    }
+    GeoMap.flyToRoom(state.room);
+  }
 }
 
 // ===== Drag-source chips → drop on map =====
