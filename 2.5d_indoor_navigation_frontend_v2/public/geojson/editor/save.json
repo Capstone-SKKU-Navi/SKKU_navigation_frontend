@@ -1,7 +1,7 @@
 {
   "version": 1,
   "metadata": {
-    "savedAt": "2026-06-02T08:55:56.617Z",
+    "savedAt": "2026-06-02T18:22:25.204Z",
     "note": ""
   },
   "graph": {
@@ -2405,8 +2405,8 @@
       },
       "node-moy02uam-2bvd": {
         "coordinates": [
-          126.97403681372992,
-          37.296274963645345
+          126.97398497941327,
+          37.296265531050096
         ],
         "level": 1,
         "type": "entrance",
@@ -2425,8 +2425,8 @@
       },
       "node-moy03ljo-1rys": {
         "coordinates": [
-          126.97502049674455,
-          37.29639855851168
+          126.97506620385428,
+          37.29641018261954
         ],
         "level": 1,
         "type": "entrance",
@@ -3245,8 +3245,8 @@
       },
       "node-moy6mf3p-gxvl": {
         "coordinates": [
-          126.97520442561455,
-          37.29500546867713
+          126.97522127256178,
+          37.29498849563468
         ],
         "level": 1,
         "type": "entrance",
@@ -3255,8 +3255,8 @@
       },
       "node-moy6mge8-6hcc": {
         "coordinates": [
-          126.97500864875008,
-          37.29524280885013
+          126.97501436157381,
+          37.29524225842779
         ],
         "level": 1,
         "type": "entrance",
@@ -3465,13 +3465,13 @@
       },
       "node-moyabrgv-xi43": {
         "coordinates": [
-          126.97434747680893,
-          37.29589225242526
+          126.97429534589537,
+          37.29586911743314
         ],
         "level": 1,
         "type": "entrance",
         "label": "",
-        "building": "outside"
+        "building": "benz"
       },
       "node-moyabxsc-1v5a": {
         "coordinates": [
@@ -4508,8 +4508,8 @@
       },
       "node-mp3powyg-g63t": {
         "coordinates": [
-          126.97498554762035,
-          37.29421551087985
+          126.97495141541134,
+          37.29421763717505
         ],
         "level": 1,
         "type": "entrance",
@@ -9472,6 +9472,982 @@
         "type": "corridor",
         "label": "",
         "building": "res1"
+      },
+      "node-mpwqtel0-oka0": {
+        "coordinates": [
+          126.97381136762095,
+          37.29573275035294
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwqti6d-f3bf": {
+        "coordinates": [
+          126.97440363677492,
+          37.29606051424736
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwqtky5-9uns": {
+        "coordinates": [
+          126.97497879649438,
+          37.295992067971426
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwqtq1x-1l0g": {
+        "coordinates": [
+          126.9733777014543,
+          37.29579416860129
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwqu6dp-s8b6": {
+        "coordinates": [
+          126.97338705364501,
+          37.29582690387031
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwqu9st-9jcs": {
+        "coordinates": [
+          126.9737022224515,
+          37.29533066541484
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwquhyd-xoiy": {
+        "coordinates": [
+          126.97420041874085,
+          37.295282638585036
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwqukmt-1uej": {
+        "coordinates": [
+          126.97465895154124,
+          37.29549434262435
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwquos8-p25b": {
+        "coordinates": [
+          126.97413148798216,
+          37.2948939431045
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwquvql-yvlr": {
+        "coordinates": [
+          126.97457653558575,
+          37.29482252939934
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwqux1w-drob": {
+        "coordinates": [
+          126.97515274718091,
+          37.29512458040381
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwquz9t-b6no": {
+        "coordinates": [
+          126.9757568986845,
+          37.29504794937749
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwqv2qt-6h82": {
+        "coordinates": [
+          126.97455970164276,
+          37.294391756122664
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwqv58d-dg7p": {
+        "coordinates": [
+          126.9749282946006,
+          37.294343386661936
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwqv7id-bu0a": {
+        "coordinates": [
+          126.97541928460407,
+          37.294613457416304
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwqv8jo-guhq": {
+        "coordinates": [
+          126.9754370537662,
+          37.29471761667706
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwqxh30-ohbb": {
+        "coordinates": [
+          126.97379351737163,
+          37.2957685251223
+        ],
+        "level": 3,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 3
+      },
+      "node-mpwqxm51-vrpl": {
+        "coordinates": [
+          126.97441733615364,
+          37.29610716666073
+        ],
+        "level": 3,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 2
+      },
+      "node-mpwqxoct-k71s": {
+        "coordinates": [
+          126.97498917004447,
+          37.29603772186141
+        ],
+        "level": 3,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 1
+      },
+      "node-mpwqy971-jrff": {
+        "coordinates": [
+          126.97365619875177,
+          37.29533546748128
+        ],
+        "level": 3,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 4
+      },
+      "node-mpwqyfas-pj65": {
+        "coordinates": [
+          126.97417604774256,
+          37.295315960318604
+        ],
+        "level": 3,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 5
+      },
+      "node-mpwqykvx-dehi": {
+        "coordinates": [
+          126.97406815455139,
+          37.294901627050976
+        ],
+        "level": 3,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 6
+      },
+      "node-mpwqyvil-471q": {
+        "coordinates": [
+          126.9745124782973,
+          37.29486261250004
+        ],
+        "level": 3,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 9
+      },
+      "node-mpwqz11g-sklh": {
+        "coordinates": [
+          126.97512550777014,
+          37.295151319683384
+        ],
+        "level": 3,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 8
+      },
+      "node-mpwqz5gc-7zto": {
+        "coordinates": [
+          126.97548155528744,
+          37.29503271578403
+        ],
+        "level": 3,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 7
+      },
+      "node-mpwqzalp-y6dz": {
+        "coordinates": [
+          126.97450953574219,
+          37.294417064911585
+        ],
+        "level": 3,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 10
+      },
+      "node-mpwqzdol-umd6": {
+        "coordinates": [
+          126.97492149154402,
+          37.29437726981398
+        ],
+        "level": 3,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 11
+      },
+      "node-mpwqzkb0-y1ao": {
+        "coordinates": [
+          126.97539033648229,
+          37.2945489347876
+        ],
+        "level": 3,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 12
+      },
+      "node-mpwqzu99-sd95": {
+        "coordinates": [
+          126.97549332543343,
+          37.29508031342263
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwr02kl-8iwc": {
+        "coordinates": [
+          126.97536354172843,
+          37.29457938628535
+        ],
+        "level": 3,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwrtifo-5win": {
+        "coordinates": [
+          126.97440969558772,
+          37.29606177826949
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwrtlz0-iln1": {
+        "coordinates": [
+          126.97498447201889,
+          37.295993113707866
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwrtqwz-80o5": {
+        "coordinates": [
+          126.9737986278102,
+          37.295730159068626
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwrtsaz-0mfh": {
+        "coordinates": [
+          126.97338176776975,
+          37.29579258161836
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwrttn8-fw93": {
+        "coordinates": [
+          126.97339648047637,
+          37.29585266327308
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwrtzgb-fhya": {
+        "coordinates": [
+          126.97370152393796,
+          37.29533143380627
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwru12c-5q1z": {
+        "coordinates": [
+          126.97419848659791,
+          37.29528462460985
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwru2fo-bale": {
+        "coordinates": [
+          126.97466765838556,
+          37.29550075574896
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwru6jn-y2vx": {
+        "coordinates": [
+          126.97412917328398,
+          37.294894472195054
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwru8tg-qho7": {
+        "coordinates": [
+          126.97461345956839,
+          37.29482359451501
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwruel0-otd8": {
+        "coordinates": [
+          126.97514825037274,
+          37.295122305596266
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwrufn7-12wj": {
+        "coordinates": [
+          126.97576127984496,
+          37.29504817815277
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwrui58-9qgv": {
+        "coordinates": [
+          126.97551214466716,
+          37.29508017000579
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwruo3x-cf3x": {
+        "coordinates": [
+          126.97454797190983,
+          37.294391952011665
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwruq0j-jkf9": {
+        "coordinates": [
+          126.97492952145285,
+          37.29434357363992
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwruser-wqxj": {
+        "coordinates": [
+          126.97541994502996,
+          37.294612775476466
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwrutg4-erfw": {
+        "coordinates": [
+          126.97543563858562,
+          37.29471889535573
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwruyej-xwf3": {
+        "coordinates": [
+          126.97537188352055,
+          37.2945846848952
+        ],
+        "level": 2,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwrvfm4-f3a2": {
+        "coordinates": [
+          126.97442069347511,
+          37.29610750914688
+        ],
+        "level": 2,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 2
+      },
+      "node-mpwrvkmr-goul": {
+        "coordinates": [
+          126.9749929907743,
+          37.296037245319994
+        ],
+        "level": 2,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 1
+      },
+      "node-mpwrvprg-zfon": {
+        "coordinates": [
+          126.97377943010434,
+          37.29578217745117
+        ],
+        "level": 2,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 3
+      },
+      "node-mpwrvuu3-nzb1": {
+        "coordinates": [
+          126.97364512776971,
+          37.29533652849331
+        ],
+        "level": 2,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 4
+      },
+      "node-mpwrvyn7-oe0t": {
+        "coordinates": [
+          126.97417181112684,
+          37.29531246529625
+        ],
+        "level": 2,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 5
+      },
+      "node-mpwrw5d8-paup": {
+        "coordinates": [
+          126.97405686768343,
+          37.29490435235691
+        ],
+        "level": 2,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 6
+      },
+      "node-mpwrwam3-star": {
+        "coordinates": [
+          126.97457834788327,
+          37.29486873862122
+        ],
+        "level": 2,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 9
+      },
+      "node-mpwrwjr0-p2qv": {
+        "coordinates": [
+          126.9751252366321,
+          37.29514787283951
+        ],
+        "level": 2,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 8
+      },
+      "node-mpwrwpe3-o3zw": {
+        "coordinates": [
+          126.97550031520154,
+          37.2950294815537
+        ],
+        "level": 2,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 7
+      },
+      "node-mpwrwth0-i2y9": {
+        "coordinates": [
+          126.97450091228092,
+          37.29440526454944
+        ],
+        "level": 2,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 10
+      },
+      "node-mpwrwxtn-pwma": {
+        "coordinates": [
+          126.97492317815352,
+          37.29438023851833
+        ],
+        "level": 2,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 11
+      },
+      "node-mpwrx2es-i4c3": {
+        "coordinates": [
+          126.97539505119033,
+          37.29454964533538
+        ],
+        "level": 2,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 12
+      },
+      "node-mpwsy4xm-ivo6": {
+        "coordinates": [
+          126.97342720746559,
+          37.29584701857435
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwsy6ai-bkte": {
+        "coordinates": [
+          126.97341685392746,
+          37.29579385625142
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwsy8ii-t6ex": {
+        "coordinates": [
+          126.97380787242383,
+          37.295732079002065
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwsyatu-kesa": {
+        "coordinates": [
+          126.97421878183201,
+          37.2959593332058
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwsyc3e-2z0e": {
+        "coordinates": [
+          126.97440891029402,
+          37.29605816995111
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwsyd7m-wbrw": {
+        "coordinates": [
+          126.97498211932799,
+          37.2959930275678
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwt2e42-w8fg": {
+        "coordinates": [
+          126.97370675273481,
+          37.29538802433949
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwt2fgp-be63": {
+        "coordinates": [
+          126.9737020465858,
+          37.29532962030625
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwt2gt6-gfyg": {
+        "coordinates": [
+          126.97414630711819,
+          37.29527870393272
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwt2kap-hkkj": {
+        "coordinates": [
+          126.9746592774361,
+          37.295497344587346
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwt2rqi-6jct": {
+        "coordinates": [
+          126.97413407111969,
+          37.29489533247782
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwt2t5m-o307": {
+        "coordinates": [
+          126.9745623307416,
+          37.294829440313094
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwt2uoh-yzxw": {
+        "coordinates": [
+          126.9751555983865,
+          37.295126823741256
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwt2wze-ucnh": {
+        "coordinates": [
+          126.97576452754828,
+          37.29504825938511
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwt2y03-6srv": {
+        "coordinates": [
+          126.97511876923744,
+          37.29510955168199
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwt337l-6lfz": {
+        "coordinates": [
+          126.97455504707762,
+          37.294392331593215
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwt34dl-1rom": {
+        "coordinates": [
+          126.97456351814702,
+          37.2944447461245
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwt3ac2-2atw": {
+        "coordinates": [
+          126.97492965659433,
+          37.29434590726402
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwt3cnm-hdbp": {
+        "coordinates": [
+          126.9754190961641,
+          37.29461247237917
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwt3ddm-32ga": {
+        "coordinates": [
+          126.97543415584278,
+          37.294712059665684
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwvcw7z-7r3f": {
+        "coordinates": [
+          126.97537854870762,
+          37.29458840447148
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
+      },
+      "node-mpwy92m4-oucd": {
+        "coordinates": [
+          126.974421015622,
+          37.29610513874148
+        ],
+        "level": 1,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 2
+      },
+      "node-mpwy972f-csu4": {
+        "coordinates": [
+          126.9749936616223,
+          37.29603512616323
+        ],
+        "level": 1,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 1
+      },
+      "node-mpwy9eq0-ps3j": {
+        "coordinates": [
+          126.97378969687497,
+          37.29578588085657
+        ],
+        "level": 1,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 3
+      },
+      "node-mpwy9irn-e6h4": {
+        "coordinates": [
+          126.97365122919001,
+          37.29534153136859
+        ],
+        "level": 1,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 4
+      },
+      "node-mpwy9ljz-9gyz": {
+        "coordinates": [
+          126.97414642716524,
+          37.295317260102834
+        ],
+        "level": 1,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 5
+      },
+      "node-mpwy9rqc-3pxa": {
+        "coordinates": [
+          126.97409010132384,
+          37.29489997980278
+        ],
+        "level": 1,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 6
+      },
+      "node-mpwy9vbr-u8cj": {
+        "coordinates": [
+          126.97456769747617,
+          37.294866373235195
+        ],
+        "level": 1,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 9
+      },
+      "node-mpwya078-tcxd": {
+        "coordinates": [
+          126.97512978238217,
+          37.29515296209523
+        ],
+        "level": 1,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 8
+      },
+      "node-mpwya93e-w4fq": {
+        "coordinates": [
+          126.97548651267743,
+          37.29503347240964
+        ],
+        "level": 1,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 7
+      },
+      "node-mpwyaeuk-2m58": {
+        "coordinates": [
+          126.97539850355565,
+          37.294553644730144
+        ],
+        "level": 1,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 12
+      },
+      "node-mpwyai37-frzt": {
+        "coordinates": [
+          126.97491856049311,
+          37.294385610967694
+        ],
+        "level": 1,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 11
+      },
+      "node-mpwyakpz-4e4b": {
+        "coordinates": [
+          126.97450198399588,
+          37.29440148083964
+        ],
+        "level": 1,
+        "type": "stairs",
+        "label": "",
+        "building": "benz",
+        "verticalId": 10
+      },
+      "node-mpwyawst-epha": {
+        "coordinates": [
+          126.97549472685876,
+          37.29508201511571
+        ],
+        "level": 1,
+        "type": "corridor",
+        "label": "",
+        "building": "benz"
       }
     },
     "edges": [
@@ -11642,7 +12618,7 @@
       {
         "from": "node-moy02uam-2bvd",
         "to": "node-moy025ta-3qsx",
-        "weight": 50,
+        "weight": 45,
         "videoFwd": "outside_11_ccw.mp4",
         "videoFwdStart": 0,
         "videoFwdEnd": 35.835833,
@@ -11653,7 +12629,7 @@
       {
         "from": "node-moy033j5-k5v7",
         "to": "node-moy02uam-2bvd",
-        "weight": 35,
+        "weight": 40,
         "videoFwd": "outside_12_ccw.mp4",
         "videoFwdStart": 0,
         "videoFwdEnd": 23.923933,
@@ -11664,7 +12640,7 @@
       {
         "from": "node-moy03ljo-1rys",
         "to": "node-moy033j5-k5v7",
-        "weight": 53,
+        "weight": 58,
         "videoFwd": "outside_13_ccw.mp4",
         "videoFwdStart": 0,
         "videoFwdEnd": 37.103767,
@@ -11675,7 +12651,7 @@
       {
         "from": "node-moy049xe-4zxd",
         "to": "node-moy03ljo-1rys",
-        "weight": 71,
+        "weight": 67,
         "videoFwd": "outside_14_ccw.mp4",
         "videoFwdStart": 0,
         "videoFwdEnd": 55.355367,
@@ -12840,21 +13816,10 @@
       {
         "from": "node-moy6mc9m-cxta",
         "to": "node-moy6mf3p-gxvl",
-        "weight": 32,
+        "weight": 29,
         "videoFwd": "outside_97_ccw.mp4",
         "videoFwdStart": 0,
         "videoFwdEnd": 19.541775,
-        "videoRev": "outside_97_cw.mp4",
-        "videoRevStart": 0,
-        "videoRevEnd": 42.108767
-      },
-      {
-        "from": "node-moy6mf3p-gxvl",
-        "to": "node-moy6mge8-6hcc",
-        "weight": 32,
-        "videoFwd": "outside_97_ccw.mp4",
-        "videoFwdStart": 20.372127,
-        "videoFwdEnd": 42.442433,
         "videoRev": "outside_97_cw.mp4",
         "videoRevStart": 0,
         "videoRevEnd": 42.108767
@@ -12873,7 +13838,7 @@
       {
         "from": "node-moy6mdzl-guve",
         "to": "node-moy6mf3p-gxvl",
-        "weight": 26,
+        "weight": 24,
         "videoFwd": "outside_99_ccw.mp4",
         "videoFwdStart": 22.598433,
         "videoFwdEnd": 40.0734,
@@ -13247,7 +14212,7 @@
       {
         "from": "node-moy03ljo-1rys",
         "to": "node-moy9w7qf-ts98",
-        "weight": 56,
+        "weight": 58,
         "videoFwd": "outside_126_ccw.mp4",
         "videoFwdStart": 0,
         "videoFwdEnd": 41.441433,
@@ -13280,7 +14245,7 @@
       {
         "from": "node-moyabrgv-xi43",
         "to": "node-moy9qgl5-r4ov",
-        "weight": 31,
+        "weight": 33,
         "videoFwd": "outside_129_ccw.mp4",
         "videoFwdStart": 0,
         "videoFwdEnd": 23.5569,
@@ -13311,20 +14276,9 @@
         "videoRevEnd": 17.967324
       },
       {
-        "from": "node-moy02uam-2bvd",
-        "to": "node-moyabrgv-xi43",
-        "weight": 51,
-        "videoFwd": "outside_131_ccw.mp4",
-        "videoFwdStart": 0,
-        "videoFwdEnd": 40.1735,
-        "videoRev": "outside_131_cw.mp4",
-        "videoRevStart": 0,
-        "videoRevEnd": 40.8742
-      },
-      {
         "from": "node-moyahxyr-dr4t",
         "to": "node-moy02uam-2bvd",
-        "weight": 126,
+        "weight": 128,
         "videoFwd": "outside_132_ccw.mp4",
         "videoFwdStart": 0,
         "videoFwdEnd": 94.427767,
@@ -14606,7 +15560,7 @@
       {
         "from": "node-moxzsyd2-mcrr",
         "to": "node-mp3powyg-g63t",
-        "weight": 73,
+        "weight": 70,
         "videoFwd": "outside_3_cw.mp4",
         "videoFwdStart": 0,
         "videoFwdEnd": 49.438587,
@@ -14617,7 +15571,7 @@
       {
         "from": "node-mp3powyg-g63t",
         "to": "node-moxzss5l-lioc",
-        "weight": 68,
+        "weight": 71,
         "videoFwd": "outside_3_cw.mp4",
         "videoFwdStart": 50.141911,
         "videoFwdEnd": 97.430767,
@@ -19586,6 +20540,996 @@
         "from": "node-mpqxxci1-ojqy",
         "to": "node-mpqy1bei-7h8e",
         "weight": 8
+      },
+      {
+        "from": "node-mpwqu6dp-s8b6",
+        "to": "node-mpwqtq1x-1l0g",
+        "weight": 4,
+        "videoFwd": "benz_c_F3_12_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 6.8068,
+        "videoRev": "benz_c_F3_12_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 7.640967
+      },
+      {
+        "from": "node-mpwqtq1x-1l0g",
+        "to": "node-mpwqtel0-oka0",
+        "weight": 39,
+        "videoFwd": "benz_c_F3_11_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 31.998667,
+        "videoRev": "benz_c_F3_11_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 33.233233
+      },
+      {
+        "from": "node-mpwqtel0-oka0",
+        "to": "node-mpwqti6d-f3bf",
+        "weight": 64,
+        "videoFwd": "benz_c_F3_10_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 55.388733,
+        "videoRev": "benz_c_F3_10_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 51.284633
+      },
+      {
+        "from": "node-mpwqti6d-f3bf",
+        "to": "node-mpwqtky5-9uns",
+        "weight": 51,
+        "videoFwd": "benz_c_F3_9_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 43.3767,
+        "videoRev": "benz_c_F3_9_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 44.0774
+      },
+      {
+        "from": "node-mpwqtel0-oka0",
+        "to": "node-mpwqu9st-9jcs",
+        "weight": 46,
+        "videoFwd": "benz_c_F3_13_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 38.614306,
+        "videoRev": "benz_c_F3_13_cw.mp4",
+        "videoRevStart": 4.727281,
+        "videoRevEnd": 44.310967
+      },
+      {
+        "from": "node-mpwqu9st-9jcs",
+        "to": "node-mpwquhyd-xoiy",
+        "weight": 44,
+        "videoFwd": "benz_c_F3_22_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 36.703367,
+        "videoRev": "benz_c_F3_22_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 36.236233
+      },
+      {
+        "from": "node-mpwquhyd-xoiy",
+        "to": "node-mpwqukmt-1uej",
+        "weight": 47,
+        "videoFwd": "benz_c_F3_23_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 39.706367,
+        "videoRev": "benz_c_F3_23_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 42.042033
+      },
+      {
+        "from": "node-mpwquhyd-xoiy",
+        "to": "node-mpwquos8-p25b",
+        "weight": 44,
+        "videoFwd": "benz_c_F3_24_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 36.468549,
+        "videoRev": "benz_c_F3_24_cw.mp4",
+        "videoRevStart": 1.190309,
+        "videoRevEnd": 38.638633
+      },
+      {
+        "from": "node-mpwquos8-p25b",
+        "to": "node-mpwquvql-yvlr",
+        "weight": 40,
+        "videoFwd": "benz_c_F3_34_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 35.902567,
+        "videoRev": "benz_c_F3_34_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 35.1685
+      },
+      {
+        "from": "node-mpwquvql-yvlr",
+        "to": "node-mpwqux1w-drob",
+        "weight": 61,
+        "videoFwd": "benz_c_F3_35_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 49.516167,
+        "videoRev": "benz_c_F3_35_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 50.250267
+      },
+      {
+        "from": "node-mpwquvql-yvlr",
+        "to": "node-mpwqv2qt-6h82",
+        "weight": 48,
+        "videoFwd": "benz_c_F3_37_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 40.306967,
+        "videoRev": "benz_c_F3_37_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 43.7771
+      },
+      {
+        "from": "node-mpwqv2qt-6h82",
+        "to": "node-mpwqv58d-dg7p",
+        "weight": 33,
+        "videoFwd": "benz_c_F3_47_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 29.663,
+        "videoRev": "benz_c_F3_47_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 29.3627
+      },
+      {
+        "from": "node-mpwqv7id-bu0a",
+        "to": "node-mpwqv8jo-guhq",
+        "weight": 12,
+        "videoFwd": "benz_c_F3_49_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 9.776433,
+        "videoRev": "benz_c_F3_49_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 9.943267
+      },
+      {
+        "from": "node-mpwqv58d-dg7p",
+        "to": "node-mpwr02kl-8iwc",
+        "weight": 47,
+        "videoFwd": "benz_c_F3_48_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 38.053691,
+        "videoRev": "benz_c_F3_48_ccw.mp4",
+        "videoRevStart": 3.15837,
+        "videoRevEnd": 41.708367
+      },
+      {
+        "from": "node-mpwr02kl-8iwc",
+        "to": "node-mpwqv7id-bu0a",
+        "weight": 6,
+        "videoFwd": "benz_c_F3_48_cw.mp4",
+        "videoFwdStart": 38.114364,
+        "videoFwdEnd": 40.807467,
+        "videoRev": "benz_c_F3_48_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 3.40366
+      },
+      {
+        "from": "node-mpwqzdol-umd6",
+        "to": "node-mpwqv58d-dg7p",
+        "weight": 4
+      },
+      {
+        "from": "node-mpwr02kl-8iwc",
+        "to": "node-mpwqzkb0-y1ao",
+        "weight": 4
+      },
+      {
+        "from": "node-mpwqzalp-y6dz",
+        "to": "node-mpwqv2qt-6h82",
+        "weight": 5
+      },
+      {
+        "from": "node-mpwqyvil-471q",
+        "to": "node-mpwquvql-yvlr",
+        "weight": 7
+      },
+      {
+        "from": "node-mpwqz11g-sklh",
+        "to": "node-mpwqux1w-drob",
+        "weight": 4
+      },
+      {
+        "from": "node-mpwqux1w-drob",
+        "to": "node-mpwqzu99-sd95",
+        "weight": 31,
+        "videoFwd": "benz_c_F3_36_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 30.582043,
+        "videoRev": "benz_c_F3_36_ccw.mp4",
+        "videoRevStart": 19.08483,
+        "videoRevEnd": 46.813467
+      },
+      {
+        "from": "node-mpwqzu99-sd95",
+        "to": "node-mpwquz9t-b6no",
+        "weight": 24,
+        "videoFwd": "benz_c_F3_36_cw.mp4",
+        "videoFwdStart": 30.030548,
+        "videoFwdEnd": 49.516167,
+        "videoRev": "benz_c_F3_36_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 19.116083
+      },
+      {
+        "from": "node-mpwqzu99-sd95",
+        "to": "node-mpwqz5gc-7zto",
+        "weight": 5
+      },
+      {
+        "from": "node-mpwqykvx-dehi",
+        "to": "node-mpwquos8-p25b",
+        "weight": 6
+      },
+      {
+        "from": "node-mpwqyfas-pj65",
+        "to": "node-mpwquhyd-xoiy",
+        "weight": 4
+      },
+      {
+        "from": "node-mpwqy971-jrff",
+        "to": "node-mpwqu9st-9jcs",
+        "weight": 4
+      },
+      {
+        "from": "node-mpwqtel0-oka0",
+        "to": "node-mpwqxh30-ohbb",
+        "weight": 4
+      },
+      {
+        "from": "node-mpwqxm51-vrpl",
+        "to": "node-mpwqti6d-f3bf",
+        "weight": 5
+      },
+      {
+        "from": "node-mpwqxoct-k71s",
+        "to": "node-mpwqtky5-9uns",
+        "weight": 5
+      },
+      {
+        "from": "node-mpwrttn8-fw93",
+        "to": "node-mpwrtsaz-0mfh",
+        "weight": 7,
+        "videoFwd": "benz_c_F2_8_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 5.939267,
+        "videoRev": "benz_c_F2_8_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 6.639967
+      },
+      {
+        "from": "node-mpwrtsaz-0mfh",
+        "to": "node-mpwrtqwz-80o5",
+        "weight": 38,
+        "videoFwd": "benz_c_F2_7_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 31.7651,
+        "videoRev": "benz_c_F2_7_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 31.8652
+      },
+      {
+        "from": "node-mpwrtqwz-80o5",
+        "to": "node-mpwrtifo-5win",
+        "weight": 65,
+        "videoFwd": "benz_c_F2_6_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 53.053067,
+        "videoRev": "benz_c_F2_6_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 51.584933
+      },
+      {
+        "from": "node-mpwrtifo-5win",
+        "to": "node-mpwrtlz0-iln1",
+        "weight": 51,
+        "videoFwd": "benz_c_F2_5_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 42.208867,
+        "videoRev": "benz_c_F2_5_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 44.244233
+      },
+      {
+        "from": "node-mpwrvkmr-goul",
+        "to": "node-mpwrtlz0-iln1",
+        "weight": 5
+      },
+      {
+        "from": "node-mpwrvfm4-f3a2",
+        "to": "node-mpwrtifo-5win",
+        "weight": 5
+      },
+      {
+        "from": "node-mpwrvprg-zfon",
+        "to": "node-mpwrtqwz-80o5",
+        "weight": 6
+      },
+      {
+        "from": "node-mpwrtqwz-80o5",
+        "to": "node-mpwrtzgb-fhya",
+        "weight": 45,
+        "videoFwd": "benz_c_F2_14_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 36.841551,
+        "videoRev": "benz_c_F2_14_cw.mp4",
+        "videoRevStart": 4.223717,
+        "videoRevEnd": 40.3737
+      },
+      {
+        "from": "node-mpwrtzgb-fhya",
+        "to": "node-mpwrvuu3-nzb1",
+        "weight": 5
+      },
+      {
+        "from": "node-mpwrtzgb-fhya",
+        "to": "node-mpwru12c-5q1z",
+        "weight": 44,
+        "videoFwd": "benz_c_F2_20_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 36.036033,
+        "videoRev": "benz_c_F2_20_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 35.201867
+      },
+      {
+        "from": "node-mpwru12c-5q1z",
+        "to": "node-mpwru2fo-bale",
+        "weight": 48,
+        "videoFwd": "benz_c_F2_21_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 39.9733,
+        "videoRev": "benz_c_F2_21_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 41.841833
+      },
+      {
+        "from": "node-mpwrvyn7-oe0t",
+        "to": "node-mpwru12c-5q1z",
+        "weight": 4
+      },
+      {
+        "from": "node-mpwru12c-5q1z",
+        "to": "node-mpwru6jn-y2vx",
+        "weight": 44,
+        "videoFwd": "benz_c_F2_25_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 35.333687,
+        "videoRev": "benz_c_F2_25_cw.mp4",
+        "videoRevStart": 4.890578,
+        "videoRevEnd": 42.642633
+      },
+      {
+        "from": "node-mpwru6jn-y2vx",
+        "to": "node-mpwrw5d8-paup",
+        "weight": 6
+      },
+      {
+        "from": "node-mpwru6jn-y2vx",
+        "to": "node-mpwru8tg-qho7",
+        "weight": 44,
+        "videoFwd": "benz_c_F2_38_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 43.643633,
+        "videoRev": "benz_c_F2_38_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 38.238233
+      },
+      {
+        "from": "node-mpwru8tg-qho7",
+        "to": "node-mpwruel0-otd8",
+        "weight": 58,
+        "videoFwd": "benz_c_F2_32_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 49.8832,
+        "videoRev": "benz_c_F2_32_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 51.184533
+      },
+      {
+        "from": "node-mpwruel0-otd8",
+        "to": "node-mpwrui58-9qgv",
+        "weight": 33,
+        "videoFwd": "benz_c_F2_33_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 27.390882,
+        "videoRev": "benz_c_F2_33_ccw.mp4",
+        "videoRevStart": 18.51613,
+        "videoRevEnd": 44.811467
+      },
+      {
+        "from": "node-mpwrui58-9qgv",
+        "to": "node-mpwrufn7-12wj",
+        "weight": 22,
+        "videoFwd": "benz_c_F2_33_cw.mp4",
+        "videoFwdStart": 27.276983,
+        "videoFwdEnd": 44.310967,
+        "videoRev": "benz_c_F2_33_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 18.461691
+      },
+      {
+        "from": "node-mpwrwam3-star",
+        "to": "node-mpwru8tg-qho7",
+        "weight": 6
+      },
+      {
+        "from": "node-mpwru8tg-qho7",
+        "to": "node-mpwruo3x-cf3x",
+        "weight": 48,
+        "videoFwd": "benz_c_F2_38_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 38.238233,
+        "videoRev": "benz_c_F2_38_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 43.643633
+      },
+      {
+        "from": "node-mpwruo3x-cf3x",
+        "to": "node-mpwrwth0-i2y9",
+        "weight": 4
+      },
+      {
+        "from": "node-mpwrwjr0-p2qv",
+        "to": "node-mpwruel0-otd8",
+        "weight": 3
+      },
+      {
+        "from": "node-mpwrwpe3-o3zw",
+        "to": "node-mpwrui58-9qgv",
+        "weight": 6
+      },
+      {
+        "from": "node-mpwruo3x-cf3x",
+        "to": "node-mpwruq0j-jkf9",
+        "weight": 34,
+        "videoFwd": "benz_c_F2_44_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 32.599267,
+        "videoRev": "benz_c_F2_44_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 30.330333
+      },
+      {
+        "from": "node-mpwruq0j-jkf9",
+        "to": "node-mpwruyej-xwf3",
+        "weight": 47,
+        "videoFwd": "benz_c_F2_45_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 41.684512,
+        "videoRev": "benz_c_F2_45_ccw.mp4",
+        "videoRevStart": 3.308368,
+        "videoRevEnd": 42.4758
+      },
+      {
+        "from": "node-mpwruyej-xwf3",
+        "to": "node-mpwruser-wqxj",
+        "weight": 5,
+        "videoFwd": "benz_c_F2_45_cw.mp4",
+        "videoFwdStart": 41.622432,
+        "videoFwdEnd": 44.811467,
+        "videoRev": "benz_c_F2_45_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 3.118891
+      },
+      {
+        "from": "node-mpwruser-wqxj",
+        "to": "node-mpwrutg4-erfw",
+        "weight": 12,
+        "videoFwd": "benz_c_F2_46_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 8.2082,
+        "videoRev": "benz_c_F2_46_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 9.075733
+      },
+      {
+        "from": "node-mpwrwxtn-pwma",
+        "to": "node-mpwruq0j-jkf9",
+        "weight": 4
+      },
+      {
+        "from": "node-mpwruyej-xwf3",
+        "to": "node-mpwrx2es-i4c3",
+        "weight": 4
+      },
+      {
+        "from": "node-moy02uam-2bvd",
+        "to": "node-mpwsyatu-kesa",
+        "weight": 40,
+        "videoFwd": "outside_131_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 26.812339,
+        "videoRev": "outside_131_cw.mp4",
+        "videoRevStart": 13.478537,
+        "videoRevEnd": 40.8742
+      },
+      {
+        "from": "node-mpwsyatu-kesa",
+        "to": "node-moyabrgv-xi43",
+        "weight": 12,
+        "videoFwd": "outside_131_ccw.mp4",
+        "videoFwdStart": 26.797538,
+        "videoFwdEnd": 40.1735,
+        "videoRev": "outside_131_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 13.334436
+      },
+      {
+        "from": "node-mpwsy4xm-ivo6",
+        "to": "node-mpwsy6ai-bkte",
+        "weight": 6,
+        "videoFwd": "benz_c_F1_4_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 5.772433,
+        "videoRev": "benz_c_F1_4_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 6.1061
+      },
+      {
+        "from": "node-mpwsy6ai-bkte",
+        "to": "node-mpwsy8ii-t6ex",
+        "weight": 35,
+        "videoFwd": "benz_c_F1_3_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 33.199867,
+        "videoRev": "benz_c_F1_3_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 30.3637
+      },
+      {
+        "from": "node-mpwsy8ii-t6ex",
+        "to": "node-mpwsyatu-kesa",
+        "weight": 44,
+        "videoFwd": "benz_c_F1_2_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 42.75684,
+        "videoRev": "benz_c_F1_2_ccw.mp4",
+        "videoRevStart": 16.687582,
+        "videoRevEnd": 53.186533
+      },
+      {
+        "from": "node-mpwsyatu-kesa",
+        "to": "node-mpwsyc3e-2z0e",
+        "weight": 20,
+        "videoFwd": "benz_c_F1_2_cw.mp4",
+        "videoFwdStart": 42.883085,
+        "videoFwdEnd": 59.759767,
+        "videoRev": "benz_c_F1_2_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 16.807111
+      },
+      {
+        "from": "node-mpwsyc3e-2z0e",
+        "to": "node-mpwsyd7m-wbrw",
+        "weight": 51,
+        "videoFwd": "benz_c_F1_1_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 43.677,
+        "videoRev": "benz_c_F1_1_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 43.743733
+      },
+      {
+        "from": "node-mpwsy8ii-t6ex",
+        "to": "node-moyacf1z-jfld",
+        "weight": 9,
+        "videoFwd": "benz_c_F1_15_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 9.342667,
+        "videoRev": "benz_c_F1_15_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 10.143467
+      },
+      {
+        "from": "node-moyac3xi-ip41",
+        "to": "node-mpwt2e42-w8fg",
+        "weight": 8
+      },
+      {
+        "from": "node-mpwt2e42-w8fg",
+        "to": "node-mpwt2fgp-be63",
+        "weight": 7,
+        "videoFwd": "benz_c_F1_16_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 7.574233,
+        "videoRev": "benz_c_F1_16_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 6.840167
+      },
+      {
+        "from": "node-mpwt2fgp-be63",
+        "to": "node-mpwt2gt6-gfyg",
+        "weight": 40,
+        "videoFwd": "benz_c_F1_17_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 35.9693,
+        "videoRev": "benz_c_F1_17_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 37.404067
+      },
+      {
+        "from": "node-mpwt2gt6-gfyg",
+        "to": "node-mpwt2kap-hkkj",
+        "weight": 51,
+        "videoFwd": "benz_c_F1_18_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 39.305967,
+        "videoRev": "benz_c_F1_18_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 41.041033
+      },
+      {
+        "from": "node-mpwt2gt6-gfyg",
+        "to": "node-moy79nag-o1k9",
+        "weight": 13,
+        "videoFwd": "benz_c_F1_19_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 7.474133,
+        "videoRev": "benz_c_F1_19_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 9.142467
+      },
+      {
+        "from": "node-moy79fx9-07wh",
+        "to": "node-mpwt2rqi-6jct",
+        "weight": 7,
+        "videoFwd": "benz_c_F1_26_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 4.671333,
+        "videoRev": "benz_c_F1_26_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 5.438767
+      },
+      {
+        "from": "node-mpwt2rqi-6jct",
+        "to": "node-mpwt2t5m-o307",
+        "weight": 39,
+        "videoFwd": "benz_c_F1_27_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 39.239233,
+        "videoRev": "benz_c_F1_27_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 40.507167
+      },
+      {
+        "from": "node-mpwt34dl-1rom",
+        "to": "node-mpwt337l-6lfz",
+        "weight": 6,
+        "videoFwd": "benz_c_F1_39_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 5.839167,
+        "videoRev": "benz_c_F1_39_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 6.3063
+      },
+      {
+        "from": "node-mpwt337l-6lfz",
+        "to": "node-mpwt3ac2-2atw",
+        "weight": 34,
+        "videoFwd": "benz_c_F1_40_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 30.897567,
+        "videoRev": "benz_c_F1_40_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 31.898567
+      },
+      {
+        "from": "node-mpwt3ac2-2atw",
+        "to": "node-mpwvcw7z-7r3f",
+        "weight": 48,
+        "videoFwd": "benz_c_F1_42_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 40.881128,
+        "videoRev": "benz_c_F1_42_ccw.mp4",
+        "videoRevStart": 3.379937,
+        "videoRevEnd": 44.210867
+      },
+      {
+        "from": "node-mpwvcw7z-7r3f",
+        "to": "node-mpwt3cnm-hdbp",
+        "weight": 4,
+        "videoFwd": "benz_c_F1_42_cw.mp4",
+        "videoFwdStart": 40.535101,
+        "videoFwdEnd": 44.210867,
+        "videoRev": "benz_c_F1_42_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 3.397862
+      },
+      {
+        "from": "node-mpwt3cnm-hdbp",
+        "to": "node-mpwt3ddm-32ga",
+        "weight": 11
+      },
+      {
+        "from": "node-moy77fgx-n6ec",
+        "to": "node-mpwt34dl-1rom",
+        "weight": 6
+      },
+      {
+        "from": "node-mpwt2t5m-o307",
+        "to": "node-moy71hr8-dfat",
+        "weight": 14,
+        "videoFwd": "benz_c_F1_29_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 8.174833,
+        "videoRev": "benz_c_F1_29_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 10.377033
+      },
+      {
+        "from": "node-moy6mf3p-gxvl",
+        "to": "node-mpwt2y03-6srv",
+        "weight": 16,
+        "videoFwd": "outside_97_ccw.mp4",
+        "videoFwdStart": 20.494831,
+        "videoFwdEnd": 29.922282,
+        "videoRev": "outside_97_cw.mp4",
+        "videoRevStart": 13.185903,
+        "videoRevEnd": 42.108767
+      },
+      {
+        "from": "node-mpwt2y03-6srv",
+        "to": "node-moy6mge8-6hcc",
+        "weight": 17,
+        "videoFwd": "outside_97_ccw.mp4",
+        "videoFwdStart": 29.852402,
+        "videoFwdEnd": 42.442433,
+        "videoRev": "outside_97_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 12.596739
+      },
+      {
+        "from": "node-mpwt2t5m-o307",
+        "to": "node-mpwt2y03-6srv",
+        "weight": 58,
+        "videoFwd": "benz_c_F1_28_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 54.268291,
+        "videoRev": "benz_c_F1_28_ccw.mp4",
+        "videoRevStart": 6.510152,
+        "videoRevEnd": 58.491833
+      },
+      {
+        "from": "node-mpwt2y03-6srv",
+        "to": "node-mpwt2uoh-yzxw",
+        "weight": 4,
+        "videoFwd": "benz_c_F1_28_cw.mp4",
+        "videoFwdStart": 54.456486,
+        "videoFwdEnd": 59.793133,
+        "videoRev": "benz_c_F1_28_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 6.329295
+      },
+      {
+        "from": "node-mpwt2uoh-yzxw",
+        "to": "node-mpwyawst-epha",
+        "weight": 30,
+        "videoFwd": "benz_c_F1_30_cw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 30.04968,
+        "videoRev": "benz_c_F1_30_ccw.mp4",
+        "videoRevStart": 20.164913,
+        "videoRevEnd": 48.9823
+      },
+      {
+        "from": "node-mpwyawst-epha",
+        "to": "node-mpwt2wze-ucnh",
+        "weight": 24,
+        "videoFwd": "benz_c_F1_30_cw.mp4",
+        "videoFwdStart": 30.228529,
+        "videoFwdEnd": 49.215867,
+        "videoRev": "benz_c_F1_30_ccw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 20.236558
+      },
+      {
+        "from": "node-mpwyakpz-4e4b",
+        "to": "node-mpwt337l-6lfz",
+        "weight": 5
+      },
+      {
+        "from": "node-mpwyai37-frzt",
+        "to": "node-mpwt3ac2-2atw",
+        "weight": 5
+      },
+      {
+        "from": "node-mpwvcw7z-7r3f",
+        "to": "node-mpwyaeuk-2m58",
+        "weight": 4
+      },
+      {
+        "from": "node-mpwy9vbr-u8cj",
+        "to": "node-mpwt2t5m-o307",
+        "weight": 4
+      },
+      {
+        "from": "node-mpwt2rqi-6jct",
+        "to": "node-mpwy9rqc-3pxa",
+        "weight": 4
+      },
+      {
+        "from": "node-mpwya93e-w4fq",
+        "to": "node-mpwyawst-epha",
+        "weight": 5
+      },
+      {
+        "from": "node-mpwy9irn-e6h4",
+        "to": "node-mpwt2fgp-be63",
+        "weight": 5
+      },
+      {
+        "from": "node-mpwy9ljz-9gyz",
+        "to": "node-mpwt2gt6-gfyg",
+        "weight": 4
+      },
+      {
+        "from": "node-mpwy9eq0-ps3j",
+        "to": "node-mpwsy8ii-t6ex",
+        "weight": 6
+      },
+      {
+        "from": "node-mpwsyc3e-2z0e",
+        "to": "node-mpwy92m4-oucd",
+        "weight": 5
+      },
+      {
+        "from": "node-mpwy972f-csu4",
+        "to": "node-mpwsyd7m-wbrw",
+        "weight": 5
+      },
+      {
+        "from": "node-mpwya078-tcxd",
+        "to": "node-mpwt2uoh-yzxw",
+        "weight": 4
+      },
+      {
+        "from": "node-mpwt3ac2-2atw",
+        "to": "node-mp3powyg-g63t",
+        "weight": 14,
+        "videoFwd": "benz_c_F1_41_ccw.mp4",
+        "videoFwdStart": 0,
+        "videoFwdEnd": 7.640967,
+        "videoRev": "benz_c_F1_41_cw.mp4",
+        "videoRevStart": 0,
+        "videoRevEnd": 8.441767
+      },
+      {
+        "from": "node-mpwy972f-csu4",
+        "to": "node-mpwrvkmr-goul",
+        "weight": 8
+      },
+      {
+        "from": "node-mpwrvkmr-goul",
+        "to": "node-mpwqxoct-k71s",
+        "weight": 8
+      },
+      {
+        "from": "node-mpwy92m4-oucd",
+        "to": "node-mpwrvfm4-f3a2",
+        "weight": 8
+      },
+      {
+        "from": "node-mpwrvfm4-f3a2",
+        "to": "node-mpwqxm51-vrpl",
+        "weight": 8
+      },
+      {
+        "from": "node-mpwy9eq0-ps3j",
+        "to": "node-mpwrvprg-zfon",
+        "weight": 9
+      },
+      {
+        "from": "node-mpwrvprg-zfon",
+        "to": "node-mpwqxh30-ohbb",
+        "weight": 10
+      },
+      {
+        "from": "node-mpwy9irn-e6h4",
+        "to": "node-mpwrvuu3-nzb1",
+        "weight": 9
+      },
+      {
+        "from": "node-mpwrvuu3-nzb1",
+        "to": "node-mpwqy971-jrff",
+        "weight": 9
+      },
+      {
+        "from": "node-mpwy9ljz-9gyz",
+        "to": "node-mpwrvyn7-oe0t",
+        "weight": 10
+      },
+      {
+        "from": "node-mpwrvyn7-oe0t",
+        "to": "node-mpwqyfas-pj65",
+        "weight": 9
+      },
+      {
+        "from": "node-mpwy9rqc-3pxa",
+        "to": "node-mpwrw5d8-paup",
+        "weight": 11
+      },
+      {
+        "from": "node-mpwrw5d8-paup",
+        "to": "node-mpwqykvx-dehi",
+        "weight": 9
+      },
+      {
+        "from": "node-mpwy9vbr-u8cj",
+        "to": "node-mpwrwam3-star",
+        "weight": 9
+      },
+      {
+        "from": "node-mpwrwam3-star",
+        "to": "node-mpwqyvil-471q",
+        "weight": 14
+      },
+      {
+        "from": "node-mpwya078-tcxd",
+        "to": "node-mpwrwjr0-p2qv",
+        "weight": 9
+      },
+      {
+        "from": "node-mpwrwjr0-p2qv",
+        "to": "node-mpwqz11g-sklh",
+        "weight": 8
+      },
+      {
+        "from": "node-mpwya93e-w4fq",
+        "to": "node-mpwrwpe3-o3zw",
+        "weight": 9
+      },
+      {
+        "from": "node-mpwrwpe3-o3zw",
+        "to": "node-mpwqz5gc-7zto",
+        "weight": 10
+      },
+      {
+        "from": "node-mpwyakpz-4e4b",
+        "to": "node-mpwrwth0-i2y9",
+        "weight": 8
+      },
+      {
+        "from": "node-mpwrwth0-i2y9",
+        "to": "node-mpwqzalp-y6dz",
+        "weight": 10
+      },
+      {
+        "from": "node-mpwyai37-frzt",
+        "to": "node-mpwrwxtn-pwma",
+        "weight": 9
+      },
+      {
+        "from": "node-mpwrwxtn-pwma",
+        "to": "node-mpwqzdol-umd6",
+        "weight": 8
+      },
+      {
+        "from": "node-mpwyaeuk-2m58",
+        "to": "node-mpwrx2es-i4c3",
+        "weight": 9
+      },
+      {
+        "from": "node-mpwrx2es-i4c3",
+        "to": "node-mpwqzkb0-y1ao",
+        "weight": 8
+      },
+      {
+        "from": "node-moyabzm6-mbpq",
+        "to": "node-moyac04z-4731",
+        "weight": 24
+      },
+      {
+        "from": "node-moyac04z-4731",
+        "to": "node-moyabrgv-xi43",
+        "weight": 18
+      },
+      {
+        "from": "node-moyabrgv-xi43",
+        "to": "node-moy9w6qq-9vhm",
+        "weight": 19
       }
     ]
   },
@@ -25267,6 +27211,782 @@
     "res1_e_1_5e.mp4": {
       "entryYaw": 325.6,
       "updatedAt": 1780061312615
+    },
+    "benz_s_1_1eu.mp4": {
+      "entryYaw": 72.20000000000005,
+      "updatedAt": 1780411532028
+    },
+    "benz_s_1_1od.mp4": {
+      "exitYaw": 233.99999999999994,
+      "updatedAt": 1780411537704
+    },
+    "benz_s_1_2ed.mp4": {
+      "entryYaw": 50.19999999999999,
+      "updatedAt": 1780411549269
+    },
+    "benz_s_1_2eu.mp4": {
+      "entryYaw": 70.80000000000001,
+      "updatedAt": 1780411552956
+    },
+    "benz_s_1_2od.mp4": {
+      "exitYaw": 238.60000000000002,
+      "updatedAt": 1780411556876
+    },
+    "benz_s_1_2ou.mp4": {
+      "exitYaw": 260.59999999999997,
+      "updatedAt": 1780411560551
+    },
+    "benz_s_1_3ed.mp4": {
+      "entryYaw": 59.39999999999998,
+      "updatedAt": 1780411565522
+    },
+    "benz_s_1_3ou.mp4": {
+      "exitYaw": 250.8,
+      "updatedAt": 1780411569608
+    },
+    "benz_s_2_1eu.mp4": {
+      "entryYaw": 116.40000000000003,
+      "updatedAt": 1780411583029
+    },
+    "benz_s_2_1od.mp4": {
+      "exitYaw": 207.4,
+      "updatedAt": 1780411587119
+    },
+    "benz_s_2_2ed.mp4": {
+      "entryYaw": 30.80000000000001,
+      "updatedAt": 1780411591955
+    },
+    "benz_s_2_2eu.mp4": {
+      "entryYaw": 112.20000000000005,
+      "updatedAt": 1780411596301
+    },
+    "benz_s_2_2od.mp4": {
+      "exitYaw": 216.20000000000002,
+      "updatedAt": 1780411600555
+    },
+    "benz_s_2_2ou.mp4": {
+      "exitYaw": 289.2,
+      "updatedAt": 1780411604236
+    },
+    "benz_s_2_3ed.mp4": {
+      "entryYaw": 28,
+      "updatedAt": 1780411609600
+    },
+    "benz_s_2_3ou.mp4": {
+      "exitYaw": 296.59999999999997,
+      "updatedAt": 1780411612524
+    },
+    "benz_s_3_1eu.mp4": {
+      "entryYaw": 2.6000000000000227,
+      "updatedAt": 1780411618679
+    },
+    "benz_s_3_1od.mp4": {
+      "exitYaw": 257.4,
+      "updatedAt": 1780411623240
+    },
+    "benz_s_3_2ed.mp4": {
+      "entryYaw": 64.60000000000002,
+      "updatedAt": 1780411632301
+    },
+    "benz_s_3_2eu.mp4": {
+      "entryYaw": 0,
+      "updatedAt": 1780411634792
+    },
+    "benz_s_3_2od.mp4": {
+      "exitYaw": 263.6,
+      "updatedAt": 1780411638595
+    },
+    "benz_s_3_2ou.mp4": {
+      "exitYaw": 179.6,
+      "updatedAt": 1780411642828
+    },
+    "benz_s_3_3ed.mp4": {
+      "entryYaw": 80,
+      "updatedAt": 1780411647676
+    },
+    "benz_s_3_3ou.mp4": {
+      "exitYaw": 175.79999999999998,
+      "updatedAt": 1780411651420
+    },
+    "benz_s_4_1eu.mp4": {
+      "entryYaw": 9.399999999999977,
+      "updatedAt": 1780411659428
+    },
+    "benz_s_4_1od.mp4": {
+      "exitYaw": 305,
+      "updatedAt": 1780411662038
+    },
+    "benz_s_4_2ed.mp4": {
+      "entryYaw": 117.39999999999998,
+      "updatedAt": 1780411668841
+    },
+    "benz_s_4_2eu.mp4": {
+      "entryYaw": 4,
+      "updatedAt": 1780411671285
+    },
+    "benz_s_4_2od.mp4": {
+      "exitYaw": 303.79999999999995,
+      "updatedAt": 1780411675604
+    },
+    "benz_s_4_2ou.mp4": {
+      "exitYaw": 184.39999999999998,
+      "updatedAt": 1780411679639
+    },
+    "benz_s_4_3ed.mp4": {
+      "entryYaw": 115.59999999999997,
+      "updatedAt": 1780411686003
+    },
+    "benz_s_4_3ou.mp4": {
+      "exitYaw": 184.39999999999992,
+      "updatedAt": 1780411691232
+    },
+    "benz_s_5_1eu.mp4": {
+      "entryYaw": 12.399999999999977,
+      "updatedAt": 1780411698324
+    },
+    "benz_s_5_1od.mp4": {
+      "exitYaw": 291.6,
+      "updatedAt": 1780411701975
+    },
+    "benz_s_5_2ed.mp4": {
+      "entryYaw": 109.79999999999995,
+      "updatedAt": 1780411709510
+    },
+    "benz_s_5_2eu.mp4": {
+      "entryYaw": 10.800000000000011,
+      "updatedAt": 1780411712971
+    },
+    "benz_s_5_2od.mp4": {
+      "exitYaw": 294.4,
+      "updatedAt": 1780411715942
+    },
+    "benz_s_5_2ou.mp4": {
+      "exitYaw": 186.4,
+      "updatedAt": 1780411719733
+    },
+    "benz_s_5_3ed.mp4": {
+      "entryYaw": 110.60000000000002,
+      "updatedAt": 1780411724783
+    },
+    "benz_s_5_3ou.mp4": {
+      "exitYaw": 188.19999999999996,
+      "updatedAt": 1780411729066
+    },
+    "benz_s_6_1eu.mp4": {
+      "entryYaw": 53.39999999999998,
+      "updatedAt": 1780411736569
+    },
+    "benz_s_6_1od.mp4": {
+      "exitYaw": 260,
+      "updatedAt": 1780411741340
+    },
+    "benz_s_6_2ed.mp4": {
+      "entryYaw": 86.80000000000001,
+      "updatedAt": 1780411746974
+    },
+    "benz_s_6_2eu.mp4": {
+      "entryYaw": 50.19999999999999,
+      "updatedAt": 1780411750204
+    },
+    "benz_s_6_2od.mp4": {
+      "exitYaw": 258.2,
+      "updatedAt": 1780411753439
+    },
+    "benz_s_6_2ou.mp4": {
+      "exitYaw": 228,
+      "updatedAt": 1780411757605
+    },
+    "benz_s_6_3ed.mp4": {
+      "entryYaw": 83,
+      "updatedAt": 1780411764653
+    },
+    "benz_s_6_3ou.mp4": {
+      "exitYaw": 228.60000000000002,
+      "updatedAt": 1780411769027
+    },
+    "benz_s_7_1eu.mp4": {
+      "entryYaw": 67.60000000000002,
+      "updatedAt": 1780411775326
+    },
+    "benz_s_7_1od.mp4": {
+      "exitYaw": 148.39999999999998,
+      "updatedAt": 1780411779268
+    },
+    "benz_s_7_2ed.mp4": {
+      "entryYaw": 335.8,
+      "updatedAt": 1780411784271
+    },
+    "benz_s_7_2eu.mp4": {
+      "entryYaw": 60.60000000000002,
+      "updatedAt": 1780411787917
+    },
+    "benz_s_7_2od.mp4": {
+      "exitYaw": 158,
+      "updatedAt": 1780411792225
+    },
+    "benz_s_7_2ou.mp4": {
+      "exitYaw": 234.8,
+      "updatedAt": 1780411796743
+    },
+    "benz_s_7_3ed.mp4": {
+      "entryYaw": 340.8,
+      "updatedAt": 1780411801640
+    },
+    "benz_s_7_3ou.mp4": {
+      "exitYaw": 240.8,
+      "updatedAt": 1780411805266
+    },
+    "benz_s_8_1eu.mp4": {
+      "entryYaw": 79.60000000000002,
+      "updatedAt": 1780411813131
+    },
+    "benz_s_8_1od.mp4": {
+      "exitYaw": 209.6,
+      "updatedAt": 1780411817420
+    },
+    "benz_s_8_2ed.mp4": {
+      "entryYaw": 37,
+      "updatedAt": 1780411822490
+    },
+    "benz_s_8_2eu.mp4": {
+      "entryYaw": 76.60000000000002,
+      "updatedAt": 1780411826468
+    },
+    "benz_s_8_2od.mp4": {
+      "exitYaw": 212.99999999999997,
+      "updatedAt": 1780411829815
+    },
+    "benz_s_8_2ou.mp4": {
+      "exitYaw": 258.6,
+      "updatedAt": 1780411834061
+    },
+    "benz_s_8_3ed.mp4": {
+      "entryYaw": 36.80000000000001,
+      "updatedAt": 1780411840737
+    },
+    "benz_s_8_3ou.mp4": {
+      "exitYaw": 245,
+      "updatedAt": 1780411844220
+    },
+    "benz_s_9_1eu.mp4": {
+      "entryYaw": 120.60000000000002,
+      "updatedAt": 1780411851455
+    },
+    "benz_s_9_1od.mp4": {
+      "exitYaw": 154.2,
+      "updatedAt": 1780411855875
+    },
+    "benz_s_9_2ed.mp4": {
+      "entryYaw": 334.2,
+      "updatedAt": 1780411860407
+    },
+    "benz_s_9_2eu.mp4": {
+      "entryYaw": 132.20000000000005,
+      "updatedAt": 1780411864499
+    },
+    "benz_s_9_2od.mp4": {
+      "exitYaw": 150.39999999999998,
+      "updatedAt": 1780411868162
+    },
+    "benz_s_9_2ou.mp4": {
+      "exitYaw": 312,
+      "updatedAt": 1780411872505
+    },
+    "benz_s_9_3ed.mp4": {
+      "entryYaw": 325.6,
+      "updatedAt": 1780411877373
+    },
+    "benz_s_9_3ou.mp4": {
+      "exitYaw": 304.8,
+      "updatedAt": 1780411881023
+    },
+    "benz_s_10_1eu.mp4": {
+      "entryYaw": 49.60000000000002,
+      "updatedAt": 1780411887137
+    },
+    "benz_s_10_1od.mp4": {
+      "exitYaw": 241.2,
+      "updatedAt": 1780411891279
+    },
+    "benz_s_10_2ed.mp4": {
+      "entryYaw": 47,
+      "updatedAt": 1780411895593
+    },
+    "benz_s_10_2eu.mp4": {
+      "entryYaw": 33.60000000000002,
+      "updatedAt": 1780411898858
+    },
+    "benz_s_10_2od.mp4": {
+      "exitYaw": 235,
+      "updatedAt": 1780411902250
+    },
+    "benz_s_10_2ou.mp4": {
+      "exitYaw": 218.20000000000005,
+      "updatedAt": 1780411906243
+    },
+    "benz_s_10_3ed.mp4": {
+      "entryYaw": 53.60000000000002,
+      "updatedAt": 1780411910887
+    },
+    "benz_s_10_3ou.mp4": {
+      "exitYaw": 217.20000000000002,
+      "updatedAt": 1780411914455
+    },
+    "benz_s_11_1eu.mp4": {
+      "entryYaw": 343,
+      "updatedAt": 1780411920428
+    },
+    "benz_s_11_1od.mp4": {
+      "exitYaw": 182.39999999999998,
+      "updatedAt": 1780411924813
+    },
+    "benz_s_11_2ed.mp4": {
+      "entryYaw": 0.6000000000000227,
+      "updatedAt": 1780411928983
+    },
+    "benz_s_11_2eu.mp4": {
+      "entryYaw": 340.2,
+      "updatedAt": 1780411932133
+    },
+    "benz_s_11_2od.mp4": {
+      "exitYaw": 184.99999999999997,
+      "updatedAt": 1780411942844
+    },
+    "benz_s_11_2ou.mp4": {
+      "exitYaw": 159.20000000000005,
+      "updatedAt": 1780411947562
+    },
+    "benz_s_11_3ed.mp4": {
+      "entryYaw": 349.6,
+      "updatedAt": 1780411952554
+    },
+    "benz_s_11_3ou.mp4": {
+      "exitYaw": 152.20000000000002,
+      "updatedAt": 1780411957830
+    },
+    "benz_s_12_1eu.mp4": {
+      "entryYaw": 255.6,
+      "updatedAt": 1780411965342
+    },
+    "benz_s_12_1od.mp4": {
+      "exitYaw": 121.40000000000003,
+      "updatedAt": 1780411969721
+    },
+    "benz_s_12_2ed.mp4": {
+      "entryYaw": 301.6,
+      "updatedAt": 1780411974596
+    },
+    "benz_s_12_2eu.mp4": {
+      "entryYaw": 255.4,
+      "updatedAt": 1780411979109
+    },
+    "benz_s_12_2od.mp4": {
+      "exitYaw": 125.40000000000006,
+      "updatedAt": 1780411983847
+    },
+    "benz_s_12_2ou.mp4": {
+      "exitYaw": 79.60000000000002,
+      "updatedAt": 1780411987243
+    },
+    "benz_s_12_3ed.mp4": {
+      "entryYaw": 303.8,
+      "updatedAt": 1780411992455
+    },
+    "benz_s_12_3ou.mp4": {
+      "exitYaw": 77.20000000000005,
+      "updatedAt": 1780411995875
+    },
+    "benz_c_F3_10_ccw.mp4": {
+      "yaw": 41.60000000000002,
+      "updatedAt": 1780412006800
+    },
+    "benz_c_F3_10_cw.mp4": {
+      "yaw": 27.599999999999966,
+      "updatedAt": 1780412012652
+    },
+    "benz_c_F3_11_ccw.mp4": {
+      "yaw": 60.60000000000002,
+      "updatedAt": 1780412018890
+    },
+    "benz_c_F3_11_cw.mp4": {
+      "yaw": 48.39999999999998,
+      "updatedAt": 1780412024378
+    },
+    "benz_c_F3_12_ccw.mp4": {
+      "yaw": 24.399999999999977,
+      "updatedAt": 1780412071113
+    },
+    "benz_c_F3_12_cw.mp4": {
+      "yaw": 0.19999999999998863,
+      "updatedAt": 1780412074315
+    },
+    "benz_c_F3_13_ccw.mp4": {
+      "yaw": 127.19999999999999,
+      "updatedAt": 1780412099204
+    },
+    "benz_c_F3_13_cw.mp4": {
+      "yaw": 39.80000000000001,
+      "updatedAt": 1780412112774
+    },
+    "benz_c_F3_22_ccw.mp4": {
+      "yaw": 53.19999999999999,
+      "updatedAt": 1780412118778
+    },
+    "benz_c_F3_22_cw.mp4": {
+      "yaw": 91.80000000000001,
+      "updatedAt": 1780412123514
+    },
+    "benz_c_F3_23_ccw.mp4": {
+      "yaw": 101.79999999999995,
+      "updatedAt": 1780412128845
+    },
+    "benz_c_F3_23_cw.mp4": {
+      "yaw": 77.80000000000001,
+      "updatedAt": 1780412136755
+    },
+    "benz_c_F3_24_ccw.mp4": {
+      "yaw": 148.80000000000007,
+      "updatedAt": 1780412146228
+    },
+    "benz_c_F3_24_cw.mp4": {
+      "yaw": 63.60000000000002,
+      "updatedAt": 1780412152308
+    },
+    "benz_c_F3_34_ccw.mp4": {
+      "yaw": 179,
+      "updatedAt": 1780412162253
+    },
+    "benz_c_F3_34_cw.mp4": {
+      "yaw": 58.80000000000007,
+      "updatedAt": 1780412168983
+    },
+    "benz_c_F3_35_ccw.mp4": {
+      "yaw": 39.200000000000045,
+      "updatedAt": 1780412177395
+    },
+    "benz_c_F3_35_cw.mp4": {
+      "yaw": 51.60000000000002,
+      "updatedAt": 1780412182602
+    },
+    "benz_c_F3_36_ccw.mp4": {
+      "yaw": 73.79999999999995,
+      "updatedAt": 1780412188156
+    },
+    "benz_c_F3_36_cw.mp4": {
+      "yaw": 88.80000000000001,
+      "updatedAt": 1780412193751
+    },
+    "benz_c_F3_37_ccw.mp4": {
+      "yaw": 0,
+      "updatedAt": 1780412206143
+    },
+    "benz_c_F3_37_cw.mp4": {
+      "yaw": 18.600000000000023,
+      "updatedAt": 1780412214106
+    },
+    "benz_c_F3_47_ccw.mp4": {
+      "yaw": 263.20000000000005,
+      "updatedAt": 1780412220943
+    },
+    "benz_c_F3_47_cw.mp4": {
+      "yaw": 279.8,
+      "updatedAt": 1780412225752
+    },
+    "benz_c_F3_48_ccw.mp4": {
+      "yaw": 254.80000000000004,
+      "updatedAt": 1780412232437
+    },
+    "benz_c_F3_48_cw.mp4": {
+      "yaw": 256.8,
+      "updatedAt": 1780412237716
+    },
+    "benz_c_F3_49_ccw.mp4": {
+      "yaw": 230.99999999999997,
+      "updatedAt": 1780412247712
+    },
+    "benz_c_F3_49_cw.mp4": {
+      "yaw": 282.8,
+      "updatedAt": 1780412251944
+    },
+    "benz_c_F3_9_ccw.mp4": {
+      "yaw": 47.19999999999999,
+      "updatedAt": 1780412256655
+    },
+    "benz_c_F3_9_cw.mp4": {
+      "yaw": 50.80000000000001,
+      "updatedAt": 1780412261357
+    },
+    "benz_c_F2_14_ccw.mp4": {
+      "yaw": 103.60000000000002,
+      "updatedAt": 1780413121196
+    },
+    "benz_c_F2_14_cw.mp4": {
+      "yaw": 74.60000000000002,
+      "updatedAt": 1780413127391
+    },
+    "benz_c_F2_20_ccw.mp4": {
+      "yaw": 21.19999999999999,
+      "updatedAt": 1780413134013
+    },
+    "benz_c_F2_20_cw.mp4": {
+      "yaw": 77.79999999999995,
+      "updatedAt": 1780413140780
+    },
+    "benz_c_F2_21_ccw.mp4": {
+      "yaw": 92.19999999999999,
+      "updatedAt": 1780413150374
+    },
+    "benz_c_F2_21_cw.mp4": {
+      "yaw": 11.999999999999716,
+      "updatedAt": 1780413168946
+    },
+    "benz_c_F2_25_ccw.mp4": {
+      "yaw": 143,
+      "updatedAt": 1780413202325
+    },
+    "benz_c_F2_25_cw.mp4": {
+      "yaw": 21.399999999999977,
+      "updatedAt": 1780413207055
+    },
+    "benz_c_F2_31_ccw.mp4": {
+      "yaw": 169.19999999999993,
+      "updatedAt": 1780413213363
+    },
+    "benz_c_F2_31_cw.mp4": {
+      "yaw": 104,
+      "updatedAt": 1780413219082
+    },
+    "benz_c_F2_32_ccw.mp4": {
+      "yaw": 34.599999999999966,
+      "updatedAt": 1780413224833
+    },
+    "benz_c_F2_32_cw.mp4": {
+      "yaw": 42.60000000000002,
+      "updatedAt": 1780413231133
+    },
+    "benz_c_F2_33_ccw.mp4": {
+      "yaw": 36.80000000000001,
+      "updatedAt": 1780413237363
+    },
+    "benz_c_F2_33_cw.mp4": {
+      "yaw": 74.60000000000002,
+      "updatedAt": 1780413243046
+    },
+    "benz_c_F2_38_ccw.mp4": {
+      "yaw": 109.80000000000001,
+      "updatedAt": 1780413253551
+    },
+    "benz_c_F2_38_cw.mp4": {
+      "yaw": 75.19999999999993,
+      "updatedAt": 1780413260871
+    },
+    "benz_c_F2_44_ccw.mp4": {
+      "yaw": 302.6,
+      "updatedAt": 1780413266815
+    },
+    "benz_c_F2_44_cw.mp4": {
+      "yaw": 265,
+      "updatedAt": 1780413273259
+    },
+    "benz_c_F2_45_ccw.mp4": {
+      "yaw": 266.99999999999994,
+      "updatedAt": 1780413277774
+    },
+    "benz_c_F2_45_cw.mp4": {
+      "yaw": 270,
+      "updatedAt": 1780413287023
+    },
+    "benz_c_F2_46_ccw.mp4": {
+      "yaw": 243.00000000000006,
+      "updatedAt": 1780413293670
+    },
+    "benz_c_F2_46_cw.mp4": {
+      "yaw": 253.4,
+      "updatedAt": 1780413299075
+    },
+    "benz_c_F2_5_ccw.mp4": {
+      "yaw": 63.60000000000002,
+      "updatedAt": 1780413303142
+    },
+    "benz_c_F2_5_cw.mp4": {
+      "yaw": 39.60000000000002,
+      "updatedAt": 1780413307369
+    },
+    "benz_c_F2_6_ccw.mp4": {
+      "yaw": 56.19999999999999,
+      "updatedAt": 1780413312889
+    },
+    "benz_c_F2_6_cw.mp4": {
+      "yaw": 19.600000000000023,
+      "updatedAt": 1780413317071
+    },
+    "benz_c_F2_7_ccw.mp4": {
+      "yaw": 71,
+      "updatedAt": 1780413321959
+    },
+    "benz_c_F2_7_cw.mp4": {
+      "yaw": 52.60000000000002,
+      "updatedAt": 1780413326071
+    },
+    "benz_c_F2_8_ccw.mp4": {
+      "yaw": 44.80000000000001,
+      "updatedAt": 1780413332883
+    },
+    "benz_c_F2_8_cw.mp4": {
+      "yaw": 36.60000000000002,
+      "updatedAt": 1780413339464
+    },
+    "benz_c_F1_1_ccw.mp4": {
+      "yaw": 72.80000000000001,
+      "updatedAt": 1780420562030
+    },
+    "benz_c_F1_1_cw.mp4": {
+      "yaw": 66.80000000000007,
+      "updatedAt": 1780420568710
+    },
+    "benz_c_F1_15_ccw.mp4": {
+      "yaw": 86.80000000000001,
+      "updatedAt": 1780420722338
+    },
+    "benz_c_F1_15_cw.mp4": {
+      "yaw": 25.19999999999999,
+      "updatedAt": 1780420771014
+    },
+    "benz_c_F1_16_ccw.mp4": {
+      "yaw": 86.19999999999999,
+      "updatedAt": 1780420777093
+    },
+    "benz_c_F1_16_cw.mp4": {
+      "yaw": 325.40000000000003,
+      "updatedAt": 1780420784253
+    },
+    "benz_c_F1_17_ccw.mp4": {
+      "yaw": 84.20000000000005,
+      "updatedAt": 1780420790857
+    },
+    "benz_c_F1_17_cw.mp4": {
+      "yaw": 103.40000000000003,
+      "updatedAt": 1780420797657
+    },
+    "benz_c_F1_18_ccw.mp4": {
+      "yaw": 76.40000000000003,
+      "updatedAt": 1780420802460
+    },
+    "benz_c_F1_18_cw.mp4": {
+      "yaw": 44.39999999999998,
+      "updatedAt": 1780422071871
+    },
+    "benz_c_F1_19_ccw.mp4": {
+      "yaw": 346.40000000000003,
+      "updatedAt": 1780422079067
+    },
+    "benz_c_F1_19_cw.mp4": {
+      "yaw": 72.60000000000002,
+      "updatedAt": 1780422086365
+    },
+    "benz_c_F1_2_ccw.mp4": {
+      "yaw": 107,
+      "updatedAt": 1780422099824
+    },
+    "benz_c_F1_2_cw.mp4": {
+      "yaw": 93.60000000000002,
+      "updatedAt": 1780422105999
+    },
+    "benz_c_F1_26_ccw.mp4": {
+      "yaw": 90.40000000000003,
+      "updatedAt": 1780422112020
+    },
+    "benz_c_F1_26_cw.mp4": {
+      "yaw": 1.8000000000000114,
+      "updatedAt": 1780422126702
+    },
+    "benz_c_F1_27_ccw.mp4": {
+      "yaw": 56.60000000000002,
+      "updatedAt": 1780422136646
+    },
+    "benz_c_F1_27_cw.mp4": {
+      "yaw": 69,
+      "updatedAt": 1780422143100
+    },
+    "benz_c_F1_28_ccw.mp4": {
+      "yaw": 57.39999999999998,
+      "updatedAt": 1780422149522
+    },
+    "benz_c_F1_28_cw.mp4": {
+      "yaw": 34.39999999999998,
+      "updatedAt": 1780422155436
+    },
+    "benz_c_F1_29_ccw.mp4": {
+      "yaw": 344.8,
+      "updatedAt": 1780422160164
+    },
+    "benz_c_F1_29_cw.mp4": {
+      "yaw": 73.19999999999999,
+      "updatedAt": 1780422826959
+    },
+    "benz_c_F1_3_ccw.mp4": {
+      "yaw": 74.80000000000001,
+      "updatedAt": 1780422833462
+    },
+    "benz_c_F1_3_cw.mp4": {
+      "yaw": 94.79999999999995,
+      "updatedAt": 1780423147067
+    },
+    "benz_c_F1_30_ccw.mp4": {
+      "yaw": 69.19999999999999,
+      "updatedAt": 1780423151700
+    },
+    "benz_c_F1_30_cw.mp4": {
+      "yaw": 56.19999999999999,
+      "updatedAt": 1780423157340
+    },
+    "benz_c_F1_39_ccw.mp4": {
+      "yaw": 252.8,
+      "updatedAt": 1780423175204
+    },
+    "benz_c_F1_39_cw.mp4": {
+      "yaw": 49,
+      "updatedAt": 1780423182583
+    },
+    "benz_c_F1_4_ccw.mp4": {
+      "yaw": 71.60000000000002,
+      "updatedAt": 1780423187165
+    },
+    "benz_c_F1_4_cw.mp4": {
+      "yaw": 66,
+      "updatedAt": 1780423190917
+    },
+    "benz_c_F1_40_ccw.mp4": {
+      "yaw": 89.20000000000005,
+      "updatedAt": 1780423204413
+    },
+    "benz_c_F1_40_cw.mp4": {
+      "yaw": 342.6,
+      "updatedAt": 1780423209529
+    },
+    "benz_c_F1_41_ccw.mp4": {
+      "yaw": 69.39999999999998,
+      "updatedAt": 1780423223457
+    },
+    "benz_c_F1_41_cw.mp4": {
+      "yaw": 166.39999999999998,
+      "updatedAt": 1780423228580
+    },
+    "benz_c_F1_42_ccw.mp4": {
+      "yaw": 206.2,
+      "updatedAt": 1780423246562
+    },
+    "benz_c_F1_42_cw.mp4": {
+      "yaw": 216.39999999999992,
+      "updatedAt": 1780423286688
+    },
+    "benz_c_F1_43_ccw.mp4": {
+      "yaw": 179.20000000000005,
+      "updatedAt": 1780423298564
+    },
+    "benz_c_F1_43_cw.mp4": {
+      "yaw": 203.2,
+      "updatedAt": 1780423313233
     }
   },
   "rooms": [
@@ -51621,6 +54341,3489 @@
       "name": "",
       "room_type": "",
       "updatedAt": 1780093806192
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974868_37.296057_156.5",
+      "ref": "62151",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780377190863
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974744_37.296073_29.9",
+      "ref": "62152",
+      "name": "오정수교수실",
+      "room_type": "office",
+      "updatedAt": 1780377196180
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974681_37.296081_67.3",
+      "ref": "62154A",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780377203483
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974592_37.296092_69.8",
+      "ref": "62154B",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780377210071
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974530_37.296100_26.1",
+      "ref": "62155",
+      "name": "면역세포배양실",
+      "room_type": "lab",
+      "updatedAt": 1780377214757
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974478_37.296099_55.1",
+      "ref": "62156",
+      "name": "전영준교수실/ RNA치료 및 정밀의학연구실Ⅱ",
+      "room_type": "lab",
+      "updatedAt": 1780377218873
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974958_37.295956_45.0",
+      "ref": "62101",
+      "name": "송민경교수실",
+      "room_type": "office",
+      "updatedAt": 1780377348436
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974903_37.295963_20.4",
+      "ref": "62102",
+      "name": "T 세포 융합연구실",
+      "room_type": "lab",
+      "updatedAt": 1780377352414
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974868_37.295967_22.5",
+      "ref": "62103",
+      "name": "T 세포 융합연구실",
+      "room_type": "lab",
+      "updatedAt": 1780377356813
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974815_37.295974_40.6",
+      "ref": "62104",
+      "name": "T 세포 융합연구실",
+      "room_type": "lab",
+      "updatedAt": 1780377361330
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974672_37.295991_41.6",
+      "ref": "62105",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780377366562
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974618_37.295998_23.5",
+      "ref": "62106",
+      "name": "이상섭 특임교수실",
+      "room_type": "office",
+      "updatedAt": 1780377376336
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974582_37.296003_19.0",
+      "ref": "62107",
+      "name": "조재열교수실",
+      "room_type": "office",
+      "updatedAt": 1780377381986
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974482_37.296012_87.1",
+      "ref": "62108",
+      "name": "RNA 치료 및 정밀 의학 연구실Ⅰ",
+      "room_type": "lab",
+      "updatedAt": 1780377386398
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974353_37.295984_49.8",
+      "ref": "62110",
+      "name": "융합생명공학과학생회실",
+      "room_type": "lab",
+      "updatedAt": 1780377414917
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974294_37.295950_48.0",
+      "ref": "62111",
+      "name": "생명공학대학학생회실",
+      "room_type": "",
+      "updatedAt": 1780377418327
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974270_37.296046_114.0",
+      "ref": "62157B",
+      "name": "생명공학대학PC실",
+      "room_type": "classroom",
+      "updatedAt": 1780377424339
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974359_37.296109_78.8",
+      "ref": "62157A",
+      "name": "융합트랙 행정지원실",
+      "room_type": "office",
+      "updatedAt": 1780377452649
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974074_37.295939_169.8",
+      "ref": "61151",
+      "name": "융합생체역학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780377463693
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974205_37.295899_48.2",
+      "ref": "61101A",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780377469743
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974149_37.295868_38.2",
+      "ref": "61101",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780377474526
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974044_37.295889_21.1",
+      "ref": "61152",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780377481198
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974108_37.295844_24.4",
+      "ref": "61101B",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780377489717
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974080_37.295828_17.9",
+      "ref": "61102",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780377496832
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974051_37.295812_24.1",
+      "ref": "61103",
+      "name": "박진성교수실",
+      "room_type": "office",
+      "updatedAt": 1780377501718
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974008_37.295787_38.6",
+      "ref": "61104A",
+      "name": "김형건교수실",
+      "room_type": "office",
+      "updatedAt": 1780377507348
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973950_37.295755_43.1",
+      "ref": "61104",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780377513110
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973898_37.295730_18.3",
+      "ref": "61104E",
+      "name": "문정환교수실",
+      "room_type": "office",
+      "updatedAt": 1780377537603
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973874_37.295834_137.1",
+      "ref": "61154",
+      "name": "바이오정보통신연구실",
+      "room_type": "lab",
+      "updatedAt": 1780377542464
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973947_37.295875_39.3",
+      "ref": "61153B",
+      "name": "의공학연구준비실",
+      "room_type": "lab",
+      "updatedAt": 1780377547301
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973983_37.295890_30.4",
+      "ref": "61153A",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780377552443
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973868_37.295700_33.8",
+      "ref": "61104D",
+      "name": "경비실",
+      "room_type": "office",
+      "updatedAt": 1780377613120
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973492_37.295822_61.6",
+      "ref": "61157",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780377624614
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973596_37.295809_66.4",
+      "ref": "61156",
+      "name": "바이오메카트로닉스학과실험실습실",
+      "room_type": "classroom",
+      "updatedAt": 1780377628255
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973666_37.295800_18.9",
+      "ref": "61155",
+      "name": "바이오메카트로닉스학과학생회실",
+      "room_type": "",
+      "updatedAt": 1780377633365
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973395_37.295745_24.2",
+      "ref": "61110",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780377638628
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973439_37.295747_22.5",
+      "ref": "61109",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780377641964
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973474_37.295743_23.4",
+      "ref": "61108",
+      "name": "발라찬드란마나발란 Lab2",
+      "room_type": "lab",
+      "updatedAt": 1780377645571
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973509_37.295739_20.7",
+      "ref": "61107",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780377650271
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973544_37.295735_21.8",
+      "ref": "61106C",
+      "name": "양유수교수실",
+      "room_type": "office",
+      "updatedAt": 1780377661456
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973596_37.295729_41.0",
+      "ref": "61106B",
+      "name": "양유수교수연구실2",
+      "room_type": "lab",
+      "updatedAt": 1780377668252
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973649_37.295712_18.1",
+      "ref": "61106A",
+      "name": "양유수교수연구실1",
+      "room_type": "lab",
+      "updatedAt": 1780377677319
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973690_37.295716_32.7",
+      "ref": "61105",
+      "name": "바이오메카트로닉스학과사무실",
+      "room_type": "office",
+      "updatedAt": 1780377681959
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974887_37.296055_118.0",
+      "ref": "62251A",
+      "name": "이종성교수실",
+      "room_type": "office",
+      "updatedAt": 1780379290210
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974851_37.295969_72.3",
+      "ref": "62202",
+      "name": "생체소재공학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780379296298
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974930_37.295959_22.7",
+      "ref": "62201B",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780379301228
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974972_37.295954_27.7",
+      "ref": "62201A",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780379305518
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974693_37.295989_21.9",
+      "ref": "62204",
+      "name": "권대혁교수실",
+      "room_type": "office",
+      "updatedAt": 1780379317708
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974624_37.295997_61.6",
+      "ref": "62205",
+      "name": "유전자교정연구실",
+      "room_type": "lab",
+      "updatedAt": 1780379320914
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974551_37.296006_26.4",
+      "ref": "62206",
+      "name": "김희권교수실",
+      "room_type": "office",
+      "updatedAt": 1780379324307
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974514_37.296011_17.1",
+      "ref": "62207",
+      "name": "윤기정교수실",
+      "room_type": "office",
+      "updatedAt": 1780379327461
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974460_37.296015_47.1",
+      "ref": "62208",
+      "name": "융합생명공학과 사무실",
+      "room_type": "office",
+      "updatedAt": 1780379334057
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974467_37.296108_40.4",
+      "ref": "62256",
+      "name": "방사성동위원소관리실",
+      "room_type": "",
+      "updatedAt": 1780379338234
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974542_37.296099_74.0",
+      "ref": "62255",
+      "name": "신경발생·줄기세포연구실",
+      "room_type": "lab",
+      "updatedAt": 1780379341474
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974610_37.296090_31.6",
+      "ref": "62254B",
+      "name": "단백질공학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780379345297
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974679_37.296081_74.9",
+      "ref": "62254A",
+      "name": "공동기기실",
+      "room_type": "lab",
+      "updatedAt": 1780379349673
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974748_37.296073_30.8",
+      "ref": "62253",
+      "name": "단백질공학연구실Ⅰ",
+      "room_type": "lab",
+      "updatedAt": 1780379354835
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974788_37.296067_30.2",
+      "ref": "62252",
+      "name": "단백질공학연구실Ⅲ",
+      "room_type": "lab",
+      "updatedAt": 1780379359495
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974289_37.296066_27.7",
+      "ref": "62257A",
+      "name": "식품생물화학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780379463462
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974232_37.296034_84.2",
+      "ref": "62257B",
+      "name": "윤정훈교수실",
+      "room_type": "office",
+      "updatedAt": 1780379468383
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974175_37.296002_30.9",
+      "ref": "62258",
+      "name": "이재환교수실",
+      "room_type": "office",
+      "updatedAt": 1780379472895
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974333_37.295972_24.6",
+      "ref": "62209",
+      "name": "허진희교수실",
+      "room_type": "office",
+      "updatedAt": 1780379492056
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974303_37.295955_25.0",
+      "ref": "62210",
+      "name": "박계원교수실",
+      "room_type": "office",
+      "updatedAt": 1780379495031
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974275_37.295939_19.7",
+      "ref": "62211",
+      "name": "예비(신임교원)",
+      "room_type": "reserved",
+      "updatedAt": 1780379499042
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974248_37.295924_23.9",
+      "ref": "62212",
+      "name": "우한민교수실",
+      "room_type": "office",
+      "updatedAt": 1780379506188
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973898_37.295848_191.2",
+      "ref": "61254",
+      "name": "식품분자생물공학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780379524694
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973990_37.295899_27.5",
+      "ref": "61253",
+      "name": "세포배양실",
+      "room_type": "lab",
+      "updatedAt": 1780379527772
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974170_37.295880_63.5",
+      "ref": "61201",
+      "name": "대사생명공학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780379536975
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973483_37.295823_50.1",
+      "ref": "61256",
+      "name": "예비(신임교원)",
+      "room_type": "reserved",
+      "updatedAt": 1780379736953
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973585_37.295810_76.0",
+      "ref": "61255",
+      "name": "학부실험실",
+      "room_type": "lab",
+      "updatedAt": 1780379741155
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973392_37.295752_22.2",
+      "ref": "61216",
+      "name": "슈퍼컴퓨팅센터(서버룸집적)",
+      "room_type": "",
+      "updatedAt": 1780379746422
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973436_37.295747_22.2",
+      "ref": "61215",
+      "name": "예비(신임교원)",
+      "room_type": "reserved",
+      "updatedAt": 1780379752831
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973469_37.295743_20.2",
+      "ref": "61214",
+      "name": "생명공학연구원장실",
+      "room_type": "lab",
+      "updatedAt": 1780379758025
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973514_37.295738_34.4",
+      "ref": "61212",
+      "name": "생명공학연구소/학부장부속실",
+      "room_type": "lab",
+      "updatedAt": 1780379775370
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973590_37.295729_53.5",
+      "ref": "61211",
+      "name": "생명공학대학장실",
+      "room_type": "office",
+      "updatedAt": 1780379778554
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973680_37.295702_43.7",
+      "ref": "61210",
+      "name": "식품생명공학학생회실",
+      "room_type": "",
+      "updatedAt": 1780379782086
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973698_37.295647_104.9",
+      "ref": "61207",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780379788446
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973674_37.295542_64.0",
+      "ref": "61208",
+      "name": "일반강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780379791803
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973662_37.295480_56.1",
+      "ref": "61209",
+      "name": "일반강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780379794950
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973782_37.295356_38.3",
+      "ref": "51262",
+      "name": "해조류바이오매스생산연구단",
+      "room_type": "lab",
+      "updatedAt": 1780379804135
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973843_37.295353_26.8",
+      "ref": "51261",
+      "name": "운동생화학실험실",
+      "room_type": "lab",
+      "updatedAt": 1780379807781
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973911_37.295347_53.0",
+      "ref": "51259",
+      "name": "시료제작실I",
+      "room_type": "lab",
+      "updatedAt": 1780379811959
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973997_37.295338_46.4",
+      "ref": "51257",
+      "name": "방사성동위원소실",
+      "room_type": "",
+      "updatedAt": 1780379816947
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974933_37.296049_47.7",
+      "ref": "62351",
+      "name": "첨단 바이오의약품 전달 연구실",
+      "room_type": "lab",
+      "updatedAt": 1780380154848
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974826_37.296062_100.4",
+      "ref": "61352",
+      "name": "소재부품융합공학과 강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780380159151
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974679_37.296081_137.3",
+      "ref": "62353",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780380164359
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974497_37.296104_114.3",
+      "ref": "62354",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780380168841
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974952_37.295957_50.4",
+      "ref": "62301",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780380178157
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974851_37.295969_72.3",
+      "ref": "62302",
+      "name": "나노바이오환경센서연구실",
+      "room_type": "lab",
+      "updatedAt": 1780380181534
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974629_37.295997_54.6",
+      "ref": "62303",
+      "name": "바이오에너지공학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780380184681
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974546_37.296007_50.5",
+      "ref": "62304",
+      "name": "퓨쳐이노베이션 연구실Ⅱ Ⅱ",
+      "room_type": "lab",
+      "updatedAt": 1780380188561
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974460_37.296015_47.1",
+      "ref": "62305",
+      "name": "여학생휴게실",
+      "room_type": "lounge",
+      "updatedAt": 1780380193796
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974232_37.296034_142.9",
+      "ref": "62355",
+      "name": "첨단e+강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780380201592
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974305_37.295956_122.9",
+      "ref": "62306",
+      "name": "첨단강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780380206452
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974106_37.295964_68.3",
+      "ref": "61351A",
+      "name": "소재부품융합공학과강의실Ⅲ",
+      "room_type": "classroom",
+      "updatedAt": 1780380212503
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974038_37.295926_79.5",
+      "ref": "61351B",
+      "name": "소재부품융합공학과사물함실",
+      "room_type": "lab",
+      "updatedAt": 1780380218066
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974177_37.295883_53.4",
+      "ref": "61301A",
+      "name": "대학원세미나실",
+      "room_type": "classroom",
+      "updatedAt": 1780380223296
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974065_37.295820_66.9",
+      "ref": "61302B",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780380294388
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973924_37.295863_123.3",
+      "ref": "61352",
+      "name": "소재부품융합공학과 강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780380252747
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973841_37.295820_63.7",
+      "ref": "61354",
+      "name": "소재부품융합공학과 사무실",
+      "room_type": "office",
+      "updatedAt": 1780380255831
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974040_37.295806_112.2",
+      "ref": "61303",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780380275163
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973435_37.295819_58.9",
+      "ref": "61357",
+      "name": "대학원설계실습실",
+      "room_type": "classroom",
+      "updatedAt": 1780380445382
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973579_37.295810_94.9",
+      "ref": "61356",
+      "name": "학부실습실/세미나실",
+      "room_type": "classroom",
+      "updatedAt": 1780380454898
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973668_37.295798_26.3",
+      "ref": "61355",
+      "name": "조경문헌자료실",
+      "room_type": "lab",
+      "updatedAt": 1780380459018
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973392_37.295752_22.2",
+      "ref": "61316",
+      "name": "플로팅 및 모델링실",
+      "room_type": "lab",
+      "updatedAt": 1780380467093
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973436_37.295747_22.2",
+      "ref": "61315",
+      "name": "최혜영교수실",
+      "room_type": "office",
+      "updatedAt": 1780380469506
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973469_37.295743_20.2",
+      "ref": "61314",
+      "name": "조경·도시공간연구실",
+      "room_type": "lab",
+      "updatedAt": 1780380474139
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973501_37.295739_17.9",
+      "ref": "61313",
+      "name": "조경·도시공간연구실",
+      "room_type": "lab",
+      "updatedAt": 1780380478106
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973529_37.295736_16.4",
+      "ref": "61312",
+      "name": "스마트팩토리융합연구실",
+      "room_type": "lab",
+      "updatedAt": 1780380480920
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973560_37.295732_19.5",
+      "ref": "61311",
+      "name": "나다니엘가르얀토교수실",
+      "room_type": "office",
+      "updatedAt": 1780380486213
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973592_37.295728_17.5",
+      "ref": "61310",
+      "name": "MCCE Lab",
+      "room_type": "lab",
+      "updatedAt": 1780380490195
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973626_37.295726_16.5",
+      "ref": "61309",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780380494756
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973675_37.295706_43.7",
+      "ref": "61308",
+      "name": "강의컨설팅룸",
+      "room_type": "lab",
+      "updatedAt": 1780380499436
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973698_37.295647_104.9",
+      "ref": "61305",
+      "name": "생명공학대학 열람실",
+      "room_type": "lounge",
+      "updatedAt": 1780380504016
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973674_37.295542_64.0",
+      "ref": "61306",
+      "name": "오뚜기함태호 첨단e+강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780380508093
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973662_37.295480_56.1",
+      "ref": "61307",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780380514511
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973854_37.295352_79.0",
+      "ref": "51363",
+      "name": "이석찬교수실",
+      "room_type": "office",
+      "updatedAt": 1780380531281
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973960_37.295342_35.0",
+      "ref": "51359",
+      "name": "이석찬교수연구실",
+      "room_type": "lab",
+      "updatedAt": 1780380534703
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974015_37.295336_25.6",
+      "ref": "51357",
+      "name": "공동기기실",
+      "room_type": "lab",
+      "updatedAt": 1780380538404
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973572_37.295358_10.3",
+      "ref": "51164",
+      "name": "창고",
+      "room_type": "storage",
+      "updatedAt": 1780380708043
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973626_37.295315_60.2",
+      "ref": "51114",
+      "name": "강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780380718616
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973768_37.295360_16.2",
+      "ref": "51163",
+      "name": "세미나실",
+      "room_type": "classroom",
+      "updatedAt": 1780380725472
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973737_37.295305_15.0",
+      "ref": "51112",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780380729180
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973733_37.295286_11.5",
+      "ref": "51113",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780380733179
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973787_37.295290_18.1",
+      "ref": "51111",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780380738356
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973808_37.295357_26.9",
+      "ref": "51162",
+      "name": "프레시맨세미나실",
+      "room_type": "classroom",
+      "updatedAt": 1780380742559
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973852_37.295353_25.8",
+      "ref": "51161",
+      "name": "도서관학생위원회",
+      "room_type": "lounge",
+      "updatedAt": 1780380754928
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973891_37.295349_20.2",
+      "ref": "51160",
+      "name": "양자물질 초전도체 연구실",
+      "room_type": "lab",
+      "updatedAt": 1780380759978
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973928_37.295345_23.1",
+      "ref": "51159",
+      "name": "초전도박막증착실",
+      "room_type": "lab",
+      "updatedAt": 1780380764257
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973966_37.295341_20.9",
+      "ref": "51158",
+      "name": "학생봉사대다소미",
+      "room_type": "",
+      "updatedAt": 1780380770171
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974006_37.295338_24.6",
+      "ref": "51157",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780380777684
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973836_37.295284_18.3",
+      "ref": "51110",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780380783435
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973874_37.295279_14.9",
+      "ref": "51109",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780380786444
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973911_37.295274_17.8",
+      "ref": "51108",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780380790290
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973949_37.295270_16.7",
+      "ref": "51107",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780380793956
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973988_37.295265_20.5",
+      "ref": "51106",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780380797564
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974044_37.295257_27.5",
+      "ref": "51105",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780380802311
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974258_37.295384_180.6",
+      "ref": "51155",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780380813701
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974384_37.295441_37.3",
+      "ref": "51154",
+      "name": "헬륨액화기실II",
+      "room_type": "",
+      "updatedAt": 1780380817313
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974417_37.295459_40.4",
+      "ref": "51153",
+      "name": "헬륨액화기실I",
+      "room_type": "",
+      "updatedAt": 1780380820288
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974490_37.295497_142.8",
+      "ref": "51152",
+      "name": "자연과학대학PC실",
+      "room_type": "classroom",
+      "updatedAt": 1780380823512
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974571_37.295539_68.2",
+      "ref": "51151",
+      "name": "미화원휴게실",
+      "room_type": "office",
+      "updatedAt": 1780380830301
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974517_37.295399_17.7",
+      "ref": "51102",
+      "name": "응용DNA나노공학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780380840206
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974551_37.295415_15.5",
+      "ref": "51101D",
+      "name": "박성하교수실",
+      "room_type": "office",
+      "updatedAt": 1780380854473
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974585_37.295432_15.2",
+      "ref": "51101C",
+      "name": "응용DNA나노공학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780380857035
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974638_37.295457_24.5",
+      "ref": "51101B",
+      "name": "응용DNA나노공학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780380864813
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974675_37.295475_13.1",
+      "ref": "51101A",
+      "name": "응용DNA나노공학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780380868922
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974402_37.295343_19.1",
+      "ref": "51103",
+      "name": "물성측정실3",
+      "room_type": "lab",
+      "updatedAt": 1780380881905
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974367_37.295326_20.2",
+      "ref": "51104A",
+      "name": "물성측정실2",
+      "room_type": "lab",
+      "updatedAt": 1780380886306
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974314_37.295300_41.9",
+      "ref": "51104B",
+      "name": "물성측정실2",
+      "room_type": "lab",
+      "updatedAt": 1780380891797
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974261_37.295263_26.1",
+      "ref": "51104C",
+      "name": "물성측정실1",
+      "room_type": "lab",
+      "updatedAt": 1780380896150
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973731_37.295297_32.5",
+      "ref": "51212",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780380929603
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973856_37.295282_71.6",
+      "ref": "51210",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780380933423
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973980_37.295266_38.6",
+      "ref": "51209",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780380937305
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974067_37.295249_40.4",
+      "ref": "51208",
+      "name": "교육매체지원실",
+      "room_type": "office",
+      "updatedAt": 1780380990542
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974110_37.295193_111.3",
+      "ref": "51205",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780380995363
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974095_37.295116_114.6",
+      "ref": "51206",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780381004774
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974075_37.295043_119.7",
+      "ref": "51207",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780381008463
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974617_37.295553_55.5",
+      "ref": "51251",
+      "name": "성균어학원교사실",
+      "room_type": "",
+      "updatedAt": 1780381061094
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974555_37.295530_91.5",
+      "ref": "51252A",
+      "name": "성균어학원강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780381066205
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974502_37.295503_49.5",
+      "ref": "51252B",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780381072075
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974462_37.295482_52.4",
+      "ref": "51252C",
+      "name": "성균어학원행정실",
+      "room_type": "office",
+      "updatedAt": 1780381076870
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974422_37.295461_44.0",
+      "ref": "51252D",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780381086777
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974378_37.295438_56.8",
+      "ref": "51253",
+      "name": "성균어학원강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780381093380
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974332_37.295414_45.6",
+      "ref": "51255A",
+      "name": "고압실험실",
+      "room_type": "lab",
+      "updatedAt": 1780381098523
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974290_37.295391_42.6",
+      "ref": "51255B",
+      "name": "CeQMF사무실",
+      "room_type": "office",
+      "updatedAt": 1780381103440
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974218_37.295363_76.8",
+      "ref": "51255C",
+      "name": "시료제작실II",
+      "room_type": "lab",
+      "updatedAt": 1780381107512
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974653_37.295465_31.5",
+      "ref": "51201A",
+      "name": "성균어학원강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780381114328
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974585_37.295432_27.7",
+      "ref": "51201B",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780381119406
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974532_37.295406_20.9",
+      "ref": "51201C",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780381124543
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974447_37.295365_27.3",
+      "ref": "51203",
+      "name": "박두선교수연구실",
+      "room_type": "lab",
+      "updatedAt": 1780381141144
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974399_37.295341_24.2",
+      "ref": "51204A",
+      "name": "학생연구실",
+      "room_type": "lab",
+      "updatedAt": 1780381145368
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974343_37.295314_41.0",
+      "ref": "51204B",
+      "name": "연구원실",
+      "room_type": "lab",
+      "updatedAt": 1780381150126
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974274_37.295274_43.6",
+      "ref": "51204C",
+      "name": "구조생물학연구실2",
+      "room_type": "lab",
+      "updatedAt": 1780381153890
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974622_37.295538_55.5",
+      "ref": "51351",
+      "name": "성균어학원강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780381200405
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974574_37.295540_40.0",
+      "ref": "51352A",
+      "name": "성균어학원강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780381204415
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974501_37.295508_153.4",
+      "ref": "51352B",
+      "name": "성균어학원강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780381210112
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974426_37.295463_34.9",
+      "ref": "51353",
+      "name": "수학과 박사후연구원실",
+      "room_type": "lab",
+      "updatedAt": 1780381215172
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974399_37.295449_34.6",
+      "ref": "51354",
+      "name": "임선혁교수실(수학과)",
+      "room_type": "office",
+      "updatedAt": 1780381218366
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974367_37.295432_31.3",
+      "ref": "51355",
+      "name": "BSM 헬프룸",
+      "room_type": "lab",
+      "updatedAt": 1780381221822
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974269_37.295386_164.9",
+      "ref": "51356",
+      "name": "강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780381225040
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974274_37.295274_43.6",
+      "ref": "51305C",
+      "name": "식물배양실",
+      "room_type": "lab",
+      "updatedAt": 1780381231154
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974377_37.295331_80.7",
+      "ref": "51305A",
+      "name": "전자구조제어연구실",
+      "room_type": "lab",
+      "updatedAt": 1780381235923
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974525_37.295398_14.2",
+      "ref": "51304",
+      "name": "연구교수실1",
+      "room_type": "office",
+      "updatedAt": 1780381240644
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974555_37.295417_14.3",
+      "ref": "51303B",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780381244624
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974584_37.295436_13.7",
+      "ref": "51303A",
+      "name": "연구교수실2",
+      "room_type": "office",
+      "updatedAt": 1780381249702
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974616_37.295447_14.0",
+      "ref": "51302B",
+      "name": "비선형에르고딕이론창의연구단단장･회의실",
+      "room_type": "lounge",
+      "updatedAt": 1780381254968
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974674_37.295475_13.6",
+      "ref": "51301",
+      "name": "자동화사육실",
+      "room_type": "lab",
+      "updatedAt": 1780381260370
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974646_37.295461_10.7",
+      "ref": "51302A",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780381266210
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974110_37.295193_111.3",
+      "ref": "51306",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780381275923
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974095_37.295116_114.6",
+      "ref": "51307",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780381281905
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974075_37.295043_119.7",
+      "ref": "51308",
+      "name": "배터리학과",
+      "room_type": "office",
+      "updatedAt": 1780381284573
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974067_37.295249_56.4",
+      "ref": "51310",
+      "name": "엄길호교수실",
+      "room_type": "office",
+      "updatedAt": 1780381496065
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973969_37.295267_17.3",
+      "ref": "51311",
+      "name": "강현식교수실",
+      "room_type": "office",
+      "updatedAt": 1780381497583
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973935_37.295271_17.1",
+      "ref": "51312",
+      "name": "장경로교수실",
+      "room_type": "office",
+      "updatedAt": 1780381500383
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973897_37.295276_14.9",
+      "ref": "51313",
+      "name": "이지항교수실",
+      "room_type": "office",
+      "updatedAt": 1780381503511
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973864_37.295280_13.7",
+      "ref": "51314",
+      "name": "박배준교수실",
+      "room_type": "office",
+      "updatedAt": 1780381506363
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973835_37.295284_11.4",
+      "ref": "51315",
+      "name": "이대한교수실",
+      "room_type": "office",
+      "updatedAt": 1780381513538
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973808_37.295288_11.7",
+      "ref": "51316",
+      "name": "퇴행성면역중개의학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780381529002
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973777_37.295291_11.7",
+      "ref": "51317",
+      "name": "성균어학원교사실",
+      "room_type": "",
+      "updatedAt": 1780381535268
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974031_37.294863_85.4",
+      "ref": "32118",
+      "name": "생명과학과열람실",
+      "room_type": "lounge",
+      "updatedAt": 1780381610019
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974041_37.294933_48.1",
+      "ref": "32119",
+      "name": "생명과학과PC실",
+      "room_type": "classroom",
+      "updatedAt": 1780381616218
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974188_37.294841_79.1",
+      "ref": "32117",
+      "name": "바이오분자아키텍처연구실",
+      "room_type": "lab",
+      "updatedAt": 1780381626497
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974262_37.294829_30.7",
+      "ref": "32116",
+      "name": "이상호교수실",
+      "room_type": "office",
+      "updatedAt": 1780381631165
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974335_37.294818_79.4",
+      "ref": "32115",
+      "name": "식물세포생물학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780381635231
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974409_37.294807_31.2",
+      "ref": "32114",
+      "name": "김지연교수실",
+      "room_type": "office",
+      "updatedAt": 1780381643551
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974461_37.294792_49.7",
+      "ref": "32113",
+      "name": "저온실",
+      "room_type": "lab",
+      "updatedAt": 1780381647509
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974427_37.294886_11.2",
+      "ref": "32163",
+      "name": "분자발생학 연구실",
+      "room_type": "lab",
+      "updatedAt": 1780381655929
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974355_37.294895_34.6",
+      "ref": "32164",
+      "name": "계산신경과학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780381659542
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974271_37.294907_18.1",
+      "ref": "32165A",
+      "name": "GT10공동기기실",
+      "room_type": "lab",
+      "updatedAt": 1780381669459
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974216_37.294914_16.2",
+      "ref": "32165B",
+      "name": "GT10공초점현미경실",
+      "room_type": "lab",
+      "updatedAt": 1780381673941
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974641_37.294905_45.3",
+      "ref": "32162B",
+      "name": "생태학연구실Ⅱ",
+      "room_type": "lab",
+      "updatedAt": 1780381682158
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974731_37.294955_106.3",
+      "ref": "32162A",
+      "name": "생명과학실험실",
+      "room_type": "lab",
+      "updatedAt": 1780381687087
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974637_37.294813_15.1",
+      "ref": "32112A",
+      "name": "경비실",
+      "room_type": "office",
+      "updatedAt": 1780381693471
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974665_37.294788_22.5",
+      "ref": "32112B",
+      "name": "자연과학대학학생회실",
+      "room_type": "",
+      "updatedAt": 1780381700905
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974716_37.294833_64.6",
+      "ref": "32112",
+      "name": "생태학연구실Ⅰ",
+      "room_type": "lab",
+      "updatedAt": 1780381722162
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974785_37.294870_23.8",
+      "ref": "32111",
+      "name": "김정하교수실",
+      "room_type": "office",
+      "updatedAt": 1780381725862
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974816_37.294887_22.1",
+      "ref": "32110",
+      "name": "김홍숙교수실",
+      "room_type": "office",
+      "updatedAt": 1780381728804
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974876_37.294920_69.4",
+      "ref": "32109",
+      "name": "분자시스템생물학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780381732705
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974811_37.294999_29.3",
+      "ref": "32161",
+      "name": "생명과학과학생회실",
+      "room_type": "",
+      "updatedAt": 1780381737509
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974857_37.295024_50.7",
+      "ref": "32160",
+      "name": "퇴행성 면역 중개의학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780381741022
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974901_37.295049_24.7",
+      "ref": "32159",
+      "name": "퇴행성 면역 중개의학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780381744036
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974956_37.295079_71.1",
+      "ref": "32158B",
+      "name": "합성생물학연구실/최동희교수실",
+      "room_type": "lab",
+      "updatedAt": 1780381748452
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975028_37.295128_60.5",
+      "ref": "32158A",
+      "name": "전공실험실",
+      "room_type": "lab",
+      "updatedAt": 1780381753692
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975001_37.294989_23.2",
+      "ref": "32108",
+      "name": "양시영교수실",
+      "room_type": "office",
+      "updatedAt": 1780381760181
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975029_37.295005_21.4",
+      "ref": "32107",
+      "name": "임화선교수실",
+      "room_type": "office",
+      "updatedAt": 1780381763018
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975075_37.295030_49.8",
+      "ref": "32106",
+      "name": "식물분자계통분류학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780381766391
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975121_37.295056_23.5",
+      "ref": "32150",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780381776558
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975181_37.295204_285.4",
+      "ref": "32157",
+      "name": "미화원휴게실",
+      "room_type": "office",
+      "updatedAt": 1780381795335
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975332_37.295152_72.2",
+      "ref": "32156B",
+      "name": "동물실험실",
+      "room_type": "lab",
+      "updatedAt": 1780381800561
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975440_37.295138_77.3",
+      "ref": "32156A",
+      "name": "방사성동위원소실험실",
+      "room_type": "lab",
+      "updatedAt": 1780381806263
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975536_37.295125_52.6",
+      "ref": "32154",
+      "name": "해양식물배양실",
+      "room_type": "lab",
+      "updatedAt": 1780381810242
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975610_37.295116_48.4",
+      "ref": "32153",
+      "name": "생명과학과세미나실",
+      "room_type": "classroom",
+      "updatedAt": 1780381813641
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975683_37.295106_48.5",
+      "ref": "32152",
+      "name": "식물표본실준비실",
+      "room_type": "lab",
+      "updatedAt": 1780381818953
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975748_37.295098_38.9",
+      "ref": "32151",
+      "name": "식물표본실",
+      "room_type": "lab",
+      "updatedAt": 1780381820647
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975529_37.295028_36.6",
+      "ref": "32104",
+      "name": "생명과학실험준비실",
+      "room_type": "lab",
+      "updatedAt": 1780381826227
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975572_37.295022_33.9",
+      "ref": "32103",
+      "name": "김철호교수실",
+      "room_type": "office",
+      "updatedAt": 1780381828361
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975638_37.295012_73.9",
+      "ref": "32102",
+      "name": "분자당쇄생물학연구실Ⅰ",
+      "room_type": "lab",
+      "updatedAt": 1780381831025
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975720_37.295001_66.9",
+      "ref": "32101",
+      "name": "분자당쇄생물학연구실Ⅱ",
+      "room_type": "lab",
+      "updatedAt": 1780381833994
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974185_37.294841_73.7",
+      "ref": "32214",
+      "name": "자연과학대학장실",
+      "room_type": "office",
+      "updatedAt": 1780382055999
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974269_37.294829_51.5",
+      "ref": "32213",
+      "name": "자연과학대학장비서실",
+      "room_type": "office",
+      "updatedAt": 1780382061558
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974386_37.294818_101.4",
+      "ref": "32212",
+      "name": "자연과학/생명공학/스포츠과학대학행정실",
+      "room_type": "office",
+      "updatedAt": 1780382064741
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974466_37.294791_45.2",
+      "ref": "32211",
+      "name": "자연과학대학행정실자료실",
+      "room_type": "office",
+      "updatedAt": 1780382070559
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974270_37.294907_32.2",
+      "ref": "32268",
+      "name": "공동기기실",
+      "room_type": "lab",
+      "updatedAt": 1780382077800
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974355_37.294895_20.7",
+      "ref": "32267",
+      "name": "생명과학과사무실Ⅰ",
+      "room_type": "office",
+      "updatedAt": 1780382082665
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974404_37.294889_10.7",
+      "ref": "32266",
+      "name": "생명과학과사무실Ⅱ",
+      "room_type": "office",
+      "updatedAt": 1780382089025
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974439_37.294884_11.5",
+      "ref": "32265",
+      "name": "세포배양실",
+      "room_type": "lab",
+      "updatedAt": 1780382092329
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974501_37.294879_23.4",
+      "ref": "32264",
+      "name": "암실",
+      "room_type": "lab",
+      "updatedAt": 1780382096437
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974744_37.294847_63.7",
+      "ref": "32210",
+      "name": "생체대사조절연구실",
+      "room_type": "lab",
+      "updatedAt": 1780382229530
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974800_37.294878_19.6",
+      "ref": "32209",
+      "name": "정수명교수실",
+      "room_type": "office",
+      "updatedAt": 1780382235981
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974828_37.294894_23.5",
+      "ref": "32208",
+      "name": "조홍백교수실",
+      "room_type": "office",
+      "updatedAt": 1780382239197
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974883_37.294924_60.1",
+      "ref": "32207",
+      "name": "미생물학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780382243049
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975002_37.294990_21.3",
+      "ref": "32206",
+      "name": "정재훈교수실",
+      "room_type": "office",
+      "updatedAt": 1780382247959
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975031_37.295006_23.5",
+      "ref": "32205",
+      "name": "최철용교수실",
+      "room_type": "office",
+      "updatedAt": 1780382250954
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975061_37.295022_23.9",
+      "ref": "32204",
+      "name": "분자유전학연구실Ⅱ",
+      "room_type": "lab",
+      "updatedAt": 1780382255558
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975106_37.295047_47.5",
+      "ref": "32203",
+      "name": "분자유전학연구실Ⅰ",
+      "room_type": "lab",
+      "updatedAt": 1780382259079
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974677_37.294925_66.3",
+      "ref": "32263C",
+      "name": "전공실험실",
+      "room_type": "lab",
+      "updatedAt": 1780382268556
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974733_37.294956_28.8",
+      "ref": "32263B",
+      "name": "김준호교수실",
+      "room_type": "office",
+      "updatedAt": 1780382274846
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974776_37.294980_44.2",
+      "ref": "32263A",
+      "name": "계산유전체학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780382279470
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974820_37.295004_30.5",
+      "ref": "32262",
+      "name": "분자발생학 및 세포신호전달 연구실",
+      "room_type": "lab",
+      "updatedAt": 1780382284038
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974865_37.295029_46.4",
+      "ref": "32260",
+      "name": "분자발생학 및 세포신호전달 연구실",
+      "room_type": "lab",
+      "updatedAt": 1780382286965
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974946_37.295073_94.5",
+      "ref": "32258",
+      "name": "식물생화학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780382289639
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975015_37.295111_25.5",
+      "ref": "32257",
+      "name": "권재영교수실",
+      "room_type": "office",
+      "updatedAt": 1780382292777
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975042_37.295135_31.9",
+      "ref": "32256",
+      "name": "신경유전학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780382295992
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975186_37.295204_302.5",
+      "ref": "32255",
+      "name": "송천강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780382305386
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975384_37.295145_107.9",
+      "ref": "32254B",
+      "name": "일반화학실험실Ⅲ",
+      "room_type": "lab",
+      "updatedAt": 1780382312007
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975484_37.295132_28.5",
+      "ref": "32254A",
+      "name": "일반화학실험준비실Ⅲ",
+      "room_type": "lab",
+      "updatedAt": 1780382317375
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975520_37.295127_20.8",
+      "ref": "32253",
+      "name": "일반화학시약실",
+      "room_type": "lab",
+      "updatedAt": 1780382322156
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975557_37.295123_29.5",
+      "ref": "32252",
+      "name": "일반화학실험준비실Ⅱ",
+      "room_type": "lab",
+      "updatedAt": 1780382325189
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975678_37.295107_133.1",
+      "ref": "32251",
+      "name": "일반화학실험실Ⅱ",
+      "room_type": "lab",
+      "updatedAt": 1780382330202
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975659_37.295009_168.9",
+      "ref": "32201",
+      "name": "일반화학실험실Ⅰ",
+      "room_type": "lab",
+      "updatedAt": 1780382332787
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975537_37.295027_34.8",
+      "ref": "32202",
+      "name": "일반화학실험준비실Ⅰ",
+      "room_type": "lab",
+      "updatedAt": 1780382336417
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974023_37.294854_76.1",
+      "ref": "32316",
+      "name": "세포성장조절연구실",
+      "room_type": "lab",
+      "updatedAt": 1780382440381
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974201_37.294916_21.9",
+      "ref": "32366",
+      "name": "박석희교수실",
+      "room_type": "office",
+      "updatedAt": 1780382446872
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974289_37.294904_32.3",
+      "ref": "32365",
+      "name": "(주)브릿지바이오",
+      "room_type": "",
+      "updatedAt": 1780382482940
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974363_37.294892_23.6",
+      "ref": "32363",
+      "name": "식물배양실",
+      "room_type": "lab",
+      "updatedAt": 1780382459900
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974419_37.294887_13.5",
+      "ref": "32362",
+      "name": "김진섭교수실",
+      "room_type": "office",
+      "updatedAt": 1780382464720
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974263_37.294829_182.1",
+      "ref": "32313",
+      "name": "분자환경생물학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780382529437
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974401_37.294808_31.8",
+      "ref": "32312",
+      "name": "이재성교수실",
+      "room_type": "office",
+      "updatedAt": 1780382532251
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974453_37.294801_57.8",
+      "ref": "32311",
+      "name": "김승원교수실",
+      "room_type": "office",
+      "updatedAt": 1780382536864
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974655_37.294913_29.3",
+      "ref": "32360B",
+      "name": "연구교수실",
+      "room_type": "office",
+      "updatedAt": 1780382643981
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974677_37.294810_35.1",
+      "ref": "32310B",
+      "name": "전자 구조 제어 연구실",
+      "room_type": "lab",
+      "updatedAt": 1780382556400
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974723_37.294835_33.0",
+      "ref": "32310A",
+      "name": "전자 구조 제어 실험실",
+      "room_type": "lab",
+      "updatedAt": 1780382560739
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974766_37.294859_30.6",
+      "ref": "32309",
+      "name": "손병민교수실",
+      "room_type": "office",
+      "updatedAt": 1780382564515
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974800_37.294878_19.6",
+      "ref": "32308",
+      "name": "한정훈교수실",
+      "room_type": "office",
+      "updatedAt": 1780382567516
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974694_37.294935_37.0",
+      "ref": "32360A",
+      "name": "강대준교수실",
+      "room_type": "office",
+      "updatedAt": 1780382652760
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974733_37.294956_28.8",
+      "ref": "32359C",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780382664364
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974766_37.294975_27.2",
+      "ref": "32359B",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780382668723
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974807_37.294997_47.4",
+      "ref": "32359A",
+      "name": "핵천체물리실험연구실",
+      "room_type": "lab",
+      "updatedAt": 1780382599431
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974856_37.295024_31.8",
+      "ref": "32358",
+      "name": "초빙교수실",
+      "room_type": "office",
+      "updatedAt": 1780382610670
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974893_37.295044_32.4",
+      "ref": "32357",
+      "name": "노창동교수실",
+      "room_type": "office",
+      "updatedAt": 1780382613600
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974956_37.295079_76.9",
+      "ref": "32356C",
+      "name": "대수학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780382620214
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975015_37.295111_25.5",
+      "ref": "32356B",
+      "name": "서이혁교수실",
+      "room_type": "office",
+      "updatedAt": 1780382625798
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975042_37.295135_31.9",
+      "ref": "32356A",
+      "name": "수학과세미나실",
+      "room_type": "classroom",
+      "updatedAt": 1780382629860
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974588_37.294879_69.0",
+      "ref": "32361",
+      "name": "물리학과신진연구원연구실",
+      "room_type": "lab",
+      "updatedAt": 1780382635103
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974828_37.294894_23.5",
+      "ref": "32307",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780382674847
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974978_37.294976_110.9",
+      "ref": "32306",
+      "name": "허석문교수실",
+      "room_type": "office",
+      "updatedAt": 1780382762386
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975002_37.294990_21.3",
+      "ref": "32305B",
+      "name": "임용도교수실",
+      "room_type": "office",
+      "updatedAt": 1780382720275
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975046_37.295014_47.5",
+      "ref": "32305A",
+      "name": "선형모델연구실",
+      "room_type": "lab",
+      "updatedAt": 1780382726645
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975090_37.295038_21.7",
+      "ref": "32304",
+      "name": "지홍창교수실",
+      "room_type": "office",
+      "updatedAt": 1780382730742
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975120_37.295055_25.8",
+      "ref": "32303",
+      "name": "정윤모교수실",
+      "room_type": "office",
+      "updatedAt": 1780382733914
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975197_37.295158_35.4",
+      "ref": "32355",
+      "name": "여학생휴게실",
+      "room_type": "lounge",
+      "updatedAt": 1780382802273
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975310_37.295156_75.7",
+      "ref": "32354B",
+      "name": "기초과학연구소연구원실",
+      "room_type": "lab",
+      "updatedAt": 1780382808550
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975441_37.295137_71.6",
+      "ref": "32354A",
+      "name": "기초과학연구소사무실",
+      "room_type": "lab",
+      "updatedAt": 1780382816464
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975507_37.295129_35.9",
+      "ref": "32353",
+      "name": "기초물리학실험준비실",
+      "room_type": "lab",
+      "updatedAt": 1780382820774
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975586_37.295119_74.3",
+      "ref": "32352",
+      "name": "기초물리학실험실",
+      "room_type": "lab",
+      "updatedAt": 1780382825303
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975686_37.295106_55.8",
+      "ref": "32351B",
+      "name": "진화유전체학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780382834125
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975753_37.295097_32.8",
+      "ref": "32351A",
+      "name": "윤환수교수실",
+      "room_type": "office",
+      "updatedAt": 1780382838767
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975693_37.295004_113.0",
+      "ref": "32301",
+      "name": "감염및염증질환연구실Ⅰ",
+      "room_type": "lab",
+      "updatedAt": 1780382843164
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975575_37.295021_72.0",
+      "ref": "32302A",
+      "name": "감염및염증질환연구실Ⅱ",
+      "room_type": "lab",
+      "updatedAt": 1780382849012
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975518_37.295029_30.8",
+      "ref": "32302B",
+      "name": "배외식교수실",
+      "room_type": "office",
+      "updatedAt": 1780382854143
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974480_37.294360_119.5",
+      "ref": "31112",
+      "name": "반도체및나노응용연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383337303
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974585_37.294342_28.6",
+      "ref": "31111B",
+      "name": "반도체및나노응용연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383341941
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974623_37.294337_28.5",
+      "ref": "31111A",
+      "name": "정동근교수실",
+      "room_type": "office",
+      "updatedAt": 1780383346586
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974637_37.294419_23.3",
+      "ref": "31157",
+      "name": "중성미자천체입자물리연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383352092
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974694_37.294412_45.3",
+      "ref": "31156B",
+      "name": "에피산화물연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383356146
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974772_37.294403_48.6",
+      "ref": "31156A",
+      "name": "중성미자천체입자물리연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383360770
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974661_37.294333_26.1",
+      "ref": "31110",
+      "name": "최우석교수실",
+      "room_type": "office",
+      "updatedAt": 1780383365899
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974698_37.294329_28.9",
+      "ref": "31109",
+      "name": "카르스텐로트교수실",
+      "room_type": "office",
+      "updatedAt": 1780383374771
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974738_37.294324_28.6",
+      "ref": "31108B",
+      "name": "중력파실험물리연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383380625
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974778_37.294320_29.8",
+      "ref": "31108A",
+      "name": "이경하교수실",
+      "room_type": "office",
+      "updatedAt": 1780383387221
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974838_37.294313_54.9",
+      "ref": "31107",
+      "name": "중력파실험물리연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383392286
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974956_37.294397_29.8",
+      "ref": "31155B",
+      "name": "나노물리 및 나노소자 연구실: 반도체/에너지/광",
+      "room_type": "lab",
+      "updatedAt": 1780383406798
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975018_37.294441_74.4",
+      "ref": "31155A",
+      "name": "나노물리 및 나노소자 연구실: 반도체/에너지/광",
+      "room_type": "lab",
+      "updatedAt": 1780383412191
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975081_37.294477_29.8",
+      "ref": "31154",
+      "name": "나노물리 및 나노소자 연구실: 반도체/에너지/광",
+      "room_type": "lab",
+      "updatedAt": 1780383417280
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975111_37.294495_22.6",
+      "ref": "31153",
+      "name": "강원남교수실",
+      "room_type": "office",
+      "updatedAt": 1780383420728
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975173_37.294531_85.4",
+      "ref": "31152",
+      "name": "초전도체및박막물리연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383424596
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975286_37.294596_114.1",
+      "ref": "31151B",
+      "name": "적외선분광물성연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383435520
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975400_37.294649_87.9",
+      "ref": "31151A",
+      "name": "황정식교수실",
+      "room_type": "office",
+      "updatedAt": 1780383445791
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975162_37.294424_63.4",
+      "ref": "31102",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780383478895
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975101_37.294392_19.4",
+      "ref": "31103",
+      "name": "공동측정기기실",
+      "room_type": "lab",
+      "updatedAt": 1780383483759
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975058_37.294369_32.9",
+      "ref": "31104",
+      "name": "유인태교수실",
+      "room_type": "office",
+      "updatedAt": 1780383485970
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975332_37.294520_92.1",
+      "ref": "31101",
+      "name": "반도체나노소자연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383473750
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974542_37.294653_153.2",
+      "ref": "31214",
+      "name": "첨단e+강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780383560218
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974486_37.294525_150.4",
+      "ref": "31213",
+      "name": "일반강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780383563938
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974467_37.294362_164.9",
+      "ref": "31212",
+      "name": "물리학과열람실",
+      "room_type": "lounge",
+      "updatedAt": 1780383570687
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974648_37.294423_48.0",
+      "ref": "31257B",
+      "name": "수리계산실(PC실)",
+      "room_type": "classroom",
+      "updatedAt": 1780383579426
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974714_37.294410_22.9",
+      "ref": "31257A",
+      "name": "수리계산실",
+      "room_type": "lab",
+      "updatedAt": 1780383584360
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974752_37.294406_23.6",
+      "ref": "31256B",
+      "name": "김장수교수실",
+      "room_type": "office",
+      "updatedAt": 1780383591775
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974792_37.294401_23.9",
+      "ref": "31256A",
+      "name": "윤석배교수실",
+      "room_type": "office",
+      "updatedAt": 1780383596258
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974602_37.294340_56.3",
+      "ref": "31211",
+      "name": "위상양자물성 연구실-ll",
+      "room_type": "lab",
+      "updatedAt": 1780383600174
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974679_37.294331_57.0",
+      "ref": "31210",
+      "name": "위상양자물성 연구실-l",
+      "room_type": "lab",
+      "updatedAt": 1780383603001
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974738_37.294324_28.4",
+      "ref": "31209",
+      "name": "최광용교수실",
+      "room_type": "office",
+      "updatedAt": 1780383606475
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974778_37.294320_28.6",
+      "ref": "31208",
+      "name": "고에너지물리연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383610312
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974837_37.294313_56.8",
+      "ref": "31207",
+      "name": "고에너지물리연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383613795
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974981_37.294420_72.1",
+      "ref": "31255",
+      "name": "일반물리실험실Ⅱ",
+      "room_type": "lab",
+      "updatedAt": 1780383686205
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975043_37.294456_29.7",
+      "ref": "31254",
+      "name": "일반물리학실험준비실Ⅱ",
+      "room_type": "lab",
+      "updatedAt": 1780383688993
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975079_37.294485_35.7",
+      "ref": "31253",
+      "name": "일반물리학실험준비실Ⅰ",
+      "room_type": "lab",
+      "updatedAt": 1780383692151
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975162_37.294524_101.8",
+      "ref": "31252",
+      "name": "일반물리실험실Ⅰ",
+      "room_type": "lab",
+      "updatedAt": 1780383695346
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975238_37.294568_30.5",
+      "ref": "31251D",
+      "name": "킨카찬드라다스교수실",
+      "room_type": "office",
+      "updatedAt": 1780383710568
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975271_37.294587_28.8",
+      "ref": "31251C",
+      "name": "박정형교수실",
+      "room_type": "office",
+      "updatedAt": 1780383712724
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975300_37.294604_23.7",
+      "ref": "31251B",
+      "name": "Post-Doc연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383716677
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975337_37.294626_44.7",
+      "ref": "31251A",
+      "name": "기하및금융수학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383721271
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975322_37.294514_124.5",
+      "ref": "31201",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780383728279
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975142_37.294413_27.7",
+      "ref": "31202",
+      "name": "김훈교수실",
+      "room_type": "office",
+      "updatedAt": 1780383731944
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975101_37.294392_25.0",
+      "ref": "31203",
+      "name": "생물물리계산연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383741092
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975067_37.294374_17.8",
+      "ref": "31204A",
+      "name": "응용반도체소자나노물리연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383747790
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975032_37.294356_23.3",
+      "ref": "31204B",
+      "name": "석좌초빙교수실/연구도서실",
+      "room_type": "office",
+      "updatedAt": 1780383761765
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974542_37.294653_153.2",
+      "ref": "31317",
+      "name": "기초과학연구소세미나실",
+      "room_type": "classroom",
+      "updatedAt": 1780383820397
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974486_37.294525_150.4",
+      "ref": "31316",
+      "name": "일반강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780383823255
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974467_37.294362_164.9",
+      "ref": "31315",
+      "name": "수학과열람실",
+      "room_type": "lounge",
+      "updatedAt": 1780383827619
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974580_37.294342_24.2",
+      "ref": "31314",
+      "name": "이종락교수실",
+      "room_type": "office",
+      "updatedAt": 1780383835443
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974618_37.294338_32.2",
+      "ref": "31313",
+      "name": "허정규교수실",
+      "room_type": "office",
+      "updatedAt": 1780383838759
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974659_37.294333_28.0",
+      "ref": "31312",
+      "name": "황인성교수실",
+      "room_type": "office",
+      "updatedAt": 1780383841925
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974699_37.294329_29.0",
+      "ref": "31311",
+      "name": "최우철교수실",
+      "room_type": "office",
+      "updatedAt": 1780383844994
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974738_37.294324_28.4",
+      "ref": "31310",
+      "name": "오세진교수실",
+      "room_type": "office",
+      "updatedAt": 1780383848049
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974778_37.294320_28.6",
+      "ref": "31309",
+      "name": "오재성교수실",
+      "room_type": "office",
+      "updatedAt": 1780383851378
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974811_37.294316_19.7",
+      "ref": "31308",
+      "name": "천창범교수실",
+      "room_type": "office",
+      "updatedAt": 1780383855011
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974851_37.294311_37.2",
+      "ref": "31307",
+      "name": "배종식교수실",
+      "room_type": "office",
+      "updatedAt": 1780383858112
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974628_37.294426_19.1",
+      "ref": "31359",
+      "name": "김창헌교수실",
+      "room_type": "office",
+      "updatedAt": 1780383864638
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974663_37.294416_20.1",
+      "ref": "31358",
+      "name": "권순학교수실",
+      "room_type": "office",
+      "updatedAt": 1780383867365
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974715_37.294410_42.9",
+      "ref": "31357",
+      "name": "수학과회의실",
+      "room_type": "lounge",
+      "updatedAt": 1780383871417
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974770_37.294404_20.7",
+      "ref": "31356",
+      "name": "수학과사무실",
+      "room_type": "office",
+      "updatedAt": 1780383876157
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975008_37.294435_101.8",
+      "ref": "31355",
+      "name": "물리학과세미나실",
+      "room_type": "classroom",
+      "updatedAt": 1780383925732
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975351_37.294634_59.9",
+      "ref": "31315A",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780383952286
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975277_37.294598_61.5",
+      "ref": "31315B",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780383956787
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975201_37.294547_93.0",
+      "ref": "31352",
+      "name": "전자물리학실험실",
+      "room_type": "lab",
+      "updatedAt": 1780383960232
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975120_37.294500_29.8",
+      "ref": "31353",
+      "name": "전자물리학실험준비실",
+      "room_type": "lab",
+      "updatedAt": 1780383968157
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975079_37.294485_35.7",
+      "ref": "31354",
+      "name": "물리학과서고",
+      "room_type": "",
+      "updatedAt": 1780383970078
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975233_37.294462_18.2",
+      "ref": "31301A",
+      "name": "최기영교수실",
+      "room_type": "office",
+      "updatedAt": 1780383976584
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975205_37.294446_21.0",
+      "ref": "31301B",
+      "name": "천체입자물리및우주론이론연구실",
+      "room_type": "lab",
+      "updatedAt": 1780383980426
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975178_37.294432_17.3",
+      "ref": "31302A",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780383985655
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975156_37.294420_17.6",
+      "ref": "31302B",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780383990454
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975130_37.294407_12.0",
+      "ref": "31303",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780383998292
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975101_37.294392_25.0",
+      "ref": "31304",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780384000809
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975067_37.294374_17.8",
+      "ref": "31305",
+      "name": "김윤배교수실",
+      "room_type": "office",
+      "updatedAt": 1780384004555
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.975032_37.294356_23.3",
+      "ref": "31306A",
+      "name": "김범준교수실",
+      "room_type": "office",
+      "updatedAt": 1780384010260
     }
   ]
 }
