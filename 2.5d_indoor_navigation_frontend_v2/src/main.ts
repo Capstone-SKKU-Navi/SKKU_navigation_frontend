@@ -7,7 +7,7 @@ import * as IndoorLayer from './components/indoorLayer';
 import * as RouteOverlay from './components/routeOverlay';
 import * as RoutePinMarkers from './components/routePinMarkers';
 import { initRouting, searchRooms as apiSearchRooms, setUseApi, isApiMode } from './services/apiClient';
-import { getApiBase } from './config/apiConfig';
+import { getApiBase, getVideoBase, hasConfiguredApiBase } from './config/apiConfig';
 import { ROOM_TYPE_LABELS, RoomListItem } from './models/types';
 import * as VideoSettings from './editor/videoSettings';
 import * as WalkthroughOverlay from './components/walkthroughOverlay';
@@ -29,10 +29,15 @@ function syncRoute3D(): void {
 // ===== Entry Point =====
 document.addEventListener('DOMContentLoaded', async () => {
   try {
+    configureProductionApiMode();
     // Backend data must complete first: graph import (inside initRouting)
     // calls detectBuilding() which depends on building outlines being loaded.
     // Running them in parallel races and stamps every node "outside".
-    await BackendService.fetchBackendData();
+    if (IS_PROD_BUILD) {
+      await BackendService.fetchBackendDataFromApi(getApiBase());
+    } else {
+      await BackendService.fetchBackendData();
+    }
     await Promise.all([
       initRouting(),
       VideoSettings.loadVideoSettings(),
@@ -76,7 +81,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // so routing and geojson load from the deployed backend instead of
         // the local-only fallback. Best-effort — failure leaves the local
         // snapshot in place so the UI is still navigable.
-        forceApiModeForMobile().catch(err => {
+        forceApiMode().catch(err => {
           console.warn('[Mobile] forceApiMode failed:', err);
         });
       } else {
@@ -116,16 +121,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       hideLoading();
     });
   } catch (err: any) {
-    showError(err?.message ?? '데이터를 불러올 수 없습니다.');
+    showError(formatStartupError(err));
   }
 });
 
 // Mirrors the API-direction half of apiModeBadge.onToggleClick: switch the
 // router to API mode, refresh BackendService from /api/geojson/all, and
 // rebuild the map sources. Idempotent.
-async function forceApiModeForMobile(): Promise<void> {
+function configureProductionApiMode(): void {
+  if (!IS_PROD_BUILD) return;
+  setUseApi(true);
+  BackendService.setVideoBase(getVideoBase());
+}
+
+async function forceApiMode(): Promise<void> {
   if (isApiMode()) return;
   setUseApi(true);
+  BackendService.setVideoBase(getVideoBase());
   await initRouting();
   await BackendService.fetchBackendDataFromApi(getApiBase());
   const map = GeoMap.getMap();
@@ -143,6 +155,13 @@ function showError(msg: string): void {
   if (overlay) {
     overlay.innerHTML = `<p style="color:#ef5350;">${escapeHtml(msg)}</p>`;
   }
+}
+
+function formatStartupError(err: any): string {
+  if (IS_PROD_BUILD && !hasConfiguredApiBase()) {
+    return '백엔드 API 주소가 설정되지 않았습니다. Vercel 환경변수 API_BASE_URL을 설정한 뒤 다시 배포해 주세요.';
+  }
+  return err?.message ?? '데이터를 불러올 수 없습니다.';
 }
 
 // ===== Building Info =====

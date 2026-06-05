@@ -1,5 +1,6 @@
 import { BuildingInterface, BuildingConstants, BuildingManifest, LevelData, RoomListItem } from '../models/types';
 import { extractLevels } from '../utils/extractLevels';
+import { getApiBase } from '../config/apiConfig';
 
 // Building view config (zoom, pitch, etc.)
 const BUILDING_VIEW = {
@@ -51,25 +52,51 @@ export function getVideoUrl(filename: string): string {
 }
 
 // ===== Video availability =====
-// Which video files actually exist on the server (from GET /api/videos-list).
-// Lets the walkthrough gray out missing clips instead of 404-ing and freezing.
+// Which video files actually exist on the server. In dev we can read the
+// webpack-dev-server list endpoint; in production we probe only the files
+// returned by the route API, so the Spring backend does not need a list API.
 let availableVideos: Set<string> | null = null;
+const checkedVideos = new Map<string, boolean>();
 
-export async function loadAvailableVideos(): Promise<void> {
+export async function loadAvailableVideos(filenames?: Iterable<string>): Promise<void> {
+  const requested = filenames ? [...new Set([...filenames].filter(Boolean))] : [];
+  if (requested.length > 0) {
+    await Promise.all(requested.map(checkVideoAvailability));
+    return;
+  }
+
   if (availableVideos) return; // already loaded
   try {
-    const res = await fetch('/api/videos-list');
+    const res = await fetch(`${getApiBase()}/videos-list`);
     if (!res.ok) return;
     const { files } = (await res.json()) as { files?: string[] };
     if (!Array.isArray(files)) return;
     // Store by basename — clips reference files flat (e.g. "slib_e_1_1e.mp4").
     availableVideos = new Set(files.map(f => f.split('/').pop() ?? f));
   } catch {
-    // Leave null → isVideoAvailable assumes present (never a false "missing").
+    // Leave null → isVideoAvailable assumes present unless a per-file probe
+    // has explicitly marked a file missing.
+  }
+}
+
+async function checkVideoAvailability(filename: string): Promise<void> {
+  if (checkedVideos.has(filename)) return;
+  try {
+    const res = await fetch(getVideoUrl(filename), {
+      method: 'GET',
+      headers: { Range: 'bytes=0-0' },
+    });
+    res.body?.cancel().catch(() => { /* noop */ });
+    checkedVideos.set(filename, res.status === 404 || res.status === 410 ? false : true);
+  } catch {
+    // CORS/network uncertainty should not create a false "missing" label.
+    // The player still handles real 404/decode failures as gap segments.
+    checkedVideos.set(filename, true);
   }
 }
 
 export function isVideoAvailable(filename: string): boolean {
+  if (checkedVideos.has(filename)) return checkedVideos.get(filename) === true;
   if (!availableVideos) return true; // list unknown → assume present, never block
   return availableVideos.has(filename);
 }
@@ -324,6 +351,22 @@ export async function fetchBackendDataFromApi(apiBase: string): Promise<void> {
     if (n > maxLat) maxLat = n;
   }
   if (Number.isFinite(minLng)) mapCenter = [(minLng + maxLng) / 2, (minLat + maxLat) / 2];
+
+  const primaryCode = buildingCodes[0];
+  const view = BUILDING_VIEW[primaryCode] ?? DEFAULT_VIEW;
+  buildingConstants = {
+    standardZoom: view.STANDARD_ZOOM,
+    maxZoom: view.MAX_ZOOM,
+    minZoom: view.MIN_ZOOM,
+    standardBearing: view.STANDARD_BEARING_3D_MODE,
+    standardBearing3DMode: view.STANDARD_BEARING_3D_MODE,
+    standardPitch3DMode: view.STANDARD_PITCH_3D_MODE,
+    standardZoom3DMode: view.STANDARD_ZOOM_3D_MODE,
+  };
+
+  const primaryManifest = primaryCode ? buildingManifests.get(primaryCode) : null;
+  buildingDescription = primaryManifest?.name ?? primaryCode ?? '';
+  if (primaryManifest?.loc_ref) buildingDescription += ` (${primaryManifest.loc_ref})`;
 }
 
 /** Restore the local-static GeoJSON state captured on the first API fetch. */

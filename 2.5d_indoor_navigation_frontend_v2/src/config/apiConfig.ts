@@ -6,11 +6,13 @@
 // testing) where the backend's CORS allowlist would otherwise reject it.
 //
 // In production the bundle hits the absolute backend URL (override via
-// `window.__API_BASE__` for staging / different hosts).
+// `window.__API_BASE__` for staging / different hosts). Video URLs default
+// to the same API host's `/videos` endpoint unless VIDEO_BASE_URL overrides it.
 
 declare global {
   interface Window {
     __API_BASE__?: string;
+    __VIDEO_BASE__?: string;
   }
 }
 
@@ -20,7 +22,7 @@ declare global {
 // gets substituted — `typeof process`, optional chaining, etc. would survive
 // into the bundle and crash in the browser (webpack 5 does not polyfill the
 // `process` global).
-declare const process: { env: { NODE_ENV?: string; API_BASE_URL?: string } };
+declare const process: { env: { NODE_ENV?: string; API_BASE_URL?: string; VIDEO_BASE_URL?: string } };
 const IS_DEV = process.env.NODE_ENV === 'development';
 
 // Build-time API base URL. In dev: '/api' so webpack-dev-server proxy handles
@@ -30,9 +32,21 @@ const IS_DEV = process.env.NODE_ENV === 'development';
 // produce broken URLs like `/route?...`.
 const BUILD_API_BASE = process.env.API_BASE_URL || '';
 const DEFAULT_API_BASE = IS_DEV ? '/api' : (BUILD_API_BASE || '/api');
+const BUILD_VIDEO_BASE = process.env.VIDEO_BASE_URL || '';
 
 export function getApiBase(): string {
   const raw = (typeof window !== 'undefined' && window.__API_BASE__) || DEFAULT_API_BASE;
   // Strip any trailing slash so callers using `${base}/path` never produce `//`.
+  return raw.replace(/\/+$/, '');
+}
+
+export function hasConfiguredApiBase(): boolean {
+  return IS_DEV || Boolean(BUILD_API_BASE || (typeof window !== 'undefined' && window.__API_BASE__));
+}
+
+export function getVideoBase(): string {
+  const raw = (typeof window !== 'undefined' && window.__VIDEO_BASE__)
+    || BUILD_VIDEO_BASE
+    || (IS_DEV ? '/videos' : `${getApiBase()}/videos`);
   return raw.replace(/\/+$/, '');
 }

@@ -360,9 +360,9 @@ export async function triggerFindRoute(): Promise<void> {
 
     showRouteInfo(routeResult.estimatedTime, routeResult.totalDistance);
 
-    // Know which video files exist before building the playlist, so missing
+    // Know which route videos exist before building the playlist, so missing
     // clips can be grayed out instead of 404-ing during playback. Cached.
-    await BackendService.loadAvailableVideos();
+    await BackendService.loadAvailableVideos(routeResult.clips?.map(c => c.videoFile));
     const playlist = buildWalkthroughPlaylist(routeResult);
     console.log('[Walkthrough] playlist:', playlist ? `${playlist.clips.length} clips, ${playlist.totalDuration.toFixed(1)}s` : 'null');
     if (playlist && playlist.clips.length > 0) {
