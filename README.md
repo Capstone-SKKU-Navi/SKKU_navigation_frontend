@@ -2,7 +2,7 @@
 
 성균관대학교 자연과학캠퍼스 실내 길찾기 웹앱. 2.5D 실내 지도에서 방을 검색하고, 백엔드 API 기반 경로와 360도 워크스루를 확인합니다.
 
-[![Status](https://img.shields.io/website?url=https%3A%2F%2F25dindoornavigationfrontendv2.vercel.app&label=status&up_message=online&down_message=offline)](https://25dindoornavigationfrontendv2.vercel.app)
+[![Status](https://img.shields.io/website?url=https%3A%2F%2F25dindoornavigationfrontendv2.vercel.app%2Fapi%2Fgeojson%2Fall&label=status&up_message=ready&down_message=api%20missing)](https://25dindoornavigationfrontendv2.vercel.app)
 
 **[페이지](https://25dindoornavigationfrontendv2.vercel.app)**
 
