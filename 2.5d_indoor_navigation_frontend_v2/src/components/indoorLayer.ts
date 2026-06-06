@@ -41,13 +41,13 @@ const OUTLINE_LIFT = 0.3;              // extra lift for the room outline above 
 const OUTLINE_THICKNESS_2D = 0.2;      // outline slab height in 2D mode
 
 // Opacity
-const ACTIVE_ROOM_OPACITY = 0.88;
+const ACTIVE_ROOM_OPACITY = 1;
 const INACTIVE_ROOM_OPACITY = 0.3;
 const ACTIVE_WALL_OPACITY = 0.35;
 const INACTIVE_WALL_OPACITY = 0.1;
-const ACTIVE_CORRIDOR_OPACITY = 0.6;
+const ACTIVE_CORRIDOR_OPACITY = 1;
 const INACTIVE_CORRIDOR_OPACITY = 0.15;
-const ACTIVE_STAIRS_OPACITY = 0.7;
+const ACTIVE_STAIRS_OPACITY = 1;
 const INACTIVE_STAIRS_OPACITY = 0.25;
 const ACTIVE_ROOM_OUTLINE_OPACITY = 0.75;
 const ACTIVE_CORRIDOR_OUTLINE_OPACITY = 0.6;
@@ -105,8 +105,8 @@ export function setFloorHeight(level: number, _height: number): void {
 
 /** Get the base altitude for a given level. Iterates only EXISTING levels so
  *  non-existent floors (e.g. level 0 between B1 and L1) don't accumulate
- *  phantom height. Basement levels (negative) default to 0 height — they sit
- *  at the same base as ground floor so 3D stacking starts from L1 upward. */
+ *  phantom height. Basement levels sit on the map plane when selected; they
+ *  are filtered out of above-ground below-stacks to avoid z-fighting with 1F. */
 export function getLevelBase(level: number): number {
   const levels = [...BackendService.getAllLevels()].sort((a, b) => a - b);
   let base = 0;
@@ -229,7 +229,7 @@ function addBuildingFootprintsLayer(map: maplibregl.Map): void {
 
 function applyFootprintsFilter(map: maplibregl.Map): void {
   if (!map.getLayer(FOOTPRINTS_FILL_LAYER)) return;
-  if (!is3DMode) {
+  if (!is3DMode || disabledGroups.has('floor')) {
     setLayerVis(map, FOOTPRINTS_FILL_LAYER, 'none');
     setLayerVis(map, FOOTPRINTS_LINE_LAYER, 'none');
     return;
@@ -281,7 +281,7 @@ export function highlightRoom(map: maplibregl.Map, ref: string | null): void {
   }
 }
 
-type LayerGroup = 'rooms' | 'corridors' | 'walls' | 'labels';
+type LayerGroup = 'rooms' | 'corridors' | 'floor' | 'labels';
 const disabledGroups = new Set<LayerGroup>();
 
 /** Toggle visibility for a layer group, then re-apply normal visibility rules. */
@@ -467,7 +467,7 @@ function applyVisibility(map: maplibregl.Map): void {
 
   applyFootprintsFilter(map);
 
-  if (is3DMode) {
+  if (is3DMode && !disabledGroups.has('labels')) {
     const altitude = getLevelBase(currentLevel) + ROOM_THICKNESS + 0.5;
     FloatingLabels.updateLabels(currentLevel, true, altitude, effectiveFocusSet());
   } else {
@@ -489,7 +489,12 @@ function applyBuildingVisibility(map: maplibregl.Map, building: string): void {
         ['!=', ['get', '_level'], currentLevel],
         ['in', ['get', '_level'], ['literal', [...routeLevels!]]],
       ]
-    : ['<', ['get', '_level'], currentLevel];
+    : currentLevel > 0
+      ? ['all',
+          ['>=', ['get', '_level'], 1],
+          ['<', ['get', '_level'], currentLevel],
+        ]
+      : ['<', ['get', '_level'], currentLevel];
 
   // Update filters on every layer (sub-frame cost; doesn't re-tessellate).
   const activeLayers = [
@@ -625,14 +630,14 @@ function addBuildingLayers(map: maplibregl.Map, building: string): void {
       type: 'geojson',
       data: { type: 'FeatureCollection', features: merged.corridors },
     });
-    addExtrusionLayerPair(map, building, 'corridors', CORRIDOR_COLOR, true);
+    addExtrusionLayerPair(map, building, 'corridors', CORRIDOR_COLOR);
 
     if (merged.corridorEdges.length > 0) {
       map.addSource(`${building}-corridors-edges`, {
         type: 'geojson',
         data: { type: 'FeatureCollection', features: merged.corridorEdges },
       });
-      addExtrusionLayerPair(map, building, 'corridors-edges', OUTLINE_COLOR, false);
+      addExtrusionLayerPair(map, building, 'corridors-edges', OUTLINE_COLOR);
     }
   }
 
@@ -641,7 +646,7 @@ function addBuildingLayers(map: maplibregl.Map, building: string): void {
       type: 'geojson',
       data: { type: 'FeatureCollection', features: merged.rooms },
     });
-    addExtrusionLayerPair(map, building, 'rooms', buildRoomColorExpression(), true);
+    addExtrusionLayerPair(map, building, 'rooms', buildRoomColorExpression());
   }
 
   if (merged.stairs.length > 0) {
@@ -649,7 +654,7 @@ function addBuildingLayers(map: maplibregl.Map, building: string): void {
       type: 'geojson',
       data: { type: 'FeatureCollection', features: merged.stairs },
     });
-    addExtrusionLayerPair(map, building, 'stairs', ROOM_COLORS.stairs, true);
+    addExtrusionLayerPair(map, building, 'stairs', ROOM_COLORS.stairs);
   }
 
   if (merged.roomEdges.length > 0) {
@@ -657,7 +662,7 @@ function addBuildingLayers(map: maplibregl.Map, building: string): void {
       type: 'geojson',
       data: { type: 'FeatureCollection', features: merged.roomEdges },
     });
-    addExtrusionLayerPair(map, building, 'rooms-edges', ROOM_OUTLINE_COLOR, false);
+    addExtrusionLayerPair(map, building, 'rooms-edges', ROOM_OUTLINE_COLOR);
   }
 
   // Walls — last (paint on top of everything else). Source is union(rooms,
@@ -669,7 +674,7 @@ function addBuildingLayers(map: maplibregl.Map, building: string): void {
       type: 'geojson',
       data: { type: 'FeatureCollection', features: merged.walls },
     });
-    addExtrusionLayerPair(map, building, 'walls', WALL_COLOR, true);
+    addExtrusionLayerPair(map, building, 'walls', WALL_COLOR);
   }
 
   // Labels — separate symbol layer, single (no active/below split). Filter
@@ -795,7 +800,6 @@ function addExtrusionLayerPair(
   building: string,
   featureType: 'rooms' | 'rooms-edges' | 'corridors' | 'corridors-edges' | 'stairs' | 'walls',
   color: any,
-  useGradient: boolean,
 ): void {
   const sourceId = `${building}-${featureType}`;
 
@@ -804,8 +808,8 @@ function addExtrusionLayerPair(
     'fill-extrusion-height': 0,
     'fill-extrusion-base': 0,
     'fill-extrusion-opacity': 0,
+    'fill-extrusion-vertical-gradient': false,
   };
-  if (useGradient) paint['fill-extrusion-vertical-gradient'] = true;
 
   // -below (added first so -active paints on top in z-order)
   map.addLayer({

@@ -5676,5 +5676,781 @@
   "res1_e_1_5e.mp4": {
     "entryYaw": 325.6,
     "updatedAt": 1780061312615
+  },
+  "benz_s_1_1eu.mp4": {
+    "entryYaw": 72.20000000000005,
+    "updatedAt": 1780411532028
+  },
+  "benz_s_1_1od.mp4": {
+    "exitYaw": 233.99999999999994,
+    "updatedAt": 1780411537704
+  },
+  "benz_s_1_2ed.mp4": {
+    "entryYaw": 50.19999999999999,
+    "updatedAt": 1780411549269
+  },
+  "benz_s_1_2eu.mp4": {
+    "entryYaw": 70.80000000000001,
+    "updatedAt": 1780411552956
+  },
+  "benz_s_1_2od.mp4": {
+    "exitYaw": 238.60000000000002,
+    "updatedAt": 1780411556876
+  },
+  "benz_s_1_2ou.mp4": {
+    "exitYaw": 260.59999999999997,
+    "updatedAt": 1780411560551
+  },
+  "benz_s_1_3ed.mp4": {
+    "entryYaw": 59.39999999999998,
+    "updatedAt": 1780411565522
+  },
+  "benz_s_1_3ou.mp4": {
+    "exitYaw": 250.8,
+    "updatedAt": 1780411569608
+  },
+  "benz_s_2_1eu.mp4": {
+    "entryYaw": 116.40000000000003,
+    "updatedAt": 1780411583029
+  },
+  "benz_s_2_1od.mp4": {
+    "exitYaw": 207.4,
+    "updatedAt": 1780411587119
+  },
+  "benz_s_2_2ed.mp4": {
+    "entryYaw": 30.80000000000001,
+    "updatedAt": 1780411591955
+  },
+  "benz_s_2_2eu.mp4": {
+    "entryYaw": 112.20000000000005,
+    "updatedAt": 1780411596301
+  },
+  "benz_s_2_2od.mp4": {
+    "exitYaw": 216.20000000000002,
+    "updatedAt": 1780411600555
+  },
+  "benz_s_2_2ou.mp4": {
+    "exitYaw": 289.2,
+    "updatedAt": 1780411604236
+  },
+  "benz_s_2_3ed.mp4": {
+    "entryYaw": 28,
+    "updatedAt": 1780411609600
+  },
+  "benz_s_2_3ou.mp4": {
+    "exitYaw": 296.59999999999997,
+    "updatedAt": 1780411612524
+  },
+  "benz_s_3_1eu.mp4": {
+    "entryYaw": 2.6000000000000227,
+    "updatedAt": 1780411618679
+  },
+  "benz_s_3_1od.mp4": {
+    "exitYaw": 257.4,
+    "updatedAt": 1780411623240
+  },
+  "benz_s_3_2ed.mp4": {
+    "entryYaw": 64.60000000000002,
+    "updatedAt": 1780411632301
+  },
+  "benz_s_3_2eu.mp4": {
+    "entryYaw": 0,
+    "updatedAt": 1780411634792
+  },
+  "benz_s_3_2od.mp4": {
+    "exitYaw": 263.6,
+    "updatedAt": 1780411638595
+  },
+  "benz_s_3_2ou.mp4": {
+    "exitYaw": 179.6,
+    "updatedAt": 1780411642828
+  },
+  "benz_s_3_3ed.mp4": {
+    "entryYaw": 80,
+    "updatedAt": 1780411647676
+  },
+  "benz_s_3_3ou.mp4": {
+    "exitYaw": 175.79999999999998,
+    "updatedAt": 1780411651420
+  },
+  "benz_s_4_1eu.mp4": {
+    "entryYaw": 9.399999999999977,
+    "updatedAt": 1780411659428
+  },
+  "benz_s_4_1od.mp4": {
+    "exitYaw": 305,
+    "updatedAt": 1780411662038
+  },
+  "benz_s_4_2ed.mp4": {
+    "entryYaw": 117.39999999999998,
+    "updatedAt": 1780411668841
+  },
+  "benz_s_4_2eu.mp4": {
+    "entryYaw": 4,
+    "updatedAt": 1780411671285
+  },
+  "benz_s_4_2od.mp4": {
+    "exitYaw": 303.79999999999995,
+    "updatedAt": 1780411675604
+  },
+  "benz_s_4_2ou.mp4": {
+    "exitYaw": 184.39999999999998,
+    "updatedAt": 1780411679639
+  },
+  "benz_s_4_3ed.mp4": {
+    "entryYaw": 115.59999999999997,
+    "updatedAt": 1780411686003
+  },
+  "benz_s_4_3ou.mp4": {
+    "exitYaw": 184.39999999999992,
+    "updatedAt": 1780411691232
+  },
+  "benz_s_5_1eu.mp4": {
+    "entryYaw": 12.399999999999977,
+    "updatedAt": 1780411698324
+  },
+  "benz_s_5_1od.mp4": {
+    "exitYaw": 291.6,
+    "updatedAt": 1780411701975
+  },
+  "benz_s_5_2ed.mp4": {
+    "entryYaw": 109.79999999999995,
+    "updatedAt": 1780411709510
+  },
+  "benz_s_5_2eu.mp4": {
+    "entryYaw": 10.800000000000011,
+    "updatedAt": 1780411712971
+  },
+  "benz_s_5_2od.mp4": {
+    "exitYaw": 294.4,
+    "updatedAt": 1780411715942
+  },
+  "benz_s_5_2ou.mp4": {
+    "exitYaw": 186.4,
+    "updatedAt": 1780411719733
+  },
+  "benz_s_5_3ed.mp4": {
+    "entryYaw": 110.60000000000002,
+    "updatedAt": 1780411724783
+  },
+  "benz_s_5_3ou.mp4": {
+    "exitYaw": 188.19999999999996,
+    "updatedAt": 1780411729066
+  },
+  "benz_s_6_1eu.mp4": {
+    "entryYaw": 53.39999999999998,
+    "updatedAt": 1780411736569
+  },
+  "benz_s_6_1od.mp4": {
+    "exitYaw": 260,
+    "updatedAt": 1780411741340
+  },
+  "benz_s_6_2ed.mp4": {
+    "entryYaw": 86.80000000000001,
+    "updatedAt": 1780411746974
+  },
+  "benz_s_6_2eu.mp4": {
+    "entryYaw": 50.19999999999999,
+    "updatedAt": 1780411750204
+  },
+  "benz_s_6_2od.mp4": {
+    "exitYaw": 258.2,
+    "updatedAt": 1780411753439
+  },
+  "benz_s_6_2ou.mp4": {
+    "exitYaw": 228,
+    "updatedAt": 1780411757605
+  },
+  "benz_s_6_3ed.mp4": {
+    "entryYaw": 83,
+    "updatedAt": 1780411764653
+  },
+  "benz_s_6_3ou.mp4": {
+    "exitYaw": 228.60000000000002,
+    "updatedAt": 1780411769027
+  },
+  "benz_s_7_1eu.mp4": {
+    "entryYaw": 67.60000000000002,
+    "updatedAt": 1780411775326
+  },
+  "benz_s_7_1od.mp4": {
+    "exitYaw": 148.39999999999998,
+    "updatedAt": 1780411779268
+  },
+  "benz_s_7_2ed.mp4": {
+    "entryYaw": 335.8,
+    "updatedAt": 1780411784271
+  },
+  "benz_s_7_2eu.mp4": {
+    "entryYaw": 60.60000000000002,
+    "updatedAt": 1780411787917
+  },
+  "benz_s_7_2od.mp4": {
+    "exitYaw": 158,
+    "updatedAt": 1780411792225
+  },
+  "benz_s_7_2ou.mp4": {
+    "exitYaw": 234.8,
+    "updatedAt": 1780411796743
+  },
+  "benz_s_7_3ed.mp4": {
+    "entryYaw": 340.8,
+    "updatedAt": 1780411801640
+  },
+  "benz_s_7_3ou.mp4": {
+    "exitYaw": 240.8,
+    "updatedAt": 1780411805266
+  },
+  "benz_s_8_1eu.mp4": {
+    "entryYaw": 79.60000000000002,
+    "updatedAt": 1780411813131
+  },
+  "benz_s_8_1od.mp4": {
+    "exitYaw": 209.6,
+    "updatedAt": 1780411817420
+  },
+  "benz_s_8_2ed.mp4": {
+    "entryYaw": 37,
+    "updatedAt": 1780411822490
+  },
+  "benz_s_8_2eu.mp4": {
+    "entryYaw": 76.60000000000002,
+    "updatedAt": 1780411826468
+  },
+  "benz_s_8_2od.mp4": {
+    "exitYaw": 212.99999999999997,
+    "updatedAt": 1780411829815
+  },
+  "benz_s_8_2ou.mp4": {
+    "exitYaw": 258.6,
+    "updatedAt": 1780411834061
+  },
+  "benz_s_8_3ed.mp4": {
+    "entryYaw": 36.80000000000001,
+    "updatedAt": 1780411840737
+  },
+  "benz_s_8_3ou.mp4": {
+    "exitYaw": 245,
+    "updatedAt": 1780411844220
+  },
+  "benz_s_9_1eu.mp4": {
+    "entryYaw": 120.60000000000002,
+    "updatedAt": 1780411851455
+  },
+  "benz_s_9_1od.mp4": {
+    "exitYaw": 154.2,
+    "updatedAt": 1780411855875
+  },
+  "benz_s_9_2ed.mp4": {
+    "entryYaw": 334.2,
+    "updatedAt": 1780411860407
+  },
+  "benz_s_9_2eu.mp4": {
+    "entryYaw": 132.20000000000005,
+    "updatedAt": 1780411864499
+  },
+  "benz_s_9_2od.mp4": {
+    "exitYaw": 150.39999999999998,
+    "updatedAt": 1780411868162
+  },
+  "benz_s_9_2ou.mp4": {
+    "exitYaw": 312,
+    "updatedAt": 1780411872505
+  },
+  "benz_s_9_3ed.mp4": {
+    "entryYaw": 325.6,
+    "updatedAt": 1780411877373
+  },
+  "benz_s_9_3ou.mp4": {
+    "exitYaw": 304.8,
+    "updatedAt": 1780411881023
+  },
+  "benz_s_10_1eu.mp4": {
+    "entryYaw": 49.60000000000002,
+    "updatedAt": 1780411887137
+  },
+  "benz_s_10_1od.mp4": {
+    "exitYaw": 241.2,
+    "updatedAt": 1780411891279
+  },
+  "benz_s_10_2ed.mp4": {
+    "entryYaw": 47,
+    "updatedAt": 1780411895593
+  },
+  "benz_s_10_2eu.mp4": {
+    "entryYaw": 33.60000000000002,
+    "updatedAt": 1780411898858
+  },
+  "benz_s_10_2od.mp4": {
+    "exitYaw": 235,
+    "updatedAt": 1780411902250
+  },
+  "benz_s_10_2ou.mp4": {
+    "exitYaw": 218.20000000000005,
+    "updatedAt": 1780411906243
+  },
+  "benz_s_10_3ed.mp4": {
+    "entryYaw": 53.60000000000002,
+    "updatedAt": 1780411910887
+  },
+  "benz_s_10_3ou.mp4": {
+    "exitYaw": 217.20000000000002,
+    "updatedAt": 1780411914455
+  },
+  "benz_s_11_1eu.mp4": {
+    "entryYaw": 343,
+    "updatedAt": 1780411920428
+  },
+  "benz_s_11_1od.mp4": {
+    "exitYaw": 182.39999999999998,
+    "updatedAt": 1780411924813
+  },
+  "benz_s_11_2ed.mp4": {
+    "entryYaw": 0.6000000000000227,
+    "updatedAt": 1780411928983
+  },
+  "benz_s_11_2eu.mp4": {
+    "entryYaw": 340.2,
+    "updatedAt": 1780411932133
+  },
+  "benz_s_11_2od.mp4": {
+    "exitYaw": 184.99999999999997,
+    "updatedAt": 1780411942844
+  },
+  "benz_s_11_2ou.mp4": {
+    "exitYaw": 159.20000000000005,
+    "updatedAt": 1780411947562
+  },
+  "benz_s_11_3ed.mp4": {
+    "entryYaw": 349.6,
+    "updatedAt": 1780411952554
+  },
+  "benz_s_11_3ou.mp4": {
+    "exitYaw": 152.20000000000002,
+    "updatedAt": 1780411957830
+  },
+  "benz_s_12_1eu.mp4": {
+    "entryYaw": 255.6,
+    "updatedAt": 1780411965342
+  },
+  "benz_s_12_1od.mp4": {
+    "exitYaw": 121.40000000000003,
+    "updatedAt": 1780411969721
+  },
+  "benz_s_12_2ed.mp4": {
+    "entryYaw": 301.6,
+    "updatedAt": 1780411974596
+  },
+  "benz_s_12_2eu.mp4": {
+    "entryYaw": 255.4,
+    "updatedAt": 1780411979109
+  },
+  "benz_s_12_2od.mp4": {
+    "exitYaw": 125.40000000000006,
+    "updatedAt": 1780411983847
+  },
+  "benz_s_12_2ou.mp4": {
+    "exitYaw": 79.60000000000002,
+    "updatedAt": 1780411987243
+  },
+  "benz_s_12_3ed.mp4": {
+    "entryYaw": 303.8,
+    "updatedAt": 1780411992455
+  },
+  "benz_s_12_3ou.mp4": {
+    "exitYaw": 77.20000000000005,
+    "updatedAt": 1780411995875
+  },
+  "benz_c_F3_10_ccw.mp4": {
+    "yaw": 41.60000000000002,
+    "updatedAt": 1780412006800
+  },
+  "benz_c_F3_10_cw.mp4": {
+    "yaw": 27.599999999999966,
+    "updatedAt": 1780412012652
+  },
+  "benz_c_F3_11_ccw.mp4": {
+    "yaw": 60.60000000000002,
+    "updatedAt": 1780412018890
+  },
+  "benz_c_F3_11_cw.mp4": {
+    "yaw": 48.39999999999998,
+    "updatedAt": 1780412024378
+  },
+  "benz_c_F3_12_ccw.mp4": {
+    "yaw": 24.399999999999977,
+    "updatedAt": 1780412071113
+  },
+  "benz_c_F3_12_cw.mp4": {
+    "yaw": 0.19999999999998863,
+    "updatedAt": 1780412074315
+  },
+  "benz_c_F3_13_ccw.mp4": {
+    "yaw": 127.19999999999999,
+    "updatedAt": 1780412099204
+  },
+  "benz_c_F3_13_cw.mp4": {
+    "yaw": 39.80000000000001,
+    "updatedAt": 1780412112774
+  },
+  "benz_c_F3_22_ccw.mp4": {
+    "yaw": 53.19999999999999,
+    "updatedAt": 1780412118778
+  },
+  "benz_c_F3_22_cw.mp4": {
+    "yaw": 91.80000000000001,
+    "updatedAt": 1780412123514
+  },
+  "benz_c_F3_23_ccw.mp4": {
+    "yaw": 101.79999999999995,
+    "updatedAt": 1780412128845
+  },
+  "benz_c_F3_23_cw.mp4": {
+    "yaw": 77.80000000000001,
+    "updatedAt": 1780412136755
+  },
+  "benz_c_F3_24_ccw.mp4": {
+    "yaw": 148.80000000000007,
+    "updatedAt": 1780412146228
+  },
+  "benz_c_F3_24_cw.mp4": {
+    "yaw": 63.60000000000002,
+    "updatedAt": 1780412152308
+  },
+  "benz_c_F3_34_ccw.mp4": {
+    "yaw": 179,
+    "updatedAt": 1780412162253
+  },
+  "benz_c_F3_34_cw.mp4": {
+    "yaw": 58.80000000000007,
+    "updatedAt": 1780412168983
+  },
+  "benz_c_F3_35_ccw.mp4": {
+    "yaw": 39.200000000000045,
+    "updatedAt": 1780412177395
+  },
+  "benz_c_F3_35_cw.mp4": {
+    "yaw": 51.60000000000002,
+    "updatedAt": 1780412182602
+  },
+  "benz_c_F3_36_ccw.mp4": {
+    "yaw": 73.79999999999995,
+    "updatedAt": 1780412188156
+  },
+  "benz_c_F3_36_cw.mp4": {
+    "yaw": 88.80000000000001,
+    "updatedAt": 1780412193751
+  },
+  "benz_c_F3_37_ccw.mp4": {
+    "yaw": 0,
+    "updatedAt": 1780412206143
+  },
+  "benz_c_F3_37_cw.mp4": {
+    "yaw": 18.600000000000023,
+    "updatedAt": 1780412214106
+  },
+  "benz_c_F3_47_ccw.mp4": {
+    "yaw": 263.20000000000005,
+    "updatedAt": 1780412220943
+  },
+  "benz_c_F3_47_cw.mp4": {
+    "yaw": 279.8,
+    "updatedAt": 1780412225752
+  },
+  "benz_c_F3_48_ccw.mp4": {
+    "yaw": 254.80000000000004,
+    "updatedAt": 1780412232437
+  },
+  "benz_c_F3_48_cw.mp4": {
+    "yaw": 256.8,
+    "updatedAt": 1780412237716
+  },
+  "benz_c_F3_49_ccw.mp4": {
+    "yaw": 230.99999999999997,
+    "updatedAt": 1780412247712
+  },
+  "benz_c_F3_49_cw.mp4": {
+    "yaw": 282.8,
+    "updatedAt": 1780412251944
+  },
+  "benz_c_F3_9_ccw.mp4": {
+    "yaw": 47.19999999999999,
+    "updatedAt": 1780412256655
+  },
+  "benz_c_F3_9_cw.mp4": {
+    "yaw": 50.80000000000001,
+    "updatedAt": 1780412261357
+  },
+  "benz_c_F2_14_ccw.mp4": {
+    "yaw": 103.60000000000002,
+    "updatedAt": 1780413121196
+  },
+  "benz_c_F2_14_cw.mp4": {
+    "yaw": 74.60000000000002,
+    "updatedAt": 1780413127391
+  },
+  "benz_c_F2_20_ccw.mp4": {
+    "yaw": 21.19999999999999,
+    "updatedAt": 1780413134013
+  },
+  "benz_c_F2_20_cw.mp4": {
+    "yaw": 77.79999999999995,
+    "updatedAt": 1780413140780
+  },
+  "benz_c_F2_21_ccw.mp4": {
+    "yaw": 92.19999999999999,
+    "updatedAt": 1780413150374
+  },
+  "benz_c_F2_21_cw.mp4": {
+    "yaw": 11.999999999999716,
+    "updatedAt": 1780413168946
+  },
+  "benz_c_F2_25_ccw.mp4": {
+    "yaw": 143,
+    "updatedAt": 1780413202325
+  },
+  "benz_c_F2_25_cw.mp4": {
+    "yaw": 21.399999999999977,
+    "updatedAt": 1780413207055
+  },
+  "benz_c_F2_31_ccw.mp4": {
+    "yaw": 169.19999999999993,
+    "updatedAt": 1780413213363
+  },
+  "benz_c_F2_31_cw.mp4": {
+    "yaw": 104,
+    "updatedAt": 1780413219082
+  },
+  "benz_c_F2_32_ccw.mp4": {
+    "yaw": 34.599999999999966,
+    "updatedAt": 1780413224833
+  },
+  "benz_c_F2_32_cw.mp4": {
+    "yaw": 42.60000000000002,
+    "updatedAt": 1780413231133
+  },
+  "benz_c_F2_33_ccw.mp4": {
+    "yaw": 36.80000000000001,
+    "updatedAt": 1780413237363
+  },
+  "benz_c_F2_33_cw.mp4": {
+    "yaw": 74.60000000000002,
+    "updatedAt": 1780413243046
+  },
+  "benz_c_F2_38_ccw.mp4": {
+    "yaw": 109.80000000000001,
+    "updatedAt": 1780413253551
+  },
+  "benz_c_F2_38_cw.mp4": {
+    "yaw": 75.19999999999993,
+    "updatedAt": 1780413260871
+  },
+  "benz_c_F2_44_ccw.mp4": {
+    "yaw": 302.6,
+    "updatedAt": 1780413266815
+  },
+  "benz_c_F2_44_cw.mp4": {
+    "yaw": 265,
+    "updatedAt": 1780413273259
+  },
+  "benz_c_F2_45_ccw.mp4": {
+    "yaw": 266.99999999999994,
+    "updatedAt": 1780413277774
+  },
+  "benz_c_F2_45_cw.mp4": {
+    "yaw": 270,
+    "updatedAt": 1780413287023
+  },
+  "benz_c_F2_46_ccw.mp4": {
+    "yaw": 243.00000000000006,
+    "updatedAt": 1780413293670
+  },
+  "benz_c_F2_46_cw.mp4": {
+    "yaw": 253.4,
+    "updatedAt": 1780413299075
+  },
+  "benz_c_F2_5_ccw.mp4": {
+    "yaw": 63.60000000000002,
+    "updatedAt": 1780413303142
+  },
+  "benz_c_F2_5_cw.mp4": {
+    "yaw": 39.60000000000002,
+    "updatedAt": 1780413307369
+  },
+  "benz_c_F2_6_ccw.mp4": {
+    "yaw": 56.19999999999999,
+    "updatedAt": 1780413312889
+  },
+  "benz_c_F2_6_cw.mp4": {
+    "yaw": 19.600000000000023,
+    "updatedAt": 1780413317071
+  },
+  "benz_c_F2_7_ccw.mp4": {
+    "yaw": 71,
+    "updatedAt": 1780413321959
+  },
+  "benz_c_F2_7_cw.mp4": {
+    "yaw": 52.60000000000002,
+    "updatedAt": 1780413326071
+  },
+  "benz_c_F2_8_ccw.mp4": {
+    "yaw": 44.80000000000001,
+    "updatedAt": 1780413332883
+  },
+  "benz_c_F2_8_cw.mp4": {
+    "yaw": 36.60000000000002,
+    "updatedAt": 1780413339464
+  },
+  "benz_c_F1_1_ccw.mp4": {
+    "yaw": 72.80000000000001,
+    "updatedAt": 1780420562030
+  },
+  "benz_c_F1_1_cw.mp4": {
+    "yaw": 66.80000000000007,
+    "updatedAt": 1780420568710
+  },
+  "benz_c_F1_15_ccw.mp4": {
+    "yaw": 86.80000000000001,
+    "updatedAt": 1780420722338
+  },
+  "benz_c_F1_15_cw.mp4": {
+    "yaw": 25.19999999999999,
+    "updatedAt": 1780420771014
+  },
+  "benz_c_F1_16_ccw.mp4": {
+    "yaw": 86.19999999999999,
+    "updatedAt": 1780420777093
+  },
+  "benz_c_F1_16_cw.mp4": {
+    "yaw": 325.40000000000003,
+    "updatedAt": 1780420784253
+  },
+  "benz_c_F1_17_ccw.mp4": {
+    "yaw": 84.20000000000005,
+    "updatedAt": 1780420790857
+  },
+  "benz_c_F1_17_cw.mp4": {
+    "yaw": 103.40000000000003,
+    "updatedAt": 1780420797657
+  },
+  "benz_c_F1_18_ccw.mp4": {
+    "yaw": 76.40000000000003,
+    "updatedAt": 1780420802460
+  },
+  "benz_c_F1_18_cw.mp4": {
+    "yaw": 44.39999999999998,
+    "updatedAt": 1780422071871
+  },
+  "benz_c_F1_19_ccw.mp4": {
+    "yaw": 346.40000000000003,
+    "updatedAt": 1780422079067
+  },
+  "benz_c_F1_19_cw.mp4": {
+    "yaw": 72.60000000000002,
+    "updatedAt": 1780422086365
+  },
+  "benz_c_F1_2_ccw.mp4": {
+    "yaw": 107,
+    "updatedAt": 1780422099824
+  },
+  "benz_c_F1_2_cw.mp4": {
+    "yaw": 93.60000000000002,
+    "updatedAt": 1780422105999
+  },
+  "benz_c_F1_26_ccw.mp4": {
+    "yaw": 90.40000000000003,
+    "updatedAt": 1780422112020
+  },
+  "benz_c_F1_26_cw.mp4": {
+    "yaw": 1.8000000000000114,
+    "updatedAt": 1780422126702
+  },
+  "benz_c_F1_27_ccw.mp4": {
+    "yaw": 56.60000000000002,
+    "updatedAt": 1780422136646
+  },
+  "benz_c_F1_27_cw.mp4": {
+    "yaw": 69,
+    "updatedAt": 1780422143100
+  },
+  "benz_c_F1_28_ccw.mp4": {
+    "yaw": 57.39999999999998,
+    "updatedAt": 1780422149522
+  },
+  "benz_c_F1_28_cw.mp4": {
+    "yaw": 34.39999999999998,
+    "updatedAt": 1780422155436
+  },
+  "benz_c_F1_29_ccw.mp4": {
+    "yaw": 344.8,
+    "updatedAt": 1780422160164
+  },
+  "benz_c_F1_29_cw.mp4": {
+    "yaw": 73.19999999999999,
+    "updatedAt": 1780422826959
+  },
+  "benz_c_F1_3_ccw.mp4": {
+    "yaw": 74.80000000000001,
+    "updatedAt": 1780422833462
+  },
+  "benz_c_F1_3_cw.mp4": {
+    "yaw": 94.79999999999995,
+    "updatedAt": 1780423147067
+  },
+  "benz_c_F1_30_ccw.mp4": {
+    "yaw": 69.19999999999999,
+    "updatedAt": 1780423151700
+  },
+  "benz_c_F1_30_cw.mp4": {
+    "yaw": 56.19999999999999,
+    "updatedAt": 1780423157340
+  },
+  "benz_c_F1_39_ccw.mp4": {
+    "yaw": 252.8,
+    "updatedAt": 1780423175204
+  },
+  "benz_c_F1_39_cw.mp4": {
+    "yaw": 49,
+    "updatedAt": 1780423182583
+  },
+  "benz_c_F1_4_ccw.mp4": {
+    "yaw": 71.60000000000002,
+    "updatedAt": 1780423187165
+  },
+  "benz_c_F1_4_cw.mp4": {
+    "yaw": 66,
+    "updatedAt": 1780423190917
+  },
+  "benz_c_F1_40_ccw.mp4": {
+    "yaw": 89.20000000000005,
+    "updatedAt": 1780423204413
+  },
+  "benz_c_F1_40_cw.mp4": {
+    "yaw": 342.6,
+    "updatedAt": 1780423209529
+  },
+  "benz_c_F1_41_ccw.mp4": {
+    "yaw": 69.39999999999998,
+    "updatedAt": 1780423223457
+  },
+  "benz_c_F1_41_cw.mp4": {
+    "yaw": 166.39999999999998,
+    "updatedAt": 1780423228580
+  },
+  "benz_c_F1_42_ccw.mp4": {
+    "yaw": 206.2,
+    "updatedAt": 1780423246562
+  },
+  "benz_c_F1_42_cw.mp4": {
+    "yaw": 216.39999999999992,
+    "updatedAt": 1780423286688
+  },
+  "benz_c_F1_43_ccw.mp4": {
+    "yaw": 179.20000000000005,
+    "updatedAt": 1780423298564
+  },
+  "benz_c_F1_43_cw.mp4": {
+    "yaw": 203.2,
+    "updatedAt": 1780423313233
   }
 }

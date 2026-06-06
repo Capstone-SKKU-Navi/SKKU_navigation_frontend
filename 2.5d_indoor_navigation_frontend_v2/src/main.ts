@@ -726,7 +726,7 @@ function setupLayerToggle(): void {
   const groups = [
     { id: 'layerRooms', group: 'rooms' as const },
     { id: 'layerCorridors', group: 'corridors' as const },
-    { id: 'layerWalls', group: 'walls' as const },
+    { id: 'layerWalls', group: 'floor' as const },
     { id: 'layerLabels', group: 'labels' as const },
   ];
 

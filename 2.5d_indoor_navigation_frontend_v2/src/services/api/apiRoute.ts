@@ -14,6 +14,11 @@ export interface RouteCoordinate {
   lng: number;
   lat: number;
   level: number;
+  /**
+   * 좌표가 방(실내 공간)을 가리키는지 여부. true면 수선의 발 투영 시 실외(outside)
+   * edge 보다 실내 edge 를 우선 선택한다. 생략 시 false (좌표 핀 등 종전 동작).
+   */
+  isRoom?: boolean;
 }
 
 // ===== Types: backend response =====

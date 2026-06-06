@@ -189,8 +189,29 @@ export interface EdgeProjection {
 /**
  * 좌표에서 가장 가까운 corridor edge 위에 수직 투영 (수선의 발).
  * door에서 복도로 수직 진입하는 자연스러운 경로를 만듦.
+ *
+ * preferIndoor=true (방 endpoint) 이면 실외(building==='outside') edge 를 제외하고
+ * 1차 투영하고, 실내 edge 가 없을 때만 전체 edge 로 재탐색한다 — 방이 실외 보행로로
+ * 먼저 내려가는 것을 막되 경로가 끊기지 않게 한다.
  */
-export function projectOntoNearestEdge(coords: [number, number], level: number): EdgeProjection | null {
+export function projectOntoNearestEdge(
+  coords: [number, number],
+  level: number,
+  preferIndoor = false,
+): EdgeProjection | null {
+  if (!graph) return null;
+  if (preferIndoor) {
+    const indoor = projectOntoNearestEdgeImpl(coords, level, true);
+    if (indoor) return indoor;
+  }
+  return projectOntoNearestEdgeImpl(coords, level, false);
+}
+
+function projectOntoNearestEdgeImpl(
+  coords: [number, number],
+  level: number,
+  indoorOnly: boolean,
+): EdgeProjection | null {
   if (!graph) return null;
 
   let best: EdgeProjection | null = null;
@@ -198,6 +219,7 @@ export function projectOntoNearestEdge(coords: [number, number], level: number):
   const [px, py] = coords;
 
   for (const edge of graph.edges) {
+    if (indoorOnly && edge.building === 'outside') continue;
     const nodeA = graph.nodes[edge.from];
     const nodeB = graph.nodes[edge.to];
     if (!nodeA || !nodeB) continue;
@@ -267,8 +289,8 @@ export interface FullRouteResult {
  * Dijkstra는 edge의 양쪽 endpoint 4가지 조합 중 최단거리를 선택.
  */
 export function buildFullRoute(
-  from: { coord: [number, number]; level: number },
-  to: { coord: [number, number]; level: number },
+  from: { coord: [number, number]; level: number; isRoom?: boolean },
+  to: { coord: [number, number]; level: number; isRoom?: boolean },
 ): FullRouteResult | null {
   if (!graph) return null;
 
@@ -277,8 +299,8 @@ export function buildFullRoute(
   const fromLevel = from.level;
   const toLevel = to.level;
 
-  const fromProj = projectOntoNearestEdge(fromCentroid, fromLevel);
-  const toProj = projectOntoNearestEdge(toCentroid, toLevel);
+  const fromProj = projectOntoNearestEdge(fromCentroid, fromLevel, from.isRoom ?? false);
+  const toProj = projectOntoNearestEdge(toCentroid, toLevel, to.isRoom ?? false);
 
   if (!fromProj || !toProj) {
     console.warn('[GraphService] 복도 edge를 찾을 수 없습니다');

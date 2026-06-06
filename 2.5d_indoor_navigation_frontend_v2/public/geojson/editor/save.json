@@ -1,7 +1,7 @@
 {
   "version": 1,
   "metadata": {
-    "savedAt": "2026-06-02T18:22:25.204Z",
+    "savedAt": "2026-06-06T13:35:53.358Z",
     "note": ""
   },
   "graph": {
@@ -52204,19 +52204,19 @@
       "building": "eng1",
       "level": 1,
       "fingerprint": "126.976280_37.293662_60.5",
-      "ref": "21123415236",
-      "name": "",
-      "room_type": "",
-      "updatedAt": 0
+      "ref": "21110",
+      "name": "반도체소자공정Ⅰ",
+      "room_type": "lab",
+      "updatedAt": 1780752920466
     },
     {
       "building": "eng1",
       "level": 1,
       "fingerprint": "126.976348_37.293654_63.2",
-      "ref": "221",
-      "name": "",
-      "room_type": "",
-      "updatedAt": 0
+      "ref": "21114",
+      "name": "반도체소자공정실Ⅱ",
+      "room_type": "lab",
+      "updatedAt": 1780752924664
     },
     {
       "building": "eng1",
@@ -57824,6 +57824,78 @@
       "name": "김범준교수실",
       "room_type": "office",
       "updatedAt": 1780384010260
+    },
+    {
+      "building": "eng1",
+      "level": 1,
+      "fingerprint": "126.976110_37.293563_21.9",
+      "ref": "21101",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780752893032
+    },
+    {
+      "building": "eng1",
+      "level": 1,
+      "fingerprint": "126.976142_37.293564_20.9",
+      "ref": "21105",
+      "name": "정보통신대학부학장실",
+      "room_type": "office",
+      "updatedAt": 1780752900803
+    },
+    {
+      "building": "eng1",
+      "level": 1,
+      "fingerprint": "126.976177_37.293560_21.9",
+      "ref": "21107",
+      "name": "정보통신대학학장부속실",
+      "room_type": "office",
+      "updatedAt": 1780752908137
+    },
+    {
+      "building": "eng1",
+      "level": 1,
+      "fingerprint": "126.976254_37.293551_62.8",
+      "ref": "21109",
+      "name": "정보통신대학학장실",
+      "room_type": "office",
+      "updatedAt": 1780752912698
+    },
+    {
+      "building": "eng1",
+      "level": 1,
+      "fingerprint": "126.976398_37.293648_30.2",
+      "ref": "211",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780752927295
+    },
+    {
+      "building": "eng1",
+      "level": 1,
+      "fingerprint": "126.976711_37.293604_123.7",
+      "ref": "21116B",
+      "name": "반도체나노소자연구실Ⅲ",
+      "room_type": "lab",
+      "updatedAt": 1780752943543
+    },
+    {
+      "building": "eng1",
+      "level": 1,
+      "fingerprint": "126.976619_37.293624_62.8",
+      "ref": "21116A",
+      "name": "나노광소자측정실",
+      "room_type": "lab",
+      "updatedAt": 1780752949808
+    },
+    {
+      "building": "eng1",
+      "level": 1,
+      "fingerprint": "126.976551_37.293631_63.0",
+      "ref": "21114",
+      "name": "반도체소자공정실Ⅱ",
+      "room_type": "lab",
+      "updatedAt": 1780752953314
     }
   ]
 }

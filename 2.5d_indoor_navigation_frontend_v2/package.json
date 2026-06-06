@@ -8,6 +8,7 @@
     "build": "webpack --mode production",
     "build:prod": "cross-env PROD_BUILD=true webpack --mode production",
     "start": "webpack serve --mode development",
+    "test:extrusion-gradient": "node scripts/verify-no-extrusion-gradient.js",
     "seed": "python scripts/seed.py",
     "init-editor-save": "node scripts/init-editor-save.js",
     "dev:full": "powershell -ExecutionPolicy Bypass -File scripts/bootstrap.ps1",
