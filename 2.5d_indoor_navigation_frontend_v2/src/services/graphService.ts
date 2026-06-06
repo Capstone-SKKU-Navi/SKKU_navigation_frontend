@@ -287,10 +287,23 @@ export interface FullRouteResult {
  * 동일하게 가장 가까운 corridor edge 위에 수직 투영해 진입한다.
  *
  * Dijkstra는 edge의 양쪽 endpoint 4가지 조합 중 최단거리를 선택.
+ *
+ * preferIndoor=true 면 무조건 실내 edge 로 진입한다. 가장 가까운 실내 edge 가
+ * 목적지와 다른 연결요소면 경로 없음(null) — 실외로 우회 폴백하지 않는다
+ * (그래프 끊김을 숨기지 않음). 백엔드 findRoute 와 동일.
  */
 export function buildFullRoute(
-  from: { coord: [number, number]; level: number; isRoom?: boolean },
-  to: { coord: [number, number]; level: number; isRoom?: boolean },
+  from: { coord: [number, number]; level: number; preferIndoor?: boolean },
+  to: { coord: [number, number]; level: number; preferIndoor?: boolean },
+): FullRouteResult | null {
+  return buildFullRouteImpl(from, to, from.preferIndoor ?? false, to.preferIndoor ?? false);
+}
+
+function buildFullRouteImpl(
+  from: { coord: [number, number]; level: number },
+  to: { coord: [number, number]; level: number },
+  preferIndoorFrom: boolean,
+  preferIndoorTo: boolean,
 ): FullRouteResult | null {
   if (!graph) return null;
 
@@ -299,8 +312,8 @@ export function buildFullRoute(
   const fromLevel = from.level;
   const toLevel = to.level;
 
-  const fromProj = projectOntoNearestEdge(fromCentroid, fromLevel, from.isRoom ?? false);
-  const toProj = projectOntoNearestEdge(toCentroid, toLevel, to.isRoom ?? false);
+  const fromProj = projectOntoNearestEdge(fromCentroid, fromLevel, preferIndoorFrom);
+  const toProj = projectOntoNearestEdge(toCentroid, toLevel, preferIndoorTo);
 
   if (!fromProj || !toProj) {
     console.warn('[GraphService] 복도 edge를 찾을 수 없습니다');

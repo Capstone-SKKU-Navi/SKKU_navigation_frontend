@@ -293,15 +293,17 @@ function showRouteInfo(time: string, distance: number): void {
 /** Resolve a `RouteEndpoint` to backend coordinates. Room refs go through the centroid cache. */
 function resolveCoordinate(ep: RouteEndpoint): RouteCoordinate | null {
   if (ep.kind === 'coord') {
-    // 지도 핀: 실내일 수도 실외일 수도 있으므로 종전대로 가장 가까운 edge 에 투영.
-    return { lng: ep.lng, lat: ep.lat, level: ep.level, isRoom: false };
+    // 지도 핀: 방을 지정하지 않았어도 좌표가 건물/방 폴리곤 내부면 실내로 보고
+    // 복도(실내 edge) 우선 투영. 실외 좌표만 종전대로 가장 가까운 edge 투영.
+    const preferIndoor = BackendService.isPointIndoors([ep.lng, ep.lat]);
+    return { lng: ep.lng, lat: ep.lat, level: ep.level, preferIndoor };
   }
   const cached = roomCentroidCache.get(ep.ref);
   const centroid = cached?.centroid ?? BackendService.getRoomCentroid(ep.ref);
   const level = cached?.level ?? BackendService.getRoomLevel(ep.ref);
   if (!centroid || level === null) return null;
-  // 방 endpoint: 실내 edge 우선 투영 (실외 보행로로 먼저 내려가지 않게).
-  return { lng: centroid[0], lat: centroid[1], level, isRoom: true };
+  // 방 endpoint: 항상 실내 edge 우선 투영 (실외 보행로로 먼저 내려가지 않게).
+  return { lng: centroid[0], lat: centroid[1], level, preferIndoor: true };
 }
 
 // Tracks the in-flight findRoute request so a newer call can cancel an older

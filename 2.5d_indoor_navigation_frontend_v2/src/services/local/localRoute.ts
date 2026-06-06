@@ -27,8 +27,8 @@ export async function init(): Promise<void> {
  */
 export function findRoute(from: RouteCoordinate, to: RouteCoordinate): ApiRouteResult | null {
   const fullResult = GraphService.buildFullRoute(
-    { coord: [from.lng, from.lat], level: from.level, isRoom: from.isRoom ?? false },
-    { coord: [to.lng, to.lat], level: to.level, isRoom: to.isRoom ?? false },
+    { coord: [from.lng, from.lat], level: from.level, preferIndoor: from.preferIndoor ?? false },
+    { coord: [to.lng, to.lat], level: to.level, preferIndoor: to.preferIndoor ?? false },
   );
   if (!fullResult) return null;
 
