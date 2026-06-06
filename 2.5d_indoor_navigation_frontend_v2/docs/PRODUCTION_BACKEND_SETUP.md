@@ -59,15 +59,18 @@ Vercel 환경 변수:
 
 | 이름 | 예시 | 설명 |
 |---|---|---|
-| `API_BASE_URL` | `https://skku-nav-api.example.com/api` | Spring Boot API base. 끝에 `/api` 포함 |
+| `API_BASE_URL` | `https://skku-nav.duckdns.org/api` | Spring Boot API base. 끝에 `/api` 포함 |
 | `VIDEO_BASE_URL` | 비움 | 비우면 자동으로 `${API_BASE_URL}/videos` 사용 |
 
-2026-06-05 현재 Vercel 프로젝트에는 아직 `API_BASE_URL`이 없다. 이 상태의 production 배포는 HTML은 열리지만, 앱 시작 시 `/api/geojson/all`이 404가 되어 지도 데이터가 로드되지 않는다.
+2026-06-06 현재 Vercel production에는 `API_BASE_URL=https://skku-nav.duckdns.org/api`가 설정되어 있다.
 
-백엔드 공개 URL이 정해지면 PowerShell에서 아래처럼 설정하고 재배포한다.
+백엔드 URL을 바꿀 때는 PowerShell에서 아래처럼 기존 env를 교체하고 재배포한다.
 
 ```powershell
-"https://{backend-host}/api" | npx vercel env add API_BASE_URL production
+Set-Content -LiteralPath .vercel_api_base.tmp -Value "https://{backend-host}/api" -NoNewline -Encoding ascii
+npx vercel env rm API_BASE_URL production --yes
+cmd /c "type .vercel_api_base.tmp | npx vercel env add API_BASE_URL production"
+Remove-Item -LiteralPath .vercel_api_base.tmp -Force
 npx vercel deploy --prod
 ```
 

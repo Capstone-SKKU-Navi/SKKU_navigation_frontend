@@ -120,8 +120,19 @@ def convert(code, levels):
     # === 1. 외곽선 ===
     outline_src = try_open(os.path.join(INPUT_DIR, f"{code}_outline.geojson"))
     if outline_src and outline_src["features"]:
-        feat = outline_src["features"][0]
-        geom = multi_to_single(feat["geometry"])
+        # 외곽선이 여러 조각(분리된 동)으로 나뉘어 있으면 모든 feature의
+        # polygon을 하나의 MultiPolygon으로 합친다. (features[0]만 쓰면 한 조각만 렌더됨)
+        polygons = []
+        for feat in outline_src["features"]:
+            g = feat["geometry"]
+            if g["type"] == "Polygon":
+                polygons.append(g["coordinates"])
+            elif g["type"] == "MultiPolygon":
+                polygons.extend(g["coordinates"])
+        if len(polygons) == 1:
+            geom = {"type": "Polygon", "coordinates": polygons[0]}
+        else:
+            geom = {"type": "MultiPolygon", "coordinates": polygons}
         outline_feature = {
             "type": "Feature",
             "properties": {
@@ -132,7 +143,7 @@ def convert(code, levels):
             "geometry": geom,
         }
         write_geojson(os.path.join(out_dir, f"{code}_outline.geojson"), [outline_feature])
-        print(f"  외곽선: 1개")
+        print(f"  외곽선: {len(polygons)}조각")
     else:
         print(f"  [경고] {code}_outline.geojson 없음")
 
