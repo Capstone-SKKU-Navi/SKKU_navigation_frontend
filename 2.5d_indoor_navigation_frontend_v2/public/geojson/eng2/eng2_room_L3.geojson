@@ -55,7 +55,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 2,
         "_centroid": [
           126.9765753,
@@ -498,7 +498,11 @@
           126.9763227,
           37.2955036
         ],
-        "_area_m2": 339.4
+        "_area_m2": 339.4,
+        "_label_pos": [
+          126.97629652321814,
+          37.29546802813729
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -678,15 +682,19 @@
         "level": [
           3
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "27332",
+        "name": "LINC3.0교수실",
+        "room_type": "office",
         "_idx": 15,
         "_centroid": [
           126.9764501,
           37.295478
         ],
-        "_area_m2": 58.6
+        "_area_m2": 58.6,
+        "_label_pos": [
+          126.97643038652086,
+          37.29547320057115
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -788,15 +796,19 @@
         "level": [
           3
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "27330",
+        "name": "예비",
+        "room_type": "reserved",
         "_idx": 17,
         "_centroid": [
           126.9765494,
           37.2954643
         ],
-        "_area_m2": 15
+        "_area_m2": 15,
+        "_label_pos": [
+          126.97655306439748,
+          37.2954592699721
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -1166,7 +1178,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 25,
         "_centroid": [
           126.9774343,
@@ -1462,9 +1474,9 @@
         "level": [
           3
         ],
-        "ref": "27330",
-        "name": "예비",
-        "room_type": "reserved",
+        "ref": "27334",
+        "name": "시스템보안연구실",
+        "room_type": "lab",
         "_idx": 31,
         "_centroid": [
           126.9764165,
@@ -2022,9 +2034,9 @@
         "level": [
           3
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "27336",
+        "name": "컴퓨터그래픽스연구실",
+        "room_type": "lab",
         "_idx": 43,
         "_centroid": [
           126.9764054,
@@ -3243,7 +3255,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 70,
         "_centroid": [
           126.9767221,
@@ -4308,7 +4320,11 @@
           126.9774009,
           37.2946182
         ],
-        "_area_m2": 166.1
+        "_area_m2": 166.1,
+        "_label_pos": [
+          126.97742196045203,
+          37.294642944665895
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -4584,7 +4600,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 99,
         "_centroid": [
           126.9771988,

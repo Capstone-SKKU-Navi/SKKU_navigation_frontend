@@ -3,7 +3,7 @@
 import type { WalkthroughPlaylist } from './walkthroughTypes';
 import { DEFAULT_WALKTHROUGH_CONFIG } from './walkthroughTypes';
 import { createWalkthroughPlayer, type WalkthroughPlayerInstance } from './walkthroughPlayer';
-import { getPositionAtTime, progressToGlobalTime } from '../services/walkthroughPlanner';
+import { getPositionAtTime, progressToGlobalTime, getTimeAtPosition } from '../services/walkthroughPlanner';
 import * as RouteOverlay from './routeOverlay';
 import * as GeoMap from './geoMap';
 import { MapConfig } from '../config/mapConfig';
@@ -33,6 +33,9 @@ let docResizeUp: (() => void) | null = null;
 let docKeydown: ((e: KeyboardEvent) => void) | null = null;
 let followCheckbox: HTMLInputElement | null = null;
 let canvasResizeObserver: ResizeObserver | null = null;
+// Deferred side-tap section jump (disambiguates single-tap-skip vs double-tap-seek).
+// Module-scoped so hideWalkthroughOverlay can cancel an in-flight timer.
+let pendingSideTimer = 0;
 
 // ===== Public API =====
 
@@ -56,6 +59,7 @@ export function showWalkthroughOverlay(playlist: WalkthroughPlaylist): void {
 
 export function hideWalkthroughOverlay(): void {
   const wasActive = overlayEl !== null;
+  if (pendingSideTimer) { window.clearTimeout(pendingSideTimer); pendingSideTimer = 0; }
   if (canvasResizeObserver) {
     canvasResizeObserver.disconnect();
     canvasResizeObserver = null;
@@ -230,7 +234,7 @@ function buildDOM(playlist: WalkthroughPlaylist): void {
       );
       if (hoveredSeg !== scrubHoverSeg) {
         scrubHoverSeg = hoveredSeg;
-        if (scrubHoverTimer) { clearTimeout(scrubHoverTimer); scrubHoverTimer = 0; }
+        if (scrubHoverTimer) { window.clearTimeout(scrubHoverTimer); scrubHoverTimer = 0; }
         if (hoveredSeg >= 0) {
           scrubHoverTimer = window.setTimeout(() => {
             player?.preloadSegment(hoveredSeg);
@@ -255,7 +259,7 @@ function buildDOM(playlist: WalkthroughPlaylist): void {
   docSeekUp = () => {
     seekDragging = false;
     scrubHoverSeg = -1;
-    if (scrubHoverTimer) { clearTimeout(scrubHoverTimer); scrubHoverTimer = 0; }
+    if (scrubHoverTimer) { window.clearTimeout(scrubHoverTimer); scrubHoverTimer = 0; }
   };
   document.addEventListener('pointermove', docSeekMove as EventListener);
   document.addEventListener('pointerup', docSeekUp);
@@ -406,30 +410,80 @@ function buildDOM(playlist: WalkthroughPlaylist): void {
   // Setup drag (move overlay by title bar)
   setupDrag(header);
 
-  // Tap zones on the video canvas:
-  //   center single-tap → play/pause
-  //   left/right double-tap → seek ∓10s (directional OSD)
+  // Tap zones on the video canvas. Two different splits:
+  //   single-tap, edges only (0–15% / 85–100%) → jump to prev/next section
+  //     (clip), like picking a chapter on the seek bar. Deferred by
+  //     DOUBLE_TAP_MS so a quick second tap can upgrade it to a seek.
+  //   single-tap, center (15–85%) → play/pause (instant; reverted if it turns
+  //     out to be the first half of a double-tap).
+  //   double-tap (anywhere) → seek ∓10s, direction split at the screen center
+  //     (left half = −10s, right half = +10s).
   // Coexists with pan-to-look (>8px = drag) and pinch (2+ pointers = ignore).
   let tapStartX = 0, tapStartY = 0, tapStartT = 0, tapTracking = false;
   let activeCanvasPointers = 0;
   let lastTapT = 0;
-  let lastTapZone: 'left' | 'center' | 'right' | '' = '';
-  const DOUBLE_TAP_MS = 300;
-
-  const zoneFor = (clientX: number): 'left' | 'center' | 'right' => {
-    const rect = canvasContainer.getBoundingClientRect();
-    const rel = (clientX - rect.left) / Math.max(1, rect.width);
-    if (rel < 0.33) return 'left';
-    if (rel > 0.67) return 'right';
-    return 'center';
+  let lastTapSeekDir: -1 | 0 | 1 = 0;   // seek-half of the last tap (0 = none yet)
+  let lastTapToggled = false;           // last tap toggled play/pause (revert on double)
+  const tapZones = MapConfig.walkthrough.tapZones;
+  const DOUBLE_TAP_MS = MapConfig.walkthrough.doubleTapMs;
+  const cancelPendingSide = (): void => {
+    if (pendingSideTimer) { window.clearTimeout(pendingSideTimer); pendingSideTimer = 0; }
   };
+  const resetTapPair = (): void => { lastTapT = 0; lastTapSeekDir = 0; lastTapToggled = false; };
+
+  // Seek to the start of the prev/next section. "Section" = clip (the boundaries
+  // drawn on the progress bar). Prev restarts the current section unless we're
+  // near its start, then it steps back one (chapter-skip convention).
+  // Resolve the current clip from the global time (single source of truth) so we
+  // don't race a cold-load that has already advanced currentClipIdx while the
+  // active video still shows the old frame.
+  // Returns true if a seek actually happened (so the caller can gate its OSD).
+  const skipSection = (dir: 1 | -1): boolean => {
+    if (!player) return false;
+    const clips = playlist.clips;
+    if (clips.length === 0) return false;
+    const g = player.getCurrentGlobalTime();
+    let cur = clips.findIndex((c) => g < c.globalEnd);
+    if (cur === -1) cur = clips.length - 1;
+    let target: number;
+    if (dir > 0) {
+      if (cur >= clips.length - 1) return false; // already at the last section — nothing past it
+      target = cur + 1;
+    } else {
+      const RESTART_THRESHOLD = 1.5;
+      const elapsed = g - clips[cur].globalStart; // ≥ 0 by construction of `cur`
+      target = elapsed > RESTART_THRESHOLD ? cur : Math.max(0, cur - 1);
+    }
+    player.seekToGlobalTime(clips[target].globalStart);
+    return true;
+  };
+
+  // Horizontal position of a tap as a 0..1 fraction of the canvas width.
+  const relFor = (clientX: number): number => {
+    const rect = canvasContainer.getBoundingClientRect();
+    return (clientX - rect.left) / Math.max(1, rect.width);
+  };
+  // Section-skip zones: only the outer edges count; the middle is play/pause.
+  const skipZoneFor = (rel: number): 'left' | 'center' | 'right' =>
+    rel < tapZones.skipPrevMaxFraction ? 'left'
+      : rel > tapZones.skipNextMinFraction ? 'right'
+        : 'center';
+  // Double-tap seek direction: split at the configured point.
+  const seekDirFor = (rel: number): -1 | 1 => (rel < tapZones.seekSplitFraction ? -1 : 1);
   const endCanvasPointer = (): void => {
     activeCanvasPointers = Math.max(0, activeCanvasPointers - 1);
   };
 
   canvasContainer.addEventListener('pointerdown', (e) => {
     activeCanvasPointers++;
-    if (activeCanvasPointers > 1) { tapTracking = false; return; } // pinch — not a tap
+    if (activeCanvasPointers > 1) {
+      // Pinch — not a tap. Drop any deferred side jump and reset double-tap
+      // tracking so a stale tap can't pair across the pinch gesture.
+      tapTracking = false;
+      cancelPendingSide();
+      resetTapPair();
+      return;
+    }
     tapStartX = e.clientX;
     tapStartY = e.clientY;
     tapStartT = performance.now();
@@ -448,32 +502,49 @@ function buildDOM(playlist: WalkthroughPlaylist): void {
     tapTracking = false;
     if (performance.now() - tapStartT > 300) return;
 
-    const zone = zoneFor(e.clientX);
+    const rel = relFor(e.clientX);
     const now = performance.now();
-    const isDouble = (now - lastTapT < DOUBLE_TAP_MS) && zone === lastTapZone && zone !== 'center';
-    const icon = playBtn.querySelector('.material-icons');
+    const seekDir = seekDirFor(rel);
+    // Double-tap = a second tap within the window, on the same screen half.
+    const isDouble = (now - lastTapT < DOUBLE_TAP_MS) && seekDir === lastTapSeekDir;
 
     if (isDouble) {
-      // Revert the play/pause toggle the first tap triggered, then seek — a
-      // double-tap seeks without changing play state (YouTube convention).
-      player?.togglePlayPause();
-      const delta = zone === 'left' ? -10 : 10;
-      player?.seekBy(delta);
-      flashSeekOsd(seekOsd, zone, delta);
-      if (icon) icon.textContent = player?.isPlaying() ? 'pause' : 'play_arrow';
-      lastTapT = 0;
-      lastTapZone = '';
+      // Upgrade to a ±10s seek. Cancel a deferred section jump and undo a
+      // play/pause the first tap may have toggled (a double-tap shouldn't
+      // change play state — YouTube convention).
+      cancelPendingSide();
+      if (lastTapToggled) { player?.togglePlayPause(); syncPlayIcon(); }
+      const zone = seekDir < 0 ? 'left' : 'right';
+      player?.seekBy(seekDir * 10);
+      flashSeekOsd(seekOsd, zone, seekDir * 10);
+      resetTapPair();
       return;
     }
 
-    player?.togglePlayPause();
-    const isNowPlaying = !!player?.isPlaying();
-    if (icon) icon.textContent = isNowPlaying ? 'pause' : 'play_arrow';
-    // Show what just happened: play_arrow if playback started, pause if it
-    // stopped — matches the YouTube/Apple convention.
-    flashTapIndicator(tapIndicator, isNowPlaying ? 'play_arrow' : 'pause');
+    const zone = skipZoneFor(rel);
+    cancelPendingSide();
+
+    if (zone === 'center') {
+      // Play/pause instantly; mark it so a follow-up double-tap can revert it.
+      player?.togglePlayPause();
+      const isNowPlaying = !!player?.isPlaying();
+      syncPlayIcon();
+      // Show what just happened: play_arrow if playback started, pause if it
+      // stopped — matches the YouTube/Apple convention.
+      flashTapIndicator(tapIndicator, isNowPlaying ? 'play_arrow' : 'pause');
+      lastTapToggled = true;
+    } else {
+      // Edge single-tap → jump section, but defer so a quick second tap can
+      // upgrade it to a ±10s seek.
+      const dir = zone === 'left' ? -1 : 1;
+      pendingSideTimer = window.setTimeout(() => {
+        pendingSideTimer = 0;
+        if (skipSection(dir)) flashSkipOsd(seekOsd, zone);
+      }, DOUBLE_TAP_MS);
+      lastTapToggled = false;
+    }
     lastTapT = now;
-    lastTapZone = zone;
+    lastTapSeekDir = seekDir;
   });
   canvasContainer.addEventListener('pointercancel', () => { tapTracking = false; endCanvasPointer(); });
 
@@ -733,6 +804,7 @@ function removeDocumentListeners(): void {
 // ===== Map interaction detection =====
 
 let mapMoveHandler: ((e: any) => void) | null = null;
+let mapRouteClickHandler: ((e: any) => void) | null = null;
 let canvasPointerDown: ((e: PointerEvent) => void) | null = null;
 let canvasPointerMove: ((e: PointerEvent) => void) | null = null;
 let canvasPointerUp: ((e: PointerEvent) => void) | null = null;
@@ -747,6 +819,21 @@ function disableFollow(): void {
 function setupMapInteractionListener(): void {
   const map = GeoMap.getMap();
   if (!map) return;
+
+  // Click (or mobile short-tap) on the blue route line → seek the player to that
+  // spot, like clicking the scrubber. The seek's onProgress moves the position
+  // marker + 360° frame in lockstep. deck.gl picking → accurate in 2D and 3D.
+  RouteOverlay.setRouteSeekEnabled(true);
+  mapRouteClickHandler = (e: any) => {
+    if (!activePlaylist || !player) return;
+    const hit = RouteOverlay.pickRouteCoordinate(e.point.x, e.point.y);
+    if (!hit) return; // tap missed the line — leave other click handlers alone
+    const time = getTimeAtPosition(activePlaylist, hit.position, hit.level);
+    if (time == null) return;
+    player.seekToGlobalTime(time);
+    updateProgressUI(time);
+  };
+  map.on('click', mapRouteClickHandler);
 
   // MapLibre's dragstart/rotatestart are the happy path.
   mapMoveHandler = () => disableFollow();
@@ -780,6 +867,11 @@ function setupMapInteractionListener(): void {
 
 function removeMapInteractionListener(): void {
   const map = GeoMap.getMap();
+  RouteOverlay.setRouteSeekEnabled(false);
+  if (mapRouteClickHandler) {
+    map?.off('click', mapRouteClickHandler);
+    mapRouteClickHandler = null;
+  }
   if (mapMoveHandler) {
     map?.off('dragstart', mapMoveHandler);
     map?.off('rotatestart', mapMoveHandler);
@@ -811,15 +903,26 @@ function flashTapIndicator(el: HTMLElement, iconName: string): void {
   el.classList.add('walkthrough-tap-indicator--show');
 }
 
-function flashSeekOsd(el: HTMLElement, zone: 'left' | 'right', delta: number): void {
+// Pop the directional side OSD (left/right) with an icon + label, restarting
+// its animation each call. Shared by the ±10s seek and the section-skip cues.
+function flashSideOsd(el: HTMLElement, zone: 'left' | 'right', iconName: string, label: string): void {
   const icon = el.querySelector('.material-icons');
   const text = el.querySelector('.walkthrough-seek-osd-text');
-  if (icon) icon.textContent = zone === 'left' ? 'fast_rewind' : 'fast_forward';
-  if (text) text.textContent = `${Math.abs(delta)}초`;
+  if (icon) icon.textContent = iconName;
+  if (text) text.textContent = label;
   el.classList.remove('walkthrough-seek-osd--left', 'walkthrough-seek-osd--right', 'walkthrough-seek-osd--show');
   el.classList.add(zone === 'left' ? 'walkthrough-seek-osd--left' : 'walkthrough-seek-osd--right');
   void el.offsetWidth; // restart animation
   el.classList.add('walkthrough-seek-osd--show');
+}
+
+function flashSeekOsd(el: HTMLElement, zone: 'left' | 'right', delta: number): void {
+  flashSideOsd(el, zone, zone === 'left' ? 'fast_rewind' : 'fast_forward', `${Math.abs(delta)}초`);
+}
+
+function flashSkipOsd(el: HTMLElement, zone: 'left' | 'right'): void {
+  flashSideOsd(el, zone, zone === 'left' ? 'skip_previous' : 'skip_next',
+    zone === 'left' ? '이전 구간' : '다음 구간');
 }
 
 function fmtTime(s: number): string {

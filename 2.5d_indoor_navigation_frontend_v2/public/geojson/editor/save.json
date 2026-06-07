@@ -1,7 +1,7 @@
 {
   "version": 1,
   "metadata": {
-    "savedAt": "2026-06-06T15:37:48.537Z",
+    "savedAt": "2026-06-07T01:18:35.430Z",
     "note": ""
   },
   "graph": {
@@ -3883,7 +3883,7 @@
         "level": -1,
         "type": "corridor",
         "label": "",
-        "building": "outside"
+        "building": "slib"
       },
       "node-mp1g7cby-qm7w": {
         "coordinates": [
@@ -3893,7 +3893,7 @@
         "level": -1,
         "type": "corridor",
         "label": "",
-        "building": "outside"
+        "building": "slib"
       },
       "node-mp1g7d1b-8c0h": {
         "coordinates": [
@@ -3913,7 +3913,7 @@
         "level": -1,
         "type": "corridor",
         "label": "",
-        "building": "outside"
+        "building": "slib"
       },
       "node-mp1g7fuf-gy3n": {
         "coordinates": [
@@ -3923,7 +3923,7 @@
         "level": -1,
         "type": "corridor",
         "label": "",
-        "building": "outside"
+        "building": "slib"
       },
       "node-mp1g7hha-c6ct": {
         "coordinates": [
@@ -3933,7 +3933,7 @@
         "level": -1,
         "type": "corridor",
         "label": "",
-        "building": "outside"
+        "building": "slib"
       },
       "node-mp1gcc2f-c6qg": {
         "coordinates": [
@@ -48649,10 +48649,10 @@
       "building": "benz",
       "level": 1,
       "fingerprint": "126.973950_37.295755_43.1",
-      "ref": "61104",
-      "name": "",
-      "room_type": "",
-      "updatedAt": 0
+      "ref": "61104B",
+      "name": "대학원세미나실",
+      "room_type": "classroom",
+      "updatedAt": 1780790773749
     },
     {
       "building": "benz",
@@ -48739,10 +48739,10 @@
       "building": "benz",
       "level": 1,
       "fingerprint": "126.973877_37.295691_16.0",
-      "ref": "61104D",
-      "name": "경비실",
-      "room_type": "office",
-      "updatedAt": 0
+      "ref": "61104C",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780790765595
     },
     {
       "building": "benz",
@@ -49413,15 +49413,6 @@
     {
       "building": "benz",
       "level": 1,
-      "fingerprint": "126.975295_37.294523_29.5",
-      "ref": "31101",
-      "name": "반도체나노소자연구실",
-      "room_type": "lab",
-      "updatedAt": 0
-    },
-    {
-      "building": "benz",
-      "level": 1,
       "fingerprint": "126.975111_37.294495_22.6",
       "ref": "31153",
       "name": "강원남교수실",
@@ -49495,19 +49486,19 @@
       "building": "benz",
       "level": 1,
       "fingerprint": "126.975101_37.294392_19.4",
-      "ref": "31103",
-      "name": "공동측정기기실",
-      "room_type": "lab",
-      "updatedAt": 0
+      "ref": "31104",
+      "name": "유인태교수실",
+      "room_type": "office",
+      "updatedAt": 1780793307118
     },
     {
       "building": "benz",
       "level": 1,
       "fingerprint": "126.975058_37.294369_32.9",
-      "ref": "31104",
-      "name": "유인태교수실",
-      "room_type": "office",
-      "updatedAt": 0
+      "ref": "31105",
+      "name": "고에너지 핵물리 실험실",
+      "room_type": "lab",
+      "updatedAt": 1780793305213
     },
     {
       "building": "benz",
@@ -49696,7 +49687,7 @@
       "ref": "62258",
       "name": "이재환교수실",
       "room_type": "office",
-      "updatedAt": 0
+      "updatedAt": 1780793702796
     },
     {
       "building": "benz",
@@ -49936,10 +49927,10 @@
       "building": "benz",
       "level": 2,
       "fingerprint": "126.974446_37.295474_38.9",
-      "ref": "51252C",
-      "name": "성균어학원행정실",
-      "room_type": "office",
-      "updatedAt": 0
+      "ref": "51252D",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780793630839
     },
     {
       "building": "benz",
@@ -49954,10 +49945,10 @@
       "building": "benz",
       "level": 2,
       "fingerprint": "126.974400_37.295450_79.7",
-      "ref": "51252D",
-      "name": "",
-      "room_type": "",
-      "updatedAt": 0
+      "ref": "51253",
+      "name": "성균어학원강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780793625581
     },
     {
       "building": "benz",
@@ -49972,10 +49963,10 @@
       "building": "benz",
       "level": 2,
       "fingerprint": "126.974350_37.295423_35.0",
-      "ref": "51253",
-      "name": "성균어학원강의실",
-      "room_type": "classroom",
-      "updatedAt": 0
+      "ref": "51255A",
+      "name": "고압실험실",
+      "room_type": "lab",
+      "updatedAt": 1780793617228
     },
     {
       "building": "benz",
@@ -49990,19 +49981,19 @@
       "building": "benz",
       "level": 2,
       "fingerprint": "126.974314_37.295404_34.4",
-      "ref": "51255A",
-      "name": "고압실험실",
-      "room_type": "lab",
-      "updatedAt": 0
+      "ref": "51255B",
+      "name": "CeQMF사무실",
+      "room_type": "office",
+      "updatedAt": 1780793610962
     },
     {
       "building": "benz",
       "level": 2,
       "fingerprint": "126.974262_37.295387_60.6",
-      "ref": "51255B",
-      "name": "CeQMF사무실",
-      "room_type": "office",
-      "updatedAt": 0
+      "ref": "51255C",
+      "name": "시료제작실II",
+      "room_type": "lab",
+      "updatedAt": 1780793609116
     },
     {
       "building": "benz",
@@ -50017,10 +50008,10 @@
       "building": "benz",
       "level": 2,
       "fingerprint": "126.974206_37.295357_47.2",
-      "ref": "51255C",
-      "name": "시료제작실II",
-      "room_type": "lab",
-      "updatedAt": 0
+      "ref": "51255D",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780793607959
     },
     {
       "building": "benz",
@@ -50511,15 +50502,6 @@
     {
       "building": "benz",
       "level": 2,
-      "fingerprint": "126.975295_37.294523_29.6",
-      "ref": "31201",
-      "name": "",
-      "room_type": "",
-      "updatedAt": 0
-    },
-    {
-      "building": "benz",
-      "level": 2,
       "fingerprint": "126.975079_37.294485_35.7",
       "ref": "31253",
       "name": "일반물리학실험준비실Ⅰ",
@@ -50646,29 +50628,20 @@
     {
       "building": "benz",
       "level": 2,
-      "fingerprint": "126.974747_37.294323_24.8",
-      "ref": "31209",
-      "name": "최광용교수실",
-      "room_type": "office",
-      "updatedAt": 0
-    },
-    {
-      "building": "benz",
-      "level": 2,
       "fingerprint": "126.974791_37.294318_40.7",
-      "ref": "31208",
+      "ref": "31207",
       "name": "고에너지물리연구실",
       "room_type": "lab",
-      "updatedAt": 0
+      "updatedAt": 1780793495846
     },
     {
       "building": "benz",
       "level": 2,
       "fingerprint": "126.974846_37.294312_43.8",
-      "ref": "31207",
-      "name": "고에너지물리연구실",
-      "room_type": "lab",
-      "updatedAt": 0
+      "ref": "31215",
+      "name": "물리학과열람실",
+      "room_type": "lounge",
+      "updatedAt": 1780793483872
     },
     {
       "building": "benz",
@@ -50812,15 +50785,6 @@
       "ref": "61354",
       "name": "소재부품융합공학과 사무실",
       "room_type": "office",
-      "updatedAt": 0
-    },
-    {
-      "building": "benz",
-      "level": 3,
-      "fingerprint": "126.974065_37.295820_66.9",
-      "ref": "61302B",
-      "name": "",
-      "room_type": "",
       "updatedAt": 0
     },
     {
@@ -52303,46 +52267,46 @@
       "building": "eng1",
       "level": 3,
       "fingerprint": "126.976488_37.294227_18.9",
-      "ref": "23306",
-      "name": "최덕현교수실",
+      "ref": "23308",
+      "name": "정형모교수실",
       "room_type": "office",
-      "updatedAt": 0
+      "updatedAt": 1780788718741
     },
     {
       "building": "eng1",
       "level": 3,
       "fingerprint": "126.976521_37.294223_18.7",
-      "ref": "23308",
-      "name": "정형모교수실",
+      "ref": "23310",
+      "name": "최재붕교수실",
       "room_type": "office",
-      "updatedAt": 0
+      "updatedAt": 1780788722151
     },
     {
       "building": "eng1",
       "level": 3,
       "fingerprint": "126.976554_37.294219_18.7",
-      "ref": "23310",
-      "name": "최재붕교수실",
-      "room_type": "office",
-      "updatedAt": 0
+      "ref": "23312",
+      "name": "예비(기계)",
+      "room_type": "reserved",
+      "updatedAt": 1780788725680
     },
     {
       "building": "eng1",
       "level": 3,
       "fingerprint": "126.976586_37.294216_18.4",
-      "ref": "23312",
-      "name": "예비(기계)",
-      "room_type": "reserved",
-      "updatedAt": 0
+      "ref": "23314",
+      "name": "이은호교수실",
+      "room_type": "office",
+      "updatedAt": 1780788728862
     },
     {
       "building": "eng1",
       "level": 3,
       "fingerprint": "126.976618_37.294213_18.2",
-      "ref": "23314",
-      "name": "이은호교수실",
+      "ref": "23316",
+      "name": "박준현교수실",
       "room_type": "office",
-      "updatedAt": 0
+      "updatedAt": 1780788730754
     },
     {
       "building": "eng1",
@@ -54571,10 +54535,10 @@
       "building": "eng2",
       "level": 2,
       "fingerprint": "126.977316_37.294827_60.2",
-      "ref": "26208",
-      "name": "전자현미경실험실",
+      "ref": "26206",
+      "name": "에너지 소재 연구실",
       "room_type": "lab",
-      "updatedAt": 0
+      "updatedAt": 1780789406443
     },
     {
       "building": "eng2",
@@ -54625,10 +54589,10 @@
       "building": "eng2",
       "level": 2,
       "fingerprint": "126.977306_37.294774_56.5",
-      "ref": "26206",
-      "name": "에너지 소재 연구실",
+      "ref": "26204",
+      "name": "정보재료소자연구실",
       "room_type": "lab",
-      "updatedAt": 0
+      "updatedAt": 1780789404398
     },
     {
       "building": "eng2",
@@ -54706,10 +54670,10 @@
       "building": "eng2",
       "level": 2,
       "fingerprint": "126.977293_37.294707_31.7",
-      "ref": "26204",
-      "name": "정보재료소자연구실",
+      "ref": "26202A",
+      "name": "대학원공동연구실",
       "room_type": "lab",
-      "updatedAt": 0
+      "updatedAt": 1780789397272
     },
     {
       "building": "eng2",
@@ -54813,15 +54777,6 @@
     {
       "building": "eng2",
       "level": 2,
-      "fingerprint": "126.977199_37.294663_16.3",
-      "ref": "26202B",
-      "name": "대학원생연구실",
-      "room_type": "lab",
-      "updatedAt": 0
-    },
-    {
-      "building": "eng2",
-      "level": 2,
       "fingerprint": "126.976636_37.294657_39.6",
       "ref": "25211",
       "name": "신소재공학부회의실",
@@ -54915,15 +54870,6 @@
       "fingerprint": "126.977106_37.294599_21.8",
       "ref": "25229",
       "name": "원병묵교수실",
-      "room_type": "office",
-      "updatedAt": 0
-    },
-    {
-      "building": "eng2",
-      "level": 2,
-      "fingerprint": "126.977186_37.294596_14.3",
-      "ref": "25231",
-      "name": "김영훈교수실",
       "room_type": "office",
       "updatedAt": 0
     },
@@ -55138,10 +55084,10 @@
       "building": "eng2",
       "level": 3,
       "fingerprint": "126.976416_37.295412_66.9",
-      "ref": "27330",
-      "name": "예비",
-      "room_type": "reserved",
-      "updatedAt": 0
+      "ref": "27334",
+      "name": "시스템보안연구실",
+      "room_type": "lab",
+      "updatedAt": 1780789281552
     },
     {
       "building": "eng2",
@@ -55857,15 +55803,6 @@
     {
       "building": "eng2",
       "level": 4,
-      "fingerprint": "126.977523_37.295431_76.8",
-      "ref": "26421",
-      "name": "첨단e+강의실",
-      "room_type": "classroom",
-      "updatedAt": 0
-    },
-    {
-      "building": "eng2",
-      "level": 4,
       "fingerprint": "126.976847_37.295429_37.4",
       "ref": "27412",
       "name": "",
@@ -56056,10 +55993,10 @@
       "building": "eng2",
       "level": 4,
       "fingerprint": "126.977341_37.294958_58.1",
-      "ref": "26408A",
-      "name": "에너지저장및환경소재연구실",
+      "ref": "26408B",
+      "name": "바이오헬스소재연구실I",
       "room_type": "lab",
-      "updatedAt": 0
+      "updatedAt": 1780789168061
     },
     {
       "building": "eng2",
@@ -56074,19 +56011,19 @@
       "building": "eng2",
       "level": 4,
       "fingerprint": "126.977330_37.294900_66.1",
-      "ref": "26406",
-      "name": "세포및조직공학연구실",
+      "ref": "26408A",
+      "name": "에너지저장및환경소재연구실",
       "room_type": "lab",
-      "updatedAt": 0
+      "updatedAt": 1780789172306
     },
     {
       "building": "eng2",
       "level": 4,
       "fingerprint": "126.977464_37.294861_53.6",
-      "ref": "26407",
-      "name": "",
-      "room_type": "",
-      "updatedAt": 0
+      "ref": "26407B",
+      "name": "Super-지능형 고분자 3D 아키텍처 연구실",
+      "room_type": "lab",
+      "updatedAt": 1780789135599
     },
     {
       "building": "eng2",
@@ -56517,15 +56454,6 @@
       "fingerprint": "126.977119_37.295495_30.4",
       "ref": "27503A",
       "name": "경입자충돌물리실험실",
-      "room_type": "lab",
-      "updatedAt": 0
-    },
-    {
-      "building": "eng2",
-      "level": 5,
-      "fingerprint": "126.976456_37.295488_27.4",
-      "ref": "27528",
-      "name": "스마트팩토리융합학과행정실스마트팩토리UNIC센터",
       "room_type": "lab",
       "updatedAt": 0
     },
@@ -57243,28 +57171,10 @@
     {
       "building": "eng2",
       "level": 1,
-      "fingerprint": "126.977442_37.295439_78.4",
-      "ref": "27101",
-      "name": "측량기기성능검사실",
-      "room_type": "lab",
-      "updatedAt": 0
-    },
-    {
-      "building": "eng2",
-      "level": 1,
       "fingerprint": "126.976771_37.295437_38.3",
       "ref": "27114B",
       "name": "교육매체지원실",
       "room_type": "office",
-      "updatedAt": 0
-    },
-    {
-      "building": "eng2",
-      "level": 1,
-      "fingerprint": "126.977540_37.295434_76.1",
-      "ref": "26121C",
-      "name": "예비",
-      "room_type": "reserved",
       "updatedAt": 0
     },
     {
@@ -57310,15 +57220,6 @@
       "ref": "27104",
       "name": "삼성전자 산하 공과대학",
       "room_type": "office",
-      "updatedAt": 0
-    },
-    {
-      "building": "eng2",
-      "level": 1,
-      "fingerprint": "126.977342_37.295394_8.0",
-      "ref": "27102",
-      "name": "공학교육혁신센터",
-      "room_type": "lab",
       "updatedAt": 0
     },
     {
@@ -57914,6 +57815,627 @@
       "name": "첨단e+강의실",
       "room_type": "classroom",
       "updatedAt": 1780759329424
+    },
+    {
+      "building": "eng1",
+      "level": 3,
+      "fingerprint": "126.976456_37.294230_18.2",
+      "ref": "23306",
+      "name": "최덕현교수실",
+      "room_type": "office",
+      "updatedAt": 1780788711211
+    },
+    {
+      "building": "eng1",
+      "level": 3,
+      "fingerprint": "126.976652_37.294209_19.9",
+      "ref": "23318",
+      "name": "류창국교수실",
+      "room_type": "office",
+      "updatedAt": 1780788733437
+    },
+    {
+      "building": "eng1",
+      "level": 3,
+      "fingerprint": "126.976685_37.294205_17.9",
+      "ref": "23320",
+      "name": "김성곤교수실",
+      "room_type": "office",
+      "updatedAt": 1780788739942
+    },
+    {
+      "building": "eng1",
+      "level": 4,
+      "fingerprint": "126.976107_37.293574_20.2",
+      "ref": "21401",
+      "name": "이득행교수실",
+      "room_type": "office",
+      "updatedAt": 1780788867476
+    },
+    {
+      "building": "eng1",
+      "level": 4,
+      "fingerprint": "126.976130_37.293565_18.4",
+      "ref": "21403",
+      "name": "심성한교수실",
+      "room_type": "office",
+      "updatedAt": 1780788872710
+    },
+    {
+      "building": "eng2",
+      "level": 5,
+      "fingerprint": "126.976860_37.294727_55.3",
+      "ref": "25416",
+      "name": "나노생체재료재생의학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780788981580
+    },
+    {
+      "building": "eng2",
+      "level": 5,
+      "fingerprint": "126.976726_37.294743_55.8",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780788986246
+    },
+    {
+      "building": "eng2",
+      "level": 5,
+      "fingerprint": "126.977435_37.295457_77.2",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789014758
+    },
+    {
+      "building": "eng2",
+      "level": 5,
+      "fingerprint": "126.976549_37.295471_14.3",
+      "ref": "27528",
+      "name": "스마트팩토리융합학과행정실스마트팩토리UNIC센터",
+      "room_type": "lab",
+      "updatedAt": 1780789045448
+    },
+    {
+      "building": "eng2",
+      "level": 5,
+      "fingerprint": "126.976585_37.295553_46.9",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789060926
+    },
+    {
+      "building": "eng2",
+      "level": 4,
+      "fingerprint": "126.976578_37.295548_55.2",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789086772
+    },
+    {
+      "building": "eng2",
+      "level": 4,
+      "fingerprint": "126.977421_37.295443_77.3",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789102033
+    },
+    {
+      "building": "eng2",
+      "level": 4,
+      "fingerprint": "126.977543_37.295378_119.0",
+      "ref": "26421",
+      "name": "첨단e+강의실",
+      "room_type": "classroom",
+      "updatedAt": 1780789113527
+    },
+    {
+      "building": "eng2",
+      "level": 4,
+      "fingerprint": "126.977457_37.294825_20.3",
+      "ref": "26407A",
+      "name": "방창현교수실",
+      "room_type": "office",
+      "updatedAt": 1780789139423
+    },
+    {
+      "building": "eng2",
+      "level": 4,
+      "fingerprint": "126.977349_37.294998_28.9",
+      "ref": "26410",
+      "name": "정찬화교수실",
+      "room_type": "office",
+      "updatedAt": 1780789164075
+    },
+    {
+      "building": "eng2",
+      "level": 4,
+      "fingerprint": "126.977323_37.294861_20.2",
+      "ref": "26406",
+      "name": "세포및조직공학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780789179226
+    },
+    {
+      "building": "eng2",
+      "level": 4,
+      "fingerprint": "126.976722_37.294744_53.7",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789194209
+    },
+    {
+      "building": "eng2",
+      "level": 4,
+      "fingerprint": "126.977209_37.294580_94.8",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789201873
+    },
+    {
+      "building": "eng2",
+      "level": 3,
+      "fingerprint": "126.976722_37.294744_56.5",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789222365
+    },
+    {
+      "building": "eng2",
+      "level": 3,
+      "fingerprint": "126.977199_37.294577_93.5",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789232153
+    },
+    {
+      "building": "eng2",
+      "level": 3,
+      "fingerprint": "126.977434_37.295437_95.0",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789252195
+    },
+    {
+      "building": "eng2",
+      "level": 3,
+      "fingerprint": "126.976549_37.295464_15.0",
+      "ref": "27330",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780789266845
+    },
+    {
+      "building": "eng2",
+      "level": 3,
+      "fingerprint": "126.976450_37.295478_58.6",
+      "ref": "27332",
+      "name": "LINC3.0교수실",
+      "room_type": "office",
+      "updatedAt": 1780789275956
+    },
+    {
+      "building": "eng2",
+      "level": 3,
+      "fingerprint": "126.976405_37.295348_64.6",
+      "ref": "27336",
+      "name": "컴퓨터그래픽스연구실",
+      "room_type": "lab",
+      "updatedAt": 1780789285306
+    },
+    {
+      "building": "eng2",
+      "level": 3,
+      "fingerprint": "126.976575_37.295549_49.1",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789300750
+    },
+    {
+      "building": "eng2",
+      "level": 2,
+      "fingerprint": "126.976573_37.295548_50.8",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789327711
+    },
+    {
+      "building": "eng2",
+      "level": 2,
+      "fingerprint": "126.976546_37.295463_10.0",
+      "ref": "27228B",
+      "name": "김낙경교수실",
+      "room_type": "office",
+      "updatedAt": 1780789349310
+    },
+    {
+      "building": "eng2",
+      "level": 2,
+      "fingerprint": "126.977412_37.295452_77.2",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789375660
+    },
+    {
+      "building": "eng2",
+      "level": 2,
+      "fingerprint": "126.977299_37.294735_28.9",
+      "ref": "26202B",
+      "name": "대학원생연구실",
+      "room_type": "lab",
+      "updatedAt": 1780789400332
+    },
+    {
+      "building": "eng2",
+      "level": 2,
+      "fingerprint": "126.977327_37.294882_59.8",
+      "ref": "26208",
+      "name": "전자현미경실험실",
+      "room_type": "lab",
+      "updatedAt": 1780789410456
+    },
+    {
+      "building": "eng2",
+      "level": 2,
+      "fingerprint": "126.977270_37.294579_88.8",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789422673
+    },
+    {
+      "building": "eng2",
+      "level": 2,
+      "fingerprint": "126.977144_37.294594_16.3",
+      "ref": "25231",
+      "name": "김영훈교수실",
+      "room_type": "office",
+      "updatedAt": 1780789444811
+    },
+    {
+      "building": "eng2",
+      "level": 2,
+      "fingerprint": "126.977154_37.294688_58.6",
+      "ref": "25220",
+      "name": "대학원생연구실",
+      "room_type": "lab",
+      "updatedAt": 1780789452203
+    },
+    {
+      "building": "eng2",
+      "level": 2,
+      "fingerprint": "126.976722_37.294744_53.9",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789471915
+    },
+    {
+      "building": "eng2",
+      "level": 1,
+      "fingerprint": "126.977531_37.295386_42.3",
+      "ref": "26121C",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780789539398
+    },
+    {
+      "building": "eng2",
+      "level": 1,
+      "fingerprint": "126.977590_37.295406_18.2",
+      "ref": "26121B",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780789560132
+    },
+    {
+      "building": "eng2",
+      "level": 1,
+      "fingerprint": "126.977587_37.295365_19.4",
+      "ref": "26121A",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780789565554
+    },
+    {
+      "building": "eng2",
+      "level": 1,
+      "fingerprint": "126.977298_37.295471_52.6",
+      "ref": "27101",
+      "name": "측량기기성능검사실",
+      "room_type": "lab",
+      "updatedAt": 1780789583593
+    },
+    {
+      "building": "eng2",
+      "level": 1,
+      "fingerprint": "126.977279_37.295386_43.4",
+      "ref": "27102",
+      "name": "공학교육혁신센터",
+      "room_type": "lab",
+      "updatedAt": 1780789592408
+    },
+    {
+      "building": "eng2",
+      "level": 1,
+      "fingerprint": "126.977442_37.295439_78.4",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789597241
+    },
+    {
+      "building": "eng2",
+      "level": 1,
+      "fingerprint": "126.976559_37.295550_74.5",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789602668
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973722_37.295803_46.6",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780789653139
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973858_37.295718_17.8",
+      "ref": "61104D",
+      "name": "경비실",
+      "room_type": "office",
+      "updatedAt": 1780790763613
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.973741_37.295362_11.7",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780790799154
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974063_37.295332_39.3",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780790815120
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974497_37.294880_28.4",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780790900217
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974597_37.294430_23.5",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780793261868
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974851_37.294394_46.0",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780793267266
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975232_37.294460_25.8",
+      "ref": "31101",
+      "name": "반도체나노소자연구실",
+      "room_type": "lab",
+      "updatedAt": 1780793279749
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.975128_37.294406_16.2",
+      "ref": "31103",
+      "name": "공동측정기기실",
+      "room_type": "lab",
+      "updatedAt": 1780793313747
+    },
+    {
+      "building": "benz",
+      "level": 1,
+      "fingerprint": "126.974998_37.294338_36.0",
+      "ref": "31106",
+      "name": "에피산화물연구실",
+      "room_type": "lab",
+      "updatedAt": 1780793318202
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975374_37.294669_27.5",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780793383987
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975218_37.294451_58.3",
+      "ref": "31201",
+      "name": "",
+      "room_type": "",
+      "updatedAt": 1780793429005
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974986_37.294337_23.9",
+      "ref": "31205",
+      "name": "교수회의실",
+      "room_type": "lounge",
+      "updatedAt": 1780793441320
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974930_37.294311_44.4",
+      "ref": "31206",
+      "name": "물리학과사무실",
+      "room_type": "office",
+      "updatedAt": 1780793449833
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974712_37.294327_22.6",
+      "ref": "31209",
+      "name": "최광용교수실",
+      "room_type": "office",
+      "updatedAt": 1780793470976
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974747_37.294323_24.8",
+      "ref": "31208",
+      "name": "고에너지물리연구실",
+      "room_type": "lab",
+      "updatedAt": 1780793500897
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974603_37.294436_21.7",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780793508385
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974852_37.294394_47.8",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780793517869
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.975286_37.295157_26.2",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780793541058
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974200_37.294916_11.5",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780793560354
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974482_37.295493_42.7",
+      "ref": "51252C",
+      "name": "성균어학원행정실",
+      "room_type": "office",
+      "updatedAt": 1780793635713
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973722_37.295802_66.9",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780793664029
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974041_37.295916_75.3",
+      "ref": "61252",
+      "name": "식품생물화학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780793676959
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974104_37.295963_72.7",
+      "ref": "61251",
+      "name": "연구분석실",
+      "room_type": "lab",
+      "updatedAt": 1780793682653
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.974070_37.295823_86.8",
+      "ref": "61203",
+      "name": "분자생태미생물학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780793713371
+    },
+    {
+      "building": "benz",
+      "level": 2,
+      "fingerprint": "126.973949_37.295761_81.9",
+      "ref": "61205",
+      "name": "식품안정성공학연구실",
+      "room_type": "lab",
+      "updatedAt": 1780793717407
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.974065_37.295820_66.9",
+      "ref": "61301B",
+      "name": "예비",
+      "room_type": "reserved",
+      "updatedAt": 1780794960490
+    },
+    {
+      "building": "benz",
+      "level": 3,
+      "fingerprint": "126.973736_37.295790_44.0",
+      "ref": "",
+      "name": "",
+      "room_type": "restroom",
+      "updatedAt": 1780795045965
     }
   ]
 }

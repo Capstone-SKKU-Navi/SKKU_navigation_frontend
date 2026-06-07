@@ -3877,7 +3877,7 @@
       "level": -1,
       "type": "corridor",
       "label": "",
-      "building": "outside"
+      "building": "slib"
     },
     "node-mp1g7cby-qm7w": {
       "coordinates": [
@@ -3887,7 +3887,7 @@
       "level": -1,
       "type": "corridor",
       "label": "",
-      "building": "outside"
+      "building": "slib"
     },
     "node-mp1g7d1b-8c0h": {
       "coordinates": [
@@ -3907,7 +3907,7 @@
       "level": -1,
       "type": "corridor",
       "label": "",
-      "building": "outside"
+      "building": "slib"
     },
     "node-mp1g7fuf-gy3n": {
       "coordinates": [
@@ -3917,7 +3917,7 @@
       "level": -1,
       "type": "corridor",
       "label": "",
-      "building": "outside"
+      "building": "slib"
     },
     "node-mp1g7hha-c6ct": {
       "coordinates": [
@@ -3927,7 +3927,7 @@
       "level": -1,
       "type": "corridor",
       "label": "",
-      "building": "outside"
+      "building": "slib"
     },
     "node-mp1gcc2f-c6qg": {
       "coordinates": [

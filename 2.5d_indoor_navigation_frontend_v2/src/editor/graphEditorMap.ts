@@ -8,6 +8,7 @@ const PREFIX = 'graph-editor';
 // Source IDs
 const SRC_NODES = `${PREFIX}-nodes`;
 const SRC_EDGES = `${PREFIX}-edges`;
+const SRC_DEBUG = `${PREFIX}-debug-perp`;
 
 // Layer IDs
 const LYR_EDGES_LINE = `${PREFIX}-edges-line`;
@@ -19,6 +20,11 @@ const LYR_NODES_EDGE_ENDPOINT = `${PREFIX}-nodes-edge-endpoint`;
 const LYR_NODES_LABELS = `${PREFIX}-nodes-labels`;
 const LYR_EDGES_HIT = `${PREFIX}-edges-hit`; // invisible wide layer for click detection
 const LYR_EDGE_START = `${PREFIX}-edge-start`;
+// Debug: perpendicular-foot (수선의 발) visualizer
+const LYR_DEBUG_EDGE = `${PREFIX}-debug-edge`;     // target corridor edge highlight
+const LYR_DEBUG_DROP = `${PREFIX}-debug-drop`;     // click → foot connector (the 수선)
+const LYR_DEBUG_POINTS = `${PREFIX}-debug-points`; // click + foot markers
+const LYR_DEBUG_LABELS = `${PREFIX}-debug-labels`; // text annotations
 
 const EDGE_FROM_COLOR = '#EF5350'; // red — "from" end of selected edge
 const EDGE_TO_COLOR = '#2979FF';   // blue — "to" end of selected edge
@@ -42,6 +48,7 @@ export function initEditorLayers(map: maplibregl.Map): void {
 
   map.addSource(SRC_NODES, { type: 'geojson', data: emptyFC });
   map.addSource(SRC_EDGES, { type: 'geojson', data: emptyFC });
+  map.addSource(SRC_DEBUG, { type: 'geojson', data: emptyFC });
 
   // Edge lines — same floor (solid)
   map.addLayer({
@@ -203,13 +210,77 @@ export function initEditorLayers(map: maplibregl.Map): void {
       'text-halo-width': 1,
     },
   });
+
+  // ===== Debug: perpendicular foot (수선의 발) overlay — drawn on top =====
+
+  // Target edge the foot lands on — thick magenta underline
+  map.addLayer({
+    id: LYR_DEBUG_EDGE,
+    type: 'line',
+    source: SRC_DEBUG,
+    filter: ['==', ['get', 'role'], 'edge'],
+    paint: {
+      'line-color': '#E91E63',
+      'line-width': 6,
+      'line-opacity': 0.55,
+    },
+  });
+
+  // The 수선 itself: click point → foot, dashed
+  map.addLayer({
+    id: LYR_DEBUG_DROP,
+    type: 'line',
+    source: SRC_DEBUG,
+    filter: ['==', ['get', 'role'], 'drop'],
+    paint: {
+      'line-color': '#FF4081',
+      'line-width': 2,
+      'line-dasharray': [2, 2],
+    },
+  });
+
+  // Click + foot markers
+  map.addLayer({
+    id: LYR_DEBUG_POINTS,
+    type: 'circle',
+    source: SRC_DEBUG,
+    filter: ['any', ['==', ['get', 'role'], 'click'], ['==', ['get', 'role'], 'foot']],
+    paint: {
+      'circle-radius': ['case', ['==', ['get', 'role'], 'foot'], 7, 6],
+      'circle-color': ['case', ['==', ['get', 'role'], 'foot'], '#FF1744', '#00E5FF'],
+      'circle-stroke-width': 2,
+      'circle-stroke-color': '#ffffff',
+    },
+  });
+
+  // Marker labels (foot shows perpendicular distance)
+  map.addLayer({
+    id: LYR_DEBUG_LABELS,
+    type: 'symbol',
+    source: SRC_DEBUG,
+    filter: ['any', ['==', ['get', 'role'], 'click'], ['==', ['get', 'role'], 'foot']],
+    layout: {
+      'text-field': ['get', 'label'],
+      'text-size': 11,
+      'text-font': ['Noto Sans Regular'],
+      'text-offset': [0, 1.2],
+      'text-anchor': 'top',
+      'text-allow-overlap': true,
+    },
+    paint: {
+      'text-color': '#FFFFFF',
+      'text-halo-color': 'rgba(0,0,0,0.85)',
+      'text-halo-width': 1.5,
+    },
+  });
 }
 
 export function destroyEditorLayers(map: maplibregl.Map): void {
-  const layers = [LYR_NODES_LABELS, LYR_EDGE_START, LYR_NODES_EDGE_ENDPOINT, LYR_NODES_SELECTED, LYR_NODES_CIRCLE, LYR_EDGES_HIT, LYR_EDGES_WEIGHT, LYR_EDGES_CROSS, LYR_EDGES_LINE];
+  const layers = [LYR_DEBUG_LABELS, LYR_DEBUG_POINTS, LYR_DEBUG_DROP, LYR_DEBUG_EDGE, LYR_NODES_LABELS, LYR_EDGE_START, LYR_NODES_EDGE_ENDPOINT, LYR_NODES_SELECTED, LYR_NODES_CIRCLE, LYR_EDGES_HIT, LYR_EDGES_WEIGHT, LYR_EDGES_CROSS, LYR_EDGES_LINE];
   for (const id of layers) {
     if (map.getLayer(id)) map.removeLayer(id);
   }
+  if (map.getSource(SRC_DEBUG)) map.removeSource(SRC_DEBUG);
   if (map.getSource(SRC_EDGES)) map.removeSource(SRC_EDGES);
   if (map.getSource(SRC_NODES)) map.removeSource(SRC_NODES);
 }
@@ -293,6 +364,56 @@ export function updateEdgeLayer(
   source.setData({ type: 'FeatureCollection', features });
 }
 
+// ===== Debug: perpendicular foot overlay =====
+
+export interface DebugPerpData {
+  click: [number, number];   // input coordinate
+  foot: [number, number];    // 수선의 발 (projection on edge)
+  edgeA: [number, number];   // target edge endpoint A
+  edgeB: [number, number];   // target edge endpoint B
+  perpDistM: number;         // click → foot distance (meters)
+}
+
+/** Render (or clear, when `data` is null) the 수선의 발 debug overlay. */
+export function updateDebugPerpLayer(map: maplibregl.Map, data: DebugPerpData | null): void {
+  const source = map.getSource(SRC_DEBUG) as maplibregl.GeoJSONSource;
+  if (!source) return;
+
+  if (!data) {
+    source.setData({ type: 'FeatureCollection', features: [] });
+    return;
+  }
+
+  const features: GeoJSON.Feature[] = [
+    {
+      type: 'Feature',
+      properties: { role: 'edge' },
+      geometry: { type: 'LineString', coordinates: [data.edgeA, data.edgeB] },
+    },
+    {
+      type: 'Feature',
+      properties: { role: 'drop' },
+      geometry: { type: 'LineString', coordinates: [data.click, data.foot] },
+    },
+    {
+      type: 'Feature',
+      properties: { role: 'click', label: '클릭' },
+      geometry: { type: 'Point', coordinates: data.click },
+    },
+    {
+      type: 'Feature',
+      properties: { role: 'foot', label: `수선의 발 (${data.perpDistM.toFixed(1)}m)` },
+      geometry: { type: 'Point', coordinates: data.foot },
+    },
+  ];
+
+  source.setData({ type: 'FeatureCollection', features });
+}
+
+export function clearDebugPerp(map: maplibregl.Map): void {
+  updateDebugPerpLayer(map, null);
+}
+
 // ===== Click Handlers =====
 
 let mapClickHandler: ((e: maplibregl.MapMouseEvent) => void) | null = null;
@@ -314,6 +435,13 @@ export function setClickHandlers(map: maplibregl.Map, callbacks: EditorMapCallba
   };
 
   mapClickHandler = (e: maplibregl.MapMouseEvent) => {
+    // Debug modes (e.g. 수선의 발) want every click as a raw map coordinate,
+    // bypassing node/edge hit-testing so the click lands exactly where pressed.
+    if (callbacks.shouldRouteAllClicksToMap?.()) {
+      callbacks.onMapClick([e.lngLat.lng, e.lngLat.lat]);
+      return;
+    }
+
     // Check if a node was clicked first
     const features = map.queryRenderedFeatures(e.point, { layers: [LYR_NODES_CIRCLE] });
     if (features.length > 0) {

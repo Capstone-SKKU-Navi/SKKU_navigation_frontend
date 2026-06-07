@@ -33,6 +33,8 @@ let buildingConstants: BuildingConstants;
 let buildingDescription = '';
 let roomList: RoomListItem[] = [];
 let mapCenter: [number, number] = [126.9766, 37.2939];
+/** Union bounding box [west, south, east, north] of all loaded buildings; pan clamp source. */
+let mapMaxBounds: [number, number, number, number] | null = null;
 
 // ===== Base URLs (configurable for backend API) =====
 
@@ -169,6 +171,7 @@ export async function fetchBackendData(): Promise<void> {
     if (n > maxLat) maxLat = n;
   }
   mapCenter = [(minLng + maxLng) / 2, (minLat + maxLat) / 2];
+  mapMaxBounds = Number.isFinite(minLng) ? [minLng, minLat, maxLng, maxLat] : null;
 
   buildingDescription = buildingManifests.get(primaryCode)?.name ?? '';
   const locRef = buildingManifests.get(primaryCode)?.loc_ref;
@@ -186,6 +189,7 @@ interface BackendStateSnapshot {
   description: string;
   rooms: RoomListItem[];
   center: [number, number];
+  maxBounds: [number, number, number, number] | null;
 }
 
 let localSnapshot: BackendStateSnapshot | null = null;
@@ -200,6 +204,7 @@ function snapshotCurrentState(): BackendStateSnapshot {
     description: buildingDescription,
     rooms: [...roomList],
     center: [...mapCenter] as [number, number],
+    maxBounds: mapMaxBounds ? [...mapMaxBounds] as [number, number, number, number] : null,
   };
 }
 
@@ -212,6 +217,7 @@ function applySnapshot(s: BackendStateSnapshot): void {
   buildingDescription = s.description;
   roomList = [...s.rooms];
   mapCenter = [...s.center] as [number, number];
+  mapMaxBounds = s.maxBounds ? [...s.maxBounds] as [number, number, number, number] : null;
 }
 
 /**
@@ -350,7 +356,10 @@ export async function fetchBackendDataFromApi(apiBase: string): Promise<void> {
     if (e > maxLng) maxLng = e;
     if (n > maxLat) maxLat = n;
   }
-  if (Number.isFinite(minLng)) mapCenter = [(minLng + maxLng) / 2, (minLat + maxLat) / 2];
+  if (Number.isFinite(minLng)) {
+    mapCenter = [(minLng + maxLng) / 2, (minLat + maxLat) / 2];
+    mapMaxBounds = [minLng, minLat, maxLng, maxLat];
+  }
 
   const primaryCode = buildingCodes[0];
   const view = BUILDING_VIEW[primaryCode] ?? DEFAULT_VIEW;
@@ -473,6 +482,9 @@ function extractAllCoords(geom: GeoJSON.Geometry): number[][] {
 export function getBuildingConstants(): BuildingConstants { return buildingConstants; }
 export function getBuildingDescription(): string { return buildingDescription; }
 export function getMapCenter(): [number, number] { return mapCenter; }
+
+/** Union bbox [west, south, east, north] of loaded buildings, or null if unknown. Pan clamp. */
+export function getMapMaxBounds(): [number, number, number, number] | null { return mapMaxBounds; }
 export function getRoomList(): RoomListItem[] { return roomList; }
 export function getBuildingCodes(): string[] { return buildingCodes; }
 

@@ -32,6 +32,12 @@ let storedHasVideo: boolean[] | null = null; // length = coords.length - 1
 let storedOutdoorMask: boolean[] | null = null; // length = coords.length; true = outdoor
 let storedIs3D = false;
 
+// IDs of the route PathLayers currently mounted — tracked here, NOT read back
+// from `overlay.props.layers` (that field is undefined at runtime; the property
+// only exists on the .d.ts, so reading it yields []). pickRouteCoordinate scopes
+// its hit-test to these.
+let routePathLayerIds: string[] = [];
+
 // Walkthrough position indicator. Stores the RAW (lng/lat, level, heading) so a
 // 2D↔3D toggle can recompute altitude/geometry on the spot — even while playback
 // is paused (no onProgress tick to re-push the position).
@@ -78,6 +84,20 @@ const EARTH_CIRCUMFERENCE_M = 40075016.686;
 
 const R = MapConfig.route;
 const NO_VIDEO_OPACITY_FACTOR = 0.35;
+
+// Tap tolerance for clicking the route line (px). Generous so a finger tap on
+// the thin line still registers on mobile. deck.gl picking, not maplibre
+// ground-unproject, so it stays accurate on the elevated 3D line (no parallax).
+const ROUTE_PICK_RADIUS_PX = 10;
+
+// True only while a walkthrough is active — gates route-line click-to-seek so a
+// plain route preview doesn't swallow room clicks. Set by walkthroughOverlay.
+let routeSeekEnabled = false;
+
+// One-tick memo: a single tap fires two pickRouteCoordinate calls (the seek
+// handler + the room-click guard) for the same pixel. pickObject is a GPU
+// readback (pipeline stall), so cache the result briefly to do it once per tap.
+let lastPick: { x: number; y: number; ts: number; result: RoutePick | null } | null = null;
 
 interface PoiData {
   position: number[];
@@ -172,6 +192,90 @@ export function onLevelChange(): void {
 /** 현재 경로가 표시 중인지 */
 export function hasRoute(): boolean {
   return storedCoordinates !== null;
+}
+
+/** Enable/disable route-line click-to-seek (on while a walkthrough is active). */
+export function setRouteSeekEnabled(enabled: boolean): void {
+  routeSeekEnabled = enabled;
+}
+
+/** Is route-line click-to-seek currently armed? */
+export function isRouteSeekEnabled(): boolean {
+  return routeSeekEnabled;
+}
+
+/** A hit-test result: the [lng, lat] on the route line + the floor it belongs to. */
+export interface RoutePick {
+  position: GeoJSON.Position;
+  level: number;
+}
+
+/**
+ * Hit-test the route line at screen pixel (x, y) via deck.gl picking and return
+ * the point on the line + its floor level, or null if the tap missed it.
+ *
+ * Uses deck picking (not maplibre's ground unproject) so the returned point sits
+ * on the actual rendered geometry — correct in 3D where the line is elevated and
+ * a ground unproject would be off by the camera-tilt parallax. Works the same in
+ * 2D. Restricted to the route PathLayers; the indicator marker, search POIs, etc.
+ * are left non-pickable so only the line responds.
+ *
+ * The `level` matters when corridors on different floors stack at the same
+ * lng/lat: the caller constrains the time lookup to the clicked floor so a 4F tap
+ * can't snap to the 1F line directly beneath it.
+ */
+export function pickRouteCoordinate(x: number, y: number): RoutePick | null {
+  if (!routeSeekEnabled || !overlay || !storedCoordinates) return null;
+
+  const now = performance.now();
+  if (lastPick && lastPick.x === x && lastPick.y === y && now - lastPick.ts < 100) {
+    return lastPick.result;
+  }
+
+  let result: RoutePick | null = null;
+  if (routePathLayerIds.length > 0) {
+    // pickObject is forwarded by MapboxOverlay at runtime (deck.gl 9.2), but the
+    // resolved .d.ts in this project predates it — cast to the call shape we use.
+    const picker = overlay as unknown as {
+      pickObject(p: {
+        x: number; y: number; radius?: number; layerIds?: string[]; unproject3D?: boolean;
+      }): { coordinate?: number[]; object?: { level?: number } } | null;
+    };
+    // unproject3D: read the picking DEPTH buffer so `coordinate` is the actual 3D
+    // point on the line. Without it deck unprojects against z=0 (the ground), so
+    // a tap on an ELEVATED upper-floor line (e.g. 4F) returns the ground point
+    // under the cursor — off by the camera-tilt parallax, snapping to the wrong
+    // spot. With it the returned lng/lat sits on the floor the user clicked.
+    const info = picker.pickObject({
+      x, y, radius: ROUTE_PICK_RADIUS_PX, layerIds: routePathLayerIds, unproject3D: true,
+    });
+    if (info?.coordinate) {
+      // info.object is the picked Segment → its level is the clicked floor.
+      const level = info.object?.level ?? storedLevels?.[storedLevels.length - 1] ?? 1;
+      result = { position: [info.coordinate[0], info.coordinate[1]], level };
+    }
+  }
+
+  // Flat-mode fallback: deck.gl picking can miss in interleaved mode. In 2D the
+  // map's ground unproject IS the line position (no elevation parallax), so
+  // project the clicked lng/lat onto the polyline and accept it when the foot
+  // point lands within tap tolerance on screen. (3D keeps relying on deck
+  // picking — a ground unproject there is off by the camera-tilt parallax.)
+  if (!result && !storedIs3D && mapRef) {
+    const ll = mapRef.unproject([x, y]);
+    const seg = nearestSegment([ll.lng, ll.lat]);
+    if (seg) {
+      const a = storedCoordinates[seg.i], b = storedCoordinates[seg.i + 1];
+      const foot: GeoJSON.Position = [a[0] + seg.t * (b[0] - a[0]), a[1] + seg.t * (b[1] - a[1])];
+      const sp = mapRef.project(foot as [number, number]);
+      if (Math.hypot(sp.x - x, sp.y - y) <= ROUTE_PICK_RADIUS_PX + 6) {
+        result = { position: foot, level: storedLevels?.[seg.i] ?? 1 };
+      }
+    }
+  }
+
+  lastPick = { x, y, ts: now, result };
+  return result;
 }
 
 /** 좌표별 층 정보를 기반으로 3D 높이 적용 */
@@ -501,6 +605,7 @@ function rebuildLayers(): void {
   if (!overlay) return;
 
   const layers: any[] = [];
+  routePathLayerIds = [];
 
   // Route layers
   if (storedCoordinates) {
@@ -508,6 +613,7 @@ function rebuildLayers(): void {
     const segments = splitByLevelAndVideo(path3d, storedLevels, storedHasVideo);
     const minLevel = storedLevels ? Math.min(...storedLevels) : 1;
     const curLevel = getCurrentLevel();
+    routePathLayerIds = segments.map((_, i) => `route-path-${i}`);
 
     segments.forEach((seg, i) => {
       const baseColor = colorForLevel(seg.level, minLevel);
@@ -524,6 +630,7 @@ function rebuildLayers(): void {
           widthMaxPixels: R.lineWidthMaxPx,
           capRounded: true,
           jointRounded: true,
+          pickable: true, // tap-to-seek: pickRouteCoordinate hit-tests these
         }),
       );
     });
@@ -549,6 +656,7 @@ export function clearRoute(): void {
   // NOTE: storedIs3D is the camera-mode state, not route state. Don't reset
   // it here — the user may clear the route while still in 3D.
   positionIndicator = null;
+  routePathLayerIds = [];
   overlay.setProps({ layers: [] });
 }
 

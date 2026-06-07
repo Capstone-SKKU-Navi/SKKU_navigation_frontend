@@ -56,6 +56,9 @@ export function createPanel(cb: PanelCallbacks): HTMLElement {
           <button class="ge-mode-btn" data-mode="delete" title="삭제 명령 (T)">
             <span class="material-icons">delete_sweep</span>
           </button>
+          <button class="ge-mode-btn" data-mode="debug-perp" title="수선의 발 디버그 (D)">
+            <span class="material-icons">my_location</span>
+          </button>
         </div>
       </div>
 
@@ -79,6 +82,29 @@ export function createPanel(cb: PanelCallbacks): HTMLElement {
           </label>
         </div>
         <p class="ge-hint">체크 시, Import save가 기존 노드/엣지를 지우지 않고 위에 추가합니다.</p>
+      </div>
+
+      <div class="ge-section" id="geDebugPerpSection" style="display:none">
+        <div class="ge-props-title"><span>수선의 발 디버그</span></div>
+        <p class="ge-hint">지도를 클릭하면 그 점에서 가장 가까운 복도 edge로 내려지는 수선의 발을 표시합니다. route 진입점과 동일한 계산.</p>
+        <div class="ge-prop-row" style="justify-content:space-between;">
+          <label for="gePerpPreferIndoor">preferIndoor (실내 edge 우선)</label>
+          <label class="ge-toggle-switch">
+            <input type="checkbox" id="gePerpPreferIndoor" />
+            <span class="ge-toggle-slider"></span>
+          </label>
+        </div>
+        <p class="ge-hint">방(room) 출발/도착처럼 실외 보행로보다 실내 edge를 먼저 시도합니다.</p>
+        <div id="geDebugPerpResult" style="display:none">
+          <div class="ge-prop-row"><label>층</label><span id="gePerpLevel" class="ge-prop-value"></span></div>
+          <div class="ge-prop-row"><label>클릭</label><span id="gePerpClick" class="ge-prop-value"></span></div>
+          <div class="ge-prop-row"><label>수선의 발</label><span id="gePerpFoot" class="ge-prop-value"></span></div>
+          <div class="ge-prop-row"><label>수직거리</label><span id="gePerpDist" class="ge-prop-value"></span></div>
+          <div class="ge-prop-row"><label>대상 edge</label><span id="gePerpEdge" class="ge-prop-value"></span></div>
+          <div class="ge-prop-row"><label>distToA</label><span id="gePerpDistA" class="ge-prop-value"></span></div>
+          <div class="ge-prop-row"><label>distToB</label><span id="gePerpDistB" class="ge-prop-value"></span></div>
+        </div>
+        <p class="ge-hint" id="gePerpEmpty" style="display:none">이 층에 복도 edge가 없어 수선의 발을 찾지 못했습니다.</p>
       </div>
 
       <div class="ge-section" id="geAddNodeOpts" style="display:none">
@@ -119,7 +145,9 @@ export function createPanel(cb: PanelCallbacks): HTMLElement {
         </div>
         <div class="ge-prop-row">
           <label>Building</label>
-          <span id="geNodeBuilding" class="ge-prop-value"></span>
+          <select id="geNodeBuilding" class="ge-select" title="좌표 기반 자동 감지값. 수동 선택 시 덮어씀">
+            ${[...BackendService.getBuildingCodes(), 'outside'].map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('')}
+          </select>
         </div>
         <div class="ge-prop-row">
           <label>Type</label>
@@ -390,7 +418,15 @@ export function showNodeProperties(node: NavNode | null): void {
   propsEl.style.display = 'block';
   setText('geNodeId', node.id.slice(0, 16));
   setText('geNodeCoord', `${node.coordinates[0].toFixed(6)}, ${node.coordinates[1].toFixed(6)}`);
-  setText('geNodeBuilding', node.building);
+  const buildingSelect = document.getElementById('geNodeBuilding') as HTMLSelectElement;
+  if (buildingSelect) {
+    // Auto-detected value may not be among the known building codes — surface it
+    // as an option so the select reflects the real value instead of falling back.
+    if (node.building && !Array.from(buildingSelect.options).some(o => o.value === node.building)) {
+      buildingSelect.add(new Option(node.building, node.building));
+    }
+    buildingSelect.value = node.building;
+  }
 
   const levelInput = document.getElementById('geNodeLevel') as HTMLInputElement;
   if (levelInput) levelInput.value = String(node.level);
@@ -436,6 +472,54 @@ export function setActiveMode(mode: EditorMode): void {
 
   const deleteSection = document.getElementById('geDeleteSection');
   if (deleteSection) deleteSection.style.display = mode === 'delete' ? 'block' : 'none';
+
+  const debugPerpSection = document.getElementById('geDebugPerpSection');
+  if (debugPerpSection) debugPerpSection.style.display = mode === 'debug-perp' ? 'block' : 'none';
+}
+
+export interface DebugPerpInfo {
+  clickStr: string;
+  footStr: string;
+  perpDistM: number;
+  edgeStr: string;
+  distToA: number;
+  distToB: number;
+  level: number;
+  preferIndoor: boolean;
+}
+
+/** Populate (or clear, when `info` is null) the 수선의 발 debug readout. */
+export function showDebugPerpInfo(info: DebugPerpInfo | null): void {
+  const result = document.getElementById('geDebugPerpResult');
+  const empty = document.getElementById('gePerpEmpty');
+
+  if (!info) {
+    if (result) result.style.display = 'none';
+    if (empty) empty.style.display = 'none';
+    return;
+  }
+
+  if (result) result.style.display = 'block';
+  if (empty) empty.style.display = 'none';
+
+  setText('gePerpLevel', formatLevel(info.level));
+  setText('gePerpClick', info.clickStr);
+  setText('gePerpFoot', info.footStr);
+  setText('gePerpDist', `${info.perpDistM.toFixed(2)} m`);
+  setText('gePerpEdge', info.edgeStr);
+  setText('gePerpDistA', `${info.distToA.toFixed(2)} m`);
+  setText('gePerpDistB', `${info.distToB.toFixed(2)} m`);
+
+  const toggle = document.getElementById('gePerpPreferIndoor') as HTMLInputElement | null;
+  if (toggle) toggle.checked = info.preferIndoor;
+}
+
+/** Shown when a click finds no corridor edge on the current level. */
+export function showDebugPerpEmpty(): void {
+  const result = document.getElementById('geDebugPerpResult');
+  const empty = document.getElementById('gePerpEmpty');
+  if (result) result.style.display = 'none';
+  if (empty) empty.style.display = 'block';
 }
 
 export function getAddNodeType(): NavNodeType {
@@ -972,6 +1056,17 @@ function wireEvents(): void {
     }
   });
 
+  // Node building change — manual override of the auto point-in-polygon detection.
+  // Edges re-derive their building from node buildings on import, so fixing a
+  // boundary node (e.g. B1 corridor mis-tagged 'outside') also fixes its edges.
+  document.getElementById('geNodeBuilding')?.addEventListener('change', (e) => {
+    const fullId = (document.getElementById('geNodeProps') as HTMLElement)?.dataset.nodeId;
+    if (fullId) {
+      const building = (e.target as HTMLSelectElement).value.trim();
+      if (building) callbacks?.onNodeUpdate(fullId, { building });
+    }
+  });
+
   // Node delete
   document.getElementById('geNodeDelete')?.addEventListener('click', () => {
     const fullId = (document.getElementById('geNodeProps') as HTMLElement)?.dataset.nodeId;
@@ -985,6 +1080,11 @@ function wireEvents(): void {
   // Edge weight label visibility
   document.getElementById('geShowEdgeWeights')?.addEventListener('change', (e) => {
     callbacks?.onToggleEdgeWeights((e.target as HTMLInputElement).checked);
+  });
+
+  // 수선의 발 디버그: preferIndoor toggle
+  document.getElementById('gePerpPreferIndoor')?.addEventListener('change', (e) => {
+    callbacks?.onPerpPreferIndoorChange((e.target as HTMLInputElement).checked);
   });
 
   // Tab switching (편집 / 설정)

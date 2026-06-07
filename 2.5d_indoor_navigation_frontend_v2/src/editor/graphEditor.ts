@@ -8,6 +8,8 @@ import * as Panel from './graphEditorPanel';
 import * as GeoMap from '../components/geoMap';
 import * as IndoorLayer from '../components/indoorLayer';
 import * as BackendService from '../services/backendService';
+import * as GraphService from '../services/graphService';
+import { getDistanceBetweenCoordinatesInM } from '../utils/coordinateHelpers';
 import * as VideoSettings from './videoSettings';
 import { openVideoPreview } from './videoPreview';
 import { getOppositeVideo, loadVideoCatalog } from './videoCatalog';
@@ -309,6 +311,12 @@ let lastKnownLevel = 1;
 let lastKnownFlatMode = true;
 let levelCheckInterval: number | null = null;
 
+// ===== Debug: perpendicular foot (수선의 발) =====
+// Last computed projection (kept so refreshMap re-draws it across level/2D-3D
+// changes) and whether to use the route's indoor-preference variant.
+let lastDebugPerp: EditorMap.DebugPerpData | null = null;
+let debugPreferIndoor = false;
+
 // ===== Public API =====
 
 export function setupGraphEditor(): void {
@@ -406,6 +414,7 @@ async function activateEditor(): Promise<void> {
     onToggleEdgeWeights: (visible: boolean) => {
       if (map) EditorMap.setEdgeWeightLabelVisible(map, visible);
     },
+    onPerpPreferIndoorChange: handlePerpPreferIndoorChange,
     onClose: () => { void deactivateEditor(); },
   });
 
@@ -421,6 +430,7 @@ async function activateEditor(): Promise<void> {
     onMapClick: handleMapClick,
     onNodeClick: handleNodeClick,
     onEdgeClick: handleEdgeClick,
+    shouldRouteAllClicksToMap: () => state.mode === 'debug-perp',
   });
 
   // Drag-to-move (2D mode + select mode only)
@@ -506,6 +516,8 @@ async function deactivateEditor(): Promise<void> {
   roomEdits.clear();
   touchedRoomFiles.clear();
   saveNote = '';
+  lastDebugPerp = null;
+  debugPreferIndoor = false;
   map = null;
 }
 
@@ -652,7 +664,7 @@ function handleModeChange(mode: EditorMode): void {
 
   // Update cursor
   if (map) {
-    map.getCanvas().style.cursor = mode === 'add-node' ? 'crosshair' : '';
+    map.getCanvas().style.cursor = (mode === 'add-node' || mode === 'debug-perp') ? 'crosshair' : '';
   }
 
   // Room click listener
@@ -662,12 +674,21 @@ function handleModeChange(mode: EditorMode): void {
     removeRoomClickListener();
   }
 
+  // Leaving debug mode → wipe the 수선의 발 overlay + readout
+  if (mode !== 'debug-perp') {
+    clearPerpDebug();
+  }
+
   refreshMap();
 }
 
 // ===== Map Click Handlers =====
 
 function handleMapClick(lngLat: [number, number]): void {
+  if (state.mode === 'debug-perp') {
+    runPerpDebug(lngLat);
+    return;
+  }
   if (state.mode === 'add-node') {
     const building = State.detectBuilding(lngLat, state.currentLevel);
     const nodeType = Panel.getAddNodeType();
@@ -698,6 +719,67 @@ function handleMapClick(lngLat: [number, number]): void {
     Panel.hideEdgeProperties();
     refreshMap();
   }
+}
+
+// ===== 수선의 발 Debug =====
+//
+// Projects the clicked coordinate onto the nearest corridor edge using the SAME
+// function the route algorithm uses (GraphService.projectOntoNearestEdgeForGraph),
+// but against the editor's live working graph — so what you see is exactly where
+// the route would drop the perpendicular foot after publish. Lets you edit nodes
+// and re-click to see the foot move live.
+
+function runPerpDebug(coord: [number, number]): void {
+  const level = state.currentLevel;
+  const proj = GraphService.projectOntoNearestEdgeForGraph(
+    state.graph, coord, level, debugPreferIndoor,
+  );
+
+  if (!proj) {
+    lastDebugPerp = null;
+    if (map) EditorMap.clearDebugPerp(map);
+    Panel.showDebugPerpEmpty();
+    return;
+  }
+
+  const nodeA = state.graph.nodes[proj.nodeA];
+  const nodeB = state.graph.nodes[proj.nodeB];
+  if (!nodeA || !nodeB) return;
+
+  const perpDistM = getDistanceBetweenCoordinatesInM(coord, proj.point);
+
+  lastDebugPerp = {
+    click: coord,
+    foot: proj.point,
+    edgeA: nodeA.coordinates,
+    edgeB: nodeB.coordinates,
+    perpDistM,
+  };
+  if (map) EditorMap.updateDebugPerpLayer(map, lastDebugPerp);
+
+  const nodeLabel = (n: typeof nodeA) => n.label || n.id.slice(5, 13);
+  Panel.showDebugPerpInfo({
+    clickStr: `${coord[0].toFixed(6)}, ${coord[1].toFixed(6)}`,
+    footStr: `${proj.point[0].toFixed(6)}, ${proj.point[1].toFixed(6)}`,
+    perpDistM,
+    edgeStr: `${nodeLabel(nodeA)} ↔ ${nodeLabel(nodeB)}`,
+    distToA: proj.distToA,
+    distToB: proj.distToB,
+    level,
+    preferIndoor: debugPreferIndoor,
+  });
+}
+
+function clearPerpDebug(): void {
+  lastDebugPerp = null;
+  if (map) EditorMap.clearDebugPerp(map);
+  Panel.showDebugPerpInfo(null);
+}
+
+function handlePerpPreferIndoorChange(enabled: boolean): void {
+  debugPreferIndoor = enabled;
+  // Re-project the last clicked point so the foot updates without re-clicking.
+  if (lastDebugPerp) runPerpDebug(lastDebugPerp.click);
 }
 
 function handleNodeClick(nodeId: string): void {
@@ -1418,6 +1500,8 @@ function handleKeyDown(e: KeyboardEvent): void {
     handleModeChange('label-room');
   } else if (e.key === 't' || e.key === 'T') {
     handleModeChange('delete');
+  } else if (e.key === 'd' || e.key === 'D') {
+    handleModeChange('debug-perp');
   }
 }
 
@@ -1490,6 +1574,9 @@ function refreshMap(): void {
     const visibleEdges = State.getEdgesOnLevel(state, level);
     EditorMap.updateEdgeLayer(map, visibleEdges, level, state.selectedEdgeIds);
   }
+
+  // Re-apply the 수선의 발 debug overlay (cleared by source re-set above)
+  EditorMap.updateDebugPerpLayer(map, lastDebugPerp);
 
   Panel.updateInfo(State.getNodeCount(state), State.getEdgeCount(state), level);
 }

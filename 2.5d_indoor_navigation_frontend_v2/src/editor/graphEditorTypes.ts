@@ -37,7 +37,7 @@ export interface NavGraph {
   edges: NavEdge[];
 }
 
-export type EditorMode = 'select' | 'add-node' | 'add-edge' | 'label-room' | 'delete';
+export type EditorMode = 'select' | 'add-node' | 'add-edge' | 'label-room' | 'delete' | 'debug-perp';
 
 /** How `Import save` integrates the incoming graph. Video and room edits always merge per-key. */
 export type ImportMode = 'replace' | 'append';
@@ -166,6 +166,9 @@ export interface EditorMapCallbacks {
   onMapClick(lngLat: [number, number]): void;
   onNodeClick(nodeId: string): void;
   onEdgeClick(edgeId: string, shiftKey: boolean): void;
+  /** When true, every map click goes straight to onMapClick (skip node/edge
+   *  hit-testing) — used by the 수선의 발 debug mode so clicks land anywhere. */
+  shouldRouteAllClicksToMap?(): boolean;
 }
 
 export interface PanelCallbacks {
@@ -190,6 +193,7 @@ export interface PanelCallbacks {
   onAutoApplyChange(preset: RoomAutoApplyPreset): void;
   onNoteChange(note: string): void;
   onToggleEdgeWeights(visible: boolean): void;
+  onPerpPreferIndoorChange(enabled: boolean): void;
   onClose(): void;
 }
 

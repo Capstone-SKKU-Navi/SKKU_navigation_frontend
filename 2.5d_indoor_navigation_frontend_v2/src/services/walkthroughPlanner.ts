@@ -122,6 +122,79 @@ export function progressToGlobalTime(playlist: WalkthroughPlaylist, progress: nu
   return Math.max(0, Math.min(1, progress)) * playlist.totalDuration;
 }
 
+/**
+ * Inverse of getPositionAtTime: given a clicked [lng, lat] on (or near) the route,
+ * return the walkthrough global time at that spot — so tapping the route line can
+ * seek the player there, exactly like clicking the scrubber.
+ *
+ * Projects the point onto the route polyline to get a route distance, finds the
+ * clip covering that distance, then maps the within-clip fraction to global time
+ * (mirrors getPositionAtTime, which goes routeDist = start + frac*(end-start)).
+ */
+export function getTimeAtPosition(
+  playlist: WalkthroughPlaylist,
+  position: GeoJSON.Position,
+  level?: number,
+): number | null {
+  const { clips, coordinates, cumulativeDist } = playlist;
+  if (clips.length === 0 || coordinates.length < 2) return null;
+
+  const routeDist = projectToRouteDist(coordinates, cumulativeDist, position, playlist.levels, level);
+
+  // First clip whose coverage reaches routeDist (clips are ordered along the
+  // route). Falls through to the last clip when the point is past all coverage.
+  // Strict `<` mirrors getPositionAtTime's `t < c.globalEnd` so a tap exactly on
+  // a clip boundary resolves to the same clip in both directions.
+  let clip = clips[clips.length - 1];
+  for (const c of clips) {
+    if (routeDist < c.routeDistEnd) { clip = c; break; }
+  }
+
+  const span = clip.routeDistEnd - clip.routeDistStart;
+  const frac = span > 0 ? (routeDist - clip.routeDistStart) / span : 0;
+  const clamped = Math.max(0, Math.min(1, frac));
+  return clip.globalStart + clamped * clip.duration;
+}
+
+/**
+ * Perpendicular-project `position` onto the route polyline; return the cumulative
+ * route distance (meters) of the foot point. Works in a locally-flat metric frame
+ * (longitude scaled by cos(lat)) so the nearest segment + fraction aren't skewed
+ * by longitude compression.
+ */
+function projectToRouteDist(
+  coordinates: GeoJSON.Position[],
+  cumulativeDist: number[],
+  position: GeoJSON.Position,
+  levels?: number[],
+  targetLevel?: number,
+): number {
+  const kx = Math.cos((position[1] * Math.PI) / 180) || 1; // lng→x scale at this lat
+  // Two candidates: the overall nearest segment, and the nearest among segments
+  // on `targetLevel`. Prefer the level-matched one — when corridors stack
+  // vertically (e.g. 4F directly above 1F) the bare-nearest could grab the wrong
+  // floor's line; the picked floor disambiguates. Falls back to overall nearest
+  // when no level is given or the route has no segment on that floor.
+  let bestD = Infinity, bestRouteDist = 0;
+  let bestLvlD = Infinity, bestLvlRouteDist = 0;
+  for (let i = 0; i < coordinates.length - 1; i++) {
+    const ax = coordinates[i][0], ay = coordinates[i][1];
+    const dx = (coordinates[i + 1][0] - ax) * kx, dy = coordinates[i + 1][1] - ay;
+    const px = (position[0] - ax) * kx, py = position[1] - ay;
+    const len2 = dx * dx + dy * dy || 1e-12;
+    let t = (px * dx + py * dy) / len2;
+    t = Math.max(0, Math.min(1, t));
+    const d = (px - t * dx) ** 2 + (py - t * dy) ** 2;
+    const routeDist = cumulativeDist[i] + t * (cumulativeDist[i + 1] - cumulativeDist[i]);
+    if (d < bestD) { bestD = d; bestRouteDist = routeDist; }
+    if (targetLevel != null && levels &&
+        (levels[i] === targetLevel || levels[i + 1] === targetLevel) && d < bestLvlD) {
+      bestLvlD = d; bestLvlRouteDist = routeDist;
+    }
+  }
+  return bestLvlD < Infinity ? bestLvlRouteDist : bestRouteDist;
+}
+
 // ===== Internal helpers =====
 
 function buildCumulativeDist(coordinates: GeoJSON.Position[]): number[] {

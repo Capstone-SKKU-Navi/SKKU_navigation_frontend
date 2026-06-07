@@ -43,4 +43,9 @@ if (!excludesBasementBelowStack) {
   throw new Error('Above-ground 3D below-stacks must exclude basement floors to avoid B1/1F z-fighting.');
 }
 
-console.log('3D indoor floor slabs are opaque, flat-shaded, and above-ground below-stacks exclude basements.');
+const excludesAboveGroundRouteStackForBasements = /currentLevel\s*<\s*0[\s\S]*\['<',\s*\['get',\s*'_level'\],\s*currentLevel\]/.test(source);
+if (!excludesAboveGroundRouteStackForBasements) {
+  throw new Error('Basement route views must hide above-ground route floors to avoid B1/1F z-fighting.');
+}
+
+console.log('3D indoor floor slabs are opaque, flat-shaded, and basement/above-ground stacks do not overlap.');

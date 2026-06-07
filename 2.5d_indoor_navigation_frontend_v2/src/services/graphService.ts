@@ -200,28 +200,42 @@ export function projectOntoNearestEdge(
   preferIndoor = false,
 ): EdgeProjection | null {
   if (!graph) return null;
+  return projectOntoNearestEdgeForGraph(graph, coords, level, preferIndoor);
+}
+
+/**
+ * Same projection as {@link projectOntoNearestEdge} but against an explicit
+ * graph instead of the module-loaded one. The graph editor's debug tool calls
+ * this with its live working graph so the visualized 수선의 발 matches exactly
+ * what the route algorithm would compute — single source of truth for the math.
+ */
+export function projectOntoNearestEdgeForGraph(
+  g: NavGraph,
+  coords: [number, number],
+  level: number,
+  preferIndoor = false,
+): EdgeProjection | null {
   if (preferIndoor) {
-    const indoor = projectOntoNearestEdgeImpl(coords, level, true);
+    const indoor = projectOntoNearestEdgeImpl(g, coords, level, true);
     if (indoor) return indoor;
   }
-  return projectOntoNearestEdgeImpl(coords, level, false);
+  return projectOntoNearestEdgeImpl(g, coords, level, false);
 }
 
 function projectOntoNearestEdgeImpl(
+  g: NavGraph,
   coords: [number, number],
   level: number,
   indoorOnly: boolean,
 ): EdgeProjection | null {
-  if (!graph) return null;
-
   let best: EdgeProjection | null = null;
   let bestDist = Infinity;
   const [px, py] = coords;
 
-  for (const edge of graph.edges) {
+  for (const edge of g.edges) {
     if (indoorOnly && edge.building === 'outside') continue;
-    const nodeA = graph.nodes[edge.from];
-    const nodeB = graph.nodes[edge.to];
+    const nodeA = g.nodes[edge.from];
+    const nodeB = g.nodes[edge.to];
     if (!nodeA || !nodeB) continue;
     if (nodeA.level !== level && nodeB.level !== level) continue;
     if (nodeA.type === 'room' || nodeB.type === 'room') continue;

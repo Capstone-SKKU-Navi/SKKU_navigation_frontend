@@ -485,10 +485,16 @@ function applyBuildingVisibility(map: maplibregl.Map, building: string): void {
   // the current one (translucent stack), we render only the floors the route
   // touches — above, below, or both — at full opacity.
   const belowFilter: any = isRouteMode()
-    ? ['all',
-        ['!=', ['get', '_level'], currentLevel],
-        ['in', ['get', '_level'], ['literal', [...routeLevels!]]],
-      ]
+    ? currentLevel < 0
+      ? ['all',
+          ['!=', ['get', '_level'], currentLevel],
+          ['<', ['get', '_level'], currentLevel],
+          ['in', ['get', '_level'], ['literal', [...routeLevels!]]],
+        ]
+      : ['all',
+          ['!=', ['get', '_level'], currentLevel],
+          ['in', ['get', '_level'], ['literal', [...routeLevels!]]],
+        ]
     : currentLevel > 0
       ? ['all',
           ['>=', ['get', '_level'], 1],

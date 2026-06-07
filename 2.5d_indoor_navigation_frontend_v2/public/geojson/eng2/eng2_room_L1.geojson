@@ -79,7 +79,7 @@
         ],
         "ref": "",
         "name": "",
-        "room_type": "",
+        "room_type": "restroom",
         "_idx": 2,
         "_centroid": [
           126.9765589,
@@ -490,15 +490,19 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "27101",
+        "name": "측량기기성능검사실",
+        "room_type": "lab",
         "_idx": 11,
         "_centroid": [
           126.9772978,
           37.2954713
         ],
-        "_area_m2": 52.6
+        "_area_m2": 52.6,
+        "_label_pos": [
+          126.97728285108889,
+          37.295476876199245
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -559,7 +563,11 @@
           126.9764956,
           37.2954624
         ],
-        "_area_m2": 101.9
+        "_area_m2": 101.9,
+        "_label_pos": [
+          126.97656995186355,
+          37.29546023214142
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -702,15 +710,19 @@
         "level": [
           1
         ],
-        "ref": "27101",
-        "name": "측량기기성능검사실",
-        "room_type": "lab",
+        "ref": "",
+        "name": "",
+        "room_type": "restroom",
         "_idx": 15,
         "_centroid": [
           126.9774416,
           37.2954391
         ],
-        "_area_m2": 78.4
+        "_area_m2": 78.4,
+        "_label_pos": [
+          126.97708646552985,
+          37.29533914152958
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -824,9 +836,9 @@
         "level": [
           1
         ],
-        "ref": "26121C",
-        "name": "예비",
-        "room_type": "reserved",
+        "ref": "",
+        "name": "",
+        "room_type": "",
         "_idx": 17,
         "_centroid": [
           126.9775397,
@@ -1016,15 +1028,19 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "26121B",
+        "name": "예비",
+        "room_type": "reserved",
         "_idx": 21,
         "_centroid": [
           126.9775898,
           37.2954062
         ],
-        "_area_m2": 18.2
+        "_area_m2": 18.2,
+        "_label_pos": [
+          126.977593764934,
+          37.295402891510705
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -1155,15 +1171,19 @@
         "level": [
           1
         ],
-        "ref": "27102",
-        "name": "공학교육혁신센터",
-        "room_type": "lab",
+        "ref": "",
+        "name": "",
+        "room_type": "",
         "_idx": 24,
         "_centroid": [
           126.9773421,
           37.2953942
         ],
-        "_area_m2": 8
+        "_area_m2": 8,
+        "_label_pos": [
+          126.977318876438,
+          37.29536675313972
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -1249,15 +1269,19 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "27102",
+        "name": "공학교육혁신센터",
+        "room_type": "lab",
         "_idx": 26,
         "_centroid": [
           126.9772793,
           37.2953863
         ],
-        "_area_m2": 43.4
+        "_area_m2": 43.4,
+        "_label_pos": [
+          126.97725894246054,
+          37.295385523424414
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -1310,15 +1334,19 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "26121C",
+        "name": "예비",
+        "room_type": "reserved",
         "_idx": 27,
         "_centroid": [
           126.9775305,
           37.295386
         ],
-        "_area_m2": 42.3
+        "_area_m2": 42.3,
+        "_label_pos": [
+          126.97753980119722,
+          37.2953880208954
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -1465,15 +1493,19 @@
         "level": [
           1
         ],
-        "ref": "",
-        "name": "",
-        "room_type": "",
+        "ref": "26121A",
+        "name": "예비",
+        "room_type": "reserved",
         "_idx": 30,
         "_centroid": [
           126.9775868,
           37.2953653
         ],
-        "_area_m2": 19.4
+        "_area_m2": 19.4,
+        "_label_pos": [
+          126.97758678620761,
+          37.29536437857868
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -1563,7 +1595,11 @@
           126.9774187,
           37.2953133
         ],
-        "_area_m2": 83.8
+        "_area_m2": 83.8,
+        "_label_pos": [
+          126.97740902497918,
+          37.29530020112195
+        ]
       },
       "geometry": {
         "type": "Polygon",

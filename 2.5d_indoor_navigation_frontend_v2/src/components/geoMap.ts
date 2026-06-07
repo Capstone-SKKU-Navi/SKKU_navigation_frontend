@@ -80,6 +80,10 @@ export function initMap(): void {
 
   map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
 
+  // Clamp panning to the building's union bbox (+ padding) so the user can't
+  // drift off to the rest of the city. minZoom/maxZoom above already cap zoom.
+  applyPanBounds(map);
+
   // Middle-click (wheel button) drag to pan
   setupMiddleClickPan(map);
 
@@ -107,6 +111,24 @@ export function initMap(): void {
     // Always emit loaded event so UI doesn't get stuck
     document.dispatchEvent(new CustomEvent('mapLoaded'));
   });
+}
+
+/**
+ * Restrict panning to the loaded buildings' union bbox plus padding.
+ * MapLibre's maxBounds keeps the whole *viewport* inside the box, so at low
+ * zoom it also effectively tightens the min zoom — set MapConfig.panBoundsPaddingDeg
+ * to null to disable entirely (e.g. for debugging the wider basemap).
+ */
+function applyPanBounds(m: maplibregl.Map): void {
+  const pad = MapConfig.panBoundsPadding;
+  if (pad == null) return;
+  const b = BackendService.getMapMaxBounds();
+  if (!b) return;
+  const [w, s, e, n] = b;
+  m.setMaxBounds([
+    [w - pad.lng, s - pad.lat],
+    [e + pad.lng, n + pad.lat],
+  ]);
 }
 
 /** Toggle between 2D and 3D mode */
@@ -394,6 +416,9 @@ function setupRoomClick(): void {
 
     map.on('click', layerId, (e) => {
       if (performance.now() < suppressClickUntil) return; // mobile long-press ate this click
+      // During a walkthrough the blue route line sits on top and owns the tap
+      // (seek-to-here); don't also pop the room behind it.
+      if (RouteOverlay.isRouteSeekEnabled() && RouteOverlay.pickRouteCoordinate(e.point.x, e.point.y)) return;
       if (!e.features || e.features.length === 0) return;
       const feature = e.features[0];
       const ref = feature.properties?.ref;
