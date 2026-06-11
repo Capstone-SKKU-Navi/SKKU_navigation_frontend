@@ -14,8 +14,10 @@ export const MapConfig = {
   flyToRoomDuration: 600,
 
   // ── 줌 ────────────────────────────────────────────
-  /** flyToRoom 줌 레벨 */
-  flyToRoomZoom: 20.5,
+  /** flyToRoom 줌 레벨. Map zoom -2 ~= 화면상 약 4배 넓게 표시. */
+  flyToRoomZoom: 18.5,
+  /** 경로 전체 보기의 최대 줌 레벨 */
+  routeFitMaxZoom: 20.5,
 
   // ── 패닝(드래그) 제한 ──────────────────────────────
   /**

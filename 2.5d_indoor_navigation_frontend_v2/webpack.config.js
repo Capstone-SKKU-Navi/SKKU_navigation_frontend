@@ -24,6 +24,15 @@ module.exports = (env, argv) => {
   const isProdBuild = process.env.PROD_BUILD === 'true';
   const apiBaseUrl = process.env.API_BASE_URL || '';
   const videoBaseUrl = process.env.VIDEO_BASE_URL || '';
+  const defaultFeedbackFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfZmbjBazwcqqBCN88k5Gt9NO_NBOSaToD1s7lU3hNkRd4WRQ/viewform';
+  const feedbackFormUrl = process.env.FEEDBACK_FORM_URL || defaultFeedbackFormUrl;
+  const feedbackEntryType = process.env.FEEDBACK_ENTRY_TYPE || 'entry.535998606';
+  const feedbackEntryTarget = process.env.FEEDBACK_ENTRY_TARGET || 'entry.307290085';
+  const feedbackEntryDebug = process.env.FEEDBACK_ENTRY_DEBUG || 'entry.1498754538';
+  const feedbackEntryScreenshotReportId = process.env.FEEDBACK_ENTRY_SCREENSHOT_REPORT_ID || 'entry.2038317800';
+  const defaultFeedbackScreenshotUploadUrl = 'https://script.google.com/macros/s/AKfycbwkOjTmvO_0CEHmfSD82Arr9K4rc3TLSm8OQsfcNAT7ZGYRegc02BFANKf6rR1NUyoPOg/exec';
+  const feedbackScreenshotUploadUrl = process.env.FEEDBACK_SCREENSHOT_UPLOAD_URL || defaultFeedbackScreenshotUploadUrl;
+  const feedbackScreenshotToken = process.env.FEEDBACK_SCREENSHOT_TOKEN || 'skku-feedback-2026';
 
   return {
     entry: './src/main.ts',
@@ -78,6 +87,20 @@ module.exports = (env, argv) => {
         IS_PROD_BUILD: JSON.stringify(isProdBuild),
         'process.env.API_BASE_URL': JSON.stringify(apiBaseUrl),
         'process.env.VIDEO_BASE_URL': JSON.stringify(videoBaseUrl),
+        __FEEDBACK_FORM_URL__: JSON.stringify(feedbackFormUrl),
+        __FEEDBACK_ENTRY_TYPE__: JSON.stringify(feedbackEntryType),
+        __FEEDBACK_ENTRY_TARGET__: JSON.stringify(feedbackEntryTarget),
+        __FEEDBACK_ENTRY_DEBUG__: JSON.stringify(feedbackEntryDebug),
+        __FEEDBACK_ENTRY_SCREENSHOT_REPORT_ID__: JSON.stringify(feedbackEntryScreenshotReportId),
+        __FEEDBACK_SCREENSHOT_UPLOAD_URL__: JSON.stringify(feedbackScreenshotUploadUrl),
+        __FEEDBACK_SCREENSHOT_TOKEN__: JSON.stringify(feedbackScreenshotToken),
+        'process.env.FEEDBACK_FORM_URL': JSON.stringify(feedbackFormUrl),
+        'process.env.FEEDBACK_ENTRY_TYPE': JSON.stringify(feedbackEntryType),
+        'process.env.FEEDBACK_ENTRY_TARGET': JSON.stringify(feedbackEntryTarget),
+        'process.env.FEEDBACK_ENTRY_DEBUG': JSON.stringify(feedbackEntryDebug),
+        'process.env.FEEDBACK_ENTRY_SCREENSHOT_REPORT_ID': JSON.stringify(feedbackEntryScreenshotReportId),
+        'process.env.FEEDBACK_SCREENSHOT_UPLOAD_URL': JSON.stringify(feedbackScreenshotUploadUrl),
+        'process.env.FEEDBACK_SCREENSHOT_TOKEN': JSON.stringify(feedbackScreenshotToken),
       }),
       new HtmlWebpackPlugin({
         template: './public/index.html',

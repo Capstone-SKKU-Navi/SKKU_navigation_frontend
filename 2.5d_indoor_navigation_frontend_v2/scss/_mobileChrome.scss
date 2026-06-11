@@ -227,12 +227,21 @@ body[data-device="mobile"] #routePinDock {
 
 body[data-device="mobile"] #mActions {
   position: fixed;
-  top: calc(env(safe-area-inset-top, 0px) + 72px); // below the search pill
+  top: calc(env(safe-area-inset-top, 0px) + 12px);
   right: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 420;
+  width: 44px;
+  height: 44px;
+  z-index: 620;
+
+  .m-action-menu {
+    position: absolute;
+    top: 52px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: none;
+  }
 
   .m-act {
     width: 44px;
@@ -248,7 +257,7 @@ body[data-device="mobile"] #mActions {
     justify-content: center;
     box-shadow: var(--m-shadow-1);
     cursor: pointer;
-    transition: transform 120ms, background 120ms;
+    transition: transform 140ms cubic-bezier(.2,.8,.2,1), background 120ms, opacity 140ms;
 
     .material-icons { font-size: 22px; }
 
@@ -268,6 +277,34 @@ body[data-device="mobile"] #mActions {
     }
 
     &:active { transform: scale(0.94); }
+  }
+
+  .m-action-toggle {
+    position: relative;
+    z-index: 2;
+  }
+
+  &[data-open="true"] {
+    .m-action-toggle {
+      background: var(--m-accent);
+      border-color: var(--m-accent);
+      color: #fff;
+    }
+
+    .m-action-menu {
+      pointer-events: auto;
+    }
+  }
+
+  &[data-open="false"] .m-action-menu .m-act {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.92);
+    pointer-events: none;
+  }
+
+  &[data-open="true"] .m-action-menu .m-act {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -587,7 +624,7 @@ body[data-device="mobile"] #mActions {
 body[data-device="mobile"] #mRouteSummary {
   position: fixed;
   top: calc(env(safe-area-inset-top, 0px) + 68px);
-  left: 12px;
+  left: 96px;
   right: 72px;
   height: 40px;
   padding: 0 6px 0 14px;
@@ -601,13 +638,25 @@ body[data-device="mobile"] #mRouteSummary {
   color: var(--m-text);
   font: 600 14px/1 'Pretendard', system-ui, sans-serif;
   z-index: 460;
+  cursor: grab;
+  touch-action: none;
 
   &[data-visible="true"] { display: flex; }
+  &[data-dragged="true"] {
+    right: auto;
+    width: 220px;
+  }
 
   .m-route-summary-icon { font-size: 20px; color: var(--m-accent); }
-  .m-route-summary-text { flex: 1; }
+  .m-route-summary-text {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-  .m-route-summary-swap {
+  .m-route-summary-video {
     width: 32px;
     height: 32px;
     border: none;

@@ -22,6 +22,7 @@ let overlayEl: HTMLElement | null = null;
 let overlayRefs: OverlayRefs | null = null;
 let player: WalkthroughPlayerInstance | null = null;
 let activePlaylist: WalkthroughPlaylist | null = null;
+let lastGlobalTime = 0;
 let isFullscreen = false;
 let cameraFollow = DEFAULT_WALKTHROUGH_CONFIG.cameraFollow;
 
@@ -43,6 +44,7 @@ export function showWalkthroughOverlay(playlist: WalkthroughPlaylist): void {
   hideWalkthroughOverlay();
 
   activePlaylist = playlist;
+  lastGlobalTime = 0;
   isFullscreen = false;
   cameraFollow = DEFAULT_WALKTHROUGH_CONFIG.cameraFollow;
 
@@ -74,6 +76,7 @@ export function hideWalkthroughOverlay(): void {
   }
   overlayRefs = null;
   activePlaylist = null;
+  lastGlobalTime = 0;
   RouteOverlay.clearPositionIndicator();
   GeoMap.clearWalkthroughCursor();
   removeMapInteractionListener();
@@ -95,6 +98,27 @@ export function hideWalkthroughOverlay(): void {
 
 export function isWalkthroughActive(): boolean {
   return overlayEl !== null;
+}
+
+export function getWalkthroughFeedbackContext(): {
+  videoFile: string;
+  videoStart: number;
+  videoEnd: number;
+  level: number;
+  edgeId: string;
+  globalTime: number;
+} | null {
+  if (!activePlaylist || activePlaylist.clips.length === 0) return null;
+  const clip = activePlaylist.clips.find(c => lastGlobalTime >= c.globalStart && lastGlobalTime <= c.globalEnd)
+    ?? activePlaylist.clips[0];
+  return {
+    videoFile: clip.videoFile,
+    videoStart: clip.videoStart,
+    videoEnd: clip.videoEnd,
+    level: clip.level,
+    edgeId: clip.edgeId,
+    globalTime: lastGlobalTime,
+  };
 }
 
 // ===== DOM Construction =====
@@ -588,6 +612,7 @@ function buildDOM(playlist: WalkthroughPlaylist): void {
 // ===== Progress UI =====
 
 function updateProgressUI(globalTime: number): void {
+  lastGlobalTime = globalTime;
   if (!overlayRefs || !activePlaylist) return;
   const pct = activePlaylist.totalDuration > 0
     ? (globalTime / activePlaylist.totalDuration) * 100

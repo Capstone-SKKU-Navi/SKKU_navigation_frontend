@@ -20,6 +20,7 @@ export const MOBILE_IDS = {
   sheetClose: 'mSheetClose',
   routeSummary: 'mRouteSummary',
   actions: 'mActions',
+  actMenu: 'mActMenu',
   actCenter: 'mActCenter',
   act3D: 'mAct3D',
   actZoomIn: 'mActZoomIn',
@@ -134,28 +135,34 @@ function buildActionStack(): HTMLElement {
   const stack = document.createElement('div');
   stack.id = MOBILE_IDS.actions;
   stack.className = 'm-actions';
+  stack.setAttribute('data-open', 'false');
   stack.innerHTML = `
-    <button id="${MOBILE_IDS.actCompass}" class="m-act m-act-compass" aria-label="북쪽 정렬" data-visible="false">
-      <span class="material-icons">navigation</span>
+    <button id="${MOBILE_IDS.actMenu}" class="m-act m-action-toggle" aria-label="지도 도구 열기" aria-expanded="false">
+      <span class="material-icons">more_vert</span>
     </button>
-    <button id="${MOBILE_IDS.actZoomIn}" class="m-act" aria-label="확대">
-      <span class="material-icons">add</span>
-    </button>
-    <button id="${MOBILE_IDS.actZoomOut}" class="m-act" aria-label="축소">
-      <span class="material-icons">remove</span>
-    </button>
-    <button id="${MOBILE_IDS.actCenter}" class="m-act" aria-label="건물 위치로 이동">
-      <span class="material-icons">center_focus_weak</span>
-    </button>
-    <button id="${MOBILE_IDS.act3D}" class="m-act" aria-label="2D/3D 전환">
-      <span class="material-icons">3d_rotation</span>
-    </button>
-    <button id="${MOBILE_IDS.actShare}" class="m-act" aria-label="링크 공유">
-      <span class="material-icons">share</span>
-    </button>
-    <button id="${MOBILE_IDS.actClear}" class="m-act m-act-danger" aria-label="경로 지우기" data-visible="false">
-      <span class="material-icons">close</span>
-    </button>
+    <div class="m-action-menu">
+      <button id="${MOBILE_IDS.actCompass}" class="m-act m-act-compass" aria-label="북쪽 정렬" data-visible="false">
+        <span class="material-icons">navigation</span>
+      </button>
+      <button id="${MOBILE_IDS.actZoomIn}" class="m-act" aria-label="확대">
+        <span class="material-icons">add</span>
+      </button>
+      <button id="${MOBILE_IDS.actZoomOut}" class="m-act" aria-label="축소">
+        <span class="material-icons">remove</span>
+      </button>
+      <button id="${MOBILE_IDS.actCenter}" class="m-act" aria-label="건물 위치로 이동">
+        <span class="material-icons">center_focus_weak</span>
+      </button>
+      <button id="${MOBILE_IDS.act3D}" class="m-act" aria-label="2D/3D 전환">
+        <span class="material-icons">3d_rotation</span>
+      </button>
+      <button id="${MOBILE_IDS.actShare}" class="m-act" aria-label="피드백 보내기">
+        <span class="material-icons">feedback</span>
+      </button>
+      <button id="${MOBILE_IDS.actClear}" class="m-act m-act-danger" aria-label="경로 지우기" data-visible="false">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
   `;
   return stack;
 }
@@ -185,7 +192,7 @@ function buildRouteSummary(): HTMLElement {
   el.innerHTML = `
     <span class="material-icons m-route-summary-icon">directions_walk</span>
     <span class="m-route-summary-text"></span>
-    <button class="m-route-summary-swap" aria-label="출발↔도착 바꾸기"><span class="material-icons">swap_vert</span></button>
+    <button class="m-route-summary-video" aria-label="워크스루 영상 열기"><span class="material-icons">videocam</span></button>
   `;
   return el;
 }

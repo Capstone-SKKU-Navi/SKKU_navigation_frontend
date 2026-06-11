@@ -22,6 +22,7 @@ import * as GeoMap from '../components/geoMap';
 import { fetchRoute } from './apiClient';
 import type { RouteCoordinate, ApiRouteResult } from './apiClient';
 import type { RoomListItem } from '../models/types';
+import type { WalkthroughPlaylist } from '../components/walkthroughTypes';
 import { buildWalkthroughPlaylist } from './walkthroughPlanner';
 import { getFlag } from '../config/featureFlags';
 import { writeSelectedRoom, writeRoute, clearUrlState } from './urlState';
@@ -45,6 +46,7 @@ export const roomCentroidCache = new Map<string, { centroid: [number, number]; l
 type CoordSlot = { lng: number; lat: number; level: number };
 let startCoordOverride: CoordSlot | null = null;
 let endCoordOverride: CoordSlot | null = null;
+let currentWalkthroughPlaylist: WalkthroughPlaylist | null = null;
 
 export function cacheRoomCentroid(room: RoomListItem): void {
   if (room.centroid) {
@@ -259,6 +261,7 @@ export function clearRoute(): void {
   if (endInput) endInput.value = '';
   RouteOverlay.clearRoute();
   WalkthroughOverlay.hideWalkthroughOverlay();
+  currentWalkthroughPlaylist = null;
   GeoMap.clearIndoorRouteLevels();
   GeoMap.clearFloorTransitions();
   clearUrlState();
@@ -279,12 +282,22 @@ export function clearRoute(): void {
   GeoMap.clearIndoorFocusPin();
 }
 
+export function clearCachedWalkthrough(): void {
+  currentWalkthroughPlaylist = null;
+}
+
+export function showCurrentWalkthrough(): boolean {
+  if (!currentWalkthroughPlaylist) return false;
+  WalkthroughOverlay.showWalkthroughOverlay(currentWalkthroughPlaylist);
+  return true;
+}
+
 function showRouteInfo(time: string, distance: number): void {
   const routeInfo = document.getElementById('routeInfo');
   const routeText = document.getElementById('routeInfoText');
   const buildingInfo = document.getElementById('buildingInfo');
   if (routeInfo && routeText) {
-    routeText.textContent = `예상 ${time} · ${distance}m`;
+    routeText.textContent = `예상 ${time} · ${Math.round(distance)}m`;
     routeInfo.style.display = 'flex';
   }
   if (buildingInfo) buildingInfo.style.display = 'none';
@@ -337,6 +350,7 @@ export async function triggerFindRoute(): Promise<void> {
   routeAbortController?.abort();
   const controller = new AbortController();
   routeAbortController = controller;
+  currentWalkthroughPlaylist = null;
 
   try {
     const routeResult = await fetchRoute(from, to, controller.signal);
@@ -368,6 +382,7 @@ export async function triggerFindRoute(): Promise<void> {
     // clips can be grayed out instead of 404-ing during playback. Cached.
     await BackendService.loadAvailableVideos(routeResult.clips?.map(c => c.videoFile));
     const playlist = buildWalkthroughPlaylist(routeResult);
+    currentWalkthroughPlaylist = playlist && playlist.clips.length > 0 ? playlist : null;
     console.log('[Walkthrough] playlist:', playlist ? `${playlist.clips.length} clips, ${playlist.totalDuration.toFixed(1)}s` : 'null');
     if (playlist && playlist.clips.length > 0) {
       WalkthroughOverlay.showWalkthroughOverlay(playlist);

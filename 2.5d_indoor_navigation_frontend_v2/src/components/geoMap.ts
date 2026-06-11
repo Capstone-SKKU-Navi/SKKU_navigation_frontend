@@ -73,6 +73,7 @@ export function initMap(): void {
     minZoom: constants.minZoom,
     maxZoom: constants.maxZoom,
     antialias: true,
+    preserveDrawingBuffer: true,
     dragRotate: true,
     touchPitch: true,
     doubleClickZoom: false, // prevent iOS Safari 300ms double-tap zoom stealing a second room tap
@@ -307,7 +308,7 @@ export function fitRouteBounds(coordinates: GeoJSON.Position[]): void {
   const cam = map.cameraForBounds([[minLng, minLat], [maxLng, maxLat]], {
     padding,
     bearing: map.getBearing(),
-    maxZoom: MapConfig.flyToRoomZoom,
+    maxZoom: MapConfig.routeFitMaxZoom,
   });
   if (!cam) return;
   map.easeTo({ ...cam, pitch: map.getPitch(), duration: MapConfig.flyToRoomDuration });
